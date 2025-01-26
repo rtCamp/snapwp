@@ -135,6 +135,13 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
+            # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
