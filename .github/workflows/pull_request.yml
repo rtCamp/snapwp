@@ -70,7 +70,7 @@ jobs:
               run: npm run --if-present lint
 
     typecheck:
-        name: TS Type Check
+        name: TS Typecheck
         runs-on: ubuntu-latest
 
         steps:
