@@ -1,0 +1,48 @@
+{
+	"name": "@snapwp/blocks",
+	"version": "0.0.1",
+	"description": "Library for handling Gutenberg blocks.",
+	"author": "rtCamp",
+	"type": "module",
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0",
+		"yarn": "please-use-npm"
+	},
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.js",
+		"types": "./dist/types/index.d.ts"
+	},
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc --build",
+		"postbuild": "npm run resolve-paths",
+		"force-build": "tsc --build --force",
+		"postforce-build": "npm run resolve-paths",
+		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
+		"resolve-paths": "resolve-tspaths",
+		"lint": "eslint . --config ../../.eslintrc.json",
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+	},
+	"dependencies": {
+		"html-entities": "^2.5.2",
+		"next": "^15"
+	},
+	"devDependencies": {
+		"@testing-library/jest-dom": "*",
+		"@testing-library/react": "*",
+		"@types/jest": "*",
+		"@types/react": "*",
+		"isomorphic-fetch": "^3.0.0",
+		"resolve-tspaths": "*",
+		"tsc-watch": "*",
+		"typescript": "*"
+	},
+	"peerDependencies": {
+		"@snapwp/core": "*",
+		"@snapwp/next": "*"
+	}
+}

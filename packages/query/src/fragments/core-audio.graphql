@@ -1,0 +1,10 @@
+fragment CoreAudioFrag on CoreAudio {
+	attributes {
+		autoplay
+		caption
+		loop
+		preload
+		src
+		style
+	}
+}

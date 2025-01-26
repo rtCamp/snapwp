@@ -1,0 +1,6 @@
+fragment CoreListItemFrag on CoreListItem {
+	attributes {
+		content
+		style
+	}
+}

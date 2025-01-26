@@ -1,0 +1,7 @@
+fragment CoreSpacerFrag on CoreSpacer {
+	attributes {
+		height
+		style
+		width
+	}
+}

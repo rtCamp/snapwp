@@ -1,0 +1,6 @@
+fragment CoreVerseFrag on CoreVerse {
+	attributes {
+		content
+		style
+	}
+}

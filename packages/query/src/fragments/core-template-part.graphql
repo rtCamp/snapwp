@@ -1,0 +1,6 @@
+fragment CoreTemplatePartFrag on CoreTemplatePart {
+	renderedHtml
+	attributes {
+		templatePartTagName: tagName
+	}
+}

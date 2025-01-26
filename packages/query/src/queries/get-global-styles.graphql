@@ -1,0 +1,7 @@
+query GetGlobalStyles {
+	globalStyles {
+		customCss
+		stylesheet
+		renderedFontFaces
+	}
+}

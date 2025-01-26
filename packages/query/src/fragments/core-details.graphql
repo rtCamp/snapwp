@@ -1,0 +1,7 @@
+fragment CoreDetailsFrag on CoreDetails {
+	attributes {
+		showContent
+		style
+		summary
+	}
+}

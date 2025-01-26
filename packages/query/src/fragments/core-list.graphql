@@ -1,0 +1,10 @@
+fragment CoreListFrag on CoreList {
+	attributes {
+		cssClassName
+		ordered
+		reversed
+		start
+		style
+		type
+	}
+}

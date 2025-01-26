@@ -1,0 +1,8 @@
+fragment CoreQuoteFrag on CoreQuote {
+	attributes {
+		citation
+		cssClassName
+		style
+		value
+	}
+}

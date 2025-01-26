@@ -1,0 +1,12 @@
+fragment CoreParagraphFrag on CoreParagraph {
+	attributes {
+		backgroundColor
+		content
+		cssClassName
+		direction
+		fontFamily
+		fontSize
+		style
+		textColor
+	}
+}

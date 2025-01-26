@@ -1,0 +1,16 @@
+{
+	"name": "snapwp",
+	"version": "0.0.1",
+	"author": "rtCamp",
+	"description": "@todo",
+	"type": "module",
+	"files": [
+		"./dist"
+	],
+	"bin": {
+		"snapwp": "./dist/snapwp.cjs"
+	},
+	"scripts": {
+		"build": "node ./build.cjs"
+	}
+}

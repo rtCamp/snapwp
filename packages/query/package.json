@@ -1,0 +1,49 @@
+{
+	"name": "@snapwp/query",
+	"version": "0.0.1",
+	"description": "",
+	"author": "rtCamp",
+	"type": "module",
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0",
+		"yarn": "please-use-npm"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.js",
+		"types": "./dist/types/index.d.ts"
+	},
+	"scripts": {
+		"build": "tsc --build",
+		"postbuild": "npm run resolve-paths",
+		"force-build": "tsc --build --force",
+		"postforce-build": "npm run resolve-paths",
+		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
+		"resolve-paths": "resolve-tspaths",
+		"codegen": "graphql-codegen --config codegen.ts",
+		"codegen:watch": "graphql-codegen --config codegen.ts --watch",
+		"lint": "eslint . --config ../../.eslintrc.json",
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+	},
+	"dependencies": {
+		"@snapwp/core": "*"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^5.0.2",
+		"@parcel/watcher": "^2.4.1",
+		"@snapwp/codegen-config": "*",
+		"dotenv": "^16.4.5",
+		"resolve-tspaths": "*",
+		"tsc-watch": "*",
+		"typescript": "*"
+	},
+	"peerDependencies": {
+		"react": "^19.0.0",
+		"@apollo/client": "^3.11.4",
+		"graphql": "^16.9.0"
+	}
+}

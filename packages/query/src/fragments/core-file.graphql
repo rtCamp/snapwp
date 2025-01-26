@@ -1,0 +1,14 @@
+fragment CoreFileFrag on CoreFile {
+	attributes {
+		displayPreview
+		downloadButtonText
+		fileId
+		fileName
+		href
+		previewHeight
+		showDownloadButton
+		style
+		textLinkHref
+		textLinkTarget
+	}
+}

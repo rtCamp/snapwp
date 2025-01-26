@@ -1,0 +1,53 @@
+{
+	"name": "@snapwp/nextjs-starter",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"dev": "concurrently \"next dev\" \"npm run codegen:watch\"",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint",
+		"lint:fix": "next lint --fix",
+		"format": "prettier . --write --paren-spacing",
+		"format:check": "prettier . --check --paren-spacing",
+		"codegen": "graphql-codegen --config codegen.ts",
+		"codegen:watch": "graphql-codegen --config codegen.ts --watch",
+		"typecheck": "tsc --noEmit",
+		"prebuild": "npm run codegen",
+		"test": "jest --passWithNoTests",
+		"test:watch": "jest --watch"
+	},
+	"dependencies": {
+		"@apollo/client": "^3.11.4",
+		"@snapwp/blocks": "file:../../../packages/blocks",
+		"@snapwp/core": "file:../../../packages/core",
+		"@snapwp/next": "file:../../../packages/next",
+		"graphql": "^16.9.0",
+		"next": "^15.0.4",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0"
+	},
+	"devDependencies": {
+		"@graphql-codegen/cli": "^5.0.2",
+		"@parcel/watcher": "^2.4.1",
+		"@snapwp/codegen-config": "file:../../../packages/codegen-config",
+		"@snapwp/eslint-config": "file:../../../packages/eslint-config",
+		"@snapwp/prettier-config": "file:../../../packages/prettier-config",
+		"@testing-library/jest-dom": "^6.4.8",
+		"@testing-library/react": "^16.1.0",
+		"@types/jest": "^29.5.12",
+		"@types/node": "^20",
+		"@types/react": "^19.0.1",
+		"@types/react-dom": "^19.0.2",
+		"concurrently": "^9.1.0",
+		"dotenv": "^16.4.5",
+		"eslint": "^8",
+		"eslint-config-next": "14.2.5",
+		"glob": "^11.0.1",
+		"jest": "^29.7.0",
+		"jest-environment-jsdom": "^29.7.0",
+		"prettier": "npm:wp-prettier@^3.0.3",
+		"typescript": ">=4.3.5 <5.4.0"
+	}
+}

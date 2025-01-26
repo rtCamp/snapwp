@@ -1,0 +1,12 @@
+{
+	"extends": [ "@snapwp/eslint-config", "next", "next/core-web-vitals" ],
+	"ignorePatterns": [ "**/__generated/" ],
+	"overrides": [
+		{
+			"files": [ "*.ts", "*.tsx", "*.js", "*.jsx" ],
+			"rules": {
+				"jsdoc/require-jsdoc": "off"
+			}
+		}
+	]
+}

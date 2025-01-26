@@ -1,0 +1,34 @@
+fragment CoreCoverFrag on CoreCover {
+	attributes {
+		alt
+		backgroundType
+		contentPosition
+		customGradient
+		customOverlayColor
+		dimRatio
+		focalPoint
+		gradient
+		hasParallax
+		isDark
+		isRepeated
+		minHeight
+		minHeightUnit
+		overlayColor
+		style
+		tagName
+		url
+		useFeaturedImage
+	}
+	connectedMediaItem {
+		node {
+			databaseId
+			mediaItemUrl
+			sizes
+			srcSet
+		}
+	}
+	mediaDetails {
+		height
+		width
+	}
+}

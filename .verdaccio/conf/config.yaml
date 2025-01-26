@@ -1,0 +1,16 @@
+# Ref - https://verdaccio.org/docs/configuration/
+
+storage: ../storage
+auth:
+    htpasswd:
+        file: ./htpasswd
+        max_users: 1
+uplinks:
+    npmjs:
+        url: https://registry.npmjs.org/
+packages:
+    '**':
+        access: $all
+        publish: $all
+logs:
+    - { type: stdout, format: pretty, level: http }

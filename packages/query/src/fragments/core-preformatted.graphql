@@ -1,0 +1,6 @@
+fragment CorePreformattedFrag on CorePreformatted {
+	attributes {
+		content
+		style
+	}
+}

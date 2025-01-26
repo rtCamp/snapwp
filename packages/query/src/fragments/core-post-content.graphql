@@ -1,0 +1,3 @@
+fragment CorePostContentFrag on CorePostContent {
+	renderedHtml
+}

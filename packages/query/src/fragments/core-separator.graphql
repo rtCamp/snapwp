@@ -1,0 +1,6 @@
+fragment CoreSeparatorFrag on CoreSeparator {
+	attributes {
+		cssClassName
+		style
+	}
+}

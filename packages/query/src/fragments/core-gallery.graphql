@@ -1,0 +1,6 @@
+fragment CoreGalleryFrag on CoreGallery {
+	attributes {
+		caption
+		style
+	}
+}

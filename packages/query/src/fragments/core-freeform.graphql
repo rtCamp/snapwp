@@ -1,0 +1,5 @@
+fragment CoreFreeformFrag on CoreFreeform {
+	attributes {
+		content
+	}
+}

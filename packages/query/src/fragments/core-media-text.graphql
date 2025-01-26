@@ -1,0 +1,28 @@
+fragment CoreMediaTextFrag on CoreMediaText {
+	attributes {
+		className
+		focalPoint
+		href
+		imageFill
+		linkClass
+		linkTarget
+		mediaAlt
+		mediaId
+		mediaPosition
+		mediaSizeSlug
+		mediaType
+		mediaUrl
+		mediaWidth
+		rel
+		style
+	}
+	connectedMediaItem {
+		node {
+			sizes
+		}
+	}
+	mediaDetails {
+		height
+		width
+	}
+}

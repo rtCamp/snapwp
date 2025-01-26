@@ -1,0 +1,7 @@
+fragment CoreColumnFrag on CoreColumn {
+	attributes {
+		cssClassName
+		style
+		width
+	}
+}

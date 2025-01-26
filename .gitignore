@@ -1,0 +1,34 @@
+# Hidden files
+.DS_Store
+.idea
+.vscode
+
+# Dependencies. These should be installed on the users machine
+vendor
+node_modules
+
+# Log files
+.log
+
+# Used for setting local environment variables when testing
+.env
+
+
+# Verdaccio config
+.verdaccio/conf/htpasswd
+.verdaccio/plugins
+.verdaccio/storage
+
+# Generated files
+__generated/
+tsconfig.tsbuildinfo
+
+# Reports and test artifacts
+/blob-report/
+/playwright-report/
+/playwright/.cache/
+/test-results/
+coverage
+
+# Build output
+dist/

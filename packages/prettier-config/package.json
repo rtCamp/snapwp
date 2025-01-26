@@ -1,0 +1,17 @@
+{
+	"name": "@snapwp/prettier-config",
+	"version": "0.0.1",
+	"author": "rtCamp",
+	"description": "Frontend Prettier Config",
+	"files": [
+		"./index.js"
+	],
+	"main": "./index.js",
+	"exports": "./index.js",
+	"dependencies": {
+		"@wordpress/prettier-config": "^4.6.0"
+	},
+	"peerDependencies": {
+		"prettier": "npm:wp-prettier@^3.0.3"
+	}
+}

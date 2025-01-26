@@ -1,0 +1,8 @@
+fragment CoreHeadingFrag on CoreHeading {
+	attributes {
+		content
+		cssClassName
+		level
+		style
+	}
+}

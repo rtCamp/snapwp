@@ -1,0 +1,16 @@
+{
+	"extends": "../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"declarationDir": "./dist/types",
+		"outDir": "./dist",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [ "./src/*" ],
+			"@graphqlTypes/*": [ "./src/__generated/*" ]
+		}
+	},
+	"include": [ "src/**/*" ],
+	"exclude": [ "node_modules", "dist", "src/**/tests/*" ],
+	"references": [ { "path": "../core" }, { "path": "../codegen-config" } ]
+}

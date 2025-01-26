@@ -1,0 +1,21 @@
+{
+	"compilerOptions": {
+		"target": "ES2018",
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"incremental": true,
+		"composite": true,
+		"disableSourceOfProjectReferenceRedirect": true,
+		"strict": true,
+		"allowUnreachableCode": false,
+		"allowUnusedLabels": false,
+		"noImplicitReturns": true,
+		"lib": [ "ES2022", "DOM" ],
+		"esModuleInterop": true,
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"jsx": "react",
+		"declarationMap": true
+	}
+}

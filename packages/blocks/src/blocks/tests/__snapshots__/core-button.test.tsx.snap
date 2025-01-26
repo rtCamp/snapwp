@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CoreButton Component applies default tag "a" when no tagName is provided 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+  >
+    <a
+      class="link-class"
+      href="https://example.com"
+      rel="noopener"
+      style="color: red;"
+      target="_blank"
+      title="Test Button"
+    >
+      Click Me
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders correctly with custom CSS classes 1`] = `
+<DocumentFragment>
+  <div
+    class="custom-class"
+  >
+    <a
+      class="link-class"
+      href="https://example.com"
+      rel="noopener"
+      style="color: blue;"
+      target="_blank"
+      title="Custom Test Button"
+    >
+      Custom Button
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with correct tag and attributes for a button tag 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+  >
+    <button
+      class="link-class"
+      style="color: red;"
+      title="Test Button"
+      type="submit"
+    >
+      Click Me
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with correct tag and attributes for an anchor tag 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+  >
+    <a
+      class="link-class"
+      href="https://example.com"
+      rel="noopener"
+      style="color: red;"
+      target="_blank"
+      title="Test Button"
+    >
+      Click Me
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with corrected url 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+  >
+    <a
+      class="link-class"
+      href="https://env-next.example.com/sub"
+      rel="noopener"
+      style="color: red;"
+      target="_blank"
+      title="Test Button"
+    >
+      Click Me
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with empty attributes object 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <a />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with null attributes 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <a />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders with undefined attributes 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <a />
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders without optional attributes if not provided 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <a>
+      Minimal Button
+    </a>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButton Component renders without text if no text is provided 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+  >
+    <a
+      class="link-class"
+      href="https://example.com"
+      rel="noopener"
+      style="color: red;"
+      target="_blank"
+      title="Test Button"
+    />
+  </div>
+</DocumentFragment>
+`;

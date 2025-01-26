@@ -1,0 +1,8 @@
+fragment CorePullquoteFrag on CorePullquote {
+	attributes {
+		citation
+		style
+		textAlign
+		pullquoteValue: value
+	}
+}

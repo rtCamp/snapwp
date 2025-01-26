@@ -1,0 +1,130 @@
+query GetCurrentTemplate($uri: String!) {
+	templateByUri(uri: $uri) {
+		bodyClasses
+		enqueuedStylesheets(first: 1000) {
+			nodes {
+				src
+				handle
+				before
+				after
+			}
+		}
+		enqueuedScripts {
+			nodes {
+				after
+				before
+				extraData
+				handle
+				id
+				location
+				src
+				loadingStrategy: strategy
+				version
+			}
+		}
+		enqueuedScriptModules {
+			nodes {
+				handle
+				src
+				extraData
+				dependencies {
+					importType
+					connectedScriptModule {
+						handle
+						src
+					}
+				}
+			}
+		}
+		editorBlocks {
+			clientId
+			parentClientId
+			renderedHtml
+			type
+			... on CoreAudio {
+				...CoreAudioFrag
+			}
+			... on CoreButton {
+				...CoreButtonFrag
+			}
+			... on CoreButtons {
+				...CoreButtonsFrag
+			}
+			... on CoreCode {
+				...CoreCodeFrag
+			}
+			... on CoreColumn {
+				...CoreColumnFrag
+			}
+			... on CoreColumns {
+				...CoreColumnsFrag
+			}
+			... on CoreCover {
+				...CoreCoverFrag
+			}
+			... on CoreDetails {
+				...CoreDetailsFrag
+			}
+			... on CoreFile {
+				...CoreFileFrag
+			}
+			... on CoreFreeform {
+				...CoreFreeformFrag
+			}
+			... on CoreGallery {
+				...CoreGalleryFrag
+			}
+			... on CoreGroup {
+				...CoreGroupFrag
+			}
+			... on CoreHeading {
+				...CoreHeadingFrag
+			}
+			... on CoreHtml {
+				...CoreHtmlFrag
+			}
+			... on CoreImage {
+				...CoreImageFrag
+			}
+			... on CoreList {
+				...CoreListFrag
+			}
+			... on CoreListItem {
+				...CoreListItemFrag
+			}
+			... on CoreMediaText {
+				...CoreMediaTextFrag
+			}
+			... on CoreParagraph {
+				...CoreParagraphFrag
+			}
+			... on CorePostContent {
+				...CorePostContentFrag
+			}
+			... on CorePreformatted {
+				...CorePreformattedFrag
+			}
+			... on CorePullquote {
+				...CorePullquoteFrag
+			}
+			... on CoreQuote {
+				...CoreQuoteFrag
+			}
+			... on CoreSeparator {
+				...CoreSeparatorFrag
+			}
+			... on CoreSpacer {
+				...CoreSpacerFrag
+			}
+			... on CoreTemplatePart {
+				...CoreTemplatePartFrag
+			}
+			... on CoreVerse {
+				...CoreVerseFrag
+			}
+			... on CoreVideo {
+				...CoreVideoFrag
+			}
+		}
+	}
+}

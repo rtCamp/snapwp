@@ -1,0 +1,52 @@
+{
+	"name": "@snapwp/next",
+	"version": "0.0.1",
+	"description": "Utility functions and components for SnapWP application",
+	"author": "rtCamp",
+	"type": "module",
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0",
+		"yarn": "please-use-npm"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"types": "./dist/types/index.d.ts"
+		},
+		"./withSnapWP": {
+			"import": "./dist/config/with-snap-wp.js",
+			"require": "./dist/config/with-snap-wp.js"
+		}
+	},
+	"scripts": {
+		"build": "tsc --build",
+		"postbuild": "npm run resolve-paths",
+		"force-build": "tsc --build --force",
+		"postforce-build": "npm run resolve-paths",
+		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
+		"resolve-paths": "resolve-tspaths",
+		"lint": "eslint . --config ../../.eslintrc.json",
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+	},
+	"peerDependencies": {
+		"next": "^15",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"@snapwp/core": "*",
+		"@snapwp/query": "*"
+	},
+	"dependencies": {
+		"html-react-parser": "^5.1.12",
+		"modify-source-webpack-plugin": "^4.1.0"
+	},
+	"devDependencies": {
+		"@types/react-dom": "*",
+		"typescript": "*",
+		"resolve-tspaths": "*",
+		"tsc-watch": "*"
+	}
+}

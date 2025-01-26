@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CoreButtons renders children correctly 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+    style="color: red;"
+  >
+    <button>
+      Button 1
+    </button>
+    <button>
+      Button 2
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButtons renders with default attributes when none are provided 1`] = `
+<DocumentFragment>
+  <div
+    class=""
+  >
+    <button>
+      Click Me
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`CoreButtons renders with given className and style 1`] = `
+<DocumentFragment>
+  <div
+    class="test-class"
+    style="color: red;"
+  >
+    <button>
+      Click Me
+    </button>
+  </div>
+</DocumentFragment>
+`;

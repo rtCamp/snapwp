@@ -1,0 +1,35 @@
+fragment CoreImageFrag on CoreImage {
+	connectedMediaItem {
+		node {
+			databaseId
+			sizes
+		}
+	}
+	mediaDetails {
+		height
+		width
+		sizes {
+			name
+			width
+			height
+			sourceUrl
+		}
+	}
+	attributes {
+		alt
+		aspectRatio
+		caption
+		href
+		linkClass
+		linkTarget
+		rel
+		scale
+		style
+		title
+		url
+		imageHeight: height
+		width
+		sizeSlug
+		lightbox
+	}
+}

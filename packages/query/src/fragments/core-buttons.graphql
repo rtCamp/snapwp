@@ -1,0 +1,6 @@
+fragment CoreButtonsFrag on CoreButtons {
+	attributes {
+		cssClassName
+		style
+	}
+}

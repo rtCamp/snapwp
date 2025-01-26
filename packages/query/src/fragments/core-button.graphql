@@ -1,0 +1,14 @@
+fragment CoreButtonFrag on CoreButton {
+	attributes {
+		buttonType: type
+		cssClassName
+		linkClassName
+		linkTarget
+		rel
+		style
+		tagName
+		text
+		title
+		url
+	}
+}

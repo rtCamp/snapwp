@@ -1,0 +1,15 @@
+fragment CoreVideoFrag on CoreVideo {
+	attributes {
+		autoplay
+		caption
+		controls
+		loop
+		muted
+		playsInline
+		poster
+		videoPreload: preload
+		src
+		style
+		tracks
+	}
+}

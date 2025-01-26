@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CoreAudio renders correctly with all attributes 1`] = `
+<DocumentFragment>
+  <figure
+    class="wp-block-audio"
+  >
+    <audio
+      autoplay=""
+      controls=""
+      loop=""
+      src="sample-audio.mp3"
+    />
+    <figcaption
+      class="wp-element-caption"
+    >
+      Sample Caption
+    </figcaption>
+  </figure>
+</DocumentFragment>
+`;
+
+exports[`CoreAudio renders correctly without optional attributes 1`] = `
+<DocumentFragment>
+  <figure
+    class=""
+  >
+    <audio
+      controls=""
+      src="sample-audio.mp3"
+    />
+  </figure>
+</DocumentFragment>
+`;
+
+exports[`CoreAudio renders null when src is not provided 1`] = `<DocumentFragment />`;

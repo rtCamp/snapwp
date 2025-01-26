@@ -1,0 +1,18 @@
+{
+	"name": "@snapwp/eslint-config",
+	"description": "Frontend ESLint Config",
+	"version": "0.0.1",
+	"main": "./index.js",
+	"exports": "./index.js",
+	"dependencies": {
+		"@wordpress/eslint-plugin": "^19.2.0",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+		"@typescript-eslint/parser": "^6.0.0",
+		"eslint-plugin-n": "^17.10.2",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-jsdoc": "^48.9.2"
+	},
+	"peerDependencies": {
+		"eslint": "^8"
+	}
+}

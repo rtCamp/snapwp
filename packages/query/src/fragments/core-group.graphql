@@ -1,0 +1,6 @@
+fragment CoreGroupFrag on CoreGroup {
+	attributes {
+		style
+		tagName
+	}
+}

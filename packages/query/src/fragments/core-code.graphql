@@ -1,0 +1,7 @@
+fragment CoreCodeFrag on CoreCode {
+	attributes {
+		style
+		content
+		cssClassName
+	}
+}
