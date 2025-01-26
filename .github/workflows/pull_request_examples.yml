@@ -49,7 +49,7 @@ jobs:
             changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
 
     generate_schema:
-        uses: './.github/actions/generate-schema.yml'
+        uses: './.github/workflows/generate-schema.yml'
         with:
             # TODO: Get from PR description.
             ref: 'develop'

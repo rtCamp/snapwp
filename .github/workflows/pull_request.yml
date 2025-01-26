@@ -26,7 +26,7 @@ on:
 
 jobs:
     generate_schema:
-        uses: './.github/actions/generate-schema.yml'
+        uses: './.github/workflows/generate-schema.yml'
         with:
             # TODO: Get from PR description.
             ref: 'develop'
