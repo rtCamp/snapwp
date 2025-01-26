@@ -27,6 +27,7 @@ on:
 jobs:
     generate_schema:
         uses: './.github/workflows/generate-schema.yml'
+        name: Generate WPGraphQL schema
         with:
             # TODO: Get from PR description.
             ref: 'develop'

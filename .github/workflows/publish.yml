@@ -16,7 +16,8 @@ env:
 
 jobs:
     generate_schema:
-        uses: './.github/actions/generate-schema.yml'
+        name: Generate WPGraphQL schema
+        uses: './.github/workflows/generate-schema.yml'
         with:
             ref: 'develop'
         secrets: inherit

@@ -49,6 +49,7 @@ jobs:
             changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
 
     generate_schema:
+        name: Generate WPGraphQL schema
         uses: './.github/workflows/generate-schema.yml'
         with:
             # TODO: Get from PR description.
