@@ -1,0 +1,242 @@
+name: Check PR
+
+on:
+    pull_request:
+        branches:
+            - main
+            - develop
+        paths-ignore:
+            - .github/workflows/pull_request_examples.yml
+            - examples/**
+    push:
+        branches:
+            - main
+            - develop
+        paths-ignore:
+            - .github/workflows/pull_request_examples.yml
+            - examples/**
+    # TODO: Remove and replace with real matrix.
+    workflow_dispatch:
+        inputs:
+            NODE_VERSIONS:
+                description: 'Node versions to test against. Need a JSON array of versions.'
+                required: true
+                default: '[20]'
+                type: string
+
+jobs:
+    generate_schema:
+        uses: './.github/actions/generate-schema.yml'
+        with:
+            # TODO: Get from PR description.
+            ref: 'develop'
+        secrets: inherit
+
+    eslint:
+        name: ESLint
+        runs-on: ubuntu-latest
+        env:
+            GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+        needs: generate_schema
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install dependencies
+              run: |
+                  npm ci --workspaces --include-workspace-root
+                  ls -al node_modules
+                  ls -al node_modules/@snapwp
+                  npm run --if-present build
+
+            - name: Run ESLint
+              run: npm run --if-present lint
+
+    typecheck:
+        name: TS Type Check
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Run TypeScript type check
+              run: npm run --if-present typecheck
+
+    test-build:
+        name: Test Build
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: ${{ fromJSON('[20]') }}
+            fail-fast: true
+        env:
+            GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+        needs: generate_schema
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Build assets
+              run: npm run --if-present build
+
+    unit:
+        name: Unit Tests
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: ${{ fromJSON('[20]') }}
+            fail-fast: true
+        env:
+            GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+        needs: generate_schema
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Run unit tests
+              run: npm run --if-present test:unit
+
+            # - name: Upload coverage to Codecov
+            #   uses: codecov/codecov-action@v5
+            #   with:
+            #       token: ${{ secrets.CODECOV_TOKEN }}
+            #       files: ./coverage/*.json
+            #       flags: unittests
+            #       name: codecov-umbrella
+
+    playwright:
+        name: E2E Tests
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: ${{ fromJSON('[20]') }}
+            fail-fast: true
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Install and setup playwright
+              run: |
+                  npm install playwright
+                  npx playwright install --with-deps
+
+            - name: Run E2E tests
+              run: npm run --if-present test:e2e
+
+            - name: Upload artifacts
+              uses: actions/upload-artifact@v4
+              with:
+                  name: playwright-results
+                  path: playwright-report/
+                  retention-days: 3 # TODO: Figure this number out
+
+    security:
+        name: Dependencies Audit
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Run npm audit
+              run: |
+                  npm audit --audit-level=high
+
+    prettier:
+        name: Check Formatting
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Install dependencies
+              run: npm ci --workspaces --include-workspace-root
+
+            - name: Run Prettier
+              run: npm run --if-present format:check

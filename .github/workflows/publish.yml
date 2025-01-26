@@ -1,0 +1,57 @@
+name: Publish to NPM
+
+on:
+    release:
+        types: [published]
+    # TODO: Remove when ready to publish
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'The tag to publish to NPM'
+                required: true
+                default: 'v0.0.0'
+
+env:
+    GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+
+jobs:
+    generate_schema:
+        uses: './.github/actions/generate-schema.yml'
+        with:
+            ref: 'develop'
+        secrets: inherit
+
+    publish:
+        runs-on: ubuntu-latest
+        needs: generate_schema
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Build
+              run: npm run build
+
+            - name: Publish all packages in NPM Workspace to NPM
+              # TODO: Remove --dry-run when ready to publish
+              run: npm publish --access public --workspaces --dry-run
+              env:
+                  NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

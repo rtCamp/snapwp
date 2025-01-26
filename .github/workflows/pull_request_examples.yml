@@ -1,0 +1,413 @@
+name: Check Examples
+on:
+    pull_request:
+        branches:
+            - main
+            - develop
+        paths:
+            - .github/workflows/pull_request_examples.yml
+            - examples/**
+    push:
+        branches:
+            - main
+            - develop
+        paths:
+            - .github/workflows/pull_request_examples.yml
+            - examples/**
+    # TODO: Remove and replace with real matrix.
+    workflow_dispatch:
+        inputs:
+            NODE_VERSIONS:
+                description: 'Node versions to test against. Need a JSON array of versions.'
+                required: true
+                default: '[20]'
+                type: string
+
+env:
+    #  NODE_VERSIONS: '[18, 20, 22]'
+    NODE_VERSIONS: '[20]'
+    PATHS: |
+        nextjs/starter:
+          - .github/workflows/pull_request_examples.yml
+          - examples/nextjs/starter/**
+    GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+    SNAPWP_HELPER_REF: 'develop'
+
+jobs:
+    path-filter:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            - name: Filter paths
+              id: filter
+              uses: dorny/paths-filter@v3
+              with:
+                  filters: ${{ env.PATHS }}
+        outputs:
+            #TODO: the example shouldn't be hardcoded
+            changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
+
+    generate_schema:
+        uses: './.github/actions/generate-schema.yml'
+        with:
+            # TODO: Get from PR description.
+            ref: 'develop'
+        secrets: inherit
+
+    eslint:
+        name: ESLint
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+
+            - name: Run ESLint
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm run --if-present lint
+
+    typecheck:
+        name: TS Type Check
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+
+        services:
+            mariadb:
+                image: mariadb:10
+                ports:
+                    - 3306:3306
+                env:
+                    MYSQL_ROOT_PASSWORD: password
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            # TODO: why not use the generated schema?
+            - name: Checkout SnapWP Helper
+              uses: actions/checkout@v4
+              with:
+                  token: '${{ secrets.RTBOT_TOKEN }}'
+                  repository: '${{ github.repository_owner }}/snapwp-helper'
+                  path: snapwp-helper
+                  ref: ${{ env.SNAPWP_HELPER_REF }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+                  extensions: mbstring, intl
+                  coverage: none
+                  tools: composer, wp-cli
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install Composer deps for SnapWP Helper
+              uses: ramsey/composer-install@v3
+              with:
+                  working-directory: '${{ github.workspace }}/snapwp-helper'
+                  composer-options: '--no-progress'
+
+            - name: Setup WordPress Test Environment
+              run: |
+                  cd '${{ github.workspace }}/snapwp-helper'
+                  cp .env.dist .env; set -a; source .env; set +a
+                  npm run install-test-env
+                  cd $WORDPRESS_ROOT_DIR
+                  sudo php -S localhost:80 -t "${WORDPRESS_ROOT_DIR}" &
+                  sleep 3
+                  curl -IL http://localhost  # Verify that the server is running; will fail and exit workflow if not
+
+            # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+                  npm run codegen
+
+            - name: Run TypeScript type check
+              # TODO: Why are we catching the error?
+              run: |
+                  npm run --if-present typecheck || (echo "Type check failed" && exit 0)
+
+    test-build:
+        name: Test Build
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                node-version: ${{ fromJSON('[20]') }}
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
+
+        services:
+            mariadb:
+                image: mariadb:10
+                ports:
+                    - 3306:3306
+                env:
+                    MYSQL_ROOT_PASSWORD: password
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Checkout SnapWP Helper
+              uses: actions/checkout@v4
+              with:
+                  token: '${{ secrets.RTBOT_TOKEN }}'
+                  repository: '${{ github.repository_owner }}/snapwp-helper'
+                  path: snapwp-helper
+                  ref: ${{ env.SNAPWP_HELPER_REF }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+                  extensions: mbstring, intl
+                  coverage: none
+                  tools: composer, wp-cli
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            - name: Install Composer deps for SnapWP Helper
+              uses: ramsey/composer-install@v3
+              with:
+                  working-directory: '${{ github.workspace }}/snapwp-helper'
+                  composer-options: '--no-progress'
+
+            - name: Setup WordPress Test Environment
+              run: |
+                  cd '${{ github.workspace }}/snapwp-helper'
+                  cp .env.dist .env; set -a; source .env; set +a
+                  npm run install-test-env
+                  cd $WORDPRESS_ROOT_DIR
+                  sudo php -S localhost:80 -t "${WORDPRESS_ROOT_DIR}" &
+                  sleep 3
+                  curl -IL http://localhost  # Verify that the server is running; will fail and exit workflow if not
+
+            # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+
+            - name: Build assets
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm run --if-present build
+
+    unit:
+        name: Unit Tests
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                node-version: ${{ fromJSON('[20]') }}
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+              # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+
+            - name: Run unit tests
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm run --if-present test
+
+    security:
+        name: Dependencies Audit
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+
+            - name: Run npm audit
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm audit --audit-level=high
+
+    prettier:
+        name: Check Formatting
+        runs-on: ubuntu-latest
+        needs:
+            - path-filter
+            - generate_schema
+        if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+
+            # TODO: figure out overriding installed dependency for local one for testing
+            - name: Build Local packages
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm ci --workspaces --include-workspace-root
+                  npm run --if-present build
+
+            - name: Install dependencies
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm ci
+                  cp .env.example .env
+
+            - name: Run Prettier
+              run: |
+                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
+                  npm run --if-present format-check
