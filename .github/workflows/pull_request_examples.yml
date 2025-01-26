@@ -1,4 +1,4 @@
-name: Check Examples
+name: CI - Examples
 on:
     pull_request:
         branches:
@@ -31,7 +31,7 @@ env:
           - .github/workflows/pull_request_examples.yml
           - examples/nextjs/starter/**
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
-    SNAPWP_HELPER_REF: 'develop'
+    SNAPWP_HELPER_REF: 'develop' # TODO: Get from PR description.
 
 jobs:
     path-filter:
@@ -111,6 +111,10 @@ jobs:
             - path-filter
             - generate_schema
         if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
 
         services:
             mariadb:
@@ -193,7 +197,7 @@ jobs:
                   npm run --if-present typecheck || (echo "Type check failed" && exit 0)
 
     test-build:
-        name: Test Build
+        name: Test Build (Node v${{ matrix.node-version }})
         runs-on: ubuntu-latest
         needs:
             - path-filter
@@ -284,7 +288,7 @@ jobs:
                   npm run --if-present build
 
     unit:
-        name: Unit Tests
+        name: Unit Tests (Node v${{ matrix.node-version }})
         runs-on: ubuntu-latest
         needs:
             - path-filter
@@ -340,6 +344,10 @@ jobs:
             - path-filter
             - generate_schema
         if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
 
         steps:
             - name: Checkout
@@ -349,6 +357,16 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version-file: '.nvmrc'
+
+            - name: Get generated schema
+              uses: actions/download-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema
+
+            - name: Move schema to workspace
+              run: |
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
             # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
@@ -375,6 +393,10 @@ jobs:
             - path-filter
             - generate_schema
         if: ${{ needs.path-filter.outputs.changes != '' && toJSON(fromJSON(needs.path-filter.outputs.changes)) != '[]' }}
+        strategy:
+            matrix:
+                example: ${{ fromJSON(needs.path-filter.outputs.changes) }}
+            fail-fast: true
 
         steps:
             - name: Checkout

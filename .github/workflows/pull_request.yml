@@ -1,4 +1,4 @@
-name: Check PR
+name: CI - PR
 
 on:
     pull_request:
@@ -89,7 +89,7 @@ jobs:
               run: npm run --if-present typecheck
 
     test-build:
-        name: Test Build
+        name: Test Build (Node v${{ matrix.node-version }})
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -125,7 +125,7 @@ jobs:
               run: npm run --if-present build
 
     unit:
-        name: Unit Tests
+        name: Unit Tests (Node v${{ matrix.node-version }})
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -168,40 +168,41 @@ jobs:
             #       flags: unittests
             #       name: codecov-umbrella
 
-    playwright:
-        name: E2E Tests
-        runs-on: ubuntu-latest
-        strategy:
-            matrix:
-                node-version: ${{ fromJSON('[20]') }}
-            fail-fast: true
+    # Reenable when we have playwright tests
+    # playwright:
+    #     name: E2E Tests (Node v${{ matrix.node-version }})
+    #     runs-on: ubuntu-latest
+    #     strategy:
+    #         matrix:
+    #             node-version: ${{ fromJSON('[20]') }}
+    #         fail-fast: true
 
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
+    #     steps:
+    #         - name: Checkout
+    #           uses: actions/checkout@v4
 
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version: ${{ matrix.node-version }}
+    #         - name: Setup Node.js
+    #           uses: actions/setup-node@v4
+    #           with:
+    #               node-version: ${{ matrix.node-version }}
 
-            - name: Install dependencies
-              run: npm ci --workspaces --include-workspace-root
+    #         - name: Install dependencies
+    #           run: npm ci --workspaces --include-workspace-root
 
-            - name: Install and setup playwright
-              run: |
-                  npm install playwright
-                  npx playwright install --with-deps
+    #         - name: Install and setup playwright
+    #           run: |
+    #               npm install playwright
+    #               npx playwright install --with-deps
 
-            - name: Run E2E tests
-              run: npm run --if-present test:e2e
+    #         - name: Run E2E tests
+    #           run: npm run --if-present test:e2e
 
-            - name: Upload artifacts
-              uses: actions/upload-artifact@v4
-              with:
-                  name: playwright-results
-                  path: playwright-report/
-                  retention-days: 3 # TODO: Figure this number out
+    #         - name: Upload artifacts
+    #           uses: actions/upload-artifact@v4
+    #           with:
+    #               name: playwright-results
+    #               path: playwright-report/
+    #               retention-days: 3 # TODO: Figure this number out
 
     security:
         name: Dependencies Audit
