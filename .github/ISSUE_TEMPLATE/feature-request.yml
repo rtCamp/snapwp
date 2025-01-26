@@ -7,8 +7,7 @@ body:
               Thank you for taking the time to submit a feature request.
 
 
-              Please make sure to search the repo for [existing feature
-              requests](@todo) before creating a new one.
+              Please make sure to search the repo for [existing feature requests](https://github.com/rtCamp/snapwp/issues) before creating a new one.
     - type: textarea
       attributes:
           label: What problem does this address?

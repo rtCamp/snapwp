@@ -155,7 +155,7 @@ const openEditor = ( filePath ) => {
 		}
 
 		// Step 4: Make a copy of the project directory's .env file to root of the frontend directory.
-		console.log( '📄 Copying .env file to packages/query.' );
+		console.log( '📄 Copying .env file.' );
 		const queryEnvPath = path.resolve( __dirname, '../frontend/.env' );
 		fs.copyFileSync( envPath, queryEnvPath );
 
