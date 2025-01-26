@@ -87,7 +87,7 @@ Work is ongoing for full feature parity with Gutenberg. The following functional
 
 ## Contributing
 
-This package is part of a monorepo for SnapWP and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
+This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
 
 Contributions are _welcome_ and **encouraged!** To learn more about contributing to this package or SnapWP as a whole, please read the [Contributing Guide](../../../.github/CONTRIBUTING.md).
 
