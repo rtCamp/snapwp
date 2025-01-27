@@ -10,7 +10,8 @@ const graphqlFiles = globSync( GRAPHQL_GLOB );
 const config: CodegenConfig = {
 	...( graphqlFiles.length > 0 && { documents: GRAPHQL_GLOB } ),
 	...baseConfig,
-	schema: [
+	// Use the schema file if it's set by CI.
+	schema: process.env.GRAPHQL_SCHEMA_FILE ?? [
 		{
 			[ generateGraphqlUrl(
 				process.env.NEXT_PUBLIC_WORDPRESS_URL,

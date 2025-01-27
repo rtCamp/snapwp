@@ -1,0 +1,97 @@
+name: Generate WPGraphQL Schema
+
+on:
+    workflow_call:
+        inputs:
+            ref:
+                description: 'The branch or tag to checkout'
+                required: true
+                type: string
+                default: 'develop'
+    workflow_dispatch:
+        inputs:
+            ref:
+                description: 'The branch or tag to checkout'
+                required: true
+                type: string
+                default: 'develop'
+
+jobs:
+    # TODO: This should check for an existing artifact before generating a new schema.
+    generate-schema:
+        name: Generate Schema from ref `${{ inputs.ref }}`
+        runs-on: ubuntu-latest
+
+        services:
+            mariadb:
+                image: mariadb:10
+                ports:
+                    - 3306:3306
+                env:
+                    MYSQL_ROOT_PASSWORD: password
+                options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+        steps:
+            - name: Checkout SnapWP Helper
+              uses: actions/checkout@v4
+              with:
+                  # @todo Remove when repo is public
+                  token: '${{ secrets.RTBOT_TOKEN }}'
+                  repository: '${{ github.repository_owner }}/snapwp-helper'
+                  path: '.'
+                  ref: ${{ inputs.ref }}
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Setup PHP
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: '8.2'
+                  extensions: mbstring, intl
+                  coverage: none
+                  tools: composer, wp-cli
+
+            - name: Install composer dependencies
+              uses: ramsey/composer-install@v3
+              with:
+                  composer-options: '--no-progress'
+
+            - name: Setup GraphQL Schema Linter
+              run: npm install -g graphql-schema-linter@^3.0 graphql@^16
+
+            - name: Install Node.js dependencies
+              run: npm ci
+              env:
+                  CI: true
+
+            - name: Build JS assets
+              run: npm run build:js
+            - name: Setup WordPress Test Environment
+              run: |
+                  cd '${{ github.workspace }}'
+                  cp .env.dist .env; set -a; source .env; set +a
+                  npm run install-test-env
+                  cd $WORDPRESS_ROOT_DIR
+
+            - name: Generarte Static Schema from ref `${{ inputs.ref }}`
+              run: |
+                  cd '${{ github.workspace }}'
+                  cp .env.dist .env; set -a; source .env; set +a
+                  cd $WORDPRESS_ROOT_DIR
+                  wp graphql generate-static-schema --allow-root
+
+            - name: Upload schema as release artifact
+              id: upload
+              uses: actions/upload-artifact@v4
+              with:
+                  name: schema
+                  path: /tmp/schema.graphql
+                  retention-days: 1
+                  if-no-files-found: 'error'
+                  overwrite: 'true'
+
+        outputs:
+            schema: ${{ steps.upload.outputs.artifact-url }}
