@@ -1,6 +1,7 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
+import { Link } from '@snapwp/next';
 
 /**
  * Renders the core/button block.
@@ -38,20 +39,29 @@ export default function CoreButton( { attributes }: any ) {
 
 	const href = replaceHostUrl( url, homeUrl, nextUrl );
 
-	//@todo use Link component from @snapwp/core or from next/link
 	return (
 		<div className={ classNames }>
-			<TagName
-				{ ...( isButtonTag ? { type } : {} ) }
-				href={ isButtonTag ? undefined : href ?? undefined }
-				target={ isButtonTag ? undefined : linkTarget ?? undefined }
-				rel={ isButtonTag ? undefined : rel ?? undefined }
-				className={ linkClassName ?? undefined }
-				style={ styleObject }
-				title={ title ?? undefined }
-			>
-				{ text }
-			</TagName>
+			{ TagName === 'a' && url ? (
+				<Link
+					href={ href }
+					className={ linkClassName ?? undefined }
+					style={ styleObject }
+				>
+					{ text }
+				</Link>
+			) : (
+				<TagName
+					{ ...( isButtonTag ? { type } : {} ) }
+					href={ isButtonTag ? undefined : href ?? undefined }
+					target={ isButtonTag ? undefined : linkTarget ?? undefined }
+					rel={ isButtonTag ? undefined : rel ?? undefined }
+					className={ linkClassName ?? undefined }
+					style={ styleObject }
+					title={ title ?? undefined }
+				>
+					{ text }
+				</TagName>
+			) }
 		</div>
 	);
 }
