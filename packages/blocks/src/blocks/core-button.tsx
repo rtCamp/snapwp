@@ -28,6 +28,9 @@ export default function CoreButton( { attributes }: any ) {
 	const TagName = tagName || 'a';
 	const isButtonTag = TagName === 'button';
 
+	// Use Link component for anchor tags.
+	const TagComponent = tagName === 'a' ? Link : TagName;
+
 	const classNames = cn( cssClassName );
 	const styleObject = getStylesFromAttributes( { style } );
 
@@ -41,27 +44,17 @@ export default function CoreButton( { attributes }: any ) {
 
 	return (
 		<div className={ classNames }>
-			{ TagName === 'a' && url ? (
-				<Link
-					href={ href }
-					className={ linkClassName ?? undefined }
-					style={ styleObject }
-				>
-					{ text }
-				</Link>
-			) : (
-				<TagName
-					{ ...( isButtonTag ? { type } : {} ) }
-					href={ isButtonTag ? undefined : href ?? undefined }
-					target={ isButtonTag ? undefined : linkTarget ?? undefined }
-					rel={ isButtonTag ? undefined : rel ?? undefined }
-					className={ linkClassName ?? undefined }
-					style={ styleObject }
-					title={ title ?? undefined }
-				>
-					{ text }
-				</TagName>
-			) }
+			<TagComponent
+				{ ...( isButtonTag ? { type } : {} ) }
+				href={ isButtonTag ? undefined : href ?? undefined }
+				target={ isButtonTag ? undefined : linkTarget ?? undefined }
+				rel={ isButtonTag ? undefined : rel ?? undefined }
+				className={ linkClassName ?? undefined }
+				style={ styleObject }
+				title={ title ?? undefined }
+			>
+				{ text }
+			</TagComponent>
 		</div>
 	);
 }
