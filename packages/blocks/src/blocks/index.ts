@@ -18,6 +18,7 @@ import CoreList from './core-list';
 import CoreListItem from './core-list-item';
 import CoreMediaText from './core-media-text';
 import CoreParagraph from './core-paragraph';
+import CorePattern from './core-pattern';
 import CorePostContent from './core-post-content';
 import CorePreformatted from './core-preformatted';
 import CorePullquote from './core-pullquote';
@@ -48,6 +49,7 @@ const blocks: BlockDefinitions = {
 	CoreList,
 	CoreListItem,
 	CoreMediaText,
+	CorePattern,
 	CoreParagraph,
 	CorePostContent,
 	CorePreformatted,
