@@ -44,9 +44,8 @@ export default function Link( {
 
 	// @todo replace internalUri?.startsWith conditional check with something more robust that will incorporate both frontend/backend domain & anything in the list of allowed images domain in the config (ref: https://github.com/rtCamp/headless/pull/241#discussion_r1824274200). TBD after https://github.com/rtCamp/headless/issues/218.
 	if (
-		! (
-			internalUri?.startsWith( '/' ) || internalUri?.startsWith( nextUrl )
-		)
+		! internalUri?.startsWith( '/' ) &&
+		! internalUri?.startsWith( nextUrl )
 	) {
 		return (
 			<a
