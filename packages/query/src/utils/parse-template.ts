@@ -27,7 +27,9 @@ export default function parseQueryResult(
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error(
-				`Error fetching template data (Please refer to our FAQs for steps to debug and fix): ${ error?.message }` // @TODO: update FAQs with URL.
+				`Error fetching template data: ${ error?.message }.`,
+				'(Please refer to our FAQs for steps to debug and fix)', // @TODO: update FAQs with URL.
+				error
 			);
 		} );
 	}
