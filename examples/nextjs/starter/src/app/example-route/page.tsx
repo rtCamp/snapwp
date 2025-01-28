@@ -1,5 +1,8 @@
 import styles from './styles.module.css';
 
+/**
+ * You can override the default route using custom route at the same path. 	
+ */
 export default function Page() {
 	return (
 		<div className={ styles.container }>
