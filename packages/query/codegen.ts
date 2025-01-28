@@ -8,7 +8,8 @@ dotenv.config( { path: '../../.env' } );
 const config: CodegenConfig = {
 	...baseConfigs,
 	documents: './src/**/*.graphql',
-	schema: [
+	// Use the schema file if it's set by CI.
+	schema: process.env.GRAPHQL_SCHEMA_FILE ?? [
 		{
 			[ generateGraphqlUrl(
 				process.env.NEXT_PUBLIC_WORDPRESS_URL,

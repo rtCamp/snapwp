@@ -23,6 +23,7 @@
 		"@snapwp/blocks": "file:../../../packages/blocks",
 		"@snapwp/core": "file:../../../packages/core",
 		"@snapwp/next": "file:../../../packages/next",
+		"@snapwp/query": "file:../../../packages/query",
 		"graphql": "^16.9.0",
 		"next": "^15.0.4",
 		"react": "^19.0.0",

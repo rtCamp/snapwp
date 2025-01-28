@@ -1,0 +1,116 @@
+name: Deploy Example on merge
+
+on:
+    push:
+        branches:
+            - main
+            - develop
+    workflow_dispatch:
+        inputs:
+            dir:
+                type: choice
+                description: 'Which example to deploy? (default: nextjs/starter)'
+                # Update this when new examples are created.
+                options:
+                    - nextjs/starter
+                default: nextjs/starter
+
+env:
+    # The commands to run to build/start the example. They will run relative to the selected example directory.
+    build-command: '(cd "${{ github.workspace }}" && npm i --install-links && npm run codegen && npm run build && cd - && npm i --install-links && npm run build) || (echo \"Build failed\" && exit 1)'
+    # TODO: Update the npm install links to use local version instead of NPM Registry version
+    start-command: 'npm run start'
+
+# Cancel previous workflow run groups that have not completed.
+concurrency:
+    # Group workflow runs by workflow name, along with the head branch ref of the pull request
+    # or otherwise the branch or tag ref.
+    group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.head_ref || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    deploy-and-notify:
+        name: Deploy Next-JS frontend when commits are pushed
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Determine what to deploy
+              shell: bash
+              run: |
+                  if [ "${{ github.event_name }}" == "workflow_dispatch" ]; then
+                      echo "Deploying ${{ github.event.inputs.dir }}"
+                      if [ "${{ github.event.inputs.dir }}" == "blocks-playground" ]; then
+                          echo "deploy-dir=examples/blocks-playground" >> "$GITHUB_ENV"
+                      else
+                          echo "deploy-dir=examples/nextjs/starter" >> "$GITHUB_ENV"
+                      fi
+                  else
+                      echo "Deploying nextjs/starter"
+                      echo "deploy-dir=examples/nextjs/starter" >> "$GITHUB_ENV"
+                  fi
+
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.nvmrc'
+
+            - name: Build
+              shell: bash
+              run: |
+                  cd "${{ github.workspace }}/${{ env.deploy-dir }}"
+                  cat <<EOF > "${{ github.workspace }}/${{ env.deploy-dir }}/__start-command__.sh"
+                  set -a
+                  source .env
+                  set +a
+                  ${{ env.start-command }}
+                  EOF
+                  chmod +x "${{ github.workspace }}/${{ env.deploy-dir }}/__start-command__.sh"
+
+                  cat <<EOF > "${{ github.workspace }}/${{ env.deploy-dir }}/.env"
+                  ${{ secrets.ENV_FILE }}
+
+                  # Changing port to 80 from default of 3000 and disabling telemetry
+                  HOSTNAME=0.0.0.0
+                  PORT=80
+                  NEXT_TELEMETRY_DISABLED=1
+                  EOF
+                  echo ".env file created"
+
+                  set -a
+                  source "${{ github.workspace }}/${{ env.deploy-dir }}/.env"
+                  set +a
+
+                  cd ${{ github.workspace }}/${{ env.deploy-dir }}
+
+                  # Bail out if the build fails
+                  set -e
+                  ${{ env.build-command }}
+                  echo "${{ env.build-command }} completed"
+
+            - name: Deploy and restart server
+              shell: bash
+              run: |
+                  cd "${{ github.workspace }}/${{ env.deploy-dir }}"
+                  mkdir -p "$GITHUB_WORKSPACE/.ssh"
+                  cat <<EOF > "$GITHUB_WORKSPACE/.ssh/__deploy_key__"
+                  ${{ secrets.ED_DEPLOYMENT_KEY }}
+                  EOF
+                  chmod 600 "$GITHUB_WORKSPACE/.ssh/__deploy_key__"
+                  rsync -arz --delete-after --quiet -e "ssh -o 'StrictHostKeyChecking=no' -o 'UserKnownHostsFile=/dev/null' -o 'LogLevel=quiet' -i $GITHUB_WORKSPACE/.ssh/__deploy_key__" \
+                    "./" "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:${{ secrets.SSH_PATH }}/next-app"
+                  ssh -o 'StrictHostKeyChecking=no' -o 'UserKnownHostsFile=/dev/null' -o 'LogLevel=quiet' -i "$GITHUB_WORKSPACE/.ssh/__deploy_key__" \
+                    "${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}" "cd ${{ secrets.SSH_PATH }} && docker compose restart > /dev/null"
+                  rm "$GITHUB_WORKSPACE/.ssh/__deploy_key__"
+
+            - name: Slack Notification
+              uses: rtCamp/action-slack-notify@master
+              env:
+                  SLACK_CHANNEL: bots-wp-decoupled
+                  SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+
+            - name: Cleanup
+              if: always()
+              uses: rtCamp/action-cleanup@master
