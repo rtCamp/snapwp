@@ -154,8 +154,6 @@ describe( 'CoreButton Component', () => {
 	test( 'renders without optional attributes if not provided', () => {
 		const minimalAttributes = {
 			text: 'Minimal Button',
-			tagName: 'a',
-			url: 'https://example.com',
 		};
 		const { asFragment, container } = render(
 			<CoreButton attributes={ minimalAttributes } />
@@ -163,7 +161,7 @@ describe( 'CoreButton Component', () => {
 		const linkElement = container.querySelector( 'a' );
 
 		expect( linkElement ).not.toBeNull();
-		expect( linkElement ).toHaveAttribute( 'href', 'https://example.com' );
+		expect( linkElement ).not.toHaveAttribute( 'href' );
 		expect( linkElement ).not.toHaveAttribute( 'target' );
 		expect( linkElement ).not.toHaveAttribute( 'rel' );
 		expect( linkElement ).not.toHaveClass();

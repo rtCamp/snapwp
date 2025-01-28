@@ -128,9 +128,7 @@ exports[`CoreButton Component renders without optional attributes if not provide
   <div
     class=""
   >
-    <a
-      href="https://example.com"
-    >
+    <a>
       Minimal Button
     </a>
   </div>
