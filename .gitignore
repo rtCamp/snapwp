@@ -18,7 +18,6 @@ node_modules
 .verdaccio/conf/htpasswd
 .verdaccio/plugins
 .verdaccio/storage
-examples/**/package-lock.json
 
 # Generated files
 __generated/
