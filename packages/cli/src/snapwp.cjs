@@ -89,8 +89,8 @@ const openEditor = ( filePath ) => {
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
 			'🫰 🫰 🫰  Thanks for using SnapWP! 🫰 🫰 🫰\n' +
-			'\nWhere would you like to create your new Headless WordPress frontend?\n' +
-			'Please enter a relative or absolute path: '
+				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
+				'Please enter a relative or absolute path: '
 		);
 		const projectDirPath = path.resolve( projectDir );
 
@@ -111,7 +111,8 @@ const openEditor = ( filePath ) => {
 		console.log( '📂 Copying frontend folder to project directory...' );
 		fs.cpSync( nextJsStarterPath, projectDirPath, {
 			recursive: true,
-			filter: source => ! /.*(node_modules|package-lock.json)/g.test( source )
+			filter: ( source ) =>
+				! /.*(node_modules|package-lock.json)/g.test( source ),
 		} );
 
 		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
@@ -126,10 +127,10 @@ const openEditor = ( filePath ) => {
 		if ( ! fs.existsSync( envPath ) ) {
 			await prompt(
 				`\nNo .env file found in "${ projectDirPath }". Please \n` +
-				'  1. Press any key to open a new .env file in your default editor,\n' +
-				'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-				'  3. Save and close the file to continue the installation. \n' +
-				'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
+					'  1. Press any key to open a new .env file in your default editor,\n' +
+					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
+					'  3. Save and close the file to continue the installation. \n' +
+					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
 			);
 
 			/**
@@ -202,7 +203,7 @@ const openEditor = ( filePath ) => {
 		console.log( '' );
 		console.log(
 			`🚀 To start your headless WordPress project, please navigate to ${ projectDirPath } ` +
-			'and run `npm run start`.'
+				'and run `npm run start`.'
 		);
 	} catch ( error ) {
 		console.error( 'Error:', error );

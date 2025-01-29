@@ -12,7 +12,10 @@ const fs = require( 'fs/promises' );
 
 	await fs.cp( examplesDir, path.resolve( __dirname, './dist/examples' ), {
 		recursive: true,
-		filter: source => ! /.*(node_modules|package-lock.json)/g.test( source )
+		filter: ( source ) =>
+			! /.*(node_modules|package-lock.json)/g.test( source ),
 	} );
-	await fs.cp( srcDir, path.resolve( __dirname, './dist' ), { recursive: true } );
+	await fs.cp( srcDir, path.resolve( __dirname, './dist' ), {
+		recursive: true,
+	} );
 } )();

@@ -4,7 +4,7 @@ Composable libraries and the Next app to power the frontend of the Headless Word
 
 ## System Requirements
 
-- **Node.js** 20.x
+-   **Node.js** 20.x
 
 ## Getting Started
 
