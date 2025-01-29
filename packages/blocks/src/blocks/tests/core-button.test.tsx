@@ -154,7 +154,6 @@ describe( 'CoreButton Component', () => {
 	test( 'renders without optional attributes if not provided', () => {
 		const minimalAttributes = {
 			text: 'Minimal Button',
-			tagName: 'a',
 		};
 		const { asFragment, container } = render(
 			<CoreButton attributes={ minimalAttributes } />
