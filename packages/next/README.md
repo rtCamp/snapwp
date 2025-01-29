@@ -18,14 +18,14 @@ The Parse component converts raw HTML strings into React components, replacing s
 
 #### Key Features:
 
-- Replaces `<a>` tags with the custom Link component for better navigation handling.
-- Replaces `<img>` tags with the Image component, ensuring optimized image loading and attribute handling.
-- Extracts and applies styles using `getStyleObjectFromString`.
-- Determines image dimensions using `getImageSizeFromAttributes`.
+-   Replaces `<a>` tags with the custom Link component for better navigation handling.
+-   Replaces `<img>` tags with the Image component, ensuring optimized image loading and attribute handling.
+-   Extracts and applies styles using `getStyleObjectFromString`.
+-   Determines image dimensions using `getImageSizeFromAttributes`.
 
 #### Props:
 
-- `html`: A string containing HTML to be parsed and rendered as React elements.
+-   `html`: A string containing HTML to be parsed and rendered as React elements.
 
 This component ensures safe and optimized rendering of dynamic HTML content.
 
@@ -50,16 +50,16 @@ The Image component wraps Next.js' `<Image>` with additional functionality for h
 
 #### Props:
 
-- `alt`: Alternative text for accessibility.
-- `className`: CSS class for styling.
-- `fill`: If true, the image fills the container.
-- `fetchPriority`: Controls browser image loading priority (high, low, auto).
-- `height`: Image height (optional, auto-calculated if not provided).
-- `image` : Media item containing the image details.
-- `priority`: Loads the image with higher priority.
-- `sizes`: Defines responsive image sizes for optimization.
-- `src`: Image URL.
-- `width`: Image width (optional, auto-calculated if not provided).
+-   `alt`: Alternative text for accessibility.
+-   `className`: CSS class for styling.
+-   `fill`: If true, the image fills the container.
+-   `fetchPriority`: Controls browser image loading priority (high, low, auto).
+-   `height`: Image height (optional, auto-calculated if not provided).
+-   `image` : Media item containing the image details.
+-   `priority`: Loads the image with higher priority.
+-   `sizes`: Defines responsive image sizes for optimization.
+-   `src`: Image URL.
+-   `width`: Image width (optional, auto-calculated if not provided).
 
 If the image source is external or missing proper dimensions, the component gracefully falls back to using a standard `<img>` tag.
 
@@ -86,10 +86,10 @@ The Link component handles both internal and external links. It automatically tr
 
 #### Props:
 
-- `children`: The link text or elements.
-- `className`: CSS class for styling.
-- `href`: The destination URL.
-- `style`: Inline styles for customization.
+-   `children`: The link text or elements.
+-   `className`: CSS class for styling.
+-   `href`: The destination URL.
+-   `style`: Inline styles for customization.
 
 If the link is external, the component renders a standard `<a>` tag. Otherwise, it leverages Next.js' `<Link>` for optimized client-side navigation.
 
@@ -112,13 +112,13 @@ The Script component is a flexible wrapper around Next.js' `<Script>`, allowing 
 
 #### Props:
 
-- `after`: Array of scripts to execute after the main script.
-- `before`: Array of scripts to execute before the main script.
-- `extraData`: Inline script data included separately.
-- `handle`: A unique identifier for the script.
-- `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
-- `location`: Defines where the script should be loaded (header or footer).
-- `src`: The source URL of the script.
+-   `after`: Array of scripts to execute after the main script.
+-   `before`: Array of scripts to execute before the main script.
+-   `extraData`: Inline script data included separately.
+-   `handle`: A unique identifier for the script.
+-   `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
+-   `location`: Defines where the script should be loaded (header or footer).
+-   `src`: The source URL of the script.
 
 This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
 
