@@ -67,7 +67,7 @@ export default function CoreFile( { attributes, renderedHtml }: any ) {
 					target={ textLinkTarget || undefined }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
-					{ fileName }
+					{ !! fileName && <Parse html={ fileName } /> }
 				</Link>
 			) }
 			{ showDownloadButton && (
