@@ -1,6 +1,5 @@
 const path = require( 'path' );
 const fs = require( 'fs/promises' );
-const copyDirectory = require( './src/utils/copyDirectory.cjs' );
 
 ( async () => {
 	try {
@@ -11,6 +10,9 @@ const copyDirectory = require( './src/utils/copyDirectory.cjs' );
 	const examplesDir = path.resolve( __dirname, '../../examples' );
 	const srcDir = path.resolve( __dirname, './src' );
 
-	copyDirectory( examplesDir, path.resolve( __dirname, './dist/examples' ) );
-	copyDirectory( srcDir, path.resolve( __dirname, './dist' ) );
+	await fs.cp( examplesDir, path.resolve( __dirname, './dist/examples' ), {
+		recursive: true,
+		filter: source => ! /.*(node_modules|package-lock.json)/g.test( source )
+	} );
+	await fs.cp( srcDir, path.resolve( __dirname, './dist' ), { recursive: true } );
 } )();
