@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 /**
- * You can override the default route using custom route at the same path.
+ * You can override the default route [[...path]] using custom route at the same level in app directory.
  */
 export default function Page() {
 	return (

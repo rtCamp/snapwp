@@ -6,7 +6,10 @@ This is a [Next.js](https://nextjs.org/) application that serves as a headless W
 
 @todo
 
+## Default Routes
 
-## Adding Custom Routes
+- [[...path]] handler manages all default routes.
 
--   You can override default routes using custom ones, such as for [example-route](./src/app/example-route/)
+## Custom Routes
+
+- To add a custom route, create a folder with its name, e.g., [example-route.](./src/app/example-route/)
