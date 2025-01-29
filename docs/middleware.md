@@ -14,41 +14,7 @@ Default middleware are added to all the requests that are made from the frontend
 
 -   This middleware configures custom proxies for the routes `wp-content/uploads/*`, `wp-json/*`, and `wp-admin/admin-ajax.php`, redirecting them to the WordPress domain.
 
-
 ## How to add custom middleware
-
-To add custom middleware, please follow the instructions provided below:
-
-1. Create middleware of type `MiddlewareFactory`.
-2. Import middleware to `src/middleware.ts` file.
-3. In `src/middleware.ts` file, add imported middleware to `middleware` array.
-
-## Misc Information about Middleware
-
-### Type of Middleware
-
--   Middleware should always be of the type `MiddlewareFactory`.
-
-```typescript
-type MiddlewareFactory = ( middleware: NextMiddleware ) => NextMiddleware;
-```
-
-### Base Scaffold for Middleware Development
-
-```typescript
-import { MiddlewareFactory } from '@snapwp/next';
-import { type NextRequest, NextFetchEvent, NextMiddleware } from 'next/server';
-
-export const MiddlewareName: MiddlewareFactory = (
-	next: NextMiddleware
-): NextMiddleware => {
-	return ( request: NextRequest, _next: NextFetchEvent ) => {
-		return next( request, _next );
-	};
-};
-```
-
-## Sample Implementation of Middleware
 
 In this example we will be creating a homepage redirect whenever `/about` page is visited.
 
@@ -89,6 +55,31 @@ import { redirectToHome } from './redirectToHome';
 
 ```typescript
 const middlewares: MiddlewareFactory[] = [ redirectToHome ];
+```
+
+## Misc Information about Middleware
+
+### Type of Middleware
+
+-   Middleware should always be of the type `MiddlewareFactory`.
+
+```typescript
+type MiddlewareFactory = ( middleware: NextMiddleware ) => NextMiddleware;
+```
+
+### Base Scaffold for Middleware Development
+
+```typescript
+import { MiddlewareFactory } from '@snapwp/next';
+import { type NextRequest, NextFetchEvent, NextMiddleware } from 'next/server';
+
+export const MiddlewareName: MiddlewareFactory = (
+	next: NextMiddleware
+): NextMiddleware => {
+	return ( request: NextRequest, _next: NextFetchEvent ) => {
+		return next( request, _next );
+	};
+};
 ```
 
 ## Notes
