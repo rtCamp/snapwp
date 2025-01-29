@@ -23,6 +23,7 @@ interface ScriptModuleInterface {
 		  }[]
 		| null;
 	extraData?: string | null;
+	isScriptAlreadyLoadedAsDependency?: boolean;
 }
 
 /**
@@ -34,6 +35,7 @@ interface ScriptModuleInterface {
  * @param props.src - The source URL for the script module
  * @param props.extraData - Additional data required by the script module
  * @param props.dependencies - Dependencies required by the script module
+ * @param props.isScriptAlreadyLoadedAsDependency - Whether the script module already loaded as dependency
  * @return The rendered script module elements
  */
 export default function ScriptModule( {
@@ -41,6 +43,7 @@ export default function ScriptModule( {
 	src,
 	dependencies,
 	extraData,
+	isScriptAlreadyLoadedAsDependency,
 	...props
 }: PropsWithoutRef< ScriptModuleInterface > ) {
 	// Generate dependency scripts
@@ -50,6 +53,18 @@ export default function ScriptModule( {
 		}
 
 		const { src: depSrc, handle: depHandle } = dep.connectedScriptModule;
+
+		if ( 'static' === dep.importType ) {
+			return (
+				<link
+					// We use "preload" instead of "modulepreload" to resolve the race condition where the script runs before the state is loaded.
+					rel="preload"
+					key={ depHandle || `${ handle }-dep-${ index }` }
+					href={ depSrc }
+					id={ `${ depHandle }-js-modulepreload` }
+				/>
+			);
+		}
 
 		return (
 			<Script
@@ -80,7 +95,7 @@ export default function ScriptModule( {
 	) : null;
 
 	// Generate main script with lazy loading strategy
-	const MainScript = src && (
+	const MainScript = src && ! isScriptAlreadyLoadedAsDependency && (
 		<Script
 			type="module"
 			src={ src }

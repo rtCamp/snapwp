@@ -81,27 +81,52 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
+	// Array to store handles of script modules that should not be loaded
+	const uniqueScriptModuleDependencies = new Set< string >();
+
 	// Filter out script modules with invalid dependencies (no handle or src)
 	const filteredScriptModules =
-		scriptModules?.map( ( { dependencies, ...rest } ) => ( {
-			...rest,
-			dependencies:
-				dependencies?.filter(
-					( dep ) =>
+		scriptModules?.map( ( scriptModule ) => {
+			scriptModule.dependencies =
+				// Filter out invalid and duplicate dependencies
+				scriptModule.dependencies?.filter( ( dep ) => {
+					const isValid =
 						dep?.connectedScriptModule?.handle &&
-						dep?.connectedScriptModule?.src
-				) || [],
-		} ) ) ?? [];
+						dep?.connectedScriptModule?.src &&
+						// If the script module is already included in the uniqueDependencies array, it is considered redundant and will be marked as invalid to prevent duplication.
+						! uniqueScriptModuleDependencies.has(
+							dep.connectedScriptModule!.handle!
+						);
+
+					// Add the handle to the uniqueScriptModuleDependencies array if it's valid.
+					if ( isValid ) {
+						uniqueScriptModuleDependencies.add(
+							dep.connectedScriptModule!.handle!
+						);
+					}
+
+					return isValid;
+				} ) || [];
+
+			return scriptModule;
+		} ) || [];
 
 	return (
 		<>
 			{ filteredScriptModules.length > 0 && (
 				<ImportMap scriptModules={ filteredScriptModules } />
 			) }
+
 			{ filteredScriptModules.map(
 				( { handle, src, extraData, dependencies }, id ) => {
 					if ( ! src ) {
 						return null;
+					}
+
+					let isScriptAlreadyLoadedAsDependency = false;
+
+					if ( uniqueScriptModuleDependencies.has( handle! ) ) {
+						isScriptAlreadyLoadedAsDependency = true;
 					}
 
 					return (
@@ -111,6 +136,9 @@ const ScriptModuleMap = ( {
 							src={ src }
 							extraData={ extraData }
 							dependencies={ dependencies }
+							isScriptAlreadyLoadedAsDependency={
+								isScriptAlreadyLoadedAsDependency
+							}
 						/>
 					);
 				}
