@@ -112,9 +112,10 @@ export default function CoreVideo( { attributes, renderedHtml }: any ) {
 				<Tracks tracks={ formattedTracks } />
 			</video>
 			{ caption && (
-				<figcaption className="wp-element-caption">
-					{ caption }
-				</figcaption>
+				<figcaption
+					className="wp-element-caption"
+					dangerouslySetInnerHTML={ { __html: caption } }
+				/>
 			) }
 		</figure>
 	);

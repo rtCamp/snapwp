@@ -204,9 +204,10 @@ export default function CoreImage( {
 				</button>
 			) }
 			{ caption && (
-				<figcaption className="wp-element-caption">
-					{ caption }
-				</figcaption>
+				<figcaption
+					className="wp-element-caption"
+					dangerouslySetInnerHTML={ { __html: caption } }
+				/>
 			) }
 		</Figure>
 	);
