@@ -182,7 +182,7 @@ const openEditor = ( filePath ) => {
 			{ encoding: 'utf8' }
 		);
 		const updatedPackageJsonData = packageJsonData.replaceAll(
-			/file:..\/..\/..\/packages\/(blocks|core|next|codegen-config|eslint-config|prettier-config)/g,
+			/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
 			'*'
 		);
 		fs.writeFileSync(
