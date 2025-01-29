@@ -111,11 +111,13 @@ const ScriptModuleMap = ( {
 			return scriptModule;
 		} ) || [];
 
+	if ( ! filteredScriptModules.length ) {
+		return null;
+	}
+
 	return (
 		<>
-			{ filteredScriptModules.length > 0 && (
-				<ImportMap scriptModules={ filteredScriptModules } />
-			) }
+			<ImportMap scriptModules={ filteredScriptModules } />
 
 			{ filteredScriptModules.map(
 				( { handle, src, extraData, dependencies }, id ) => {
@@ -123,22 +125,17 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
-					let isScriptAlreadyLoadedAsDependency = false;
-
-					if ( uniqueScriptModuleDependencies.has( handle! ) ) {
-						isScriptAlreadyLoadedAsDependency = true;
-					}
+					// We use this to prevent (re)loading the main script module if it's already included in the page.
+					const shouldLoadMainScript =
+						uniqueScriptModuleDependencies.has( handle! );
 
 					return (
 						<ScriptModule
 							key={ handle || id }
 							handle={ handle }
-							src={ src }
+							src={ shouldLoadMainScript ? src : undefined }
 							extraData={ extraData }
 							dependencies={ dependencies }
-							isScriptAlreadyLoadedAsDependency={
-								isScriptAlreadyLoadedAsDependency
-							}
 						/>
 					);
 				}

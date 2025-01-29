@@ -12,7 +12,7 @@ import Script from 'next/script';
 
 interface ScriptModuleInterface {
 	handle?: string | null;
-	src: string;
+	src?: string | null;
 	dependencies?:
 		| {
 				importType?: string | null;
@@ -23,7 +23,6 @@ interface ScriptModuleInterface {
 		  }[]
 		| null;
 	extraData?: string | null;
-	isScriptAlreadyLoadedAsDependency?: boolean;
 }
 
 /**
@@ -35,7 +34,6 @@ interface ScriptModuleInterface {
  * @param props.src - The source URL for the script module
  * @param props.extraData - Additional data required by the script module
  * @param props.dependencies - Dependencies required by the script module
- * @param props.isScriptAlreadyLoadedAsDependency - Whether the script module already loaded as dependency
  * @return The rendered script module elements
  */
 export default function ScriptModule( {
@@ -43,7 +41,6 @@ export default function ScriptModule( {
 	src,
 	dependencies,
 	extraData,
-	isScriptAlreadyLoadedAsDependency,
 	...props
 }: PropsWithoutRef< ScriptModuleInterface > ) {
 	// Generate dependency scripts
@@ -96,7 +93,7 @@ export default function ScriptModule( {
 	) : null;
 
 	// Generate main script with lazy loading strategy
-	const MainScript = src && ! isScriptAlreadyLoadedAsDependency && (
+	const MainScript = src && (
 		<Script
 			type="module"
 			src={ src }
