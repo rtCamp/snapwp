@@ -1,88 +1,71 @@
 # Middleware
 
--   Next.js middleware is a function that runs before a request is processed, allowing you to modify the request/response, perform redirects, authentication, or other tasks globally or for specific routes.
+Next.js [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) allows you to run custom logic before Next.js processes the request.
 
-## Default Middleware
+The [`@snapwp/next`](../packages/next/README.md) package provides middleware to integrate your frontend project with a headless WordPress backend along with any custom middleware you may need.
+
+## Usage
+
+```ts
+// ./src/app/middleware.ts
+import { appMiddlewares, type MiddlewareFactory } from '@snapwp/next';
+
+const middleware: MiddlewareFactory[] = [
+	// Add your custom middleware here, e.g.:
+	myCustomMiddleware,
+];
+
+// Combine them with default middleware.
+export default appMiddlewares( middleware );
+```
+
+## Default middleware
 
 Default middleware are added to all the requests that are made from the frontend project.
 
-### Current Path
+### [Current Path](../packages/next/src/middleware/current-path.ts)
 
--   This middleware adds a custom header 'x-current-path' to the response, which contains the current pathname of the request.
+Adds a custom header 'x-current-path' to the response, which is used to query the GraphQL data for that URI.
 
-### Proxies
+### [Proxies](packages/next/src/middleware/proxies.ts)
 
--   This middleware configures custom proxies for the routes `wp-content/uploads/*`, `wp-json/*`, and `wp-admin/admin-ajax.php`, redirecting them to the WordPress domain.
+Configures custom proxies to the headless WordPress backend for the following routes:
 
-## How to add custom middleware
+-   `wp-content/uploads/*`
+-   `wp-json/*`
+-   `wp-admin/admin-ajax.php`
 
-In this example we will be creating a homepage redirect whenever `/about` page is visited.
+## Adding custom middleware
 
-### Step 1
+Middleware should be defined as type `MiddlewareFactory` and then added to the array passed to `appMiddlewares()`.
 
--   Create a `src/redirectToHome.ts` middleware file containing the following middleware code:
+> [!NOTE]
+> There is no limit to the number of middleware you can add.
+>
+> Middleware are executed in the order they are added to the array.
 
-```typescript
-import { MiddlewareFactory } from '@snapwp/next';
-import { type NextRequest, NextFetchEvent, NextMiddleware } from 'next/server';
+```ts
+// my-custom-middleware.ts
+import type { MiddlewareFactory } from '@snapwp/next';
+import type { NextRequest, NextFetchEvent, NextMiddleware } from 'next/server';
 
-export const redirectToHome: MiddlewareFactory = (
-	next: NextMiddleware
-): NextMiddleware => {
-	// Return NextMiddleware.
-	return ( request: NextRequest, _next: NextFetchEvent ) => {
-		// Redirect to home page whenever user visits about page.
-		if ( '/about' === request.nextUrl.pathname ) {
-			return NextResponse.redirect( new URL( '/', request.url ) );
-		}
-
-		return next( request, _next ); // Call next middleware to conitnue execution.
-	};
-};
-```
-
-### Step 2
-
--   Import middleware created in `Step 1` file to `src/middleware.ts`.
-
-```typescript
-import { redirectToHome } from './redirectToHome';
-```
-
-### Step 3
-
--   In `src/middleware.ts`, add the imported `redirectToHome` middleware in `middlewares` array.
-
-```typescript
-const middlewares: MiddlewareFactory[] = [ redirectToHome ];
-```
-
-## Misc Information about Middleware
-
-### Type of Middleware
-
--   Middleware should always be of the type `MiddlewareFactory`.
-
-```typescript
-type MiddlewareFactory = ( middleware: NextMiddleware ) => NextMiddleware;
-```
-
-### Base Scaffold for Middleware Development
-
-```typescript
-import { MiddlewareFactory } from '@snapwp/next';
-import { type NextRequest, NextFetchEvent, NextMiddleware } from 'next/server';
-
-export const MiddlewareName: MiddlewareFactory = (
+export const myCustomMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
 ): NextMiddleware => {
 	return ( request: NextRequest, _next: NextFetchEvent ) => {
-		return next( request, _next );
+		// Custom middleware logic here.
+
+		return next( request, _next ); // Calls the next middleware in the chain.
 	};
 };
+
+// ./src/app/middleware.ts
+import { appMiddlewares, type MiddlewareFactory } from '@snapwp/next';
+import { myCustomMiddleware } from './my-custom-middleware';
+
+const middleware: MiddlewareFactory[] = [
+	myCustomMiddleware, // 👈 Add your middleware here here.
+];
+
+export default appMiddlewares( middleware );
 ```
-
-## Notes
-
--   Multiple middleware can be loaded by adding them to `middleware` array in `src/middleware.ts` file.
--   The execution priority of middleware will depend on the index they are added in `middleware` array.

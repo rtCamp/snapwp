@@ -1,10 +1,10 @@
-import { appMiddlewares, MiddlewareFactory } from '@snapwp/next';
+import { appMiddlewares, type MiddlewareFactory } from '@snapwp/next';
 
 /**
  * Layer your own custom middlewares here by adding them to the array.
  *
- * @see @todo add docs link
+ * @see https://github.com/rtCamp/snapwp/blob/main/docs/middleware.md
  */
-const middlewares: MiddlewareFactory[] = [];
+const middleware: MiddlewareFactory[] = [];
 
-export default appMiddlewares( middlewares );
+export default appMiddlewares( middleware );
