@@ -1,6 +1,6 @@
 # Middleware
 
-- Next.js middleware is a function that runs before a request is processed, allowing you to modify the request/response, perform redirects, authentication, or other tasks globally or for specific routes.
+-   Next.js middleware is a function that runs before a request is processed, allowing you to modify the request/response, perform redirects, authentication, or other tasks globally or for specific routes.
 
 ## Default Middleware
 
@@ -8,7 +8,7 @@ Default middleware are added to all the requests that are made from the frontend
 
 ### Current Path
 
-- This middleware adds a custom header 'x-current-path' to the response, which contains the current pathname of the request.
+-   This middleware adds a custom header 'x-current-path' to the response, which contains the current pathname of the request.
 
 ```typescript
 /**
@@ -35,7 +35,7 @@ export const currentPath: MiddlewareFactory = ( next: NextMiddleware ) => {
 
 ### Proxies
 
-- This middleware configures custom proxies for the routes `wp-content/uploads/*`, `wp-json/*`, and `wp-admin/admin-ajax.php`, redirecting them to the WordPress domain.
+-   This middleware configures custom proxies for the routes `wp-content/uploads/*`, `wp-json/*`, and `wp-admin/admin-ajax.php`, redirecting them to the WordPress domain.
 
 ```typescript
 /**
