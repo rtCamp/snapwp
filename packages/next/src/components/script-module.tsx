@@ -59,6 +59,7 @@ export default function ScriptModule( {
 				<link
 					// We use "preload" instead of "modulepreload" to resolve the race condition where the script runs before the state is loaded.
 					rel="preload"
+					as="script"
 					key={ depHandle || `${ handle }-dep-${ index }` }
 					href={ depSrc }
 					id={ `${ depHandle }-js-modulepreload` }
