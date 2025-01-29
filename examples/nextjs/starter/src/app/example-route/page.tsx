@@ -1,7 +1,12 @@
 import styles from './styles.module.css';
 
 /**
- * You can override the default route [[...path]] using custom route at the same level in app directory.
+ * This is an example of a "traditional" Next.js app route.
+ *
+ * It coexists alongside the default WordPress template rendering ( in `./[[...path]]` ), but still has access to the global styles and theme.json styles.
+ * You can use this to create custom routes that don't rely on the WordPress template hierarchy.
+ *
+ * @see https://nextjs.org/docs/app/getting-started/layouts-and-pages#nesting-layouts
  */
 export default function Page() {
 	return (
