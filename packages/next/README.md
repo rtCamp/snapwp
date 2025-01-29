@@ -14,6 +14,21 @@ npm install @snapwp/next
 
 #### React Parser
 
+The Parse component converts raw HTML strings into React components, replacing specific elements with custom Next.js components.
+
+#### Key Features:
+
+- Replaces `<a>` tags with the custom Link component for better navigation handling.
+- Replaces `<img>` tags with the Image component, ensuring optimized image loading and attribute handling.
+- Extracts and applies styles using `getStyleObjectFromString`.
+- Determines image dimensions using `getImageSizeFromAttributes`.
+
+#### Props:
+
+- `html`: A string containing HTML to be parsed and rendered as React elements.
+
+This component ensures safe and optimized rendering of dynamic HTML content.
+
 ```typescript
 import Parse from '@snapwp/next';
 
@@ -31,6 +46,23 @@ export default function HtmlParserExample() {
 
 #### Image Component
 
+The Image component wraps Next.js' `<Image>` with additional functionality for handling WordPress media items dynamically. It supports automatic width and height calculations, fill mode for flexible layouts, and integration with SnapWP's configuration for optimized image loading. If fill is enabled, the image will adapt to its container while maintaining responsiveness.
+
+#### Props:
+
+- `alt`: Alternative text for accessibility.
+- `className`: CSS class for styling.
+- `fill`: If true, the image fills the container.
+- `fetchPriority`: Controls browser image loading priority (high, low, auto).
+- `height`: Image height (optional, auto-calculated if not provided).
+- `image` : Media item containing the image details.
+- `priority`: Loads the image with higher priority.
+- `sizes`: Defines responsive image sizes for optimization.
+- `src`: Image URL.
+- `width`: Image width (optional, auto-calculated if not provided).
+
+If the image source is external or missing proper dimensions, the component gracefully falls back to using a standard `<img>` tag.
+
 ```typescript
 import Image from '@snapwp/next';
 
@@ -46,10 +78,20 @@ export default function CustomImage() {
         />
     );
 }
-
 ```
 
 #### Link Component
+
+The Link component handles both internal and external links. It automatically transforms WordPress links to match the frontend domain while preserving accessibility and SEO best practices.
+
+#### Props:
+
+- `children`: The link text or elements.
+- `className`: CSS class for styling.
+- `href`: The destination URL.
+- `style`: Inline styles for customization.
+
+If the link is external, the component renders a standard `<a>` tag. Otherwise, it leverages Next.js' `<Link>` for optimized client-side navigation.
 
 ```typescript
 import Link from '@snapwp/next';
@@ -65,6 +107,20 @@ export default function CustomLink() {
 ```
 
 #### Script Component
+
+The Script component is a flexible wrapper around Next.js' `<Script>`, allowing for controlled execution of scripts with additional inline data.
+
+#### Props:
+
+- `after`: Array of scripts to execute after the main script.
+- `before`: Array of scripts to execute before the main script.
+- `extraData`: Inline script data included separately.
+- `handle`: A unique identifier for the script.
+- `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
+- `location`: Defines where the script should be loaded (header or footer).
+- `src`: The source URL of the script.
+
+This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
 
 ```typescript
 import Script from '@snapwp/next';
