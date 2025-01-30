@@ -1,3 +1,4 @@
+import { getConfig } from '@snapwp/core/config';
 import React from 'react';
 
 /**
@@ -11,13 +12,16 @@ import React from 'react';
  */
 export default function Fonts( props: { renderedFontFaces: string } ) {
 	const { renderedFontFaces } = props;
+
+	// @todo: we might need to proxy these for CORS.
+
 	return (
 		<style
 			id="wp-fonts-local"
 			dangerouslySetInnerHTML={ {
 				__html: renderedFontFaces
-					?.replace( "<style id='wp-fonts-local'>", '' )
-					?.replace( '</style>\n', '' ),
+					.replace( /<style[^>]*>/g, '' )
+					.replace( /<\/style>/g, '' ),
 			} }
 		></style>
 	);
