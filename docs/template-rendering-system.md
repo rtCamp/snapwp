@@ -107,5 +107,5 @@ export default function Page() {
 
 **Props:**
 
--   `editorBlocks`: (Required) An array of block data objects.
--   `blockDefinitions`: (Required) An object mapping block names to React components.
+-   `editorBlocks`: (Optional) An array of block data objects.
+-   `blockDefinitions`: (Optional) An object mapping block names to React components.
