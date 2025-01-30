@@ -12,7 +12,7 @@ npm install @snapwp/next
 
 ## Usage
 
-#### React Parser
+### `<Parse />`
 
 The Parse component converts raw HTML strings into React components, replacing specific elements with custom Next.js components.
 
@@ -44,9 +44,9 @@ export default function HtmlParserExample() {
 }
 ```
 
-#### Image Component
+### `<Image />`
 
-The Image component wraps Next.js' `<Image>` with additional functionality for handling WordPress media items dynamically. It supports automatic width and height calculations, fill mode for flexible layouts, and integration with SnapWP's configuration for optimized image loading. If fill is enabled, the image will adapt to its container while maintaining responsiveness.
+The Image component wraps [Next.js' `Image`](https://nextjs.org/docs/api-reference/next/image) with additional functionality for handling WordPress media items dynamically. It supports automatic width and height calculations, fill mode for flexible layouts, and integration with SnapWP's configuration for optimized image loading.
 
 #### Props:
 
@@ -80,9 +80,9 @@ export default function CustomImage() {
 }
 ```
 
-#### Link Component
+### `<Link />`
 
-The Link component handles both internal and external links. It automatically transforms WordPress links to match the frontend domain while preserving accessibility and SEO best practices.
+The Link component wraps [Next.js' `Link`](https://nextjs.org/docs/api-reference/next/link) to map both internal and external links. Full-qualified links to the WordPress backend are automatically transformed into frontend-relative URLs.
 
 #### Props:
 
@@ -106,7 +106,7 @@ export default function CustomLink() {
 }
 ```
 
-#### Script Component
+### `<Script>`
 
 The Script component is a flexible wrapper around Next.js' `<Script>`, allowing for controlled execution of scripts with additional inline data.
 
