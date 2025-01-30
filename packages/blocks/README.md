@@ -2,6 +2,10 @@
 
 A React component library for rendering and hydrating [WordPress Blocks](https://wordpress.org/blocks/) from their block data.
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 ```bash

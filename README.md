@@ -20,11 +20,9 @@ A better way to build headless WordPress applications.
 
 SnapWP treats headless WordPress as a progressive enhancement, providing a "turn-key" experience for parity with traditional WordPress sites, so you can focus on building the unique and custom features that make your project stand out.
 
-> [!NOTE]
->
-> 🐉 There Be Dragons! 🐉
->
-> This project is in active development and considered "experimental." Some features may be incomplete, unstable, or subject to change.
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
 
 ## What's Included?
 
