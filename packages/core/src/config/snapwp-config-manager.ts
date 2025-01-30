@@ -30,7 +30,7 @@ export interface SnapWPConfig {
 	 */
 	corsProxyPrefix?: string;
 	/**
-	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
+	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
 	useCorsProxy?: boolean;
 }
