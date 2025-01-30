@@ -127,7 +127,7 @@ const ScriptModuleMap = ( {
 
 					// We use this to prevent (re)loading the main script module if it's already included in the page.
 					const shouldLoadMainScript =
-						uniqueScriptModuleDependencies.has( handle! );
+						! uniqueScriptModuleDependencies.has( handle! );
 
 					return (
 						<ScriptModule
