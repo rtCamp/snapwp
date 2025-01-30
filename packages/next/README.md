@@ -112,13 +112,13 @@ The Script component is a flexible wrapper around Next.js' `<Script>`, allowing 
 
 #### Props:
 
--   `after`: Array of scripts to execute after the main script.
--   `before`: Array of scripts to execute before the main script.
--   `extraData`: Inline script data included separately.
+-   `after`: The inline code to be run after the asset is loaded..
+-   `before`: The inline code to be run before the asset is loaded..
+-   `extraData`: Extra information needed for the script
 -   `handle`: A unique identifier for the script.
 -   `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
 -   `location`: Defines where the script should be loaded (header or footer).
--   `src`: The source URL of the script.
+-   `src`: The source of the asset.
 
 This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
 
