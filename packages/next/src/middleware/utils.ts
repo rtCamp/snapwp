@@ -1,6 +1,8 @@
 import { NextMiddleware, NextResponse } from 'next/server';
 import { proxies } from './proxies';
 import { currentPath as cm } from './current-path';
+import { corsProxyMiddleware } from './cors';
+import { getConfig } from '@snapwp/core/config';
 
 export type MiddlewareFactory = (
 	middleware: NextMiddleware
@@ -46,7 +48,13 @@ export function appMiddlewares(
  * @return Array combining default middlewares and custom middlewares.
  */
 export function stackMiddlewares( middlewares: MiddlewareFactory[] = [] ) {
+	const { useCorsProxy } = getConfig();
+
 	const defaultMiddlewares = [ cm, proxies ];
+
+	if ( useCorsProxy ) {
+		defaultMiddlewares.push( corsProxyMiddleware );
+	}
 
 	return [ ...defaultMiddlewares, ...middlewares ];
 }

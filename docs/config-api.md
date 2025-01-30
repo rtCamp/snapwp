@@ -11,7 +11,7 @@ To ensure consistency and allow for composability across the SnapWP framework, w
 SnapWP resolves configuration using the following hierarchy:
 
 1. **Environment Variables (.env file):** Highest priority.
-2. **`snapwp.config.js` or `snapwp.config.mjs` file:** Overrides devault values.
+2. **`snapwp.config.js` or `snapwp.config.mjs` file:** Overrides default values.
 3. **Defaults:** Built-in values to fallback to if no configuration is provided.
 
 The `.env` file takes precedence over `snapwp.config.js`. For instance, if `NEXT_PUBLIC_GRAPHQL_ENDPOINT` is set in both, the `.env` value will override the configuration file.

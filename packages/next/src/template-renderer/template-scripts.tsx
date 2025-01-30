@@ -3,6 +3,7 @@ import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';
 import { type EnqueuedScriptProps, type ScriptModuleProps } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
 
 /**
  * Renders a list of script elements from a given array of script data.
@@ -38,11 +39,15 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
+	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
+
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = src;
+				acc[ handle ] = useCorsProxy
+					? src.replace( homeUrl, corsProxyPrefix )
+					: src;
 			} );
 			return acc;
 		},
@@ -81,6 +86,7 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
+	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -125,9 +131,13 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
+					src = useCorsProxy
+						? src.replace( homeUrl, corsProxyPrefix )
+						: src;
+
 					// We use this to prevent (re)loading the main script module if it's already included in the page.
 					const shouldLoadMainScript =
-						uniqueScriptModuleDependencies.has( handle! );
+						! uniqueScriptModuleDependencies.has( handle! );
 
 					return (
 						<ScriptModule
