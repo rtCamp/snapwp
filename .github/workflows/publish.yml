@@ -3,13 +3,6 @@ name: Publish to NPM
 on:
     release:
         types: [published]
-    # TODO: Remove when ready to publish
-    workflow_dispatch:
-        inputs:
-            tag:
-                description: 'The tag to publish to NPM'
-                required: true
-                default: 'v0.0.0'
 
 env:
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
