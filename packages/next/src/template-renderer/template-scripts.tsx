@@ -3,6 +3,7 @@ import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';
 import { type EnqueuedScriptProps, type ScriptModuleProps } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
 
 /**
  * Renders a list of script elements from a given array of script data.
@@ -38,11 +39,13 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
+	const moduleAPIRoute = '/api/proxy/js/module';
+	const { homeUrl } = getConfig();
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = src;
+				acc[ handle ] = src.replace( homeUrl, moduleAPIRoute );
 			} );
 			return acc;
 		},
