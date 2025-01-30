@@ -20,9 +20,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
 
-2. (Optional) If the frontend is on a different domain than your WordPress backend and you are faced with CORS issues you may want to install and activate the [WPGraphQL CORS](https://github.com/funkhaus/wp-graphql-cors/releases/latest) plugin. Once the plugin is installed, you can change the allowed CORS domains as follows:
-    1. Go to `Dashboard > WPGraphQL > Settings > CORS Settings`.
-    2. Add the frontend domain to `Extend "Access-Control-Allow-Origin" header` (Use `*` to allow-list all domains).
+2. (Optional) If you are faced with CORS issues during local development you may want to install activate the [`Allow CORS: Access-Control-Allow-Origin` Chrome Extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) or similar.
 
 ## Frontend Setup
 
@@ -65,6 +63,14 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     3. Visit the `NEXT_PUBLIC_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
 
 ### Manual Installation
+
+@todo
+
+### Deployment
+
+@todo
+
+### Troubleshooting
 
 @todo
 
