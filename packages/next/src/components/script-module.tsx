@@ -44,8 +44,6 @@ export default function ScriptModule( {
 	extraData,
 	...props
 }: PropsWithoutRef< ScriptModuleInterface > ) {
-	const { homeUrl, corsProxyPrefix } = getConfig();
-
 	// Generate dependency scripts
 	const DependencyScripts = dependencies?.map( ( dep, index ) => {
 		if ( ! dep?.connectedScriptModule ) {
@@ -61,7 +59,7 @@ export default function ScriptModule( {
 					rel="preload"
 					as="script"
 					key={ depHandle || `${ handle }-dep-${ index }` }
-					href={ depSrc.replace( homeUrl, corsProxyPrefix ) }
+					href={ depSrc }
 					id={ `${ depHandle }-js-modulepreload` }
 				/>
 			);
@@ -72,7 +70,7 @@ export default function ScriptModule( {
 				key={ depHandle || `${ handle }-dep-${ index }` }
 				id={ depHandle || undefined }
 				type="module"
-				src={ depSrc.replace( homeUrl, corsProxyPrefix ) }
+				src={ depSrc }
 				/*
 				 * Use lazyOnload strategy for dependencies to ensure they are loaded asynchronously.
 				 * This strategy is recommended for non-blocking scripts and they prevent preload warnings.
@@ -99,7 +97,7 @@ export default function ScriptModule( {
 	const MainScript = src && (
 		<Script
 			type="module"
-			src={ src.replace( homeUrl, corsProxyPrefix ) }
+			src={ src }
 			id={ handle || undefined }
 			strategy="lazyOnload"
 			{ ...props }

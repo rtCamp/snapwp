@@ -83,6 +83,7 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
+	const { homeUrl, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -135,7 +136,11 @@ const ScriptModuleMap = ( {
 						<ScriptModule
 							key={ handle || id }
 							handle={ handle }
-							src={ shouldLoadMainScript ? src : undefined }
+							src={
+								shouldLoadMainScript
+									? src.replace( homeUrl, corsProxyPrefix )
+									: undefined
+							}
 							extraData={ extraData }
 							dependencies={ dependencies }
 						/>
