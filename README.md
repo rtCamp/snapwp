@@ -2,11 +2,6 @@
 
 A better way to build headless WordPress applications.
 
-> [!NOTE]
->
-> 🐉 There Be Dragons! 🐉
-> This project is in active development and considered "experimental." Some features may be incomplete, unstable, or subject to change.
-
 ## Table of Contents
 
 -   [Overview](#what-is-snapwp)
@@ -24,6 +19,12 @@ A better way to build headless WordPress applications.
 -   🛠️ It provides an additive and adaptable DX layer / API / tooling that lets developers granularly override just the parts of their app they care about.
 
 SnapWP treats headless WordPress as a progressive enhancement, providing a "turn-key" experience for parity with traditional WordPress sites, so you can focus on building the unique and custom features that make your project stand out.
+
+> [!NOTE]
+>
+> 🐉 There Be Dragons! 🐉
+>
+> This project is in active development and considered "experimental." Some features may be incomplete, unstable, or subject to change.
 
 ## What's Included?
 
