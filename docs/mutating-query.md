@@ -9,7 +9,7 @@ The default definition for `getGlobalStyles` function passed in `getGlobalStyles
 Type Definition of `getGlobalStyles`:
 
 ```typescript
-() => Promise< GlobalHeadProps >
+type getGlobalStyles = () => Promise< GlobalHeadProps >;
 ```
 
 Type definition of `GlobalHeadProps` can be found in [@snapwp/core](../packages/next/README.md) package.
@@ -25,7 +25,7 @@ The default definition for `getTemplateData` function passed in `getTemplateData
 Type Definition of `getTemplateData`:
 
 ```typescript
-( uri: string ) => Promise< TemplateData >
+type getTemplateData = ( uri: string ) => Promise< TemplateData >;
 ```
 
 Type definition of `TemplateData` can be found in [@snapwp/core](../packages/next/README.md) package.
