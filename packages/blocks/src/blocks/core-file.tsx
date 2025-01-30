@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { Link } from '@snapwp/next';
+import { Link, Parse } from '@snapwp/next';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
@@ -67,7 +67,7 @@ export default function CoreFile( { attributes, renderedHtml }: any ) {
 					target={ textLinkTarget || undefined }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
-					{ fileName }
+					{ !! fileName && <Parse html={ fileName } /> }
 				</Link>
 			) }
 			{ showDownloadButton && (
@@ -77,7 +77,7 @@ export default function CoreFile( { attributes, renderedHtml }: any ) {
 					download
 					aria-describedby={ fileId || undefined }
 				>
-					{ downloadText }
+					{ !! downloadText && <Parse html={ downloadText } /> }
 				</Link>
 			) }
 		</div>
