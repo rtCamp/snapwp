@@ -10,7 +10,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { Image, Link } from '@snapwp/next';
+import { Image, Link, Parse } from '@snapwp/next';
 
 interface CoreImageAttributes {
 	alt?: string;
@@ -203,11 +203,11 @@ export default function CoreImage( {
 					</svg>
 				</button>
 			) }
+
 			{ caption && (
-				<figcaption
-					className="wp-element-caption"
-					dangerouslySetInnerHTML={ { __html: caption } }
-				/>
+				<figcaption className="wp-element-caption">
+					<Parse html={ caption } />
+				</figcaption>
 			) }
 		</Figure>
 	);

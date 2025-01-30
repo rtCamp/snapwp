@@ -4,6 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { Parse } from '@snapwp/next';
 
 interface TrackProps {
 	src: string;
@@ -111,11 +112,11 @@ export default function CoreVideo( { attributes, renderedHtml }: any ) {
 			>
 				<Tracks tracks={ formattedTracks } />
 			</video>
+
 			{ caption && (
-				<figcaption
-					className="wp-element-caption"
-					dangerouslySetInnerHTML={ { __html: caption } }
-				/>
+				<figcaption className="wp-element-caption">
+					<Parse html={ caption } />
+				</figcaption>
 			) }
 		</figure>
 	);
