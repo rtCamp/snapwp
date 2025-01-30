@@ -8,15 +8,14 @@ import { getConfig } from '@snapwp/core/config';
  * @param request The incoming request.
  * @param root0 The parameters for the request.
  * @param root0.params The parameters for the request.
- * @param root0.params.path The path to the external API.
  *
  * @return The response from the external API.
  */
 export async function GET(
 	request: NextRequest,
-	{ params }: { params: { path: string[] } }
+	{ params }: { params: Promise< { path: string[] } > }
 ) {
-	const { path } = params;
+	const { path } = await params;
 
 	const { homeUrl } = getConfig();
 	// Construct the target URL
