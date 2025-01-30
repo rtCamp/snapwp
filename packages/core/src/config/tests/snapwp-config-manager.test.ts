@@ -152,6 +152,7 @@ describe( 'SnapWPConfigManager functions', () => {
 			graphqlEndpoint: ' index.php?graphql ',
 			restUrlPrefix: ' /wp-json ',
 			uploadsDirectory: ' /wp-content/uploads ',
+			corsProxyPrefix: ' /proxy ',
 		};
 
 		expect( getConfig() ).toEqual( {
@@ -160,6 +161,7 @@ describe( 'SnapWPConfigManager functions', () => {
 			graphqlEndpoint: 'index.php?graphql',
 			restUrlPrefix: '/wp-json',
 			uploadsDirectory: '/wp-content/uploads',
+			corsProxyPrefix: '/proxy',
 		} );
 	} );
 
