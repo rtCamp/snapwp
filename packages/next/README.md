@@ -2,6 +2,10 @@
 
 Next.js-specific utilities and frontend components for integrating with SnapWP and headless WordPress.
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 Run the following command:

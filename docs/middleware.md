@@ -1,4 +1,4 @@
-# Middleware
+# NextJS Middleware
 
 Next.js [middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) allows you to run custom logic before Next.js processes the request.
 
