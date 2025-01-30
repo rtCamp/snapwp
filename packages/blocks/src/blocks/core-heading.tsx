@@ -1,5 +1,6 @@
 import React, { type JSX } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
+import { Parse } from '@snapwp/next';
 
 /**
  * Renders the core/heading block.
@@ -21,8 +22,9 @@ export default function CoreHeading( { attributes }: any ) {
 	return (
 		<HeadingTag
 			style={ styleObject }
-			className={ cssClassName || '' }
-			dangerouslySetInnerHTML={ { __html: content || '' } }
-		/>
+			className={ cssClassName || undefined }
+		>
+			{ !! content && <Parse html={ content } /> }
+		</HeadingTag>
 	);
 }

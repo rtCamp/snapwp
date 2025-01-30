@@ -1,5 +1,6 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
+import { Parse } from '@snapwp/next';
 
 /**
  * Renders the core/paragraph block.
@@ -46,7 +47,8 @@ export default function CoreParagraph( { attributes }: any ) {
 			className={ cssClassName || undefined }
 			style={ styleObject }
 			dir={ direction || undefined }
-			dangerouslySetInnerHTML={ { __html: content || '' } }
-		/>
+		>
+			{ !! content && <Parse html={ content } /> }
+		</p>
 	);
 }

@@ -1,7 +1,7 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import React, { type ButtonHTMLAttributes } from 'react';
 import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import { Link } from '@snapwp/next';
+import { Link, Parse } from '@snapwp/next';
 
 /**
  * Renders the core/button block.
@@ -53,7 +53,7 @@ export default function CoreButton( { attributes }: any ) {
 				style={ styleObject }
 				title={ title ?? undefined }
 			>
-				{ text }
+				{ !! text && <Parse html={ text } /> }
 			</TagComponent>
 		</div>
 	);
