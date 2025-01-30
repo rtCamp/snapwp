@@ -9,5 +9,9 @@ import { type BlockData } from '@snapwp/core';
  * @return The rendered default block.
  */
 export default function Default( { renderedHtml }: BlockData ) {
-	return <Parse html={ renderedHtml || '' } />;
+	if ( ! renderedHtml ) {
+		return null;
+	}
+
+	return <Parse html={ renderedHtml } />;
 }

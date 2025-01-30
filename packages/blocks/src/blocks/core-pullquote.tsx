@@ -4,6 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { Parse } from '@snapwp/next';
 
 /**
  * Renders the core/pullquote block.
@@ -32,14 +33,15 @@ export default function CorePullquote( { attributes, renderedHtml }: any ) {
 		<figure style={ styleObject } className={ classNames }>
 			<blockquote>
 				{ pullquoteValue && (
-					<p
-						dangerouslySetInnerHTML={ { __html: pullquoteValue } }
-					></p>
+					<p>
+						<Parse html={ pullquoteValue } />
+					</p>
 				) }
+
 				{ citation && (
-					<cite
-						dangerouslySetInnerHTML={ { __html: citation } }
-					></cite>
+					<cite>
+						<Parse html={ citation } />
+					</cite>
 				) }
 			</blockquote>
 		</figure>
