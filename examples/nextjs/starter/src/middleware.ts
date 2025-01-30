@@ -1,7 +1,7 @@
 import {
 	appMiddlewares,
-	type MiddlewareFactory,
 	corsProxyMiddleware,
+	type MiddlewareFactory,
 } from '@snapwp/next';
 
 /**

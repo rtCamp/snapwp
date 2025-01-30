@@ -40,6 +40,7 @@ const ImportMap = ( {
 } ) => {
 	// Generate import map from all module dependencies
 	const { homeUrl, corsProxyPrefix } = getConfig();
+
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {

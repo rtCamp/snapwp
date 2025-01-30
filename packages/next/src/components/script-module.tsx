@@ -4,12 +4,9 @@
  * A script module is typically a JavaScript file that needs to be loaded on a webpage.
  * This component ensures that all dependencies of a script module are loaded before the main script.
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
- *
- * @todo Add CORS headers in production by fetching WordPress site URL from getConfig
  */
 import React, { type PropsWithoutRef } from 'react';
 import Script from 'next/script';
-import { getConfig } from '@snapwp/core/config';
 
 interface ScriptModuleInterface {
 	handle?: string | null;

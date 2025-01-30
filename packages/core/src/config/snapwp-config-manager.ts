@@ -26,7 +26,7 @@ export interface SnapWPConfig {
 	 */
 	restUrlPrefix?: string;
 	/**
-	 * URL prefix for WP assests loaded from 'wp-includes' dir . Defaults to `/proxy`.
+	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
 	corsProxyPrefix?: string;
 }
