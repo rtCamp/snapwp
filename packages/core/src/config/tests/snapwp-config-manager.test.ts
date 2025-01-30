@@ -24,6 +24,7 @@ describe( 'SnapWPConfigManager functions', () => {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
+		corsProxyPrefix: '/proxy',
 	};
 
 	beforeEach( () => {
