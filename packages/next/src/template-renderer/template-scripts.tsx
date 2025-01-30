@@ -45,7 +45,9 @@ const ImportMap = ( {
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = src.replace( homeUrl, corsProxyPrefix );
+				acc[ handle ] = src.includes( corsProxyPrefix )
+					? src.replace( homeUrl, corsProxyPrefix )
+					: src;
 			} );
 			return acc;
 		},
@@ -129,6 +131,10 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
+					src = src.includes( corsProxyPrefix )
+						? src.replace( homeUrl, corsProxyPrefix )
+						: src;
+
 					// We use this to prevent (re)loading the main script module if it's already included in the page.
 					const shouldLoadMainScript =
 						! uniqueScriptModuleDependencies.has( handle! );
@@ -137,11 +143,7 @@ const ScriptModuleMap = ( {
 						<ScriptModule
 							key={ handle || id }
 							handle={ handle }
-							src={
-								shouldLoadMainScript
-									? src.replace( homeUrl, corsProxyPrefix )
-									: undefined
-							}
+							src={ shouldLoadMainScript ? src : undefined }
 							extraData={ extraData }
 							dependencies={ dependencies }
 						/>
