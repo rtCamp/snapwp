@@ -1,6 +1,6 @@
 {
-	"name": "snapwp",
 	"version": "0.0.1",
+	"license": "AGPL-3.0",
 	"private": true,
 	"description": "Frontend next app and utilities for SnapWP",
 	"author": "rtCamp",
@@ -28,7 +28,8 @@
 		"force-build:next": "npm run force-build -w @snapwp/next",
 		"force-build:query": "npm run force-build -w @snapwp/query",
 		"force-build:codegen": "npm run force-build -w @snapwp/codegen-config",
-		"force-build": "tsc --build --force",
+		"force-build:snapwp": "npm run force-build -w snapwp",
+		"force-build": "tsc --build --force && npm run force-build:snapwp",
 		"postforce-build": "npm-run-all resolve-paths:*",
 		"dev:blocks": "npm run dev -w @snapwp/blocks",
 		"dev:core": "npm run dev -w @snapwp/core",

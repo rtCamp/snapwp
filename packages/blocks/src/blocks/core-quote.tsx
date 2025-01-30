@@ -1,5 +1,6 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
+import { Parse } from '@snapwp/next';
 
 /**
  * Renders the core/quote block.
@@ -18,8 +19,11 @@ export default function CoreQuote( { attributes, children }: any ) {
 	return (
 		<blockquote className={ cssClassName || '' } style={ styleObject }>
 			{ children }
+
 			{ !! citation && (
-				<cite dangerouslySetInnerHTML={ { __html: citation } }></cite>
+				<cite>
+					<Parse html={ citation } />
+				</cite>
 			) }
 		</blockquote>
 	);

@@ -8,6 +8,7 @@ import styles from './styles.module.css';
  *
  * @see https://nextjs.org/docs/app/getting-started/layouts-and-pages#nesting-layouts
  */
+
 export default function Page() {
 	return (
 		<div className={ styles.container }>

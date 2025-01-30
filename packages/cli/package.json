@@ -1,6 +1,7 @@
 {
 	"name": "snapwp",
 	"version": "0.0.1",
+	"license": "AGPL-3.0",
 	"author": "rtCamp",
 	"description": "@todo",
 	"type": "module",
@@ -11,6 +12,10 @@
 		"snapwp": "./dist/snapwp.cjs"
 	},
 	"scripts": {
-		"build": "node ./build.cjs"
+		"build": "node ./build.cjs",
+		"force-build": "rm -rf dist && npm run build"
+	},
+	"dependencies": {
+		"commander": "^13.1.0"
 	}
 }
