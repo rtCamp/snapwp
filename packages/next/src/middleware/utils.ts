@@ -47,7 +47,7 @@ export function appMiddlewares(
  * @return Array combining default middlewares and custom middlewares.
  */
 export function stackMiddlewares( middlewares: MiddlewareFactory[] = [] ) {
-	const defaultMiddlewares = [ cm, proxies, cors ];
+	const defaultMiddlewares = [ cm, proxies ];
 
 	return [ ...defaultMiddlewares, ...middlewares ];
 }
