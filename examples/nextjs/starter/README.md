@@ -1,22 +1,41 @@
-# Overview
+# 🫰 SnapWP - Next.js Starter Example
 
-This is a [Next.js](https://nextjs.org/) application that serves as a headless WordPress frontend using SnapWP.
+This is a headless WordPress application built with [Next.js](https://nextjs.org/), powered by [WPGraphQL](https://www.wpgraphql.com/) and [SnapWP](https://github.com/rtCamp/snapwp).
 
 ## Getting Started
 
-#### Install dependencies
-  ``` 
-  npm install
-   ```
+```bash
+# Install dependencies
+npm install
 
-#### Run  development server 
-```
+# Run the development server
 npm run dev
-``` 
+```
+
 Your Next.js app will be available at http://localhost:3000 🎉
 
+## Commands
 
-## Route Handling
+`npm run <command>`
+
+-   `build` Builds the production Next app. This command is usually followed by `start` which starts a server to server the next app.
+-   `dev` Builds the next app in development mode and watches for changes in the source files and graphql schema.
+-   `format` formats the codebase using prettier.
+-   `lint` and `lint:fix`: verifies (and fixes, respectively) linting and formatting rules with ESLint.
+-   `test` Runs unit tests configured with Jest.
+-   `typecheck` runs Typescript type checking.
+
+For more information about developing with SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/DEVELOPMENT.md).
+
+## Usage
+
+For detailed instructions on how to use SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/docs).
+
+## Features
+
+@todo - Add directory structure and features.
+
+### Route Handling
 
 The application uses NextJS's [App router](https://nextjs.org/docs/app/building-your-application/routing) to manage routes.
 
@@ -27,34 +46,16 @@ The application uses NextJS's [App router](https://nextjs.org/docs/app/building-
 
 To add a custom route, create a folder with its name, e.g. [./src/app/example-route](./src/app/example-route/page.tsx). The route will be available at `/example-route`, and have access to WordPress global styles and settings.
 
-## Building the App
-
--   `npm run build` Builds the production Next app. This command is usually followed by `npm run start` which starts a server to server the next app.
--   `npm run dev` Builds the next app in development mode and watches for changes in source files for rebuilding.
-
-## Linting and formatting
-
--   `npm run lint` verifies linting and formatting rules.
--  `npm run link:fix`  fixes lintining errors
-
-## Codegen
-
--   `npm run codegen` Generates GraphQL related types for integration into TS.
--   `npm run codegen:watch` Generates GraphQL related types for integration into TS in watch mode.
--   `npm run prebuild` Codegen is also configured as a prebuild step since generated types are required for building the next app.
-
-## Testing
-
--   `npm run test` Runs unit tests configured with jest.
--   `npm run test:watch` Runs unit tests configured with jest in watch mode.
-
-## Middleware 
+### Middleware
 
 -   @see [middleware.md](../../../docs/middleware.md)
 
-## Learn more
+## Contributing
 
-- Visit the [Next.js Documentation](https://nextjs.org/docs)  for more details
+This example project is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Examples are stored in the `examples` directory, and can be setup locally using the `npx snapwp` command.
 
-## Does this interest you?
-<a href="https://rtcamp.com/"><img src="https://rtcamp.com/wp-content/uploads/sites/2/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions"></a>
+Contributions are _welcome_ and **encouraged!** To learn more about contributing to this package or SnapWP as a whole, please read the [Contributing Guide](https://github.com/rtCamp/snapwp/blob/main/.github/CONTRIBUTING.md).
+
+## Want to expand what's possible with WordPress?
+
+<a href="https://rtcamp.com/"><img src="https://rtcamp.com/wp-content/uploads/sites/2/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions."></a>
