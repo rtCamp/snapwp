@@ -35,7 +35,7 @@ To add a custom route, create a folder with its name, e.g. [./src/app/example-ro
 ## Linting and formatting
 
 -   `npm run lint` verifies linting and formatting rules.
--  `npm run link:fix`  fixes lintining errors
+-  `npm run lint:fix`  fixes lintining errors
 
 ## Codegen
 
@@ -48,9 +48,10 @@ To add a custom route, create a folder with its name, e.g. [./src/app/example-ro
 -   `npm run test` Runs unit tests configured with jest.
 -   `npm run test:watch` Runs unit tests configured with jest in watch mode.
 
-## Middleware 
+## Middlewares
 
--   @see [middleware.md](../../../docs/middleware.md)
+-    Run custom logic before Next.js processes the request. 
+-    Checkout [middleware.md](../../../docs/middleware.md) for more
 
 ## Learn more
 
