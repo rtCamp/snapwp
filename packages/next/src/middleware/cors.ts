@@ -4,8 +4,14 @@ import { getConfig } from '@snapwp/core/config';
 import { MiddlewareFactory } from './utils';
 
 /**
+ * Facilitates proxying resources from WP resources. Any request with `corsProxyPrefix`
+ * as the first path element will be proxied to WP server.
  *
- * @param next
+ * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
+ * assuming env vars NEXT_PUBLIC_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WORDPRESS_URL to https://examplewp.com
+ *
+ * @param  next - Next middleware
+ * @return The response object with modified headers
  */
 export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
@@ -42,6 +48,7 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 			return new NextResponse( data, {
 				headers: {
 					'Content-Type': 'application/javascript',
+					'Content-Security-Policy': "default-src 'self'",
 				},
 			} );
 		} catch ( error ) {
