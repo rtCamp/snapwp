@@ -12,7 +12,7 @@ import Script from 'next/script';
 
 interface ScriptModuleInterface {
 	handle?: string | null;
-	src: string;
+	src?: string | null;
 	dependencies?:
 		| {
 				importType?: string | null;
@@ -50,6 +50,19 @@ export default function ScriptModule( {
 		}
 
 		const { src: depSrc, handle: depHandle } = dep.connectedScriptModule;
+
+		if ( 'static' === dep.importType ) {
+			return (
+				<link
+					// We use "preload" instead of "modulepreload" to resolve the race condition where the script runs before the state is loaded.
+					rel="preload"
+					as="script"
+					key={ depHandle || `${ handle }-dep-${ index }` }
+					href={ depSrc }
+					id={ `${ depHandle }-js-modulepreload` }
+				/>
+			);
+		}
 
 		return (
 			<Script
