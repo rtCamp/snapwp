@@ -1,11 +1,10 @@
 # Introduction
 
-🚀 SnapWP is a turnkey solution that brings the power of modern web development to WordPress, combining the flexibility of Next.js  with WordPress's robust content management capabilities.
+🚀 SnapWP is a turnkey solution that brings the power of modern web development to WordPress, combining the flexibility of Next.js with WordPress's robust content management capabilities.
 
 🎨 It uses Block Themes as the complete source of truth for both design and content on the frontend.
 
-🛠️ With an additive developer experience layer powered by WPGraphQL, it makes headless customizations a progressive enhancement  rather than a complete rewrite.
-
+🛠️ With an additive developer experience layer powered by WPGraphQL, it makes headless customizations a progressive enhancement rather than a complete rewrite.
 
 ## Background
 
@@ -25,7 +24,7 @@ The biggest risk to any headless project is cumulative tech debt. Both the WordP
 
 Adopting Composable Architecture - the development of many different libraries over a monolithic solution - addresses these risks by allowing work on individual features to occur independently. Developers don’t require knowledge of the other packages to get onboarded; features can be iterated on separately and without blocking each other; we can easily pivot while minimizing duplicate work; and we make it easier for our users to build an ecosystem around us.
 
-*PS: Composable Architecture extends to the components and APIs themselves, too. The more pluggable/extendable our code is, the easier it is for us and the user to iterate on or adapt to specific use cases without the additional cost of tech debt or duplicate work.*
+_PS: Composable Architecture extends to the components and APIs themselves, too. The more pluggable/extendable our code is, the easier it is for us and the user to iterate on or adapt to specific use cases without the additional cost of tech debt or duplicate work._
 
 ### WordPress as the Source of Truth
 
@@ -33,7 +32,7 @@ The biggest barrier to entry for Headless WordPress is the amount of initial inv
 
 The disjointed experience also hurts the user experience, by depriving content managers of essential WordPress features and workflows. Clients are forced to choose between handicapping WordPress’s backend or continuously and meticulously replicating designs and functionality in both WordPress and their frontend of choice. This further raises the barrier to entry by limiting ideal use cases to projects with large teams and budgets, or simple projects for which Headless WordPress - in its current state is overkill.
 
-Our approach is to use WordPress as the ```source of truth``` for both design and functionality. By leveraging WordPress’s existing WYSIWYG functionality to abstract away complexity from the user, we can build our solution once, and reuse the same solution across multiple projects. With the Site Editor and Global Styles, there’s no reason why Headless WordPress can’t be turn-key, and every reason that it should.
+Our approach is to use WordPress as the `source of truth` for both design and functionality. By leveraging WordPress’s existing WYSIWYG functionality to abstract away complexity from the user, we can build our solution once, and reuse the same solution across multiple projects. With the Site Editor and Global Styles, there’s no reason why Headless WordPress can’t be turn-key, and every reason that it should.
 
 ### Headless as Progressive Enhancement
 
@@ -42,6 +41,7 @@ No two problems are the same, and solutions are equally varied. The promise of H
 With WordPress already as our source of truth, we’re able to make DX a first-party priority, where the goal is extending the framework instead of replacing it. Custom development becomes additive - aided by our Composable Architecture - and can focus on creating value and exploring unique use cases and experiences that don’t make sense for us to invest in on a framework level or without a paying client, but can be contributed back to feed the framework and ecosystem.
 
 ## FAQ
+
 <details>
     <summary> Why Headless over traditional WordPress ?</summary>
     <p>
@@ -70,5 +70,3 @@ With WordPress already as our source of truth, we’re able to make DX a first-p
 </details>
 
 <br/>
-
-**Last Updated: 2025-01-30**
