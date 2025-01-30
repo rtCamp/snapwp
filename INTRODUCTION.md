@@ -1,10 +1,11 @@
 # Introduction
 
-A turnkey NextJS application that is powered by a decoupled WordPress backend.
+🚀 SnapWP is a turnkey solution that brings the power of modern web development to WordPress, combining the flexibility of Next.js  with WordPress's robust content management capabilities.
 
-*Note: This document is constantly evolving.*
+🎨 It uses Block Themes as the complete source of truth for both design and content on the frontend.
 
-**Last Updated: 2025-01-30**
+🛠️ With an additive developer experience layer powered by WPGraphQL, it makes headless customizations a progressive enhancement  rather than a complete rewrite.
+
 
 ## Background
 
@@ -45,7 +46,7 @@ With WordPress already as our source of truth, we’re able to make DX a first-p
     <summary> Why Headless over traditional WordPress ?</summary>
     <p>
     <ul>
-        <li>Frontend Flexibility: Decoupled backend (WordPress CMS) from frontend, allowing any technology for the UI (React, Vue, etc.).</li>
+        <li>Frontend Flexibility: Decoupled backend (WordPress CMS) from frontend, allowing any technology for the UI (React, Next.js, etc.).</li>
         <li>Performance: Can use static site generation (SSG) or server-side rendering (SSR) for faster page loads.</li>
         <li>Content Delivery: Content can be delivered via APIs to multiple platforms (web, mobile, IoT, etc.).</li>
         <li>Customization: Full control over frontend design and integration with external services.</li>
@@ -68,4 +69,6 @@ With WordPress already as our source of truth, we’re able to make DX a first-p
     <p>In order to prevent shipping bugs and improve developer experience (DX) and adoption, a strict type system is essential for any robust library. TypeScript, which is more powerful than JSDoc, is widely favored by enterprise clients. By writing our source code in TypeScript, we can continue to ship as .cjs/mjs while also providing TypeScript types for consumers who require them.</p>
 </details>
 
+<br/>
 
+**Last Updated: 2025-01-30**
