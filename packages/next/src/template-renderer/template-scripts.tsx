@@ -39,13 +39,13 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
-	const { homeUrl, corsProxyPrefix } = getConfig();
+	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
 
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = src.includes( corsProxyPrefix )
+				acc[ handle ] = useCorsProxy
 					? src.replace( homeUrl, corsProxyPrefix )
 					: src;
 			} );
@@ -86,7 +86,7 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
-	const { homeUrl, corsProxyPrefix } = getConfig();
+	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -131,7 +131,7 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
-					src = src.includes( corsProxyPrefix )
+					src = useCorsProxy
 						? src.replace( homeUrl, corsProxyPrefix )
 						: src;
 

@@ -29,6 +29,10 @@ export interface SnapWPConfig {
 	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
 	corsProxyPrefix?: string;
+	/**
+	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
+	 */
+	useCorsProxy?: boolean;
 }
 
 /**
@@ -49,6 +53,7 @@ const defaultConfig: SnapWPConfig = {
 	graphqlEndpoint: 'index.php?graphql',
 	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
+	useCorsProxy: false,
 	corsProxyPrefix: '/proxy',
 };
 
@@ -86,6 +91,7 @@ function normalizeConfig( cfg: SnapWPConfig ): SnapWPConfig {
 		( key: keyof SnapWPConfig ) => {
 			// Trim the value if it is a string.
 			if ( typeof cfg[ key ] === 'string' ) {
+				//@ts-ignore
 				cfg[ key ] = cfg[ key ]?.trim();
 			}
 
@@ -267,6 +273,7 @@ class SnapWPConfigManager {
 			}
 
 			if ( prop.validate ) {
+				//@ts-ignore
 				prop.validate( value );
 			}
 		};
