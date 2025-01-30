@@ -1,7 +1,6 @@
 import { NextMiddleware, NextResponse } from 'next/server';
 import { proxies } from './proxies';
 import { currentPath as cm } from './current-path';
-import { cors } from './cors';
 
 export type MiddlewareFactory = (
 	middleware: NextMiddleware

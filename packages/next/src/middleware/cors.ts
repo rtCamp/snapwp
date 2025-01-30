@@ -7,7 +7,9 @@ import { MiddlewareFactory } from './utils';
  *
  * @param next
  */
-export const cors: MiddlewareFactory = ( next: NextMiddleware ) => {
+export const corsProxyMiddleware: MiddlewareFactory = (
+	next: NextMiddleware
+) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
 		const { homeUrl, corsProxyPrefix } = getConfig();
 

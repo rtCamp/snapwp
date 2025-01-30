@@ -1,4 +1,4 @@
-import { appMiddlewares, type MiddlewareFactory, corsMiddleware } from '@snapwp/next';
+import { appMiddlewares, type MiddlewareFactory, corsProxyMiddleware } from '@snapwp/next';
 
 /**
  * Layer your own custom middlewares here by adding them to the array.
@@ -7,7 +7,7 @@ import { appMiddlewares, type MiddlewareFactory, corsMiddleware } from '@snapwp/
  */
 const middleware: MiddlewareFactory[] = [
     // Proxies WordPress assets (scripts, theme files, etc) to prevent CORS issues on localhost.
-    corsMiddleware
+    corsProxyMiddleware
 ];
 
 export default appMiddlewares( middleware );
