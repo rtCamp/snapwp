@@ -25,6 +25,10 @@ export interface SnapWPConfig {
 	 * REST URL prefix. Defaults to `/wp-json`.
 	 */
 	restUrlPrefix?: string;
+	/**
+	 * REST URL prefix. Defaults to `/wp-json`.
+	 */
+	corsProxyPrefix?: string;
 }
 
 /**
@@ -45,6 +49,7 @@ const defaultConfig: SnapWPConfig = {
 	graphqlEndpoint: 'index.php?graphql',
 	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
+	corsProxyPrefix: '/proxy',
 };
 
 /**

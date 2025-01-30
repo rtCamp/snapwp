@@ -1,6 +1,7 @@
 import { NextMiddleware, NextResponse } from 'next/server';
 import { proxies } from './proxies';
 import { currentPath as cm } from './current-path';
+import { cors } from './cors';
 
 export type MiddlewareFactory = (
 	middleware: NextMiddleware
@@ -46,7 +47,7 @@ export function appMiddlewares(
  * @return Array combining default middlewares and custom middlewares.
  */
 export function stackMiddlewares( middlewares: MiddlewareFactory[] = [] ) {
-	const defaultMiddlewares = [ cm, proxies ];
+	const defaultMiddlewares = [ cm, proxies, cors ];
 
 	return [ ...defaultMiddlewares, ...middlewares ];
 }

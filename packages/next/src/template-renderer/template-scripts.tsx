@@ -39,13 +39,12 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
-	const moduleAPIRoute = '/api/proxy/js/module';
-	const { homeUrl } = getConfig();
+	const { homeUrl, corsProxyPrefix } = getConfig();
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = src.replace( homeUrl, moduleAPIRoute );
+				acc[ handle ] = src.replace( homeUrl, corsProxyPrefix );
 			} );
 			return acc;
 		},

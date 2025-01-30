@@ -1,6 +1,7 @@
 export { currentPath } from './middleware/current-path';
 export { proxies } from './middleware/proxies';
 export * from './middleware/utils';
+export * from './middleware/cors';
 export * from './template-renderer';
 export * from './root-layout';
 export { default as Parse } from './react-parser';
