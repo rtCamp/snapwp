@@ -1,6 +1,7 @@
 {
 	"name": "@snapwp/next",
 	"version": "0.0.1",
+	"license": "AGPL-3.0",
 	"description": "Utility functions and components for SnapWP application",
 	"author": "rtCamp",
 	"type": "module",

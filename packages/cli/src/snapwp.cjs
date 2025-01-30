@@ -1,10 +1,17 @@
 #!/usr/bin/env node
+const registryURL = 'http://localhost:4873';
+const npmrcContent = `@snapwp:registry=${ registryURL }`;
+
 // Scaffold a new directory with the SnapWP build and the .env file.
 const { execSync, spawn } = require( 'child_process' );
 const fs = require( 'fs' );
 const path = require( 'path' );
 const readline = require( 'readline' );
-const copyDirectory = require( './utils/copyDirectory.cjs' );
+const { program } = require( 'commander' );
+
+program.option( '--proxy', 'Use proxy registry.' ).parse();
+
+const options = program.opts();
 
 // Utility function to execute shell commands
 /**
@@ -102,7 +109,11 @@ const openEditor = ( filePath ) => {
 		fs.rmSync( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
 
 		console.log( '📂 Copying frontend folder to project directory...' );
-		copyDirectory( nextJsStarterPath, projectDirPath, { recursive: true } );
+		fs.cpSync( nextJsStarterPath, projectDirPath, {
+			recursive: true,
+			filter: ( source ) =>
+				! /.*(node_modules|package-lock.json)/g.test( source ),
+		} );
 
 		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
 
@@ -154,16 +165,31 @@ const openEditor = ( filePath ) => {
 			}
 		}
 
-		// Step 4: Make a copy of the project directory's .env file to root of the frontend directory.
-		console.log( '📄 Copying .env file.' );
-		const queryEnvPath = path.resolve( __dirname, '../frontend/.env' );
-		fs.copyFileSync( envPath, queryEnvPath );
+		// Step 4: Create .npmrc file in project directory if running via proxy registry.
+		if ( options.proxy ) {
+			console.log( 'Found --proxy flag, generating `.npmrc` file.' );
+			fs.writeFileSync(
+				path.join( projectDirPath, '.npmrc' ),
+				npmrcContent
+			);
+			console.log(
+				`\`.npmrc\` file generated successfully. Please make sure the proxy registry is running on ${ registryURL }`
+			);
+		}
 
-		// Step 5: Cd into `packages` and run `npm install && npm run build` to build the local packages.
-		const packagesPath = path.resolve( __dirname, 'packages' );
-		exec( 'npm install', { cwd: packagesPath } );
-		exec( 'npm run codegen && npm run build', { cwd: packagesPath } );
-		console.log( '🧱 Built local packages.' );
+		// Step 5: update @snapwp package version numbers in package.json.
+		const packageJsonData = fs.readFileSync(
+			path.join( projectDirPath, 'package.json' ),
+			{ encoding: 'utf8' }
+		);
+		const updatedPackageJsonData = packageJsonData.replaceAll(
+			/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
+			'*'
+		);
+		fs.writeFileSync(
+			path.join( projectDirPath, 'package.json' ),
+			updatedPackageJsonData
+		);
 
 		// Step 6: CD into project directory and run `npm install && npm run build` to build the frontend.
 		exec( 'npm install', { cwd: projectDirPath } );
