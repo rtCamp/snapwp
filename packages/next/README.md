@@ -18,8 +18,8 @@ The Parse component converts raw HTML strings into React components, replacing s
 
 #### Key Features:
 
--   Replaces `<a>` tags with the custom Link component for better navigation handling.
--   Replaces `<img>` tags with the Image component, ensuring optimized image loading and attribute handling.
+-   Replaces `<a>` tags with the custom [Link](#link-component) component for better navigation handling.
+-   Replaces `<img>` tags with the [Image](#image-component) component, ensuring optimized image loading and attribute handling.
 -   Extracts and applies styles using `getStyleObjectFromString`.
 -   Determines image dimensions using `getImageSizeFromAttributes`.
 
