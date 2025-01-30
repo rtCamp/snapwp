@@ -1,130 +1,75 @@
-# SnapWP Frontend Framework
+# 🫰 SnapWP
 
-A turn-key Headless WordPress framework that transforms any WordPress site into a decoupled application while maintaining full Block Theme compatibility.
+A better way to build headless WordPress applications.
+
+> [!NOTE]
+>
+> 🐉 There Be Dragons! 🐉
+> This project is in active development and considered "experimental." Some features may be incomplete, unstable, or subject to change.
 
 ## Table of Contents
 
--   [Overview](#overview)
--   [System Requirements](#system-requirements)
--   [Getting Started](#getting-started)
+-   [Overview](#what-is-snapwp)
+-   [What's Included?](#whats-included)
 -   [Usage](#usage)
--   [Features](#features)
--   [Documentation](#documentation)
--   [Local Development & Contributing Guidelines](#local-development--contributing-guidelines)
+-   [Development & Contributing](#local-development--contributing-guidelines)
 -   [License](#license)
 
-## Overview
+## What is SnapWP?
 
-SnapWP is a modern headless WordPress framework that uses Block Themes as the complete source of truth for both design and content on the frontend. With an additive developer experience layer powered by WPGraphQL, it makes headless customizations a progressive enhancement rather than a complete rewrite.
+[SnapWP](https://snapwp.io) is a composable framework of JavaScript libraries for building headless WordPress applications.
 
-## System Requirements
+-   🎨 It uses WordPress's [Block Themes](https://wordpress.org/documentation/article/block-themes/) as the default source of truth for both design and content on the frontend.
 
--   Node.js 18.x or higher
--   WordPress 6.0 or higher
--   WPGraphQL 1.28.0 or higher
--   WPGraphQL Content Blocks 4.1.0 or higher
+-   🛠️ It provides an additive and adaptable DX layer / API / tooling that lets developers granularly override just the parts of their app they care about.
 
-## Getting Started
+SnapWP treats headless WordPress as a progressive enhancement, providing a "turn-key" experience for parity with traditional WordPress sites, so you can focus on building the unique and custom features that make your project stand out.
 
-1. Install the package:
+## What's Included?
 
-```bash
-npm install @snapwp/core
-```
+SnapWP provides several plugins, packages, and libraries that can be used individually or together to build better headless WordPress applications.
 
-2. Create a new Next.js project with SnapWP:
+### JavaScript Libraries (🎯 This monorepo)
 
-```bash
-npx create-next-app@latest --example https://github.com/rtcamp/snapwp/tree/main/examples/nextjs/starter my-snapwp-app
-```
+#### Core Dependencies
 
-3. Configure your WordPress connection:
+-   [@snapwp/core](packages/core): The "core" functionality and utilities for SnapWP.
+-   [@snapwp/next](packages/next): Next.js integration layer for SnapWP.
+-   [@snapwp/blocks](packages/blocks): WordPress Block rendering and management system.
+-   [@snapwp/query](packages/query): Centralized WPGraphQL query management.
 
-```javascript
-// snapwp.config.mjs
-export default {
-	wordpress: {
-		url: process.env.WORDPRESS_URL,
-	},
-};
-```
+#### Developer Tooling
 
-4. Start development:
+-   [@snapwp/codegen-config](packages/codegen-config): Reusable configuration for [GraphQL Codegen](https://the-guild.dev/graphql/codegen).
+-   [@snapwp/eslint-config](packages/eslint-config): Reusable ESLint configuration.
+-   [@snapwp/prettier-config](packages/jest-preset): Reusable Prettier configuration.
 
-```bash
-npm run dev
-```
+### WordPress Plugins
+
+-   [SnapWP Helper](https://github.com/rtCamp/snapwp-helper): A WordPress plugin that provides the additional functionality to WordPress and [WPGraphQL](https://www.wpgraphql.com/) needed for SnapWP's frontend libraries.
 
 ## Usage
 
-SnapWP is structured as a monorepo with the following packages:
-
--   `@snapwp/core`: Core functionality and utilities
--   `@snapwp/blocks`: Block rendering and management system
--   `@snapwp/next`: Next.js integration layer
--   `@snapwp/query`: GraphQL query management
--   Additional utility packages for development
-
-## Features
-
--   **Full Block Theme Support**:
-
-    -   Complete theme.json implementation
-    -   All default Gutenberg content blocks
-    -   Global elements (headers, footers, sidebars, menus)
-    -   Templates, template parts, and archive pages
-    -   Seamless Twenty Twenty-Four theme support
-
--   **Advanced Block Management**:
-
-    -   Built-in support for essential block types
-    -   Block Visibility integration
-    -   ACF blocks compatibility
-    -   Custom block development framework
-    -   Comprehensive block testing utilities
-
--   **Developer Experience**:
-
-    -   Next.js-based frontend architecture
-    -   Flexible API approach (GraphQL/REST)
-    -   Extensible plugin system
-    -   Comprehensive testing framework
-    -   TypeScript support
-    -   Hot module replacement for development
-
--   **WordPress Integration**:
-    -   Perfect FSE editor synchronization
-    -   Real-time preview capabilities
-    -   Maintains all WordPress editorial workflows
-    -   Complete template hierarchy support
-
-## Documentation
-
 -   [Getting Started](docs/getting-started.md)
--   [Configuration API](docs/config-api.md)
--   [Middleware](docs/middleware.md)
 
-## Local Development & Contributing Guidelines
+### References
 
-1. Clone the repository:
+-   [Config API & Environment Variables](docs/config-api.md)
+-   [Overloading WordPress Behavior](docs/overloading-wordpress-behaviour.md)
+-   [NextJS Middleware](docs/middleware.md)
+-   [Template Rendering System](docs/template-rendering.md)
 
-```bash
-git clone https://github.com/rtcamp/snapwp.git
-```
+## Development & Contributing
 
-2. Install dependencies:
+[SnapWP](https://github.com/rtCamp/snapwp) is under active development and maintained by [rtCamp](https://rtcamp.com/).
 
-```bash
-npm install
-```
+Contributions are _welcome_ and **encouraged!** To learn more about contributing to this package or SnapWP as a whole, please read the [Contributing Guide](/.github/CONTRIBUTING.md).
 
-For detailed development instructions and contribution guidelines, please see [DEVELOPMENT.md](DEVELOPMENT.md).
-
-We welcome and encourage contributions from the community to help improve this project. To contribute, please follow our [Contributing Guidelines](CONTRIBUTING.md).
+For development guidelines, please refer to our [Development Guide](./DEVELOPMENT.md).
 
 ## License
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the AGPL-3.0 License - see the [LICENSE](LICENSE) file for details.
 
 ## BTW, We're Hiring!
 
