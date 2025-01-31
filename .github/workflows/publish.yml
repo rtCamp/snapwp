@@ -3,6 +3,13 @@ name: Publish to NPM
 on:
     release:
         types: [published]
+    # TODO: Remove when ready to publish
+    workflow_dispatch:
+        inputs:
+            tag:
+                description: 'The tag to publish to NPM'
+                required: true
+                default: 'v0.0.0'
 
 env:
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
@@ -43,6 +50,9 @@ jobs:
 
             - name: Build
               run: npm run build
+
+            - name: Authenticate with npm
+              run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
             - name: Publish all packages in NPM Workspace to NPM
               run: npm publish --access public --workspaces
