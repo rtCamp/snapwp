@@ -1,2 +1,4 @@
 # Ignore files from the NextJS/Starter example.
 .next/
+.github/ISSUE_TEMPLATE
+.github/workflows
