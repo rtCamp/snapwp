@@ -115,9 +115,11 @@ const openEditor = ( filePath ) => {
 			{
 				recursive: true,
 				filter: ( source ) => {
-					const fileCheck = new RegExp( `/${nextJsStarterPath}/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$` );
+					const fileCheck = new RegExp(
+						`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
+					);
 					return ! fileCheck.test( source );
-				}
+				},
 			},
 			( error ) => {
 				if ( ! error ) {
