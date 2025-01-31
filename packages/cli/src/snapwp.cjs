@@ -115,7 +115,9 @@ const openEditor = ( filePath ) => {
 			{
 				recursive: true,
 				filter: ( source ) =>
-					! /.*(node_modules|package-lock.json)/g.test( source ),
+					! /.*(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)/g.test(
+						source
+					),
 			},
 			( error ) => {
 				if ( ! error ) {
