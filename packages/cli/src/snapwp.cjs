@@ -215,11 +215,12 @@ const openEditor = ( filePath ) => {
 		// New line for clarity.
 		console.log( '' );
 
-		console.log( '🚀 To start your headless WordPress project, please run the following commands:' );
+		console.log(
+			'🚀 To start your headless WordPress project, please run the following commands:'
+		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
 		console.log( `npm run dev` );
-
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );
