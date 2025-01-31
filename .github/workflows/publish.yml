@@ -45,7 +45,6 @@ jobs:
               run: npm run build
 
             - name: Publish all packages in NPM Workspace to NPM
-              # TODO: Remove --dry-run when ready to publish
-              run: npm publish --access public --workspaces --dry-run
+              run: npm publish --access public --workspaces
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
