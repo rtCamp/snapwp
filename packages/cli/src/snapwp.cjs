@@ -109,11 +109,23 @@ const openEditor = ( filePath ) => {
 		fs.rmSync( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
 
 		console.log( '📂 Copying frontend folder to project directory...' );
-		fs.cpSync( nextJsStarterPath, projectDirPath, {
-			recursive: true,
-			filter: ( source ) =>
-				! /.*(node_modules|package-lock.json)/g.test( source ),
-		} );
+		await fs.cp(
+			nextJsStarterPath,
+			projectDirPath,
+			{
+				recursive: true,
+				filter: ( source ) =>
+					! /.*(node_modules|package-lock.json)/g.test( source ),
+			},
+			( error ) => {
+				if ( ! error ) {
+					return;
+				}
+
+				console.log( 'Error: ', error );
+				process.exit( 1 );
+			}
+		);
 
 		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
 
