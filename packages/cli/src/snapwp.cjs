@@ -114,10 +114,10 @@ const openEditor = ( filePath ) => {
 			projectDirPath,
 			{
 				recursive: true,
-				filter: ( source ) =>
-					! /.*(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)/g.test(
-						source
-					),
+				filter: ( source ) => {
+					const fileCheck = new RegExp( `/${nextJsStarterPath}/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$` );
+					return ! fileCheck.test( source );
+				}
 			},
 			( error ) => {
 				if ( ! error ) {
