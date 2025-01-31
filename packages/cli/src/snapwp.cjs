@@ -205,20 +205,21 @@ const openEditor = ( filePath ) => {
 			updatedPackageJsonData
 		);
 
-		// Step 6: CD into project directory and run `npm install && npm run build` to build the frontend.
-		exec( 'npm install', { cwd: projectDirPath } );
-		exec( 'npm run build', { cwd: projectDirPath } );
-		console.log( '🌐 Built example frontend.' );
+		// New line for clarity.
+		console.log( '' );
 
 		console.log(
 			`✔️ Your project has been scaffolded at: ${ projectDirPath }.`
 		);
+
 		// New line for clarity.
 		console.log( '' );
-		console.log(
-			`🚀 To start your headless WordPress project, please navigate to ${ projectDirPath } ` +
-				'and run `npm run start`.'
-		);
+
+		console.log( '🚀 To start your headless WordPress project, please run the following commands:' );
+		console.log( `cd ${ projectDirPath }` );
+		console.log( `npm install` );
+		console.log( `npm run dev` );
+
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );
