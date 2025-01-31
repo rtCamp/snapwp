@@ -109,11 +109,25 @@ const openEditor = ( filePath ) => {
 		fs.rmSync( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
 
 		console.log( '📂 Copying frontend folder to project directory...' );
-		fs.cpSync( nextJsStarterPath, projectDirPath, {
-			recursive: true,
-			filter: ( source ) =>
-				! /.*(node_modules|package-lock.json)/g.test( source ),
-		} );
+		await fs.cp(
+			nextJsStarterPath,
+			projectDirPath,
+			{
+				recursive: true,
+				filter: ( source ) =>
+					! /.*(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)/g.test(
+						source
+					),
+			},
+			( error ) => {
+				if ( ! error ) {
+					return;
+				}
+
+				console.log( 'Error: ', error );
+				process.exit( 1 );
+			}
+		);
 
 		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
 
@@ -191,20 +205,22 @@ const openEditor = ( filePath ) => {
 			updatedPackageJsonData
 		);
 
-		// Step 6: CD into project directory and run `npm install && npm run build` to build the frontend.
-		exec( 'npm install', { cwd: projectDirPath } );
-		exec( 'npm run build', { cwd: projectDirPath } );
-		console.log( '🌐 Built example frontend.' );
+		// New line for clarity.
+		console.log( '' );
 
 		console.log(
 			`✔️ Your project has been scaffolded at: ${ projectDirPath }.`
 		);
+
 		// New line for clarity.
 		console.log( '' );
+
 		console.log(
-			`🚀 To start your headless WordPress project, please navigate to ${ projectDirPath } ` +
-				'and run `npm run start`.'
+			'🚀 To start your headless WordPress project, please run the following commands:'
 		);
+		console.log( `cd ${ projectDirPath }` );
+		console.log( `npm install` );
+		console.log( `npm run dev` );
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );
