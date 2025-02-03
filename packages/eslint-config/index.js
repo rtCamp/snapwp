@@ -13,17 +13,17 @@ module.exports = {
 	ignorePatterns: [
 		'**/config/*.js',
 		'**/dist',
-		"**/node_modules/**",
-		"**/dist/**",
-		"**/dist-types/**",
-		"out/**",
-		"data/**",
-		"assets/**/*.js",
-		"coverage/**",
-		"**/__generated/"
+		'**/node_modules/**',
+		'**/dist/**',
+		'**/dist-types/**',
+		'out/**',
+		'data/**',
+		'assets/**/*.js',
+		'coverage/**',
+		'**/__generated/',
 	],
-	"globals": {
-		"globalThis": "readonly"
+	globals: {
+		globalThis: 'readonly',
 	},
 	settings: {
 		'import/resolver': {
@@ -59,10 +59,10 @@ module.exports = {
 		},
 		// Disable n/no-process-env for codegen.ts file.
 		{
-			"files": [ "**/codegen.ts", "**/*.test.*", "**/jest.setup.js" ],
-			"rules": {
-				"n/no-process-env": "off"
-			}
+			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
+			rules: {
+				'n/no-process-env': 'off',
+			},
 		},
 	],
 	rules: {
