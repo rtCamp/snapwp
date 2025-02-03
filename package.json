@@ -43,8 +43,8 @@
 		"resolve-paths:codegen": "npm run resolve-paths -w @snapwp/codegen-config",
 		"dev": "tsc-watch -b --onSuccess \"npm-run-all resolve-paths:*\"",
 		"typecheck": "tsc --noEmit",
-		"lint": "eslint . --config ./.eslintrc.json",
-		"lint:fix": "eslint . --config ./.eslintrc.json --fix",
+		"lint": "eslint . --config config/.eslintrc.cjs",
+		"lint:fix": "eslint . --config config/.eslintrc.cjs --fix",
 		"format": "prettier . --config config/.prettierrc.cjs --write --paren-spacing",
 		"format:check": "prettier . --config config/.prettierrc.cjs --check --paren-spacing",
 		"test:e2e": "playwright test -c config/playwright.config.js",
@@ -78,7 +78,12 @@
 		"ts-jest": "^29.2.5",
 		"tsc-watch": "^6.3.0",
 		"typescript": ">=4.3.5 <5.4.0",
-		"resolve-tspaths": "^0.8.23"
+		"resolve-tspaths": "^0.8.23",
+		"@wordpress/eslint-plugin": "^19.2.0",
+		"@wordpress/prettier-config": "^4.5.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-jsdoc": "^48.9.2"
 	},
 	"dependencies": {
 		"react": "^19.0.0",

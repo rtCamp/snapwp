@@ -1,19 +1,36 @@
 module.exports = {
 	root: true,
 	env: {
-		browser: true,
+		node: true,
 		es6: true,
 	},
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@wordpress/eslint-plugin', 'jsdoc', 'import', 'n' ],
+	plugins: [ 'jsdoc', 'import', 'n' ],
 	extends: [
-		'plugin:@wordpress/eslint-plugin/recommended',
 		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
 	],
-	ignorePatterns: [ '**/config/*.js', '**/dist' ],
+	ignorePatterns: [
+		'**/config/*.js',
+		'**/dist',
+		"**/node_modules/**",
+		"**/dist/**",
+		"**/dist-types/**",
+		"out/**",
+		"data/**",
+		"assets/**/*.js",
+		"coverage/**",
+		"**/__generated/"
+	],
+	"globals": {
+		"globalThis": "readonly"
+	},
 	settings: {
-		'import/resolver': require.resolve( './import-resolver' ),
+		'import/resolver': {
+			typescript: {
+				project: [ '../tsconfig.json', '../packages/*/tsconfig.json' ],
+			},
+		},
 	},
 	overrides: [
 		{
@@ -40,8 +57,17 @@ module.exports = {
 				'import/default': [ 'off' ],
 			},
 		},
+		// Disable n/no-process-env for codegen.ts file.
+		{
+			"files": [ "**/codegen.ts", "**/*.test.*", "**/jest.setup.js" ],
+			"rules": {
+				"n/no-process-env": "off"
+			}
+		},
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],
+		'jsdoc/no-types': [ 'off' ],
+		'jsdoc/require-param-type': [ 'warn' ], // @todo: Convert current rule to error after @param types are added.
 	},
 };
