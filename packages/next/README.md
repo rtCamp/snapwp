@@ -144,6 +144,69 @@ export default function ScriptExample() {
 }
 ```
 
+### `<ScriptModule>`
+
+The ScriptModule component loads all dependencies of a script module before the main script.It uses Next.js script loading strategies to optimize loading behavior.
+
+#### Props:
+
+-   `extraData`: Extra information needed for the script
+-   `handle`: A unique identifier for the script.
+-   `dependencies`: Dependencies required by the script module .
+-   `src`: The source URL for the script module.
+
+This component ensures that all dependencies are loaded asynchronously and before main script load.
+
+```typescript
+import ScriptModule from '@snapwp/next';
+
+export default function ScriptModuleExample() {
+    return (
+        <div>
+            <h1>Custom ScriptModule Component</h1>
+            <ScriptModule
+                src="https://example.com/main.js"
+                handle="example-main-script"
+                dependencies=[
+                 {
+                importType: 'static',
+                connectedScriptModule: {
+                    handle: '@module',
+                    src: 'http://example.com/index.min.js'
+                     }
+                 }
+                ]
+             />
+        </div>
+    );
+}
+```
+
+### `<Fonts />`
+
+The Fonts component is a wrapper around [Nextjs' `fonts`](https://nextjs.org/docs/pages/api-reference/components/font) to load fonts dynamically using next/font .
+
+#### Props:
+
+-   `renderedFontFaces`: font face data as a string.
+
+renderedFontFaces receives the list of @font-face CSS to load fonts (with URLs to font files)..
+
+```typescript
+import Fonts from '@snapwp/next';
+
+const fontfaceString =
+    "<style class='wp-fonts-local'>\n" +
+     "@font-face{font-family:Manrope;font-style:normal;font-weight:200 800;font-display:fallback;src:url('http://example.com/font1.woff2') format('woff2');}\n" +
+    "</style>\n"
+
+export default function CustomFonts() {
+    return (
+        <Fonts renderedFontFaces={fontfaceString} />
+    );
+}
+```
+
 ## Contributing
 
 This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
