@@ -146,16 +146,16 @@ export default function ScriptExample() {
 
 ### `<ScriptModule>`
 
-The ScriptModule component loads all dependencies of a script module before the main script.It uses Next.js script loading strategies to optimize loading behavior.
+The ScriptModule component loads all dependencies of a script module before the main script. It uses Next.js script loading strategies to optimize loading behavior.
 
 #### Props:
 
--   `extraData`: Extra information needed for the script
+-   `extraData`: Extra information needed for the script.
 -   `handle`: A unique identifier for the script.
 -   `dependencies`: Dependencies required by the script module .
 -   `src`: The source URL for the script module.
 
-This component ensures that all dependencies are loaded asynchronously and before main script load.
+This component ensures that all dependencies are loaded asynchronously and before the main script loads.
 
 ```typescript
 import ScriptModule from '@snapwp/next';
@@ -184,7 +184,7 @@ export default function ScriptModuleExample() {
 
 ### `<Fonts />`
 
-The Fonts component is a wrapper around [Nextjs' `fonts`](https://nextjs.org/docs/pages/api-reference/components/font) to load fonts dynamically using next/font .
+The Fonts component is a wrapper around [Nextjs' `fonts`](https://nextjs.org/docs/pages/api-reference/components/font) to load fonts dynamically using next/font.
 
 #### Props:
 
