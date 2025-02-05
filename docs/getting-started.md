@@ -20,13 +20,13 @@ This guide will walk you through setting up a headless WordPress app using SnapW
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
 
-2. (Optional) If you are faced with CORS issues during local development you may want to install activate the [`Allow CORS: Access-Control-Allow-Origin` Chrome Extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) or similar.
+2. (Optional) If you're running your WordPress site on a different domain than your frontend, you may need to [configure CORS headers](./cors.md).
 
 ## Frontend Setup
 
 ### Prerequisites
 
--   **Node.js**: v20+ (with `npm and `npx` installed).
+-   **Node.js**: v20+ (with `npm` and `npx` installed).
 -   **A WordPress backend** [configured with SnapWP Helper](#backend-setup).
 
 ### Installation Steps
@@ -75,19 +75,19 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 @todo
 
-## **Additional Resources [Reference]**
+## Additional Resources
 
 This section contains a list of curated resources for developers working with headless WordPress, WPGraphQL, and some of the technologies used in the SnapWP stack.
 
-### **WPGraphQL**
+### WPGraphQL
 
 -   **Docs**: [https://www.wpgraphql.com/docs/introduction](https://www.wpgraphql.com/docs/introduction)
 -   **Official Discord Community**: [https://wpgraphql.com/discord/](https://wpgraphql.com/community/)
 
-### **Next.js**
+### Next.js
 
 -   **Docs**: [https://nextjs.org/docs](https://nextjs.org/docs)
 
-### **TypeScript**
+### TypeScript
 
 -   **Docs**: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/)
