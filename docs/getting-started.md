@@ -60,7 +60,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
            </figure>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./usage.md#example-env-file).
+        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.
