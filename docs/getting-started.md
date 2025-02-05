@@ -21,7 +21,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
     **With WP-CLI**:
 
     You can install the latest versions of the required plugins using the WP-CLI command below:
-    
+
     ```bash
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
