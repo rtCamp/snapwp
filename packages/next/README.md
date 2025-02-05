@@ -146,7 +146,7 @@ export default function ScriptExample() {
 
 ### `<ScriptModule>`
 
-The ScriptModule component loads all dependencies of a script module before the main script. It uses Next.js script loading strategies to optimize loading behavior.
+The ScriptModule component loads a [WordPress-registered script module](https://developer.wordpress.org/reference/functions/wp_register_script_module/), along with its dependencies.
 
 #### Props:
 
@@ -184,7 +184,7 @@ export default function ScriptModuleExample() {
 
 ### `<Fonts />`
 
-The Fonts component is a wrapper around [Nextjs' `fonts`](https://nextjs.org/docs/pages/api-reference/components/font) to load fonts dynamically using next/font.
+The Fonts component is used to correctly parse and output the [WordPress-generated font face data](https://developer.wordpress.org/reference/functions/wp_print_font_faces/).
 
 #### Props:
 
