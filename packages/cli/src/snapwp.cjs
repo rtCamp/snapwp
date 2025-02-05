@@ -11,13 +11,39 @@ const { program } = require( 'commander' );
 
 program
 	.option( '--proxy', 'Use proxy registry.' )
-	.requiredOption( '--NEXT_PUBLIC_WORDPRESS_URL <string>', 'WordPress "frontend" domain URL.' )
-	.requiredOption( '--INTROSPECTION_TOKEN <string>', 'Token used for authenticating GraphQL introspection queries.' )
-	.option( '--NODE_TLS_REJECT_UNAUTHORIZED <string>', 'Enable if connecting to a self-signed cert.', '0' )
-	.option( '--NEXT_PUBLIC_URL <string>', 'Headless frontend domain URL.', 'http://localhost:3000' )
-	.option( '--NEXT_PUBLIC_GRAPHQL_ENDPOINT <string>', 'WordPress GraphQL endpoint.', 'graphql' )
-	.option( '--NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH <string>', 'WordPress Uploads directory path.', '/wp-content/uploads' )
-	.option( '--NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX <string>', 'WordPress REST URL Prefix.', '/wp-json' )
+	.requiredOption(
+		'--NEXT_PUBLIC_WORDPRESS_URL <string>',
+		'WordPress "frontend" domain URL.'
+	)
+	.requiredOption(
+		'--INTROSPECTION_TOKEN <string>',
+		'Token used for authenticating GraphQL introspection queries.'
+	)
+	.option(
+		'--NODE_TLS_REJECT_UNAUTHORIZED <string>',
+		'Enable if connecting to a self-signed cert.',
+		'0'
+	)
+	.option(
+		'--NEXT_PUBLIC_URL <string>',
+		'Headless frontend domain URL.',
+		'http://localhost:3000'
+	)
+	.option(
+		'--NEXT_PUBLIC_GRAPHQL_ENDPOINT <string>',
+		'WordPress GraphQL endpoint.',
+		'graphql'
+	)
+	.option(
+		'--NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH <string>',
+		'WordPress Uploads directory path.',
+		'/wp-content/uploads'
+	)
+	.option(
+		'--NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX <string>',
+		'WordPress REST URL Prefix.',
+		'/wp-json'
+	)
 	.parse();
 
 const options = program.opts();
@@ -135,32 +161,28 @@ const openEditor = ( filePath ) => {
 				process.exit( 1 );
 			}
 
-			const envFileData = `# Enable if connecting to a self-signed cert\n` +
+			const envFileData =
+				`# Enable if connecting to a self-signed cert\n` +
 				`NODE_TLS_REJECT_UNAUTHORIZED=${ options.NODE_TLS_REJECT_UNAUTHORIZED }\n\n` +
-
 				`# The headless frontend domain URL. Uncomment this line and ensure the value matches the URL used by your frontend app.\n` +
 				`NEXT_PUBLIC_URL=${ options.NEXT_PUBLIC_URL }\n\n` +
-
 				`# The WordPress "frontend" domain URL\n` +
 				`NEXT_PUBLIC_WORDPRESS_URL=${ options.NEXT_PUBLIC_WORDPRESS_URL }\n\n` +
-
 				`# The WordPress GraphQL endpoint\n` +
 				`NEXT_PUBLIC_GRAPHQL_ENDPOINT=${ options.NEXT_PUBLIC_GRAPHQL_ENDPOINT }\n\n` +
-
 				`# The WordPress Uploads directory path\n` +
 				`# NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH=${ options.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH }\n\n` +
-
 				`# The WordPress REST URL Prefix\n` +
 				`# NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX=${ options.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX }\n\n` +
-
 				`# Token used for authenticating GraphQL introspection queries\n` +
 				`INTROSPECTION_TOKEN=${ options.INTROSPECTION_TOKEN }\n`;
 
-			console.log( `\nNo ".env" file found in "${ projectDirPath }". Creating ".env" file.` );
+			console.log(
+				`\nNo ".env" file found in "${ projectDirPath }". Creating ".env" file.`
+			);
 
 			// Create ".env" file.
 			await fs.writeFile( envPath, envFileData );
-
 		}
 
 		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
