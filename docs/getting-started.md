@@ -18,12 +18,13 @@ This guide will walk you through setting up a headless WordPress app using SnapW
     - [WPGraphQL Content Blocks](https://github.com/wpengine/wp-graphql-content-blocks/releases/latest)
     - [SnapWP Helper](https://github.com/rtCamp/snapwp-helper/releases/latest)
 
-    > [!TIP]
-    > You can install the latest versions of the required plugins using the WP-CLI command below:
-    >
-    > ```bash
-    > wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
-    > ```
+    **With WP-CLI**:
+
+    You can install the latest versions of the required plugins using the WP-CLI command below:
+    
+    ```bash
+    wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
+    ```
 
 2. (Optional) If you're running your WordPress site on a different domain than your frontend, you may need to [configure CORS headers](./cors.md).
 
