@@ -1,6 +1,7 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
+import { type BlockDefinitions } from '..';
 
 export interface SnapWPConfig {
 	/**
@@ -33,6 +34,10 @@ export interface SnapWPConfig {
 	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
 	useCorsProxy?: boolean;
+	/**
+	 * Custom block implementations.
+	 */
+	blockDefinitions?: BlockDefinitions;
 }
 
 /**
@@ -192,6 +197,11 @@ class SnapWPConfigManager {
 				}
 			},
 		},
+		blockDefinitions: {
+			type: 'object',
+			required: false,
+			validate: ( value ) => {},
+		},
 	};
 
 	/**
@@ -267,6 +277,8 @@ class SnapWPConfigManager {
 			}
 
 			if ( value && prop.type && typeof value !== prop.type ) {
+				console.log( 'typeof value', typeof value );
+				console.log( 'prop.type', prop.type );
 				throw new Error(
 					`Property ${ key } should be of type ${ prop.type }.`
 				);
