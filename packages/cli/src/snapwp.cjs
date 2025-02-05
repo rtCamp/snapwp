@@ -9,7 +9,16 @@ const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
 
-program.option( '--proxy', 'Use proxy registry.' ).parse();
+program
+	.option( '--proxy', 'Use proxy registry.' )
+	.requiredOption( '--NEXT_PUBLIC_WORDPRESS_URL <string>', 'WordPress "frontend" domain URL.' )
+	.requiredOption( '--INTROSPECTION_TOKEN <string>', 'Token used for authenticating GraphQL introspection queries.' )
+	.option( '--NODE_TLS_REJECT_UNAUTHORIZED <string>', 'Enable if connecting to a self-signed cert.', '0' )
+	.option( '--NEXT_PUBLIC_URL <string>', 'Headless frontend domain URL.', 'http://localhost:3000' )
+	.option( '--NEXT_PUBLIC_GRAPHQL_ENDPOINT <string>', 'WordPress GraphQL endpoint.', 'graphql' )
+	.option( '--NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH <string>', 'WordPress Uploads directory path.', '/wp-content/uploads' )
+	.option( '--NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX <string>', 'WordPress REST URL Prefix.', '/wp-json' )
+	.parse();
 
 const options = program.opts();
 
@@ -111,11 +120,9 @@ const openEditor = ( filePath ) => {
 			'./examples/nextjs/starter/'
 		);
 
-		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
+		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 2`.
 
-		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 3`.
-
-		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 3`.
+		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 2`.
 
 		// Step 2: Check if there is an `.env` file in projectDirPath.
 		const envPath = path.join( projectDirPath, '.env' );
@@ -128,66 +135,39 @@ const openEditor = ( filePath ) => {
 				process.exit( 1 );
 			}
 
-			await prompt(
-				`\nNo .env file found in "${ projectDirPath }". Please \n` +
-					'  1. Press any key to open a new .env file in your default editor,\n' +
-					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-					'  3. Save and close the file to continue the installation. \n' +
-					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
-			);
+			const envFileData = `# Enable if connecting to a self-signed cert\n` +
+				`NODE_TLS_REJECT_UNAUTHORIZED=${ options.NODE_TLS_REJECT_UNAUTHORIZED }\n\n` +
 
-			/**
-			 * Create an empty file before opening to prevent: "saving file with default editor extension".
-			 * E.g.,
-			 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
-			 * Creating a file before opening will prevent bugs due to default editor extensions.
-			 */
-			await fs.writeFile( envPath, '' );
+				`# The headless frontend domain URL. Uncomment this line and ensure the value matches the URL used by your frontend app.\n` +
+				`NEXT_PUBLIC_URL=${ options.NEXT_PUBLIC_URL }\n\n` +
 
-			const envFileCreationStatus = await openEditor( envPath );
+				`# The WordPress "frontend" domain URL\n` +
+				`NEXT_PUBLIC_WORDPRESS_URL=${ options.NEXT_PUBLIC_WORDPRESS_URL }\n\n` +
 
-			if ( envFileCreationStatus.success ) {
-				console.log( envFileCreationStatus.message );
-			} else {
-				console.error( envFileCreationStatus.message );
-				process.exit( 1 );
-			}
+				`# The WordPress GraphQL endpoint\n` +
+				`NEXT_PUBLIC_GRAPHQL_ENDPOINT=${ options.NEXT_PUBLIC_GRAPHQL_ENDPOINT }\n\n` +
 
-			try {
-				await fs.access( envPath );
-			} catch ( error ) {
-				// Throw error if .env file still does not exist.
-				if ( 'ENOENT' === error.code ) {
-					console.error(
-						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
-					);
+				`# The WordPress Uploads directory path\n` +
+				`# NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH=${ options.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH }\n\n` +
 
-					process.exit( 1 );
-				}
+				`# The WordPress REST URL Prefix\n` +
+				`# NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX=${ options.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX }\n\n` +
 
-				// Exit if any other unknown error occurred.
-				console.error( 'Error:', error );
-				process.exit( 1 );
-			}
-		}
+				`# Token used for authenticating GraphQL introspection queries\n` +
+				`INTROSPECTION_TOKEN=${ options.INTROSPECTION_TOKEN }\n`;
 
-		// Fetch the `.env` file size.
-		const { size } = await fs.stat( envPath );
+			console.log( `\nNo ".env" file found in "${ projectDirPath }". Creating ".env" file.` );
 
-		// Throw error if .env file is empty.
-		if ( 0 === size ) {
-			console.error(
-				`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
-			);
+			// Create ".env" file.
+			await fs.writeFile( envPath, envFileData );
 
-			await fs.rm( envPath, { force: true } ); // Delete old env for a fresh start.
-
-			process.exit( 1 );
 		}
 
 		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
 		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
 		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+
+		console.log( '' );
 
 		console.log( '📂 Copying frontend folder to project directory...' );
 		await fs.cp( nextJsStarterPath, projectDirPath, {
@@ -202,11 +182,17 @@ const openEditor = ( filePath ) => {
 
 		// Step 4: Create .npmrc file in project directory if running via proxy registry.
 		if ( options.proxy ) {
+			console.log( '' );
+
 			console.log( 'Found --proxy flag, generating `.npmrc` file.' );
+
 			await fs.writeFile(
 				path.join( projectDirPath, '.npmrc' ),
 				npmrcContent
 			);
+
+			console.log( '' );
+
 			console.log(
 				`\`.npmrc\` file generated successfully. Please make sure the proxy registry is running on ${ registryURL }`
 			);
