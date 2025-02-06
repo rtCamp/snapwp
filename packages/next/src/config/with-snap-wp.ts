@@ -1,5 +1,7 @@
 import { type NextConfig } from 'next';
 import fs from 'fs';
+import path from 'path';
+import url from 'url';
 import { getConfig, setConfig } from '@snapwp/core/config';
 import {
 	ModifySourcePlugin,
@@ -81,12 +83,22 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	];
 
 	// Locate the SnapWP configuration file.
-	const snapWPConfigPath = possibleSnapWPConfigPaths.find( ( path ) => {
-		return fs.existsSync( path );
-	} );
+	let snapWPConfigPath = possibleSnapWPConfigPaths.find(
+		( possibleSnapWPConfigPath ) => {
+			return fs.existsSync( possibleSnapWPConfigPath );
+		}
+	);
 
 	if ( ! snapWPConfigPath ) {
 		throw new Error( 'SnapWP configuration file not found.' );
+	}
+
+	// Platform-specific handling
+	if ( process.platform === 'win32' ) {
+		// Use path.normalize to replace backslashes correctly
+		snapWPConfigPath = path.normalize( snapWPConfigPath );
+		// Convert it to a file:// URL
+		snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
 	}
 
 	const snapWPConfig = ( await import( snapWPConfigPath ) ).default;
