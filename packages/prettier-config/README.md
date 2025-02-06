@@ -2,6 +2,10 @@
 
 Sharable Prettier config for the Headless WordPress ecosystem. Extends [@wordpress/prettier-config](https://github.com/WordPress/gutenberg/blob/trunk/packages/prettier-config/README.md).
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 > [!NOTE]

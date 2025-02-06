@@ -2,6 +2,10 @@
 
 Next.js-specific utilities and frontend components for integrating with SnapWP and headless WordPress.
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 Run the following command:
@@ -136,6 +140,69 @@ export default function ScriptExample() {
                 location="header"
             />
         </div>
+    );
+}
+```
+
+### `<ScriptModule>`
+
+The ScriptModule component loads a [WordPress-registered script module](https://developer.wordpress.org/reference/functions/wp_register_script_module/), along with its dependencies.
+
+#### Props:
+
+-   `extraData`: Extra information needed for the script.
+-   `handle`: A unique identifier for the script.
+-   `dependencies`: Dependencies required by the script module .
+-   `src`: The source URL for the script module.
+
+This component ensures that all dependencies are loaded asynchronously and before the main script loads.
+
+```typescript
+import ScriptModule from '@snapwp/next';
+
+export default function ScriptModuleExample() {
+    return (
+        <div>
+            <h1>Custom ScriptModule Component</h1>
+            <ScriptModule
+                src="https://example.com/main.js"
+                handle="example-main-script"
+                dependencies=[
+                 {
+                importType: 'static',
+                connectedScriptModule: {
+                    handle: '@module',
+                    src: 'http://example.com/index.min.js'
+                     }
+                 }
+                ]
+             />
+        </div>
+    );
+}
+```
+
+### `<Fonts />`
+
+The Fonts component is used to correctly parse and output the [WordPress-generated font face data](https://developer.wordpress.org/reference/functions/wp_print_font_faces/).
+
+#### Props:
+
+-   `renderedFontFaces`: font face data as a string.
+
+renderedFontFaces receives the list of @font-face CSS to load fonts (with URLs to font files)..
+
+```typescript
+import Fonts from '@snapwp/next';
+
+const fontfaceString =
+    "<style class='wp-fonts-local'>\n" +
+     "@font-face{font-family:Manrope;font-style:normal;font-weight:200 800;font-display:fallback;src:url('http://example.com/font1.woff2') format('woff2');}\n" +
+    "</style>\n"
+
+export default function CustomFonts() {
+    return (
+        <Fonts renderedFontFaces={fontfaceString} />
     );
 }
 ```

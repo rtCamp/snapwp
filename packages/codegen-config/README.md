@@ -2,6 +2,10 @@
 
 Sharable [GraphQL Codegen](https://the-guild.dev/graphql/codegen) config for the Headless WordPress ecosystem.
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 Run the following command:

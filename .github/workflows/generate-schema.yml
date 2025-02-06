@@ -35,8 +35,6 @@ jobs:
             - name: Checkout SnapWP Helper
               uses: actions/checkout@v4
               with:
-                  # @todo Remove when repo is public
-                  token: '${{ secrets.RTBOT_TOKEN }}'
                   repository: '${{ github.repository_owner }}/snapwp-helper'
                   path: '.'
                   ref: ${{ inputs.ref }}

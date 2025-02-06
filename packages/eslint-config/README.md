@@ -2,6 +2,10 @@
 
 Sharable ESLint config for the Headless WordPress ecosystem. Extends [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards/blob/develop/README.md) with built-in TypeScript support.
 
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
 ## Installation
 
 Run the following command:

@@ -24,6 +24,8 @@ describe( 'SnapWPConfigManager functions', () => {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
+		corsProxyPrefix: '/proxy',
+		useCorsProxy: false,
 	};
 
 	beforeEach( () => {
@@ -151,6 +153,8 @@ describe( 'SnapWPConfigManager functions', () => {
 			graphqlEndpoint: ' index.php?graphql ',
 			restUrlPrefix: ' /wp-json ',
 			uploadsDirectory: ' /wp-content/uploads ',
+			corsProxyPrefix: ' /proxy ',
+			useCorsProxy: true,
 		};
 
 		expect( getConfig() ).toEqual( {
@@ -159,6 +163,8 @@ describe( 'SnapWPConfigManager functions', () => {
 			graphqlEndpoint: 'index.php?graphql',
 			restUrlPrefix: '/wp-json',
 			uploadsDirectory: '/wp-content/uploads',
+			corsProxyPrefix: '/proxy',
+			useCorsProxy: true,
 		} );
 	} );
 

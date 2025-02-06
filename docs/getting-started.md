@@ -20,15 +20,13 @@ This guide will walk you through setting up a headless WordPress app using SnapW
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
 
-2. (Optional) If the frontend is on a different domain than your WordPress backend and you are faced with CORS issues you may want to install and activate the [WPGraphQL CORS](https://github.com/funkhaus/wp-graphql-cors/releases/latest) plugin. Once the plugin is installed, you can change the allowed CORS domains as follows:
-    1. Go to `Dashboard > WPGraphQL > Settings > CORS Settings`.
-    2. Add the frontend domain to `Extend "Access-Control-Allow-Origin" header` (Use `*` to allow-list all domains).
+2. (Optional) If you're running your WordPress site on a different domain than your frontend, you may need to [configure CORS headers](./cors.md).
 
 ## Frontend Setup
 
 ### Prerequisites
 
--   **Node.js**: v20+ (with `npm and `npx` installed).
+-   **Node.js**: v20+ (with `npm` and `npx` installed).
 -   **A WordPress backend** [configured with SnapWP Helper](#backend-setup).
 
 ### Installation Steps
@@ -38,7 +36,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 1. Run the scaffolding wizard:
 
     ```bash
-    npx snapwp create-app
+    npx snapwp
     ```
 
 2. Answer the CLI prompts:
@@ -54,33 +52,42 @@ To create a new headless WordPress app using SnapWP, follow these steps:
            <p> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</p>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environemnt variables as needed](./usage.md#example-env-file).
+        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./usage.md#example-env-file).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.
 
 3. Start your headless WordPress app:
     1. Navigate to the newly created app.
-    2. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
-    3. Visit the `NEXT_PUBLIC_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
+    2. Run `npm install`.
+    3. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
+    4. Visit the `NEXT_PUBLIC_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
 
 ### Manual Installation
 
 @todo
 
-## **Additional Resources [Reference]**
+### Deployment
+
+@todo
+
+### Troubleshooting
+
+@todo
+
+## Additional Resources
 
 This section contains a list of curated resources for developers working with headless WordPress, WPGraphQL, and some of the technologies used in the SnapWP stack.
 
-### **WPGraphQL**
+### WPGraphQL
 
 -   **Docs**: [https://www.wpgraphql.com/docs/introduction](https://www.wpgraphql.com/docs/introduction)
 -   **Official Discord Community**: [https://wpgraphql.com/discord/](https://wpgraphql.com/community/)
 
-### **Next.js**
+### Next.js
 
 -   **Docs**: [https://nextjs.org/docs](https://nextjs.org/docs)
 
-### **TypeScript**
+### TypeScript
 
 -   **Docs**: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/)

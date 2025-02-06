@@ -3,7 +3,11 @@
 Used to query and prepare data from WPGraphQL for use in the SnapWP framework.
 
 > [!Note]
-> This package is used internally by other SnapWP packages. It not intended for standalone use.
+> This package is used internally by other SnapWP packages. It is not intended for standalone use.
+
+> [!WARNING]
+> 🐉 There be dragons!
+> This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
 
 ## Contributing
 
