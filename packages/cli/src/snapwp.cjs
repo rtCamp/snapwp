@@ -111,28 +111,13 @@ const openEditor = ( filePath ) => {
 			'./examples/nextjs/starter/'
 		);
 
-		// Step 2: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
-		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
-		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 2`.
 
-		console.log( '📂 Copying frontend folder to project directory...' );
-		await fs.cp( nextJsStarterPath, projectDirPath, {
-			recursive: true,
-			filter: ( source ) => {
-				const fileCheck = new RegExp(
-					`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
-				);
-				return ! fileCheck.test( source );
-			},
-		} );
+		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 2`.
 
-		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
+		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 2`.
 
-		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 3`.
-
-		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 3`.
-
-		// Step 3: Check if there is an `.env` file in projectDirPath.
+		// Step 2: Check if there is an `.env` file in projectDirPath.
 		const envPath = path.join( projectDirPath, '.env' );
 
 		try {
@@ -199,6 +184,21 @@ const openEditor = ( filePath ) => {
 
 			process.exit( 1 );
 		}
+
+		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
+		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
+		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+
+		console.log( '📂 Copying frontend folder to project directory...' );
+		await fs.cp( nextJsStarterPath, projectDirPath, {
+			recursive: true,
+			filter: ( source ) => {
+				const fileCheck = new RegExp(
+					`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
+				);
+				return ! fileCheck.test( source );
+			},
+		} );
 
 		// Step 4: Create .npmrc file in project directory if running via proxy registry.
 		if ( options.proxy ) {
