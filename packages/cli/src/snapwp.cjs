@@ -116,19 +116,15 @@ const openEditor = ( filePath ) => {
 		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
 
 		console.log( '📂 Copying frontend folder to project directory...' );
-		await fs.cp(
-			nextJsStarterPath,
-			projectDirPath,
-			{
-				recursive: true,
-				filter: ( source ) => {
-					const fileCheck = new RegExp(
-						`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
-					);
-					return ! fileCheck.test( source );
-				},
-			}
-		);
+		await fs.cp( nextJsStarterPath, projectDirPath, {
+			recursive: true,
+			filter: ( source ) => {
+				const fileCheck = new RegExp(
+					`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
+				);
+				return ! fileCheck.test( source );
+			},
+		} );
 
 		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
 
@@ -142,17 +138,17 @@ const openEditor = ( filePath ) => {
 		try {
 			await fs.access( envPath );
 		} catch ( error ) {
-			if ('ENOENT' !== error.code) {
-				console.error('Error:', error);
-				process.exit(1);
+			if ( 'ENOENT' !== error.code ) {
+				console.error( 'Error:', error );
+				process.exit( 1 );
 			}
 
 			await prompt(
 				`\nNo .env file found in "${ projectDirPath }". Please \n` +
-				'  1. Press any key to open a new .env file in your default editor,\n' +
-				'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-				'  3. Save and close the file to continue the installation. \n' +
-				'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
+					'  1. Press any key to open a new .env file in your default editor,\n' +
+					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
+					'  3. Save and close the file to continue the installation. \n' +
+					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
 			);
 
 			/**
@@ -177,9 +173,9 @@ const openEditor = ( filePath ) => {
 				await fs.access( envPath );
 			} catch ( error ) {
 				// Throw error if .env file still does not exist.
-				if ('ENOENT' === error.code) {
+				if ( 'ENOENT' === error.code ) {
 					console.error(
-						`".env" still not found at "${envPath}". Please create an ".env" and try again.`
+						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
 					);
 					process.exit( 1 );
 				}
