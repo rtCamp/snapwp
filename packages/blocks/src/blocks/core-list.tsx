@@ -1,5 +1,18 @@
-import React from 'react';
-import { cn, getStylesFromAttributes } from '@snapwp/core';
+import React, { PropsWithChildren } from 'react';
+import { BlockData, cn, getStylesFromAttributes } from '@snapwp/core';
+
+interface CoreListAttributes {
+	cssClassName?: string;
+	ordered: boolean;
+	reversed?: boolean;
+	start?: number;
+	style?: string;
+	type?: string;
+}
+
+export interface CoreListProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreListAttributes;
+}
 
 /**
  * Renders the core/list block.
@@ -10,7 +23,7 @@ import { cn, getStylesFromAttributes } from '@snapwp/core';
  *
  * @return The rendered block.
  */
-export default function CoreList( { attributes, children }: any ) {
+export default function CoreList( { attributes, children }: CoreListProps ) {
 	const { cssClassName, ordered, reversed, start, style, type } =
 		attributes || {};
 
