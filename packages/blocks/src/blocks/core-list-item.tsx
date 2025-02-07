@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CoreListItemAttributes {
+	content?: string;
+	style?: string;
+}
+
+export interface CoreListItemProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreListItemAttributes;
+}
 
 /**
  * Renders the core/list-item block.
@@ -20,7 +30,7 @@ export default function CoreListItem( {
 	attributes,
 	renderedHtml,
 	children,
-}: any ) {
+}: CoreListItemProps ) {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
