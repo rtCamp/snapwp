@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
+interface CoreGalleryAttributes {
+	caption?: string;
+	style?: string;
+}
+
+export interface CoreGalleryProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreGalleryAttributes;
+}
 
 /**
  * Renders the core/gallery block.
@@ -19,7 +29,7 @@ export default function CoreGallery( {
 	attributes,
 	children,
 	renderedHtml,
-}: any ) {
+}: CoreGalleryProps ) {
 	const { caption, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
