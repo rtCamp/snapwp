@@ -3,19 +3,19 @@ import {
 	type EditorBlocksRendererProps,
 	type BlockTreeNode,
 } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
 import React from 'react';
 
 /**
  * A react component to render editor blocks.
  * @param props - Props.
- * @param props.blockDefinitions - blocks rendering functions.
  * @param props.editorBlocks - A list of blocks to be rendered.
  * @return The rendered template
  */
 export default function EditorBlocksRenderer( {
 	editorBlocks,
-	blockDefinitions,
 }: EditorBlocksRendererProps ) {
+	const { blockDefinitions } = getConfig();
 	if ( blockDefinitions ) {
 		BlockManager.addBlockDefinitions( blockDefinitions );
 	}

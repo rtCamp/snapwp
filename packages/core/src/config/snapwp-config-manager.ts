@@ -1,6 +1,7 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
+import { type BlockDefinitions } from '..';
 
 export interface SnapWPConfig {
 	/**
@@ -33,6 +34,10 @@ export interface SnapWPConfig {
 	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
 	useCorsProxy?: boolean;
+	/**
+	 * Custom block implementations.
+	 */
+	blockDefinitions?: BlockDefinitions;
 }
 
 /**
@@ -191,6 +196,10 @@ class SnapWPConfigManager {
 					);
 				}
 			},
+		},
+		blockDefinitions: {
+			type: 'object',
+			required: false,
 		},
 	};
 

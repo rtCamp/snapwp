@@ -21,7 +21,6 @@ export type BlockDefinitions = {
 
 export type EditorBlocksRendererProps = {
 	editorBlocks?: BlockData[] | null;
-	blockDefinitions?: BlockDefinitions | null;
 };
 
 export type TemplateHeadProps = {
