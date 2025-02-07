@@ -1,5 +1,8 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '@snapwp/core';
+
+export interface CoreHtmlProps extends BlockData {}
 
 /**
  * Renders the core/html block.
@@ -9,7 +12,7 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreHtml( { renderedHtml }: any ) {
+export default function CoreHtml( { renderedHtml }: CoreHtmlProps ) {
 	// @todo use attributes.content instead of renderedHtml once it's available
 	if ( ! renderedHtml ) {
 		return null;
