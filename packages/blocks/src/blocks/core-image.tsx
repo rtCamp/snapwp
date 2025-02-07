@@ -30,7 +30,7 @@ interface CoreImageAttributes {
 	lightbox?: string | null;
 }
 
-interface CoreImageProps extends BlockData {
+export interface CoreImageProps extends BlockData {
 	attributes?: CoreImageAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	mediaDetails?: MediaDetails;
