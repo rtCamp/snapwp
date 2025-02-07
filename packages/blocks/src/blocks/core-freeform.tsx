@@ -1,5 +1,8 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '@snapwp/core';
+
+export interface CoreFreeformProps extends BlockData {}
 
 /**
  * Renders the core/freeform block.
@@ -9,7 +12,7 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreFreeform( { renderedHtml }: any ) {
+export default function CoreFreeform( { renderedHtml }: CoreFreeformProps ) {
 	// @todo `attribues.content` is not populated in GraphQL. Using `renderedHtml` for now.
 	if ( ! renderedHtml ) {
 		return null;
