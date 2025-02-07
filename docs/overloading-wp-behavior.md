@@ -67,6 +67,87 @@ export default function Page() {
 
 Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`. Setting the value to `null` will use the [default block rendering](#default-block-rendering).
 
+---
+
+## Overloading Template Parts
+
+SnapWP allows you to customize **Template Parts**, such as headers, footers, etc, by mapping them to custom React components. This is useful for modifying the structure, design, or behavior of key site areas while keeping WordPress as the content source.
+
+> [!TIP] > **Template Parts** are reusable block structures in WordPress [Block Themes](https://wordpress.org/documentation/article/block-themes/).
+> Common examples include:
+>
+> -   The **Header** ( slug `"header"`)
+> -   The **Footer** ( slug `"footer"`)
+
+### 1. Identifying the Template Part
+
+Each **Template Part** has a unique `slug` (e.g., `"header"`, `"footer"`). You can retrieve this information via the attributes present in the props.
+
+### 2. Creating a Custom Component
+
+Create a new React component to modify the rendering of a specific Template Part.
+
+```tsx
+import React from 'react';
+import { BlockData, cn, getClassNamesFromString } from '@snapwp/core';
+
+export default function MyCustomFooter( {
+	renderedHtml,
+	attributes,
+}: BlockData ) {
+	const safeAttributes = attributes || {}; // Ensure attributes are not undefined.
+	const { templatePartTagName } = safeAttributes;
+
+	const TagName = templatePartTagName || 'footer';
+
+	// Extract class names from rendered HTML.
+	const classNamesFromString = renderedHtml
+		? getClassNamesFromString( renderedHtml )
+		: '';
+	const classNames = cn( classNamesFromString, 'custom-footer' );
+
+	return (
+		<TagName className={ classNames }>
+			<p className="footer-note">This is a custom footer!</p>
+		</TagName>
+	);
+}
+```
+
+### 3. Mapping the Template Part
+
+Map this custom component in the **SnapWP blockDefinitions** so it only applies to the `"footer"` template part.
+
+```tsx
+import { TemplateRenderer } from '@snapwp/next';
+import { EditorBlocksRenderer } from '@snapwp/blocks';
+import MyCustomFooter from '../../components/MyCustomFooter';
+
+const blockDefinitions = {
+	CoreTemplatePart: ( props ) => {
+		if ( props.attributes.slug === 'footer' ) {
+			return <MyCustomFooter { ...props } />;
+		}
+		return null; // Default rendering for other template parts.
+	},
+};
+
+export default function Page() {
+	return (
+		<TemplateRenderer>
+			{ ( editorBlocks ) => (
+				<EditorBlocksRenderer
+					editorBlocks={ editorBlocks }
+					blockDefinitions={ blockDefinitions }
+				/>
+			) }
+		</TemplateRenderer>
+	);
+}
+```
+
+---
+
 ## Creating Custom Frontend Routes
 
 This tutorial explains how to create custom frontend routes in your SnapWP-powered Next.js application using the App Router.
