@@ -88,7 +88,7 @@ const openEditor = ( filePath ) => {
 	try {
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
-			'🫰 🫰 🫰  Thanks for using SnapWP! 🫰 🫰 🫰\n' +
+			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
 				'Please enter a relative or absolute path: '
 		);
@@ -189,7 +189,7 @@ const openEditor = ( filePath ) => {
 		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
 		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
 
-		console.log( '📂 Copying frontend folder to project directory...' );
+		console.log( 'Copying frontend folder to project directory...' );
 		await fs.cp( nextJsStarterPath, projectDirPath, {
 			recursive: true,
 			filter: ( source ) => {
@@ -230,14 +230,14 @@ const openEditor = ( filePath ) => {
 		console.log( '' );
 
 		console.log(
-			`✔️ Your project has been scaffolded at: ${ projectDirPath }.`
+			`Your project has been scaffolded at: ${ projectDirPath }.`
 		);
 
 		// New line for clarity.
 		console.log( '' );
 
 		console.log(
-			'🚀 To start your headless WordPress project, please run the following commands:'
+			'To start your headless WordPress project, please run the following commands:'
 		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
