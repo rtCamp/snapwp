@@ -1,5 +1,14 @@
-import React from 'react';
-import { cn, getStylesFromAttributes } from '@snapwp/core';
+import React, { PropsWithChildren } from 'react';
+import { BlockData, cn, getStylesFromAttributes } from '@snapwp/core';
+
+interface CoreButtonsAttributes {
+	cssClassName?: string;
+	style?: string;
+}
+
+export interface CoreButtonsProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreButtonsAttributes;
+}
 
 /**
  * Renders the core/buttons block.
@@ -10,7 +19,10 @@ import { cn, getStylesFromAttributes } from '@snapwp/core';
  *
  * @return The rendered block.
  */
-export default function CoreButtons( { attributes, children }: any ) {
+export default function CoreButtons( {
+	attributes,
+	children,
+}: CoreButtonsProps ) {
 	const { cssClassName, style } = attributes || {};
 	const classNames = cn( cssClassName );
 
