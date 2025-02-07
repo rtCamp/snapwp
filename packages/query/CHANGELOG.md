@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](./README.md#updating-and-versi
 
 ## [Unreleased]
 
-
 ## [0.0.2] - 2025-02-07
 
 -   fix: Normalize file paths when detecting the `snapwp.config.mjs` file on Windows.

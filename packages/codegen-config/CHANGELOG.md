@@ -7,7 +7,6 @@ and this project adheres to [Semantic Versioning](./README.md#updating-and-versi
 
 ## [Unreleased]
 
-
 ## [0.0.2] - 2025-02-07
 
 -   feat: Update the base configuration to enable the following: `enumsAsTypes`, `skipTypename`, `useTypeImports`.
