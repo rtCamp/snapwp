@@ -1,9 +1,26 @@
-import React, { createElement } from 'react';
+import React, { PropsWithChildren, createElement } from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
+interface CoreGroupAttributes {
+	style?: string;
+	tagName: string;
+}
+
+export interface CoreGroupProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreGroupAttributes;
+}
+
+interface TagProps {
+	name?: string;
+	className: string;
+	style: string;
+	children: React.ReactNode;
+}
 
 /**
  * Renders an HTML element with the specified tag name.
@@ -16,7 +33,7 @@ import {
  *
  * @return The rendered HTML element or the children if no tag name is provided.
  */
-const Tag = ( { name, className, style, children }: any ) => {
+const Tag = ( { name, className, style, children }: TagProps ) => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}
@@ -38,7 +55,7 @@ export default function CoreGroup( {
 	attributes,
 	renderedHtml,
 	children,
-}: any ) {
+}: CoreGroupProps ) {
 	const { style, tagName } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );
