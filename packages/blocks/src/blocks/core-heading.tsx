@@ -1,6 +1,17 @@
 import React, { type JSX } from 'react';
-import { getStylesFromAttributes } from '@snapwp/core';
+import { BlockData, getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CoreHeadingAttributes {
+	content?: string;
+	cssClassName?: string;
+	level: number;
+	style?: any;
+}
+
+export interface CoreHeadingProps extends BlockData {
+	attributes?: CoreHeadingAttributes;
+}
 
 /**
  * Renders the core/heading block.
@@ -10,7 +21,7 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreHeading( { attributes }: any ) {
+export default function CoreHeading( { attributes }: CoreHeadingProps ) {
 	const { style, cssClassName, content, level } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
