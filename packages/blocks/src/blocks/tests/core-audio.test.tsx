@@ -8,7 +8,6 @@ describe( 'CoreAudio', () => {
 		autoplay: true,
 		caption: 'Sample Caption',
 		loop: true,
-		preload: null,
 		src: 'sample-audio.mp3',
 		style: JSON.stringify( {
 			spacing: {
@@ -32,6 +31,7 @@ describe( 'CoreAudio', () => {
 	test( 'renders correctly with all attributes', () => {
 		const { container, asFragment } = render(
 			<CoreAudio
+				type="CoreAudio"
 				attributes={ attributes }
 				renderedHtml={ renderedHtml }
 			/>
@@ -67,11 +67,15 @@ describe( 'CoreAudio', () => {
 	test( 'renders null when src is not provided', () => {
 		const attributesWithoutSrc = {
 			...attributes,
-			src: null,
+			src: undefined,
 		};
 
 		const { container, asFragment } = render(
-			<CoreAudio attributes={ attributesWithoutSrc } renderedHtml="" />
+			<CoreAudio
+				type="CoreAudio"
+				attributes={ attributesWithoutSrc }
+				renderedHtml=""
+			/>
 		);
 		expect( container.firstChild ).toBeNull();
 		expect( asFragment() ).toMatchSnapshot();
@@ -83,7 +87,11 @@ describe( 'CoreAudio', () => {
 		};
 
 		const { container, asFragment } = render(
-			<CoreAudio attributes={ attributesWithOnlySrc } renderedHtml="" />
+			<CoreAudio
+				type="CoreAudio"
+				attributes={ attributesWithOnlySrc }
+				renderedHtml=""
+			/>
 		);
 
 		const audioElement = container.querySelector( 'audio' );

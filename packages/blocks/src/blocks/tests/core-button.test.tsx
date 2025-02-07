@@ -43,10 +43,11 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 
 		const { asFragment } = render(
-			<CoreButton attributes={ exampleAttributes } />
+			<CoreButton type="CoreButton" attributes={ exampleAttributes } />
 		);
 		const linkElement = screen.getByRole( 'link', { name: 'Click Me' } );
 
@@ -71,10 +72,11 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 
 		const { asFragment } = render(
-			<CoreButton attributes={ exampleAttributes } />
+			<CoreButton type="CoreButton" attributes={ exampleAttributes } />
 		);
 		const linkElement = screen.getByRole( 'link', { name: 'Click Me' } );
 
@@ -93,7 +95,7 @@ describe( 'CoreButton Component', () => {
 			buttonType: 'submit',
 		};
 		const { asFragment } = render(
-			<CoreButton attributes={ buttonAttributes } />
+			<CoreButton type="CoreButton" attributes={ buttonAttributes } />
 		);
 		const buttonElement = screen.getByRole( 'button', {
 			name: 'Click Me',
@@ -118,9 +120,10 @@ describe( 'CoreButton Component', () => {
 			url: 'https://example.com',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 		const { asFragment } = render(
-			<CoreButton attributes={ attributesWithoutTag } />
+			<CoreButton type="CoreButton" attributes={ attributesWithoutTag } />
 		);
 		const linkElement = screen.getByRole( 'link', { name: 'Click Me' } );
 
@@ -140,9 +143,13 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 		const { asFragment } = render(
-			<CoreButton attributes={ attributesWithoutText } />
+			<CoreButton
+				type="CoreButton"
+				attributes={ attributesWithoutText }
+			/>
 		);
 		const linkElement = screen.getByRole( 'link' );
 
@@ -156,7 +163,7 @@ describe( 'CoreButton Component', () => {
 			text: 'Minimal Button',
 		};
 		const { asFragment, container } = render(
-			<CoreButton attributes={ minimalAttributes } />
+			<CoreButton type="CoreButton" attributes={ minimalAttributes } />
 		);
 		const linkElement = container.querySelector( 'a' );
 
@@ -181,7 +188,10 @@ describe( 'CoreButton Component', () => {
 			linkTarget: '_blank',
 		};
 		const { asFragment } = render(
-			<CoreButton attributes={ customClassAttributes } />
+			<CoreButton
+				type="CoreButton"
+				attributes={ customClassAttributes }
+			/>
 		);
 		const linkElement = screen.getByRole( 'link', {
 			name: 'Custom Button',
@@ -194,19 +204,7 @@ describe( 'CoreButton Component', () => {
 
 	test( 'renders with empty attributes object', () => {
 		const { asFragment, container } = render(
-			<CoreButton attributes={ {} } />
-		);
-		const linkElement = container.querySelector( 'a' );
-
-		expect( linkElement ).not.toBeNull();
-		expect( linkElement!.tagName ).toBe( 'A' );
-		expect( linkElement ).toBeEmptyDOMElement();
-		expect( asFragment() ).toMatchSnapshot();
-	} );
-
-	test( 'renders with null attributes', () => {
-		const { asFragment, container } = render(
-			<CoreButton attributes={ null } />
+			<CoreButton type="CoreButton" attributes={ {} } />
 		);
 		const linkElement = container.querySelector( 'a' );
 
@@ -218,7 +216,7 @@ describe( 'CoreButton Component', () => {
 
 	test( 'renders with undefined attributes', () => {
 		const { asFragment, container } = render(
-			<CoreButton attributes={ undefined } />
+			<CoreButton type="CoreButton" attributes={ undefined } />
 		);
 		const linkElement = container.querySelector( 'a' );
 
