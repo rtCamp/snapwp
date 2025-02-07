@@ -1,9 +1,23 @@
-import React, { type JSX } from 'react';
+import React from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
+interface CoreAudioAttributes {
+	autoplay?: boolean;
+	caption?: string;
+	loop?: boolean;
+	preload?: string;
+	src?: string;
+	style?: string;
+}
+
+export interface CoreAudioProps extends BlockData {
+	attributes?: CoreAudioAttributes;
+}
 
 /**
  * Renders the core/audio block.
@@ -17,7 +31,7 @@ import {
 export default function CoreAudio( {
 	attributes,
 	renderedHtml,
-}: any ): JSX.Element | null {
+}: CoreAudioProps ) {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {
