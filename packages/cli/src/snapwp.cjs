@@ -4,7 +4,7 @@ const npmrcContent = `@snapwp:registry=${ registryURL }`;
 
 // Scaffold a new directory with the SnapWP build and the .env file.
 const { execSync, spawn } = require( 'child_process' );
-const fs = require( 'fs' );
+const fs = require( 'fs/promises' );
 const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
@@ -88,15 +88,22 @@ const openEditor = ( filePath ) => {
 	try {
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
-			'🫰 🫰 🫰  Thanks for using SnapWP! 🫰 🫰 🫰\n' +
+			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
 				'Please enter a relative or absolute path: '
 		);
 		const projectDirPath = path.resolve( projectDir );
 
 		// Create the project directory if not exists.
-		if ( ! fs.existsSync( projectDirPath ) ) {
-			fs.mkdirSync( projectDirPath, { recursive: true } );
+		try {
+			await fs.access( projectDirPath );
+		} catch ( error ) {
+			if ( 'ENOENT' !== error.code ) {
+				console.error( 'Error:', error );
+				process.exit( 1 );
+			}
+
+			await fs.mkdir( projectDirPath, { recursive: true } );
 		}
 
 		const nextJsStarterPath = path.resolve(
@@ -104,43 +111,23 @@ const openEditor = ( filePath ) => {
 			'./examples/nextjs/starter/'
 		);
 
-		// Step 2: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
-		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
-		fs.rmSync( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 2`.
 
-		console.log( '📂 Copying frontend folder to project directory...' );
-		await fs.cp(
-			nextJsStarterPath,
-			projectDirPath,
-			{
-				recursive: true,
-				filter: ( source ) => {
-					const fileCheck = new RegExp(
-						`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
-					);
-					return ! fileCheck.test( source );
-				},
-			},
-			( error ) => {
-				if ( ! error ) {
-					return;
-				}
+		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 2`.
 
-				console.log( 'Error: ', error );
-				process.exit( 1 );
-			}
-		);
+		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 2`.
 
-		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 3`.
-
-		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 3`.
-
-		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 3`.
-
-		// Step 3: Check if there is an `.env` file in projectDirPath.
+		// Step 2: Check if there is an `.env` file in projectDirPath.
 		const envPath = path.join( projectDirPath, '.env' );
 
-		if ( ! fs.existsSync( envPath ) ) {
+		try {
+			await fs.access( envPath );
+		} catch ( error ) {
+			if ( 'ENOENT' !== error.code ) {
+				console.error( 'Error:', error );
+				process.exit( 1 );
+			}
+
 			await prompt(
 				`\nNo .env file found in "${ projectDirPath }". Please \n` +
 					'  1. Press any key to open a new .env file in your default editor,\n' +
@@ -155,7 +142,7 @@ const openEditor = ( filePath ) => {
 			 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
 			 * Creating a file before opening will prevent bugs due to default editor extensions.
 			 */
-			fs.closeSync( fs.openSync( envPath, 'w' ) );
+			await fs.writeFile( envPath, '' );
 
 			const envFileCreationStatus = await openEditor( envPath );
 
@@ -167,24 +154,56 @@ const openEditor = ( filePath ) => {
 			}
 
 			// Throw error if .env file still does not exist or if exists, its empty.
-			if (
-				! fs.existsSync( envPath ) ||
-				0 === fs.statSync( envPath ).size
-			) {
-				console.error(
-					`".env" still not found at "${ envPath }" or is empty. Please create an ".env" and try again.`
-				);
+			try {
+				await fs.access( envPath );
+			} catch ( error ) {
+				// Throw error if .env file still does not exist.
+				if ( 'ENOENT' === error.code ) {
+					console.error(
+						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
+					);
+					process.exit( 1 );
+				}
 
-				fs.rmSync( envPath, { force: true } ); // Delete old env for a fresh start.
-
+				// Exit if any other unknown error occurred.
+				console.error( 'Error:', error );
 				process.exit( 1 );
 			}
 		}
 
+		// Fetch the `.env` file size.
+		const { size } = await fs.stat( envPath );
+
+		// Throw error if .env file is empty.
+		if ( 0 === size ) {
+			console.error(
+				`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
+			);
+
+			await fs.rm( envPath, { force: true } ); // Delete old env for a fresh start.
+
+			process.exit( 1 );
+		}
+
+		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
+		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
+		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+
+		console.log( 'Copying frontend folder to project directory...' );
+		await fs.cp( nextJsStarterPath, projectDirPath, {
+			recursive: true,
+			filter: ( source ) => {
+				const fileCheck = new RegExp(
+					`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
+				);
+				return ! fileCheck.test( source );
+			},
+		} );
+
 		// Step 4: Create .npmrc file in project directory if running via proxy registry.
 		if ( options.proxy ) {
 			console.log( 'Found --proxy flag, generating `.npmrc` file.' );
-			fs.writeFileSync(
+			await fs.writeFile(
 				path.join( projectDirPath, '.npmrc' ),
 				npmrcContent
 			);
@@ -194,7 +213,7 @@ const openEditor = ( filePath ) => {
 		}
 
 		// Step 5: update @snapwp package version numbers in package.json.
-		const packageJsonData = fs.readFileSync(
+		const packageJsonData = await fs.readFile(
 			path.join( projectDirPath, 'package.json' ),
 			{ encoding: 'utf8' }
 		);
@@ -202,7 +221,7 @@ const openEditor = ( filePath ) => {
 			/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
 			'*'
 		);
-		fs.writeFileSync(
+		await fs.writeFile(
 			path.join( projectDirPath, 'package.json' ),
 			updatedPackageJsonData
 		);
@@ -211,14 +230,14 @@ const openEditor = ( filePath ) => {
 		console.log( '' );
 
 		console.log(
-			`✔️ Your project has been scaffolded at: ${ projectDirPath }.`
+			`Your project has been scaffolded at: ${ projectDirPath }.`
 		);
 
 		// New line for clarity.
 		console.log( '' );
 
 		console.log(
-			'🚀 To start your headless WordPress project, please run the following commands:'
+			'To start your headless WordPress project, please run the following commands:'
 		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
