@@ -1,6 +1,16 @@
 import React from 'react';
-import { getStylesFromAttributes } from '@snapwp/core';
+import { BlockData, getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CoreCodeAttributes {
+	style?: string;
+	content?: string;
+	cssClassName?: string;
+}
+
+export interface CoreCodeProps extends BlockData {
+	attributes?: CoreCodeAttributes;
+}
 
 /**
  * Renders the core/code block.
@@ -10,7 +20,7 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreCode( { attributes }: any ) {
+export default function CoreCode( { attributes }: CoreCodeProps ) {
 	const { style, cssClassName, content } = attributes || {};
 	const styleObject = getStylesFromAttributes( { style } );
 
