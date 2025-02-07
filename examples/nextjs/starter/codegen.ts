@@ -23,9 +23,6 @@ const config: CodegenConfig = {
 			},
 		},
 	],
-	config: {
-		useTypeImports: true,
-	},
 };
 
 export default config;

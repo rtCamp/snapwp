@@ -7,9 +7,9 @@ const baseConfig: CodegenConfig = {
 			preset: 'client',
 			plugins: [],
 			config: {
-				useTypeImports: true,
 				enumsAsTypes: true,
-				maybeValue: 'T | null',
+				skipTypename: true,
+				useTypeImports: true,
 			},
 		},
 	},
