@@ -31,7 +31,6 @@ describe( 'CoreAudio', () => {
 	test( 'renders correctly with all attributes', () => {
 		const { container, asFragment } = render(
 			<CoreAudio
-				type="CoreAudio"
 				attributes={ attributes }
 				renderedHtml={ renderedHtml }
 			/>
@@ -71,11 +70,7 @@ describe( 'CoreAudio', () => {
 		};
 
 		const { container, asFragment } = render(
-			<CoreAudio
-				type="CoreAudio"
-				attributes={ attributesWithoutSrc }
-				renderedHtml=""
-			/>
+			<CoreAudio attributes={ attributesWithoutSrc } renderedHtml="" />
 		);
 		expect( container.firstChild ).toBeNull();
 		expect( asFragment() ).toMatchSnapshot();
@@ -87,11 +82,7 @@ describe( 'CoreAudio', () => {
 		};
 
 		const { container, asFragment } = render(
-			<CoreAudio
-				type="CoreAudio"
-				attributes={ attributesWithOnlySrc }
-				renderedHtml=""
-			/>
+			<CoreAudio attributes={ attributesWithOnlySrc } renderedHtml="" />
 		);
 
 		const audioElement = container.querySelector( 'audio' );

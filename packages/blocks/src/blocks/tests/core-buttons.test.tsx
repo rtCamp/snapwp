@@ -23,9 +23,7 @@ describe( 'CoreButtons', () => {
 		const children = <button>Click Me</button>;
 
 		const { asFragment } = render(
-			<CoreButtons type="CoreButtons" attributes={ attributes }>
-				{ children }
-			</CoreButtons>
+			<CoreButtons attributes={ attributes }>{ children }</CoreButtons>
 		);
 
 		const divElement = screen.getByRole( 'button', {
@@ -40,7 +38,7 @@ describe( 'CoreButtons', () => {
 		const children = <button>Click Me</button>;
 
 		const { asFragment } = render(
-			<CoreButtons type="CoreButtons">{ children }</CoreButtons>
+			<CoreButtons>{ children }</CoreButtons>
 		);
 
 		const divElement = screen.getByRole( 'button', {
@@ -64,9 +62,7 @@ describe( 'CoreButtons', () => {
 		);
 
 		const { asFragment } = render(
-			<CoreButtons type="CoreButtons" attributes={ attributes }>
-				{ children }
-			</CoreButtons>
+			<CoreButtons attributes={ attributes }>{ children }</CoreButtons>
 		);
 
 		expect(
