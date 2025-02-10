@@ -1,4 +1,7 @@
-import React from 'react';
+import { BlockData } from '@snapwp/core';
+import React, { PropsWithChildren } from 'react';
+
+export interface CorePatternProps extends PropsWithChildren< BlockData > {}
 
 /**
  * Renders the core/pattern block.
@@ -8,7 +11,7 @@ import React from 'react';
  *
  * @return The rendered block.
  */
-export default function CorePattern( { children }: any ) {
+export default function CorePattern( { children }: CorePatternProps ) {
 	// Patterns contain only children, so we just return them.
 	return <>{ children }</>;
 }
