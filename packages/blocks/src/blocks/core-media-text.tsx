@@ -10,7 +10,7 @@ import { Image, Link, Parse } from '@snapwp/next';
 /**
  * Props interface for CoreMediaText component
  */
-interface CoreMediaTextProps extends PropsWithChildren< BlockData > {
+export interface CoreMediaTextProps extends PropsWithChildren< BlockData > {
 	attributes?: CoreMediaTextAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	renderedHtml?: string | null;
