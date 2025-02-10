@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
@@ -11,6 +12,24 @@ interface TrackProps {
 	kind: string;
 	srclang: string;
 	label: string;
+}
+
+interface CoreVideoAttributes {
+	autoplay?: boolean;
+	caption?: string;
+	controls: boolean;
+	loop?: boolean;
+	muted?: boolean;
+	playsInline?: boolean;
+	poster?: string;
+	src?: string;
+	style?: any;
+	tracks: Array< any >;
+	videoPreload: string;
+}
+
+export interface CoreVideoProps extends BlockData {
+	attributes?: CoreVideoAttributes;
 }
 
 /**
@@ -42,14 +61,17 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
 
 /**
  * Renders the core/video block.
- 
+
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
  * @return The rendered block.
  */
-export default function CoreVideo( { attributes, renderedHtml }: any ) {
+export default function CoreVideo( {
+	attributes,
+	renderedHtml,
+}: CoreVideoProps ) {
 	const {
 		autoplay,
 		caption,
