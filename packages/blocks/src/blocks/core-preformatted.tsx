@@ -1,10 +1,20 @@
 import React from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CorePreformattedAttributes {
+	content?: string;
+	style?: string;
+}
+
+export interface CorePreformattedProps extends BlockData {
+	attributes?: CorePreformattedAttributes;
+}
 
 /**
  * Renders the core/preformatted block.
@@ -15,7 +25,10 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CorePreformatted( { attributes, renderedHtml }: any ) {
+export default function CorePreformatted( {
+	attributes,
+	renderedHtml,
+}: CorePreformattedProps ) {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
