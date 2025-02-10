@@ -5,7 +5,14 @@ module.exports = {
 		es6: true,
 	},
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@wordpress/eslint-plugin', '@typescript-eslint', 'jsdoc', 'jest', 'import', 'n' ],
+	plugins: [
+		'@wordpress/eslint-plugin',
+		'@typescript-eslint',
+		'jsdoc',
+		'jest',
+		'import',
+		'n',
+	],
 	extends: [
 		'eslint:recommended',
 		'plugin:jsdoc/recommended-typescript',
@@ -60,11 +67,7 @@ module.exports = {
 			},
 		},
 		{
-			files: [
-				'bin/**/*.js',
-				'bin/**/*.mjs',
-				'packages/cli/src/*.cjs',
-			],
+			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
 			rules: {
 				'no-console': 'off',
 			},
@@ -77,7 +80,7 @@ module.exports = {
 			},
 		},
 		{
-			files: ['**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts'],
+			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
 			excludedFiles: [
 				'**/*.test.ts',
 				'**/*.test.tsx',
@@ -85,9 +88,7 @@ module.exports = {
 				'**/*.spec.tsx',
 				'**/codegen.ts',
 			],
-			extends: [
-				'plugin:@typescript-eslint/recommended-type-checked'
-			],
+			extends: [ 'plugin:@typescript-eslint/recommended-type-checked' ],
 			parserOptions: {
 				project: true,
 			},
@@ -96,7 +97,7 @@ module.exports = {
 			},
 		},
 		{
-			files: ['**/jest.*.js', '**/*.cjs', '**/*.test.ts'],
+			files: [ '**/jest.*.js', '**/*.cjs', '**/*.test.ts' ],
 			env: {
 				node: true,
 				'jest/globals': true,
@@ -109,9 +110,9 @@ module.exports = {
 			},
 		},
 		{
-			files: ["**/codegen.ts", "**/*.test.*"],
+			files: [ '**/codegen.ts', '**/*.test.*' ],
 			rules: {
-				"n/no-process-env": "off"
+				'n/no-process-env': 'off',
 			},
 		},
 	],
@@ -120,7 +121,7 @@ module.exports = {
 		'jsdoc/no-types': [ 'off' ],
 		'jsdoc/require-param-type': [ 'error' ],
 		'jsdoc/require-returns-type': [ 'error' ],
-		'dot-notation': [ "error", { allowKeywords: false } ],
+		'dot-notation': [ 'error', { allowKeywords: false } ],
 		'@typescript-eslint/naming-convention': 'error',
 		'jest/expect-expect': 'off',
 		'react/jsx-boolean-value': 'error',
@@ -153,7 +154,7 @@ module.exports = {
 					{
 						name: 'classnames',
 						message:
-							'Please use `clsx` instead. It\'s a lighter and faster drop-in replacement for `classnames`.',
+							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
 					},
 				],
 			},
