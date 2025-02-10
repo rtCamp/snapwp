@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockData } from '..';
 
 interface CoreSpacerAttributes {
 	height: string;
@@ -13,7 +13,7 @@ interface CoreSpacerAttributes {
 	width?: string;
 }
 
-export interface CoreSpacerProps extends BlockData {
+export interface CoreSpacerProps extends Omit< BlockData, 'type' > {
 	attributes?: CoreSpacerAttributes;
 }
 

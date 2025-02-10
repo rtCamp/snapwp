@@ -1,18 +1,19 @@
 import React, { PropsWithChildren } from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 interface CoreListItemAttributes {
 	content?: string;
 	style?: string;
 }
 
-export interface CoreListItemProps extends PropsWithChildren< BlockData > {
+export interface CoreListItemProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreListItemAttributes;
 }
 

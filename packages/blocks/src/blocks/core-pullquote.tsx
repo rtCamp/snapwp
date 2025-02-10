@@ -1,11 +1,11 @@
 import React from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 interface CorePullquoteAttributes {
 	citation?: string;
@@ -14,7 +14,7 @@ interface CorePullquoteAttributes {
 	pullquoteValue?: string;
 }
 
-export interface CorePullquoteProps extends BlockData {
+export interface CorePullquoteProps extends Omit< BlockData, 'type' > {
 	attributes?: CorePullquoteAttributes;
 }
 

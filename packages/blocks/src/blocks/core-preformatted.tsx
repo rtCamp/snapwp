@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 interface CorePreformattedAttributes {
 	content?: string;
 	style?: string;
 }
 
-export interface CorePreformattedProps extends BlockData {
+export interface CorePreformattedProps extends Omit< BlockData, 'type' > {
 	attributes?: CorePreformattedAttributes;
 }
 

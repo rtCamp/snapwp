@@ -4,12 +4,12 @@ import React, {
 	type ElementType,
 } from 'react';
 import {
-	type BlockData,
 	getStylesFromAttributes,
 	findElementAndGetClassNames,
 	getColorClassName,
 	cn,
 } from '@snapwp/core';
+import { BlockData } from '..';
 import { Image, Parse } from '@snapwp/next';
 
 interface CoreCoverAttributes {
@@ -35,7 +35,8 @@ interface CoreCoverAttributes {
 	useFeaturedImage?: boolean;
 }
 
-interface CoreCoverProps extends PropsWithChildren< BlockData > {
+interface CoreCoverProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreCoverAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	mediaDetails?: MediaDetails;

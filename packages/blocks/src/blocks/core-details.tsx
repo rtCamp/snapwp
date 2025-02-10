@@ -1,9 +1,21 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockData } from '..';
+
+interface CoreDetailsAttributes {
+	style?: string;
+	showContent: boolean;
+	summary?: string;
+}
+
+export interface CoreDetailsProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+	attributes?: CoreDetailsAttributes;
+}
 
 /**
  * Renders the core/details block.
@@ -19,7 +31,7 @@ export default function CoreDetails( {
 	attributes,
 	children,
 	renderedHtml,
-}: any ) {
+}: CoreDetailsProps ) {
 	const { style, showContent, summary } = attributes ?? {};
 	const styleObject = getStylesFromAttributes( { style } );
 

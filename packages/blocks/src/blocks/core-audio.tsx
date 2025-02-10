@@ -1,10 +1,10 @@
 import React from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockData } from '..';
 
 interface CoreAudioAttributes {
 	autoplay?: boolean;
@@ -15,7 +15,7 @@ interface CoreAudioAttributes {
 	style?: string;
 }
 
-export interface CoreAudioProps extends BlockData {
+export interface CoreAudioProps extends Omit< BlockData, 'type' > {
 	attributes?: CoreAudioAttributes;
 }
 

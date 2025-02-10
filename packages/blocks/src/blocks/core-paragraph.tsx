@@ -1,5 +1,6 @@
 import React from 'react';
-import { BlockData, getStylesFromAttributes } from '@snapwp/core';
+import { getStylesFromAttributes } from '@snapwp/core';
+import { BlockData } from '..';
 import { Parse } from '@snapwp/next';
 
 interface CoreParagraphAttributes {
@@ -13,7 +14,7 @@ interface CoreParagraphAttributes {
 	textColor?: string;
 }
 
-export interface CoreParagraphProps extends BlockData {
+export interface CoreParagraphProps extends Omit< BlockData, 'type' > {
 	attributes?: CoreParagraphAttributes;
 }
 

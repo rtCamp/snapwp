@@ -1,17 +1,18 @@
 import React, { PropsWithChildren } from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockData } from '..';
 
 interface CoreGalleryAttributes {
 	caption?: string;
 	style?: string;
 }
 
-export interface CoreGalleryProps extends PropsWithChildren< BlockData > {
+export interface CoreGalleryProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreGalleryAttributes;
 }
 

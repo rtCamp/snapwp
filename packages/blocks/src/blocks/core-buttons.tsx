@@ -1,12 +1,14 @@
 import React, { PropsWithChildren } from 'react';
-import { BlockData, cn, getStylesFromAttributes } from '@snapwp/core';
+import { cn, getStylesFromAttributes } from '@snapwp/core';
+import { BlockData } from '..';
 
 interface CoreButtonsAttributes {
 	cssClassName?: string;
 	style?: string;
 }
 
-export interface CoreButtonsProps extends PropsWithChildren< BlockData > {
+export interface CoreButtonsProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreButtonsAttributes;
 }
 

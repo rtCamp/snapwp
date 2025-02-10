@@ -1,18 +1,18 @@
 import React from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 interface CoreVerseAttributes {
 	content?: string;
 	style?: string;
 }
 
-export interface CoreVerseProps extends BlockData {
+export interface CoreVerseProps extends Omit< BlockData, 'type' > {
 	attributes?: CoreVerseAttributes;
 }
 

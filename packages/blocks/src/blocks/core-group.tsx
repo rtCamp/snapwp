@@ -1,24 +1,25 @@
 import React, { PropsWithChildren, createElement } from 'react';
 import {
-	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockData } from '..';
 
 interface CoreGroupAttributes {
 	style?: string;
 	tagName: string;
 }
 
-export interface CoreGroupProps extends PropsWithChildren< BlockData > {
+export interface CoreGroupProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreGroupAttributes;
 }
 
 interface TagProps {
 	name?: string;
 	className: string;
-	style: string;
+	style: React.CSSProperties;
 	children: React.ReactNode;
 }
 

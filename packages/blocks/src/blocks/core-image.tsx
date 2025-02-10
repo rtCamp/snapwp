@@ -5,12 +5,12 @@ import React, {
 	type PropsWithChildren,
 } from 'react';
 import {
-	type BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 interface CoreImageAttributes {
 	alt?: string;
@@ -30,7 +30,7 @@ interface CoreImageAttributes {
 	lightbox?: string | null;
 }
 
-export interface CoreImageProps extends BlockData {
+export interface CoreImageProps extends Omit< BlockData, 'type' > {
 	attributes?: CoreImageAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	mediaDetails?: MediaDetails;

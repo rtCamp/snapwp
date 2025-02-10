@@ -1,5 +1,16 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
+import { BlockData } from '..';
+import { JSX } from 'react/jsx-dev-runtime';
+
+interface CoreTemplatePartAttributes {
+	templatePartTagName?: string;
+}
+
+export interface CoreTemplatePartProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+	attributes?: CoreTemplatePartAttributes;
+}
 
 /**
  * Renders the core/template-part block.
@@ -15,13 +26,14 @@ export default function CoreTemplatePart( {
 	renderedHtml,
 	children,
 	attributes,
-}: any ) {
-	const { templatePartTagName } = attributes;
+}: CoreTemplatePartProps ) {
+	const { templatePartTagName } = attributes || {};
 	/**
 	 * @todo add support for area_tag.
 	 * @see https://github.com/WordPress/gutenberg/blob/4775e7052b9e2ed7df46429e6e738de3faf2fb18/packages/block-library/src/template-part/index.php#L165
 	 */
-	const TagName = templatePartTagName || 'div';
+	const TagName = ( templatePartTagName ||
+		'div' ) as keyof JSX.IntrinsicElements;
 
 	/**
 	 * @todo replace with cssClassName once it's supported.

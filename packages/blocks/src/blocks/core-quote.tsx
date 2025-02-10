@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
-import { BlockData, getStylesFromAttributes } from '@snapwp/core';
+import { getStylesFromAttributes } from '@snapwp/core';
+import { BlockData } from '..';
 import { Parse } from '@snapwp/next';
 
 interface CoreQuoteAttributes {
@@ -9,7 +10,8 @@ interface CoreQuoteAttributes {
 	value: string;
 }
 
-export interface CoreQuoteProps extends PropsWithChildren< BlockData > {
+export interface CoreQuoteProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreQuoteAttributes;
 }
 

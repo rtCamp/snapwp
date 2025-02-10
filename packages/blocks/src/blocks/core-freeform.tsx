@@ -1,8 +1,8 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '@snapwp/core';
+import { BlockData } from '..';
 
-export interface CoreFreeformProps extends BlockData {}
+export interface CoreFreeformProps extends Omit< BlockData, 'type' > {}
 
 /**
  * Renders the core/freeform block.

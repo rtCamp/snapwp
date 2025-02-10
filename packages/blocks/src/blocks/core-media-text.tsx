@@ -1,16 +1,17 @@
 import React, { type ComponentProps, PropsWithChildren } from 'react';
 import {
-	type BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
+import { BlockData } from '..';
 
 /**
  * Props interface for CoreMediaText component
  */
-export interface CoreMediaTextProps extends PropsWithChildren< BlockData > {
+export interface CoreMediaTextProps
+	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreMediaTextAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	renderedHtml?: string | null;
