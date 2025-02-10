@@ -81,10 +81,10 @@ export default function CoreFile( {
 					aria-label={ ariaLabel }
 				/>
 			) }
-			{ fileName && (
+			{ fileName && textLinkHref && (
 				<Link
 					id={ fileId || undefined }
-					href={ textLinkHref || undefined }
+					href={ textLinkHref }
 					target={ textLinkTarget || undefined }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
