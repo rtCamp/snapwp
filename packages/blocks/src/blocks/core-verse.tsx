@@ -1,10 +1,20 @@
 import React from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CoreVerseAttributes {
+	content?: string;
+	style?: string;
+}
+
+export interface CoreVerseProps extends BlockData {
+	attributes?: CoreVerseAttributes;
+}
 
 /**
  * Renders the core/verse block.
@@ -15,7 +25,10 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreVerse( { attributes, renderedHtml }: any ) {
+export default function CoreVerse( {
+	attributes,
+	renderedHtml,
+}: CoreVerseProps ) {
 	const { style, content } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );
