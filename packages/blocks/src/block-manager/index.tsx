@@ -1,23 +1,35 @@
-import {
-	type BlockData,
-	type BlockTreeNode,
-	type BlockDefinitions,
-} from '@snapwp/core';
 import defaultBlockDefinitions from '@/blocks';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
+
+export interface BlockData {
+	type: keyof typeof defaultBlockDefinitions;
+	cssClassNames?: Array< string | null > | null;
+	clientId?: string | null;
+	parentClientId?: string | null;
+	renderedHtml?: string | null;
+	attributes?: Record< any, any >;
+}
+
+export type BlockTreeNode = Omit< BlockData, 'clientId' & 'parentClientId' > & {
+	children?: BlockTreeNode[] | null;
+	// @todo: implement as generic type once we enforce `no-explicit-any`
+	renderer: React.FC< React.PropsWithChildren< any > >;
+};
 
 /**
  * Singleton class that renders blocks using defined React components.
  * Falls back to a default block if the type isn't found.
  */
 export default class BlockManager {
-	private static blockDefinitions: BlockDefinitions = defaultBlockDefinitions;
+	private static blockDefinitions = defaultBlockDefinitions;
 
 	/**
 	 * Update block definitions to be used while rendering blocks.
 	 * @param blockDefinitions - rendering implementaion for blocks.
 	 */
-	public static addBlockDefinitions( blockDefinitions: BlockDefinitions ) {
+	public static addBlockDefinitions(
+		blockDefinitions: typeof defaultBlockDefinitions
+	) {
 		BlockManager.blockDefinitions = {
 			...BlockManager.blockDefinitions,
 			...blockDefinitions,

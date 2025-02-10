@@ -1,6 +1,5 @@
 import React, { type JSX } from 'react';
 import { headers } from 'next/headers';
-import { type BlockData } from '@snapwp/core';
 import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
@@ -8,7 +7,7 @@ import Script from 'next/script';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
-	children: ( editorBlocks: BlockData[] ) => JSX.Element;
+	children: ( editorBlocks: unknown[] ) => JSX.Element;
 };
 
 /**
