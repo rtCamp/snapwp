@@ -1,10 +1,21 @@
 import React from 'react';
 import {
+	BlockData,
 	cn,
 	getClassNamesFromString,
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
+interface CoreSpacerAttributes {
+	height: string;
+	style?: string;
+	width?: string;
+}
+
+export interface CoreSpacerProps extends BlockData {
+	attributes?: CoreSpacerAttributes;
+}
 
 /**
  * Renders the core/spacer block.
@@ -15,7 +26,10 @@ import {
  *
  * @return The rendered block.
  */
-export default function CoreSpacer( { attributes, renderedHtml }: any ) {
+export default function CoreSpacer( {
+	attributes,
+	renderedHtml,
+}: CoreSpacerProps ) {
 	const { height, width, style } = attributes || {};
 
 	const parsedStyle = style ? JSON.parse( style ) : {};
