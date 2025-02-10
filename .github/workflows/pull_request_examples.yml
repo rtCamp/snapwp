@@ -183,7 +183,7 @@ jobs:
             - name: Checkout SnapWP Helper
               uses: actions/checkout@v4
               with:
-                  token: '${{ secrets.RTBOT_TOKEN }}'
+                  token: '${{ secrets.GITHUB_TOKEN }}'
                   repository: '${{ github.repository_owner }}/snapwp-helper'
                   path: snapwp-helper
                   ref: ${{ env.SNAPWP_HELPER_REF }}

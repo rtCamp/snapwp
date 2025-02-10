@@ -9,8 +9,16 @@ uplinks:
     npmjs:
         url: https://registry.npmjs.org/
 packages:
+    '@snapwp/*':
+        access: $all
+        publish: $all
+    'snapwp':
+        access: $all
+        publish: $all
     '**':
         access: $all
         publish: $all
+        proxy: npmjs
+
 logs:
     - { type: stdout, format: pretty, level: http }

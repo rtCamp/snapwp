@@ -12,22 +12,28 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 
 ### Installation Steps
 
-1. Install and activate the latest release versions of the following plugins: - [WPGraphQL](https://wordpress.org/plugins/wp-graphql/) - [WPGraphQL Content Blocks](https://github.com/wpengine/wp-graphql-content-blocks/releases/latest) - [SnapWP Helper](https://github.com/rtCamp/snapwp-helper/releases/latest)
+1. Install and activate the latest release versions of the following plugins:
+
+    - [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
+    - [WPGraphQL Content Blocks](https://github.com/wpengine/wp-graphql-content-blocks/releases/latest)
+    - [SnapWP Helper](https://github.com/rtCamp/snapwp-helper/releases/latest)
+
+    **With WP-CLI**:
+
+    You can install the latest versions of the required plugins using the WP-CLI command below:
 
     ```bash
-    # With WP-CLI
-
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
 
-2. (Optional) If you are faced with CORS issues during local development you may want to install activate the [`Allow CORS: Access-Control-Allow-Origin` Chrome Extension](https://chromewebstore.google.com/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf) or similar.
+2. (Optional) If you're running your WordPress site on a different domain than your frontend, you may need to [configure CORS headers](./cors.md).
 
 ## Frontend Setup
 
 ### Prerequisites
 
--   **Node.js**: v20+ (with `npm and `npx` installed).
--   **A WordPress backend** [configured with SnapWP Helper](#backend-setup).
+-   **Node.js**: v20+ (with `npm` and `npx` installed).
+-   **A WordPress backend** configured with SnapWP Helper (see [previous section](#backend-setup)).
 
 ### Installation Steps
 
@@ -47,12 +53,14 @@ To create a new headless WordPress app using SnapWP, follow these steps:
         1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper into the file created.
 
          <a href="./images/snapwp-helper-env.png">
-           <!--@todo: link to snapwp-helper repo for image-->
-           <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
-           <p> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</p>
+           <figure>
+             <!--@todo: link to snapwp-helper repo for image-->
+             <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
+             <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
+           </figure>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./usage.md#example-env-file).
+        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.
@@ -75,19 +83,19 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 @todo
 
-## **Additional Resources [Reference]**
+## Additional Resources
 
 This section contains a list of curated resources for developers working with headless WordPress, WPGraphQL, and some of the technologies used in the SnapWP stack.
 
-### **WPGraphQL**
+### WPGraphQL
 
 -   **Docs**: [https://www.wpgraphql.com/docs/introduction](https://www.wpgraphql.com/docs/introduction)
 -   **Official Discord Community**: [https://wpgraphql.com/discord/](https://wpgraphql.com/community/)
 
-### **Next.js**
+### Next.js
 
 -   **Docs**: [https://nextjs.org/docs](https://nextjs.org/docs)
 
-### **TypeScript**
+### TypeScript
 
 -   **Docs**: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/)
