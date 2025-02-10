@@ -5,11 +5,12 @@ module.exports = {
 		es6: true,
 	},
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@typescript-eslint', 'jsdoc', 'jest', 'import', 'n' ],
+	plugins: [ '@wordpress/eslint-plugin', '@typescript-eslint', 'jsdoc', 'jest', 'import', 'n' ],
 	extends: [
 		'eslint:recommended',
 		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
+		'plugin:@wordpress/eslint-plugin/recommended',
 	],
 	ignorePatterns: [
 		'**/config/*.js',
