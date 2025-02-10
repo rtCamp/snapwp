@@ -1,6 +1,17 @@
-import React from 'react';
-import { getStylesFromAttributes } from '@snapwp/core';
+import React, { PropsWithChildren } from 'react';
+import { BlockData, getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+
+interface CoreQuoteAttributes {
+	citation?: string;
+	cssClassName?: string;
+	style?: string;
+	value: string;
+}
+
+export interface CoreQuoteProps extends PropsWithChildren< BlockData > {
+	attributes?: CoreQuoteAttributes;
+}
 
 /**
  * Renders the core/quote block.
@@ -11,7 +22,7 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreQuote( { attributes, children }: any ) {
+export default function CoreQuote( { attributes, children }: CoreQuoteProps ) {
 	const { style, citation, cssClassName } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
