@@ -81,7 +81,7 @@ export default function CoreFile( {
 					aria-label={ ariaLabel }
 				/>
 			) }
-			{ /* { fileName && (
+			{ fileName && (
 				<Link
 					id={ fileId || undefined }
 					href={ textLinkHref || undefined }
@@ -90,7 +90,7 @@ export default function CoreFile( {
 				>
 					{ !! fileName && <Parse html={ fileName } /> }
 				</Link>
-			) } */ }
+			) }
 			{ showDownloadButton && (
 				<Link
 					href={ href }
