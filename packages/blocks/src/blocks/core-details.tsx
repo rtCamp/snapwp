@@ -6,7 +6,7 @@ import {
 } from '@snapwp/core';
 import { BlockData } from '..';
 
-interface CoreDetailsAttributes {
+export interface CoreDetailsAttributes {
 	style?: string;
 	showContent: boolean;
 	summary?: string;

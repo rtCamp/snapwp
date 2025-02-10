@@ -12,7 +12,7 @@ import {
 import { BlockData } from '..';
 import { Image, Parse } from '@snapwp/next';
 
-interface CoreCoverAttributes {
+export interface CoreCoverAttributes {
 	alt?: string;
 	backgroundType?: string;
 	contentPosition?: string;

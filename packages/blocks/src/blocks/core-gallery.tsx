@@ -6,7 +6,7 @@ import {
 } from '@snapwp/core';
 import { BlockData } from '..';
 
-interface CoreGalleryAttributes {
+export interface CoreGalleryAttributes {
 	caption?: string;
 	style?: string;
 }

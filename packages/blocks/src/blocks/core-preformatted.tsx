@@ -7,7 +7,7 @@ import {
 import { Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-interface CorePreformattedAttributes {
+export interface CorePreformattedAttributes {
 	content?: string;
 	style?: string;
 }

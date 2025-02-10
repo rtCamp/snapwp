@@ -4,7 +4,7 @@ import { getConfig } from '@snapwp/core/config';
 import { Link, Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-interface CoreButtonAttributes {
+export interface CoreButtonAttributes {
 	cssClassName?: string;
 	linkClassName?: string;
 	linkTarget?: string;

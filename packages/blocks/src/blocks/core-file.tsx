@@ -10,7 +10,7 @@ import { BlockData } from '..';
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
 
-interface CoreFileAttributes {
+export interface CoreFileAttributes {
 	displayPreview?: boolean;
 	downloadButtonText?: string;
 	fileId?: string;

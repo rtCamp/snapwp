@@ -7,7 +7,7 @@ import {
 import { Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-interface CoreVerseAttributes {
+export interface CoreVerseAttributes {
 	content?: string;
 	style?: string;
 }

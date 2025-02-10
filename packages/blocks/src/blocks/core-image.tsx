@@ -12,7 +12,7 @@ import {
 import { Image, Link, Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-interface CoreImageAttributes {
+export interface CoreImageAttributes {
 	alt?: string;
 	aspectRatio?: string;
 	caption?: string;

@@ -6,7 +6,7 @@ import {
 } from '@snapwp/core';
 import { BlockData } from '..';
 
-interface CoreAudioAttributes {
+export interface CoreAudioAttributes {
 	autoplay?: boolean;
 	caption?: string;
 	loop?: boolean;

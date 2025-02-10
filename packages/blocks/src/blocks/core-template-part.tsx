@@ -3,7 +3,7 @@ import { cn, getClassNamesFromString } from '@snapwp/core';
 import { BlockData } from '..';
 import { JSX } from 'react/jsx-dev-runtime';
 
-interface CoreTemplatePartAttributes {
+export interface CoreTemplatePartAttributes {
 	templatePartTagName?: string;
 }
 

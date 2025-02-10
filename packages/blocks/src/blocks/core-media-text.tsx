@@ -18,7 +18,7 @@ export interface CoreMediaTextProps
 	mediaDetails?: MediaDetails;
 }
 
-interface CoreMediaTextAttributes {
+export interface CoreMediaTextAttributes {
 	href?: string;
 	linkClass?: string;
 	linkTarget?: string;

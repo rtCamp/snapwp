@@ -3,7 +3,7 @@ import { getStylesFromAttributes } from '@snapwp/core';
 import { BlockData } from '..';
 import { Parse } from '@snapwp/next';
 
-interface CoreParagraphAttributes {
+export interface CoreParagraphAttributes {
 	backgroundColor?: string;
 	content?: string;
 	cssClassName?: string;

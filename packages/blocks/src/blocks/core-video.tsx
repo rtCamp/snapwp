@@ -14,7 +14,7 @@ interface TrackProps {
 	label: string;
 }
 
-interface CoreVideoAttributes {
+export interface CoreVideoAttributes {
 	autoplay?: boolean;
 	caption?: string;
 	controls: boolean;
