@@ -6,6 +6,11 @@ const baseConfig: CodegenConfig = {
 		'src/__generated/': {
 			preset: 'client',
 			plugins: [],
+			config: {
+				enumsAsTypes: true,
+				skipTypename: true,
+				useTypeImports: true,
+			},
 		},
 	},
 };
