@@ -1,0 +1,10 @@
+{
+  "$schema": "https://unpkg.com/@changesets/config@1.6.2/schema.json",
+  "changelog": ["@changesets/changelog-github", { "repo": "l0rd-zer0/snapwp" }],
+  "commit": false,
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "develop",
+  "updateInternalDependencies": "patch",
+  "ignore": []
+}
