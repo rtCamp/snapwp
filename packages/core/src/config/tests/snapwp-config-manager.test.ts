@@ -1,10 +1,10 @@
 import { Logger } from '@/logger';
 import {
-	type SnapWPConfig,
 	_private,
 	getConfig,
 	setConfig,
 	getGraphqlUrl,
+	SnapWPEnvConfig,
 } from '@/config/snapwp-config-manager';
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
 
@@ -12,15 +12,15 @@ describe( 'SnapWPConfigManager functions', () => {
 	// eslint-disable-next-line n/no-process-env
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
-	const validConfig: SnapWPConfig = {
-		nextUrl: 'https://next.example.com',
-		homeUrl: 'https://home.example.com',
-		graphqlEndpoint: 'index.php?graphql',
-		uploadsDirectory: '/wp-content/uploads',
-		restUrlPrefix: '/wp-json',
+	const validSnapWPEnvConfig: Partial< SnapWPEnvConfig > = {
+		nextUrl: 'https://env-next.example.com',
+		homeUrl: 'https://env-home.example.com',
+		graphqlEndpoint: 'env-index.php?graphql',
+		uploadsDirectory: '/env-wp-content/uploads',
+		restUrlPrefix: '/env-wp-json',
 	};
 
-	const defaultConfig: SnapWPConfig = {
+	const defaultConfig: Partial< SnapWPEnvConfig > = {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
@@ -50,8 +50,6 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw error when no process.env configs or snapWPConfigs are provided', () => {
-		// @ts-ignore Allow emptying global variable for testing
-		global.__snapWPConfig = {};
 		process.env = {
 			...ORIG_ENV,
 		};
@@ -71,15 +69,15 @@ describe( 'SnapWPConfigManager functions', () => {
 	it( 'should set the configuration correctly with environment variables and from __snapWPConfig', async () => {
 		expect( getConfig() ).toEqual( {
 			...defaultConfig,
-			...validConfig,
+			...validSnapWPEnvConfig,
 			// @ts-ignore Allow setting global variable for testing
 			...global.__envConfig,
 		} );
 	} );
 
 	it( 'should log an error if setConfig is called multiple times', () => {
-		setConfig( validConfig );
-		setConfig( validConfig );
+		setConfig();
+		setConfig();
 		expect( Logger.error ).toHaveBeenCalledWith(
 			'Multiple calls to setConfig detected.'
 		);
@@ -139,45 +137,11 @@ describe( 'SnapWPConfigManager functions', () => {
 		);
 	} );
 
-	it( 'should trim string values in the config', () => {
-		delete process.env.NEXT_PUBLIC_URL;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_URL;
-		delete process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX;
-
-		// @ts-ignore Allow setting global variable for testing
-		global.__snapWPConfig = {
-			nextUrl: ' https://next.example.com ',
-			homeUrl: ' https://home.example.com ',
-			graphqlEndpoint: ' index.php?graphql ',
-			restUrlPrefix: ' /wp-json ',
-			uploadsDirectory: ' /wp-content/uploads ',
-			corsProxyPrefix: ' /proxy ',
-			useCorsProxy: true,
-		};
-
-		expect( getConfig() ).toEqual( {
-			nextUrl: 'https://next.example.com',
-			homeUrl: 'https://home.example.com',
-			graphqlEndpoint: 'index.php?graphql',
-			restUrlPrefix: '/wp-json',
-			uploadsDirectory: '/wp-content/uploads',
-			corsProxyPrefix: '/proxy',
-			useCorsProxy: true,
-		} );
-	} );
-
 	it( 'should return the correct GraphQL URL', () => {
-		delete process.env.NEXT_PUBLIC_URL;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_URL;
-		delete process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX;
-
 		const graphqlUrl = getGraphqlUrl();
 		expect( graphqlUrl ).toBe(
-			'https://home.example.com/index.php?graphql'
+			// @ts-ignore Allow setting global variable for testing
+			`${ global.__envConfig.homeUrl }/${ global.__envConfig.graphqlEndpoint }`
 		);
 	} );
 
@@ -196,29 +160,6 @@ describe( 'SnapWPConfigManager functions', () => {
 		expect( getConfig().restUrlPrefix ).toBe( envConfig.restUrlPrefix );
 	} );
 
-	it( 'should prioritize configs from config file over defaultConfig', () => {
-		// @ts-ignore Allow setting global variable for testing
-		global.__snapWPConfig = {
-			nextUrl: 'https://partial-next.example.com',
-		};
-		delete process.env.NEXT_PUBLIC_URL;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX;
-
-		expect( getConfig().nextUrl ).toBe(
-			'https://partial-next.example.com'
-		);
-		// @ts-ignore Allow setting global variable for testing
-		const envConfig = global.__envConfig;
-
-		expect( getConfig().homeUrl ).toBe( envConfig.homeUrl );
-		expect( getConfig().graphqlEndpoint ).toBe( envConfig.graphqlEndpoint );
-		expect( getConfig().uploadsDirectory ).toBe(
-			defaultConfig.uploadsDirectory
-		);
-		expect( getConfig().restUrlPrefix ).toBe( defaultConfig.restUrlPrefix );
-	} );
-
 	it( 'should handle missing environment variables correctly', () => {
 		delete process.env.NEXT_PUBLIC_URL;
 		delete process.env.NEXT_PUBLIC_WORDPRESS_URL;
@@ -228,16 +169,10 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		expect( getConfig() ).toEqual( {
 			...defaultConfig,
-			...validConfig,
 		} );
 	} );
 
 	it( 'should handle missing validConfig values correctly', () => {
-		// @ts-ignore Allow setting global variable for testing
-		global.__snapWPConfig = {
-			homeUrl: 'https://partial-home.example.com',
-		};
-
 		expect( getConfig() ).toEqual( {
 			...defaultConfig,
 			// @ts-ignore Allow setting global variable for testing

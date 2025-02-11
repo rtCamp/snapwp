@@ -3,7 +3,7 @@ import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
 import { BlockDefinitions } from '@/props';
 
-interface SnapWPEnvConfig {
+export interface SnapWPEnvConfig {
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
 	 */
@@ -17,23 +17,23 @@ interface SnapWPEnvConfig {
 	/**
 	 * The GraphQL endpoint. Defaults to `graphql`.
 	 */
-	graphqlEndpoint?: string;
+	graphqlEndpoint: string;
 	/**
 	 * Uploads directory. Defaults to `/wp-content/uploads`.
 	 */
-	uploadsDirectory?: string;
+	uploadsDirectory: string;
 	/**
 	 * REST URL prefix. Defaults to `/wp-json`.
 	 */
-	restUrlPrefix?: string;
+	restUrlPrefix: string;
 	/**
 	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
-	corsProxyPrefix?: string;
+	corsProxyPrefix: string;
 	/**
 	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
-	useCorsProxy?: boolean;
+	useCorsProxy: boolean;
 }
 
 export interface SnapWPConfig {
@@ -92,7 +92,7 @@ class SnapWPConfigManager {
 	/**
 	 * The configuration.
 	 */
-	static config: SnapWPConfig & Required< SnapWPEnvConfig >;
+	static config: SnapWPConfig & SnapWPEnvConfig;
 
 	/**
 	 * Flag to check if configs are set.
@@ -231,7 +231,7 @@ class SnapWPConfigManager {
 	 *
 	 * @return The resolved configuration.
 	 */
-	static getConfig(): Readonly< SnapWPConfig & Required< SnapWPEnvConfig > > {
+	static getConfig(): Readonly< SnapWPConfig & SnapWPEnvConfig > {
 		if ( ! SnapWPConfigManager.configsSet ) {
 			// @ts-ignore -- __snapWPConfig injected from WebPack
 			SnapWPConfigManager.setConfig( __snapWPConfig );
