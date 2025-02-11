@@ -59,7 +59,7 @@ jobs:
             echo "Publishing $package"
             location="$(npm query ".workspace#$package" | jq -r '.[0].location')"
             version="$(npm query ".workspace#$package" | jq -r '.[0].version')"
-            npm publish --dry-run --access public --workspace "$location" "$package"
+            npm publish --access public --workspace "$location" "$package"
             # Make a GitHub Release
             bash '${{ github.workspace }}/.github/scripts/release_content.sh' "${{ github.workspace }}/$location/CHANGELOG.md" "$version"
             gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
