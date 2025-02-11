@@ -43,36 +43,50 @@ export default function CoreButton( { attributes }: CoreButtonProps ) {
 		url,
 	} = attributes || {};
 
-	const TagName = tagName || 'a';
-	const isButtonTag = TagName === 'button';
-
-	// Use Link component for anchor tags.
-	const TagComponent = tagName === 'a' ? Link : TagName;
-
 	const classNames = cn( cssClassName );
 	const styleObject = getStylesFromAttributes( { style } );
 
-	const type =
-		( buttonType as ButtonHTMLAttributes< HTMLButtonElement >[ 'type' ] ) ||
-		undefined;
-
 	const { homeUrl, nextUrl } = getConfig();
+	const commonProps = {
+		className: linkClassName ?? undefined,
+		style: styleObject,
+		title: title ?? undefined,
+	};
 
-	const href = replaceHostUrl( url || '', homeUrl, nextUrl );
+	if ( tagName === 'button' ) {
+		return (
+			<div className={ classNames }>
+				<button
+					type={
+						buttonType as ButtonHTMLAttributes< HTMLButtonElement >[ 'type' ]
+					}
+					{ ...commonProps }
+				>
+					{ !! text && <Parse html={ text } /> }
+				</button>
+			</div>
+		);
+	}
+
+	if ( url ) {
+		const href = replaceHostUrl( url, homeUrl, nextUrl );
+		return (
+			<div className={ classNames }>
+				<Link
+					href={ href }
+					target={ linkTarget ?? undefined }
+					rel={ rel ?? undefined }
+					{ ...commonProps }
+				>
+					{ !! text && <Parse html={ text } /> }
+				</Link>
+			</div>
+		);
+	}
 
 	return (
 		<div className={ classNames }>
-			<TagComponent
-				{ ...( isButtonTag ? { type } : {} ) }
-				href={ isButtonTag ? '' : href }
-				target={ isButtonTag ? undefined : linkTarget ?? undefined }
-				rel={ isButtonTag ? undefined : rel ?? undefined }
-				className={ linkClassName ?? undefined }
-				style={ styleObject }
-				title={ title ?? undefined }
-			>
-				{ !! text && <Parse html={ text } /> }
-			</TagComponent>
+			<a { ...commonProps }>{ !! text && <Parse html={ text } /> }</a>
 		</div>
 	);
 }
