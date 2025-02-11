@@ -3,11 +3,10 @@ import { getStylesFromAttributes } from '@snapwp/core';
 import { BlockData } from '..';
 import { Parse } from '@snapwp/next';
 
-export interface CoreQuoteAttributes {
+export interface CoreQuoteAttributes extends Record< string, unknown > {
 	citation?: string;
 	cssClassName?: string;
 	style?: string;
-	value: string;
 }
 
 export interface CoreQuoteProps

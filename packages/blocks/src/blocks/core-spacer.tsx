@@ -7,8 +7,8 @@ import {
 } from '@snapwp/core';
 import { BlockData } from '..';
 
-export interface CoreSpacerAttributes {
-	height: string;
+export interface CoreSpacerAttributes extends Record< string, unknown > {
+	height?: string;
 	style?: string;
 	width?: string;
 }

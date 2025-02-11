@@ -3,10 +3,10 @@ import { getStylesFromAttributes } from '@snapwp/core';
 import { BlockData } from '..';
 import { Parse } from '@snapwp/next';
 
-export interface CoreHeadingAttributes {
+export interface CoreHeadingAttributes extends Record< string, unknown > {
 	content?: string;
 	cssClassName?: string;
-	level: number;
+	level?: number;
 	style?: any;
 }
 

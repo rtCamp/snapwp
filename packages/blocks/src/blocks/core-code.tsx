@@ -3,7 +3,7 @@ import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-export interface CoreCodeAttributes {
+export interface CoreCodeAttributes extends Record< string, unknown > {
 	style?: string;
 	content?: string;
 	cssClassName?: string;

@@ -7,7 +7,7 @@ import {
 import { Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-export interface CorePullquoteAttributes {
+export interface CorePullquoteAttributes extends Record< string, unknown > {
 	citation?: string;
 	style?: string;
 	textAlign?: string;

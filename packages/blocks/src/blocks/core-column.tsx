@@ -2,7 +2,7 @@ import React, { PropsWithChildren } from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
 import { BlockData } from '..';
 
-export interface CoreColumnAttributes {
+export interface CoreColumnAttributes extends Record< string, unknown > {
 	style?: string;
 	width?: string;
 	cssClassName?: string;

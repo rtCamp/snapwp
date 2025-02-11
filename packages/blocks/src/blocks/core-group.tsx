@@ -6,9 +6,9 @@ import {
 } from '@snapwp/core';
 import { BlockData } from '..';
 
-export interface CoreGroupAttributes {
+export interface CoreGroupAttributes extends Record< string, unknown > {
 	style?: string;
-	tagName: string;
+	tagName?: string;
 }
 
 export interface CoreGroupProps

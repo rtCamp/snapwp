@@ -2,9 +2,9 @@ import React, { PropsWithChildren } from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
 import { BlockData } from '..';
 
-export interface CoreListAttributes {
+export interface CoreListAttributes extends Record< string, unknown > {
 	cssClassName?: string;
-	ordered: boolean;
+	ordered?: boolean;
 	reversed?: boolean;
 	start?: number;
 	style?: string;

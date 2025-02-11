@@ -12,7 +12,7 @@ import {
 import { BlockData } from '..';
 import { Image, Parse } from '@snapwp/next';
 
-export interface CoreCoverAttributes {
+export interface CoreCoverAttributes extends Record< string, unknown > {
 	alt?: string;
 	backgroundType?: string;
 	contentPosition?: string;
@@ -35,7 +35,7 @@ export interface CoreCoverAttributes {
 	useFeaturedImage?: boolean;
 }
 
-interface CoreCoverProps
+export interface CoreCoverProps
 	extends PropsWithChildren< Omit< BlockData, 'type' > > {
 	attributes?: CoreCoverAttributes;
 	connectedMediaItem?: ConnectedMediaItem;

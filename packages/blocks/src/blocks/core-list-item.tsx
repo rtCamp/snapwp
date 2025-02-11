@@ -7,7 +7,7 @@ import {
 import { Parse } from '@snapwp/next';
 import { BlockData } from '..';
 
-export interface CoreListItemAttributes {
+export interface CoreListItemAttributes extends Record< string, unknown > {
 	content?: string;
 	style?: string;
 }
