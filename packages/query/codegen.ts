@@ -1,11 +1,9 @@
 import * as dotenv from 'dotenv';
-import type { CodegenConfig } from '@graphql-codegen/cli';
-import { withCodegenConfig } from '@snapwp/codegen-config';
+import { baseConfig } from '@snapwp/codegen-config';
 
 dotenv.config( { path: '../../.env' } );
 
-const config: Partial< CodegenConfig > = {
-	documents: './src/**/*.graphql',
-};
+const config = baseConfig();
+config.documents = './src/**/*.graphql';
 
-export default withCodegenConfig( config );
+export default config;

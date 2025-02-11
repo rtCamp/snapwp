@@ -35,20 +35,4 @@ const baseConfig = (): CodegenConfig => {
 	};
 };
 
-/**
- * Extend the base configuration with the provided configuration.
- *
- * @param config The configuration to extend the base configuration with.
- *
- * @return The extended configuration.
- */
-const withCodegenConfig = (
-	config: Partial< CodegenConfig >
-): CodegenConfig => {
-	return {
-		...baseConfig(),
-		...config,
-	};
-};
-
-export { withCodegenConfig };
+export { baseConfig };
