@@ -1,10 +1,13 @@
 {
-  "$schema": "https://unpkg.com/@changesets/config@1.6.2/schema.json",
-  "changelog": ["@changesets/changelog-github", { "repo": "rtcamp/snapwp" }],
-  "commit": false,
-  "linked": [],
-  "access": "restricted",
-  "baseBranch": "develop",
-  "updateInternalDependencies": "patch",
-  "ignore": []
+	"$schema": "https://unpkg.com/@changesets/config@1.6.2/schema.json",
+	"changelog": [
+		"@changesets/changelog-github",
+		{ "repo": "rtcamp/snapwp" }
+	],
+	"commit": false,
+	"linked": [],
+	"access": "restricted",
+	"baseBranch": "develop",
+	"updateInternalDependencies": "patch",
+	"ignore": []
 }
