@@ -24,6 +24,11 @@ export default function parseQueryResult(
 		} );
 	}
 
+	// Check if globalStyles is null.
+	if ( queryData.data.globalStyles === null ) {
+		throw new GlobalStylesParseError( `Error fetching global styles.` );
+	}
+
 	if ( ! queryData.data && queryData.errors?.length ) {
 		throw new GlobalStylesParseError( `Error fetching global styles.` );
 	}
