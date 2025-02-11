@@ -1,13 +1,13 @@
-import defaultBlockDefinitions from '@/blocks';
+import defaultBlockDefinitions, { BlockDefinitions } from '@/blocks';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
 
 export interface BlockData {
-	type: keyof typeof defaultBlockDefinitions;
+	type: string;
 	cssClassNames?: Array< string | null > | null;
 	clientId?: string | null;
 	parentClientId?: string | null;
 	renderedHtml?: string | null;
-	attributes?: Record< any, any >;
+	attributes?: Record< string, unknown >;
 }
 
 export type BlockTreeNode = Omit< BlockData, 'clientId' & 'parentClientId' > & {
@@ -27,9 +27,7 @@ export default class BlockManager {
 	 * Update block definitions to be used while rendering blocks.
 	 * @param blockDefinitions - rendering implementaion for blocks.
 	 */
-	public static addBlockDefinitions(
-		blockDefinitions: typeof defaultBlockDefinitions
-	) {
+	public static addBlockDefinitions( blockDefinitions: BlockDefinitions ) {
 		BlockManager.blockDefinitions = {
 			...BlockManager.blockDefinitions,
 			...blockDefinitions,
