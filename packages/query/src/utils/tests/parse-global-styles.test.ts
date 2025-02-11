@@ -48,7 +48,7 @@ describe( 'parseQueryResult', () => {
 						'@font-face { font-family: "OtherFont"; }',
 				},
 			},
-			errors: [ { message: 'Sample error message' } ], // @todo : Fix this is not taking strings and hence inaccurate assertion below.
+			errors: [ { message: 'Sample error message' } ],
 			loading: false,
 			networkStatus: 7,
 		};
@@ -56,7 +56,8 @@ describe( 'parseQueryResult', () => {
 		const result = parseQueryResult( queryData );
 
 		expect( Logger.error ).toHaveBeenCalledWith(
-			'Error fetching global styles: [object Object]' // @todo : Fix
+			'Error fetching global styles: Sample error message',
+			{ message: 'Sample error message' }
 		);
 		expect( result ).toEqual( {
 			customCss: 'body { color: blue; }',
@@ -77,8 +78,8 @@ describe( 'parseQueryResult', () => {
 			GlobalStylesParseError
 		);
 		expect( Logger.error ).toHaveBeenCalledWith(
-			// 'Error fetching global styles: Critical error occurred'
-			'Error fetching global styles: [object Object]'
+			'Error fetching global styles: Critical error occurred',
+			{ message: 'Critical error occurred' }
 		);
 	} );
 

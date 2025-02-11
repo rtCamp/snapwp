@@ -20,7 +20,10 @@ export default function parseQueryResult(
 ): GlobalHeadProps {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
-			Logger.error( `Error fetching global styles: ${ error }` );
+			Logger.error(
+				`Error fetching global styles: ${ error?.message }`,
+				error
+			);
 		} );
 	}
 
