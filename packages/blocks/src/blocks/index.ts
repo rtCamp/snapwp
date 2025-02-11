@@ -1,3 +1,4 @@
+import { BlockData } from '..';
 import CoreAudio from './core-audio';
 import CoreButton from './core-button';
 import CoreButtons from './core-buttons';
@@ -29,7 +30,11 @@ import CoreVerse from './core-verse';
 import CoreVideo from './core-video';
 import Default from './default';
 
-const blocks = {
+export type BlockDefinitions = {
+	[ key: string ]: React.FC< BlockData >;
+};
+
+const blocks: BlockDefinitions = {
 	CoreAudio,
 	CoreButton,
 	CoreButtons,
@@ -62,37 +67,41 @@ const blocks = {
 	default: Default,
 };
 
-export type BlockDefinitions = typeof blocks;
-
 export default blocks;
 
-export * from './core-audio';
-export * from './core-button';
-export * from './core-buttons';
-export * from './core-code';
-export * from './core-column';
-export * from './core-columns';
-export * from './core-cover';
-export * from './core-details';
-export * from './core-file';
-export * from './core-freeform';
-export * from './core-gallery';
-export * from './core-group';
-export * from './core-heading';
-export * from './core-html';
-export * from './core-image';
-export * from './core-list';
-export * from './core-list-item';
-export * from './core-media-text';
-export * from './core-paragraph';
-export * from './core-pattern';
-export * from './core-post-content';
-export * from './core-preformatted';
-export * from './core-pullquote';
-export * from './core-quote';
-export * from './core-separator';
-export * from './core-spacer';
-export * from './core-template-part';
-export * from './core-verse';
-export * from './core-video';
-export * from './default';
+export { CoreAudioAttributes, CoreAudioProps } from './core-audio';
+export { CoreButtonAttributes, CoreButtonProps } from './core-button';
+export { CoreButtonsAttributes, CoreButtonsProps } from './core-buttons';
+export { CoreCodeAttributes, CoreCodeProps } from './core-code';
+export { CoreColumnAttributes, CoreColumnProps } from './core-column';
+export { CoreColumnsAttributes, CoreColumnsProps } from './core-columns';
+export { CoreCoverAttributes, CoreCoverProps } from './core-cover';
+export { CoreDetailsAttributes, CoreDetailsProps } from './core-details';
+export { CoreFileAttributes, CoreFileProps } from './core-file';
+export { CoreFreeformProps } from './core-freeform';
+export { CoreGalleryAttributes, CoreGalleryProps } from './core-gallery';
+export { CoreGroupAttributes, CoreGroupProps } from './core-group';
+export { CoreHeadingAttributes, CoreHeadingProps } from './core-heading';
+export { CoreHtmlProps } from './core-html';
+export { CoreImageAttributes, CoreImageProps } from './core-image';
+export { CoreListAttributes, CoreListProps } from './core-list';
+export { CoreListItemAttributes, CoreListItemProps } from './core-list-item';
+export { CoreMediaTextAttributes, CoreMediaTextProps } from './core-media-text';
+export { CoreParagraphAttributes, CoreParagraphProps } from './core-paragraph';
+export { CorePatternProps } from './core-pattern';
+export { CorePostContentProps } from './core-post-content';
+export {
+	CorePreformattedAttributes,
+	CorePreformattedProps,
+} from './core-preformatted';
+export { CorePullquoteAttributes, CorePullquoteProps } from './core-pullquote';
+export { CoreQuoteAttributes, CoreQuoteProps } from './core-quote';
+export { CoreSeparatorProps } from './core-separator';
+export { CoreSpacerAttributes, CoreSpacerProps } from './core-spacer';
+export {
+	CoreTemplatePartAttributes,
+	CoreTemplatePartProps,
+} from './core-template-part';
+export { CoreVerseAttributes, CoreVerseProps } from './core-verse';
+export { CoreVideoAttributes, CoreVideoProps } from './core-video';
+export { DefaultProps } from './default';
