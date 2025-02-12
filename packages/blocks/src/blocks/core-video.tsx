@@ -17,15 +17,15 @@ interface TrackProps {
 export interface CoreVideoAttributes extends Record< string, unknown > {
 	autoplay?: boolean;
 	caption?: string;
-	controls?: boolean;
+	controls: boolean;
 	loop?: boolean;
 	muted?: boolean;
 	playsInline?: boolean;
 	poster?: string;
 	src?: string;
-	style?: any;
-	tracks?: Array< any >;
-	videoPreload?: string;
+	style?: string;
+	tracks: Array< any >;
+	videoPreload: string;
 }
 
 export interface CoreVideoProps extends Omit< BlockData, 'type' > {
