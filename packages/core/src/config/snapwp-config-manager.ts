@@ -1,60 +1,69 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
+import { BlockDefinitions } from '@/props';
 
-export interface SnapWPConfig {
+export interface SnapWPEnv {
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
 	 */
-	nextUrl?: string;
+	nextUrl: string;
 	/**
 	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_URL`.
 	 *
 	 * TODO: Update variable name from homeUrl to siteUrl. ref: https://github.com/rtCamp/headless/pull/272#discussion_r1907601796
 	 */
-	homeUrl?: string;
+	homeUrl: string;
 	/**
 	 * The GraphQL endpoint. Defaults to `graphql`.
 	 */
-	graphqlEndpoint?: string;
+	graphqlEndpoint: string;
 	/**
 	 * Uploads directory. Defaults to `/wp-content/uploads`.
 	 */
-	uploadsDirectory?: string;
+	uploadsDirectory: string;
 	/**
 	 * REST URL prefix. Defaults to `/wp-json`.
 	 */
-	restUrlPrefix?: string;
+	restUrlPrefix: string;
 	/**
 	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
-	corsProxyPrefix?: string;
+	corsProxyPrefix: string;
 	/**
 	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
-	useCorsProxy?: boolean;
+	useCorsProxy: boolean;
+}
+
+export interface SnapWPConfig {
+	/**
+	 * Block definitions for the editor.
+	 */
+	blockDefinitions?: BlockDefinitions;
 }
 
 /**
  * Schema used to validate the configuration.
  */
-type SnapWPConfigSchema = {
-	[ K in keyof SnapWPConfig ]: {
+type ConfigSchema< T > = {
+	[ K in keyof T ]: {
 		type: string;
 		required: boolean;
-		validate?: ( value: SnapWPConfig[ K ] ) => void;
+		validate?: ( value: T[ K ] ) => void;
 	};
 };
 
 /**
  * Default configuration.
  */
-const defaultConfig: SnapWPConfig = {
+const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
-	useCorsProxy: false,
 	corsProxyPrefix: '/proxy',
+	// eslint-disable-next-line n/no-process-env
+	useCorsProxy: process.env.NODE_ENV === 'development',
 };
 
 /**
@@ -64,45 +73,17 @@ const defaultConfig: SnapWPConfig = {
  *
  * @return The configuration object.
  */
-const envConfig = (): SnapWPConfig => ( {
+const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env */
 	nextUrl: process.env.NEXT_PUBLIC_URL,
 	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
 	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
 	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
 	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
+	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
+	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	/* eslint-enable n/no-process-env */
 } );
-
-/**
- * Normalizes the configuration.
- *
- * Merges the configs using the following hierarchy:
- * 1. Environment variables.
- * 2. Config file.
- * 3. Default values.
- *
- * @param cfg The configuration to normalize.
- * @return The normalized configuration.
- */
-function normalizeConfig( cfg: SnapWPConfig ): SnapWPConfig {
-	// Removing empty values.
-	( Object.keys( cfg ) as Array< keyof SnapWPConfig > ).forEach(
-		( key: keyof SnapWPConfig ) => {
-			// Trim the value if it is a string.
-			if ( typeof cfg[ key ] === 'string' ) {
-				//@ts-ignore
-				cfg[ key ] = cfg[ key ]?.trim();
-			}
-
-			if ( cfg[ key ] === undefined || cfg[ key ] === '' ) {
-				delete cfg[ key ];
-			}
-		}
-	);
-
-	return cfg;
-}
 
 /**
  * Singleton class for managing SnapWPConfig.
@@ -111,7 +92,7 @@ class SnapWPConfigManager {
 	/**
 	 * The configuration.
 	 */
-	static config: SnapWPConfig;
+	static config: SnapWPConfig & SnapWPEnv;
 
 	/**
 	 * Flag to check if configs are set.
@@ -121,7 +102,17 @@ class SnapWPConfigManager {
 	/**
 	 * The schema used to validate the configuration.
 	 */
-	static schema: SnapWPConfigSchema = {
+	static snapWPConfigSchema: ConfigSchema< SnapWPConfig > = {
+		blockDefinitions: {
+			type: 'object',
+			required: false,
+		},
+	};
+
+	/**
+	 * The schema used to validate the configuration.
+	 */
+	static snapWPConfigEnvSchema: ConfigSchema< SnapWPEnv > = {
 		nextUrl: {
 			type: 'string',
 			required: true,
@@ -192,6 +183,47 @@ class SnapWPConfigManager {
 				}
 			},
 		},
+		corsProxyPrefix: {
+			type: 'string',
+			required: false,
+			/**
+			 * Validate the CORS proxy prefix.
+			 *
+			 * @param value The value to validate.
+			 *
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate: ( value ) => {
+				if ( value && ! value.startsWith( '/' ) ) {
+					throw new Error(
+						'`corsProxyPrefix` should start with a forward slash.'
+					);
+				}
+			},
+		},
+		useCorsProxy: {
+			type: 'boolean',
+			required: false,
+		},
+	};
+
+	/**
+	 * Normalizes the configuration.
+	 *
+	 * @param cfg The configuration to normalize.
+	 * @return The normalized configuration.
+	 */
+	static normalizeConfig = < T >( cfg: Partial< T > ) => {
+		// Removing empty values.
+		( Object.keys( cfg ) as Array< keyof T > ).forEach(
+			( key: keyof T ) => {
+				if ( cfg[ key ] === undefined ) {
+					delete cfg[ key ];
+				}
+			}
+		);
+
+		return cfg;
 	};
 
 	/**
@@ -199,7 +231,7 @@ class SnapWPConfigManager {
 	 *
 	 * @return The resolved configuration.
 	 */
-	static getConfig(): Readonly< Required< SnapWPConfig > > {
+	static getConfig(): Readonly< SnapWPConfig & SnapWPEnv > {
 		if ( ! SnapWPConfigManager.configsSet ) {
 			// @ts-ignore -- __snapWPConfig injected from WebPack
 			SnapWPConfigManager.setConfig( __snapWPConfig );
@@ -208,30 +240,41 @@ class SnapWPConfigManager {
 		// setConfig validates the config, so we can safely assert that it is a valid configuration.
 		return {
 			...SnapWPConfigManager.config,
-		} as Required< SnapWPConfig >;
+		};
 	}
 
 	/**
 	 * Set the configuration.
 	 *
+	 * Merges the configs:
+	 * 1. Environment variables.
+	 * 2. Config file.
+	 * 3. Default values.
+	 *
 	 * @param cfg The configuration object.
 	 */
-	static setConfig( cfg: SnapWPConfig ): void {
+	static setConfig( cfg?: Partial< SnapWPConfig > ): void {
 		if ( SnapWPConfigManager.configsSet ) {
 			Logger.error( 'Multiple calls to setConfig detected.' );
 			return;
 		}
 
-		// Hierarchy is valueFromEnv -> valueFromConfig -> defaultValue where valueFromEnv is the highest priority.
-		const mergedConfig: SnapWPConfig = {
-			...defaultConfig,
-			...normalizeConfig( cfg ),
-			...normalizeConfig( envConfig() ),
-		};
+		const snapWPEnv = SnapWPConfigManager.validateConfig< SnapWPEnv >(
+			SnapWPConfigManager.normalizeConfig< SnapWPEnv >( envConfig() ),
+			SnapWPConfigManager.snapWPConfigEnvSchema
+		);
 
-		// Validate and store resolved configuration.
-		SnapWPConfigManager.config =
-			SnapWPConfigManager.validateConfig( mergedConfig );
+		const snapWPConfig = SnapWPConfigManager.validateConfig< SnapWPConfig >(
+			SnapWPConfigManager.normalizeConfig< SnapWPConfig >( cfg || {} ),
+			SnapWPConfigManager.snapWPConfigSchema
+		);
+
+		SnapWPConfigManager.config = {
+			...defaultConfig,
+			...snapWPEnv,
+			...snapWPConfig,
+		} as SnapWPConfig & Required< SnapWPEnv >;
+
 		SnapWPConfigManager.configsSet = true;
 	}
 
@@ -239,10 +282,15 @@ class SnapWPConfigManager {
 	 * Validate and resolve the configuration.
 	 *
 	 * @param config The configuration to validate.
+	 * @param schema The schema to validate the configuration against.
+	 *
 	 * @return The resolved configuration.
 	 * @throws {Error} If the configuration is invalid.
 	 */
-	static validateConfig( config: SnapWPConfig ): Required< SnapWPConfig > {
+	static validateConfig = < T >(
+		config: Partial< T >,
+		schema: ConfigSchema< T >
+	): T => {
 		if ( typeof config !== 'object' ) {
 			throw new Error( 'Configs should be an object.' );
 		}
@@ -254,21 +302,25 @@ class SnapWPConfigManager {
 		 *
 		 * @throws {Error} If the property is invalid.
 		 */
-		const validateProperty = ( key: keyof SnapWPConfig ) => {
-			const prop = SnapWPConfigManager.schema[ key ];
+		const validateProperty = ( key: keyof T ) => {
+			const prop = schema[ key ];
 			const value = config[ key ];
 
 			if ( ! prop ) {
-				throw new Error( `Unknown property: ${ key }.` );
+				throw new Error( `Unknown property: ${ String( key ) }.` );
 			}
 
 			if ( prop.required && ! value ) {
-				throw new Error( `Missing required property: ${ key }.` );
+				throw new Error(
+					`Missing required property: ${ String( key ) }.`
+				);
 			}
 
 			if ( value && prop.type && typeof value !== prop.type ) {
 				throw new Error(
-					`Property ${ key } should be of type ${ prop.type }.`
+					`Property ${ String( key ) } should be of type ${
+						prop.type
+					}.`
 				);
 			}
 
@@ -279,17 +331,15 @@ class SnapWPConfigManager {
 		};
 
 		// Validate each property.
-		(
-			Object.keys( SnapWPConfigManager.schema ) as Array<
-				keyof SnapWPConfig
-			>
-		 ).forEach( ( key: keyof SnapWPConfig ) => {
-			validateProperty( key );
-		} );
+		( Object.keys( config ) as Array< keyof T > ).forEach(
+			( key: keyof T ) => {
+				validateProperty( key );
+			}
+		);
 
 		// If all properties are valid, return the resolved configuration.
-		return config as Required< SnapWPConfig >;
-	}
+		return config as T;
+	};
 
 	/**
 	 * Get the GraphQL URL.
