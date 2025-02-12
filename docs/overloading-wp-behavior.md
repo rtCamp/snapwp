@@ -147,7 +147,116 @@ export default function Page() {
 ```
 
 ---
+## Overloading React Parser Options
 
+SnapWP allows you to pass custom options  to [**react-parser**](../packages/next/src/react-parser/index.tsx) . This is useful when you want to overload default options.
+
+### 1. Creating a Custom Component with options
+
+Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
+
+```tsx
+import {
+	getImageSizeFromAttributes,
+	getStyleObjectFromString,
+} from '@snapwp/core';
+import { Image } from '@snapwp/next';
+import {
+	domToReact,
+	Element,
+	type DOMNode,
+	type HTMLReactParserOptions,
+} from 'html-react-parser';
+
+/**
+ *  Using typescript type guard to check if a DOMNode is an Element.
+ * Ref : https://github.com/remarkablemark/html-react-parser/issues/221#issuecomment-784073240
+ * @param domNode The DOM element
+ * @return parser options
+ */
+const isElement = ( domNode: DOMNode ): domNode is Element => {
+	const isTag = domNode.type === 'tag';
+	const hasAttributes = ( domNode as Element ).attribs !== undefined;
+
+	return isTag && hasAttributes;
+};
+
+export const customParserOptions: HTMLReactParserOptions = {
+	replace: ( domNode ) => {
+		if ( isElement( domNode ) ) {
+			const { attribs, children, name, type } = domNode;
+			const { class: className, style, ...attributes } = attribs;
+			const { href } = attribs;
+			const styleObject = style
+				? getStyleObjectFromString( style )
+				: undefined;
+          
+				return (
+					<Image
+						{ ...attributes }
+						src={ attribs.src }
+						alt={ attribs.alt || '' }
+						height={ height }
+						width={ width }
+						className={ className }
+						fill={ shouldFill }
+						style={ styleObject }
+						image={ imageAttributes }
+                        //overload custom id
+						id="overloading id"
+					/>
+				);
+			}
+
+			return undefined;
+		}
+
+		return undefined;
+	},
+};
+```
+
+### 2. Use react-parser as fallback 
+
+Make any default component null to use react-parser as fallback component
+
+```tsx
+import { TemplateRenderer } from '@snapwp/next';
+import { EditorBlocksRenderer } from '@snapwp/blocks';
+
+const blockDefinitions = {
+	CoreImage: null, // To use react parser.
+};
+
+export default function Page() {
+	return (
+		<TemplateRenderer>
+			{ ( editorBlocks ) => (
+				<EditorBlocksRenderer
+					editorBlocks={ editorBlocks }
+					blockDefinitions={ blockDefinitions }
+				/>
+			) }
+		</TemplateRenderer>
+	);
+}
+```
+### 3. Pass customParserOptions  to overload
+
+```tsx
+import type { SnapWPConfig } from '@snapwp/core/config';
+import { customParserOptions } from './src/MyCustomReactParser';
+
+const config: SnapWPConfig = {
+
+    /* passing custom options to overload default react-parser options  */
+    parserOptions :customParserOptions
+};
+
+export default config;
+```
+
+---
 ## Creating Custom Frontend Routes
 
 This tutorial explains how to create custom frontend routes in your SnapWP-powered Next.js application using the App Router.

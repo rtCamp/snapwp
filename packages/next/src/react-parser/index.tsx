@@ -11,8 +11,9 @@ import {
 } from '@snapwp/core';
 import Image from '@/components/image';
 import Link from '@/components/link';
+import { getConfig } from '@snapwp/core/config';
 
-const options: HTMLReactParserOptions = {
+const defaultOptions: HTMLReactParserOptions = {
 	/**
 	 * Replaces anchor tags with Next.js Link components.
 	 *
@@ -36,7 +37,7 @@ const options: HTMLReactParserOptions = {
 						style={ styleObject }
 						className={ className }
 					>
-						{ domToReact( children as DOMNode[], options ) }
+						{ domToReact( children as DOMNode[], defaultOptions ) }
 					</Link>
 				);
 			} else if ( type === 'tag' && name === 'img' ) {
@@ -97,5 +98,12 @@ const options: HTMLReactParserOptions = {
  * @return The rendered React components.
  */
 export default function Parse( { html }: { html: string } ) {
+	const { parserOptions } = getConfig();
+
+	const options = {
+		...defaultOptions,
+		...parserOptions,
+	};
+
 	return <>{ Parser( html, options ) }</>;
 }
