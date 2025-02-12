@@ -13,6 +13,11 @@ const baseConfig = (): CodegenConfig => {
 			'src/__generated/': {
 				preset: 'client',
 				plugins: [],
+				config: {
+					enumsAsTypes: true,
+					skipTypename: true,
+					useTypeImports: true,
+				},
 			},
 		},
 		// Use the schema file if it's set by CI.
