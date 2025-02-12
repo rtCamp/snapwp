@@ -78,7 +78,11 @@
 		"ts-jest": "^29.2.5",
 		"tsc-watch": "^6.3.0",
 		"typescript": ">=4.3.5 <5.4.0",
-		"resolve-tspaths": "^0.8.23"
+		"resolve-tspaths": "^0.8.23",
+		"@wordpress/eslint-plugin": "^19.2.0",
+		"eslint-plugin-import": "^2.29.1",
+		"eslint-import-resolver-typescript": "^3.6.1",
+		"eslint-plugin-jsdoc": "^48.9.2"
 	},
 	"dependencies": {
 		"react": "^19.0.0",
