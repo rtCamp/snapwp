@@ -26,14 +26,12 @@ export default function EditorBlocksRenderer( {
 
 	// eslint-disable-next-line jsdoc/require-jsdoc
 	const renderNode = ( node: BlockTreeNode ) => {
-		const props: Record< any, any > = {
+		const props = {
 			key: node.clientId,
 			...node,
+			renderer: undefined,
+			children: undefined,
 		};
-
-		// Removing renderer and children from props. Renderer should not be passed to the component.
-		delete props.renderer;
-		delete props.children;
 
 		return (
 			<node.renderer { ...props }>
