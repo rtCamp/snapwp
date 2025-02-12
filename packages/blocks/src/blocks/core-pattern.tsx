@@ -1,8 +1,7 @@
-import { BlockData } from '..';
+import { BlockProps } from '..';
 import React, { PropsWithChildren } from 'react';
 
-export interface CorePatternProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {}
+export interface CorePatternProps extends PropsWithChildren< BlockProps > {}
 
 /**
  * Renders the core/pattern block.

@@ -4,15 +4,14 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreGalleryAttributes extends Record< string, unknown > {
 	caption?: string;
 	style?: string;
 }
 
-export interface CoreGalleryProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreGalleryProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreGalleryAttributes;
 }
 

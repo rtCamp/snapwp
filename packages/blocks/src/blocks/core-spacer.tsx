@@ -5,7 +5,7 @@ import {
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreSpacerAttributes extends Record< string, unknown > {
 	height: string;
@@ -13,7 +13,7 @@ export interface CoreSpacerAttributes extends Record< string, unknown > {
 	width?: string;
 }
 
-export interface CoreSpacerProps extends Omit< BlockData, 'type' > {
+export interface CoreSpacerProps extends BlockProps {
 	attributes?: CoreSpacerAttributes;
 }
 

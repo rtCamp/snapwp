@@ -1,14 +1,13 @@
 import React, { PropsWithChildren } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 import { JSX } from 'react/jsx-dev-runtime';
 
 export interface CoreTemplatePartAttributes extends Record< string, unknown > {
 	templatePartTagName?: string;
 }
 
-export interface CoreTemplatePartProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreTemplatePartProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreTemplatePartAttributes;
 }
 

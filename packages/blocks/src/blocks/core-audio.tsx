@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreAudioAttributes extends Record< string, unknown > {
 	autoplay?: boolean;
@@ -15,7 +15,7 @@ export interface CoreAudioAttributes extends Record< string, unknown > {
 	style?: string;
 }
 
-export interface CoreAudioProps extends Omit< BlockData, 'type' > {
+export interface CoreAudioProps extends BlockProps {
 	attributes?: CoreAudioAttributes;
 }
 

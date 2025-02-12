@@ -1,6 +1,6 @@
 import React, { type JSX } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 import { Parse } from '@snapwp/next';
 
 export interface CoreHeadingAttributes extends Record< string, unknown > {
@@ -10,7 +10,7 @@ export interface CoreHeadingAttributes extends Record< string, unknown > {
 	style?: string;
 }
 
-export interface CoreHeadingProps extends Omit< BlockData, 'type' > {
+export interface CoreHeadingProps extends BlockProps {
 	attributes?: CoreHeadingAttributes;
 }
 

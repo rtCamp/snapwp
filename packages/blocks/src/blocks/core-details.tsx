@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreDetailsAttributes extends Record< string, unknown > {
 	style?: string;
@@ -12,8 +12,7 @@ export interface CoreDetailsAttributes extends Record< string, unknown > {
 	summary?: string;
 }
 
-export interface CoreDetailsProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreDetailsProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreDetailsAttributes;
 }
 

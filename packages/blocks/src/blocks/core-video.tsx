@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 interface TrackProps {
 	src: string;
@@ -28,7 +28,7 @@ export interface CoreVideoAttributes extends Record< string, unknown > {
 	videoPreload: string;
 }
 
-export interface CoreVideoProps extends Omit< BlockData, 'type' > {
+export interface CoreVideoProps extends BlockProps {
 	attributes?: CoreVideoAttributes;
 }
 
@@ -61,7 +61,7 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
 
 /**
  * Renders the core/video block.
-
+ 
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.

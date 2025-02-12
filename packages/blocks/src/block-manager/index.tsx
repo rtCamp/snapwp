@@ -16,6 +16,10 @@ export interface BlockData<
 	attributes?: T;
 }
 
+export type BlockProps<
+	T extends Record< string, unknown > = Record< string, unknown >,
+> = Omit< BlockData< T >, 'type' >;
+
 export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
 	TBlockProps,
 	'parentClientId'

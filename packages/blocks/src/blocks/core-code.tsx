@@ -1,7 +1,7 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreCodeAttributes extends Record< string, unknown > {
 	style?: string;
@@ -9,7 +9,7 @@ export interface CoreCodeAttributes extends Record< string, unknown > {
 	cssClassName?: string;
 }
 
-export interface CoreCodeProps extends Omit< BlockData, 'type' > {
+export interface CoreCodeProps extends BlockProps {
 	attributes?: CoreCodeAttributes;
 }
 

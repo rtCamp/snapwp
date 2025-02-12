@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 import { Parse } from '@snapwp/next';
 
 export interface CoreQuoteAttributes extends Record< string, unknown > {
@@ -9,8 +9,7 @@ export interface CoreQuoteAttributes extends Record< string, unknown > {
 	style?: string;
 }
 
-export interface CoreQuoteProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreQuoteProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreQuoteAttributes;
 }
 

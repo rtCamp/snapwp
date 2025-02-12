@@ -5,15 +5,14 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreListItemAttributes extends Record< string, unknown > {
 	content?: string;
 	style?: string;
 }
 
-export interface CoreListItemProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreListItemProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreListItemAttributes;
 }
 

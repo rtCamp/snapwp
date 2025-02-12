@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CorePullquoteAttributes extends Record< string, unknown > {
 	citation?: string;
@@ -14,7 +14,7 @@ export interface CorePullquoteAttributes extends Record< string, unknown > {
 	pullquoteValue?: string;
 }
 
-export interface CorePullquoteProps extends Omit< BlockData, 'type' > {
+export interface CorePullquoteProps extends BlockProps {
 	attributes?: CorePullquoteAttributes;
 }
 

@@ -9,7 +9,7 @@ import {
 	getColorClassName,
 	cn,
 } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 import { Image, Parse } from '@snapwp/next';
 
 export interface CoreCoverAttributes extends Record< string, unknown > {
@@ -35,8 +35,7 @@ export interface CoreCoverAttributes extends Record< string, unknown > {
 	useFeaturedImage?: boolean;
 }
 
-export interface CoreCoverProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreCoverProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreCoverAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	mediaDetails?: MediaDetails;

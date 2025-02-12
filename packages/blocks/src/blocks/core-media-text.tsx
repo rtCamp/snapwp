@@ -5,13 +5,9 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
-/**
- * Props interface for CoreMediaText component
- */
-export interface CoreMediaTextProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreMediaTextProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreMediaTextAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	renderedHtml?: string | null;

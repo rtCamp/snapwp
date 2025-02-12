@@ -10,7 +10,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreImageAttributes extends Record< string, unknown > {
 	alt?: string;
@@ -30,7 +30,7 @@ export interface CoreImageAttributes extends Record< string, unknown > {
 	lightbox?: string | null;
 }
 
-export interface CoreImageProps extends Omit< BlockData, 'type' > {
+export interface CoreImageProps extends BlockProps {
 	attributes?: CoreImageAttributes;
 	connectedMediaItem?: ConnectedMediaItem;
 	mediaDetails?: MediaDetails;

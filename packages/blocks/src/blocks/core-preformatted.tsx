@@ -5,14 +5,14 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CorePreformattedAttributes extends Record< string, unknown > {
 	content?: string;
 	style?: string;
 }
 
-export interface CorePreformattedProps extends Omit< BlockData, 'type' > {
+export interface CorePreformattedProps extends BlockProps {
 	attributes?: CorePreformattedAttributes;
 }
 

@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
@@ -23,7 +23,7 @@ export interface CoreFileAttributes extends Record< string, unknown > {
 	textLinkTarget?: string;
 }
 
-export interface CoreFileProps extends Omit< BlockData, 'type' > {
+export interface CoreFileProps extends BlockProps {
 	attributes?: CoreFileAttributes;
 }
 

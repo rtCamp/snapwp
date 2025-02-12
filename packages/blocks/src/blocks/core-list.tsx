@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
-import { BlockData } from '..';
+import { BlockProps } from '..';
 
 export interface CoreListAttributes extends Record< string, unknown > {
 	cssClassName?: string;
@@ -11,8 +11,7 @@ export interface CoreListAttributes extends Record< string, unknown > {
 	type?: string;
 }
 
-export interface CoreListProps
-	extends PropsWithChildren< Omit< BlockData, 'type' > > {
+export interface CoreListProps extends PropsWithChildren< BlockProps > {
 	attributes?: CoreListAttributes;
 }
 
