@@ -56,6 +56,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
             <figure>
               <!--@todo: link to snapwp-helper repo for image-->
               <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;" />
+              <br />
               <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
             </figure>
           </a>
