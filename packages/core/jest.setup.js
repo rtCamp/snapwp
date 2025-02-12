@@ -1,25 +1,17 @@
-global.__snapWPConfig = {
-	nextUrl: 'https://next.example.com',
-	homeUrl: 'https://home.example.com',
-	graphqlEndpoint: 'index.php?graphql',
-	uploadsDirectory: '/wp-content/uploads',
-	restUrlPrefix: '/wp-json',
-};
+global.__snapWPConfig = {};
 
-const envConfig = {
+global.__envConfig = {
 	nextUrl: 'https://env-next.example.com',
 	homeUrl: 'https://env-home.example.com',
-	graphqlEndpoint: 'env-graphql',
-	uploadsDirectory: '/env-uploads',
+	graphqlEndpoint: 'env-index.php?graphql',
+	uploadsDirectory: '/env-wp-content/uploads',
 	restUrlPrefix: '/env-wp-json',
 };
 
-global.__envConfig = {
-	...envConfig,
-};
-
-process.env.NEXT_PUBLIC_URL = envConfig.nextUrl;
-process.env.NEXT_PUBLIC_WORDPRESS_URL = envConfig.homeUrl;
-process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT = envConfig.graphqlEndpoint;
-process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH = envConfig.uploadsDirectory;
-process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX = envConfig.restUrlPrefix;
+process.env.NEXT_PUBLIC_URL = global.__envConfig.nextUrl;
+process.env.NEXT_PUBLIC_WORDPRESS_URL = global.__envConfig.homeUrl;
+process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT = global.__envConfig.graphqlEndpoint;
+process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH =
+	global.__envConfig.uploadsDirectory;
+process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX =
+	global.__envConfig.restUrlPrefix;
