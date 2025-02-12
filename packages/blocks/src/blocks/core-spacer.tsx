@@ -8,7 +8,7 @@ import {
 import { BlockData } from '..';
 
 export interface CoreSpacerAttributes extends Record< string, unknown > {
-	height?: string;
+	height: string;
 	style?: string;
 	width?: string;
 }
