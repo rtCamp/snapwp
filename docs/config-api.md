@@ -32,11 +32,11 @@ Additionally, if you are running a local development environment without a valid
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
-## snapwp.config.ts` File
+## `snapwp.config.ts` File
 
 SnapWP allows you to define configurations in a `snapwp.config.ts` (or `.mjs` or `.js`) file at the root of your application (alongside your `package.json` and `next.config.ts`).
 
-For example: @todo: Add example once we specify what can be configured in `snapwp.config.js|mjs|ts`.
+@todo: Add example once we specify what can be configured in `snapwp.config.js|mjs|ts`.
 
 ## Integration with `next.config.ts`
 
