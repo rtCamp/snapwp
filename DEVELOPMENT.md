@@ -64,31 +64,31 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Setup
 
-1. Copy the example environment file:
+1. Copy the example environment file to `.env` and update the values as needed.
 
     ```bash
     cp .env.example .env
     ```
 
-2. Use node version in .nvmrc
+2. Use the node version defined in .nvmrc.
 
     ```bash
     nvm use
     ```
 
-3. Install the NPM dependencies:
+3. Install the NPM dependencies.
 
     ```bash
     npm install
     ```
 
-4. Build the packages:
+4. Build the packages.
 
     ```bash
     npm run build
     ```
 
-5. Publish packages locally:
+5. Publish packages locally.
 
     ```bash
     npm run publish:local
