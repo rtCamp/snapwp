@@ -50,7 +50,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     1. Enter the path to the directory where you want to create the app, e.g. `./my-headless-app`
     2. Create an Environment File:
 
-        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper into the file created.
+        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` into the file created.
 
          <a href="./images/snapwp-helper-env.png">
            <figure>

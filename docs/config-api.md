@@ -1,28 +1,19 @@
 # Config API & Environment Variables
 
-This section covers the Config API and `.env` variables used to power SnapWP.
+To ensure consistency and enable composability across the SnapWP framework, we use a shared configuration API that unifies two source:
 
-## How It Works
+-   The environment variables in the `.env` file.
+-   The `snapwp.config.ts` config.
 
-To ensure consistency and enable composability across the SnapWP framework, we rely on a shared configuration API and environment variables.
+Configurations are used to power behavior behind the scenes, but can also be used directly in your application code with the `getConfig` function.
 
-### Configuration Resolution
-
-SnapWP resolves configuration using the following hierarchy:
-
-There are two types of configurations you can use:
-
-1. Environment variables (`.env` file) - Available at both build time and runtime.
-2. Configuration API (`snapwp.config.js|mjs|ts`) - Available only at runtime.
-
-## Config API
-
-### Environment Variables
+## `.env` Variables
 
 SnapWP uses the following `.env` variables to configure your Next.js app.
 
 > [!TIP]
 > We recommend copying the `.env` variables from the SnapWP Helper plugin settings screen and pasting them into your `.env` file, then modifying them as needed.
+> See the [Getting Started](getting-started.md#backend-setup) guide for more information.
 
 | Variable                                | Required | Default Value                            | Description                                                                       | Maps to Config Variable |
 | --------------------------------------- | -------- | ---------------------------------------- | --------------------------------------------------------------------------------- | ----------------------- |
@@ -41,18 +32,15 @@ Additionally, if you are running a local development environment without a valid
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
-### Using `snapwp.config.js|mjs|ts`
+## snapwp.config.ts` File
 
-SnapWP allows you to define configurations in a `snapwp.config.js`, `snapwp.config.mjs`, or `snapwp.config.ts` file.
+SnapWP allows you to define configurations in a `snapwp.config.ts` (or `.mjs` or `.js`) file at the root of your application (alongside your `package.json` and `next.config.ts`).
 
 For example: @todo: Add example once we specify what can be configured in `snapwp.config.js|mjs|ts`.
 
-> [!NOTE]
-> Place your `snapwp.config.js`, `snapwp.config.mjs`, or `snapwp.config.ts` at the root of your application, alongside your `package.json` and `next.config.js` files.
+## Integration with `next.config.ts`
 
-### Integration with `next.config.mjs`
-
-SnapWP extends the Next.js configuration using the `withSnapWP` function to configure certain settings automatically based on your Config API.
+SnapWP extends the Next.js configuration using the `withSnapWP` function to configure certain settings automatically based on your Config API, such as using the WordPress URL for [`images.remotePatterns`](https://nextjs.org/docs/app/api-reference/components/image#remotepatterns).
 
 ```ts
 import withSnapWP from '@snapwp/next/withSnapWP';
@@ -63,3 +51,14 @@ export default await withSnapWP( {
 ```
 
 This function automatically loads configurations from `.env` and `snapwp.config.js|mjs|ts`, making them available for your Next.js application.
+
+## Accessing config values with `getConfig()`
+
+You can access the configuration values in your application code using the `getConfig` function from `@snapwp/config`.
+
+```ts
+import { getConfig } from '@snapwp/core/config';
+
+// Or any other valid configuration property.
+const { nextUrl, homeUrl } = getConfig();
+```
