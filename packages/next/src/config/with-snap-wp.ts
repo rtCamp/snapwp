@@ -78,14 +78,17 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
  */
 const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	const possibleSnapWPConfigPaths = [
-		process.cwd() + '/snapwp.config.js',
-		process.cwd() + '/snapwp.config.mjs',
+		'snapwp.config.ts',
+		'snapwp.config.js',
+		'snapwp.config.mjs',
 	];
 
 	// Locate the SnapWP configuration file.
 	let snapWPConfigPath = possibleSnapWPConfigPaths.find(
 		( possibleSnapWPConfigPath ) => {
-			return fs.existsSync( possibleSnapWPConfigPath );
+			return fs.existsSync(
+				`${ process.cwd() }/${ possibleSnapWPConfigPath }`
+			);
 		}
 	);
 
@@ -93,16 +96,14 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 		throw new Error( 'SnapWP configuration file not found.' );
 	}
 
-	// Platform-specific handling
-	if ( process.platform === 'win32' ) {
-		// Use path.normalize to replace backslashes correctly
-		snapWPConfigPath = path.normalize( snapWPConfigPath );
-		// Convert it to a file:// URL
-		snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
-	}
+	// Use path.normalize to replace backslashes correctly
+	snapWPConfigPath = path.normalize(
+		`${ process.cwd() }/${ snapWPConfigPath }`
+	);
+	// Convert it to a file:// URL
+	snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
 
-	const snapWPConfig = ( await import( snapWPConfigPath ) ).default;
-	setConfig( snapWPConfig );
+	setConfig();
 	const homeUrl = new URL( getConfig().homeUrl );
 
 	return {
