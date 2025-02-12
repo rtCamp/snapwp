@@ -27,8 +27,8 @@
 		"resolve-paths": "resolve-tspaths",
 		"codegen": "graphql-codegen --config codegen.ts",
 		"codegen:watch": "graphql-codegen --config codegen.ts --watch",
-		"lint": "eslint . --config ../../.eslintrc.json",
-		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+		"lint": "eslint . --config .eslintrc.json",
+		"lint:fix": "eslint . --config .eslintrc.json --fix"
 	},
 	"dependencies": {
 		"@snapwp/core": "*"

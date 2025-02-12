@@ -40,6 +40,13 @@ module.exports = {
 				'import/default': [ 'off' ],
 			},
 		},
+		// Disable n/no-process-env for codegen.ts file.
+		{
+			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
+			rules: {
+				'n/no-process-env': 'off',
+			},
+		},
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],
