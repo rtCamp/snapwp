@@ -16,9 +16,10 @@ export interface BlockData<
 	attributes?: T;
 }
 
-export type BlockTreeNode<
-	TBlockProps extends BlockData = BlockData< CoreVideoAttributes >,
-> = Omit< TBlockProps, 'parentClientId' > & {
+export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
+	TBlockProps,
+	'parentClientId'
+> & {
 	children?: BlockTreeNode[] | null;
 	renderer: React.FC< React.PropsWithChildren< TBlockProps > >;
 };
