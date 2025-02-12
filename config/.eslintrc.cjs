@@ -1,3 +1,3 @@
 module.exports = {
-	extends: '@snapwp/eslint-config'
+	extends: '@snapwp/eslint-config',
 };
