@@ -1,4 +1,0 @@
-{
-	"extends": [ "../../config/.eslintrc.cjs" ],
-	"ignorePatterns": [ "**/config/*.js", "**/dist", "**/__generated/" ]
-}
