@@ -1,19 +1,26 @@
-import defaultBlockDefinitions, { BlockDefinitions } from '@/blocks';
+import defaultBlockDefinitions, {
+	BlockDefinitions,
+	CoreVideoAttributes,
+} from '@/blocks';
+import Default from '@/blocks/default';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
 
-export interface BlockData {
+export interface BlockData<
+	T extends Record< string, unknown > = Record< string, unknown >,
+> {
 	type: string;
 	cssClassNames?: Array< string | null > | null;
 	clientId?: string | null;
 	parentClientId?: string | null;
 	renderedHtml?: string | null;
-	attributes?: Record< string, unknown >;
+	attributes?: T;
 }
 
-export type BlockTreeNode = Omit< BlockData, 'clientId' & 'parentClientId' > & {
+export type BlockTreeNode<
+	TBlockProps extends BlockData = BlockData< CoreVideoAttributes >,
+> = Omit< TBlockProps, 'parentClientId' > & {
 	children?: BlockTreeNode[] | null;
-	// @todo: implement as generic type once we enforce `no-explicit-any`
-	renderer: React.FC< React.PropsWithChildren< any > >;
+	renderer: React.FC< React.PropsWithChildren< TBlockProps > >;
 };
 
 /**
@@ -58,13 +65,22 @@ export default class BlockManager {
 	 * @param node - A flat list of blocks.
 	 */
 	public static attachRendererToTreeNode = ( node: BlockTreeNode ): void => {
-		if (
-			BlockManager.blockDefinitions[ node.type ] !== undefined &&
-			BlockManager.blockDefinitions[ node.type ] !== null
-		) {
-			node.renderer = BlockManager.blockDefinitions[ node.type ];
+		const customBlockDefinition =
+			BlockManager.blockDefinitions[ node.type ];
+		const defaultBlockDefinition = defaultBlockDefinitions[ node.type ];
+
+		if ( customBlockDefinition === null ) {
+			// If explicitly set to null in custom definitions, use default renderer
+			node.renderer = BlockManager.blockDefinitions.default || Default;
+		} else if ( customBlockDefinition ) {
+			// If custom definition exists, use it
+			node.renderer = customBlockDefinition;
+		} else if ( defaultBlockDefinition ) {
+			// If no custom definition but default definition exists, use default
+			node.renderer = defaultBlockDefinition;
 		} else {
-			node.renderer = BlockManager.blockDefinitions.default;
+			// If no definition found anywhere, use default renderer and prune children
+			node.renderer = BlockManager.blockDefinitions.default || Default;
 			node.children = null;
 		}
 
