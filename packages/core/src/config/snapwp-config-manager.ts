@@ -1,7 +1,7 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import { BlockDefinitions } from '@/props';
+import { BlockDefinitions, HTMLReactParserOptions } from '@/props';
 
 export interface SnapWPEnv {
 	/**
@@ -41,6 +41,10 @@ export interface SnapWPConfig {
 	 * Block definitions for the editor.
 	 */
 	blockDefinitions?: BlockDefinitions;
+	/**
+	 * html-react-parser overload options
+	 */
+	parserOptions?: HTMLReactParserOptions;
 }
 
 /**
@@ -104,6 +108,10 @@ class SnapWPConfigManager {
 	 */
 	static snapWPConfigSchema: ConfigSchema< SnapWPConfig > = {
 		blockDefinitions: {
+			type: 'object',
+			required: false,
+		},
+		parserOptions: {
 			type: 'object',
 			required: false,
 		},

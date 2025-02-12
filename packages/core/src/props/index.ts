@@ -75,3 +75,15 @@ export type GlobalHeadProps = {
 	globalStylesheet?: string | null;
 	renderedFontFaces?: string | null;
 };
+
+type DOMNode = {
+	type: string;
+	name?: string;
+	children?: DOMNode[];
+	attribs?: Record< string, string >;
+	data?: string;
+};
+
+export type HTMLReactParserOptions = {
+	replace?: ( domNode: DOMNode ) => React.ReactElement | string | null | void;
+};
