@@ -3,7 +3,7 @@ import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
 import { BlockDefinitions } from '@/props';
 
-export interface SnapWPEnvConfig {
+export interface SnapWPEnv {
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
 	 */
@@ -46,7 +46,7 @@ export interface SnapWPConfig {
 /**
  * Schema used to validate the configuration.
  */
-type SnapWPConfigSchema< T > = {
+type ConfigSchema< T > = {
 	[ K in keyof T ]: {
 		type: string;
 		required: boolean;
@@ -57,7 +57,7 @@ type SnapWPConfigSchema< T > = {
 /**
  * Default configuration.
  */
-const defaultConfig: Partial< SnapWPEnvConfig & SnapWPConfig > = {
+const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
@@ -73,7 +73,7 @@ const defaultConfig: Partial< SnapWPEnvConfig & SnapWPConfig > = {
  *
  * @return The configuration object.
  */
-const envConfig = (): Partial< SnapWPEnvConfig > => ( {
+const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env */
 	nextUrl: process.env.NEXT_PUBLIC_URL,
 	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
@@ -92,7 +92,7 @@ class SnapWPConfigManager {
 	/**
 	 * The configuration.
 	 */
-	static config: SnapWPConfig & SnapWPEnvConfig;
+	static config: SnapWPConfig & SnapWPEnv;
 
 	/**
 	 * Flag to check if configs are set.
@@ -102,7 +102,7 @@ class SnapWPConfigManager {
 	/**
 	 * The schema used to validate the configuration.
 	 */
-	static snapWPConfigSchema: SnapWPConfigSchema< SnapWPConfig > = {
+	static snapWPConfigSchema: ConfigSchema< SnapWPConfig > = {
 		blockDefinitions: {
 			type: 'object',
 			required: false,
@@ -112,7 +112,7 @@ class SnapWPConfigManager {
 	/**
 	 * The schema used to validate the configuration.
 	 */
-	static snapWPConfigEnvSchema: SnapWPConfigSchema< SnapWPEnvConfig > = {
+	static snapWPConfigEnvSchema: ConfigSchema< SnapWPEnv > = {
 		nextUrl: {
 			type: 'string',
 			required: true,
@@ -231,7 +231,7 @@ class SnapWPConfigManager {
 	 *
 	 * @return The resolved configuration.
 	 */
-	static getConfig(): Readonly< SnapWPConfig & SnapWPEnvConfig > {
+	static getConfig(): Readonly< SnapWPConfig & SnapWPEnv > {
 		if ( ! SnapWPConfigManager.configsSet ) {
 			// @ts-ignore -- __snapWPConfig injected from WebPack
 			SnapWPConfigManager.setConfig( __snapWPConfig );
@@ -259,13 +259,10 @@ class SnapWPConfigManager {
 			return;
 		}
 
-		const snapWPEnvConfig =
-			SnapWPConfigManager.validateConfig< SnapWPEnvConfig >(
-				SnapWPConfigManager.normalizeConfig< SnapWPEnvConfig >(
-					envConfig()
-				),
-				SnapWPConfigManager.snapWPConfigEnvSchema
-			);
+		const snapWPEnv = SnapWPConfigManager.validateConfig< SnapWPEnv >(
+			SnapWPConfigManager.normalizeConfig< SnapWPEnv >( envConfig() ),
+			SnapWPConfigManager.snapWPConfigEnvSchema
+		);
 
 		const snapWPConfig = SnapWPConfigManager.validateConfig< SnapWPConfig >(
 			SnapWPConfigManager.normalizeConfig< SnapWPConfig >( cfg || {} ),
@@ -274,9 +271,9 @@ class SnapWPConfigManager {
 
 		SnapWPConfigManager.config = {
 			...defaultConfig,
-			...snapWPEnvConfig,
+			...snapWPEnv,
 			...snapWPConfig,
-		} as SnapWPConfig & Required< SnapWPEnvConfig >;
+		} as SnapWPConfig & Required< SnapWPEnv >;
 
 		SnapWPConfigManager.configsSet = true;
 	}
@@ -292,7 +289,7 @@ class SnapWPConfigManager {
 	 */
 	static validateConfig = < T >(
 		config: Partial< T >,
-		schema: SnapWPConfigSchema< T >
+		schema: ConfigSchema< T >
 	): T => {
 		if ( typeof config !== 'object' ) {
 			throw new Error( 'Configs should be an object.' );

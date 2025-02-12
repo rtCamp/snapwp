@@ -4,7 +4,7 @@ import {
 	getConfig,
 	setConfig,
 	getGraphqlUrl,
-	SnapWPEnvConfig,
+	SnapWPEnv,
 } from '@/config/snapwp-config-manager';
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
 
@@ -12,7 +12,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	// eslint-disable-next-line n/no-process-env
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
-	const validSnapWPEnvConfig: Partial< SnapWPEnvConfig > = {
+	const validSnapWPEnvConfig: Partial< SnapWPEnv > = {
 		nextUrl: 'https://env-next.example.com',
 		homeUrl: 'https://env-home.example.com',
 		graphqlEndpoint: 'env-index.php?graphql',
@@ -20,7 +20,7 @@ describe( 'SnapWPConfigManager functions', () => {
 		restUrlPrefix: '/env-wp-json',
 	};
 
-	const defaultConfig: Partial< SnapWPEnvConfig > = {
+	const defaultConfig: Partial< SnapWPEnv > = {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
