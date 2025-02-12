@@ -12,9 +12,7 @@ module.exports = {
 		'plugin:import/typescript',
 	],
 	ignorePatterns: [ '**/config/*.js', '**/dist' ],
-	settings: {
-		'import/resolver': require.resolve( './import-resolver' ),
-	},
+	settings: {},
 	overrides: [
 		{
 			files: '**/*.test.ts',
