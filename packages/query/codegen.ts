@@ -1,9 +1,9 @@
 import * as dotenv from 'dotenv';
-import { baseConfig } from '@snapwp/codegen-config';
+import { getBaseConfig } from '@snapwp/codegen-config';
 
 dotenv.config( { path: '../../.env' } );
 
-const config = baseConfig();
+const config = getBaseConfig();
 config.documents = './src/**/*.graphql';
 
 export default config;

@@ -6,7 +6,7 @@ import { generateGraphqlUrl } from '@snapwp/core';
  *
  * @return The base configuration.
  */
-const baseConfig = (): CodegenConfig => {
+const getBaseConfig = (): CodegenConfig => {
 	return {
 		overwrite: true,
 		generates: {
@@ -40,4 +40,4 @@ const baseConfig = (): CodegenConfig => {
 	};
 };
 
-export { baseConfig };
+export { getBaseConfig };
