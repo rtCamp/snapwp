@@ -1,8 +1,8 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import { BlockDefinitions, HTMLReactParserOptions } from '@/props';
-
+import type { BlockDefinitions } from '@/props';
+import type { HTMLReactParserOptions } from 'html-react-parser';
 export interface SnapWPEnv {
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
