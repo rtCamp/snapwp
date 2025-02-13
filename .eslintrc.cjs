@@ -6,18 +6,18 @@ module.exports = {
 	extends: '@snapwp/eslint-config',
 	parser: '@typescript-eslint/parser',
 	ignorePatterns: [
-		'**/node_modules/**',
-		'**/dist/**',
-		'**/dist-types/**',
-		'out/**',
-		'data/**',
-		'assets/**/*.js',
-		'coverage/**',
-		'**/config/*.js',
-		'**/dist',
 		'**/__generated/',
 		'**/.eslintrc.cjs',
+		'**/config/*.js',
+		'**/dist',
+		'**/dist/**',
+		'**/dist-types/**',
 		'**/eslint-config/**',
+		'**/node_modules/**',
+		'assets/**/*.js',
+		'data/**',
+		'coverage/**',
+		'out/**',
 	],
 	globals: {
 		globalThis: 'readonly',
@@ -30,6 +30,8 @@ module.exports = {
 		{
 			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
 			rules: {
+				// Disable check for default import.
+				'import/default': [ 'off' ],
 				// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
 				'jsdoc/require-jsdoc': [
 					'error',
@@ -43,8 +45,6 @@ module.exports = {
 						},
 					},
 				],
-				// Disable check for default import.
-				'import/default': [ 'off' ],
 			},
 		},
 		// Rules for bin and cli files.
@@ -66,10 +66,10 @@ module.exports = {
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
 			excludedFiles: [
-				'**/*.test.ts',
-				'**/*.test.tsx',
 				'**/*.spec.ts',
 				'**/*.spec.tsx',
+				'**/*.test.ts',
+				'**/*.test.tsx',
 				'**/codegen.ts',
 			],
 			// Enable the recommended eslint checks.
@@ -86,14 +86,62 @@ module.exports = {
 				'jest/globals': true,
 			},
 			rules: {
+				// Disable forced use of import.
+				'@typescript-eslint/no-require-imports': 'off',
+				// Disable force comment description.
+				'eslint-comments/require-description': 'off',
 				// Allow empty functions.
 				'no-empty-function': 'off',
 				'@typescript-eslint/no-empty-function': 'off',
-				// Disable force comment description.
-				'eslint-comments/require-description': 'off',
-				// Disable forced use of import.
-				'@typescript-eslint/no-require-imports': 'off',
 			},
 		},
 	],
+	rules: {
+		'@typescript-eslint/naming-convention': 'error',
+		'@typescript-eslint/no-restricted-imports': [
+			'error',
+			'classnames',
+			'lodash',
+		],
+		'@wordpress/dependency-group': 'error',
+		'dot-notation': [ 'error', { allowKeywords: false } ],
+		'eslint-comments/require-description': 'error',
+		'import/default': 'error',
+		'import/named': 'error',
+		'jest/expect-expect': 'off',
+		'jsdoc/no-types': [ 'off' ],
+		'jsdoc/require-param-type': [ 'error' ],
+		'jsdoc/require-returns-type': [ 'error' ],
+		'jsx-closing-tag-location': [ 1, { location: 'line-aligned' } ],
+		'no-empty-function': 'error',
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: 'classnames',
+						message:
+							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
+					},
+					{
+						name: 'lodash',
+						message: 'Please use native functionality instead.',
+					},
+				],
+			},
+		],
+		'no-restricted-syntax': [ 'error' ],
+		'prefer-destructuring': [
+			'error',
+			{
+				array: true,
+				object: true,
+			},
+		],
+		'react/jsx-boolean-value': 'error',
+		'react/jsx-curly-brace-presence': [
+			'error',
+			{ children: 'never', props: 'never' },
+		],
+	},
 };
