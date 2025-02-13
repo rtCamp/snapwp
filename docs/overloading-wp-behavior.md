@@ -157,6 +157,7 @@ SnapWP allows you to pass custom options to [**react-parser**](../packages/next/
 Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
 
 MyCustomReactParser.tsx
+
 ```tsx
 import {
 	getImageSizeFromAttributes,
