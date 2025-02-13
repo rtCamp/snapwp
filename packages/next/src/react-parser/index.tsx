@@ -100,10 +100,7 @@ const defaultOptions: HTMLReactParserOptions = {
 export default function Parse( { html }: { html: string } ) {
 	const { parserOptions } = getConfig();
 
-	const options = {
-		...defaultOptions,
-		...parserOptions,
-	};
+	const options = parserOptions ? parserOptions : defaultOptions;
 
 	return <>{ Parser( html, options ) }</>;
 }
