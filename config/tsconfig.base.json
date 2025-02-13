@@ -16,6 +16,10 @@
 		"forceConsistentCasingInFileNames": true,
 		"allowSyntheticDefaultImports": true,
 		"jsx": "react",
-		"declarationMap": true
+		"declarationMap": true,
+		"noFallthroughCasesInSwitch": true,
+		"noUnusedParameters": true,
+		"noUnusedLocals": true,
+		"strictFunctionTypes": true
 	}
 }

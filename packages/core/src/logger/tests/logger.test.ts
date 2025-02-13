@@ -1,5 +1,5 @@
 /* eslint-disable no-console, n/no-process-env */
-import { Logger, LOGTYPE } from '../index';
+import { Logger } from '../index';
 
 describe( 'Logger', () => {
 	beforeEach( () => {
