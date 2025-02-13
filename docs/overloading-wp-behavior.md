@@ -147,14 +147,16 @@ export default function Page() {
 ```
 
 ---
+
 ## Overloading React Parser Options
 
-SnapWP allows you to pass custom options  to [**react-parser**](../packages/next/src/react-parser/index.tsx) . This is useful when you want to overload default options.
+SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) . This is useful when you want to overload default options of react-parser.
 
 ### 1. Creating a Custom Component with options
 
 Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
 
+MyCustomReactParser.tsx
 ```tsx
 import {
 	getImageSizeFromAttributes,
@@ -190,7 +192,21 @@ export const customParserOptions: HTMLReactParserOptions = {
 			const styleObject = style
 				? getStyleObjectFromString( style )
 				: undefined;
-          
+
+			const { width, height } = getImageSizeFromAttributes( attribs );
+			const imageAttributes = {
+					id: attribs.id,
+					mediaDetails: {
+						width,
+						height,
+					},
+				};
+			const shouldFill =
+					! width &&
+					! height &&
+					undefined !== width &&
+					undefined !== height;
+
 				return (
 					<Image
 						{ ...attributes }
@@ -216,7 +232,7 @@ export const customParserOptions: HTMLReactParserOptions = {
 };
 ```
 
-### 2. Use react-parser as fallback 
+### 2. Use react-parser as fallback
 
 Make any default component null to use react-parser as fallback component
 
@@ -241,22 +257,23 @@ export default function Page() {
 	);
 }
 ```
-### 3. Pass customParserOptions  to overload
+
+### 3. Pass customParserOptions to overload
 
 ```tsx
 import type { SnapWPConfig } from '@snapwp/core/config';
 import { customParserOptions } from './src/MyCustomReactParser';
 
 const config: SnapWPConfig = {
-
-    /* passing custom options to overload default react-parser options  */
-    parserOptions :customParserOptions
+	/* passing custom options to overload default react-parser options  */
+	parserOptions: customParserOptions,
 };
 
 export default config;
 ```
 
 ---
+
 ## Creating Custom Frontend Routes
 
 This tutorial explains how to create custom frontend routes in your SnapWP-powered Next.js application using the App Router.
