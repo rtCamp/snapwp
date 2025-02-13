@@ -5,12 +5,31 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockProps } from '..';
 
 interface TrackProps {
 	src: string;
 	kind: string;
 	srclang: string;
 	label: string;
+}
+
+export interface CoreVideoAttributes extends Record< string, unknown > {
+	autoplay?: boolean;
+	caption?: string;
+	controls: boolean;
+	loop?: boolean;
+	muted?: boolean;
+	playsInline?: boolean;
+	poster?: string;
+	src?: string;
+	style?: string;
+	tracks: Array< any >;
+	videoPreload: string;
+}
+
+export interface CoreVideoProps extends BlockProps {
+	attributes?: CoreVideoAttributes;
 }
 
 /**
@@ -49,7 +68,10 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
  *
  * @return The rendered block.
  */
-export default function CoreVideo( { attributes, renderedHtml }: any ) {
+export default function CoreVideo( {
+	attributes,
+	renderedHtml,
+}: CoreVideoProps ) {
 	const {
 		autoplay,
 		caption,

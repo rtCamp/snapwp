@@ -5,9 +5,27 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
+import { BlockProps } from '..';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
+
+export interface CoreFileAttributes extends Record< string, unknown > {
+	displayPreview?: boolean;
+	downloadButtonText?: string;
+	fileId?: string;
+	fileName?: string;
+	href?: string;
+	previewHeight: number;
+	showDownloadButton: boolean;
+	style?: string;
+	textLinkHref?: string;
+	textLinkTarget?: string;
+}
+
+export interface CoreFileProps extends BlockProps {
+	attributes?: CoreFileAttributes;
+}
 
 /**
  * Renders the core/file block.
@@ -18,7 +36,10 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
  *
  * @return The rendered block.
  */
-export default function CoreFile( { attributes, renderedHtml }: any ) {
+export default function CoreFile( {
+	attributes,
+	renderedHtml,
+}: CoreFileProps ) {
 	const {
 		displayPreview,
 		downloadButtonText,
@@ -60,10 +81,10 @@ export default function CoreFile( { attributes, renderedHtml }: any ) {
 					aria-label={ ariaLabel }
 				/>
 			) }
-			{ fileName && (
+			{ fileName && textLinkHref && (
 				<Link
 					id={ fileId || undefined }
-					href={ textLinkHref || undefined }
+					href={ textLinkHref }
 					target={ textLinkTarget || undefined }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>

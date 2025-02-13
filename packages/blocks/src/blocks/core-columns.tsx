@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
+import { BlockProps } from '..';
+
+export interface CoreColumnsAttributes extends Record< string, unknown > {
+	style?: string;
+	cssClassName?: string;
+}
+
+export interface CoreColumnsProps extends PropsWithChildren< BlockProps > {
+	attributes?: CoreColumnsAttributes;
+}
 
 /**
  * Renders the core/columns block.
@@ -10,7 +20,10 @@ import { cn, getStylesFromAttributes } from '@snapwp/core';
  *
  * @return The rendered block.
  */
-export default function CoreColumns( { attributes, children }: any ) {
+export default function CoreColumns( {
+	attributes,
+	children,
+}: CoreColumnsProps ) {
 	const { cssClassName, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

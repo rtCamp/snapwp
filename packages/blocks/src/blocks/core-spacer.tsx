@@ -5,6 +5,17 @@ import {
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import { BlockProps } from '..';
+
+export interface CoreSpacerAttributes extends Record< string, unknown > {
+	height: string;
+	style?: string;
+	width?: string;
+}
+
+export interface CoreSpacerProps extends BlockProps {
+	attributes?: CoreSpacerAttributes;
+}
 
 /**
  * Renders the core/spacer block.
@@ -15,7 +26,10 @@ import {
  *
  * @return The rendered block.
  */
-export default function CoreSpacer( { attributes, renderedHtml }: any ) {
+export default function CoreSpacer( {
+	attributes,
+	renderedHtml,
+}: CoreSpacerProps ) {
 	const { height, width, style } = attributes || {};
 
 	const parsedStyle = style ? JSON.parse( style ) : {};

@@ -38,7 +38,7 @@ describe( 'CoreButtons', () => {
 		const children = <button>Click Me</button>;
 
 		const { asFragment } = render(
-			<CoreButtons attributes={ null }>{ children }</CoreButtons>
+			<CoreButtons>{ children }</CoreButtons>
 		);
 
 		const divElement = screen.getByRole( 'button', {

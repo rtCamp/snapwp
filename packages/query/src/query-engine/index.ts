@@ -1,5 +1,5 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
-import { TemplateData, GlobalHeadProps } from '@snapwp/core';
+import { GlobalHeadProps } from '@snapwp/core';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
@@ -73,7 +73,7 @@ export class QueryEngine {
 	 * @param uri - The URL of the seed node.
 	 * @return The template data fetched for the uri.
 	 */
-	static getTemplateData = async ( uri: string ): Promise< TemplateData > => {
+	static getTemplateData = async ( uri: string ) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}

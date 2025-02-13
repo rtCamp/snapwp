@@ -5,6 +5,16 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import { BlockProps } from '..';
+
+export interface CoreVerseAttributes extends Record< string, unknown > {
+	content?: string;
+	style?: string;
+}
+
+export interface CoreVerseProps extends BlockProps {
+	attributes?: CoreVerseAttributes;
+}
 
 /**
  * Renders the core/verse block.
@@ -15,7 +25,10 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreVerse( { attributes, renderedHtml }: any ) {
+export default function CoreVerse( {
+	attributes,
+	renderedHtml,
+}: CoreVerseProps ) {
 	const { style, content } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );

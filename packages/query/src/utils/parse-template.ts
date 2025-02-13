@@ -1,12 +1,10 @@
 import { ApolloQueryResult } from '@apollo/client';
 import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 import {
-	BlockData,
 	Logger,
 	type EnqueuedScriptProps,
 	type StyleSheetProps,
 	type ScriptModuleProps,
-	TemplateData,
 	TemplateParseError,
 } from '@snapwp/core';
 
@@ -23,7 +21,7 @@ export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
 	wordpressUrl: string,
 	uri: string
-): TemplateData {
+) {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error(
@@ -110,12 +108,12 @@ function parseEnqueuedScripts(
  */
 function parseEditorBlocks(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ]
-): BlockData[] | undefined {
-	const editorBlocks: BlockData[] | undefined = [];
+) {
+	const editorBlocks: unknown[] = [];
 
-	templateByUri?.editorBlocks?.forEach( ( editorBlock: unknown ) => {
+	templateByUri?.editorBlocks?.forEach( ( editorBlock ) => {
 		if ( editorBlock && 'object' === typeof editorBlock ) {
-			editorBlocks.push( editorBlock as BlockData );
+			editorBlocks.push( editorBlock );
 		}
 	} );
 
