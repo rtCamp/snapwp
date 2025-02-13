@@ -55,7 +55,7 @@ interface MediaSize {
 	name: string;
 	sourceUrl: string;
 }
-
+//@ts-ignore -- Unused until lightbox support is fixed.
 interface LightBoxProp {
 	enabled: boolean;
 }
@@ -296,6 +296,7 @@ const getImageProps = (
  *
  * @return Whether the lightbox is enabled.
  */
+//@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ) => {
 	// if ( ! lightbox ) {
 	// 	return false;
