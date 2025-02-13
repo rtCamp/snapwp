@@ -49,6 +49,7 @@
 		"@types/react": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"html-react-parser": "^5.1.12"
 	}
 }
