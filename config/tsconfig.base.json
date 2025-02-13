@@ -28,7 +28,7 @@
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
 		"isolatedModules": true,
-		"verbatimModuleSyntax": false,  // @todo Enable this.
+		"verbatimModuleSyntax": false, // @todo Enable this.
 
 		// Language and Environment
 		"jsx": "react",
