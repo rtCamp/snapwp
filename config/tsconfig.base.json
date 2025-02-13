@@ -1,21 +1,40 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+
 	"compilerOptions": {
-		"target": "ES2018",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"incremental": true,
-		"composite": true,
-		"disableSourceOfProjectReferenceRedirect": true,
+		// Type checking.
 		"strict": true,
+		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
+		"noFallthroughCasesInSwitch": true,
 		"noImplicitReturns": true,
-		"lib": [ "ES2022", "DOM" ],
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictFunctionTypes": true,
+
+		// Modules
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+
+		// Emit
+		"declarationMap": true,
+
+		// Interop Constraints
 		"esModuleInterop": true,
-		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true,
+
+		// Language and Environment
 		"jsx": "react",
-		"declarationMap": true
+		"lib": [ "ES2022", "DOM" ],
+		"target": "ES2018",
+
+		// Projects
+		"composite": true,
+		"disableSourceOfProjectReferenceRedirect": true,
+		"incremental": true,
+
+		// Completeness
+		"skipLibCheck": true
 	}
 }

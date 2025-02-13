@@ -1,4 +1,3 @@
-import { getConfig } from '@snapwp/core/config';
 import React from 'react';
 
 /**
