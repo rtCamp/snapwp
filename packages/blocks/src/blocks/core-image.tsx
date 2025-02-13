@@ -55,7 +55,7 @@ interface MediaSize {
 	name: string;
 	sourceUrl: string;
 }
-//@ts-ignore
+//@ts-ignore Unused until lightbox support is fixed.
 interface LightBoxProp {
 	enabled: boolean;
 }
