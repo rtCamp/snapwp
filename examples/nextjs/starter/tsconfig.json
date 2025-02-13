@@ -1,23 +1,43 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+
 	"compilerOptions": {
-		"lib": [ "dom", "dom.iterable", "esnext" ],
-		"allowJs": true,
-		"skipLibCheck": true,
+		// Type checking
 		"strict": true,
-		"noEmit": true,
-		"esModuleInterop": true,
+
+		// Modules
 		"module": "esnext",
 		"moduleResolution": "bundler",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
+
+		// Emit
+		"noEmit": true,
+
+		// Language and Environment
 		"jsx": "preserve",
-		"incremental": true,
+		"lib": [ "dom", "dom.iterable", "esnext" ],
+		"target": "ES2017",
+
+		// Javascript Support
+		"allowJs": true,
+
+		// Editor Support
 		"plugins": [
 			{
 				"name": "next"
 			}
 		],
-		"target": "ES2017"
+
+		// Interop Constraints
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"isolatedModules": true,
+
+		// Projects
+		"incremental": true,
+		"composite": true,
+
+		// Completeness
+		"skipLibCheck": true,
 	},
 	"include": [
 		"next-env.d.ts",
