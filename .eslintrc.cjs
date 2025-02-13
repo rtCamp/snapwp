@@ -26,15 +26,11 @@ module.exports = {
 		'import/resolver': require.resolve( './config/import-resolver.cjs' ),
 	},
 	overrides: [
-		{
-			files: '**/*.test.ts',
-			env: {
-				jest: true,
-			},
-		},
+		// Rules for JS, JSX, TS & TSX files.
 		{
 			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
 			rules: {
+				// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
 				'jsdoc/require-jsdoc': [
 					'error',
 					{
@@ -47,21 +43,26 @@ module.exports = {
 						},
 					},
 				],
+				// Disable check for default import.
 				'import/default': [ 'off' ],
 			},
 		},
+		// Rules for bin and cli files.
 		{
 			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
 			rules: {
+				// Enable console log.
 				'no-console': 'off',
 			},
 		},
+		// Disable n/no-process-env for codegen.ts, test and jest setup files.
 		{
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
 			rules: {
 				'n/no-process-env': 'off',
 			},
 		},
+		// Rules for TypeScript files.
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
 			excludedFiles: [
@@ -71,14 +72,13 @@ module.exports = {
 				'**/*.spec.tsx',
 				'**/codegen.ts',
 			],
+			// Enable the recommended eslint checks.
 			extends: [ 'plugin:@typescript-eslint/recommended-type-checked' ],
 			parserOptions: {
 				project: true,
 			},
-			rules: {
-				'@typescript-eslint/no-array-delete': 'error',
-			},
 		},
+		// Enable jest & node env for cjs, test & jest files.
 		{
 			files: [ '**/jest.*.js', '**/*.cjs', '**/*.test.ts' ],
 			env: {
@@ -86,9 +86,12 @@ module.exports = {
 				'jest/globals': true,
 			},
 			rules: {
+				// Allow empty functions.
 				'no-empty-function': 'off',
 				'@typescript-eslint/no-empty-function': 'off',
+				// Disable force comment description.
 				'eslint-comments/require-description': 'off',
+				// Disable forced use of import.
 				'@typescript-eslint/no-require-imports': 'off',
 			},
 		},
