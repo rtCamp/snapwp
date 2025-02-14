@@ -148,9 +148,9 @@ export default function Page() {
 
 ---
 
-## Overloading React Parser Options
+## Overloading [html-react-parser](https://www.npmjs.com/package/html-react-parser) Options
 
-SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) . This is useful when you want to overload default options of react-parser.
+SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) Component which internally uses html-react-parser. This is useful when you want to overload default options of html-react-parser.
 
 ### 1. Creating a Custom Component with options
 
@@ -159,18 +159,13 @@ Create a new Custom Component to overload the default options of [react-parser](
 MyCustomReactParser.tsx
 
 ```tsx
+import React from 'react';
 import {
-	getImageSizeFromAttributes,
-	getStyleObjectFromString,
-} from '@snapwp/core';
-import { Image } from '@snapwp/next';
-import {
-	domToReact,
 	Element,
 	type DOMNode,
 	type HTMLReactParserOptions,
 } from 'html-react-parser';
-
+import { CustomImage } from '@/CustomImage'; // custom image component defined in your project
 /**
  *  Using typescript type guard to check if a DOMNode is an Element.
  * Ref : https://github.com/remarkablemark/html-react-parser/issues/221#issuecomment-784073240
@@ -190,37 +185,20 @@ export const customParserOptions: HTMLReactParserOptions = {
 			const { attribs, children, name, type } = domNode;
 			const { class: className, style, ...attributes } = attribs;
 			const { href } = attribs;
-			const styleObject = style
-				? getStyleObjectFromString( style )
-				: undefined;
 
-			const { width, height } = getImageSizeFromAttributes( attribs );
-			const imageAttributes = {
-					id: attribs.id,
-					mediaDetails: {
-						width,
-						height,
-					},
-				};
-			const shouldFill =
-					! width &&
-					! height &&
-					undefined !== width &&
-					undefined !== height;
-
+			if ( type === 'tag' && name === 'img' ) {
 				return (
-					<Image
+					<CustomImage
 						{ ...attributes }
 						src={ attribs.src }
 						alt={ attribs.alt || '' }
 						height={ height }
 						width={ width }
 						className={ className }
-						fill={ shouldFill }
 						style={ styleObject }
 						image={ imageAttributes }
-                        //overload custom id
-						id="overloading id"
+						//adding custom id
+						id="overriding id"
 					/>
 				);
 			}
@@ -235,7 +213,9 @@ export const customParserOptions: HTMLReactParserOptions = {
 
 ### 2. Use react-parser as fallback
 
-Make any default component null to use react-parser as fallback component
+Make any default block component null to use react-parser as fallback component
+
+src/app/[[...path]]/page.tsx
 
 ```tsx
 import { TemplateRenderer } from '@snapwp/next';
@@ -260,6 +240,8 @@ export default function Page() {
 ```
 
 ### 3. Pass customParserOptions to overload
+
+snapwp.config.ts
 
 ```tsx
 import type { SnapWPConfig } from '@snapwp/core/config';
