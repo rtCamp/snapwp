@@ -53,4 +53,5 @@ Contributing Guidelines: https://github.com/rtCamp/snapwp/blob/develop/.github/C
 -   [ ] My code passes all lints (ESLint, tsc, prettier etc.).
 -   [ ] My code has detailed inline documentation.
 -   [ ] I have added unit tests to verify the code works as intended.
--   [ ] I have updated the project documentation accordingly.
+-   [ ] I have updated the project documentation as needed.
+-   [ ] I have added a changeset for this PR using `npm run changeset`.

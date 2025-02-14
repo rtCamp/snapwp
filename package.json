@@ -55,7 +55,8 @@
 		"local-registry:start": "docker compose --project-directory ./.verdaccio/ -f \"./.verdaccio/docker-compose.yml\" up -d",
 		"local-registry:stop": "docker compose --project-directory ./.verdaccio/ -f \"./.verdaccio/docker-compose.yml\" down",
 		"publish:version": "changeset version && npm update $(npm query .workspace | jq -rc '.[].name' | tr '\\n' ' ')",
-		"publish:local": "sh ./bin/publish-local.sh"
+		"publish:local": "sh ./bin/publish-local.sh",
+		"changeset": "changeset"
 	},
 	"workspaces": [
 		"packages/*"
