@@ -1,3 +1,3 @@
 module.exports = {
-  ...require("../../config/.prettierrc.cjs"),
+	...require( '../../config/.prettierrc.cjs' ),
 };
