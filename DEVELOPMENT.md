@@ -203,9 +203,7 @@ You can test these packages locally by linking them, or by using a local npm reg
 
 This project uses [Changesets](https://github.com/changesets/changesets) for versioning and generating changelogs across the packages in the monorepo.
 
-To generate a Changeset:
-
-(_Copied and modified from [Changesets' docs](https://github.com/changesets/changesets/blob/01c037c0462540196b5d3d0c0241d8752b465b4b/docs/adding-a-changeset.md)_):
+To generate a Changeset (_copied and modified from [Changesets' docs](https://github.com/changesets/changesets/blob/01c037c0462540196b5d3d0c0241d8752b465b4b/docs/adding-a-changeset.md)_):
 
 1. Run `npm run changeset` in the root of the monorepo.
 2. Select the packages you want to include in the changeset.
@@ -214,14 +212,17 @@ To generate a Changeset:
     - Hit `enter` when all desired packages are selected.
 3. You will be prompted to select a bump type for each selected package. First you will flag all the packages that should receive a `major` bump, then `minor`. The remaining packages will receive a `patch` bump.
 
-    **Major**: Any form of breaking change.
-    **Minor**: New (non-breaking) features or changes.
-    **Patch**: Bug fixes.
+    - **Major**: Any form of breaking change.
+    - **Minor**: New (non-breaking) features or changes.
+    - **Patch**: Bug fixes.
 
 4. Your final prompt will be to provide a message to go along with the changeset. This message will be written to the changeset when the next release is made.
 
     > ⚠️ **Important**
-    > Remember to follow [Conventional Commits formatting](https://www.conventionalcommits.org/en/v1.0.0/) to use imperative language in your changeset message. For example, "feat: Add new feature" instead of "Added new feature".
+    >
+    > Remember to follow [Conventional Commits formatting](https://www.conventionalcommits.org/en/v1.0.0/) and to use imperative language in your changeset message.
+    >
+    > For example, "feat: Add new feature" instead of "Added new feature".
 
     After this, a new changeset will be added which is a markdown file with YAML front matter.
 
