@@ -51,7 +51,7 @@ jobs:
             - name: Authenticate with npm
               run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-            - name: Publish all packages in NPM Workspace to NPM
+            - name: Publish to NPM
               run: |
                   sudo apt install jq
                   declare -a package_array=($(echo '${{ inputs.updated }}' | jq -r '.[]'))

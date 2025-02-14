@@ -11,23 +11,23 @@ permissions:
 
 jobs:
     changeset:
-        name: Release
+        name: Prepare Release
         runs-on: ubuntu-latest
         steps:
-            - name: Checkout Repo
+            - name: Checkout
               uses: actions/checkout@v4
 
-            - name: Setup Node
+            - name: Setup Node.js
               uses: actions/setup-node@v4
               with:
                   node-version: 20
 
-            - name: Install Dependencies
+            - name: Install dependencies
               run: |
                   sudo apt install jq  # Install jq for JSON manipulation
                   npm ci
 
-            - name: Create Release Pull Request or Publish to npm
+            - name: Handle Changesets
               id: changesets
               uses: changesets/action@c8bada60c408975afd1a20b3db81d6eee6789308
               env:
@@ -35,7 +35,7 @@ jobs:
               with:
                   version: 'npm run publish:version'
 
-            - name: Check if any versions updated for publishing
+            - name: Check what packages to publish
               id: check_publish
               if: steps.changesets.outputs.hasChangesets == 'false'
               shell: bash
@@ -76,7 +76,7 @@ jobs:
             updatedPackages: ${{ steps.check_publish.outputs.updatedPackages }}
 
     publish:
-        name: Publish packages to NPM Registry
+        name: Publish packages to NPM
         needs: changeset
         uses: './.github/workflows/publish.yml'
         if: needs.changeset.outputs.publish == 'true'
