@@ -245,6 +245,7 @@ const getImageProps = (
  *
  * @return Whether the lightbox is enabled.
  */
+//@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ) => {
 	// if ( ! lightbox ) {
 	// 	return false;
