@@ -7,6 +7,7 @@ import {
 	type ScriptModuleProps,
 	TemplateParseError,
 } from '@snapwp/core';
+import { BlockData } from '@snapwp/types';
 
 /**
  * Parses template query data into props for rendering a template.
@@ -108,12 +109,12 @@ function parseEnqueuedScripts(
  */
 function parseEditorBlocks(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ]
-) {
-	const editorBlocks: unknown[] = [];
+): BlockData[] | undefined {
+	const editorBlocks: BlockData[] | undefined = [];
 
-	templateByUri?.editorBlocks?.forEach( ( editorBlock ) => {
+	templateByUri?.editorBlocks?.forEach( ( editorBlock: unknown ) => {
 		if ( editorBlock && 'object' === typeof editorBlock ) {
-			editorBlocks.push( editorBlock );
+			editorBlocks.push( editorBlock as BlockData );
 		}
 	} );
 

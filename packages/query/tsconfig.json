@@ -12,5 +12,9 @@
 	},
 	"include": [ "src/**/*" ],
 	"exclude": [ "node_modules", "dist", "src/**/tests/*" ],
-	"references": [ { "path": "../core" }, { "path": "../codegen-config" } ]
+	"references": [
+		{ "path": "../core" },
+		{ "path": "../codegen-config" },
+		{ "path": "../types" }
+	]
 }

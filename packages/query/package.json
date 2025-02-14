@@ -45,6 +45,7 @@
 	"peerDependencies": {
 		"react": "^19.0.0",
 		"@apollo/client": "^3.11.4",
-		"graphql": "^16.9.0"
+		"graphql": "^16.9.0",
+		"@snapwp/types": "*"
 	}
 }
