@@ -12,7 +12,7 @@
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
 		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
-		"noUncheckedIndexedAccess": false, // @todo Enable this.
+		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"strictFunctionTypes": true,
