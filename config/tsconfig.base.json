@@ -7,17 +7,20 @@
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": false, // @todo Enable this.
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
 		"noUncheckedIndexedAccess": false, // @todo Enable this.
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"strictFunctionTypes": true,
 
 		// Modules
-		"module": "ESNext",
+		"module": "ES2022",
 		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
 
 		// Emit
 		"declaration": true,
@@ -34,7 +37,7 @@
 		"jsx": "react",
 		"lib": [ "ES2022", "DOM" ],
 		"moduleDetection": "force",
-		"target": "ES2018", // @todo bump to ES2022
+		"target": "ES2022",
 
 		// Projects
 		"composite": true,
