@@ -2,24 +2,7 @@ import React, { type ButtonHTMLAttributes } from 'react';
 import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { Link, Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreButtonAttributes extends Record< string, unknown > {
-	cssClassName?: string;
-	linkClassName?: string;
-	linkTarget?: string;
-	rel?: string;
-	style?: string;
-	tagName?: string;
-	text?: string;
-	title?: string;
-	url?: string;
-	buttonType?: string;
-}
-
-export interface CoreButtonProps extends BlockProps {
-	attributes?: CoreButtonAttributes;
-}
+import { CoreButtonProps } from '@snapwp/types';
 
 /**
  * Renders the core/button block.

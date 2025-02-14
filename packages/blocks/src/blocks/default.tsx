@@ -1,8 +1,6 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface DefaultProps extends BlockProps {}
+import { DefaultProps } from '@snapwp/types';
 
 /**
  * Renders the default block.

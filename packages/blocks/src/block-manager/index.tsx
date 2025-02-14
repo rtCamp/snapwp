@@ -1,32 +1,7 @@
-import defaultBlockDefinitions, {
-	BlockDefinitions,
-	CoreVideoAttributes,
-} from '@/blocks';
+import defaultBlockDefinitions from '@/blocks';
 import Default from '@/blocks/default';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
-
-export interface BlockData<
-	T extends Record< string, unknown > = Record< string, unknown >,
-> {
-	type: string;
-	cssClassNames?: Array< string | null > | null;
-	clientId?: string | null;
-	parentClientId?: string | null;
-	renderedHtml?: string | null;
-	attributes?: T;
-}
-
-export type BlockProps<
-	T extends Record< string, unknown > = Record< string, unknown >,
-> = Omit< BlockData< T >, 'type' >;
-
-export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
-	TBlockProps,
-	'parentClientId'
-> & {
-	children?: BlockTreeNode[] | null;
-	renderer: React.FC< React.PropsWithChildren< TBlockProps > >;
-};
+import { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 /**
  * Singleton class that renders blocks using defined React components.

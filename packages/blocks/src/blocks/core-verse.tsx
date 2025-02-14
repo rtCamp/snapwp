@@ -5,16 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreVerseAttributes extends Record< string, unknown > {
-	content?: string;
-	style?: string;
-}
-
-export interface CoreVerseProps extends BlockProps {
-	attributes?: CoreVerseAttributes;
-}
+import { CoreVerseProps } from '@snapwp/types';
 
 /**
  * Renders the core/verse block.

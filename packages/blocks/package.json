@@ -15,9 +15,7 @@
 		"require": "./dist/index.js",
 		"types": "./dist/types/index.d.ts"
 	},
-	"files": [
-		"dist"
-	],
+	"files": [ "dist" ],
 	"scripts": {
 		"build": "tsc --build",
 		"postbuild": "npm run resolve-paths",
@@ -44,6 +42,7 @@
 	},
 	"peerDependencies": {
 		"@snapwp/core": "*",
-		"@snapwp/next": "*"
+		"@snapwp/next": "*",
+		"@snapwp/types": "*"
 	}
 }

@@ -1,20 +1,11 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreListItemAttributes extends Record< string, unknown > {
-	content?: string;
-	style?: string;
-}
-
-export interface CoreListItemProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreListItemAttributes;
-}
+import { CoreListItemProps } from '@snapwp/types';
 
 /**
  * Renders the core/list-item block.

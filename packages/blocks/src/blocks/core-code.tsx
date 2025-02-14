@@ -1,17 +1,7 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreCodeAttributes extends Record< string, unknown > {
-	style?: string;
-	content?: string;
-	cssClassName?: string;
-}
-
-export interface CoreCodeProps extends BlockProps {
-	attributes?: CoreCodeAttributes;
-}
+import { CoreCodeProps } from '@snapwp/types';
 
 /**
  * Renders the core/code block.

@@ -1,8 +1,6 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreHtmlProps extends BlockProps {}
+import { CoreHtmlProps } from '@snapwp/types';
 
 /**
  * Renders the core/html block.

@@ -1,7 +1,5 @@
-import { BlockProps } from '..';
-import React, { PropsWithChildren } from 'react';
-
-export interface CorePatternProps extends PropsWithChildren< BlockProps > {}
+import React from 'react';
+import { CorePatternProps } from '@snapwp/types';
 
 /**
  * Renders the core/pattern block.

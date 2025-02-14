@@ -1,26 +1,10 @@
-import React, { PropsWithChildren, createElement } from 'react';
+import React, { createElement } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { BlockProps } from '..';
-
-export interface CoreGroupAttributes extends Record< string, unknown > {
-	style?: string;
-	tagName?: string;
-}
-
-export interface CoreGroupProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreGroupAttributes;
-}
-
-interface TagProps {
-	name?: string;
-	className: string;
-	style: React.CSSProperties;
-	children: React.ReactNode;
-}
+import { CoreGroupProps, TagProps } from '@snapwp/types';
 
 /**
  * Renders an HTML element with the specified tag name.

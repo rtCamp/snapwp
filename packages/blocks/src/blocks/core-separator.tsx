@@ -1,8 +1,6 @@
 import React from 'react';
 import { getClassNamesFromString } from '@snapwp/core';
-import { BlockData, BlockProps } from '..';
-
-export interface CoreSeparatorProps extends BlockProps {}
+import { CoreSeparatorProps } from '@snapwp/types';
 
 /**
  * Renders the core/separator block.

@@ -1,64 +1,13 @@
-import React, {
-	type ComponentProps,
-	type PropsWithChildren,
-	type ElementType,
-} from 'react';
+import React, { type ComponentProps } from 'react';
 import {
 	getStylesFromAttributes,
 	findElementAndGetClassNames,
 	getColorClassName,
 	cn,
 } from '@snapwp/core';
-import { BlockProps } from '..';
 import { Image, Parse } from '@snapwp/next';
+import { CoreCoverProps, FocalPoint } from '@snapwp/types';
 
-export interface CoreCoverAttributes extends Record< string, unknown > {
-	alt?: string;
-	backgroundType?: string;
-	contentPosition?: string;
-	customGradient?: string;
-	customOverlayColor?: string;
-	dimRatio?: number;
-	focalPoint?: FocalPoint;
-	gradient?: string;
-	hasParallax?: boolean;
-	id?: number;
-	isDark?: boolean;
-	isRepeated?: boolean;
-	minHeight?: number;
-	minHeightUnit?: string;
-	overlayColor?: string;
-	sizeSlug?: string;
-	style?: string;
-	tagName?: ElementType;
-	url?: string;
-	useFeaturedImage?: boolean;
-}
-
-export interface CoreCoverProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreCoverAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	mediaDetails?: MediaDetails;
-	renderedHtml?: string | null;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		databaseId: number;
-		sizes: string;
-		srcSet: string;
-		mediaItemUrl: string;
-	};
-}
-interface FocalPoint {
-	x: number;
-	y: number;
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-}
 const IMAGE_BACKGROUND_TYPE = 'image';
 const VIDEO_BACKGROUND_TYPE = 'video';
 const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };

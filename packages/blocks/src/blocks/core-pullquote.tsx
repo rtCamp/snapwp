@@ -5,18 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CorePullquoteAttributes extends Record< string, unknown > {
-	citation?: string;
-	style?: string;
-	textAlign?: string;
-	pullquoteValue?: string;
-}
-
-export interface CorePullquoteProps extends BlockProps {
-	attributes?: CorePullquoteAttributes;
-}
+import { CorePullquoteProps } from '@snapwp/types';
 
 /**
  * Renders the core/pullquote block.

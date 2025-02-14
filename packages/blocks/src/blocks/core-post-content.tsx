@@ -1,8 +1,6 @@
-import React, { PropsWithChildren } from 'react';
+import React from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { BlockProps } from '..';
-
-export interface CorePostContentProps extends PropsWithChildren< BlockProps > {}
+import { CorePostContentProps } from '@snapwp/types';
 
 /**
  * Renders the core/post-content block.

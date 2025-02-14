@@ -1,51 +1,11 @@
-import React, { type ComponentProps, PropsWithChildren } from 'react';
+import React, { type ComponentProps } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreMediaTextProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreMediaTextAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	renderedHtml?: string | null;
-	mediaDetails?: MediaDetails;
-}
-
-export interface CoreMediaTextAttributes extends Record< string, unknown > {
-	href?: string;
-	linkClass?: string;
-	linkTarget?: string;
-	mediaAlt?: string;
-	mediaId?: number;
-	mediaPosition?: 'left' | 'right';
-	mediaSizeSlug?: string;
-	mediaType?: 'image' | 'video';
-	mediaUrl?: string;
-	mediaWidth?: number;
-	rel?: string;
-	style?: string;
-	imageFill?: boolean;
-	focalPoint?: FocalPoint;
-}
-
-interface FocalPoint {
-	x: number;
-	y: number;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		sizes: string;
-	};
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-}
+import { CoreMediaTextProps, FocalPoint } from '@snapwp/types';
 
 /**
  * Default width for media content as percentage

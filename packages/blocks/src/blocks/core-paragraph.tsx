@@ -1,22 +1,7 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
-import { BlockProps } from '..';
 import { Parse } from '@snapwp/next';
-
-export interface CoreParagraphAttributes extends Record< string, unknown > {
-	backgroundColor?: string;
-	content?: string;
-	cssClassName?: string;
-	direction?: string;
-	fontFamily?: string;
-	fontSize?: string;
-	style?: string;
-	textColor?: string;
-}
-
-export interface CoreParagraphProps extends BlockProps {
-	attributes?: CoreParagraphAttributes;
-}
+import { CoreParagraphProps } from '@snapwp/types';
 
 /**
  * Renders the core/paragraph block.

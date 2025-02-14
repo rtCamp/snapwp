@@ -1,69 +1,18 @@
 import { decode } from 'html-entities';
-import React, {
-	type ComponentProps,
-	type CSSProperties,
-	type PropsWithChildren,
-} from 'react';
+import React, { type ComponentProps, type CSSProperties } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { BlockProps } from '..';
-
-export interface CoreImageAttributes extends Record< string, unknown > {
-	alt?: string;
-	aspectRatio?: string;
-	caption?: string;
-	href?: string;
-	linkClass?: string;
-	linkTarget?: string;
-	rel?: string;
-	scale?: string;
-	style?: string;
-	title?: string;
-	url?: string;
-	imageHeight?: string;
-	width?: string;
-	sizeSlug?: string;
-	lightbox?: string | null;
-}
-
-export interface CoreImageProps extends BlockProps {
-	attributes?: CoreImageAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	mediaDetails?: MediaDetails;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		databaseId: number;
-		sizes: string;
-	};
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-	sizes: MediaSize[];
-}
-
-interface MediaSize {
-	height: number;
-	width: number;
-	name: string;
-	sourceUrl: string;
-}
-
-interface LightBoxProp {
-	enabled: boolean;
-}
-
-interface FigureProps extends CoreImageAttributes, PropsWithChildren {
-	renderedHtml?: string | null;
-	classNames?: string;
-}
+import {
+	CoreImageAttributes,
+	CoreImageConnectedMediaItem,
+	CoreImageMediaDetails,
+	CoreImageProps,
+	FigureProps,
+} from '@snapwp/types';
 
 /**
  * Renders a figure element with optional link and caption.
@@ -224,8 +173,8 @@ export default function CoreImage( {
  */
 const getImageProps = (
 	attributes?: CoreImageAttributes,
-	connectedMediaItem?: ConnectedMediaItem,
-	mediaDetails?: MediaDetails
+	connectedMediaItem?: CoreImageConnectedMediaItem,
+	mediaDetails?: CoreImageMediaDetails
 ): ComponentProps< typeof Image > => {
 	const {
 		alt,
