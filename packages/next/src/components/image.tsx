@@ -1,9 +1,9 @@
 import React, {
-	CSSProperties,
-	ImgHTMLAttributes,
-	PropsWithoutRef,
+	type CSSProperties,
+	type ImgHTMLAttributes,
+	type PropsWithoutRef,
 } from 'react';
-import NextImage, { ImageProps } from 'next/image';
+import NextImage, { type ImageProps } from 'next/image';
 import { cn } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 

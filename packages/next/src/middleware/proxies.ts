@@ -1,12 +1,12 @@
 import {
-	type NextRequest,
-	NextMiddleware,
-	NextFetchEvent,
 	NextResponse,
+	type NextRequest,
+	type NextMiddleware,
+	type NextFetchEvent,
 } from 'next/server';
-import { MiddlewareFactory } from './utils';
 import { getConfig } from '@snapwp/core/config';
 import { addTrailingSlash } from '@snapwp/core';
+import type { MiddlewareFactory } from './utils';
 
 /**
  * Middleware function for Next.js

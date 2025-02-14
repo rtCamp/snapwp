@@ -1,14 +1,14 @@
-import { ApolloQueryResult } from '@apollo/client';
-import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 import {
-	BlockData,
 	Logger,
-	type EnqueuedScriptProps,
-	type StyleSheetProps,
-	type ScriptModuleProps,
-	TemplateData,
 	TemplateParseError,
+	type BlockData,
+	type EnqueuedScriptProps,
+	type ScriptModuleProps,
+	type StyleSheetProps,
+	type TemplateData,
 } from '@snapwp/core';
+import type { ApolloQueryResult } from '@apollo/client';
+import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
 /**
  * Parses template query data into props for rendering a template.
