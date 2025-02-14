@@ -1,7 +1,7 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import { BlockDefinitions } from '@/props';
+import { BlockDefinitions } from '@snapwp/types';
 
 export interface SnapWPEnv {
 	/**
