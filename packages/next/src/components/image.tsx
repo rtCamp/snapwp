@@ -8,7 +8,6 @@ import { cn } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 
 interface MediaItem {
-	id: string;
 	altText?: string | null;
 	mediaDetails: {
 		width: number | undefined;
