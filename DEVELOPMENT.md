@@ -82,23 +82,22 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm install
     ```
 
-4. Build the packages.
+4. Choose ONE of the following options:
+
+    **Option A: Build and Run in Development Mode**
 
     ```bash
     npm run build
+    npm run dev
     ```
 
-5. Publish packages locally.
+    **Option B: Publish Packages Locally**
 
     ```bash
     npm run publish:local
     ```
 
-Alternatively, you could build the packages in watch mode:
-
-```bash
-npm run dev
-```
+The `dev` command runs the packages in watch mode, but requires either a build step or local publishing first to work properly.
 
 ## Code Contributions (Pull Requests)
 
