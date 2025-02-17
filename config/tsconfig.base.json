@@ -1,21 +1,50 @@
 {
+	"$schema": "https://json.schemastore.org/tsconfig",
+
 	"compilerOptions": {
-		"target": "ES2018",
-		"module": "ESNext",
-		"moduleResolution": "Bundler",
-		"incremental": true,
-		"composite": true,
-		"disableSourceOfProjectReferenceRedirect": true,
+		// Type checking.
 		"strict": true,
+		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": false, // @todo Enable this.
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
 		"noImplicitReturns": true,
-		"lib": [ "ES2022", "DOM" ],
+		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
+		"noUncheckedIndexedAccess": false, // @todo Enable this.
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"strictFunctionTypes": true,
+
+		// Modules
+		"module": "ES2022",
+		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
+
+		// Emit
+		"declaration": true,
+		"declarationMap": true,
+		"sourceMap": true,
+
+		// Interop Constraints
 		"esModuleInterop": true,
-		"skipLibCheck": true,
 		"forceConsistentCasingInFileNames": true,
-		"allowSyntheticDefaultImports": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": false, // @todo Enable this.
+
+		// Language and Environment
 		"jsx": "react",
-		"declarationMap": true
+		"lib": [ "ES2022", "DOM" ],
+		"moduleDetection": "force",
+		"target": "ES2022",
+
+		// Projects
+		"composite": true,
+		"disableSourceOfProjectReferenceRedirect": true,
+		"incremental": true,
+
+		// Completeness
+		"skipLibCheck": true
 	}
 }

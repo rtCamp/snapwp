@@ -12,11 +12,17 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 
 ### Installation Steps
 
-1. Install and activate the latest release versions of the following plugins: - [WPGraphQL](https://wordpress.org/plugins/wp-graphql/) - [WPGraphQL Content Blocks](https://github.com/wpengine/wp-graphql-content-blocks/releases/latest) - [SnapWP Helper](https://github.com/rtCamp/snapwp-helper/releases/latest)
+1. Install and activate the latest release versions of the following plugins:
+
+    - [WPGraphQL](https://wordpress.org/plugins/wp-graphql/)
+    - [WPGraphQL Content Blocks](https://github.com/wpengine/wp-graphql-content-blocks/releases/latest)
+    - [SnapWP Helper](https://github.com/rtCamp/snapwp-helper/releases/latest)
+
+    **With WP-CLI**:
+
+    You can install the latest versions of the required plugins using the WP-CLI command below:
 
     ```bash
-    # With WP-CLI
-
     wp plugin install wp-graphql https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip --activate
     ```
 
@@ -27,7 +33,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 ### Prerequisites
 
 -   **Node.js**: v20+ (with `npm` and `npx` installed).
--   **A WordPress backend** [configured with SnapWP Helper](#backend-setup).
+-   **A WordPress backend** configured with SnapWP Helper (see [previous section](#backend-setup)).
 
 ### Installation Steps
 
@@ -44,15 +50,18 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     1. Enter the path to the directory where you want to create the app, e.g. `./my-headless-app`
     2. Create an Environment File:
 
-        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper into the file created.
+        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` into the file created.
 
          <a href="./images/snapwp-helper-env.png">
-           <!--@todo: link to snapwp-helper repo for image-->
-           <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
-           <p> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</p>
+           <figure>
+             <!--@todo: link to snapwp-helper repo for image-->
+             <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;" />
+             <br />
+             <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
+           </figure>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./usage.md#example-env-file).
+        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.

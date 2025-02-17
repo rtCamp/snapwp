@@ -43,8 +43,8 @@
 		"resolve-paths:codegen": "npm run resolve-paths -w @snapwp/codegen-config",
 		"dev": "tsc-watch -b --onSuccess \"npm-run-all resolve-paths:*\"",
 		"typecheck": "tsc --noEmit",
-		"lint": "eslint . --config ./.eslintrc.json",
-		"lint:fix": "eslint . --config ./.eslintrc.json --fix",
+		"lint": "eslint . --config ./.eslintrc.cjs",
+		"lint:fix": "eslint . --config ./.eslintrc.cjs --fix",
 		"format": "prettier . --config config/.prettierrc.cjs --write --paren-spacing",
 		"format:check": "prettier . --config config/.prettierrc.cjs --check --paren-spacing",
 		"test:e2e": "playwright test -c config/playwright.config.js",
@@ -54,7 +54,9 @@
 		"test:unit:coverage": "npm run test:unit -- --collectCoverage && open coverage/lcov-report/index.html",
 		"local-registry:start": "docker compose --project-directory ./.verdaccio/ -f \"./.verdaccio/docker-compose.yml\" up -d",
 		"local-registry:stop": "docker compose --project-directory ./.verdaccio/ -f \"./.verdaccio/docker-compose.yml\" down",
-		"publish:local": "sh ./bin/publish-local.sh"
+		"publish:version": "changeset version && npm update $(npm query .workspace | jq -rc '.[].name' | tr '\\n' ' ')",
+		"publish:local": "sh ./bin/publish-local.sh",
+		"changeset": "changeset"
 	},
 	"workspaces": [
 		"packages/*"
@@ -62,6 +64,8 @@
 	"devDependencies": {
 		"@babel/preset-env": "^7.26.7",
 		"@babel/preset-react": "^7.26.3",
+		"@changesets/changelog-github": "^0.5.0",
+		"@changesets/cli": "^2.27.12",
 		"@playwright/test": "^1.50.0",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.2.0",
@@ -75,10 +79,10 @@
 		"jest-environment-jsdom": "^29.7.0",
 		"npm-run-all": "^4.1.5",
 		"prettier": "npm:wp-prettier@^3.0.3",
+		"resolve-tspaths": "^0.8.23",
 		"ts-jest": "^29.2.5",
 		"tsc-watch": "^6.3.0",
-		"typescript": ">=4.3.5 <5.4.0",
-		"resolve-tspaths": "^0.8.23"
+		"typescript": ">=4.3.5 <5.4.0"
 	},
 	"dependencies": {
 		"react": "^19.0.0",

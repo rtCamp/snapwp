@@ -64,25 +64,31 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Setup
 
-1. Use node version in .nvmrc
+1. Copy the example environment file to `.env` and update the values as needed.
+
+    ```bash
+    cp .env.example .env
+    ```
+
+2. Use the node version defined in .nvmrc.
 
     ```bash
     nvm use
     ```
 
-2. Install the NPM dependencies:
+3. Install the NPM dependencies.
 
     ```bash
     npm install
     ```
 
-3. Build the packages:
+4. Build the packages.
 
     ```bash
     npm run build
     ```
 
-4. Publish packages locally:
+5. Publish packages locally.
 
     ```bash
     npm run publish:local
@@ -193,8 +199,44 @@ You can test these packages locally by linking them, or by using a local npm reg
 
 @todo
 
+### Changesets
+
+This project uses [Changesets](https://github.com/changesets/changesets) for versioning and generating changelogs across the packages in the monorepo.
+
+To generate a Changeset (_copied and modified from [Changesets' docs](https://github.com/changesets/changesets/blob/01c037c0462540196b5d3d0c0241d8752b465b4b/docs/adding-a-changeset.md)_):
+
+1. Run `npm run changeset` in the root of the monorepo.
+2. Select the packages you want to include in the changeset.
+    - Use `↑` and `↓` to navigate to packages.
+    - Use `space` to select a package.
+    - Hit `enter` when all desired packages are selected.
+3. You will be prompted to select a bump type for each selected package. First you will flag all the packages that should receive a `major` bump, then `minor`. The remaining packages will receive a `patch` bump.
+
+    - **Major**: Any form of breaking change.
+    - **Minor**: New (non-breaking) features or changes.
+    - **Patch**: Bug fixes.
+
+4. Your final prompt will be to provide a message to go along with the changeset. This message will be written to the changeset when the next release is made.
+
+    > ⚠️ **Important**
+    >
+    > Remember to follow [Conventional Commits formatting](https://www.conventionalcommits.org/en/v1.0.0/) and to use imperative language in your changeset message.
+    >
+    > For example, "feat: Add new feature" instead of "Added new feature".
+
+    After this, a new changeset will be added which is a markdown file with YAML front matter.
+
+    ```
+    -| .changeset/
+    -|-| UNIQUE_ID.md
+    ```
+
+    The message you typed can be found in the markdown file. If you want to expand on it, you can write as much markdown as you want, which will all be added to the changelog on publish. If you want to add more packages or change the bump types of any packages, that's also fine.
+
+5. Once you are happy with the changeset, commit the file to your branch.
+
 ### Releasing
 
-As will all other Code Contributions, the release process is managed through Pull Requests. When you are ready to make a release, create a new branch from `develop` and make the necessary changes, and then create a PR.
+This project uses [Changesets](#changesets) to manage releases.
 
-Once the PR is merged, you should push a copy of the `develop` branch to the `main` branch.
+Once all the latest version of the packages are ready to be released and all the [changesets are generated](#changesets), the generated `chore: Release packages 🏷️` PR should be reviewed and approved. Merging the PR will release the packages to NPM and tag + publish the corresponding GitHub releases.
