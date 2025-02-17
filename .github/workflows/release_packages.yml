@@ -1,0 +1,87 @@
+name: Release Packages
+
+on:
+    push:
+        branches:
+            - develop
+
+permissions:
+    contents: write
+    pull-requests: write
+
+jobs:
+    changeset:
+        name: Prepare Release
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 20
+
+            - name: Install dependencies
+              run: |
+                  sudo apt install jq  # Install jq for JSON manipulation
+                  npm ci
+
+            - name: Handle Changesets
+              id: changesets
+              uses: changesets/action@c8bada60c408975afd1a20b3db81d6eee6789308
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+              with:
+                  version: 'npm run publish:version'
+                  commit: 'chore: version bump'
+                  title: 'chore: Release packages 🏷️'
+
+            - name: Check what packages to publish
+              id: check_publish
+              if: steps.changesets.outputs.hasChangesets == 'false'
+              shell: bash
+              run: |
+                  # Get all packages in the workspace
+                  declare -a packages=($(npm query .workspace | jq -rc '.[]._id'))
+                  declare -a updatedPackages=()
+
+                  # Check if any packages have been updated
+                  set +e
+                  for package in "${packages[@]}"; do
+                      echo -e "\nChecking if $package exists on npm registry"
+                      npm info "$package" &> /dev/null
+                      if [ $? -ne 0 ]; then
+                          echo "Package $package does not exist in the registry"  
+                          updatedPackages+=("$(echo "$package" | sed -e 's/@[^@]*$//')")
+                      else
+                          echo "Package $package is already published on npm"
+                      fi
+                  done
+                  set -e
+
+                  # If there are no updated packages, we don't need to publish
+                  if [ ${#updatedPackages[@]} -eq 0 ]; then
+                      echo "No packages updated"
+                      echo "publish=false" >> "$GITHUB_OUTPUT"
+                  else
+                      echo "Packages updated: ${updatedPackages[@]}"
+                      echo "publish=true" >> "$GITHUB_OUTPUT"
+                  fi
+
+                  echo "${updatedPackages[@]}"
+                  ary="$(echo "${updatedPackages[@]}" | jq -Rc 'split(" ")')"
+                  echo "updatedPackages=$ary" >> "$GITHUB_OUTPUT"
+        outputs:
+            # We want to run publish if and only if there are no changesets
+            publish: ${{ steps.check_publish.outputs.publish }}
+            updatedPackages: ${{ steps.check_publish.outputs.updatedPackages }}
+
+    publish:
+        name: Publish packages to NPM
+        needs: changeset
+        uses: './.github/workflows/publish.yml'
+        if: needs.changeset.outputs.publish == 'true'
+        with:
+            updated: ${{ needs.changeset.outputs.updatedPackages }}
+        secrets: inherit
