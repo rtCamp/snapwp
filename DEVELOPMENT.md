@@ -64,7 +64,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Setup
 
-1. Copy the example environment file to `.env` and update the values as needed.
+1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
     ```bash
     cp .env.example .env
@@ -82,22 +82,25 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm install
     ```
 
-4. Choose ONE of the following options:
-
-    **Option A: Build and Run in Development Mode**
+4. Build the packages locally.
 
     ```bash
     npm run build
+    ```
+
+   At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+
+5. (Optional) Start the packages in watch mode.
+
+    ```bash
     npm run dev
     ```
 
-    **Option B: Publish Packages Locally**
+    Alternatively, you can publish the packages locally using Verdaccio:
 
     ```bash
     npm run publish:local
     ```
-
-The `dev` command runs the packages in watch mode, but requires either a build step or local publishing first to work properly.
 
 ## Code Contributions (Pull Requests)
 
