@@ -110,7 +110,7 @@ module.exports = {
 		'jsdoc/no-types': [ 'off' ],
 		'jsdoc/require-param-type': [ 'error' ],
 		'jsdoc/require-returns-type': [ 'error' ],
-		'jsx-closing-tag-location': [ 1, { location: 'line-aligned' } ],
+		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
 		'no-empty-function': 'error',
 		'no-restricted-imports': [
 			'error',
