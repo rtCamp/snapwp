@@ -207,6 +207,39 @@ export default function CustomFonts() {
 }
 ```
 
+### Updating Global Styles
+
+Global styles can be modified by passing the `getGlobalStyles` attribute to the `RootLayout` within the `src/app/layout.tsx` file of the frontend application.
+
+`getGlobalStyles` takes an async callback function that returns an object containing global styles.
+
+The default definition for `getGlobalStyles` function passed in `getGlobalStyles` attribute can be found in [@snapwp/query](../packages/query/README.md) package.
+
+Type Definition of `getGlobalStyles`:
+
+```typescript
+type getGlobalStyles = () => Promise< GlobalHeadProps >;
+```
+
+Type definition of `GlobalHeadProps` can be found in [@snapwp/core](../packages/core/README.md) package.
+
+### Updating Template Data
+
+Template data can be modified by passing `getTemplateData` attribute to the `TemplateRenderer` within `src/app/[[...path]]/page.tsx` file of the frontend application.
+
+`getTemplateData` takes an async callback to get template styles and content.
+
+The default definition for `getTemplateData` function passed in `getTemplateData` attribute can be found in [@snapwp/query](../packages/query/README.md) package.
+
+Type Definition of `getTemplateData`:
+
+```typescript
+type getTemplateData = ( uri: string ) => Promise< TemplateData >;
+```
+
+Type definition of `TemplateData` can be found in [@snapwp/core](../packages/core/README.md) package.
+
+
 ## Contributing
 
 This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
