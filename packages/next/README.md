@@ -239,7 +239,6 @@ type getTemplateData = ( uri: string ) => Promise< TemplateData >;
 
 Type definition of `TemplateData` can be found in [@snapwp/core](../packages/core/README.md) package.
 
-
 ## Contributing
 
 This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
