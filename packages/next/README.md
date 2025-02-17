@@ -167,16 +167,16 @@ export default function ScriptModuleExample() {
             <ScriptModule
                 src="https://example.com/main.js"
                 handle="example-main-script"
-                dependencies=[
-                 {
-                importType: 'static',
-                connectedScriptModule: {
-                    handle: '@module',
-                    src: 'http://example.com/index.min.js'
-                     }
-                 }
-                ]
-             />
+                dependencies={[
+                    {
+                        importType: 'static',
+                        connectedScriptModule: {
+                            handle: '@module',
+                            src: 'http://example.com/index.min.js'
+                        }
+                    }
+                ]}
+            />
         </div>
     );
 }
@@ -207,7 +207,7 @@ export default function CustomFonts() {
 }
 ```
 
-### Updating Global Styles
+### `getGlobalStyles()`
 
 Global styles can be modified by passing the `getGlobalStyles` attribute to the [RootLayout](./src/root-layout/index.tsx) within the `src/app/layout.tsx` file of the frontend application.
 
@@ -223,7 +223,7 @@ type getGlobalStyles = () => Promise< GlobalHeadProps >;
 
 Type definition of `GlobalHeadProps` can be found in [@snapwp/core](../packages/core/README.md) package.
 
-### Updating Template Data
+### `getTemplateData()`
 
 Template data can be modified by passing `getTemplateData` attribute to the [TemplateRenderer](./src/template-renderer/index.tsx) within `src/app/[[...path]]/page.tsx` file of the frontend application.
 

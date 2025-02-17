@@ -7,7 +7,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 ### Prerequisites
 
 -   **PHP**: v7.4+
--   **WordPress**: v6.0+
+-   **WordPress**: v6.7+
 -   A **[Block Theme](https://wordpress.org/documentation/article/block-themes/)**
 
 ### Installation Steps
