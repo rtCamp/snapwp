@@ -1,5 +1,3 @@
-import { ApolloQueryResult } from '@apollo/client';
-import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 import {
 	Logger,
 	type EnqueuedScriptProps,
@@ -8,6 +6,8 @@ import {
 	TemplateParseError,
 } from '@snapwp/core';
 import { BlockData } from '@snapwp/types';
+import type { ApolloQueryResult } from '@apollo/client';
+import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
 /**
  * Parses template query data into props for rendering a template.

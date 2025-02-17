@@ -7,27 +7,37 @@
 		"allowSyntheticDefaultImports": true,
 		"allowUnreachableCode": false,
 		"allowUnusedLabels": false,
+		"exactOptionalPropertyTypes": false, // @todo Enable this.
 		"noFallthroughCasesInSwitch": true,
+		"noImplicitOverride": true,
 		"noImplicitReturns": true,
+		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
+		"noUncheckedIndexedAccess": false, // @todo Enable this.
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"strictFunctionTypes": true,
 
 		// Modules
-		"module": "ESNext",
+		"module": "ES2022",
 		"moduleResolution": "Bundler",
+		"resolveJsonModule": true,
 
 		// Emit
+		"declaration": true,
 		"declarationMap": true,
+		"sourceMap": true,
 
 		// Interop Constraints
 		"esModuleInterop": true,
 		"forceConsistentCasingInFileNames": true,
+		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
 
 		// Language and Environment
 		"jsx": "react",
 		"lib": [ "ES2022", "DOM" ],
-		"target": "ES2018",
+		"moduleDetection": "force",
+		"target": "ES2022",
 
 		// Projects
 		"composite": true,

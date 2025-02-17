@@ -41,6 +41,11 @@ In general, we recommend you adhere to the GitHub issue templates included in th
 
 3. **Write tests**: If possible, add/update the necessary Integration/Functional/etc. tests for your changes to ensure that everything works correctly.
 
+4. **Add a changeset**: If your changes introduce a new feature or fix a bug, add a [changeset](https://github.com/changesets/changesets/blob/main/docs/adding-a-changeset.md#i-am-in-a-multi-package-repository-a-mono-repo) using the `npm run changeset` command.
+
+> [!TIP]
+> Not every change requires a changeset, and if your PR handles multiple changes you may want to include multiple changesets. If you're unsure, feel free to ask for guidance in your PR.
+
 4. **Commit and push your changes**: Once you're satisfied with your changes, commit them to your forked repository and push them to your branch.
 
 5. **Create a pull request**: Submit a `Pull Request` to the `develop` branch of this repository. Select your branch and provide a detailed description of your changes.

@@ -1,4 +1,4 @@
-import { NextMiddleware, NextResponse } from 'next/server';
+import { NextResponse, type NextMiddleware } from 'next/server';
 import { proxies } from './proxies';
 import { currentPath as cm } from './current-path';
 import { corsProxyMiddleware } from './cors';
