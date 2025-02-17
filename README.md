@@ -54,7 +54,7 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 ### References
 
 -   [Config API & Environment Variables](docs/config-api.md)
--   [Overloading WordPress Behavior](docs/overloading-wordpress-behaviour.md)
+-   [Overloading WordPress Behavior](docs/overloading-wp-behavior.md)
 -   [NextJS Middleware](docs/middleware.md)
 -   [Template Rendering System](docs/template-rendering.md)
 
