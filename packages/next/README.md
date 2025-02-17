@@ -209,7 +209,7 @@ export default function CustomFonts() {
 
 ### Updating Global Styles
 
-Global styles can be modified by passing the `getGlobalStyles` attribute to the `RootLayout` within the `src/app/layout.tsx` file of the frontend application.
+Global styles can be modified by passing the `getGlobalStyles` attribute to the [RootLayout](./src/root-layout/index.tsx) within the `src/app/layout.tsx` file of the frontend application.
 
 `getGlobalStyles` takes an async callback function that returns an object containing global styles.
 
@@ -225,7 +225,7 @@ Type definition of `GlobalHeadProps` can be found in [@snapwp/core](../packages/
 
 ### Updating Template Data
 
-Template data can be modified by passing `getTemplateData` attribute to the `TemplateRenderer` within `src/app/[[...path]]/page.tsx` file of the frontend application.
+Template data can be modified by passing `getTemplateData` attribute to the [TemplateRenderer](./src/template-renderer/index.tsx) within `src/app/[[...path]]/page.tsx` file of the frontend application.
 
 `getTemplateData` takes an async callback to get template styles and content.
 
