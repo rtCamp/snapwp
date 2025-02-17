@@ -4,7 +4,7 @@ import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 import Script from 'next/script';
-import { BlockData } from '@snapwp/types';
+import type { BlockData } from '@snapwp/types';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];

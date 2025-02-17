@@ -1,6 +1,6 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
-import { Default, DefaultProps } from '@snapwp/types';
+import type { Default as DefaultType, DefaultProps } from '@snapwp/types';
 
 /**
  * Renders the default block.
@@ -8,7 +8,7 @@ import { Default, DefaultProps } from '@snapwp/types';
  * @param props.renderedHtml - The rendered HTML.
  * @return The rendered default block.
  */
-const Default: Default = ( { renderedHtml }: DefaultProps ) => {
+const Default: DefaultType = ( { renderedHtml }: DefaultProps ) => {
 	if ( ! renderedHtml ) {
 		return null;
 	}

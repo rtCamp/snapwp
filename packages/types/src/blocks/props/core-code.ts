@@ -1,4 +1,4 @@
-import { BaseAttributes, BaseProps } from '../base';
+import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreCodeAttributes = BaseAttributes & {
 	style?: string;

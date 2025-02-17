@@ -1,5 +1,8 @@
 import React from 'react';
-import { CorePattern, CorePatternProps } from '@snapwp/types';
+import type {
+	CorePattern as CorePatternType,
+	CorePatternProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/pattern block.
@@ -9,7 +12,7 @@ import { CorePattern, CorePatternProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CorePattern: CorePattern = ( { children }: CorePatternProps ) => {
+const CorePattern: CorePatternType = ( { children }: CorePatternProps ) => {
 	// Patterns contain only children, so we just return them.
 	return <>{ children }</>;
 };

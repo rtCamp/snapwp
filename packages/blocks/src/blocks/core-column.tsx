@@ -1,6 +1,9 @@
 import React from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
-import { CoreColumn, CoreColumnProps } from '@snapwp/types';
+import type {
+	CoreColumn as CoreColumnType,
+	CoreColumnProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/column block.
@@ -11,7 +14,7 @@ import { CoreColumn, CoreColumnProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreColumn: CoreColumn = ( {
+const CoreColumn: CoreColumnType = ( {
 	attributes,
 	children,
 }: CoreColumnProps ) => {

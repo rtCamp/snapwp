@@ -1,4 +1,4 @@
-import { BaseAttributes, BaseProps } from '..';
+import type { BaseAttributes, BaseProps } from '..';
 
 export interface TrackProps {
 	src: string;

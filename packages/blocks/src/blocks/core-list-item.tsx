@@ -5,7 +5,10 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CoreListItem, CoreListItemProps } from '@snapwp/types';
+import type {
+	CoreListItem as CoreListItemType,
+	CoreListItemProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/list-item block.
@@ -17,7 +20,7 @@ import { CoreListItem, CoreListItemProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreListItem: CoreListItem = ( {
+const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,

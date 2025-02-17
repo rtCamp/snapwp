@@ -1,6 +1,9 @@
 import React, { type JSX } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { CoreTemplatePart, CoreTemplatePartProps } from '@snapwp/types';
+import type {
+	CoreTemplatePart as CoreTemplatePartType,
+	CoreTemplatePartProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/template-part block.
@@ -12,7 +15,7 @@ import { CoreTemplatePart, CoreTemplatePartProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreTemplatePart: CoreTemplatePart = ( {
+const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,

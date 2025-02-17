@@ -1,6 +1,9 @@
 import React from 'react';
 import { Parse } from '@snapwp/next';
-import { CoreFreeform, CoreFreeformProps } from '@snapwp/types';
+import type {
+	CoreFreeform as CoreFreeformType,
+	CoreFreeformProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/freeform block.
@@ -10,7 +13,9 @@ import { CoreFreeform, CoreFreeformProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreFreeform: CoreFreeform = ( { renderedHtml }: CoreFreeformProps ) => {
+const CoreFreeform: CoreFreeformType = ( {
+	renderedHtml,
+}: CoreFreeformProps ) => {
 	// @todo `attribues.content` is not populated in GraphQL. Using `renderedHtml` for now.
 	if ( ! renderedHtml ) {
 		return null;

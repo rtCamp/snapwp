@@ -1,5 +1,5 @@
-import { ElementType, PropsWithChildren } from 'react';
-import { BaseAttributes, BaseProps } from '../base';
+import type { ElementType, PropsWithChildren } from 'react';
+import type { BaseAttributes, BaseProps } from '../base';
 
 export interface FocalPoint {
 	x: number;

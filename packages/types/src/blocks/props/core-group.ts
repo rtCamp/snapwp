@@ -1,5 +1,5 @@
-import { PropsWithChildren, CSSProperties, ReactNode } from 'react';
-import { BaseAttributes, BaseProps } from '../base';
+import type { PropsWithChildren, CSSProperties, ReactNode } from 'react';
+import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreGroupAttributes = BaseAttributes & {
 	style?: string;

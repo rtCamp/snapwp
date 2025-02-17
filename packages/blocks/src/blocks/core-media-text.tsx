@@ -5,7 +5,11 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { CoreMediaText, CoreMediaTextProps, FocalPoint } from '@snapwp/types';
+import type {
+	CoreMediaText as CoreMediaTextType,
+	CoreMediaTextProps,
+	FocalPoint,
+} from '@snapwp/types';
 
 /**
  * Default width for media content as percentage
@@ -49,7 +53,7 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
  * @param props.mediaDetails - Media details
  * @return Rendered component or null if no content
  */
-const CoreMediaText: CoreMediaText = ( {
+const CoreMediaText: CoreMediaTextType = ( {
 	attributes = {},
 	children,
 	renderedHtml,

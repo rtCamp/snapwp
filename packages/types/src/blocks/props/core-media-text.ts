@@ -1,6 +1,6 @@
-import { PropsWithChildren } from 'react';
-import { BaseAttributes, BaseProps } from '../base';
-import { FocalPoint } from '.';
+import type { PropsWithChildren } from 'react';
+import type { BaseAttributes, BaseProps } from '../base';
+import type { FocalPoint } from '.';
 
 export type CoreMediaTextAttributes = BaseAttributes & {
 	href?: string;

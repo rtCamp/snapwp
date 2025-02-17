@@ -1,6 +1,6 @@
 import React from 'react';
 import BlockManager from '@/block-manager';
-import { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
+import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 type EditorBlocksRendererProps = {
 	editorBlocks?: BlockData[] | null;

@@ -5,7 +5,7 @@ import {
 	type ScriptModuleProps,
 	TemplateParseError,
 } from '@snapwp/core';
-import { BlockData } from '@snapwp/types';
+import type { BlockData } from '@snapwp/types';
 import type { ApolloQueryResult } from '@apollo/client';
 import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 

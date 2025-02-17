@@ -6,11 +6,11 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import {
+import type {
 	CoreImageAttributes,
 	CoreImageConnectedMediaItem,
 	CoreImageMediaDetails,
-	CoreImage,
+	CoreImage as CoreImageType,
 	CoreImageProps,
 	FigureProps,
 } from '@snapwp/types';
@@ -79,7 +79,7 @@ const Figure = ( {
  * @param [props.renderedHtml] - The rendered HTML.
  * @return The rendered core image block or null if no URL is provided.
  */
-const CoreImage: CoreImage = ( {
+const CoreImage: CoreImageType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,

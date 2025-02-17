@@ -5,7 +5,10 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CorePullquote, CorePullquoteProps } from '@snapwp/types';
+import type {
+	CorePullquote as CorePullquoteType,
+	CorePullquoteProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/pullquote block.
@@ -16,7 +19,7 @@ import { CorePullquote, CorePullquoteProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CorePullquote: CorePullquote = ( {
+const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
 }: CorePullquoteProps ) => {

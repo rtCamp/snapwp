@@ -1,6 +1,9 @@
 import React from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
-import { CoreButtons, CoreButtonsProps } from '@snapwp/types';
+import type {
+	CoreButtons as CoreButtonsType,
+	CoreButtonsProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/buttons block.
@@ -11,7 +14,7 @@ import { CoreButtons, CoreButtonsProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreButtons: CoreButtons = ( {
+const CoreButtons: CoreButtonsType = ( {
 	attributes,
 	children,
 }: CoreButtonsProps ) => {

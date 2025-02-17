@@ -1,4 +1,4 @@
-import { BaseAttributes, BaseProps } from '../base';
+import type { BaseAttributes, BaseProps } from '../base';
 
 export type CorePullquoteAttributes = BaseAttributes & {
 	citation?: string;

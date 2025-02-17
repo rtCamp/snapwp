@@ -6,7 +6,11 @@ import {
 	cn,
 } from '@snapwp/core';
 import { Image, Parse } from '@snapwp/next';
-import { CoreCover, CoreCoverProps, FocalPoint } from '@snapwp/types';
+import type {
+	CoreCover as CoreCoverType,
+	CoreCoverProps,
+	FocalPoint,
+} from '@snapwp/types';
 
 const IMAGE_BACKGROUND_TYPE = 'image';
 const VIDEO_BACKGROUND_TYPE = 'video';
@@ -40,7 +44,7 @@ const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
  * @param root0.mediaDetails - The media details object
  * @return The rendered cover block or null if using featured image
  */
-const CoreCover: CoreCover = ( {
+const CoreCover: CoreCoverType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,

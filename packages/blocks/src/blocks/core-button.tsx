@@ -2,7 +2,10 @@ import React, { type ButtonHTMLAttributes } from 'react';
 import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { Link, Parse } from '@snapwp/next';
-import { CoreButton, CoreButtonProps } from '@snapwp/types';
+import type {
+	CoreButton as CoreButtonType,
+	CoreButtonProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/button block.
@@ -12,7 +15,7 @@ import { CoreButton, CoreButtonProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreButton: CoreButton = ( { attributes }: CoreButtonProps ) => {
+const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	const {
 		buttonType,
 		cssClassName,

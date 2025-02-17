@@ -1,4 +1,4 @@
-import { BaseAttributes, BaseProps } from '..';
+import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreAudioAttributes = BaseAttributes & {
 	autoplay?: boolean;

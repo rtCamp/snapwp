@@ -1,7 +1,7 @@
 import defaultBlockDefinitions from '@/blocks';
 import Default from '@/blocks/default';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
-import { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
+import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 /**
  * Singleton class that renders blocks using defined React components.

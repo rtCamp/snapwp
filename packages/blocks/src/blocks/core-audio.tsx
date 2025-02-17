@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreAudio, CoreAudioProps } from '@snapwp/types';
+import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
 
 /**
  * Renders the core/audio block.
@@ -15,7 +15,7 @@ import { CoreAudio, CoreAudioProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreAudio: CoreAudio = ( {
+const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
 }: CoreAudioProps ) => {

@@ -1,4 +1,4 @@
-import { BaseProps } from '../base';
+import type { BaseProps } from '../base';
 
 export type CoreFreeformProps = BaseProps< {} >;
 

@@ -1,5 +1,5 @@
-import { PropsWithChildren } from 'react';
-import { BaseProps } from '../base';
+import type { PropsWithChildren } from 'react';
+import type { BaseProps } from '../base';
 
 export type CorePostContentProps = PropsWithChildren< BaseProps< {} > >;
 

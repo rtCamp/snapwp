@@ -5,7 +5,10 @@ import {
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreSpacer, CoreSpacerProps } from '@snapwp/types';
+import type {
+	CoreSpacer as CoreSpacerType,
+	CoreSpacerProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/spacer block.
@@ -16,7 +19,7 @@ import { CoreSpacer, CoreSpacerProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreSpacer: CoreSpacer = ( {
+const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
 }: CoreSpacerProps ) => {

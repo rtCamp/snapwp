@@ -5,7 +5,11 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CoreVideo, CoreVideoProps, TrackProps } from '@snapwp/types';
+import type {
+	CoreVideo as CoreVideoType,
+	CoreVideoProps,
+	TrackProps,
+} from '@snapwp/types';
 
 /**
  * Renders a list of `<track>` elements for a video.
@@ -43,7 +47,7 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
  *
  * @return The rendered block.
  */
-const CoreVideo: CoreVideo = ( {
+const CoreVideo: CoreVideoType = ( {
 	attributes,
 	renderedHtml,
 }: CoreVideoProps ) => {

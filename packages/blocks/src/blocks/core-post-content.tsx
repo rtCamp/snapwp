@@ -1,6 +1,9 @@
 import React from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { CorePostContent, CorePostContentProps } from '@snapwp/types';
+import type {
+	CorePostContent as CorePostContentType,
+	CorePostContentProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/post-content block.
@@ -11,7 +14,7 @@ import { CorePostContent, CorePostContentProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CorePostContent: CorePostContent = ( {
+const CorePostContent: CorePostContentType = ( {
 	renderedHtml,
 	children,
 }: CorePostContentProps ) => {
