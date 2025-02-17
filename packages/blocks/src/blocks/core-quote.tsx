@@ -1,7 +1,7 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CoreQuoteProps } from '@snapwp/types';
+import { CoreQuote, CoreQuoteProps } from '@snapwp/types';
 
 /**
  * Renders the core/quote block.
@@ -12,7 +12,7 @@ import { CoreQuoteProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreQuote( { attributes, children }: CoreQuoteProps ) {
+const CoreQuote: CoreQuote = ( { attributes, children }: CoreQuoteProps ) => {
 	const { style, citation, cssClassName } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -28,4 +28,6 @@ export default function CoreQuote( { attributes, children }: CoreQuoteProps ) {
 			) }
 		</blockquote>
 	);
-}
+};
+
+export default CoreQuote;

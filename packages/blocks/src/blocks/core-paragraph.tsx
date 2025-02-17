@@ -1,7 +1,7 @@
 import React from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CoreParagraphProps } from '@snapwp/types';
+import { CoreParagraph, CoreParagraphProps } from '@snapwp/types';
 
 /**
  * Renders the core/paragraph block.
@@ -11,7 +11,7 @@ import { CoreParagraphProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreParagraph( { attributes }: CoreParagraphProps ) {
+const CoreParagraph: CoreParagraph = ( { attributes }: CoreParagraphProps ) => {
 	const {
 		backgroundColor,
 		content,
@@ -52,4 +52,6 @@ export default function CoreParagraph( { attributes }: CoreParagraphProps ) {
 			{ !! content && <Parse html={ content } /> }
 		</p>
 	);
-}
+};
+
+export default CoreParagraph;

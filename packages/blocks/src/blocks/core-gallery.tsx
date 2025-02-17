@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreGalleryProps } from '@snapwp/types';
+import { CoreGallery, CoreGalleryProps } from '@snapwp/types';
 
 /**
  * Renders the core/gallery block.
@@ -16,11 +16,11 @@ import { CoreGalleryProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreGallery( {
+const CoreGallery: CoreGallery = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreGalleryProps ) {
+}: CoreGalleryProps ) => {
 	const { caption, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -43,4 +43,6 @@ export default function CoreGallery( {
 			) }
 		</figure>
 	);
-}
+};
+
+export default CoreGallery;

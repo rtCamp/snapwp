@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
-import { CoreFileProps } from '@snapwp/types';
+import { CoreFile, CoreFileProps } from '@snapwp/types';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
@@ -19,10 +19,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
  *
  * @return The rendered block.
  */
-export default function CoreFile( {
-	attributes,
-	renderedHtml,
-}: CoreFileProps ) {
+const CoreFile: CoreFile = ( { attributes, renderedHtml }: CoreFileProps ) => {
 	const {
 		displayPreview,
 		downloadButtonText,
@@ -86,4 +83,6 @@ export default function CoreFile( {
 			) }
 		</div>
 	);
-}
+};
+
+export default CoreFile;

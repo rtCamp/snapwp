@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CoreVideoProps, TrackProps } from '@snapwp/types';
+import { CoreVideo, CoreVideoProps, TrackProps } from '@snapwp/types';
 
 /**
  * Renders a list of `<track>` elements for a video.
@@ -43,10 +43,10 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
  *
  * @return The rendered block.
  */
-export default function CoreVideo( {
+const CoreVideo: CoreVideo = ( {
 	attributes,
 	renderedHtml,
-}: CoreVideoProps ) {
+}: CoreVideoProps ) => {
 	const {
 		autoplay,
 		caption,
@@ -78,7 +78,6 @@ export default function CoreVideo( {
 
 	// Transform tracks data to match the expected format
 	const formattedTracks: TrackProps[] | undefined = tracks
-		// @ts-ignore
 		?.map( ( track ) => {
 			if ( typeof track === 'string' ) {
 				return {
@@ -117,4 +116,6 @@ export default function CoreVideo( {
 			) }
 		</figure>
 	);
-}
+};
+
+export default CoreVideo;

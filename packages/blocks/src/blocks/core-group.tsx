@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreGroupProps, TagProps } from '@snapwp/types';
+import { CoreGroup, CoreGroupProps, TagProps } from '@snapwp/types';
 
 /**
  * Renders an HTML element with the specified tag name.
@@ -35,11 +35,11 @@ const Tag = ( { name, className, style, children }: TagProps ) => {
  *
  * @return The rendered block.
  */
-export default function CoreGroup( {
+const CoreGroup: CoreGroup = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreGroupProps ) {
+}: CoreGroupProps ) => {
 	const { style, tagName } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -59,4 +59,6 @@ export default function CoreGroup( {
 			{ children }
 		</Tag>
 	);
-}
+};
+
+export default CoreGroup;

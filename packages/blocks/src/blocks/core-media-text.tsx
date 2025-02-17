@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { CoreMediaTextProps, FocalPoint } from '@snapwp/types';
+import { CoreMediaText, CoreMediaTextProps, FocalPoint } from '@snapwp/types';
 
 /**
  * Default width for media content as percentage
@@ -49,13 +49,13 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
  * @param props.mediaDetails - Media details
  * @return Rendered component or null if no content
  */
-export default function CoreMediaText( {
+const CoreMediaText: CoreMediaText = ( {
 	attributes = {},
 	children,
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ) {
+}: CoreMediaTextProps ) => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;
@@ -170,4 +170,6 @@ export default function CoreMediaText( {
 			<div className="wp-block-media-text__content">{ children }</div>
 		</div>
 	);
-}
+};
+
+export default CoreMediaText;

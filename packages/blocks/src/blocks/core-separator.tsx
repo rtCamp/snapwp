@@ -1,6 +1,6 @@
 import React from 'react';
 import { getClassNamesFromString } from '@snapwp/core';
-import { CoreSeparatorProps } from '@snapwp/types';
+import { CoreSeparator, CoreSeparatorProps } from '@snapwp/types';
 
 /**
  * Renders the core/separator block.
@@ -10,7 +10,11 @@ import { CoreSeparatorProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreSeparator( { renderedHtml }: CoreSeparatorProps ) {
+const CoreSeparator: CoreSeparator = ( {
+	renderedHtml,
+}: CoreSeparatorProps ) => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
-}
+};
+
+export default CoreSeparator;

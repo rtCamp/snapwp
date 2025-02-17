@@ -10,6 +10,7 @@ import {
 	CoreImageAttributes,
 	CoreImageConnectedMediaItem,
 	CoreImageMediaDetails,
+	CoreImage,
 	CoreImageProps,
 	FigureProps,
 } from '@snapwp/types';
@@ -78,12 +79,12 @@ const Figure = ( {
  * @param [props.renderedHtml] - The rendered HTML.
  * @return The rendered core image block or null if no URL is provided.
  */
-export default function CoreImage( {
+const CoreImage: CoreImage = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ) {
+}: CoreImageProps ) => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 
@@ -160,7 +161,7 @@ export default function CoreImage( {
 			) }
 		</Figure>
 	);
-}
+};
 
 /**
  * Returns the props for the image component.
@@ -327,3 +328,5 @@ const extractAriaAttributesForElement = (
 
 	return result;
 };
+
+export default CoreImage;

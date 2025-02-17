@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CorePullquoteProps } from '@snapwp/types';
+import { CorePullquote, CorePullquoteProps } from '@snapwp/types';
 
 /**
  * Renders the core/pullquote block.
@@ -16,10 +16,10 @@ import { CorePullquoteProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CorePullquote( {
+const CorePullquote: CorePullquote = ( {
 	attributes,
 	renderedHtml,
-}: CorePullquoteProps ) {
+}: CorePullquoteProps ) => {
 	const { style, pullquoteValue, citation } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -50,4 +50,6 @@ export default function CorePullquote( {
 			</blockquote>
 		</figure>
 	);
-}
+};
+
+export default CorePullquote;

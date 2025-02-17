@@ -1,6 +1,6 @@
 import React from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { CorePostContentProps } from '@snapwp/types';
+import { CorePostContent, CorePostContentProps } from '@snapwp/types';
 
 /**
  * Renders the core/post-content block.
@@ -11,10 +11,10 @@ import { CorePostContentProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CorePostContent( {
+const CorePostContent: CorePostContent = ( {
 	renderedHtml,
 	children,
-}: CorePostContentProps ) {
+}: CorePostContentProps ) => {
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -23,4 +23,6 @@ export default function CorePostContent( {
 		: '';
 	const classNames = cn( classNamesFromString );
 	return <div className={ classNames }>{ children }</div>;
-}
+};
+
+export default CorePostContent;

@@ -1,6 +1,6 @@
 import React, { type JSX } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
-import { CoreTemplatePartProps } from '@snapwp/types';
+import { CoreTemplatePart, CoreTemplatePartProps } from '@snapwp/types';
 
 /**
  * Renders the core/template-part block.
@@ -12,11 +12,11 @@ import { CoreTemplatePartProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreTemplatePart( {
+const CoreTemplatePart: CoreTemplatePart = ( {
 	renderedHtml,
 	children,
 	attributes,
-}: CoreTemplatePartProps ) {
+}: CoreTemplatePartProps ) => {
 	const { templatePartTagName } = attributes || {};
 	/**
 	 * @todo add support for area_tag.
@@ -33,4 +33,6 @@ export default function CoreTemplatePart( {
 		: '';
 	const classNames = cn( classNamesFromString );
 	return <TagName className={ classNames }>{ children }</TagName>;
-}
+};
+
+export default CoreTemplatePart;

@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreAudioProps } from '@snapwp/types';
+import { CoreAudio, CoreAudioProps } from '@snapwp/types';
 
 /**
  * Renders the core/audio block.
@@ -15,10 +15,10 @@ import { CoreAudioProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreAudio( {
+const CoreAudio: CoreAudio = ( {
 	attributes,
 	renderedHtml,
-}: CoreAudioProps ) {
+}: CoreAudioProps ) => {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {
@@ -52,4 +52,6 @@ export default function CoreAudio( {
 			) }
 		</figure>
 	);
-}
+};
+
+export default CoreAudio;

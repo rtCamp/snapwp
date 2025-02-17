@@ -5,7 +5,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-import { CorePreformattedProps } from '@snapwp/types';
+import { CorePreformatted, CorePreformattedProps } from '@snapwp/types';
 
 /**
  * Renders the core/preformatted block.
@@ -16,10 +16,10 @@ import { CorePreformattedProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CorePreformatted( {
+const CorePreformatted: CorePreformatted = ( {
 	attributes,
 	renderedHtml,
-}: CorePreformattedProps ) {
+}: CorePreformattedProps ) => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -38,4 +38,6 @@ export default function CorePreformatted( {
 			{ !! content && <Parse html={ content } /> }
 		</pre>
 	);
-}
+};
+
+export default CorePreformatted;

@@ -4,7 +4,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import { CoreDetailsProps } from '@snapwp/types';
+import { CoreDetails, CoreDetailsProps } from '@snapwp/types';
 
 /**
  * Renders the core/details block.
@@ -16,11 +16,11 @@ import { CoreDetailsProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-export default function CoreDetails( {
+const CoreDetails: CoreDetails = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreDetailsProps ) {
+}: CoreDetailsProps ) => {
 	const { style, showContent, summary } = attributes ?? {};
 	const styleObject = getStylesFromAttributes( { style } );
 
@@ -43,4 +43,6 @@ export default function CoreDetails( {
 			{ children }
 		</details>
 	);
-}
+};
+
+export default CoreDetails;
