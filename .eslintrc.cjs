@@ -30,8 +30,6 @@ module.exports = {
 		{
 			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
 			rules: {
-				// Disable check for default import.
-				'import/default': [ 'off' ],
 				// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
 				'jsdoc/require-jsdoc': [
 					'error',
