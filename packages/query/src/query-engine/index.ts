@@ -1,5 +1,4 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
-import { TemplateData, GlobalHeadProps } from '@snapwp/core';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
@@ -7,10 +6,11 @@ import {
 import {
 	ApolloClient,
 	InMemoryCache,
-	NormalizedCacheObject,
+	type NormalizedCacheObject,
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
+import type { TemplateData, GlobalHeadProps } from '@snapwp/core';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.

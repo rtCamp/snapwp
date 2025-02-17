@@ -1,11 +1,11 @@
 import React, {
-	AnchorHTMLAttributes,
-	CSSProperties,
-	PropsWithChildren,
+	type AnchorHTMLAttributes,
+	type CSSProperties,
+	type PropsWithChildren,
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import NextLink, { LinkProps } from 'next/link';
+import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
 	href: string;
