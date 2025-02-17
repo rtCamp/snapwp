@@ -32,7 +32,6 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
-		'@wordpress/dependency-group': 'error',
 		'dot-notation': [ 'error', { allowKeywords: false } ],
 		'eslint-comments/require-description': 'error',
 		'import/default': 'error',
