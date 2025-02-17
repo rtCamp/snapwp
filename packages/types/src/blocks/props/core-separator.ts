@@ -1,3 +1,5 @@
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface CoreSeparatorProps extends BlockProps {}
+export type CoreSeparatorProps = BaseProps< {} >;
+
+export type CoreSeparator = React.ComponentType< CoreSeparatorProps >;

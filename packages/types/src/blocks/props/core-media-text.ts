@@ -1,15 +1,8 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 import { FocalPoint } from '.';
 
-export interface CoreMediaTextProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreMediaTextAttributes;
-	connectedMediaItem?: CoreMediaTextConnectedMediaItem;
-	renderedHtml?: string | null;
-	mediaDetails?: CoreMediaTextMediaDetails;
-}
-
-export interface CoreMediaTextAttributes extends Record< string, unknown > {
+export type CoreMediaTextAttributes = BaseAttributes & {
 	href?: string;
 	linkClass?: string;
 	linkTarget?: string;
@@ -24,7 +17,17 @@ export interface CoreMediaTextAttributes extends Record< string, unknown > {
 	style?: string;
 	imageFill?: boolean;
 	focalPoint?: FocalPoint;
-}
+};
+
+export type CoreMediaTextProps = PropsWithChildren<
+	BaseProps< CoreMediaTextAttributes >
+> & {
+	connectedMediaItem?: CoreMediaTextConnectedMediaItem;
+	renderedHtml?: string | null;
+	mediaDetails?: CoreMediaTextMediaDetails;
+};
+
+export type CoreMediaText = React.ComponentType< CoreMediaTextProps >;
 
 export interface CoreMediaTextConnectedMediaItem {
 	node: {

@@ -1,10 +1,10 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreVerseAttributes extends Record< string, unknown > {
+export type CoreVerseAttributes = BaseAttributes & {
 	content?: string;
 	style?: string;
-}
+};
 
-export interface CoreVerseProps extends BlockProps {
-	attributes?: CoreVerseAttributes;
-}
+export type CoreVerseProps = BaseProps< CoreVerseAttributes >;
+
+export type CoreVerse = React.ComponentType< CoreVerseProps >;

@@ -1,10 +1,12 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreTemplatePartAttributes extends Record< string, unknown > {
+export type CoreTemplatePartAttributes = BaseAttributes & {
 	templatePartTagName?: string;
-}
+};
 
-export interface CoreTemplatePartProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreTemplatePartAttributes;
-}
+export type CoreTemplatePartProps = PropsWithChildren<
+	BaseProps< CoreTemplatePartAttributes >
+>;
+
+export type CoreTemplatePart = React.ComponentType< CoreTemplatePartProps >;

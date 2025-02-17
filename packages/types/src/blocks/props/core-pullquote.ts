@@ -1,12 +1,12 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CorePullquoteAttributes extends Record< string, unknown > {
+export type CorePullquoteAttributes = BaseAttributes & {
 	citation?: string;
 	style?: string;
 	textAlign?: string;
 	pullquoteValue?: string;
-}
+};
 
-export interface CorePullquoteProps extends BlockProps {
-	attributes?: CorePullquoteAttributes;
-}
+export type CorePullquoteProps = BaseProps< CorePullquoteAttributes >;
+
+export type CorePullquote = React.ComponentType< CorePullquoteProps >;

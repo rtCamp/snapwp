@@ -1,12 +1,12 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreHeadingAttributes extends Record< string, unknown > {
+export type CoreHeadingAttributes = BaseAttributes & {
 	content?: string;
 	cssClassName?: string;
 	level: number;
 	style?: string;
-}
+};
 
-export interface CoreHeadingProps extends BlockProps {
-	attributes?: CoreHeadingAttributes;
-}
+export type CoreHeadingProps = BaseProps< CoreHeadingAttributes >;
+
+export type CoreHeading = React.ComponentType< CoreHeadingProps >;

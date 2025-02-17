@@ -1,3 +1,15 @@
+export interface BaseAttributes {
+	[ key: string ]: unknown;
+}
+
+export interface BaseProps< TAttributes > {
+	cssClassNames?: Array< string | null > | null;
+	renderedHtml?: string | null;
+	attributes?: TAttributes;
+}
+
+export type BaseBlock = React.ComponentType< BaseProps< BaseAttributes > >;
+
 export interface BlockData<
 	T extends Record< string, unknown > = Record< string, unknown >,
 > {
@@ -9,14 +21,10 @@ export interface BlockData<
 	attributes?: T;
 }
 
-export type BlockProps<
-	T extends Record< string, unknown > = Record< string, unknown >,
-> = Omit< BlockData< T >, 'type' >;
-
 export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
 	TBlockProps,
 	'parentClientId'
 > & {
 	children?: BlockTreeNode[] | null;
-	renderer: React.FC< React.PropsWithChildren< TBlockProps > >;
+	renderer: React.ComponentType< any >;
 };

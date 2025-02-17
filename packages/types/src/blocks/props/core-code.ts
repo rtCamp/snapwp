@@ -1,11 +1,11 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreCodeAttributes extends Record< string, unknown > {
+export type CoreCodeAttributes = BaseAttributes & {
 	style?: string;
 	content?: string;
 	cssClassName?: string;
-}
+};
 
-export interface CoreCodeProps extends BlockProps {
-	attributes?: CoreCodeAttributes;
-}
+export type CoreCodeProps = BaseProps< CoreCodeAttributes >;
+
+export type CoreCode = React.ComponentType< CoreCodeProps >;

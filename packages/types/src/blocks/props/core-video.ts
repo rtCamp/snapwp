@@ -1,4 +1,4 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '..';
 
 export interface TrackProps {
 	src: string;
@@ -7,7 +7,7 @@ export interface TrackProps {
 	label: string;
 }
 
-export interface CoreVideoAttributes extends Record< string, unknown > {
+export type CoreVideoAttributes = BaseAttributes & {
 	autoplay?: boolean;
 	caption?: string;
 	controls: boolean;
@@ -19,8 +19,8 @@ export interface CoreVideoAttributes extends Record< string, unknown > {
 	style?: string;
 	tracks: Array< any >;
 	videoPreload: string;
-}
+};
 
-export interface CoreVideoProps extends BlockProps {
-	attributes?: CoreVideoAttributes;
-}
+export type CoreVideoProps = BaseProps< CoreVideoAttributes >;
+
+export type CoreVideo = React.ComponentType< CoreVideoProps >;

@@ -1,11 +1,11 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreSpacerAttributes extends Record< string, unknown > {
+export type CoreSpacerAttributes = BaseAttributes & {
 	height: string;
 	style?: string;
 	width?: string;
-}
+};
 
-export interface CoreSpacerProps extends BlockProps {
-	attributes?: CoreSpacerAttributes;
-}
+export type CoreSpacerProps = BaseProps< CoreSpacerAttributes >;
+
+export type CoreSpacer = React.ComponentType< CoreSpacerProps >;

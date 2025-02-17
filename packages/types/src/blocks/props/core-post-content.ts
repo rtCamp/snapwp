@@ -1,4 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface CorePostContentProps extends PropsWithChildren< BlockProps > {}
+export type CorePostContentProps = PropsWithChildren< BaseProps< {} > >;
+
+export type CorePostContent = React.ComponentType< CorePostContentProps >;

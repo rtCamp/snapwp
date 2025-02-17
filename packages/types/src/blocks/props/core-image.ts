@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreImageAttributes extends Record< string, unknown > {
+export type CoreImageAttributes = BaseAttributes & {
 	alt?: string;
 	aspectRatio?: string;
 	caption?: string;
@@ -17,13 +17,14 @@ export interface CoreImageAttributes extends Record< string, unknown > {
 	width?: string;
 	sizeSlug?: string;
 	lightbox?: string | null;
-}
+};
 
-export interface CoreImageProps extends BlockProps {
-	attributes?: CoreImageAttributes;
+export type CoreImageProps = BaseProps< CoreImageAttributes > & {
 	connectedMediaItem?: CoreImageConnectedMediaItem;
 	mediaDetails?: CoreImageMediaDetails;
-}
+};
+
+export type CoreImage = React.ComponentType< CoreImageProps >;
 
 export interface CoreImageConnectedMediaItem {
 	node: {

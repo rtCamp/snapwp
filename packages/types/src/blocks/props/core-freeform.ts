@@ -1,3 +1,5 @@
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface CoreFreeformProps extends BlockProps {}
+export type CoreFreeformProps = BaseProps< {} >;
+
+export type CoreFreeform = React.ComponentType< CoreFreeformProps >;

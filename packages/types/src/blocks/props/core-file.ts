@@ -1,6 +1,6 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreFileAttributes extends Record< string, unknown > {
+export type CoreFileAttributes = BaseAttributes & {
 	displayPreview?: boolean;
 	downloadButtonText?: string;
 	fileId?: string;
@@ -11,8 +11,8 @@ export interface CoreFileAttributes extends Record< string, unknown > {
 	style?: string;
 	textLinkHref?: string;
 	textLinkTarget?: string;
-}
+};
 
-export interface CoreFileProps extends BlockProps {
-	attributes?: CoreFileAttributes;
-}
+export type CoreFileProps = BaseProps< CoreFileAttributes >;
+
+export type CoreFile = React.ComponentType< CoreFileProps >;

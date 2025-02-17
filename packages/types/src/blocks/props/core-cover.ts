@@ -1,5 +1,5 @@
 import { ElementType, PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
 export interface FocalPoint {
 	x: number;
@@ -20,7 +20,7 @@ export interface CoreCoverConnectedMediaItem {
 	};
 }
 
-export interface CoreCoverAttributes extends Record< string, unknown > {
+export type CoreCoverAttributes = BaseAttributes & {
 	alt?: string;
 	backgroundType?: string;
 	contentPosition?: string;
@@ -41,11 +41,14 @@ export interface CoreCoverAttributes extends Record< string, unknown > {
 	tagName?: ElementType;
 	url?: string;
 	useFeaturedImage?: boolean;
-}
+};
 
-export interface CoreCoverProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreCoverAttributes;
+export type CoreCoverProps = PropsWithChildren<
+	BaseProps< CoreCoverAttributes >
+> & {
 	connectedMediaItem?: CoreCoverConnectedMediaItem;
 	mediaDetails?: CoreCoverMediaDetails;
 	renderedHtml?: string | null;
-}
+};
+
+export type CoreCover = React.ComponentType< CoreCoverProps >;

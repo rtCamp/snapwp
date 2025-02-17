@@ -1,12 +1,14 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreQuoteAttributes extends Record< string, unknown > {
+export type CoreQuoteAttributes = BaseAttributes & {
 	citation?: string;
 	cssClassName?: string;
 	style?: string;
-}
+};
 
-export interface CoreQuoteProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreQuoteAttributes;
-}
+export type CoreQuoteProps = PropsWithChildren<
+	BaseProps< CoreQuoteAttributes >
+>;
+
+export type CoreQuote = React.ComponentType< CoreQuoteProps >;

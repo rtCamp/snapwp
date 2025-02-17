@@ -1,14 +1,14 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '..';
 
-export interface CoreAudioAttributes extends Record< string, unknown > {
+export type CoreAudioAttributes = BaseAttributes & {
 	autoplay?: boolean;
 	caption?: string;
 	loop?: boolean;
 	preload?: string;
 	src?: string;
 	style?: string;
-}
+};
 
-export interface CoreAudioProps extends BlockProps {
-	attributes?: CoreAudioAttributes;
-}
+export type CoreAudioProps = BaseProps< CoreAudioAttributes >;
+
+export type CoreAudio = React.ComponentType< CoreAudioProps >;

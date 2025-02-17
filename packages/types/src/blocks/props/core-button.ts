@@ -1,6 +1,6 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreButtonAttributes extends Record< string, unknown > {
+export type CoreButtonAttributes = BaseAttributes & {
 	cssClassName?: string;
 	linkClassName?: string;
 	linkTarget?: string;
@@ -11,8 +11,8 @@ export interface CoreButtonAttributes extends Record< string, unknown > {
 	title?: string;
 	url?: string;
 	buttonType?: string;
-}
+};
 
-export interface CoreButtonProps extends BlockProps {
-	attributes?: CoreButtonAttributes;
-}
+export type CoreButtonProps = BaseProps< CoreButtonAttributes >;
+
+export type CoreButton = React.ComponentType< CoreButtonProps >;

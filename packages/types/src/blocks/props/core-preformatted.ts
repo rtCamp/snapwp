@@ -1,10 +1,10 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CorePreformattedAttributes extends Record< string, unknown > {
+export type CorePreformattedAttributes = BaseAttributes & {
 	content?: string;
 	style?: string;
-}
+};
 
-export interface CorePreformattedProps extends BlockProps {
-	attributes?: CorePreformattedAttributes;
-}
+export type CorePreformattedProps = BaseProps< CorePreformattedAttributes >;
+
+export type CorePreformatted = React.ComponentType< CorePreformattedProps >;

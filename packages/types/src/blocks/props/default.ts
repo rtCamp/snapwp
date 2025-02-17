@@ -1,3 +1,5 @@
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface DefaultProps extends BlockProps {}
+export type DefaultProps = BaseProps< {} >;
+
+export type Default = React.ComponentType< DefaultProps >;

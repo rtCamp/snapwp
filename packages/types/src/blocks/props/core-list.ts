@@ -1,15 +1,17 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreListAttributes extends Record< string, unknown > {
+export type CoreListAttributes = BaseAttributes & {
 	cssClassName?: string;
 	ordered?: boolean;
 	reversed?: boolean;
 	start?: number;
 	style?: string;
 	type?: string;
-}
+};
 
-export interface CoreListProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreListAttributes;
-}
+export type CoreListProps = PropsWithChildren<
+	BaseProps< CoreListAttributes >
+>;
+
+export type CoreList = React.ComponentType< CoreListProps >;

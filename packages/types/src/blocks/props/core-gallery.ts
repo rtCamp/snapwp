@@ -1,11 +1,13 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreGalleryAttributes extends Record< string, unknown > {
+export type CoreGalleryAttributes = BaseAttributes & {
 	caption?: string;
 	style?: string;
-}
+};
 
-export interface CoreGalleryProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreGalleryAttributes;
-}
+export type CoreGalleryProps = PropsWithChildren<
+	BaseProps< CoreGalleryAttributes >
+>;
+
+export type CoreGallery = React.ComponentType< CoreGalleryProps >;

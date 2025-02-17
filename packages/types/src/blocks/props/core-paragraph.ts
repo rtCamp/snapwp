@@ -1,6 +1,6 @@
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreParagraphAttributes extends Record< string, unknown > {
+export type CoreParagraphAttributes = BaseAttributes & {
 	backgroundColor?: string;
 	content?: string;
 	cssClassName?: string;
@@ -9,8 +9,8 @@ export interface CoreParagraphAttributes extends Record< string, unknown > {
 	fontSize?: string;
 	style?: string;
 	textColor?: string;
-}
+};
 
-export interface CoreParagraphProps extends BlockProps {
-	attributes?: CoreParagraphAttributes;
-}
+export type CoreParagraphProps = BaseProps< CoreParagraphAttributes >;
+
+export type CoreParagraph = React.ComponentType< CoreParagraphProps >;

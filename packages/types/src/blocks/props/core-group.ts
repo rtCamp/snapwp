@@ -1,14 +1,16 @@
 import { PropsWithChildren, CSSProperties, ReactNode } from 'react';
-import { BlockProps } from '../base';
+import { BaseAttributes, BaseProps } from '../base';
 
-export interface CoreGroupAttributes extends Record< string, unknown > {
+export type CoreGroupAttributes = BaseAttributes & {
 	style?: string;
 	tagName?: string;
-}
+};
 
-export interface CoreGroupProps extends PropsWithChildren< BlockProps > {
-	attributes?: CoreGroupAttributes;
-}
+export type CoreGroupProps = PropsWithChildren<
+	BaseProps< CoreGroupAttributes >
+>;
+
+export type CoreGroup = React.ComponentType< CoreGroupProps >;
 
 export interface TagProps {
 	name?: string;

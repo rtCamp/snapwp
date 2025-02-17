@@ -1,4 +1,6 @@
 import { PropsWithChildren } from 'react';
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface CorePatternProps extends PropsWithChildren< BlockProps > {}
+export type CorePatternProps = PropsWithChildren< BaseProps< {} > >;
+
+export type CorePattern = React.ComponentType< CorePatternProps >;

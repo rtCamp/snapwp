@@ -1,3 +1,5 @@
-import { BlockProps } from '../base';
+import { BaseProps } from '../base';
 
-export interface CoreHtmlProps extends BlockProps {}
+export type CoreHtmlProps = BaseProps< {} >;
+
+export type CoreHtml = React.ComponentType< CoreHtmlProps >;
