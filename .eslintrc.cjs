@@ -92,21 +92,6 @@ module.exports = {
 				],
 			},
 		},
-		// Rules for bin and cli files.
-		{
-			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
-			rules: {
-				// Enable console log.
-				'no-console': 'off',
-			},
-		},
-		// Disable n/no-process-env for codegen.ts, test and jest setup files.
-		{
-			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
-			rules: {
-				'n/no-process-env': 'off',
-			},
-		},
 		// Rules for TypeScript files.
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
@@ -121,6 +106,21 @@ module.exports = {
 			extends: [ 'plugin:@typescript-eslint/recommended-type-checked' ],
 			parserOptions: {
 				project: true,
+			},
+		},
+		// Rules for bin and cli files.
+		{
+			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
+			rules: {
+				// Enable console log.
+				'no-console': 'off',
+			},
+		},
+		// Disable n/no-process-env for codegen.ts, test and jest setup files.
+		{
+			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
+			rules: {
+				'n/no-process-env': 'off',
 			},
 		},
 		// Enable jest & node env for cjs, test & jest files.
