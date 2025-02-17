@@ -17,7 +17,6 @@ module.exports = {
 		'plugin:@wordpress/eslint-plugin/recommended',
 		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
-		'eslint:recommended',
 		'plugin:eslint-comments/recommended',
 	],
 	rules: {
