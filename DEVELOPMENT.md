@@ -88,7 +88,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm run build
     ```
 
-   At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+    At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
 
 5. (Optional) Start the packages in watch mode.
 
