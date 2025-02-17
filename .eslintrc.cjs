@@ -25,6 +25,54 @@ module.exports = {
 	settings: {
 		'import/resolver': require.resolve( './config/import-resolver.cjs' ),
 	},
+	rules: {
+		'@typescript-eslint/naming-convention': 'error',
+		'@typescript-eslint/no-restricted-imports': [
+			'error',
+			'classnames',
+			'lodash',
+		],
+		'@wordpress/dependency-group': 'error',
+		'dot-notation': [ 'error', { allowKeywords: false } ],
+		'eslint-comments/require-description': 'error',
+		'import/default': 'error',
+		'import/named': 'error',
+		'jest/expect-expect': 'off',
+		'jsdoc/no-types': [ 'off' ],
+		'jsdoc/require-param-type': [ 'error' ],
+		'jsdoc/require-returns-type': [ 'error' ],
+		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
+		'no-empty-function': 'error',
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: 'classnames',
+						message:
+							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
+					},
+					{
+						name: 'lodash',
+						message: 'Please use native functionality instead.',
+					},
+				],
+			},
+		],
+		'no-restricted-syntax': [ 'error' ],
+		'prefer-destructuring': [
+			'error',
+			{
+				array: true,
+				object: true,
+			},
+		],
+		'react/jsx-boolean-value': 'error',
+		'react/jsx-curly-brace-presence': [
+			'error',
+			{ children: 'never', props: 'never' },
+		],
+	},
 	overrides: [
 		// Rules for JS, JSX, TS & TSX files.
 		{
@@ -94,52 +142,4 @@ module.exports = {
 			},
 		},
 	],
-	rules: {
-		'@typescript-eslint/naming-convention': 'error',
-		'@typescript-eslint/no-restricted-imports': [
-			'error',
-			'classnames',
-			'lodash',
-		],
-		'@wordpress/dependency-group': 'error',
-		'dot-notation': [ 'error', { allowKeywords: false } ],
-		'eslint-comments/require-description': 'error',
-		'import/default': 'error',
-		'import/named': 'error',
-		'jest/expect-expect': 'off',
-		'jsdoc/no-types': [ 'off' ],
-		'jsdoc/require-param-type': [ 'error' ],
-		'jsdoc/require-returns-type': [ 'error' ],
-		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
-		'no-empty-function': 'error',
-		'no-restricted-imports': [
-			'error',
-			{
-				paths: [
-					{
-						name: 'classnames',
-						message:
-							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
-					},
-					{
-						name: 'lodash',
-						message: 'Please use native functionality instead.',
-					},
-				],
-			},
-		],
-		'no-restricted-syntax': [ 'error' ],
-		'prefer-destructuring': [
-			'error',
-			{
-				array: true,
-				object: true,
-			},
-		],
-		'react/jsx-boolean-value': 'error',
-		'react/jsx-curly-brace-presence': [
-			'error',
-			{ children: 'never', props: 'never' },
-		],
-	},
 };
