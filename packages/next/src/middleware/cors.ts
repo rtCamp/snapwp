@@ -1,7 +1,11 @@
-import { NextResponse } from 'next/server';
-import type { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
+import {
+	NextResponse,
+	type NextFetchEvent,
+	type NextMiddleware,
+	type NextRequest,
+} from 'next/server';
 import { getConfig } from '@snapwp/core/config';
-import { MiddlewareFactory } from './utils';
+import type { MiddlewareFactory } from './utils';
 
 /**
  * Facilitates proxying resources from WP resources. Any request with `corsProxyPrefix`

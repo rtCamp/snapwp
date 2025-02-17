@@ -1,4 +1,4 @@
-import React, { type ComponentProps, PropsWithChildren } from 'react';
+import React, { type ComponentProps, type PropsWithChildren } from 'react';
 import {
 	type BlockData,
 	cn,
