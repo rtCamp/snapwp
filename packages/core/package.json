@@ -10,7 +10,9 @@
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
-	"files": [ "dist" ],
+	"files": [
+		"dist"
+	],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
