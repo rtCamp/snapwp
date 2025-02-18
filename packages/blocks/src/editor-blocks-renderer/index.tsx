@@ -26,12 +26,13 @@ export default function EditorBlocksRenderer( {
 
 	// eslint-disable-next-line jsdoc/require-jsdoc
 	const renderNode = ( node: BlockTreeNode ) => {
-		const props = {
+		const props: Record< any, any > = {
 			key: node.clientId,
 			...node,
-			renderer: undefined,
-			children: undefined,
 		};
+
+		delete props.renderer;
+		delete props.children;
 
 		return (
 			<node.renderer { ...props }>
