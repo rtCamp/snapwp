@@ -16,6 +16,5 @@ export default function replaceHostUrl(
 	if ( url && hostUrl && url.startsWith( hostUrl ) ) {
 		return url.replace( hostUrl, newHostUrl );
 	}
-
 	return url;
 }
