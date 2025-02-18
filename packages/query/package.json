@@ -10,9 +10,7 @@
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
-	"files": [
-		"dist"
-	],
+	"files": [ "dist" ],
 	"exports": {
 		"import": "./dist/index.js",
 		"require": "./dist/index.js",
@@ -40,12 +38,12 @@
 		"dotenv": "^16.4.5",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"@snapwp/types": "*"
 	},
 	"peerDependencies": {
 		"react": "^19.0.0",
 		"@apollo/client": "^3.11.4",
-		"graphql": "^16.9.0",
-		"@snapwp/types": "*"
+		"graphql": "^16.9.0"
 	}
 }

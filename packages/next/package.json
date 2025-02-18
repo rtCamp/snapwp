@@ -10,9 +10,7 @@
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
-	"files": [
-		"dist"
-	],
+	"files": [ "dist" ],
 	"exports": {
 		".": {
 			"import": "./dist/index.js",
@@ -38,8 +36,7 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"@snapwp/core": "*",
-		"@snapwp/query": "*",
-		"@snapwp/types": "*"
+		"@snapwp/query": "*"
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
@@ -49,6 +46,7 @@
 		"@types/react-dom": "*",
 		"typescript": "*",
 		"resolve-tspaths": "*",
-		"tsc-watch": "*"
+		"tsc-watch": "*",
+		"@snapwp/types": "*"
 	}
 }
