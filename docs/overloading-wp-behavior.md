@@ -4,6 +4,139 @@ SnapWP takes an additive approach to headless WordPress development, where WordP
 
 This tutorial explains how to overload default WordPress behavior using SnapWP, focusing on customizing blocks, creating custom frontend routes, and `html-react-parser` component mapping.
 
+## Default Block Rendering
+
+This tutorial covers how SnapWP uses the `Parse` component to render HTML content. The `Parse` component converts HTML strings into React components, which is essential for displaying default WordPress blocks.
+
+### Using `Parse`
+
+The `Parse` component takes an HTML string (`renderedHtml`) and converts it into React components. Here's a basic example:
+
+```tsx
+import React from 'react';
+import { Parse } from '@snapwp/next';
+import { type BlockData } from '@snapwp/core';
+
+/**
+ * Renders the default block.
+ * @param props - The props for the component.
+ * @param props.renderedHtml - The rendered HTML.
+ * @return The rendered default block.
+ */
+export default function Default( { renderedHtml }: BlockData ) {
+	return <Parse html={ renderedHtml || '' } />;
+}
+```
+
+## Overloading [html-react-parser](https://www.npmjs.com/package/html-react-parser) Options
+
+SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) Component which internally uses html-react-parser. This is useful when you want to overload default options of html-react-parser.
+
+### 1. Creating a Custom Component with options
+
+Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
+
+MyCustomReactParser.tsx
+
+```tsx
+import React from 'react';
+import {
+	Element,
+	type DOMNode,
+	type HTMLReactParserOptions,
+} from 'html-react-parser';
+import { CustomImage } from '@/CustomImage'; // custom image component defined in your project
+/**
+ *  Using typescript type guard to check if a DOMNode is an Element.
+ * Ref : https://github.com/remarkablemark/html-react-parser/issues/221#issuecomment-784073240
+ * @param domNode The DOM element
+ * @return parser options
+ */
+const isElement = ( domNode: DOMNode ): domNode is Element => {
+	const isTag = domNode.type === 'tag';
+	const hasAttributes = ( domNode as Element ).attribs !== undefined;
+
+	return isTag && hasAttributes;
+};
+
+export const customParserOptions: HTMLReactParserOptions = {
+	replace: ( domNode ) => {
+		if ( isElement( domNode ) ) {
+			const { attribs, children, name, type } = domNode;
+			const { class: className, style, ...attributes } = attribs;
+			const { href } = attribs;
+
+			if ( type === 'tag' && name === 'img' ) {
+				return (
+					<CustomImage
+						{ ...attributes }
+						src={ attribs.src }
+						alt={ attribs.alt || '' }
+						height={ height }
+						width={ width }
+						className={ className }
+						style={ styleObject }
+						image={ imageAttributes }
+						//adding custom id
+						id="overriding id"
+					/>
+				);
+			}
+
+			return undefined;
+		}
+
+		return undefined;
+	},
+};
+```
+
+### 2. Use react-parser as fallback
+
+Make any default block component null to use react-parser as fallback component
+
+src/app/[[...path]]/page.tsx
+
+```tsx
+import { TemplateRenderer } from '@snapwp/next';
+import { EditorBlocksRenderer } from '@snapwp/blocks';
+
+const blockDefinitions = {
+	CoreImage: null, // To use react parser.
+};
+
+export default function Page() {
+	return (
+		<TemplateRenderer>
+			{ ( editorBlocks ) => (
+				<EditorBlocksRenderer
+					editorBlocks={ editorBlocks }
+					blockDefinitions={ blockDefinitions }
+				/>
+			) }
+		</TemplateRenderer>
+	);
+}
+```
+
+### 3. Pass customParserOptions to overload
+
+snapwp.config.ts
+
+```tsx
+import type { SnapWPConfig } from '@snapwp/core/config';
+import { customParserOptions } from './src/MyCustomReactParser';
+
+const config: SnapWPConfig = {
+	/* passing custom options to overload default react-parser options  */
+	parserOptions: customParserOptions,
+};
+
+export default config;
+```
+
+---
+
 ## Overloading Blocks
 
 SnapWP allows you to customize the rendering of individual WordPress blocks. This is useful for modifying the default appearance or behavior of a block to better suit your design.
@@ -149,115 +282,6 @@ export default function Page() {
 
 ---
 
-## Overloading [html-react-parser](https://www.npmjs.com/package/html-react-parser) Options
-
-SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) Component which internally uses html-react-parser. This is useful when you want to overload default options of html-react-parser.
-
-### 1. Creating a Custom Component with options
-
-Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
-
-MyCustomReactParser.tsx
-
-```tsx
-import React from 'react';
-import {
-	Element,
-	type DOMNode,
-	type HTMLReactParserOptions,
-} from 'html-react-parser';
-import { CustomImage } from '@/CustomImage'; // custom image component defined in your project
-/**
- *  Using typescript type guard to check if a DOMNode is an Element.
- * Ref : https://github.com/remarkablemark/html-react-parser/issues/221#issuecomment-784073240
- * @param domNode The DOM element
- * @return parser options
- */
-const isElement = ( domNode: DOMNode ): domNode is Element => {
-	const isTag = domNode.type === 'tag';
-	const hasAttributes = ( domNode as Element ).attribs !== undefined;
-
-	return isTag && hasAttributes;
-};
-
-export const customParserOptions: HTMLReactParserOptions = {
-	replace: ( domNode ) => {
-		if ( isElement( domNode ) ) {
-			const { attribs, children, name, type } = domNode;
-			const { class: className, style, ...attributes } = attribs;
-			const { href } = attribs;
-
-			if ( type === 'tag' && name === 'img' ) {
-				return (
-					<CustomImage
-						{ ...attributes }
-						src={ attribs.src }
-						alt={ attribs.alt || '' }
-						height={ height }
-						width={ width }
-						className={ className }
-						style={ styleObject }
-						image={ imageAttributes }
-						//adding custom id
-						id="overriding id"
-					/>
-				);
-			}
-
-			return undefined;
-		}
-
-		return undefined;
-	},
-};
-```
-
-### 2. Use react-parser as fallback
-
-Make any default block component null to use react-parser as fallback component
-
-src/app/[[...path]]/page.tsx
-
-```tsx
-import { TemplateRenderer } from '@snapwp/next';
-import { EditorBlocksRenderer } from '@snapwp/blocks';
-
-const blockDefinitions = {
-	CoreImage: null, // To use react parser.
-};
-
-export default function Page() {
-	return (
-		<TemplateRenderer>
-			{ ( editorBlocks ) => (
-				<EditorBlocksRenderer
-					editorBlocks={ editorBlocks }
-					blockDefinitions={ blockDefinitions }
-				/>
-			) }
-		</TemplateRenderer>
-	);
-}
-```
-
-### 3. Pass customParserOptions to overload
-
-snapwp.config.ts
-
-```tsx
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { customParserOptions } from './src/MyCustomReactParser';
-
-const config: SnapWPConfig = {
-	/* passing custom options to overload default react-parser options  */
-	parserOptions: customParserOptions,
-};
-
-export default config;
-```
-
----
-
 ## Creating Custom Frontend Routes
 
 This tutorial explains how to create custom frontend routes in your SnapWP-powered Next.js application using the App Router.
@@ -287,27 +311,3 @@ export default function Page() {
 
 -   **Local Styles**: Use CSS Modules (as shown with `styles.module.css`) or any other CSS-in-JS solution for component-specific styling.
 -   **Global and Theme Styles**: Classes like `wp-block-heading`, `has-text-align-center`, and `has-x-large-font-size` (likely from your WordPress `theme.json` and/or global CSS) are automatically available.
-
-## Default Block Rendering
-
-This tutorial covers how SnapWP uses the `Parse` component to render HTML content. The `Parse` component converts HTML strings into React components, which is essential for displaying default WordPress blocks.
-
-### Using `Parse`
-
-The `Parse` component takes an HTML string (`renderedHtml`) and converts it into React components. Here's a basic example:
-
-```tsx
-import React from 'react';
-import { Parse } from '@snapwp/next';
-import { type BlockData } from '@snapwp/core';
-
-/**
- * Renders the default block.
- * @param props - The props for the component.
- * @param props.renderedHtml - The rendered HTML.
- * @return The rendered default block.
- */
-export default function Default( { renderedHtml }: BlockData ) {
-	return <Parse html={ renderedHtml || '' } />;
-}
-```
