@@ -18,10 +18,10 @@
     -   @snapwp/core@0.0.2
     -   @snapwp/query@0.0.3
 
-## [0.0.2] - 2025-02-07
+## 0.0.2 - 2025-02-07
 
 -   fix: Expose the `className`, `slug`, and `theme` fields to the `CoreTemplatePartFrag.attributes`, to allow for easier component overloading.
 
-## [0.0.1] - 2025-01-30
+## 0.0.1 - 2025-01-30
 
 -   Initial (public) release.
