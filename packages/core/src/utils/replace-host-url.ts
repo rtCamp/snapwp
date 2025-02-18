@@ -13,8 +13,20 @@ export default function replaceHostUrl(
 	hostUrl: string,
 	newHostUrl: string
 ) {
-	if ( url && hostUrl && url.startsWith( hostUrl ) ) {
+	if ( ! url || ! hostUrl ) {
+		return url;
+	}
+
+	if ( ! hostUrl.endsWith( '/' ) ) {
+		hostUrl += '/';
+	}
+	if ( ! newHostUrl.endsWith( '/' ) ) {
+		newHostUrl += '/';
+	}
+
+	if ( url.startsWith( hostUrl ) ) {
 		return url.replace( hostUrl, newHostUrl );
 	}
+
 	return url;
 }
