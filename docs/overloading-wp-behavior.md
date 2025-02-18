@@ -4,13 +4,13 @@ SnapWP takes an additive approach to headless WordPress development, where WordP
 
 This tutorial explains how to overload default WordPress behavior using SnapWP, focusing on customizing blocks, creating custom frontend routes, and `html-react-parser` component mapping.
 
-## Default Block Rendering
+## Default HTML Rendering with `Parse` and [`html-react-parser`](https://www.npmjs.com/package/html-react-parser)
 
-This tutorial covers how SnapWP uses the `Parse` component to render HTML content. The `Parse` component converts HTML strings into React components, which is essential for displaying default WordPress blocks.
+By default, SnapWP uses WordPress as the source of truth for both content _and_ markup. The `Parse` component in SnapWP allows you to convert raw HTML strings into React components, replacing specific elements with custom Next.js components.
 
-### Using `Parse`
+This component can be used anywhere in your Next.js application to progressively enhance the rendering of HTML content.
 
-The `Parse` component takes an HTML string (`renderedHtml`) and converts it into React components. Here's a basic example:
+Here's a basic example:
 
 ```tsx
 import React from 'react';
@@ -28,17 +28,17 @@ export default function Default( { renderedHtml }: BlockData ) {
 }
 ```
 
-## Overloading [html-react-parser](https://www.npmjs.com/package/html-react-parser) Options
+### Overloading the HTML-to-React component mapping
 
-SnapWP allows you to pass custom options to [**react-parser**](../packages/next/src/react-parser/index.tsx) Component which internally uses html-react-parser. This is useful when you want to overload default options of html-react-parser.
+SnapWP allows you to extend and overload the default `HTMLReactParserOptions` used by the `Parse` component. This is useful for customizing the rendering of specific HTML elements, such as images, links, or other custom elements.
 
-### 1. Creating a Custom Component with options
+### 1. Creating a custom `HTMLReactParserOptions` object`
 
-Create a new Custom Component to overload the default options of [react-parser](../packages/next/src/react-parser/index.tsx).
-
-MyCustomReactParser.tsx
+Create a new Custom Component to overload the [default html-react-parser options](../packages/next/src/react-parser/options.tsx).
 
 ```tsx
+// MyCustomReactParser.tsx
+
 import React from 'react';
 import {
 	Element,
@@ -91,39 +91,11 @@ export const customParserOptions: HTMLReactParserOptions = {
 };
 ```
 
-### 2. Use react-parser as fallback
-
-Make any default block component null to use react-parser as fallback component
-
-src/app/[[...path]]/page.tsx
+### 2. Pass customParserOptions to overload
 
 ```tsx
-import { TemplateRenderer } from '@snapwp/next';
-import { EditorBlocksRenderer } from '@snapwp/blocks';
+// snapwp.config.ts
 
-const blockDefinitions = {
-	CoreImage: null, // To use react parser.
-};
-
-export default function Page() {
-	return (
-		<TemplateRenderer>
-			{ ( editorBlocks ) => (
-				<EditorBlocksRenderer
-					editorBlocks={ editorBlocks }
-					blockDefinitions={ blockDefinitions }
-				/>
-			) }
-		</TemplateRenderer>
-	);
-}
-```
-
-### 3. Pass customParserOptions to overload
-
-snapwp.config.ts
-
-```tsx
 import type { SnapWPConfig } from '@snapwp/core/config';
 import { customParserOptions } from './src/MyCustomReactParser';
 
@@ -139,7 +111,9 @@ export default config;
 
 ## Overloading Blocks
 
-SnapWP allows you to customize the rendering of individual WordPress blocks. This is useful for modifying the default appearance or behavior of a block to better suit your design.
+In addition to overloading the underling rendering of default HTML content, SnapWP allows you to target the rendering of individual WordPress blocks.
+
+The `@snapwp/blocks` package provides a large and growing number of [Block Components](https://github.com/rtCamp/snapwp/blob/develop/packages/blocks/src/blocks/index.ts), which you can in turn overload with custom components or unregister to fallback to rendering with [html-react-parser](#1-creating-a-custom-htmlreactparseroptions-object).
 
 > [!TIP]
 > When using WordPress [Block Themes](https://wordpress.org/documentation/article/block-themes/), pretty much _everything_ is a block.
@@ -198,7 +172,10 @@ export default function Page() {
 }
 ```
 
-Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`. Setting the value to `null` will use the [default block rendering](#default-block-rendering).
+Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`.
+
+> [!TIP]
+> Setting the block definition value to `null` will use the [default block rendering](#default-html-rendering-with-parse-and-html-react-parser).
 
 ---
 
