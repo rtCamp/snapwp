@@ -73,7 +73,8 @@ Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` 
 
 SnapWP allows you to customize **Template Parts**, such as headers, footers, etc, by mapping them to custom React components. This is useful for modifying the structure, design, or behavior of key site areas while keeping WordPress as the content source.
 
-> [!TIP] > **Template Parts** are reusable block structures in WordPress [Block Themes](https://wordpress.org/documentation/article/block-themes/).
+> [!TIP]
+> Template Parts are reusable block structures in WordPress [Block Themes](https://wordpress.org/documentation/article/block-themes/).
 > Common examples include:
 >
 > -   The **Header** ( slug `"header"`)
