@@ -57,8 +57,17 @@ body:
     - type: textarea
       attributes:
           label: Backend Environment
-          description: Please provide details about your backend environment. We recommend you go Admin > Site Health > Info and share the output.
-          render: bash
+          description: Please provide details about your backend environment. Pleas go to your WordPress `Dashboard > Tools > Site Health > Info`, click `Copy site info to clipboard`, and paste the output here.
+          render: markdown
+          value: |
+              <details>
+                <summary>Site Health Info</summary>
+                <!-- Please leave one blank line below for enabling the code block rendering. -->
+
+                ```
+                PASTE SITE HEALTH INFO HERE
+                ```
+              </details>
 
     - type: checkboxes
       attributes:

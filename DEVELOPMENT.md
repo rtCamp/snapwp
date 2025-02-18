@@ -37,6 +37,7 @@ The monorepo is organized as follows:
 │  # Contains all the modules (libraries and apps) for the project
 ├── packages/
 │   ├── blocks          # Consumable WordPress blocks for frontend use
+│   ├── cli             # CLI commands for `npx snapwp`
 │   ├── codegen-config  # GraphQL code generation configuration
 │   ├── core            # Core functionality shared by the SnapWP framework
 │   ├── eslint-config   # Shared ESLint configuration for all packages
@@ -64,7 +65,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Setup
 
-1. Copy the example environment file to `.env` and update the values as needed.
+1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
     ```bash
     cp .env.example .env
@@ -82,23 +83,25 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm install
     ```
 
-4. Build the packages.
+4. Build the packages locally.
 
     ```bash
     npm run build
     ```
 
-5. Publish packages locally.
+    At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+
+5. (Optional) Start the packages in watch mode.
+
+    ```bash
+    npm run dev
+    ```
+
+    Alternatively, you can publish the packages locally using Verdaccio:
 
     ```bash
     npm run publish:local
     ```
-
-Alternatively, you could build the packages in watch mode:
-
-```bash
-npm run dev
-```
 
 ## Code Contributions (Pull Requests)
 

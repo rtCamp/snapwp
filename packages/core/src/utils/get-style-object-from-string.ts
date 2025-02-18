@@ -9,10 +9,11 @@ import { Logger } from '@/logger';
  *
  * @internal
  */
-function formatStringToCamelCase( str: string ) {
+function formatStringToCamelCase( str: string ): string {
 	const splitted = str.split( '-' ).filter( ( word ) => !! word );
+
 	if ( splitted.length === 1 ) {
-		return splitted[ 0 ];
+		return splitted[ 0 ]!;
 	}
 
 	return (
@@ -20,7 +21,7 @@ function formatStringToCamelCase( str: string ) {
 		splitted
 			.slice( 1 )
 			.map( ( word ) => {
-				return word[ 0 ].toUpperCase() + word.slice( 1 );
+				return word[ 0 ]!.toUpperCase() + word.slice( 1 );
 			} )
 			.join( '' )
 	);

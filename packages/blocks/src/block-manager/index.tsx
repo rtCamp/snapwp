@@ -52,8 +52,10 @@ export default class BlockManager {
 			BlockManager.blockDefinitions[ node.type ] !== undefined &&
 			BlockManager.blockDefinitions[ node.type ] !== null
 		) {
+			// @ts-ignore -- Block definitions are checked for null/undefined.
 			node.renderer = BlockManager.blockDefinitions[ node.type ];
 		} else {
+			// @ts-ignore -- @todo remove when types are fixed.
 			node.renderer = BlockManager.blockDefinitions.default;
 			node.children = null;
 		}
