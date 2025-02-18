@@ -220,6 +220,7 @@ class SnapWPConfigManager {
 				if ( cfg[ key ] === undefined ) {
 					delete cfg[ key ];
 				} else if (
+					// This should probably be moved into the schema as a sanitize callback.
 					( key === 'homeUrl' || key === 'nextUrl' ) &&
 					typeof cfg[ key ] === 'string'
 				) {
