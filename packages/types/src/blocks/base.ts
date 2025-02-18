@@ -25,6 +25,6 @@ export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
 	TBlockProps,
 	'parentClientId'
 > & {
-	children?: BlockTreeNode[] | null;
+	children: BlockTreeNode[] | null;
 	renderer: React.ComponentType< any >;
 };
