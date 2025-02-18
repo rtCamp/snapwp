@@ -2,7 +2,10 @@
 
 This is a headless WordPress application built with [Next.js](https://nextjs.org/), powered by [WPGraphQL](https://www.wpgraphql.com/) and [SnapWP](https://github.com/rtCamp/snapwp).
 
-## Getting Started
+## Quick Start
+
+> [!TIP]
+> We recommend reading the [Getting Started guide](https://github.com/rtCamp/snapwp/blob/develop/docs/getting-started.md) for a more in-depth overview of SnapWP.
 
 ```bash
 # Install dependencies
