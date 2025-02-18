@@ -4,9 +4,8 @@
 
 ### Patch Changes
 
--   [#71](https://github.com/rtCamp/snapwp/pull/71) [`f19903d`](https://github.com/rtCamp/snapwp/commit/f19903d33b61a7fe15c16bbe949aebb5c26f1081) Thanks [@justlevine](https://github.com/justlevine)! - docs: Update, backfill, and cleanup readmes
-
--   [#71](https://github.com/rtCamp/snapwp/pull/71) [`f19903d`](https://github.com/rtCamp/snapwp/commit/f19903d33b61a7fe15c16bbe949aebb5c26f1081) Thanks [@justlevine](https://github.com/justlevine)! - chore: Cleanup tsconfig rulesets and remediate unearthed issues
+-   docs: Update, backfill, and cleanup readmes
+-   chore: Cleanup tsconfig rulesets and remediate unearthed issues
 
 ## 0.0.4 - 2025-02-07
 
