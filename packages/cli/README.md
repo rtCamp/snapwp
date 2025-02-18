@@ -38,18 +38,3 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     2. Run `npm install`.
     3. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
     4. Visit the `NEXT_PUBLIC_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
-
-## Development
-
-### Using linking (useful while developing)
-
-1. Clone the [SnapWP](https://github.com/rtCamp/snapwp) repository using `git clone https://github.com/rtCamp/snapwp.git`.
-2. `npm run build` to build the packages. (Alternatively, `npm run build -w snapwp` to only build the script)
-3. `npm link -w snapwp` to link the package to your global dependencies. This exposes `snapwp` as a CLI command.
-4. `snapwp` will be available to be used.
-5. `npm r snapwp -g` to remove the link.
-
-### Using Verdaccio (useful while testing pre-release)
-
-1. `npm run publish:local` to build and publish.
-2. Run `snapwp --proxy` to scaffold the project which uses dependencies from local registry.

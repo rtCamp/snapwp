@@ -38,6 +38,7 @@ const config = {
 					'ts-jest',
 					{
 						useESM: true,
+						isolatedModules: true,
 						tsconfig: '<rootDir>/packages/core/tsconfig.json',
 					},
 				],
@@ -69,6 +70,7 @@ const config = {
 					'ts-jest',
 					{
 						useESM: true,
+						isolatedModules: true,
 						tsconfig: '<rootDir>/packages/query/tsconfig.json',
 					},
 				],
@@ -100,6 +102,7 @@ const config = {
 					'ts-jest',
 					{
 						useESM: true,
+						isolatedModules: true,
 						tsconfig: '<rootDir>/packages/next/tsconfig.json',
 					},
 				],
@@ -136,6 +139,7 @@ const config = {
 					'ts-jest',
 					{
 						useESM: true,
+						isolatedModules: true,
 						tsconfig: '<rootDir>/packages/blocks/tsconfig.json',
 					},
 				],

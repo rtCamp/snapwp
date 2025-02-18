@@ -1,5 +1,8 @@
 blank_issues_enabled: true
 contact_links:
-    - name: General Support Request
+    - name: ❓ Support Question
       url: https://github.com/rtCamp/snapwp/discussions
       about: For general help requests, create a new topic in Github Discussions
+    - name: 💬 Community Discord Channel
+      url: https://discord.gg/55h7WmYZff
+      about: The WPGraphQL Discord is a great place to communicate in real-time, and SnapWP has a dedicated channel. Ask questions, discuss features, get to know other folks using SnapWP and WPGraphQL.
