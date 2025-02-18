@@ -37,6 +37,7 @@ The monorepo is organized as follows:
 │  # Contains all the modules (libraries and apps) for the project
 ├── packages/
 │   ├── blocks          # Consumable WordPress blocks for frontend use
+│   ├── cli             # CLI commands for `npx snapwp`
 │   ├── codegen-config  # GraphQL code generation configuration
 │   ├── core            # Core functionality shared by the SnapWP framework
 │   ├── eslint-config   # Shared ESLint configuration for all packages

@@ -7,7 +7,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 ### Prerequisites
 
 -   **PHP**: v7.4+
--   **WordPress**: v6.0+
+-   **WordPress**: v6.7+
 -   A **[Block Theme](https://wordpress.org/documentation/article/block-themes/)**
 
 ### Installation Steps
@@ -61,7 +61,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
            </figure>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./config-api.md#environment-variables).
+        2. Adjust any [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.

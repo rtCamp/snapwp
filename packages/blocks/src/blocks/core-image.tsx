@@ -283,6 +283,11 @@ const extractInteractivityAttributesForElement = (
 	while ( ( match = regex.exec( renderedHtml ) ) !== null ) {
 		const [ , attributes ] = match;
 		let dataMatch;
+
+		if ( ! attributes ) {
+			continue;
+		}
+
 		while (
 			( dataMatch = dataAttributesRegex.exec( attributes ) ) !== null
 		) {
@@ -318,6 +323,11 @@ const extractAriaAttributesForElement = (
 	while ( ( match = regex.exec( renderedHtml ) ) !== null ) {
 		const [ , attributes ] = match;
 		let dataMatch;
+
+		if ( ! attributes ) {
+			continue;
+		}
+
 		while (
 			( dataMatch = dataAttributesRegex.exec( attributes ) ) !== null
 		) {
