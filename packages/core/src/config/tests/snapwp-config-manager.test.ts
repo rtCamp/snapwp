@@ -199,4 +199,15 @@ describe( 'SnapWPConfigManager functions', () => {
 			'`uploadsDirectory` should start with a forward slash.'
 		);
 	} );
+
+	it( 'should correctly normalize URLs by removing trailing slashes', () => {
+		process.env.NEXT_PUBLIC_URL = 'https://localhost:3000/';
+		process.env.NEXT_PUBLIC_WORDPRESS_URL =
+			'https://wordpress.example.com/';
+
+		const config = getConfig();
+
+		expect( config.nextUrl ).toBe( 'https://localhost:3000' );
+		expect( config.homeUrl ).toBe( 'https://wordpress.example.com' );
+	} );
 } );
