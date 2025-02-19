@@ -34,6 +34,13 @@ export default function parseQueryResult(
 		} );
 	}
 
+	// Check if data.templateByUri is null
+	if ( ! queryData.data.templateByUri ) {
+		throw new TemplateParseError(
+			`Error fetching template data for uri: ${ uri }`
+		);
+	}
+
 	if ( ! queryData.data && queryData.errors?.length ) {
 		throw new TemplateParseError(
 			`Error fetching template data for uri: ${ uri }`
