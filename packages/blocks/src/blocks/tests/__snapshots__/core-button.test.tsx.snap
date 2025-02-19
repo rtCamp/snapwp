@@ -103,16 +103,6 @@ exports[`CoreButton Component renders with empty attributes object 1`] = `
 </DocumentFragment>
 `;
 
-exports[`CoreButton Component renders with null attributes 1`] = `
-<DocumentFragment>
-  <div
-    class=""
-  >
-    <a />
-  </div>
-</DocumentFragment>
-`;
-
 exports[`CoreButton Component renders with undefined attributes 1`] = `
 <DocumentFragment>
   <div

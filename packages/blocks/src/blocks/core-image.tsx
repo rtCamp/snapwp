@@ -1,69 +1,19 @@
 import { decode } from 'html-entities';
-import React, {
-	type ComponentProps,
-	type CSSProperties,
-	type PropsWithChildren,
-} from 'react';
+import React, { type ComponentProps, type CSSProperties } from 'react';
 import {
-	type BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-
-interface CoreImageAttributes {
-	alt?: string;
-	aspectRatio?: string;
-	caption?: string;
-	href?: string;
-	linkClass?: string;
-	linkTarget?: string;
-	rel?: string;
-	scale?: string;
-	style?: string;
-	title?: string;
-	url?: string;
-	imageHeight?: string;
-	width?: string;
-	sizeSlug?: string;
-	lightbox?: string | null;
-}
-
-interface CoreImageProps extends BlockData {
-	attributes?: CoreImageAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	mediaDetails?: MediaDetails;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		databaseId: number;
-		sizes: string;
-	};
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-	sizes: MediaSize[];
-}
-
-interface MediaSize {
-	height: number;
-	width: number;
-	name: string;
-	sourceUrl: string;
-}
-//@ts-ignore -- Unused until lightbox support is fixed.
-interface LightBoxProp {
-	enabled: boolean;
-}
-
-interface FigureProps extends CoreImageAttributes, PropsWithChildren {
-	renderedHtml?: string | null;
-	classNames?: string;
-}
+import type {
+	CoreImageAttributes,
+	CoreImageConnectedMediaItem,
+	CoreImageMediaDetails,
+	CoreImage as CoreImageType,
+	CoreImageProps,
+	FigureProps,
+} from '@snapwp/types';
 
 /**
  * Renders a figure element with optional link and caption.
@@ -129,12 +79,12 @@ const Figure = ( {
  * @param [props.renderedHtml] - The rendered HTML.
  * @return The rendered core image block or null if no URL is provided.
  */
-export default function CoreImage( {
+const CoreImage: CoreImageType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ) {
+}: CoreImageProps ) => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 
@@ -211,7 +161,7 @@ export default function CoreImage( {
 			) }
 		</Figure>
 	);
-}
+};
 
 /**
  * Returns the props for the image component.
@@ -224,8 +174,8 @@ export default function CoreImage( {
  */
 const getImageProps = (
 	attributes?: CoreImageAttributes,
-	connectedMediaItem?: ConnectedMediaItem,
-	mediaDetails?: MediaDetails
+	connectedMediaItem?: CoreImageConnectedMediaItem,
+	mediaDetails?: CoreImageMediaDetails
 ): ComponentProps< typeof Image > => {
 	const {
 		alt,
@@ -388,3 +338,5 @@ const extractAriaAttributesForElement = (
 
 	return result;
 };
+
+export default CoreImage;

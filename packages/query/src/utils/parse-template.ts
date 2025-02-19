@@ -1,12 +1,11 @@
 import {
 	Logger,
-	TemplateParseError,
-	type BlockData,
 	type EnqueuedScriptProps,
-	type ScriptModuleProps,
 	type StyleSheetProps,
-	type TemplateData,
+	type ScriptModuleProps,
+	TemplateParseError,
 } from '@snapwp/core';
+import type { BlockData } from '@snapwp/types';
 import type { ApolloQueryResult } from '@apollo/client';
 import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
@@ -23,7 +22,7 @@ export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
 	wordpressUrl: string,
 	uri: string
-): TemplateData {
+) {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error(

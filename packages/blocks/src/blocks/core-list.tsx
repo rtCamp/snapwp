@@ -1,5 +1,6 @@
 import React from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
+import type { CoreList as CoreListType, CoreListProps } from '@snapwp/types';
 
 /**
  * Renders the core/list block.
@@ -10,7 +11,7 @@ import { cn, getStylesFromAttributes } from '@snapwp/core';
  *
  * @return The rendered block.
  */
-export default function CoreList( { attributes, children }: any ) {
+const CoreList: CoreListType = ( { attributes, children }: CoreListProps ) => {
 	const { cssClassName, ordered, reversed, start, style, type } =
 		attributes || {};
 
@@ -35,4 +36,6 @@ export default function CoreList( { attributes, children }: any ) {
 			{ children }
 		</TagName>
 	);
-}
+};
+
+export default CoreList;

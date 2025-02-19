@@ -50,6 +50,7 @@
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
 		"typescript": "*",
+		"@snapwp/types": "*",
 		"html-react-parser": "^5.1.12"
 	}
 }
