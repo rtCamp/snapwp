@@ -48,6 +48,7 @@
 		"@types/react-dom": "*",
 		"typescript": "*",
 		"resolve-tspaths": "*",
-		"tsc-watch": "*"
+		"tsc-watch": "*",
+		"@snapwp/types": "*"
 	}
 }

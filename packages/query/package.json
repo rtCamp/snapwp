@@ -40,7 +40,8 @@
 		"dotenv": "^16.4.5",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"@snapwp/types": "*"
 	},
 	"peerDependencies": {
 		"react": "^19.0.0",

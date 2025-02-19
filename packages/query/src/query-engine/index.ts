@@ -10,7 +10,7 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import type { TemplateData, GlobalHeadProps } from '@snapwp/core';
+import type { GlobalHeadProps } from '@snapwp/core';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -73,7 +73,7 @@ export class QueryEngine {
 	 * @param uri - The URL of the seed node.
 	 * @return The template data fetched for the uri.
 	 */
-	static getTemplateData = async ( uri: string ): Promise< TemplateData > => {
+	static getTemplateData = async ( uri: string ) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
