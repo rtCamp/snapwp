@@ -117,7 +117,7 @@ export class QueryEngine {
 
 					// Throw the error with proper message.
 					throw new Error(
-						`Network error: ${ errorMessage } (Status: ${ statusCode })`
+						`Network error ${ errorMessage } (Status: ${ statusCode })`
 					);
 				}
 			}
@@ -193,7 +193,7 @@ export class QueryEngine {
 
 					// Throw the error with proper message.
 					throw new Error(
-						`Network error: ${ errorMessage } (Status: ${ statusCode })`
+						`Network error ${ errorMessage } (Status: ${ statusCode })`
 					);
 				}
 			}

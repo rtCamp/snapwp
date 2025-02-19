@@ -36,10 +36,7 @@ export default function GlobalError( {
 			</div>
 			<style jsx>{ `
 				.error-container {
-					display: flex;
-					flex-direction: column;
-					justify-content: center;
-					align-items: center;
+					display: block;
 					height: 100vh;
 					text-align: center;
 					background-color: #000;
@@ -48,13 +45,11 @@ export default function GlobalError( {
 					padding: 20px;
 				}
 				.error-content {
-					display: flex;
-					align-items: center;
-					justify-content: center;
+					display: block;
 					font-size: 1.5rem;
-					border-left: 2px solid rgba( 255, 255, 255, 0.5 );
 					padding-left: 20px;
-					gap: 12px;
+					width: 50%;
+					white-space: wrap;
 				}
 				.error-digest {
 					font-size: 0.8rem;
