@@ -82,7 +82,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 ### Troubleshooting
 
-@todo
+If you encounter issues, check the [GitHub Issues](https://github.com/rtCamp/snapwp/issues) for known problems and workarounds.
 
 ## Additional Resources
 
