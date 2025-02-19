@@ -34,7 +34,7 @@ Run `npm run codegen` inside the SnapWP application to generate codegen document
 
 ### 3. Initialize Apollo client
 
-Create a new instance of an Apollo client using `ApolloClient` class available in `@apollo/client` package. 
+Create a new instance of an Apollo client using `ApolloClient` class available in `@apollo/client` package.
 
 > [!TIP]
 > Refer [config-api.md](./config-api.md) for more information on NEXT_PUBLIC_WORDPRESS_URL and NEXT_PUBLIC_GRAPHQL_ENDPOINT.
@@ -55,9 +55,9 @@ const apolloClient = new ApolloClient( {
 Data can be fetched by firing `query` function provided by the Apollo client instance.
 
 ```typescript
-import { GetGlobalStylesDocument } from './__generated/graphql'; // Import generated codegen query document. 
+import { GetGlobalStylesDocument } from './__generated/graphql'; // Import generated codegen query document.
 
 const data = await apolloClient.query( {
-	query: GetGlobalStylesDocument
+	query: GetGlobalStylesDocument,
 } );
 ```
