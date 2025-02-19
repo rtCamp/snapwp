@@ -1,6 +1,6 @@
 ---
-"@snapwp/query": minor
-"snapwp": minor
+"@snapwp/query": patch
+"snapwp": patch
 ---
 
-feat: better handling of graphQL request and error boundary UI update
+feat: Improve handling of GraphQL errors and the Error Boundary UI.
