@@ -6,7 +6,7 @@ import React from 'react';
  * Default error component.
  *
  * This component is exported directly from `package.json` to prevent conflicts with other components when importing it from the Next.js package.
- * This resolves the issue of ` You are importing a component that requires next/header which is only available in a server-rendered page.`
+ * This resolves the issue of `You're importing a component that needs "next/headers". That only works in a Server Component which is not supported in the pages/ directory`
  *
  * @param root0 - The props.
  * @param root0.error - The error.
