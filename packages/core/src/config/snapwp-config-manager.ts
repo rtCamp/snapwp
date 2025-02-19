@@ -2,7 +2,7 @@
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
 import type { BlockDefinitions } from '@/props';
-
+import type { HTMLReactParserOptions } from 'html-react-parser';
 export interface SnapWPEnv {
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
@@ -41,6 +41,10 @@ export interface SnapWPConfig {
 	 * Block definitions for the editor.
 	 */
 	blockDefinitions?: BlockDefinitions;
+	/**
+	 * html-react-parser overload options
+	 */
+	parserOptions?: HTMLReactParserOptions;
 }
 
 /**
@@ -104,6 +108,10 @@ class SnapWPConfigManager {
 	 */
 	static snapWPConfigSchema: ConfigSchema< SnapWPConfig > = {
 		blockDefinitions: {
+			type: 'object',
+			required: false,
+		},
+		parserOptions: {
 			type: 'object',
 			required: false,
 		},
@@ -219,6 +227,17 @@ class SnapWPConfigManager {
 			( key: keyof T ) => {
 				if ( cfg[ key ] === undefined ) {
 					delete cfg[ key ];
+				} else if (
+					// @todo this should probably be moved into the schema as a sanitize callback.
+					( key === 'homeUrl' || key === 'nextUrl' ) &&
+					typeof cfg[ key ] === 'string'
+				) {
+					cfg[ key ] = ( cfg[ key ] as string ).endsWith( '/' )
+						? ( ( cfg[ key ] as string ).slice(
+								0,
+								-1
+						  ) as T[ keyof T ] )
+						: cfg[ key ];
 				}
 			}
 		);
