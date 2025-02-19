@@ -96,7 +96,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run ESLint
@@ -145,7 +145,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
                   npm run codegen
 
@@ -237,7 +237,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Build assets
@@ -287,7 +287,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run unit tests
@@ -336,7 +336,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run npm audit
@@ -385,7 +385,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run Prettier
