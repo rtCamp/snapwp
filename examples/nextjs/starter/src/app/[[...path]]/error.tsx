@@ -1,7 +1,5 @@
 'use client'; // Error boundaries must be Client Components
 
-import { useEffect } from 'react';
-
 export default function Error( {
 	error,
 	reset,
@@ -9,25 +7,61 @@ export default function Error( {
 	error: Error & { digest?: string };
 	reset: () => void;
 } ) {
-	useEffect( () => {
-		// Log the error to an error reporting service
-		console.error( error ); // eslint-disable-line no-console
-	}, [ error ] );
-
-	const errorMessage = 'Something went wrong! Please check the console logs';
-	const tryAgainButtonText = 'Try again';
-
 	return (
-		<div>
-			<h2>{ errorMessage }</h2>
-			<button
-				onClick={
-					// Attempt to recover by trying to re-render the segment
-					() => reset()
+		<div className="error-container">
+			<div
+				className="error-content"
+				dangerouslySetInnerHTML={ {
+					__html: error?.message || 'An unexpected error occurred.',
+				} }
+			/>
+			<div className="buttons">
+				<button onClick={ reset }>Try Again</button>
+			</div>
+			<style jsx>{ `
+				.error-container {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					align-items: center;
+					height: 100vh;
+					text-align: center;
+					background-color: #000;
+					color: #fff;
+					font-family: Arial, sans-serif;
+					padding: 20px;
 				}
-			>
-				{ tryAgainButtonText }
-			</button>
+				.error-content {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font-size: 1.5rem;
+					border-left: 2px solid rgba( 255, 255, 255, 0.5 );
+					padding-left: 20px;
+					gap: 12px;
+				}
+				.buttons {
+					margin-top: 20px;
+					display: flex;
+					gap: 10px;
+				}
+				button,
+				.home-button {
+					padding: 10px 20px;
+					background-color: #ff5555;
+					color: #fff;
+					border: none;
+					border-radius: 5px;
+					cursor: pointer;
+					transition: background 0.3s ease;
+					font-size: 1rem;
+					text-decoration: none;
+				}
+				button:hover,
+				.home-button:hover {
+					background-color: #cc4444;
+				}
+			` }</style>
 		</div>
 	);
 }

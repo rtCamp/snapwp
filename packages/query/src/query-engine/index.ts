@@ -5,12 +5,16 @@ import {
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
+	ApolloError,
 	InMemoryCache,
 	type NormalizedCacheObject,
+	type ServerError,
+	type ServerParseError,
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import type { TemplateData, GlobalHeadProps } from '@snapwp/core';
+import { Logger } from '@snapwp/core';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -59,13 +63,68 @@ export class QueryEngine {
 			QueryEngine.initialize();
 		}
 
-		const data = await QueryEngine.apolloClient.query( {
-			query: GetGlobalStylesDocument,
-			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-			errorPolicy: 'all',
-		} );
+		try {
+			const data = await QueryEngine.apolloClient.query( {
+				query: GetGlobalStylesDocument,
+				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+				errorPolicy: 'all',
+			} );
 
-		return parseGlobalStyles( data );
+			return parseGlobalStyles( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				// If there are graphQLErrors log them.
+				error.graphQLErrors.forEach( ( graphQLError ) => {
+					Logger.error( graphQLError.message );
+				} );
+
+				// If there are clientErrors log them.
+				error.clientErrors.forEach( ( clientError ) => {
+					Logger.error( clientError.message );
+				} );
+
+				// If there are protocolErrors log them.
+				error.protocolErrors.forEach( ( protocolError ) => {
+					Logger.error( protocolError.message );
+				} );
+
+				// If there are networkError throw the error with proper message.
+				if ( error.networkError ) {
+					let statusCode: number | undefined;
+					let errorMessage: string | undefined;
+					// If networkError is ServerError, get the status code and message.
+					if ( error.networkError.name === 'ServerError' ) {
+						const serverError = error.networkError as ServerError;
+						statusCode = serverError.statusCode;
+						if ( typeof serverError.result === 'string' ) {
+							errorMessage = serverError.result;
+						} else {
+							errorMessage = serverError.result.message;
+						}
+					} else if (
+						// If networkError is ServerParseError, get the status code and message.
+						error.networkError.name === 'ServerParseError'
+					) {
+						const serverParseError =
+							error.networkError as ServerParseError;
+
+						statusCode = serverParseError.statusCode;
+						errorMessage = serverParseError.message;
+					} else {
+						// If networkError is not ServerError or ServerParseError, get the message.
+						errorMessage = error.networkError.message;
+					}
+
+					// Throw the error with proper message.
+					throw new Error(
+						`Network error: ${ errorMessage } (Status: ${ statusCode })`
+					);
+				}
+			}
+
+			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
 	};
 
 	/**
@@ -79,13 +138,68 @@ export class QueryEngine {
 		}
 		const variables = { uri };
 
-		const data = await QueryEngine.apolloClient.query( {
-			query: GetCurrentTemplateDocument,
-			variables,
-			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-			errorPolicy: 'all',
-		} );
+		try {
+			const data = await QueryEngine.apolloClient.query( {
+				query: GetCurrentTemplateDocument,
+				variables,
+				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+				errorPolicy: 'all',
+			} );
 
-		return parseTemplate( data, QueryEngine.homeUrl, uri );
+			return parseTemplate( data, QueryEngine.homeUrl, uri );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				// If there are graphQLErrors log them.
+				error.graphQLErrors.forEach( ( graphQLError ) => {
+					Logger.error( graphQLError.message );
+				} );
+
+				// If there are clientErrors log them.
+				error.clientErrors.forEach( ( clientError ) => {
+					Logger.error( clientError.message );
+				} );
+
+				// If there are protocolErrors log them.
+				error.protocolErrors.forEach( ( protocolError ) => {
+					Logger.error( protocolError.message );
+				} );
+
+				// If there are networkError throw the error with proper message.
+				if ( error.networkError ) {
+					let statusCode: number | undefined;
+					let errorMessage: string | undefined;
+					// If networkError is ServerError, get the status code and message.
+					if ( error.networkError.name === 'ServerError' ) {
+						const serverError = error.networkError as ServerError;
+						statusCode = serverError.statusCode;
+						if ( typeof serverError.result === 'string' ) {
+							errorMessage = serverError.result;
+						} else {
+							errorMessage = serverError.result.message;
+						}
+					} else if (
+						// If networkError is ServerParseError, get the status code and message.
+						error.networkError.name === 'ServerParseError'
+					) {
+						const serverParseError =
+							error.networkError as ServerParseError;
+
+						statusCode = serverParseError.statusCode;
+						errorMessage = serverParseError.message;
+					} else {
+						// If networkError is not ServerError or ServerParseError, get the message.
+						errorMessage = error.networkError.message;
+					}
+
+					// Throw the error with proper message.
+					throw new Error(
+						`Network error: ${ errorMessage } (Status: ${ statusCode })`
+					);
+				}
+			}
+
+			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
 	};
 }
