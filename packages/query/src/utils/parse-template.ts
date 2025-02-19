@@ -33,7 +33,11 @@ export default function parseQueryResult(
 		} );
 	}
 
-	if ( ! queryData.data && queryData.errors?.length ) {
+	// If there is no data or templateByUri in the query data and there are errors, throw an error.
+	if (
+		( ! queryData.data || ! queryData.data.templateByUri ) &&
+		queryData.errors?.length
+	) {
 		throw new TemplateParseError(
 			`Error fetching template data for uri: ${ uri }`
 		);
