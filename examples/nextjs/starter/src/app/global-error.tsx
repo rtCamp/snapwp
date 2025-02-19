@@ -7,16 +7,18 @@ export default function GlobalError( {
 	error: Error & { digest?: string };
 	reset: () => void;
 } ) {
+	const unknownError = 'An unexpected error occurred.';
+	const tryAgain = 'Try Again';
 	return (
 		<div className="error-container">
 			<div
 				className="error-content"
 				dangerouslySetInnerHTML={ {
-					__html: error?.message || 'An unexpected error occurred.',
+					__html: error?.message || unknownError,
 				} }
 			/>
 			<div className="buttons">
-				<button onClick={ reset }>Try Again</button>
+				<button onClick={ reset }>{ tryAgain }</button>
 			</div>
 			<style jsx>{ `
 				.error-container {
