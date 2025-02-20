@@ -24,6 +24,9 @@ on:
                 default: '[20]'
                 type: string
 
+permissions:
+    contents: read
+
 jobs:
     generate_schema:
         uses: './.github/workflows/generate-schema.yml'
