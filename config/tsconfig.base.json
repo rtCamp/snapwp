@@ -11,7 +11,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
-		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
+		"noPropertyAccessFromIndexSignature": true,
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
@@ -45,6 +45,12 @@
 		"incremental": true,
 
 		// Completeness
-		"skipLibCheck": true
+		"skipLibCheck": true,
+		
+		"include": [
+			"src/**/*",
+			"packages/**/*"
+		  ]
+		  
 	}
 }

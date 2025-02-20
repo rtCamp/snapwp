@@ -31,8 +31,8 @@ export default function EditorBlocksRenderer( {
 			...node,
 		};
 
-		delete props.renderer;
-		delete props.children;
+		delete props[ 'renderer' ];
+		delete props[ 'children' ];
 
 		return (
 			<node.renderer { ...props }>

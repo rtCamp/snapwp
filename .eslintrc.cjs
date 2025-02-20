@@ -28,6 +28,8 @@ module.exports = {
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
 			rules: {
 				'n/no-process-env': 'off',
+				// 'dot-notation': 'off',
+				// '@typescript-eslint/dot-notation': 'error',
 			},
 		},
 	],

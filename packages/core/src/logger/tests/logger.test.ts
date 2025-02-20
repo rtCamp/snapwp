@@ -15,7 +15,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a debug message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env[ 'NODE_ENV' ] = 'dev';
 		Logger.debug( 'Debug message' );
 		expect( console.debug ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -24,7 +24,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an info message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env[ 'NODE_ENV' ] = 'dev';
 		Logger.info( 'Info message' );
 		expect( console.info ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -33,7 +33,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a warning message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env[ 'NODE_ENV' ] = 'dev';
 		Logger.warn( 'Warning message' );
 		expect( console.warn ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -42,7 +42,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an error message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env[ 'NODE_ENV' ] = 'dev';
 		Logger.error( 'Error message' );
 		expect( console.error ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -51,7 +51,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a general message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env[ 'NODE_ENV' ] = 'dev';
 		Logger.log( 'General message' );
 		expect( console.log ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -60,7 +60,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should not log in production mode', () => {
-		process.env.NODE_ENV = 'production';
+		process.env[ 'NODE_ENV' ] = 'production';
 		Logger.debug( 'Debug message' );
 		Logger.info( 'Info message' );
 		Logger.warn( 'Warning message' );
@@ -71,7 +71,7 @@ describe( 'Logger', () => {
 		expect( console.warn ).not.toHaveBeenCalled();
 		expect( console.error ).not.toHaveBeenCalled();
 		expect( console.log ).not.toHaveBeenCalled();
-		process.env.NODE_ENV = 'test';
+		process.env[ 'NODE_ENV' ] = 'test';
 	} );
 
 	it( 'should not log in test mode', () => {
