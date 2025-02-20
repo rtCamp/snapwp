@@ -77,10 +77,10 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 1. Install npm packages in your Next App
 
 ```bash
-npm i @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
+npm install @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
 ```
 
-2. Copy the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from the WP server and create an `.env` file in the project root.
+2. Create an `.env` file in the project root. The contents for the .env file can be copied from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from the WP server.
 
 3. Create `snapwp.config.ts` in the project root with the following content.
 
@@ -92,7 +92,15 @@ const config: SnapWPConfig = {};
 export default config;
 ```
 
-4. Create the default route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
+4. Update the nextjs config. Rename the file to `next.config.mjs` so that top-level await can be used.
+
+```javascript
+import withSnapWP from '@snapwp/next/withSnapWP';
+
+export default await withSnapWP( {} );
+```
+
+5. Create the default route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
 
 ```typescript
 import { TemplateRenderer } from '@snapwp/next';
@@ -110,7 +118,7 @@ export default function Page() {
 
 ```
 
-5. Create the root layout to load global styles, fonts and scripts from WP server. Make a file `src/app/layout.tsx`
+6. Create the root layout to load global styles, fonts and scripts from WP server. Make a file `src/app/layout.tsx`
 
 ```typescript
 import { RootLayout } from '@snapwp/next';
@@ -124,15 +132,8 @@ export default function Layout( { children }: { children: React.ReactNode } ) {
 }
 ```
 
-6. Update the nextjs config. Rename the file to `next.config.mjs` so that top-level await can be used.
 
-```javascript
-import withSnapWP from '@snapwp/next/withSnapWP';
-
-export default await withSnapWP( {} );
-```
-
-7. Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.
+NOTE: Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.
 
 ```diff
 ...
