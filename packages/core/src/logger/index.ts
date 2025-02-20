@@ -20,7 +20,7 @@ export enum LOGTYPE {
 const log = ( type: LOGTYPE, ...args: any[] ): void => {
 	if (
 		// eslint-disable-next-line n/no-process-env
-		'production' === process.env.NODE_ENV ||
+		'production' === process.env[ 'NODE_ENV' ] ||
 		// eslint-disable-next-line n/no-process-env
 		'test' === process.env[ 'NODE_ENV' ]
 	) {

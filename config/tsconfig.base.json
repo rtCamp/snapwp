@@ -11,11 +11,12 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
-		"noPropertyAccessFromIndexSignature": true,
+		"noPropertyAccessFromIndexSignature": true, 
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"strictFunctionTypes": true,
+		"strictNullChecks": true,
 
 		// Modules
 		"module": "ES2022",
@@ -46,11 +47,13 @@
 
 		// Completeness
 		"skipLibCheck": true,
-		
-		"include": [
-			"src/**/*",
-			"packages/**/*"
-		  ]
-		  
-	}
+	},
+	"ts-node": {
+		"files": true
+	  },
+	"include": [
+		"src/**/*",
+		"packages/**/*",
+		"env.d.ts",
+	  ]
 }
