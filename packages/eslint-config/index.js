@@ -5,7 +5,15 @@ module.exports = {
 		es6: true,
 	},
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@wordpress/eslint-plugin', 'jsdoc', 'import', 'n' ],
+	plugins: [
+		'@typescript-eslint',
+		'@wordpress/eslint-plugin',
+		'import',
+		'n',
+		'jest',
+		'jsdoc',
+		'@stylistic/jsx',
+	],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
 		'plugin:jsdoc/recommended-typescript',
