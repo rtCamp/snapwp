@@ -1,4 +1,4 @@
-import { type BlockDefinitions } from '@snapwp/core';
+import type { BlockDefinitions } from '@snapwp/types';
 import CoreAudio from './core-audio';
 import CoreButton from './core-button';
 import CoreButtons from './core-buttons';

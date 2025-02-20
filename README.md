@@ -43,7 +43,7 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 -   [@snapwp/eslint-config](packages/eslint-config): Reusable ESLint configuration.
 -   [@snapwp/prettier-config](packages/jest-preset): Reusable Prettier configuration.
 
-### WordPress Plugins
+### WordPress Plugins (🔌 External)
 
 -   [SnapWP Helper](https://github.com/rtCamp/snapwp-helper): A WordPress plugin that provides the additional functionality to WordPress and [WPGraphQL](https://www.wpgraphql.com/) needed for SnapWP's frontend libraries.
 
@@ -54,7 +54,7 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 ### References
 
 -   [Config API & Environment Variables](docs/config-api.md)
--   [Overloading WordPress Behavior](docs/overloading-wordpress-behaviour.md)
+-   [Overloading WordPress Behavior](docs/overloading-wp-behavior.md)
 -   [NextJS Middleware](docs/middleware.md)
 -   [Template Rendering System](docs/template-rendering.md)
 
@@ -62,7 +62,7 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 
 [SnapWP](https://github.com/rtCamp/snapwp) is under active development and maintained by [rtCamp](https://rtcamp.com/).
 
-Contributions are _welcome_ and **encouraged!** To learn more about contributing to this package or SnapWP as a whole, please read the [Contributing Guide](/.github/CONTRIBUTING.md).
+Contributions are _welcome_ and **encouraged!** To learn more about contributing to SnapWP, please read the [Contributing Guide](/.github/CONTRIBUTING.md).
 
 For development guidelines, please refer to our [Development Guide](./DEVELOPMENT.md).
 

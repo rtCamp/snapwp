@@ -1,28 +1,3 @@
-import React from 'react';
-
-export interface BlockData {
-	type: string;
-	cssClassNames?: Array< string | null > | null;
-	clientId?: string | null;
-	parentClientId?: string | null;
-	renderedHtml?: string | null;
-	attributes?: Record< any, any >;
-}
-
-export type BlockTreeNode = Omit< BlockData, 'clientId' & 'parentClientId' > & {
-	children?: BlockTreeNode[] | null;
-	// @todo: implement as generic type once we enforce `no-explicit-any`
-	renderer: React.FC< React.PropsWithChildren< any > >;
-};
-
-export type BlockDefinitions = {
-	[ key: string ]: React.FC< BlockData >;
-};
-
-export type EditorBlocksRendererProps = {
-	editorBlocks?: BlockData[] | null;
-};
-
 export type TemplateHeadProps = {
 	stylesheets?: StyleSheetProps[] | null;
 };
@@ -40,14 +15,6 @@ export type ScriptModuleProps = {
 	src?: string | null;
 	extraData?: string | null;
 	dependencies?: ScriptModuleDependencyProps[] | null;
-};
-
-export type TemplateData = {
-	stylesheets?: StyleSheetProps[];
-	editorBlocks?: BlockData[];
-	scripts?: EnqueuedScriptProps[];
-	scriptModules?: ScriptModuleProps[];
-	bodyClasses?: string[];
 };
 
 export type StyleSheetProps = {

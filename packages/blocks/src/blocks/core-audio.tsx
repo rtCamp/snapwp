@@ -1,9 +1,10 @@
-import React, { type JSX } from 'react';
+import React from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
 
 /**
  * Renders the core/audio block.
@@ -14,10 +15,10 @@ import {
  *
  * @return The rendered block.
  */
-export default function CoreAudio( {
+const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
-}: any ): JSX.Element | null {
+}: CoreAudioProps ) => {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {
@@ -51,4 +52,6 @@ export default function CoreAudio( {
 			) }
 		</figure>
 	);
-}
+};
+
+export default CoreAudio;

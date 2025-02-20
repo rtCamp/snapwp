@@ -1,5 +1,7 @@
 'use client'; // Error boundaries must be Client Components
 
+import DefaultError from '@snapwp/next/defaultError';
+
 export default function GlobalError( {
 	error,
 	reset,
@@ -7,18 +9,5 @@ export default function GlobalError( {
 	error: Error & { digest?: string };
 	reset: () => void;
 } ) {
-	const errorMessage = 'Something went wrong!';
-	const tryAgainButtonText = 'Try again';
-
-	return (
-		<html lang="en">
-			<body>
-				<h2>{ errorMessage }</h2>
-				{ error.message }
-				<button onClick={ () => reset() }>
-					{ tryAgainButtonText }
-				</button>
-			</body>
-		</html>
-	);
+	return <DefaultError error={ error } reset={ reset } />;
 }

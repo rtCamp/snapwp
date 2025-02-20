@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/query",
-	"version": "0.0.1",
+	"version": "0.1.0",
 	"license": "AGPL-3.0",
 	"description": "Internal package for SnapWP",
 	"author": "rtCamp",
@@ -40,7 +40,8 @@
 		"dotenv": "^16.4.5",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"@snapwp/types": "*"
 	},
 	"peerDependencies": {
 		"react": "^19.0.0",

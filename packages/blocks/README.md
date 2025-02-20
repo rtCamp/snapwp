@@ -81,9 +81,9 @@ These components provide developer-friendly APIs for rendering core WordPress bl
 | core-video         | CoreVideo        |
 | default            | Default          |
 
-## (Currently) Unsupported
+## Known Limitations
 
-Work is ongoing for full feature parity with Gutenberg. The following functionality is coming soon:
+Work is ongoing for full feature parity with Gutenberg, in particular around Block Supports and certain aspects of the Interactivity API. The following functionality is coming soon:
 
 -   Duotone Filters
 -   Image Lightboxes
