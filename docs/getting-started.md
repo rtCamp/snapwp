@@ -75,6 +75,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 ### Manual Installation
 
 1. Install npm packages in your Next App
+
 ```bash
 npm i @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
 ```
@@ -82,13 +83,13 @@ npm i @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
 2. Copy the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from the WP server and create an `.env` file in the project root.
 
 3. Create `snapwp.config.ts` in the project root with the following content.
+
 ```typescript
 import type { SnapWPConfig } from '@snapwp/core/config';
 
 const config: SnapWPConfig = {};
 
 export default config;
-
 ```
 
 4. Create the default route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
@@ -131,7 +132,7 @@ import withSnapWP from '@snapwp/next/withSnapWP';
 export default await withSnapWP( {} );
 ```
 
-7. Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.  
+7. Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.
 
 ```diff
 ...
