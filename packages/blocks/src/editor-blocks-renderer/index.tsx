@@ -1,5 +1,7 @@
 import React from 'react';
 import BlockManager from '@/block-manager';
+import { getConfig } from '@snapwp/core/config';
+
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 type EditorBlocksRendererProps = {
@@ -10,14 +12,13 @@ type EditorBlocksRendererProps = {
 /**
  * A react component to render editor blocks.
  * @param props - Props.
- * @param props.blockDefinitions - blocks rendering functions.
  * @param props.editorBlocks - A list of blocks to be rendered.
  * @return The rendered template
  */
 export default function EditorBlocksRenderer( {
 	editorBlocks,
-	blockDefinitions,
 }: EditorBlocksRendererProps ) {
+	const { blockDefinitions } = getConfig();
 	if ( blockDefinitions ) {
 		BlockManager.addBlockDefinitions( blockDefinitions );
 	}

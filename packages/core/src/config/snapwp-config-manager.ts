@@ -34,7 +34,7 @@ export interface SnapWPEnv {
 	/**
 	 * Flag to enable cors middleware which proxies assets from WP server.
 	 */
-	useCorsProxy: boolean;
+	useCorsProxy?: boolean;
 }
 
 export interface SnapWPConfig {
