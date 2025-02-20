@@ -16,6 +16,9 @@ on:
                 type: string
                 default: 'develop'
 
+permissions:
+    contents: read
+
 jobs:
     # TODO: This should check for an existing artifact before generating a new schema.
     generate-schema:
@@ -35,7 +38,7 @@ jobs:
             - name: Checkout SnapWP Helper
               uses: actions/checkout@v4
               with:
-                  repository: '${{ github.repository_owner }}/snapwp-helper'
+                  repository: 'rtcamp/snapwp-helper'
                   path: '.'
                   ref: ${{ inputs.ref }}
 
@@ -45,7 +48,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Setup PHP
-              uses: shivammathur/setup-php@v2
+              uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401
               with:
                   php-version: '8.2'
                   extensions: mbstring, intl
@@ -53,7 +56,7 @@ jobs:
                   tools: composer, wp-cli
 
             - name: Install composer dependencies
-              uses: ramsey/composer-install@v3
+              uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a
               with:
                   composer-options: '--no-progress'
 
