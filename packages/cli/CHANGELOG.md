@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.1.0
+
+### Minor Changes
+
+-   [#81](https://github.com/rtCamp/snapwp/pull/81) [`2595e37`](https://github.com/rtCamp/snapwp/commit/2595e376efb9a24b9caa0be9146976ec1386ffc4) Thanks [@justlevine](https://github.com/justlevine)! - chore: SemVer bump to 0.1.0
+
+### Patch Changes
+
+-   [#77](https://github.com/rtCamp/snapwp/pull/77) [`a3c3f6b`](https://github.com/rtCamp/snapwp/commit/a3c3f6b27994b1c5fee555e23c4ea40f7b88667a) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat: Improve handling of GraphQL errors and the Error Boundary UI.
+
+-   [#80](https://github.com/rtCamp/snapwp/pull/80) [`777305f`](https://github.com/rtCamp/snapwp/commit/777305fcfe0ac104fc0259f81a1ec93451e14b50) Thanks [@justlevine](https://github.com/justlevine)! - chore: Update `snapwp` package readme
+
+-   [#76](https://github.com/rtCamp/snapwp/pull/76) [`4ded470`](https://github.com/rtCamp/snapwp/commit/4ded47012041099e01c8231cfa367c389de10171) Thanks [@justlevine](https://github.com/justlevine)! - chore: remove the NextJS example's package-lock.json from VCS.
+
 ## 0.0.6
 
 ### Patch Changes
