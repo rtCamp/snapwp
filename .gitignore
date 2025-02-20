@@ -7,12 +7,14 @@
 vendor
 node_modules
 
+# Example package-lock files should also be generated on the users machine
+examples/**/package-lock.json
+
 # Log files
 .log
 
 # Used for setting local environment variables when testing
 .env
-
 
 # Verdaccio config
 .verdaccio/conf/htpasswd

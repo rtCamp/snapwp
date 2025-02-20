@@ -8,7 +8,6 @@ describe( 'CoreAudio', () => {
 		autoplay: true,
 		caption: 'Sample Caption',
 		loop: true,
-		preload: null,
 		src: 'sample-audio.mp3',
 		style: JSON.stringify( {
 			spacing: {
@@ -67,7 +66,7 @@ describe( 'CoreAudio', () => {
 	test( 'renders null when src is not provided', () => {
 		const attributesWithoutSrc = {
 			...attributes,
-			src: null,
+			src: undefined,
 		};
 
 		const { container, asFragment } = render(

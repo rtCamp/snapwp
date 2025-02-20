@@ -1,9 +1,11 @@
-import BlockManager from '@/block-manager';
-import {
-	type EditorBlocksRendererProps,
-	type BlockTreeNode,
-} from '@snapwp/core';
 import React from 'react';
+import BlockManager from '@/block-manager';
+import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
+
+type EditorBlocksRendererProps = {
+	editorBlocks?: BlockData[] | null;
+	blockDefinitions?: BlockDefinitions | null;
+};
 
 /**
  * A react component to render editor blocks.
@@ -29,7 +31,6 @@ export default function EditorBlocksRenderer( {
 			...node,
 		};
 
-		// Removing renderer and children from props. Renderer should not be passed to the component.
 		delete props.renderer;
 		delete props.children;
 
