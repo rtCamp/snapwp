@@ -132,7 +132,6 @@ export default function Layout( { children }: { children: React.ReactNode } ) {
 }
 ```
 
-
 NOTE: Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.
 
 ```diff
