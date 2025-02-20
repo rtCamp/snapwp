@@ -45,5 +45,5 @@
 		"**/*.tsx",
 		".next/types/**/*.ts"
 	],
-	"exclude": [ "node_modules", "src/__generated" ]
+	"exclude": [ "node_modules" ]
 }

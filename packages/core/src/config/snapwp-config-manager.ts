@@ -1,7 +1,11 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import type { BlockDefinitions } from '@snapwp/types';
+import type {
+	BlockDefinitions,
+	CurrentTemplateDocument,
+	GlobalStylesDocument,
+} from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -46,6 +50,13 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Queries
+	 */
+	queries?: {
+		globalStylesDocument?: GlobalStylesDocument;
+		currentTemplateDocument?: CurrentTemplateDocument;
+	};
 }
 
 /**
@@ -113,6 +124,10 @@ class SnapWPConfigManager {
 			required: false,
 		},
 		parserOptions: {
+			type: 'object',
+			required: false,
+		},
+		queries: {
 			type: 'object',
 			required: false,
 		},

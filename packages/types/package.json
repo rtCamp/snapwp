@@ -38,6 +38,7 @@
 		"@types/react": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"@apollo/client": "^3.11.4"
 	}
 }

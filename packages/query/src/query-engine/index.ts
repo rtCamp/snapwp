@@ -62,9 +62,17 @@ export class QueryEngine {
 			QueryEngine.initialize();
 		}
 
+		const { queries } = getConfig();
+
+		let query = GetGlobalStylesDocument;
+
+		if ( queries?.globalStylesDocument ) {
+			query = queries.globalStylesDocument;
+		}
+
 		try {
 			const data = await QueryEngine.apolloClient.query( {
-				query: GetGlobalStylesDocument,
+				query,
 				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
 				errorPolicy: 'all',
 			} );
@@ -99,9 +107,16 @@ export class QueryEngine {
 		}
 		const variables = { uri };
 
+		const { queries } = getConfig();
+
+		let query = GetCurrentTemplateDocument;
+
+		if ( queries?.currentTemplateDocument ) {
+			query = queries.currentTemplateDocument;
+		}
 		try {
 			const data = await QueryEngine.apolloClient.query( {
-				query: GetCurrentTemplateDocument,
+				query,
 				variables,
 				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
 				errorPolicy: 'all',
