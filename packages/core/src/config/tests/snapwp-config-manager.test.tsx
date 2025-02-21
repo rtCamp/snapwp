@@ -7,6 +7,14 @@ import {
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
+import React from 'react';
+
+/**
+ * A mock React component used for testing block definitions.
+ *
+ * @return A div containing "Test Block".
+ */
+const MockBlockComponent = () => <div>Test Block</div>;
 
 describe( 'SnapWPConfigManager functions', () => {
 	// eslint-disable-next-line n/no-process-env
@@ -209,5 +217,29 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		expect( config.nextUrl ).toBe( 'https://localhost:3000' );
 		expect( config.homeUrl ).toBe( 'https://wordpress.example.com' );
+	} );
+
+	it( 'should not include blockDefinitions if not set', () => {
+		// @ts-ignore Allow setting global variable for testing
+		global.__snapWPConfig = {};
+		const config = getConfig();
+		expect( config.blockDefinitions ).toBeUndefined();
+	} );
+
+	it( 'should correctly set and retrieve blockDefinitions with a React component', () => {
+		const mockBlockDefinitions = { myBlock: MockBlockComponent };
+		// @ts-ignore Allow setting global variable for testing
+		global.__snapWPConfig = { blockDefinitions: mockBlockDefinitions };
+
+		const config = getConfig();
+		expect( config.blockDefinitions ).toEqual( mockBlockDefinitions );
+		expect( config.blockDefinitions?.myBlock ).toBe( MockBlockComponent );
+	} );
+
+	it( 'should throw an error if blockDefinitions is not an object', () => {
+		expect( () => {
+			// @ts-ignore - intentionally assigning invalid values
+			setConfig( { blockDefinitions: 'invalid' } );
+		} ).toThrow( 'Property blockDefinitions should be of type object.' );
 	} );
 } );
