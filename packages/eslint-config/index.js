@@ -11,34 +11,6 @@ module.exports = {
 		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
 	],
-	ignorePatterns: [ '**/config/*.js', '**/dist' ],
-	settings: {},
-	overrides: [
-		{
-			files: '**/*.test.ts',
-			env: {
-				jest: true,
-			},
-		},
-		{
-			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
-			rules: {
-				'jsdoc/require-jsdoc': [
-					'error',
-					{
-						require: {
-							ArrowFunctionExpression: true,
-							ClassDeclaration: true,
-							ClassExpression: true,
-							FunctionExpression: true,
-							MethodDefinition: true,
-						},
-					},
-				],
-				'import/default': [ 'off' ],
-			},
-		},
-	],
 	rules: {
 		'n/no-process-env': [ 'error' ],
 	},
