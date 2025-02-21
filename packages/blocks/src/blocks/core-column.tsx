@@ -21,7 +21,7 @@ const CoreColumn: CoreColumnType = ( {
 	const { cssClassName, style, width } = attributes || {};
 
 	const classNames = cn( cssClassName );
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const combinedStyles: React.CSSProperties = {
 		...styleObject,

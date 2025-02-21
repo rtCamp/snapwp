@@ -32,7 +32,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 				return (
 					<Link
 						{ ...attributes }
-						href={ href }
+						href={ href || '' }
 						style={ styleObject }
 						className={ className }
 					>
@@ -70,13 +70,13 @@ export const defaultOptions: HTMLReactParserOptions = {
 				return (
 					<Image
 						{ ...attributes }
-						src={ attribs.src }
+						src={ attribs.src || '' }
 						alt={ attribs.alt || '' }
-						height={ height }
-						width={ width }
-						className={ className }
+						height={ height || 0 }
+						width={ width || 0 }
+						className={ className || '' }
 						fill={ shouldFill }
-						style={ styleObject }
+						style={ styleObject ?? {} }
 						image={ imageAttributes }
 					/>
 				);

@@ -55,7 +55,7 @@ const Figure = ( {
 				<Link
 					href={ href }
 					className={ linkClass }
-					target={ linkTarget }
+					{ ...( linkTarget && { target: linkTarget } ) }
 					{ ...( rel && { rel } ) }
 				>
 					{ children }
@@ -124,7 +124,7 @@ const CoreImage: CoreImageType = ( {
 
 	return (
 		<Figure
-			renderedHtml={ renderedHtml }
+			renderedHtml={ renderedHtml ?? null }
 			classNames={ classNames }
 			{ ...attributes }
 		>
@@ -189,7 +189,7 @@ const getImageProps = (
 		sizeSlug,
 	} = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const imageStyles: CSSProperties = {
 		...styleObject,
@@ -198,10 +198,14 @@ const getImageProps = (
 	};
 
 	const imageProps: ComponentProps< typeof Image > = {
-		src: url,
-		alt,
 		title,
 	};
+	if ( url ) {
+		imageProps.src = url;
+	}
+	if ( alt ) {
+		imageProps.alt = alt;
+	}
 
 	if ( connectedMediaItem?.node ) {
 		imageProps.sizes = connectedMediaItem.node.sizes;

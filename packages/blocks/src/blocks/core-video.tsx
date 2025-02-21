@@ -69,7 +69,7 @@ const CoreVideo: CoreVideoType = ( {
 		return null;
 	}
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	/**
 	 * @todo replace with cssClassName once it's supported.
@@ -110,7 +110,7 @@ const CoreVideo: CoreVideoType = ( {
 				src={ src }
 				playsInline={ playsInline || undefined }
 			>
-				<Tracks tracks={ formattedTracks } />
+				<Tracks tracks={ formattedTracks || [] } />
 			</video>
 
 			{ caption && (

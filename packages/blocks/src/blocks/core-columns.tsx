@@ -20,7 +20,7 @@ const CoreColumns: CoreColumnsType = ( {
 }: CoreColumnsProps ) => {
 	const { cssClassName, style } = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 	const classNames = cn( cssClassName );
 
 	return (
