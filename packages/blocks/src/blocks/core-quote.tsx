@@ -18,7 +18,7 @@ const CoreQuote: CoreQuoteType = ( {
 }: CoreQuoteProps ) => {
 	const { style, citation, cssClassName } = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	return (
 		<blockquote className={ cssClassName || '' } style={ styleObject }>

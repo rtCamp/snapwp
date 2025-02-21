@@ -1,6 +1,6 @@
 import React, {
-	type AnchorHTMLAttributes,
 	type CSSProperties,
+	type HTMLAttributes,
 	type PropsWithChildren,
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
@@ -12,6 +12,7 @@ interface LinkInterface {
 	style?: CSSProperties | undefined;
 	className?: string | undefined;
 }
+interface NavLinkProps extends LinkProps, HTMLAttributes< HTMLAnchorElement > {}
 
 /**
  * Link component to handle internal and external links.
@@ -30,9 +31,7 @@ export default function Link( {
 	className,
 	children,
 	...props
-}: PropsWithChildren<
-	LinkInterface & ( LinkProps | AnchorHTMLAttributes< HTMLAnchorElement > )
-> ) {
+}: PropsWithChildren< LinkInterface & NavLinkProps > ) {
 	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();
 
 	const internalUri = href

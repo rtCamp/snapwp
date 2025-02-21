@@ -45,7 +45,7 @@ const CoreFile: CoreFileType = ( {
 		: '';
 	const classNames = cn( classNamesFromString );
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const ariaLabel = fileName || FALLBACK_ARIA_LABEL;
 	const downloadText = downloadButtonText || FALLBACK_DOWNLOAD_BUTTON_TEXT;
@@ -68,7 +68,7 @@ const CoreFile: CoreFileType = ( {
 				<Link
 					id={ fileId || undefined }
 					href={ textLinkHref }
-					target={ textLinkTarget || undefined }
+					{ ...( textLinkTarget ? { target: textLinkTarget } : {} ) }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
 					{ !! fileName && <Parse html={ fileName } /> }
@@ -78,6 +78,7 @@ const CoreFile: CoreFileType = ( {
 				<Link
 					href={ href }
 					className="wp-block-file__button wp-element-button"
+					//@ts-ignore todo: allow download prop in link
 					download
 					aria-describedby={ fileId || undefined }
 				>

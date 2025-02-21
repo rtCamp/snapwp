@@ -65,7 +65,6 @@ export default function ScriptModule( {
 		return (
 			<Script
 				key={ depHandle || `${ handle }-dep-${ index }` }
-				id={ depHandle || undefined }
 				type="module"
 				src={ depSrc }
 				/*
@@ -74,6 +73,7 @@ export default function ScriptModule( {
 				 */
 				strategy="lazyOnload"
 				{ ...props }
+				{ ...( depHandle ? { id: depHandle } : {} ) }
 			/>
 		);
 	} );
@@ -95,9 +95,9 @@ export default function ScriptModule( {
 		<Script
 			type="module"
 			src={ src }
-			id={ handle || undefined }
 			strategy="lazyOnload"
 			{ ...props }
+			{ ...( handle ? { id: handle } : {} ) }
 		/>
 	);
 

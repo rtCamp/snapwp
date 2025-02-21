@@ -70,6 +70,7 @@ describe( 'CoreAudio', () => {
 		};
 
 		const { container, asFragment } = render(
+			// @ts-ignore to test undefined props
 			<CoreAudio attributes={ attributesWithoutSrc } renderedHtml="" />
 		);
 		expect( container.firstChild ).toBeNull();

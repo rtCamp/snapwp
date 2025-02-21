@@ -31,7 +31,7 @@ const CoreSpacer: CoreSpacerType = ( {
 	const finalHeight =
 		selfStretch === 'fill' || selfStretch === 'fit' ? undefined : height;
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const classNamesFromString = renderedHtml
 		? getClassNamesFromString( renderedHtml )

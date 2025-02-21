@@ -22,7 +22,7 @@ const CoreVerse: CoreVerseType = ( {
 }: CoreVerseProps ) => {
 	const { style, content } = attributes ?? {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	/**
 	 * @todo replace with cssClassName once it's supported.
