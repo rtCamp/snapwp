@@ -37,6 +37,7 @@ module.exports = {
 		'import/named': 'error',
 		'jest/expect-expect': 'off',
 		'jsdoc/no-types': [ 'off' ],
+		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
 		'no-restricted-imports': [
 			'error',
 			{

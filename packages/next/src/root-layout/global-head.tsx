@@ -23,6 +23,7 @@ export function GlobalHead( {
 				<style
 					id={ 'stylesheet' }
 					dangerouslySetInnerHTML={ { __html: globalStylesheet } }
+					// eslint-disable-next-line @stylistic/jsx/jsx-closing-tag-location -- Allow closing tag on the same line.
 				></style>
 			) }
 
@@ -34,6 +35,7 @@ export function GlobalHead( {
 				<style
 					id={ 'customCSS' }
 					dangerouslySetInnerHTML={ { __html: customCss } }
+					// eslint-disable-next-line @stylistic/jsx/jsx-closing-tag-location -- Allow closing tag on the same line.
 				></style>
 			) }
 		</>
