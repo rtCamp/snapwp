@@ -37,7 +37,7 @@ function cssToReactStyle( str: string ): CSSProperties {
 	const style: { [ key: string ]: string } = {}; // add index signature here
 
 	str.split( ';' ).forEach( ( el ) => {
-		// eslint-disable-next-line
+		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
 		const [ property, ...value ] = el.split( ':' );
 
 		if ( ! property ) {
