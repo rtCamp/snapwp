@@ -108,11 +108,11 @@ jobs:
                   rm "$GITHUB_WORKSPACE/.ssh/__deploy_key__"
 
             - name: Slack Notification
-              uses: rtCamp/action-slack-notify@c33737706dea87cd7784c687dadc9adf1be59990  # v2.3.2
+              uses: rtCamp/action-slack-notify@c33737706dea87cd7784c687dadc9adf1be59990 # v2.3.2
               env:
                   SLACK_CHANNEL: bots-wp-decoupled
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
             - name: Cleanup
               if: always()
-              uses: rtCamp/action-cleanup@b7d0ca1703e3255f54d69b4da4cadccee99a44e6  # v1.2.0
+              uses: rtCamp/action-cleanup@b7d0ca1703e3255f54d69b4da4cadccee99a44e6 # v1.2.0

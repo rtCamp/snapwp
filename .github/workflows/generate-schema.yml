@@ -48,7 +48,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Setup PHP
-              uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401  # 2.32.0
+              uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401 # 2.32.0
               with:
                   php-version: '8.2'
                   extensions: mbstring, intl
@@ -56,7 +56,7 @@ jobs:
                   tools: composer, wp-cli
 
             - name: Install composer dependencies
-              uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a  # 3.0.0
+              uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # 3.0.0
               with:
                   composer-options: '--no-progress'
 
