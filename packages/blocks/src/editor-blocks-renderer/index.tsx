@@ -2,11 +2,10 @@ import React from 'react';
 import BlockManager from '@/block-manager';
 import { getConfig } from '@snapwp/core/config';
 
-import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
+import type { BlockData, BlockTreeNode } from '@snapwp/types';
 
 type EditorBlocksRendererProps = {
 	editorBlocks?: BlockData[] | null;
-	blockDefinitions?: BlockDefinitions | null;
 };
 
 /**
