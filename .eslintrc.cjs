@@ -31,6 +31,7 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
+		'dot-notation': [ 'error', { allowKeywords: false } ],
 		'import/default': 'error',
 		'import/named': 'error',
 		'jest/expect-expect': 'off',
