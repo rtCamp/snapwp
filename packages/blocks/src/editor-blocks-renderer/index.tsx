@@ -19,6 +19,7 @@ export default function EditorBlocksRenderer( {
 	editorBlocks,
 }: EditorBlocksRendererProps ) {
 	const { blockDefinitions } = getConfig();
+
 	if ( blockDefinitions ) {
 		BlockManager.addBlockDefinitions( blockDefinitions );
 	}
