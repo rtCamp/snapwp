@@ -1,4 +1,4 @@
-/* eslint-disable no-console, n/no-process-env */
+/* eslint-disable no-console, n/no-process-env -- Allow the use of console & process.env. */
 import { Logger } from '../index';
 
 describe( 'Logger', () => {
@@ -88,4 +88,4 @@ describe( 'Logger', () => {
 	} );
 } );
 
-/* eslint-enable no-console, n/no-process-env */
+/* eslint-enable no-console, n/no-process-env -- Disallow the use of console & process.env. */

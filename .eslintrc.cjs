@@ -32,6 +32,7 @@ module.exports = {
 			'lodash',
 		],
 		'dot-notation': [ 'error', { allowKeywords: false } ],
+		'eslint-comments/require-description': 'error',
 		'import/default': 'error',
 		'import/named': 'error',
 		'jest/expect-expect': 'off',
