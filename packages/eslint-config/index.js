@@ -5,6 +5,7 @@ module.exports = {
 		es6: true,
 	},
 	parser: '@typescript-eslint/parser',
+
 	plugins: [ '@wordpress/eslint-plugin', 'jsdoc', 'import', 'n' ],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
@@ -36,6 +37,25 @@ module.exports = {
 					},
 				],
 				'import/default': [ 'off' ],
+			},
+		},
+		{
+			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
+			excludedFiles: [
+				'**/*.spec.ts',
+				'**/*.spec.tsx',
+				'**/*.test.ts',
+				'**/*.test.tsx',
+				'**/codegen.ts',
+			],
+			rules: {
+				'n/no-process-env': [ 'error' ],
+				'dot-notation': 'off',
+				'@typescript-eslint/dot-notation': 'error',
+			},
+			// Enable the recommended eslint checks.
+			parserOptions: {
+				project: true,
 			},
 		},
 	],

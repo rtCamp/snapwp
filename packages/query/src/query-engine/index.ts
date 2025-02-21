@@ -168,7 +168,7 @@ const getNetworkErrorMessage = (
 		if ( typeof serverError.result === 'string' ) {
 			errorMessage = serverError.result;
 		} else {
-			errorMessage = serverError.result.message;
+			errorMessage = serverError.result[ 'message' ];
 		}
 	} else if (
 		// If networkError is ServerParseError, get the status code and message.
