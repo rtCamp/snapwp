@@ -68,7 +68,7 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	restUrlPrefix: '/wp-json',
 	corsProxyPrefix: '/proxy',
 	// eslint-disable-next-line n/no-process-env
-	useCorsProxy: process.env[ 'NODE_ENV' ] === 'development',
+	useCorsProxy: process.env.NODE_ENV === 'development',
 };
 
 /**
@@ -80,13 +80,13 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  */
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env */
-	nextUrl: process.env[ 'NEXT_PUBLIC_URL' ],
-	homeUrl: process.env[ 'NEXT_PUBLIC_WORDPRESS_URL' ],
-	graphqlEndpoint: process.env[ 'NEXT_PUBLIC_GRAPHQL_ENDPOINT' ],
-	uploadsDirectory: process.env[ 'NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH' ],
-	restUrlPrefix: process.env[ 'NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX' ],
-	useCorsProxy: process.env[ 'NEXT_PUBLIC_USE_CORS_PROXY' ] === 'true',
-	corsProxyPrefix: process.env[ 'NEXT_PUBLIC_CORS_PROXY_PREFIX' ],
+	nextUrl: process.env.NEXT_PUBLIC_URL,
+	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
+	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
+	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
+	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	/* eslint-enable n/no-process-env */
 } );
 
@@ -381,7 +381,7 @@ export const getGraphqlUrl = SnapWPConfigManager.getGraphqlUrl;
 // Exporting for testing purposes.
 export const _private =
 	// eslint-disable-next-line n/no-process-env
-	process.env[ 'NODE_ENV' ] === 'test'
+	process.env.NODE_ENV === 'test'
 		? {
 				SnapWPConfigManager,
 		  }

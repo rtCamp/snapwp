@@ -6,8 +6,5 @@
 		{ "path": "packages/query" },
 		{ "path": "packages/codegen-config" }
 	],
-	"exclude": [
-		"./packages/esling-config/*.js",
-	],
 	"files": []
 }

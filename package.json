@@ -21,7 +21,7 @@
 		"build:types": "npm run build -w @snapwp/types",
 		"build:snapwp": "npm run build -w snapwp",
 		"clean-ts-build": "tsc --build --clean",
-		"prebuild": "npm run codegen",
+		"prebuild": "npm run codegen && npm run build -w @snapwp/types",
 		"build": "tsc --build && npm run build:snapwp",
 		"postbuild": "npm-run-all resolve-paths:*",
 		"force-build:blocks": "npm run force-build -w @snapwp/blocks",

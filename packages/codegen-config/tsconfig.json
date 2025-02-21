@@ -9,7 +9,7 @@
 			"@/*": [ "./src/*" ]
 		}
 	},
-	"include": [ "src/**/*" ,"packages/eslint-config/**/*" ],
+	"include": [ "src/**/*"],
 	"exclude": [ "node_modules", "dist" ],
 	"references": [ { "path": "../core" } ]
 }
