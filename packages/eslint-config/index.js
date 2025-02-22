@@ -4,7 +4,6 @@ module.exports = {
 		browser: true,
 		es6: true,
 	},
-	parser: '@typescript-eslint/parser',
 	plugins: [ '@wordpress/eslint-plugin', 'jsdoc', 'import', 'n' ],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
