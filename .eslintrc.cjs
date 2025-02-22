@@ -24,6 +24,43 @@ module.exports = {
 	settings: {
 		'import/resolver': require.resolve( './config/import-resolver.cjs' ),
 	},
+	rules: {
+		// Restrict usage of "bad" libraries.
+		'@typescript-eslint/no-restricted-imports': [
+			'error',
+			'classnames',
+			'lodash',
+		],
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: 'classnames',
+						message:
+							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
+					},
+					{
+						name: 'lodash',
+						message: 'Please use native functionality instead.',
+					},
+				],
+			},
+		],
+
+		// Restricted syntax should error, not warn.
+		'no-restricted-syntax': [ 'error' ],
+
+		// Import rules.
+		'import/default': 'error',
+		'import/named': 'error',
+
+		// Jest rules.
+		'jest/expect-expect': 'off',
+
+		// Turn of JSdoc types and use TypeScript types instead.
+		'jsdoc/no-types': [ 'off' ],
+	},
 	overrides: [
 		{
 			files: '**/*.test.ts',
