@@ -74,75 +74,83 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 ### Manual Installation
 
-1. Install npm packages in your Next App
+1. Install the required packages in your Next.js project:
 
-```bash
-npm install @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
-```
+    ```bash
+    npm install --save @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
+    ```
 
-2. Create an `.env` file in the project root. The contents for the .env file can be copied from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from the WP server.
+2. Create an `.env` file in the project root. The contents for the .env file can be copied from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from your [WordPress backend](#backend-setup).
 
 3. Create `snapwp.config.ts` in the project root with the following content.
 
-```typescript
-import type { SnapWPConfig } from '@snapwp/core/config';
+    ```typescript
+    // snapwp.config.ts
+    import type { SnapWPConfig } from '@snapwp/core/config';
 
-const config: SnapWPConfig = {};
+    const config: SnapWPConfig = {};
 
-export default config;
-```
+    export default config;
+    ```
 
-4. Update the nextjs config. Rename the file to `next.config.mjs` so that top-level await can be used.
+4. Update your [NextJS Config file](https://nextjs.org/docs/api-reference/next.config.js/introduction).
 
-```javascript
-import withSnapWP from '@snapwp/next/withSnapWP';
+    **Important**: Make sure to use the `*.mjs` filetype for your config (i.e `next.config.mjs` ) so that top-level `await` can be used.
 
-export default await withSnapWP( {} );
-```
+    ```javascript
+    // next.config.mjs
+    import withSnapWP from '@snapwp/next/withSnapWP';
 
-5. Create the default route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
+    export default await withSnapWP( {} );
+    ```
 
-```typescript
-import { TemplateRenderer } from '@snapwp/next';
-import { EditorBlocksRenderer } from '@snapwp/blocks';
+5. Create a default app route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
 
-export default function Page() {
-	return (
-		<TemplateRenderer>
-			{ ( editorBlocks ) => {
-				return <EditorBlocksRenderer editorBlocks={ editorBlocks } />;
-			} }
-		</TemplateRenderer>
-	);
-}
+    ```typescript
+    // src/app/[[...path]]/page.tsx
+    import { TemplateRenderer } from '@snapwp/next';
+    import { EditorBlocksRenderer } from '@snapwp/blocks';
 
-```
+    export default function Page() {
+      return (
+        <TemplateRenderer>
+          { ( editorBlocks ) => {
+            return <EditorBlocksRenderer editorBlocks={ editorBlocks } />;
+          } }
+        </TemplateRenderer>
+      );
+    }
+    ```
 
-6. Create the root layout to load global styles, fonts and scripts from WP server. Make a file `src/app/layout.tsx`
+    **Important**: Make sure you have no other routes of the same specificity in your app. If you have an `app/page.tsx` file, you should delete it and instead integrate the code into the `src/app/[[...path]]/page.tsx` file.
 
-```typescript
-import { RootLayout } from '@snapwp/next';
+6. Create the Root Layout to load Global Styles, Fonts and WordPress's enqueued scripts/styles for the route. Make a file `src/app/layout.tsx`
 
-export default function Layout( { children }: { children: React.ReactNode } ) {
-	return (
-		<RootLayout>
-			<>{ children }</>
-		</RootLayout>
-	);
-}
-```
+    ```typescript
+    // src/app/layout.tsx
+    import { RootLayout } from '@snapwp/next';
 
-NOTE: Check if you are using webpack for dev builds. Currently we don't support turbopack for dev builds. Remove the flag `--turbopack` to opt-out of using turbopack.
+    export default function Layout( { children }: React.PropsWithChildren<{}> ) {
+      return (
+        <RootLayout>
+          <>{ children }</>
+        </RootLayout>
+      );
+    }
+    ```
 
-```diff
-...
-  "scripts": {
--    "dev": "next dev --turbopack",
-+    "dev": "next dev",
-    ...
-  },
-...
-```
+> [!NOTE]
+> Currently, SnapWP only supports webpack for local development. If your existing project uses Turbopack, you will need to remove the `--turbopack` flag from the `dev` script in your `package.json` file.
+>
+> ```diff
+> ...
+>   "scripts": {
+> -    "dev": "next dev --turbopack",
+> +    "dev": "next dev",
+>     ...
+>   },
+> ...
+> ```
 
 ### Deployment
 
