@@ -5,18 +5,18 @@ module.exports = {
 	},
 	extends: '@snapwp/eslint-config',
 	parser: '@typescript-eslint/parser',
+	plugins: [ '@stylistic/jsx', '@typescript-eslint', 'jest' ],
 	ignorePatterns: [
 		'**/__generated/',
 		'**/.eslintrc.cjs',
 		'**/config/*.js',
+		'**/dist-types/**',
 		'**/dist',
 		'**/dist/**',
-		'**/dist-types/**',
-		'**/eslint-config/**',
 		'**/node_modules/**',
 		'assets/**/*.js',
-		'data/**',
 		'coverage/**',
+		'data/**',
 		'out/**',
 	],
 	globals: {
@@ -26,18 +26,12 @@ module.exports = {
 		'import/resolver': require.resolve( './config/import-resolver.cjs' ),
 	},
 	rules: {
+		// Restrict usage of "bad" libraries.
 		'@typescript-eslint/no-restricted-imports': [
 			'error',
 			'classnames',
 			'lodash',
 		],
-		'dot-notation': [ 'error', { allowKeywords: false } ],
-		'eslint-comments/require-description': 'error',
-		'import/default': 'error',
-		'import/named': 'error',
-		'jest/expect-expect': 'off',
-		'jsdoc/no-types': [ 'off' ],
-		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
 		'no-restricted-imports': [
 			'error',
 			{
@@ -54,10 +48,36 @@ module.exports = {
 				],
 			},
 		],
+
+		// Enforce the indentation of JSX closing tag aligned with the opening tag.
+		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
+
+		// Enforce the use of dot notation over square brackets.
+		'dot-notation': [ 'error', { allowKeywords: false } ],
+
+		// Enforce description on directive comments.
+		'eslint-comments/require-description': 'error',
+
+		// Restricted syntax should error, not warn.
 		'no-restricted-syntax': [ 'error' ],
+
+		// Import rules.
+		'import/default': 'error',
+		'import/named': 'error',
+
+		// Jest rules.
+		'jest/expect-expect': 'off',
+
+		// Turn off JSdoc types and use TypeScript types instead.
+		'jsdoc/no-types': [ 'off' ],
 	},
 	overrides: [
-		// Rules for JS, JSX, TS & TSX files.
+		{
+			files: '**/*.test.ts',
+			env: {
+				jest: true,
+			},
+		},
 		{
 			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
 			// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
