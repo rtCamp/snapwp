@@ -8,6 +8,9 @@ on:
                 required: true
                 type: string
 
+permissions:
+    contents: write
+
 env:
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
 
@@ -65,6 +68,9 @@ jobs:
                     gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
                   done
 
+                  git fetch origin main
+                  git fetch origin develop --shallow-since="$(git log -1 --pretty=format:"%aI" origin/main)"
+                  git pull --set-upstream origin develop:main
                   git push origin develop:main
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
