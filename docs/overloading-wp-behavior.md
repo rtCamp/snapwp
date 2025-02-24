@@ -28,11 +28,11 @@ export default function Default( { renderedHtml }: BlockData ) {
 }
 ```
 
-### Overloading the HTML-to-React component mapping
+## Overloading the HTML-to-React component mapping
 
 SnapWP allows you to extend and overload the default `HTMLReactParserOptions` used by the `Parse` component. This is useful for customizing the rendering of specific HTML elements, such as images, links, or other custom elements.
 
-### 1. Creating a custom `HTMLReactParserOptions` object`
+### 1. Creating a custom `HTMLReactParserOptions` object
 
 Create a new Custom Component to overload the [default html-react-parser options](../packages/next/src/react-parser/options.tsx).
 
@@ -124,55 +124,113 @@ The `@snapwp/blocks` package provides a large and growing number of [Block Compo
 
 First, identify the block you want to overload. Each block has a unique name (e.g., `CoreParagraph`, `CoreImage`). You can find this name in the block's data when fetched via WPGraphQL.
 
-### 2. Creating a Custom Component
+### 2. Creating a Custom Component for Core Paragraph
 
 Create a new React component to represent your custom block rendering. This component will receive the block's attributes as props.
 
-```javascript
-import React from 'react';
+When creating a custom block, you can extend from:
 
-function MyCustomParagraph( { attributes } ) {
+-   `BaseAttributes` and `BaseProps` for a fresh implementation.
+-   The existing attributes and props of a core block (e.g., `CoreParagraphAttributes`, `CoreParagraphProps`) to retain default behavior while adding custom properties.
+
+#### Overriding Core Paragraph
+
+```ts
+import React from 'react';
+import { BaseAttributes, BaseProps } from '@snapwp/types';
+
+type CoreParagraphAttributes = BaseAttributes & {
+	backgroundColor?: string;
+	content?: string;
+	cssClassName?: string;
+	fontSize?: string;
+	style?: string;
+	textColor?: string;
+};
+
+type CoreParagraphProps = BaseProps< CoreParagraphAttributes >;
+
+type CoreParagraph = React.ComponentType< CoreParagraphProps >;
+
+const MyCustomParagraph: CoreParagraph = ( { attributes } ) => {
+	const { content, backgroundColor, textColor, fontSize } = attributes || {};
+
+	const styleObject = {
+		backgroundColor,
+		color: textColor,
+		fontSize,
+	};
+
 	return (
-		<div className="my-custom-paragraph">
-			<p>{ attributes.content }</p> { /* Access block attributes */ }
-			{ /* Add any additional JSX or logic here */ }
-			<span className="custom-attribution"> - My Custom Rendering</span>
-		</div>
+		<p className="my-custom-paragraph" style={ styleObject }>
+			{ content }
+		</p>
 	);
-}
+};
 
 export default MyCustomParagraph;
 ```
 
-### 3. Mapping the Block
+### 3. Applying the Override
 
-Map your custom component to the block in your SnapWP configuration.
+SnapWP provides two ways to apply custom block overrides:
 
-```tsx
+-   Global Override via `snapwp.config.ts`
+-   Per-Route Override by passing a prop to `EditorBlocksRenderer`
+
+**Global Override (snapwp.config.ts)**
+
+To apply your block override globally, update your SnapWP configuration:
+
+```ts
+// snapwp.config.ts
+import type { SnapWPConfig } from '@snapwp/core/config';
+import MyCustomParagraph from './src/app/core-paragraph';
+
+const config: SnapWPConfig = {
+	blockDefinitions: {
+		CoreParagraph: MyCustomParagraph,
+	},
+};
+
+export default config;
+```
+
+With this setup, `MyCustomParagraph` will be used across all pages where the Core Paragraph block is rendered.
+
+**Per-Route Override (Prop to EditorBlocksRenderer)**
+
+If you want to override blocks only for a specific page or route, pass a `blockDefinitions` prop to `EditorBlocksRenderer` instead:
+
+```ts
 import { TemplateRenderer } from '@snapwp/next';
 import MyCustomParagraph from './components/MyCustomParagraph';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 
-const blockDefinitions = {
-	CoreParagraph: MyCustomParagraph, // Overload CoreParagraph
-	CoreImage: null, // Use default rendering for CoreImage
+const pageBlockDefinitions = {
+	CoreParagraph: MyCustomParagraph, // Override only for this page
 };
 
 export default function Page() {
 	return (
 		<TemplateRenderer>
-			{ ( editorBlocks ) => (
+			{(editorBlocks) => (
 				<EditorBlocksRenderer
-					editorBlocks={ editorBlocks }
-					blockDefinitions={ blockDefinitions }
+					editorBlocks={editorBlocks}
+					blockDefinitions={pageBlockDefinitions}
 				/>
-			) }
+			)}
 		</TemplateRenderer>
 	);
 }
 ```
 
+This allows you to apply the override only on specific routes while using the default block rendering elsewhere.
+
 Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`.
+
+> [!TIP]
+> If a block is overridden both globally (`snapwp.config.ts`) and per-route (`EditorBlocksRenderer` prop), the per-route override takes precedence.
 
 > [!TIP]
 > Setting the block definition value to `null` will use the [default block rendering](#default-html-rendering-with-parse-and-html-react-parser).
@@ -256,6 +314,12 @@ export default function Page() {
 	);
 }
 ```
+
+> [!NOTE]
+> Similar to blocks, you can override template parts in two ways:
+
+-   Globally by defining overrides in `snapwp.config.ts`.
+-   Per route by passing `blockDefinitions` as a prop to `EditorBlocksRenderer`.
 
 ---
 
