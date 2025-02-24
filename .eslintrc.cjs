@@ -4,17 +4,19 @@ module.exports = {
 		node: true,
 	},
 	extends: '@snapwp/eslint-config',
+	parser: '@typescript-eslint/parser',
 	ignorePatterns: [
-		'**/node_modules/**',
-		'**/dist/**',
+		'**/__generated/',
+		'**/.eslintrc.cjs',
+		'**/config/*.js',
 		'**/dist-types/**',
-		'out/**',
-		'data/**',
+		'**/dist',
+		'**/dist/**',
+		'**/node_modules/**',
 		'assets/**/*.js',
 		'coverage/**',
-		'**/config/*.js',
-		'**/dist',
-		'**/__generated/',
+		'data/**',
+		'out/**',
 	],
 	globals: {
 		globalThis: 'readonly',
@@ -22,8 +24,70 @@ module.exports = {
 	settings: {
 		'import/resolver': require.resolve( './config/import-resolver.cjs' ),
 	},
+	rules: {
+		// Restrict usage of "bad" libraries.
+		'@typescript-eslint/no-restricted-imports': [
+			'error',
+			'classnames',
+			'lodash',
+		],
+		'no-restricted-imports': [
+			'error',
+			{
+				paths: [
+					{
+						name: 'classnames',
+						message:
+							"Please use `clsx` instead. It's a lighter and faster drop-in replacement for `classnames`.",
+					},
+					{
+						name: 'lodash',
+						message: 'Please use native functionality instead.',
+					},
+				],
+			},
+		],
+
+		// Restricted syntax should error, not warn.
+		'no-restricted-syntax': [ 'error' ],
+
+		// Import rules.
+		'import/default': 'error',
+		'import/named': 'error',
+
+		// Jest rules.
+		'jest/expect-expect': 'off',
+
+		// Turn of JSdoc types and use TypeScript types instead.
+		'jsdoc/no-types': [ 'off' ],
+	},
 	overrides: [
-		// Disable n/no-process-env for codegen.ts file
+		{
+			files: '**/*.test.ts',
+			env: {
+				jest: true,
+			},
+		},
+		{
+			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
+			// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
+			rules: {
+				'jsdoc/require-jsdoc': [
+					'error',
+					{
+						require: {
+							ArrowFunctionExpression: true,
+							ClassDeclaration: true,
+							ClassExpression: true,
+							FunctionExpression: true,
+							MethodDefinition: true,
+						},
+					},
+				],
+				'import/default': [ 'off' ],
+			},
+		},
+		// Disable n/no-process-env for `codegen.ts` file.
 		{
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
 			rules: {
