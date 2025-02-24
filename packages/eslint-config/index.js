@@ -4,15 +4,7 @@ module.exports = {
 		browser: true,
 		es6: true,
 	},
-	plugins: [
-		'@typescript-eslint',
-		'@wordpress/eslint-plugin',
-		'import',
-		'n',
-		'jest',
-		'jsdoc',
-		'@stylistic/jsx',
-	],
+	plugins: [ '@wordpress/eslint-plugin', 'import', 'n', 'jsdoc' ],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
 		'plugin:jsdoc/recommended-typescript',
