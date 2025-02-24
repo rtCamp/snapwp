@@ -13,7 +13,7 @@
 	},
 	"include": [
 		"src/**/*",
-		"../../node_modules/@snapwp/types/dist/types/global/env.d.ts"
+		"../types/dist/types/global/env.d.ts"
 	],
 	"exclude": [ "node_modules", "dist" ],
 	"references": [ { "path": "../types" } ]

@@ -49,11 +49,9 @@ module.exports = {
 				'**/codegen.ts',
 			],
 			rules: {
-				'n/no-process-env': [ 'error' ],
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': 'error',
 			},
-			// Enable the recommended eslint checks.
 			parserOptions: {
 				project: true,
 			},
