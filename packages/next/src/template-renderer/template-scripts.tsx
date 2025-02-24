@@ -136,13 +136,14 @@ const ScriptModuleMap = ( {
 						! uniqueScriptModuleDependencies.has( handle! );
 
 					return (
-						// @ts-ignore fix this
 						<ScriptModule
 							key={ handle || id }
 							{ ...( handle ? { handle } : {} ) }
 							{ ...( shouldLoadMainScript ? { src } : {} ) }
-							extraData={ extraData }
-							dependencies={ dependencies }
+							extraData={ extraData ? extraData : null }
+							{ ...( dependencies && dependencies.length > 0
+								? { dependencies }
+								: {} ) }
 						/>
 					);
 				}
