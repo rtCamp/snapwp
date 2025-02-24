@@ -4,11 +4,11 @@ module.exports = {
 		browser: true,
 		es6: true,
 	},
-	plugins: [ '@wordpress/eslint-plugin', 'import', 'n', 'jsdoc' ],
+	plugins: [ '@wordpress/eslint-plugin', 'import', 'jsdoc', 'n' ],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
-		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
+		'plugin:jsdoc/recommended-typescript',
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],

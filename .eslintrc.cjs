@@ -5,7 +5,7 @@ module.exports = {
 	},
 	extends: '@snapwp/eslint-config',
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@typescript-eslint', 'jest', '@stylistic/jsx' ],
+	plugins: [ '@stylistic/jsx', '@typescript-eslint', 'jest' ],
 	ignorePatterns: [
 		'**/__generated/',
 		'**/.eslintrc.cjs',
