@@ -11,10 +11,7 @@
 		"types": [ "jest", "node" ],
 		"typeRoots": [ "../../node_modules/@types" ]
 	},
-	"include": [
-		"src/**/*",
-		"../types/dist/types/global/env.d.ts"
-	],
+	"include": [ "src/**/*", "../types/dist/types/global/env.d.ts" ],
 	"exclude": [ "node_modules", "dist" ],
 	"references": [ { "path": "../types" } ]
 }
