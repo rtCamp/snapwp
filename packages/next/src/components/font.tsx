@@ -22,7 +22,8 @@ export default function Fonts( props: { renderedFontFaces: string } ) {
 					.replace( /<style[^>]*>/g, '' )
 					.replace( /<\/style>/g, '' ),
 			} }
-			// eslint-disable-next-line @stylistic/jsx/jsx-closing-tag-location -- Allow closing tag on the same line.
-		></style>
+		>
+			{ /* Styles are set via `dangerouslySetInnerHTML`. */ }
+		</style>
 	);
 }
