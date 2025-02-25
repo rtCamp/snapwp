@@ -13,7 +13,7 @@ import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
  */
 const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ) => {
 	const { style, cssClassName, content } = attributes || {};
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	return (
 		<pre className={ cssClassName || '' } style={ styleObject }>

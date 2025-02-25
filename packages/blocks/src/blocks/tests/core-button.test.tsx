@@ -210,6 +210,7 @@ describe( 'CoreButton Component', () => {
 
 	test( 'renders with undefined attributes', () => {
 		const { asFragment, container } = render(
+			//@ts-ignore to test undefined props
 			<CoreButton attributes={ undefined } />
 		);
 		const linkElement = container.querySelector( 'a' );

@@ -17,7 +17,7 @@ import type {
 const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
 	const { style, cssClassName, content, level } = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const HeadingTag = level
 		? ( `h${ level }` as keyof JSX.IntrinsicElements )

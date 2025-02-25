@@ -110,7 +110,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 		<Image
 			{ ...imageProps }
 			src={ mediaUrl }
-			alt={ mediaAlt }
+			{ ...( mediaAlt ? { alt: mediaAlt } : {} ) }
 			className={ imageClasses }
 			style={ positionStyles }
 		/>
@@ -121,7 +121,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 			<Link
 				className={ linkClass }
 				href={ href }
-				target={ linkTarget }
+				{ ...( linkTarget ? { target: linkTarget } : {} ) }
 				rel={ newRel }
 			>
 				{ image }
@@ -138,7 +138,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 		? getClassNamesFromString( renderedHtml )
 		: '';
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	let gridTemplateColumns;
 	if ( mediaWidth !== DEFAULT_MEDIA_WIDTH ) {

@@ -151,7 +151,7 @@ export default function Image( {
 			className={ cn( className, imageProps?.fill && 'object-cover' ) }
 			src={ src }
 			alt={ altText }
-			priority={ priority }
+			priority={ priority ?? false }
 		/>
 	) : null;
 }
