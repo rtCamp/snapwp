@@ -8,8 +8,8 @@ import type {
 /**
  * Renders the core/freeform block.
  *
- * @param props - The props for the block component.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                         props              The props for the block component.
+ * @param {CoreFreeformProps.renderedHtml} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

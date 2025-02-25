@@ -14,8 +14,8 @@ export enum LOGTYPE {
 /**
  * Logs a message to the console.
  *
- * @param type - The type of log message.
- * @param args - The arguments to log.
+ * @param {LOGTYPE} type The type of log message.
+ * @param {Array}   args The arguments to log.
  */
 const log = ( type: LOGTYPE, ...args: any[] ): void => {
 	if (
@@ -56,7 +56,7 @@ class Logger {
 	/**
 	 * Logs a debug message in the console in dev mode
 	 *
-	 * @param args - The arguments to log.
+	 * @param {Array} args The arguments to log.
 	 *
 	 * @example Logger.debug("This is a debug message.")
 	 *
@@ -67,7 +67,7 @@ class Logger {
 	/**
 	 * Logs an info message in the console in dev mode
 	 *
-	 * @param args - The arguments to log.
+	 * @param {Array} args The arguments to log.
 	 *
 	 * @example Logger.info("This is an info message.")
 	 *
@@ -78,7 +78,7 @@ class Logger {
 	/**
 	 * Logs a warning in the console in dev mode
 	 *
-	 * @param args - The arguments to log.
+	 * @param {Array} args The arguments to log.
 	 *
 	 * @example Logger.warn("You should do/change something.")
 	 *
@@ -89,7 +89,7 @@ class Logger {
 	/**
 	 * Logs an error in the console in dev mode
 	 *
-	 * @param args - The arguments to log.
+	 * @param {Array} args The arguments to log.
 	 *
 	 * @example Logger.error("An error occurred.")
 	 *
@@ -100,7 +100,7 @@ class Logger {
 	/**
 	 * Logs a message in the console in dev mode
 	 *
-	 * @param args - The arguments to log.
+	 * @param {Array} args The arguments to log.
 	 *
 	 * @example Logger.log("This is a message.")
 	 *

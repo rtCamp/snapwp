@@ -12,10 +12,10 @@ export type MiddlewareFactory = (
  * Stacks middlewares.
  * Ref: https://reacthustle.com/blog/how-to-chain-multiple-middleware-functions-in-nextjs
  *
- * @param functions               Array containing Middleware.
- * @param index                   Index of current middleware.
- * @param stackDefaultMiddlewares Weather to add load default middlewares with custom ones.
- *                                Pass false to skip loading default middlewares.
+ * @param {Array<MiddlewareFactory>} functions               Array containing Middleware.
+ * @param {number}                   index                   Index of current middleware.
+ * @param {boolean}                  stackDefaultMiddlewares Weather to add load default middlewares with custom ones.
+ *                                                           Pass false to skip loading default middlewares.
  *
  * @return NextMiddleware
  */
@@ -43,7 +43,7 @@ export function appMiddlewares(
 /**
  * Stacks default middlewares with the custom middlewares passed by user.
  *
- * @param middlewares Array containing user defined Middlewares.
+ * @param {Array<MiddlewareFactory>} middlewares Array containing user defined Middlewares.
  *
  * @return Array combining default middlewares and custom middlewares.
  */

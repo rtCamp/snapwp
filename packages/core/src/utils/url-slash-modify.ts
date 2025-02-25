@@ -1,7 +1,7 @@
 /**
  * Remove trailing slash from the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -14,7 +14,7 @@ export function removeTrailingSlash( url: string ): string {
 /**
  * Add trailing slash to the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -27,7 +27,7 @@ export function addTrailingSlash( url: string ): string {
 /**
  * Remove leading slash from the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -40,7 +40,7 @@ export function removeLeadingSlash( url: string ): string {
 /**
  * Add leading slash to the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *

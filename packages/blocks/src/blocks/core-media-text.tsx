@@ -24,10 +24,11 @@ const DEFAULT_MEDIA_SIZE_SLUG = 'full';
 /**
  * Generates CSS styles for image fill based on the provided URL and focal point.
  *
- * @param url - The URL of the image.
- * @param focalPoint - The focal point of the image.
- * @param focalPoint.x - The x-coordinate of the focal point (0 to 1).
- * @param focalPoint.y - The y-coordinate of the focal point (0 to 1).
+ * @param {string}       url          The URL of the image.
+ * @param {FocalPoint}   focalPoint   The focal point of the image.
+ * @param {FocalPoint.x} focalPoint.x The x-coordinate of the focal point (0 to 1).
+ * @param {FocalPoint.y} focalPoint.y The y-coordinate of the focal point (0 to 1).
+ *
  * @return CSS styles for the image fill.
  */
 function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
@@ -45,12 +46,13 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
 /**
  * Renders a WordPress Media & Text block with support for images, videos, and linked media
  *
- * @param props - Component props
- * @param props.attributes - Block configuration attributes
- * @param props.children - Child components to render
- * @param props.renderedHtml - Raw HTML string from WordPress
- * @param props.connectedMediaItem - Connected media item
- * @param props.mediaDetails - Media details
+ * @param {Object}                                props                    Component props
+ * @param {CoreMediaTextProps.attributes}         props.attributes         Block configuration attributes
+ * @param {ReactNode}                             props.children           Child components to render
+ * @param {CoreMediaTextProps.renderedHtml}       props.renderedHtml       Raw HTML string from WordPress
+ * @param {CoreMediaTextProps.connectedMediaItem} props.connectedMediaItem Connected media item
+ * @param {CoreMediaTextProps.mediaDetails}       props.mediaDetails       Media details
+ *
  * @return Rendered component or null if no content
  */
 const CoreMediaText: CoreMediaTextType = ( {

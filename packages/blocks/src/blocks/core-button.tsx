@@ -10,8 +10,8 @@ import type {
 /**
  * Renders the core/button block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
+ * @param {Object}                     props            The props for the block component.
+ * @param {CoreButtonProps.attributes} props.attributes Block attributes.
  *
  * @return The rendered block.
  */

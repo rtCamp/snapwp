@@ -13,7 +13,8 @@ import type { MiddlewareFactory } from './utils';
  *
  * This middleware adds custom proxies.
  *
- * @param  next - Next middleware
+ * @param {NextMiddleware} next Next middleware.
+ *
  * @return Custom redirection or NextMiddleware.
  */
 export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {

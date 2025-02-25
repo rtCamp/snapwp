@@ -67,6 +67,7 @@ module.exports = {
 
 		// Turn of JSdoc types and use TypeScript types instead.
 		'jsdoc/no-types': [ 'off' ],
+		'jsdoc/require-param-type': [ 'error' ],
 	},
 	overrides: [
 		{

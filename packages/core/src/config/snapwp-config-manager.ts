@@ -128,7 +128,8 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the URL.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
+			 *
 			 * @throws {Error} If the value is invalid.
 			 */
 			validate: ( value ) => {
@@ -143,7 +144,8 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the URL.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
+			 *
 			 * @throws {Error} If the value is invalid.
 			 */
 			validate: ( value ) => {
@@ -162,7 +164,7 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the uploads directory.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
 			 *
 			 * @throws {Error} If the value is invalid.
 			 */
@@ -180,7 +182,7 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the REST URL prefix.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
 			 *
 			 * @throws {Error} If the value is invalid.
 			 */
@@ -198,7 +200,7 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the CORS proxy prefix.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
 			 *
 			 * @throws {Error} If the value is invalid.
 			 */
@@ -219,7 +221,8 @@ class SnapWPConfigManager {
 	/**
 	 * Normalizes the configuration.
 	 *
-	 * @param cfg The configuration to normalize.
+	 * @param {Partial<Type>} cfg The configuration to normalize.
+	 *
 	 * @return The normalized configuration.
 	 */
 	static normalizeConfig = < T >( cfg: Partial< T > ) => {
@@ -271,7 +274,7 @@ class SnapWPConfigManager {
 	 * 2. Config file.
 	 * 3. Default values.
 	 *
-	 * @param cfg The configuration object.
+	 * @param {Partial<SnapWPConfig>} cfg The configuration object.
 	 */
 	static setConfig( cfg?: Partial< SnapWPConfig > ): void {
 		if ( SnapWPConfigManager.configsSet ) {
@@ -301,10 +304,11 @@ class SnapWPConfigManager {
 	/**
 	 * Validate and resolve the configuration.
 	 *
-	 * @param config The configuration to validate.
-	 * @param schema The schema to validate the configuration against.
+	 * @param {Partial<Type>}      config The configuration to validate.
+	 * @param {ConfigSchema<Type>} schema The schema to validate the configuration against.
 	 *
 	 * @return The resolved configuration.
+	 *
 	 * @throws {Error} If the configuration is invalid.
 	 */
 	static validateConfig = < T >(
@@ -318,7 +322,7 @@ class SnapWPConfigManager {
 		/**
 		 * Validate a property.
 		 *
-		 * @param key The property key.
+		 * @param {keyof Type} key The property key.
 		 *
 		 * @throws {Error} If the property is invalid.
 		 */

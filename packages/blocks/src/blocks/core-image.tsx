@@ -18,15 +18,15 @@ import type {
 /**
  * Renders a figure element with optional link and caption.
  *
- * @param props - The properties for the figure element.
- * @param [props.children] - The children of the figure element.
- * @param [props.classNames] - The class names for the figure element.
- * @param [props.renderedHtml] - The rendered HTML.
- * @param [props.href] - The href for the link.
- * @param [props.linkClass] - The class for the link.
- * @param [props.linkTarget] - The target for the link.
- * @param [props.rel] - The rel for the link.
- * @param [props.lightbox] - The lightbox attribute.
+ * @param {Object}                   props              The properties for the figure element.
+ * @param {ReactNode}                props.children     The children of the figure element.
+ * @param {FigureProps.classNames}   props.classNames   The class names for the figure element.
+ * @param {FigureProps.renderedHtml} props.renderedHtml The rendered HTML.
+ * @param {FigureProps.href}         props.href         The href for the link.
+ * @param {FigureProps.linkClass}    props.linkClass    The class for the link.
+ * @param {FigureProps.linkTarget}   props.linkTarget   The target for the link.
+ * @param {FigureProps.rel}          props.rel          The rel for the link.
+ * @param {FigureProps.lightbox}     props.lightbox     The lightbox attribute.
  *
  * @return The rendered figure element.
  */
@@ -72,11 +72,12 @@ const Figure = ( {
  *
  * @todo Expose context and state to frontend for lightbox functionality.
  *
- * @param props - The properties for the core image block.
- * @param [props.attributes] - The attributes for the image.
- * @param [props.connectedMediaItem] - The connected media item.
- * @param [props.mediaDetails] - The media details.
- * @param [props.renderedHtml] - The rendered HTML.
+ * @param {Object}                            props                    The properties for the core image block.
+ * @param {CoreImageProps.attributes}         props.attributes         The attributes for the image.
+ * @param {CoreImageProps.connectedMediaItem} props.connectedMediaItem The connected media item.
+ * @param {CoreImageProps.mediaDetails}       props.mediaDetails       The media details.
+ * @param {CoreImageProps.renderedHtml}       props.renderedHtml       The rendered HTML.
+ *
  * @return The rendered core image block or null if no URL is provided.
  */
 const CoreImage: CoreImageType = ( {
@@ -166,9 +167,9 @@ const CoreImage: CoreImageType = ( {
 /**
  * Returns the props for the image component.
  *
- * @param [attributes] The attributes for the image.
- * @param [connectedMediaItem] The connected media item.
- * @param [mediaDetails] The media details.
+ * @param {CoreImageAttributes}         attributes         The attributes for the image.
+ * @param {CoreImageConnectedMediaItem} connectedMediaItem The connected media item.
+ * @param {CoreImageMediaDetails}       mediaDetails       The media details.
  *
  * @return The props for the image component.
  */
@@ -242,7 +243,7 @@ const getImageProps = (
 /**
  * Is Lightbox enabled for the image.
  *
- * @param lightbox - The lightbox attribute.
+ * @param {string} lightbox The lightbox attribute.
  *
  * @return Whether the lightbox is enabled.
  */
@@ -262,8 +263,8 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
 /**
  * Extracts interactivity attributes from the rendered HTML for a given element.
  *
- * @param element - The element to extract attributes for.
- * @param renderedHtml - The rendered HTML.
+ * @param {string} element      The element to extract attributes for.
+ * @param {string} renderedHtml The rendered HTML.
  *
  * @return The extracted interactivity attributes.
  */
@@ -302,8 +303,8 @@ const extractInteractivityAttributesForElement = (
 /**
  * Extracts ARIA attributes from the rendered HTML for a given element.
  *
- * @param element - The element to extract attributes for.
- * @param renderedHtml - The rendered HTML.
+ * @param {string} element      The element to extract attributes for.
+ * @param {string} renderedHtml The rendered HTML.
  *
  * @return The extracted ARIA attributes.
  */

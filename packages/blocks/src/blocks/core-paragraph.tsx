@@ -9,8 +9,8 @@ import type {
 /**
  * Renders the core/paragraph block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
+ * @param {Object}                        props            The props for the block component.
+ * @param {CoreParagraphProps.attributes} props.attributes Block attributes.
  *
  * @return The rendered block.
  */

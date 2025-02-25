@@ -1,7 +1,8 @@
 /**
  * Converts a size attribute to pixels.
  *
- * @param sizeAttribute - The size attribute string (e.g., "10em", "50%").
+ * @param {string} sizeAttribute The size attribute string (e.g., "10em", "50%").
+ *
  * @return The size in pixels.
  *
  * @internal

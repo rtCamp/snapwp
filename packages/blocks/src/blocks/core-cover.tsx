@@ -21,7 +21,7 @@ const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
  *
  * @see https://github.com/WordPress/gutenberg/blob/887243c1cb2b3280934fbff05d4af8e46a3feddc/packages/block-library/src/cover/shared.js#L27
  *
- * @param focalPoint - The focal point coordinates object containing x and y values.
+ * @param {FocalPoint} focalPoint The focal point coordinates object containing x and y values.
  *
  * @return CSS position string or undefined if no focal point
  */
@@ -36,12 +36,14 @@ const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
 
 /**
  * Renders the core/cover block.
- * @param root0 - The component props object
- * @param root0.attributes - Block attributes including styling and media settings
- * @param root0.children - Child elements to render inside the cover
- * @param root0.renderedHtml - Pre-rendered HTML string for class extraction
- * @param root0.connectedMediaItem - The connected media item object
- * @param root0.mediaDetails - The media details object
+ *
+ * @param {Object}                            root0                    The component props object
+ * @param {CoreCoverProps.attributes}         root0.attributes         Block attributes including styling and media settings
+ * @param {ReactNode}                         root0.children           Child elements to render inside the cover
+ * @param {CoreCoverProps.renderedHtml}       root0.renderedHtml       Pre-rendered HTML string for class extraction
+ * @param {CoreCoverProps.connectedMediaItem} root0.connectedMediaItem The connected media item object
+ * @param {CoreCoverProps.mediaDetails}       root0.mediaDetails       The media details object
+ *
  * @return The rendered cover block or null if using featured image
  */
 const CoreCover: CoreCoverType = ( {

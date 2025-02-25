@@ -6,10 +6,11 @@ import { type GlobalHeadProps } from '@snapwp/core';
  * Renders the head section with custom styles, block styles, global stylesheet,
  * rendered font faces for the global context.
  *
- * @param props - The props for the component.
- * @param props.customCss - Custom CSS to be included.
- * @param props.globalStylesheet - Global stylesheet for the page.
- * @param props.renderedFontFaces - Font faces rendered locally.
+ * @param {Object}      props                   The props for the component.
+ * @param {string|null} props.customCss         Custom CSS to be included.
+ * @param {string|null} props.globalStylesheet  Global stylesheet for the page.
+ * @param {string|null} props.renderedFontFaces Font faces rendered locally.
+ *
  * @return A head element containing the provided styles and links.
  */
 export function GlobalHead( {

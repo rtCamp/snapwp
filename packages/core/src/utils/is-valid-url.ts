@@ -1,5 +1,8 @@
 /**
- * @param str A string to be validated as a Url.
+ * Check if the URL is valid.
+ *
+ * @param {string} str A string to be validated as a URL.
+ *
  * @return flag signifying validity.
  *
  * @internal

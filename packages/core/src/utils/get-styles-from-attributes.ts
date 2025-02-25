@@ -8,7 +8,8 @@ interface AttributesWithStyle {
 /**
  * Extracts and compiles styles from attributes.
  *
- * @param attributes - Object containing a style string.
+ * @param {AttributesWithStyle} attributes Object containing a style string.
+ *
  * @return Compiled styles as an object or an empty object if no styles exist.
  */
 export default function getStylesFromAttributes(

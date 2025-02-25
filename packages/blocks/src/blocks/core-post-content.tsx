@@ -8,9 +8,9 @@ import type {
 /**
  * Renders the core/post-content block.
  *
- * @param props - The props for the block component.
- * @param props.children - The block's children.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                            props              The props for the block component.
+ * @param {ReactNode}                         props.children     The block's children.
+ * @param {CorePostContentProps.renderedHtml} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

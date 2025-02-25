@@ -4,8 +4,9 @@ import { Logger } from '@/logger';
 /**
  * Formats a string to camel case.
  *
- * @param str - The input string.
- * @return The camelcased string.
+ * @param {string} str The input string.
+ *
+ * @return The camelcase string.
  *
  * @internal
  */
@@ -30,7 +31,8 @@ function formatStringToCamelCase( str: string ): string {
 /**
  * Converts a CSS string to an object.
  *
- * @param str - The CSS string.
+ * @param {string} str The CSS string.
+ *
  * @return The style object.
  */
 function cssToReactStyle( str: string ): CSSProperties {
@@ -54,7 +56,8 @@ function cssToReactStyle( str: string ): CSSProperties {
 /**
  * Converts a CSS string or object to a React style object.
  *
- * @param css - The CSS string.
+ * @param {Object|string} css The CSS string.
+ *
  * @return The style object.
  */
 export default function getStyleObjectFromString(

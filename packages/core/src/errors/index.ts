@@ -5,7 +5,7 @@ class TemplateParseError extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @param message The error message.
+	 * @param {string} message The error message.
 	 */
 	constructor( message: string ) {
 		super( message );
@@ -20,7 +20,7 @@ class GlobalStylesParseError extends Error {
 	/**
 	 * Constructor.
 	 *
-	 * @param message - The error message.
+	 * @param {string} message The error message.
 	 */
 	constructor( message: string ) {
 		super( message );

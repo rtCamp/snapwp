@@ -5,9 +5,9 @@ import type { CoreList as CoreListType, CoreListProps } from '@snapwp/types';
 /**
  * Renders the core/list block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
+ * @param {Object}                   props            The props for the block component.
+ * @param {CoreListProps.attributes} props.attributes Block attributes.
+ * @param {ReactNode}                props.children   The block's children.
  *
  * @return The rendered block.
  */
