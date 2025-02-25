@@ -49,7 +49,8 @@ export default function ScriptModule( {
 
 		const { src: depSrc, handle: depHandle } = dep.connectedScriptModule;
 
-		if ( 'static' === dep.importType ) {
+		// @todo Remove `toUpperCase()` when we drop support for snapwp-helper v0.1.0.
+		if ( 'STATIC' === dep.importType?.toUpperCase() ) {
 			return (
 				<link
 					// We use "preload" instead of "modulepreload" to resolve the race condition where the script runs before the state is loaded.
