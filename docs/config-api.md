@@ -53,9 +53,10 @@ export default config;
 
 Here are the available configuration options:
 
-| Property        | Type                     | Default Value                                                   | Description                                                                                                                                     |
-| --------------- | ------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parserOptions` | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx) | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
+| Property           | Type                     | Default Value                                                   | Description                                                                                                                                     |
+| ------------------ | ------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `parserOptions`    | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx) | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
+| `blockDefinitions` | `BlockDefinitions`       | [blocks](../packages/blocks/src/blocks/index.ts)                | Block definitions for the editor.<br />[Learn more](./overloading-wp-behavior.md#overloading-blocks)                                            |
 
 Config values are available via their respective keys in the `getConfig()` function.
 
