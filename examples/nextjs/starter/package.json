@@ -35,7 +35,6 @@
 		"@snapwp/codegen-config": "file:../../../packages/codegen-config",
 		"@snapwp/eslint-config": "file:../../../packages/eslint-config",
 		"@snapwp/prettier-config": "file:../../../packages/prettier-config",
-		"@snapwp/types": "file:../../../packages/types",
 		"@testing-library/jest-dom": "^6.6.3",
 		"@testing-library/react": "^16.2.0",
 		"@types/jest": "^29.5.14",
