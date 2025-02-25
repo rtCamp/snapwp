@@ -22,6 +22,8 @@ export default function Fonts( props: { renderedFontFaces: string } ) {
 					.replace( /<style[^>]*>/g, '' )
 					.replace( /<\/style>/g, '' ),
 			} }
-		></style>
+		>
+			{ /* Styles are set via `dangerouslySetInnerHTML`. */ }
+		</style>
 	);
 }

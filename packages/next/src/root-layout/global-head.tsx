@@ -23,7 +23,9 @@ export function GlobalHead( {
 				<style
 					id={ 'stylesheet' }
 					dangerouslySetInnerHTML={ { __html: globalStylesheet } }
-				></style>
+				>
+					{ /* Styles are set via `dangerouslySetInnerHTML`. */ }
+				</style>
 			) }
 
 			{ renderedFontFaces && (
@@ -34,7 +36,9 @@ export function GlobalHead( {
 				<style
 					id={ 'customCSS' }
 					dangerouslySetInnerHTML={ { __html: customCss } }
-				></style>
+				>
+					{ /* Styles are set via `dangerouslySetInnerHTML`. */ }
+				</style>
 			) }
 		</>
 	);

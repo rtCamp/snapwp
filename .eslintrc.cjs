@@ -5,7 +5,7 @@ module.exports = {
 	},
 	extends: '@snapwp/eslint-config',
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@typescript-eslint', 'jest' ],
+	plugins: [ '@stylistic/jsx', '@typescript-eslint', 'jest' ],
 	ignorePatterns: [
 		'**/__generated/',
 		'**/.eslintrc.cjs',
@@ -48,6 +48,9 @@ module.exports = {
 				],
 			},
 		],
+
+		// Enforce the indentation of JSX closing tag aligned with the opening tag.
+		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
 
 		// Restricted syntax should error, not warn.
 		'no-restricted-syntax': [ 'error' ],
