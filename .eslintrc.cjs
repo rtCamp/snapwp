@@ -5,10 +5,11 @@ module.exports = {
 	},
 	extends: [
 		'@snapwp/eslint-config',
+		'plugin:@eslint-community/eslint-comments/recommended',
 		'plugin:@typescript-eslint/eslint-recommended',
 	],
 	parser: '@typescript-eslint/parser',
-	plugins: [ '@typescript-eslint' ],
+	plugins: [ '@typescript-eslint', 'jest' ],
 	ignorePatterns: [
 		'**/__generated/',
 		'**/.eslintrc.cjs',
