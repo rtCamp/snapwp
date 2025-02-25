@@ -3,7 +3,10 @@ module.exports = {
 	env: {
 		node: true,
 	},
-	extends: '@snapwp/eslint-config',
+	extends: [
+		'@snapwp/eslint-config',
+		'plugin:@eslint-community/eslint-comments/recommended',
+	],
 	parser: '@typescript-eslint/parser',
 	plugins: [ '@stylistic/jsx', '@typescript-eslint', 'jest' ],
 	ignorePatterns: [
