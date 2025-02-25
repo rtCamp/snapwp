@@ -55,6 +55,9 @@ module.exports = {
 		// Enforce the indentation of JSX closing tag aligned with the opening tag.
 		'@stylistic/jsx/jsx-closing-tag-location': [ 1, 'line-aligned' ],
 
+		// Enforce the use of dot notation over square brackets.
+		'dot-notation': [ 'error', { allowKeywords: false } ],
+
 		// Restricted syntax should error, not warn.
 		'no-restricted-syntax': [ 'error' ],
 
