@@ -19,16 +19,16 @@ export enum LOGTYPE {
  */
 const log = ( type: LOGTYPE, ...args: any[] ): void => {
 	if (
-		// eslint-disable-next-line n/no-process-env
+		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
 		'production' === process.env.NODE_ENV ||
-		// eslint-disable-next-line n/no-process-env
+		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
 		'test' === process.env.NODE_ENV
 	) {
 		return;
 	}
 
 	const prefix = 'SnapWP:';
-	/* eslint-disable no-console */
+	/* eslint-disable no-console -- Allow the use of console. */
 	switch ( type ) {
 		case LOGTYPE.DEBUG:
 			console.debug( prefix, ...args );
@@ -46,7 +46,7 @@ const log = ( type: LOGTYPE, ...args: any[] ): void => {
 			console.log( prefix, ...args );
 			break;
 	}
-	/* eslint-enable no-console */
+	/* eslint-enable no-console -- Disallow the use of console. */
 };
 
 /**

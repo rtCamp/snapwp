@@ -29,7 +29,7 @@ export default function DefaultError( {
 
 	// Show error message in development mode.
 	// In Production mode NextJS will add message `An error occurred in the Server Components render. The specific message is omitted in production builds to avoid leaking sensitive details. A digest property is included on this error instance which may provide additional details about the nature of the error.` So for that we are adding our own generic mesasge
-	// eslint-disable-next-line n/no-process-env
+	// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
 	if ( process.env.NODE_ENV === 'development' ) {
 		errorMessage = error?.message || unknownError;
 	}
