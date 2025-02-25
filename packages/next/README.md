@@ -169,7 +169,7 @@ export default function ScriptModuleExample() {
                 handle="example-main-script"
                 dependencies={[
                     {
-                        importType: 'static',
+                        importType: 'STATIC',
                         connectedScriptModule: {
                             handle: '@module',
                             src: 'http://example.com/index.min.js'
