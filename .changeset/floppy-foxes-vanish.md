@@ -1,9 +1,9 @@
 ---
-"@snapwp/blocks": minor
-"@snapwp/query": minor
-"@snapwp/types": minor
-"@snapwp/core": minor
-"@snapwp/next": minor
+"@snapwp/blocks": patch
+"@snapwp/query": patch
+"@snapwp/types": patch
+"@snapwp/core": patch
+"@snapwp/next": patch
 ---
 
-implement noPropertyAccessFromIndexSignature rule in tsconfig base
+dev: Implement noPropertyAccessFromIndexSignature rule in tsconfig base

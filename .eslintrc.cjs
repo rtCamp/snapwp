@@ -1,10 +1,16 @@
+const { plugins } = require( './packages/eslint-config' );
+
 module.exports = {
 	root: true,
 	env: {
 		node: true,
 	},
-	extends: '@snapwp/eslint-config',
+	extends: [
+		'@snapwp/eslint-config',
+		'plugin:@typescript-eslint/eslint-recommended',
+	],
 	parser: '@typescript-eslint/parser',
+	plugins: [ '@typescript-eslint' ],
 	ignorePatterns: [
 		'**/__generated/',
 		'**/.eslintrc.cjs',
