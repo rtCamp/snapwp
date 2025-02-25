@@ -3,4 +3,4 @@
 "@snapwp/core": patch
 ---
 
-migrate block definitions to Config API
+feat: Add support for providing block definitions via the Config API.
