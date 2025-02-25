@@ -104,13 +104,7 @@ module.exports = {
 		},
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
-			excludedFiles: [
-				'**/*.spec.ts',
-				'**/*.spec.tsx',
-				'**/*.test.ts',
-				'**/*.test.tsx',
-				'**/codegen.ts',
-			],
+			excludedFiles: [ '**/codegen.ts' ],
 			rules: {
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': 'error',
