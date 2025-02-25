@@ -1,5 +1,3 @@
-const { plugins } = require( './packages/eslint-config' );
-
 module.exports = {
 	root: true,
 	env: {
