@@ -7,9 +7,9 @@
 	"exports": "./index.js",
 	"dependencies": {
 		"@wordpress/eslint-plugin": "^19.2.0",
-		"eslint-plugin-n": "^17.10.2",
 		"eslint-import-resolver-typescript": "^3.6.1",
-		"eslint-plugin-jsdoc": "^48.9.2"
+		"eslint-plugin-jsdoc": "^48.9.2",
+		"eslint-plugin-n": "^17.10.2"
 	},
 	"peerDependencies": {
 		"eslint": "^8"
