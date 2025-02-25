@@ -6,7 +6,6 @@
 	"main": "./index.js",
 	"exports": "./index.js",
 	"dependencies": {
-		"@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
 		"@wordpress/eslint-plugin": "^19.2.0",
 		"eslint-import-resolver-typescript": "^3.6.1",
 		"eslint-plugin-jsdoc": "^48.9.2",
