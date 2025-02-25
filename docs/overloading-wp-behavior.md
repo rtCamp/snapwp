@@ -28,11 +28,11 @@ export default function Default( { renderedHtml }: BlockData ) {
 }
 ```
 
-### Overloading the HTML-to-React component mapping
+## Overloading the HTML-to-React component mapping
 
 SnapWP allows you to extend and overload the default `HTMLReactParserOptions` used by the `Parse` component. This is useful for customizing the rendering of specific HTML elements, such as images, links, or other custom elements.
 
-### 1. Creating a custom `HTMLReactParserOptions` object`
+### 1. Creating a custom `HTMLReactParserOptions` object
 
 Create a new Custom Component to overload the [default html-react-parser options](../packages/next/src/react-parser/options.tsx).
 
@@ -146,36 +146,68 @@ export default MyCustomParagraph;
 
 ### 3. Mapping the Block
 
-Map your custom component to the block in your SnapWP configuration.
+SnapWP provides two ways to map your block in your SnapWP configuration:
 
-```tsx
+-   Global Override via `snapwp.config.ts`
+-   Per-Route Override by passing a prop to `EditorBlocksRenderer`
+
+**Global Override (snapwp.config.ts)**
+
+To apply your block override globally, update your SnapWP configuration:
+
+```ts
+// snapwp.config.ts
+import type { SnapWPConfig } from '@snapwp/core/config';
+import MyCustomParagraph from './src/app/core-paragraph';
+
+const config: SnapWPConfig = {
+	blockDefinitions: {
+		CoreParagraph: MyCustomParagraph,
+	},
+};
+
+export default config;
+```
+
+With this setup, `MyCustomParagraph` will be used across all pages where the `CoreParagraph` block is rendered.
+
+> [!TIP]
+> Setting the block definition value to `null` will use the [default block rendering](#default-html-rendering-with-parse-and-html-react-parser).
+
+**Per-Route Override (Prop to EditorBlocksRenderer)**
+
+If you want to override blocks only for a specific page or route, pass a `blockDefinitions` prop to `EditorBlocksRenderer` instead:
+
+```ts
 import { TemplateRenderer } from '@snapwp/next';
 import MyCustomParagraph from './components/MyCustomParagraph';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 
-const blockDefinitions = {
-	CoreParagraph: MyCustomParagraph, // Overload CoreParagraph
-	CoreImage: null, // Use default rendering for CoreImage
+const pageBlockDefinitions = {
+	CoreParagraph: MyCustomParagraph, // Override only for this page.
+	CoreVideo: null, // Use html-react-parser instead of a Block Component.
 };
 
 export default function Page() {
 	return (
 		<TemplateRenderer>
-			{ ( editorBlocks ) => (
+			{(editorBlocks) => (
 				<EditorBlocksRenderer
-					editorBlocks={ editorBlocks }
-					blockDefinitions={ blockDefinitions }
+					editorBlocks={editorBlocks}
+					blockDefinitions={pageBlockDefinitions}
 				/>
-			) }
+			)}
 		</TemplateRenderer>
 	);
 }
 ```
 
+This allows you to apply the override only on specific routes while using the default block rendering elsewhere.
+
 Now, whenever a `core/paragraph` block is encountered, your `MyCustomParagraph` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`.
 
 > [!TIP]
-> Setting the block definition value to `null` will use the [default block rendering](#default-html-rendering-with-parse-and-html-react-parser).
+> If a block is overridden both globally (`snapwp.config.ts`) and per-route (`EditorBlocksRenderer` prop), the per-route override takes precedence.
 
 ---
 
@@ -230,10 +262,6 @@ export default function MyCustomFooter( {
 Map this custom component in the **SnapWP blockDefinitions** so it only applies to the `"footer"` template part.
 
 ```tsx
-import { TemplateRenderer } from '@snapwp/next';
-import { EditorBlocksRenderer } from '@snapwp/blocks';
-import MyCustomFooter from '../../components/MyCustomFooter';
-
 const blockDefinitions = {
 	CoreTemplatePart: ( props ) => {
 		if ( props.attributes.slug === 'footer' ) {
@@ -242,20 +270,10 @@ const blockDefinitions = {
 		return null; // Default rendering for other template parts.
 	},
 };
-
-export default function Page() {
-	return (
-		<TemplateRenderer>
-			{ ( editorBlocks ) => (
-				<EditorBlocksRenderer
-					editorBlocks={ editorBlocks }
-					blockDefinitions={ blockDefinitions }
-				/>
-			) }
-		</TemplateRenderer>
-	);
-}
 ```
+
+> [!NOTE]
+> Template Parts are just another type of Block, which means they can be overwritten [the same way](#3-mapping-the-block).
 
 ---
 
@@ -267,7 +285,7 @@ This tutorial explains how to create custom frontend routes in your SnapWP-power
 2. Inside the directory, create a `page.tsx` file. Inside `page.tsx`, you can create a standard Next.js page component. These custom pages have access to your global styles and theme styles (defined in your `theme.json` and global CSS).
 
 ```tsx
-import styles from './styles.module.css'; // Import local styles if needed
+import styles from './styles.module.css'; // Import local styles if needed.
 
 export default function Page() {
 	return (
