@@ -87,3 +87,5 @@ describe( 'Logger', () => {
 		expect( console.log ).not.toHaveBeenCalled();
 	} );
 } );
+
+/* eslint-enable no-console, n/no-process-env */
