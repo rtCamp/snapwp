@@ -48,51 +48,53 @@ export default function DefaultError( {
 			<div className="buttons">
 				<button onClick={ reset }>{ tryAgain }</button>
 			</div>
-			<style>{ `
-				.error-container {
-					display: flex;
-					flex-direction: column;
-					height: 100vh;
-					text-align: center;
-					background-color: #000;
-					color: #fff;
-					font-family: Arial, sans-serif;
-					padding: 20px;
-					justify-content: center;
-					align-items: center;
-				}
-				.error-content {
-					display: block;
-					font-size: 1.5rem;
-					width: 50%;
-					white-space: wrap;
-				}
-				.error-digest {
-					font-size: 0.8rem;
-					margin-top: 10px;
-				}
-				.buttons {
-					margin-top: 20px;
-					display: flex;
-					gap: 10px;
-				}
-				button,
-				.home-button {
-					padding: 10px 20px;
-					background-color: #ff5555;
-					color: #fff;
-					border: none;
-					border-radius: 5px;
-					cursor: pointer;
-					transition: background 0.3s ease;
-					font-size: 1rem;
-					text-decoration: none;
-				}
-				button:hover,
-				.home-button:hover {
-					background-color: #cc4444;
-				}
-			` }</style>
+			<style>
+				{ `
+					.error-container {
+						display: flex;
+						flex-direction: column;
+						height: 100vh;
+						text-align: center;
+						background-color: #000;
+						color: #fff;
+						font-family: Arial, sans-serif;
+						padding: 20px;
+						justify-content: center;
+						align-items: center;
+					}
+					.error-content {
+						display: block;
+						font-size: 1.5rem;
+						width: 50%;
+						white-space: wrap;
+					}
+					.error-digest {
+						font-size: 0.8rem;
+						margin-top: 10px;
+					}
+					.buttons {
+						margin-top: 20px;
+						display: flex;
+						gap: 10px;
+					}
+					button,
+					.home-button {
+						padding: 10px 20px;
+						background-color: #ff5555;
+						color: #fff;
+						border: none;
+						border-radius: 5px;
+						cursor: pointer;
+						transition: background 0.3s ease;
+						font-size: 1rem;
+						text-decoration: none;
+					}
+					button:hover,
+					.home-button:hover {
+						background-color: #cc4444;
+					}
+				` }
+			</style>
 		</div>
 	);
 }
