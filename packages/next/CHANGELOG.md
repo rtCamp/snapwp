@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+-   [#95](https://github.com/rtCamp/snapwp/pull/95) [`58d3d47`](https://github.com/rtCamp/snapwp/commit/58d3d4755962456347295dd7d876d02486a8a455) Thanks [@justlevine](https://github.com/justlevine)! - dev: Add compatibility for `ScriptModuleDependency.importType` type change to `ScriptModuleImportTypeEnum`
+
+-   Updated dependencies [[`dcecabf`](https://github.com/rtCamp/snapwp/commit/dcecabfa9df535727e988d2db59bb0a6aa5d2a73)]:
+    -   @snapwp/core@0.1.1
+
 ## 0.1.0
 
 ### Minor Changes

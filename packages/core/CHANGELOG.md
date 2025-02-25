@@ -1,5 +1,11 @@
 # @snapwp/core
 
+## 0.1.1
+
+### Patch Changes
+
+-   [#42](https://github.com/rtCamp/snapwp/pull/42) [`dcecabf`](https://github.com/rtCamp/snapwp/commit/dcecabfa9df535727e988d2db59bb0a6aa5d2a73) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Add support for providing block definitions via the Config API.
+
 ## 0.1.0
 
 ### Minor Changes
