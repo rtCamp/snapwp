@@ -9,6 +9,7 @@ module.exports = {
 		'plugin:@wordpress/eslint-plugin/recommended',
 		'plugin:import/typescript',
 		'plugin:jsdoc/recommended-typescript',
+		'plugin:@eslint-community/eslint-comments/recommended',
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],

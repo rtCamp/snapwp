@@ -6,10 +6,13 @@
 	"main": "./index.js",
 	"exports": "./index.js",
 	"dependencies": {
+		"@eslint-community/eslint-plugin-eslint-comments": "^4.4.1",
+		"@typescript-eslint/eslint-plugin": "^6.4.1",
+		"@typescript-eslint/parser": "^6.0.0",
 		"@wordpress/eslint-plugin": "^19.2.0",
-		"eslint-plugin-n": "^17.10.2",
 		"eslint-import-resolver-typescript": "^3.6.1",
-		"eslint-plugin-jsdoc": "^48.9.2"
+		"eslint-plugin-jsdoc": "^48.9.2",
+		"eslint-plugin-n": "^17.10.2"
 	},
 	"peerDependencies": {
 		"eslint": "^8"

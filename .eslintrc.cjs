@@ -49,6 +49,9 @@ module.exports = {
 			},
 		],
 
+		// Enforce description on directive comments.
+		'@eslint-community/eslint-comments/require-description': 'error',
+
 		// Restricted syntax should error, not warn.
 		'no-restricted-syntax': [ 'error' ],
 

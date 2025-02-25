@@ -56,7 +56,7 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 				},
 			} );
 		} catch ( error ) {
-			// eslint-disable-next-line no-console
+			// eslint-disable-next-line no-console -- Allow the use of console.
 			console.error( 'Proxy error:', error );
 			return NextResponse.json(
 				{ error: 'Internal Server Error' },
