@@ -24,13 +24,7 @@ export default function EditorBlocksRenderer( {
 
 	const parsedTree = BlockManager.parseBlockForRendering( editorBlocks );
 
-	/**
-	 * Renders block node.
-	 *
-	 * @param node Block node.
-	 *
-	 * @return Rendered block node.
-	 */
+	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
 	const renderNode = ( node: BlockTreeNode ) => {
 		const props: Record< any, any > = {
 			key: node.clientId,
