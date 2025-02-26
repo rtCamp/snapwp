@@ -32,7 +32,6 @@ export type EnqueuedScriptProps = {
 	before?: ( string | null )[] | null;
 	extraData?: string | null;
 	handle?: string | null;
-	// Updated from 'location' to 'groupLocation'
 	groupLocation?: ScriptLoadingGroupLocationEnum | null;
 	src?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;

@@ -137,7 +137,7 @@ export default function ScriptExample() {
                 src="https://example.com/main.js"
                 handle="example-main-script"
                 loadingStrategy="ASYNC"
-                groupLocation="header"
+                groupLocation="HEADER"
             />
         </div>
     );

@@ -1,7 +1,7 @@
 ---
-"@snapwp/query": patch
-"@snapwp/core": patch
-"@snapwp/next": patch
+"@snapwp/query": minor
+"@snapwp/core": minor
+"@snapwp/next": minor
 ---
 
-Refactor: Change location to groupLocation for script placement enum type
+refactor!: Change `location` to `groupLocation` for script placement enum type
