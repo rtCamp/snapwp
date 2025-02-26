@@ -1,13 +1,15 @@
 /* eslint-disable no-console, n/no-process-env */
+/// <reference path="../../../../types/dist/types/global/env.d.ts" />
+
 import { Logger } from '../index';
 
 describe( 'Logger', () => {
 	beforeEach( () => {
-		jest.spyOn( console, 'debug' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'info' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'warn' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'error' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'log' ).mockImplementation( () => {} );
+		jest.spyOn( console, 'debug' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'info' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'warn' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'error' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'log' ).mockImplementation( jest.fn() );
 	} );
 
 	afterEach( () => {
@@ -15,7 +17,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a debug message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env.NODE_ENV = 'development';
 		Logger.debug( 'Debug message' );
 		expect( console.debug ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -24,7 +26,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an info message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env.NODE_ENV = 'development';
 		Logger.info( 'Info message' );
 		expect( console.info ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -33,7 +35,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a warning message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env.NODE_ENV = 'development';
 		Logger.warn( 'Warning message' );
 		expect( console.warn ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -42,7 +44,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an error message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env.NODE_ENV = 'development';
 		Logger.error( 'Error message' );
 		expect( console.error ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -51,7 +53,7 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a general message', () => {
-		process.env.NODE_ENV = 'dev';
+		process.env.NODE_ENV = 'development';
 		Logger.log( 'General message' );
 		expect( console.log ).toHaveBeenCalledWith(
 			'SnapWP:',
