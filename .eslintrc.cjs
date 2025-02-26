@@ -70,6 +70,8 @@ module.exports = {
 
 		// Restrict the use of empty functions.
 		'no-empty-function': 'error',
+
+		'react/jsx-boolean-value': 'error',
 	},
 	overrides: [
 		{
