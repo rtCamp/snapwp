@@ -27,8 +27,6 @@ const CoreListItem: CoreListItemType = ( {
 }: CoreListItemProps ) => {
 	const { content, style } = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -40,7 +38,12 @@ const CoreListItem: CoreListItemType = ( {
 	const firstLineContent = content ? content.split( '\n' )[ 0 ] : undefined;
 
 	return (
-		<li className={ classNames || undefined } style={ styleObject }>
+		<li
+			className={ classNames || undefined }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
+		>
 			{ firstLineContent && <Parse html={ firstLineContent } /> }
 			{ children }
 		</li>

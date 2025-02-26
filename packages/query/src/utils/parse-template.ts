@@ -46,12 +46,11 @@ export default function parseQueryResult(
 	const templateByUri = queryData.data?.templateByUri;
 
 	return {
-		stylesheets:
-			parseEnqueuedStylesheets( wordpressUrl, templateByUri ) || [],
-		editorBlocks: parseEditorBlocks( templateByUri ) || [],
-		scripts: parseEnqueuedScripts( templateByUri, wordpressUrl ) || [],
-		scriptModules: parseScriptModules( templateByUri, wordpressUrl ) || [],
-		bodyClasses: parseBodyClasses( templateByUri ) || [],
+		stylesheets: parseEnqueuedStylesheets( wordpressUrl, templateByUri ),
+		editorBlocks: parseEditorBlocks( templateByUri ),
+		scripts: parseEnqueuedScripts( templateByUri, wordpressUrl ),
+		scriptModules: parseScriptModules( templateByUri, wordpressUrl ),
+		bodyClasses: parseBodyClasses( templateByUri ),
 	};
 }
 

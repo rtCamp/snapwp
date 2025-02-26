@@ -25,7 +25,6 @@ const CoreDetails: CoreDetailsType = ( {
 	renderedHtml,
 }: CoreDetailsProps ) => {
 	const { style, showContent, summary } = attributes ?? {};
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	/**
 	 * @todo replace with cssClassName once it's supported.
@@ -39,7 +38,9 @@ const CoreDetails: CoreDetailsType = ( {
 	return (
 		<details
 			className={ classNames }
-			style={ styleObject }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
 			open={ showContent }
 		>
 			<summary>{ summary }</summary>

@@ -26,8 +26,6 @@ const CoreGallery: CoreGalleryType = ( {
 }: CoreGalleryProps ) => {
 	const { caption, style } = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -37,7 +35,12 @@ const CoreGallery: CoreGalleryType = ( {
 	const className = cn( classNamesFromString ) || undefined;
 
 	return (
-		<figure className={ className } style={ styleObject }>
+		<figure
+			className={ className }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
+		>
 			{ children }
 			{ caption && (
 				<figcaption className="wp-element-caption">

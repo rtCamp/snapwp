@@ -45,13 +45,16 @@ const CoreFile: CoreFileType = ( {
 		: '';
 	const classNames = cn( classNamesFromString );
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	const ariaLabel = fileName || FALLBACK_ARIA_LABEL;
 	const downloadText = downloadButtonText || FALLBACK_DOWNLOAD_BUTTON_TEXT;
 
 	return (
-		<div className={ classNames } style={ styleObject }>
+		<div
+			className={ classNames }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
+		>
 			{ displayPreview && (
 				<object
 					className="wp-block-file__embed"
@@ -68,7 +71,7 @@ const CoreFile: CoreFileType = ( {
 				<Link
 					id={ fileId || undefined }
 					href={ textLinkHref }
-					{ ...( textLinkTarget ? { target: textLinkTarget } : {} ) }
+					{ ...( textLinkTarget && { target: textLinkTarget } ) }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
 					{ !! fileName && <Parse html={ fileName } /> }

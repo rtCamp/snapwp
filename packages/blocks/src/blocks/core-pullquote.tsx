@@ -25,7 +25,6 @@ const CorePullquote: CorePullquoteType = ( {
 }: CorePullquoteProps ) => {
 	const { style, pullquoteValue, citation } = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -36,7 +35,12 @@ const CorePullquote: CorePullquoteType = ( {
 	const classNames = cn( classNamesFromString );
 
 	return (
-		<figure style={ styleObject } className={ classNames }>
+		<figure
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
+			className={ classNames }
+		>
 			<blockquote>
 				{ pullquoteValue && (
 					<p>

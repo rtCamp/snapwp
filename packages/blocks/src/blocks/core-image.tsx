@@ -189,10 +189,8 @@ const getImageProps = (
 		sizeSlug,
 	} = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	const imageStyles: CSSProperties = {
-		...styleObject,
+		...( style && getStylesFromAttributes( { style } ) ),
 		aspectRatio,
 		objectFit: scale as CSSProperties[ 'objectFit' ],
 	};

@@ -59,24 +59,16 @@ type ConfigSchema< T > = {
 	};
 };
 
-const DEFAULTS = {
+/**
+ * Default configuration.
+ */
+const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
 	corsProxyPrefix: '/proxy',
 	// eslint-disable-next-line n/no-process-env
 	useCorsProxy: process.env.NODE_ENV === 'development',
-};
-
-/**
- * Default configuration.
- */
-const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
-	graphqlEndpoint: DEFAULTS.graphqlEndpoint,
-	uploadsDirectory: DEFAULTS.uploadsDirectory,
-	restUrlPrefix: DEFAULTS.restUrlPrefix,
-	corsProxyPrefix: DEFAULTS.corsProxyPrefix,
-	useCorsProxy: DEFAULTS.useCorsProxy,
 };
 
 /**
@@ -91,17 +83,11 @@ const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env */
 	nextUrl: process.env.NEXT_PUBLIC_URL,
 	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
-	graphqlEndpoint:
-		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || DEFAULTS.graphqlEndpoint,
-	uploadsDirectory:
-		process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH ||
-		DEFAULTS.uploadsDirectory,
-	restUrlPrefix:
-		process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX ||
-		DEFAULTS.restUrlPrefix,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
+	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
 	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
-	corsProxyPrefix:
-		process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX || DEFAULTS.corsProxyPrefix,
+	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	/* eslint-enable n/no-process-env */
 } );
 

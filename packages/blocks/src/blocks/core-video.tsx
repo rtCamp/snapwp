@@ -69,8 +69,6 @@ const CoreVideo: CoreVideoType = ( {
 		return null;
 	}
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -97,7 +95,12 @@ const CoreVideo: CoreVideoType = ( {
 		.filter( ( track ): track is TrackProps => track !== null );
 
 	return (
-		<figure className={ classNames } style={ styleObject }>
+		<figure
+			className={ classNames }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
+		>
 			<video
 				autoPlay={ autoplay || undefined }
 				controls={ controls || undefined }

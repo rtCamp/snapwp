@@ -17,15 +17,15 @@ import type {
 const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
 	const { style, cssClassName, content, level } = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	const HeadingTag = level
 		? ( `h${ level }` as keyof JSX.IntrinsicElements )
 		: 'div';
 
 	return (
 		<HeadingTag
-			style={ styleObject }
+			{ ...( style && {
+				style: getStylesFromAttributes( { style } ),
+			} ) }
 			className={ cssClassName || undefined }
 		>
 			{ !! content && <Parse html={ content } /> }

@@ -30,12 +30,13 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	} = attributes || {};
 
 	const classNames = cn( cssClassName );
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
 
 	const { homeUrl, nextUrl } = getConfig();
 	const commonProps = {
 		className: linkClassName ?? undefined,
-		style: styleObject,
+		...( style && {
+			style: getStylesFromAttributes( { style } ),
+		} ),
 		title: title ?? undefined,
 	};
 
@@ -60,7 +61,7 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 			<div className={ classNames }>
 				<Link
 					href={ href }
-					{ ...( linkTarget ? { target: linkTarget } : {} ) }
+					{ ...( linkTarget && { target: linkTarget } ) }
 					rel={ rel ?? undefined }
 					{ ...commonProps }
 				>

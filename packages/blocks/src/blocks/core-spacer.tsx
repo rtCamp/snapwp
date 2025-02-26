@@ -31,15 +31,13 @@ const CoreSpacer: CoreSpacerType = ( {
 	const finalHeight =
 		selfStretch === 'fill' || selfStretch === 'fit' ? undefined : height;
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	const classNamesFromString = renderedHtml
 		? getClassNamesFromString( renderedHtml )
 		: '';
 	const classNames = cn( classNamesFromString );
 
 	const combinedStyle = {
-		...styleObject,
+		...( style && getStylesFromAttributes( { style } ) ),
 		height: getSpacingPresetCssVar( finalHeight ),
 		width: getSpacingPresetCssVar( width ),
 	};

@@ -74,7 +74,7 @@ export default function ScriptModule( {
 				 */
 				strategy="lazyOnload"
 				{ ...props }
-				{ ...( depHandle ? { id: depHandle } : {} ) }
+				{ ...( depHandle && { id: depHandle } ) }
 			/>
 		);
 	} );
@@ -98,7 +98,7 @@ export default function ScriptModule( {
 			src={ src }
 			strategy="lazyOnload"
 			{ ...props }
-			{ ...( handle ? { id: handle } : {} ) }
+			{ ...( handle && { id: handle } ) }
 		/>
 	);
 
