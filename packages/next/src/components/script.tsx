@@ -1,16 +1,13 @@
 import React, { type PropsWithoutRef } from 'react';
 import NextScript, { type ScriptProps } from 'next/script';
 
-// Define script location enum to match backend GraphQL schema changes
-export type ScriptLoadingGroupLocationEnum = 'HEADER' | 'FOOTER';
-
 interface ScriptInterface {
 	after?: ( string | null )[] | null;
 	before?: ( string | null )[] | null;
 	extraData?: string | null;
 	handle?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
-	groupLocation?: ScriptLoadingGroupLocationEnum | null;
+	groupLocation?: 'HEADER' | 'FOOTER' | null;
 	src?: string | null;
 }
 
