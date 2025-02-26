@@ -67,6 +67,9 @@ module.exports = {
 
 		// Turn of JSdoc types and use TypeScript types instead.
 		'jsdoc/no-types': [ 'off' ],
+
+		// Restrict the use of empty functions.
+		'no-empty-function': 'error',
 	},
 	overrides: [
 		{

@@ -38,7 +38,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 	beforeEach( () => {
 		SnapWPConfigManager.configsSet = false;
-		jest.spyOn( Logger, 'error' ).mockImplementation( () => {} );
+		jest.spyOn( Logger, 'error' ).mockImplementation( jest.fn() );
 		jest.resetModules();
 		// eslint-disable-next-line n/no-process-env
 		ORIG_ENV = { ...process.env };

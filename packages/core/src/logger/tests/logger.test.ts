@@ -3,11 +3,11 @@ import { Logger } from '../index';
 
 describe( 'Logger', () => {
 	beforeEach( () => {
-		jest.spyOn( console, 'debug' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'info' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'warn' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'error' ).mockImplementation( () => {} );
-		jest.spyOn( console, 'log' ).mockImplementation( () => {} );
+		jest.spyOn( console, 'debug' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'info' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'warn' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'error' ).mockImplementation( jest.fn() );
+		jest.spyOn( console, 'log' ).mockImplementation( jest.fn() );
 	} );
 
 	afterEach( () => {
