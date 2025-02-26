@@ -43,7 +43,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 				const { width, height } = getImageSizeFromAttributes( attribs );
 
 				const imageAttributes = {
-					id: attribs.id,
+					id: attribs[ 'id' ],
 					mediaDetails: {
 						width,
 						height,
@@ -57,21 +57,22 @@ export const defaultOptions: HTMLReactParserOptions = {
 					undefined !== height;
 
 				// srcset should be srcSet
-				if ( attributes.srcset ) {
-					attributes.srcSet = attributes.srcset;
-					delete attributes.srcset;
+				if ( attributes[ 'srcset' ] ) {
+					attributes[ 'srcSet' ] = attributes[ 'srcset' ];
+					delete attributes[ 'srcset' ];
 				}
 
-				if ( attributes.fetchpriority ) {
-					attributes.fetchPriority = attributes.fetchpriority;
-					delete attributes.fetchpriority;
+				if ( attributes[ 'fetchpriority' ] ) {
+					attributes[ 'fetchPriority' ] =
+						attributes[ 'fetchpriority' ];
+					delete attributes[ 'fetchpriority' ];
 				}
 
 				return (
 					<Image
 						{ ...attributes }
-						src={ attribs.src }
-						alt={ attribs.alt || '' }
+						src={ attribs[ 'src' ] }
+						alt={ attribs[ 'alt' ] || '' }
 						height={ height }
 						width={ width }
 						className={ className }

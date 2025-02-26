@@ -51,8 +51,7 @@ export default class BlockManager {
 
 		if ( customBlockDefinition === null ) {
 			// If explicitly set to null in custom definitions, use default renderer
-			node.renderer =
-				BlockManager.blockDefinitions[ 'default' ] || Default;
+			node.renderer = BlockManager.blockDefinitions.default || Default;
 		} else if ( customBlockDefinition ) {
 			// If custom definition exists, use it
 			node.renderer = customBlockDefinition;
@@ -61,8 +60,7 @@ export default class BlockManager {
 			node.renderer = defaultBlockDefinition;
 		} else {
 			// If no definition found anywhere, use default renderer and prune children
-			node.renderer =
-				BlockManager.blockDefinitions[ 'default' ] || Default;
+			node.renderer = BlockManager.blockDefinitions.default || Default;
 			node.children = null;
 		}
 
