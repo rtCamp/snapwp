@@ -173,9 +173,9 @@ export function TemplateScripts( {
 } > ) {
 	// Separate scripts by location
 	const headerScripts =
-		scripts?.filter( ( script ) => script.location === 'HEADER' ) ?? [];
+		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ?? [];
 	const footerScripts =
-		scripts?.filter( ( script ) => script.location === 'FOOTER' ) ?? [];
+		scripts?.filter( ( script ) => script.groupLocation === 'FOOTER' ) ?? [];
 
 	return (
 		<>
