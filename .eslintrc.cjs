@@ -6,6 +6,7 @@ module.exports = {
 	extends: [
 		'@snapwp/eslint-config',
 		'plugin:@eslint-community/eslint-comments/recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	plugins: [ '@typescript-eslint', 'jest' ],
@@ -67,6 +68,9 @@ module.exports = {
 
 		// Turn of JSdoc types and use TypeScript types instead.
 		'jsdoc/no-types': [ 'off' ],
+
+		// Restrict the use of empty functions.
+		'no-empty-function': 'error',
 	},
 	overrides: [
 		{
@@ -99,6 +103,17 @@ module.exports = {
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
 			rules: {
 				'n/no-process-env': 'off',
+			},
+		},
+		{
+			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
+			excludedFiles: [ '**/codegen.ts' ],
+			rules: {
+				'dot-notation': 'off',
+				'@typescript-eslint/dot-notation': 'error',
+			},
+			parserOptions: {
+				project: true,
 			},
 		},
 	],
