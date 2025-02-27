@@ -1,4 +1,5 @@
-import React, { type ComponentProps } from 'react';
+import * as React from 'react';
+import { type ComponentProps } from 'react';
 import {
 	cn,
 	getClassNamesFromString,

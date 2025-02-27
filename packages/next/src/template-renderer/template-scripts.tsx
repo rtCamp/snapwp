@@ -1,4 +1,5 @@
-import React, { type PropsWithChildren } from 'react';
+import * as React from 'react';
+import { type PropsWithChildren } from 'react';
 import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';

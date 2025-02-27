@@ -1,4 +1,5 @@
-import React, { type JSX } from 'react';
+import * as React from 'react';
+import { type JSX } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
 import type {

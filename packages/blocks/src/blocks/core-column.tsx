@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { cn, getStylesFromAttributes } from '@snapwp/core';
 import type {
 	CoreColumn as CoreColumnType,

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { getClassNamesFromString } from '@snapwp/core';
 import type {
 	CoreSeparator as CoreSeparatorType,

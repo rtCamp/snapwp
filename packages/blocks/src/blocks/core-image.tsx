@@ -1,5 +1,6 @@
 import { decode } from 'html-entities';
-import React, { type ComponentProps, type CSSProperties } from 'react';
+import * as React from 'react';
+import { type ComponentProps, type CSSProperties } from 'react';
 import {
 	cn,
 	getClassNamesFromString,

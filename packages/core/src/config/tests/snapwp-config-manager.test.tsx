@@ -7,7 +7,7 @@ import {
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
-import React from 'react';
+import * as React from 'react';
 
 /**
  * A mock React component used for testing block definitions.

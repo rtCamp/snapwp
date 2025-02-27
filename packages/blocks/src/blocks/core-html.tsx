@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Parse } from '@snapwp/next';
 import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
 
