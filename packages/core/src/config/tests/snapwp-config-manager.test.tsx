@@ -38,7 +38,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 	beforeEach( () => {
 		SnapWPConfigManager.configsSet = false;
-		jest.spyOn( Logger, 'error' ).mockImplementation( () => {} );
+		jest.spyOn( Logger, 'error' ).mockImplementation( jest.fn() );
 		jest.resetModules();
 		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
 		ORIG_ENV = { ...process.env };
@@ -233,7 +233,9 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		const config = getConfig();
 		expect( config.blockDefinitions ).toEqual( mockBlockDefinitions );
-		expect( config.blockDefinitions?.myBlock ).toBe( MockBlockComponent );
+		expect( config.blockDefinitions?.[ 'myBlock' ] ).toBe(
+			MockBlockComponent
+		);
 	} );
 
 	it( 'should throw an error if blockDefinitions is not an object', () => {
