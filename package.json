@@ -51,6 +51,7 @@
 		"format": "prettier . --config config/.prettierrc.cjs --write --paren-spacing",
 		"format:check": "prettier . --config config/.prettierrc.cjs --check --paren-spacing",
 		"test:e2e": "playwright test -c config/playwright.config.js",
+		"test:e2e:headed": "npm run test:e2e -- --headed",
 		"test:unit": "jest --config=config/jest.config.js --passWithNoTests",
 		"pretest:unit": "npm run clean-ts-build && npm run build",
 		"test:unit:updatesnapshot": "npm run test:unit -- --updateSnapshot",
