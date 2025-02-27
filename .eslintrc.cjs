@@ -116,5 +116,12 @@ module.exports = {
 				project: true,
 			},
 		},
+		{
+			files: [ '**/packages/e2e-tests/src/utils/*.ts' ],
+			rules: {
+				'n/no-process-env': 'off',
+				'no-console': 'off',
+			},
+		},
 	],
 };
