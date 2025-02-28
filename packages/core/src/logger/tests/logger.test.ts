@@ -1,4 +1,4 @@
-/* eslint-disable no-console, n/no-process-env -- Allow the use of console & process.env. */
+/* eslint-disable no-console -- Allow the use of console for a logger file. */
 /// <reference path="../../../../types/dist/types/global/env.d.ts" />
 
 import { Logger } from '../index';
@@ -90,4 +90,4 @@ describe( 'Logger', () => {
 	} );
 } );
 
-/* eslint-enable no-console, n/no-process-env -- Disallow the use of console & process.env. */
+/* eslint-enable no-console -- Disallow the use of console. */

@@ -19,16 +19,16 @@ export enum LOGTYPE {
  */
 const log = ( type: LOGTYPE, ...args: any[] ): void => {
 	if (
-		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
+		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env to check the current environment.
 		'production' === process.env.NODE_ENV ||
-		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env.
+		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env to check the current environment.
 		'test' === process.env.NODE_ENV
 	) {
 		return;
 	}
 
 	const prefix = 'SnapWP:';
-	/* eslint-disable no-console -- Allow the use of console. */
+	/* eslint-disable no-console -- Allow the use of console for loggers. */
 	switch ( type ) {
 		case LOGTYPE.DEBUG:
 			console.debug( prefix, ...args );
