@@ -53,6 +53,9 @@ module.exports = {
 			},
 		],
 
+		// Enforce description on directive comments.
+		'@eslint-community/eslint-comments/require-description': 'error',
+
 		// Enforce the use of dot notation over square brackets.
 		'dot-notation': [ 'error', { allowKeywords: false } ],
 
