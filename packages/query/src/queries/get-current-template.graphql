@@ -16,7 +16,7 @@ query GetCurrentTemplate($uri: String!) {
 				extraData
 				handle
 				id
-				location
+				groupLocation
 				src
 				loadingStrategy: strategy
 				version
