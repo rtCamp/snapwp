@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/codegen-config",
-	"version": "1.0.0",
+	"version": "0.1.1",
 	"license": "AGPL-3.0",
 	"author": "rtCamp",
 	"description": "Frontend Codegen Config",
