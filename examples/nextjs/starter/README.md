@@ -17,7 +17,16 @@ npm run dev
 
 Your Next.js app will be available at http://localhost:3000 🎉
 
-## Commands
+## Features
+
+@todo: Add features
+
+## Usage
+
+> [!TIP]
+> For detailed instructions on how to use SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/docs).
+
+### Commands
 
 `npm run <command>`
 
@@ -30,12 +39,6 @@ Your Next.js app will be available at http://localhost:3000 🎉
 
 For more information about developing with SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/DEVELOPMENT.md).
 
-## Usage
-
-For detailed instructions on how to use SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/docs).
-
-## Features
-
 ### Directory Structure
 
 The starter example has the following structure:
@@ -46,6 +49,7 @@ The starter example has the following structure:
 ```log
 /examples/nextjs/starter
 ├── src/
+│   │   # This example uses the NextJS app router
 │   ├── app/
 │   │   ├── [[...path]]/             # WordPress catch-all route handler
 │   │   │   ├── error.tsx
@@ -56,23 +60,19 @@ The starter example has the following structure:
 │   │   ├── global-error.tsx
 │   │   └── layout.tsx               # Root layout with WP styles/settings
 │   └── middleware.ts                # Next.js middleware
-├── codegen.ts                       # GraphQL code generation config
-├── next.config.mjs
-└── snapwp.config.ts                 # SnapWP configuration
+│
+├── .eslintrc.json                   # ESLint config
+├── .nvmrc                           # Node version
+├── .prettierrc.cjs                  # Prettier config
+├── codegen.ts                       # GraphQL Codegen config
+├── jest.config.js                   # Jest config
+├── next.config.mjs                  # Next.js config
+├── package.json
+├── snapwp.config.ts                 # SnapWP config
+└── tsconfig.json                    # TypeScript config
 ```
 
 </details>
-
-### Route Handling
-
-The application uses NextJS's [App router](https://nextjs.org/docs/app/building-your-application/routing) to manage routes.
-
-1. [./src/app/layout.tsx](./src/app/layout.tsx) - The layout component wraps all pages, and handles WordPress's global styles and settings.
-2. [./src/app/[[...path]]](./src/app/[[...path]]) - The default WordPress route handler. It renders the WordPress template for the given path.
-
-### Custom Routes
-
-To add a custom route, create a folder with its name, e.g. [./src/app/example-route](./src/app/example-route/page.tsx). The route will be available at `/example-route`, and have access to WordPress global styles and settings.
 
 ### Route Handling
 
