@@ -36,7 +36,43 @@ For detailed instructions on how to use SnapWP, please refer to the [SnapWP docu
 
 ## Features
 
-@todo - Add directory structure and features.
+### Directory Structure
+
+The starter example has the following structure:
+
+<details>
+<summary> Click to expand </summary>
+
+```log
+/examples/nextjs/starter
+├── src/
+│   ├── app/
+│   │   ├── [[...path]]/             # WordPress catch-all route handler
+│   │   │   ├── error.tsx
+│   │   │   └── page.tsx
+│   │   ├── example-route/           # Example of a custom route
+│   │   │   ├── page.tsx
+│   │   │   └── styles.module.css
+│   │   ├── global-error.tsx
+│   │   └── layout.tsx               # Root layout with WP styles/settings
+│   └── middleware.ts                # Next.js middleware
+├── codegen.ts                       # GraphQL code generation config
+├── next.config.mjs
+└── snapwp.config.ts                 # SnapWP configuration
+```
+
+</details>
+
+### Route Handling
+
+The application uses NextJS's [App router](https://nextjs.org/docs/app/building-your-application/routing) to manage routes.
+
+1. [./src/app/layout.tsx](./src/app/layout.tsx) - The layout component wraps all pages, and handles WordPress's global styles and settings.
+2. [./src/app/[[...path]]](./src/app/[[...path]]) - The default WordPress route handler. It renders the WordPress template for the given path.
+
+### Custom Routes
+
+To add a custom route, create a folder with its name, e.g. [./src/app/example-route](./src/app/example-route/page.tsx). The route will be available at `/example-route`, and have access to WordPress global styles and settings.
 
 ### Route Handling
 
