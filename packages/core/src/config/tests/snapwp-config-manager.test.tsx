@@ -172,6 +172,7 @@ describe( 'SnapWPConfigManager functions', () => {
 		delete process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 		delete process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH;
 		delete process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX;
+		delete process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL;
 
 		expect( getConfig() ).toEqual( {
 			...defaultConfig,
