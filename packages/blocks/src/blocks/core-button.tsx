@@ -1,5 +1,5 @@
 import React, { type ButtonHTMLAttributes } from 'react';
-import { cn, getStylesFromAttributes, toInternalUrl } from '@snapwp/core';
+import { cn, getStylesFromAttributes } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
 import type {
 	CoreButton as CoreButtonType,
@@ -53,11 +53,11 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	}
 
 	if ( url ) {
-		const href = toInternalUrl( url );
+		// No need to convert URL to internal URL as the Link component handles it.
 		return (
 			<div className={ classNames }>
 				<Link
-					href={ href }
+					href={ url }
 					target={ linkTarget ?? undefined }
 					rel={ rel ?? undefined }
 					{ ...commonProps }
