@@ -1,6 +1,5 @@
 import React, { type ButtonHTMLAttributes } from 'react';
-import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
-import { getConfig } from '@snapwp/core/config';
+import { cn, getStylesFromAttributes, toInternalUrl } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
 import type {
 	CoreButton as CoreButtonType,
@@ -32,7 +31,6 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	const classNames = cn( cssClassName );
 	const styleObject = getStylesFromAttributes( { style } );
 
-	const { homeUrl, nextUrl } = getConfig();
 	const commonProps = {
 		className: linkClassName ?? undefined,
 		style: styleObject,
@@ -55,7 +53,7 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	}
 
 	if ( url ) {
-		const href = replaceHostUrl( url, homeUrl, nextUrl );
+		const href = toInternalUrl( url );
 		return (
 			<div className={ classNames }>
 				<Link

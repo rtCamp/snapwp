@@ -1,6 +1,5 @@
 export { default as generateGraphqlUrl } from './generate-graphql-url';
 export { default as getStyleObjectFromString } from './get-style-object-from-string';
-export { default as replaceHostUrl } from './replace-host-url';
 export { default as getClassNamesFromString } from './get-class-names-from-string';
 export { default as getSpacingPresetCssVar } from './get-spacing-preset-css-var';
 export { default as getStylesFromAttributes } from './get-styles-from-attributes';
@@ -17,3 +16,9 @@ export {
 	addLeadingSlash,
 	removeLeadingSlash,
 } from './url-slash-modify';
+export {
+	isWPSiteUrl,
+	toInternalUrl,
+	isWPHomeUrl,
+	isInternalUrl,
+} from './url-checker';

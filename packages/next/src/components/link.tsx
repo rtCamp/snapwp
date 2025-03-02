@@ -3,7 +3,7 @@ import React, {
 	type CSSProperties,
 	type PropsWithChildren,
 } from 'react';
-import { replaceHostUrl } from '@snapwp/core';
+import { toInternalUrl, isInternalUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import NextLink, { type LinkProps } from 'next/link';
 
@@ -33,22 +33,13 @@ export default function Link( {
 }: PropsWithChildren<
 	LinkInterface & ( LinkProps | AnchorHTMLAttributes< HTMLAnchorElement > )
 > ) {
-	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();
+	const { graphqlEndpoint } = getConfig();
 
 	const internalUri = href
-		? replaceHostUrl(
-				href,
-				homeUrl,
-				nextUrl
-				// @todo: Remove replace when the graphql endpoint is removed from the pagination links.
-		  )?.replace( `/${ graphqlEndpoint }`, '' )
+		? toInternalUrl( href )?.replace( `/${ graphqlEndpoint }`, '' )
 		: '';
 
-	// @todo replace internalUri?.startsWith conditional check with something more robust that will incorporate both frontend/backend domain & anything in the list of allowed images domain in the config (ref: https://github.com/rtCamp/headless/pull/241#discussion_r1824274200). TBD after https://github.com/rtCamp/headless/issues/218.
-	if (
-		! internalUri?.startsWith( '/' ) &&
-		! internalUri?.startsWith( nextUrl )
-	) {
+	if ( ! isInternalUrl( internalUri ) ) {
 		return (
 			<a
 				{ ...props }

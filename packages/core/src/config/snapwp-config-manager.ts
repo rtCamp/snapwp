@@ -6,13 +6,15 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
 	/**
-	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
+	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_NEXT_APP_URL`.
 	 */
 	nextUrl: string;
 	/**
+	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL`.
+	 */
+	siteUrl: string;
+	/**
 	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_URL`.
-	 *
-	 * TODO: Update variable name from homeUrl to siteUrl. ref: https://github.com/rtCamp/headless/pull/272#discussion_r1907601796
 	 */
 	homeUrl: string;
 	/**
@@ -80,9 +82,10 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  */
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env */
-	nextUrl: process.env.NEXT_PUBLIC_URL,
-	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
-	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+	nextUrl: process.env.NEXT_PUBLIC_NEXT_APP_URL,
+	siteUrl: process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL,
+	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_ENDPOINT,
 	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
 	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
 	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
@@ -134,6 +137,21 @@ class SnapWPConfigManager {
 			validate: ( value ) => {
 				if ( value && ! isValidUrl( value ) ) {
 					throw new Error( '`nextUrl` should be a valid URL.' );
+				}
+			},
+		},
+		siteUrl: {
+			type: 'string',
+			required: true,
+			/**
+			 * Validate the URL.
+			 *
+			 * @param value The value to validate.
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate: ( value ) => {
+				if ( value && ! isValidUrl( value ) ) {
+					throw new Error( '`siteUrl` should be a valid URL.' );
 				}
 			},
 		},
@@ -230,7 +248,9 @@ class SnapWPConfigManager {
 					delete cfg[ key ];
 				} else if (
 					// @todo this should probably be moved into the schema as a sanitize callback.
-					( key === 'homeUrl' || key === 'nextUrl' ) &&
+					( key === 'homeUrl' ||
+						key === 'nextUrl' ||
+						key === 'siteUrl' ) &&
 					typeof cfg[ key ] === 'string'
 				) {
 					cfg[ key ] = ( cfg[ key ] as string ).endsWith( '/' )
