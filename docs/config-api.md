@@ -16,7 +16,7 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 > See the [Getting Started](getting-started.md#backend-setup) guide for more information.
 
 | Variable                                | Required | Default Value                            | Description                                                                       | Available via `getConfig() |
-|-----------------------------------------| -------- | ---------------------------------------- |-----------------------------------------------------------------------------------|----------------------------|
+| --------------------------------------- | -------- | ---------------------------------------- | --------------------------------------------------------------------------------- | -------------------------- |
 | `NEXT_PUBLIC_URL`                       | Yes      |                                          | The URL of the Next.js site.                                                      | `nextUrl`                  |
 | `NEXT_PUBLIC_WORDPRESS_HOME_URL`        | Yes      |                                          | The WordPress frontend domain URL.                                                | `homeUrl`                  |
 | `NEXT_PUBLIC_WORDPRESS_SITE_URL`        | Yes      |                                          | The WordPress site URL.                                                           | `siteUrl`                  |
