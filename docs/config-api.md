@@ -16,9 +16,10 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 > See the [Getting Started](getting-started.md#backend-setup) guide for more information.
 
 | Variable                                | Required | Default Value                            | Description                                                                       | Available via `getConfig() |
-| --------------------------------------- | -------- | ---------------------------------------- | --------------------------------------------------------------------------------- | -------------------------- |
+|-----------------------------------------| -------- | ---------------------------------------- |-----------------------------------------------------------------------------------|----------------------------|
 | `NEXT_PUBLIC_URL`                       | Yes      |                                          | The URL of the Next.js site.                                                      | `nextUrl`                  |
-| `NEXT_PUBLIC_WORDPRESS_URL`             | Yes      |                                          | The WordPress frontend domain URL.                                                | `homeUrl`                  |
+| `NEXT_PUBLIC_WORDPRESS_HOME_URL`        | Yes      |                                          | The WordPress frontend domain URL.                                                | `homeUrl`                  |
+| `NEXT_PUBLIC_WORDPRESS_SITE_URL`        | Yes      |                                          | The WordPress site URL.                                                           | `siteUrl`                  |
 | `INTROSPECTION_TOKEN`                   | Yes      |                                          | Token used for authenticating GraphQL introspection queries with GraphQL Codegen. | N/A                        |
 | `NEXT_PUBLIC_GRAPHQL_ENDPOINT`          | No       | `index.php?graphql`                      | The relative path to the WordPress GraphQL endpoint.                              | `graphqlEndpoint`          |
 | `NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH`    | No       | `/wp-content/uploads`                    | The relative path to the WordPress uploads directory.                             | `uploadsDirectory`         |

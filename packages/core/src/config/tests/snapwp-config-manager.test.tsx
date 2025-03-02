@@ -117,7 +117,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if homeUrl is missing', () => {
-		process.env.NEXT_PUBLIC_WORDPRESS_URL = '';
+		process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL = '';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -126,7 +126,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if homeUrl is not a string', () => {
-		process.env.NEXT_PUBLIC_WORDPRESS_URL = 123 as unknown as string;
+		process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL = 123 as unknown as string;
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -135,7 +135,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if homeUrl is not a valid URL', () => {
-		process.env.NEXT_PUBLIC_WORDPRESS_URL = 'invalid-url';
+		process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL = 'invalid-url';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -168,7 +168,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 	it( 'should handle missing environment variables correctly', () => {
 		delete process.env.NEXT_PUBLIC_URL;
-		delete process.env.NEXT_PUBLIC_WORDPRESS_URL;
+		delete process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL;
 		delete process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
 		delete process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH;
 		delete process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX;
@@ -208,7 +208,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 	it( 'should correctly normalize URLs by removing trailing slashes', () => {
 		process.env.NEXT_PUBLIC_URL = 'https://localhost:3000/';
-		process.env.NEXT_PUBLIC_WORDPRESS_URL =
+		process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL =
 			'https://wordpress.example.com/';
 
 		const config = getConfig();

@@ -6,7 +6,7 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
 	/**
-	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_NEXT_APP_URL`.
+	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
 	 */
 	nextUrl: string;
 	/**
@@ -14,7 +14,7 @@ export interface SnapWPEnv {
 	 */
 	siteUrl: string;
 	/**
-	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_URL`.
+	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL`.
 	 */
 	homeUrl: string;
 	/**
@@ -82,10 +82,10 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  */
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
-	nextUrl: process.env.NEXT_PUBLIC_NEXT_APP_URL,
+	nextUrl: process.env.NEXT_PUBLIC_URL,
 	siteUrl: process.env.NEXT_PUBLIC_WORDPRESS_SITE_URL,
 	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_HOME_URL,
-	graphqlEndpoint: process.env.NEXT_PUBLIC_WORDPRESS_GRAPHQL_ENDPOINT,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
 	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
 	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
 	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
