@@ -30,15 +30,15 @@ export default function EditorBlocksRenderer( {
 
 	const parsedTree = BlockManager.parseBlockForRendering( editorBlocks );
 
-	// eslint-disable-next-line jsdoc/require-jsdoc
+	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
 	const renderNode = ( node: BlockTreeNode ) => {
 		const props: Record< any, any > = {
 			key: node.clientId,
 			...node,
 		};
 
-		delete props.renderer;
-		delete props.children;
+		delete props[ 'renderer' ];
+		delete props[ 'children' ];
 
 		return (
 			<node.renderer { ...props }>

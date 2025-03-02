@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+-   [#109](https://github.com/rtCamp/snapwp/pull/109) [`e31540c`](https://github.com/rtCamp/snapwp/commit/e31540cb97091eca81f02d824b4c58eb9fa71f5e) Thanks [@ashutoshgautams](https://github.com/ashutoshgautams)! - docs: Add directory structure `examples/nextjs/starter` readme.
+
 ## 0.1.0
 
 ### Minor Changes
