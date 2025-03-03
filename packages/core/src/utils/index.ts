@@ -16,9 +16,5 @@ export {
 	addLeadingSlash,
 	removeLeadingSlash,
 } from './url-slash-modify';
-export {
-	isWPSiteUrl,
-	toInternalUrl,
-	isWPHomeUrl,
-	isInternalUrl,
-} from './url-checker';
+export { isWPSiteUrl, isWPHomeUrl, isInternalUrl } from './url-checker';
+export { toInternalUrl } from './to-internal-uri';
