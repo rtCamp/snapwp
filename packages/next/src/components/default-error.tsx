@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 /**
  * Default error component.
@@ -21,9 +22,15 @@ export default function DefaultError( {
 	error: Error & { digest?: string };
 	reset?: () => void;
 } ) {
+	const router = useRouter();
 	const unknownError =
 		'An unexpected error has occurred. Please check the logs for more details.';
 	const tryAgain = 'Try Again';
+	const handleReset =
+		reset ||
+		( () => {
+			router.refresh();
+		} );
 
 	let errorMessage = unknownError;
 
@@ -45,11 +52,9 @@ export default function DefaultError( {
 			<div className="error-digest">
 				{ error?.digest && error.digest }
 			</div>
-			{ reset && (
-				<div className="buttons">
-					<button onClick={ reset }>{ tryAgain }</button>
-				</div>
-			) }
+			<div className="buttons">
+				<button onClick={ handleReset }>{ tryAgain }</button>
+			</div>
 			<style>{ `
 				.error-container {
 					display: flex;
