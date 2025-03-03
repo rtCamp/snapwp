@@ -56,8 +56,8 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 					'Content-Security-Policy': "default-src 'self'",
 				},
 			} );
-		} catch ( error ) {
-			Logger.error( 'Proxy error:', error );
+		} catch ( error: unknown ) {
+			Logger.error( 'Proxy error:', error as Error );
 			return NextResponse.json(
 				{ error: 'Internal Server Error' },
 				{ status: 500 }

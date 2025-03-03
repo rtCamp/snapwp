@@ -32,7 +32,7 @@ export default function EditorBlocksRenderer( {
 
 	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
 	const renderNode = ( node: BlockTreeNode ) => {
-		const props: Record< any, any > = {
+		const props: Record< string | number, unknown > = {
 			key: node.clientId,
 			...node,
 		};

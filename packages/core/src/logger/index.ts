@@ -17,7 +17,10 @@ export enum LOGTYPE {
  * @param type - The type of log message.
  * @param args - The arguments to log.
  */
-const log = ( type: LOGTYPE, ...args: any[] ): void => {
+const log = (
+	type: LOGTYPE,
+	...args: ( string | number | object | boolean )[]
+): void => {
 	if (
 		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env to check the current environment.
 		'production' === process.env.NODE_ENV ||
@@ -62,7 +65,9 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static debug = ( ...args: any[] ): void => log( LOGTYPE.DEBUG, ...args );
+	static debug = (
+		...args: ( string | number | object | boolean )[]
+	): void => log( LOGTYPE.DEBUG, ...args );
 
 	/**
 	 * Logs an info message in the console in dev mode
@@ -73,7 +78,8 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static info = ( ...args: any[] ): void => log( LOGTYPE.INFO, ...args );
+	static info = ( ...args: ( string | number | object | boolean )[] ): void =>
+		log( LOGTYPE.INFO, ...args );
 
 	/**
 	 * Logs a warning in the console in dev mode
@@ -84,7 +90,8 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static warn = ( ...args: any[] ): void => log( LOGTYPE.WARN, ...args );
+	static warn = ( ...args: ( string | number | object | boolean )[] ): void =>
+		log( LOGTYPE.WARN, ...args );
 
 	/**
 	 * Logs an error in the console in dev mode
@@ -95,7 +102,9 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static error = ( ...args: any[] ): void => log( LOGTYPE.ERROR, ...args );
+	static error = (
+		...args: ( string | number | object | boolean )[]
+	): void => log( LOGTYPE.ERROR, ...args );
 
 	/**
 	 * Logs a message in the console in dev mode
@@ -106,7 +115,8 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static log = ( ...args: any[] ): void => log( LOGTYPE.LOG, ...args );
+	static log = ( ...args: ( string | number | object | boolean )[] ): void =>
+		log( LOGTYPE.LOG, ...args );
 }
 
 export { Logger };
