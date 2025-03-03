@@ -118,6 +118,7 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 					protocol: 'https',
 					hostname: homeUrl.hostname,
 				},
+				...( ( nextConfig && nextConfig[ 'remotePatterns' ] ) || [] ),
 			],
 		},
 		webpack: modifyWebpackConfig( snapWPConfigPath ),
