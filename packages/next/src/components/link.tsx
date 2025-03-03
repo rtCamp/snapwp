@@ -22,7 +22,7 @@ interface LinkInterface {
  * @param props.className - CSS class name.
  * @param props.children - Block's Children.
  *
- * @return The rendered link.
+ * @return {React.JSX.Element} The rendered link.
  */
 export default function Link( {
 	href,

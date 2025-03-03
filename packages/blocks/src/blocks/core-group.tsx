@@ -19,7 +19,7 @@ import type {
  * @param props.style - Inline styles.
  * @param props.children - The content to render inside the element.
  *
- * @return The rendered HTML element or the children if no tag name is provided.
+ * @return {React.JSX.Element} The rendered HTML element or the children if no tag name is provided.
  */
 const Tag = ( { name, className, style, children }: TagProps ) => {
 	if ( ! name ) {
@@ -37,7 +37,7 @@ const Tag = ( { name, className, style, children }: TagProps ) => {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CoreGroup: CoreGroupType = ( {
 	attributes,

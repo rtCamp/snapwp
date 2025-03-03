@@ -76,7 +76,7 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  *
  * This is a function (instead of a constant) so we can inject the variables in Jest.
  *
- * @return The configuration object.
+ * @return {Partial<SnapWPEnv>} The configuration object.
  */
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
@@ -220,7 +220,8 @@ class SnapWPConfigManager {
 	 * Normalizes the configuration.
 	 *
 	 * @param cfg The configuration to normalize.
-	 * @return The normalized configuration.
+	 *
+	 * @return {Partial<Type>} The normalized configuration.
 	 */
 	static normalizeConfig = < T >( cfg: Partial< T > ) => {
 		// Removing empty values.
@@ -249,7 +250,7 @@ class SnapWPConfigManager {
 	/**
 	 * Get the configuration.
 	 *
-	 * @return The resolved configuration.
+	 * @return {SnapWPConfig|SnapWPEnv} The resolved configuration.
 	 */
 	static getConfig(): Readonly< SnapWPConfig & SnapWPEnv > {
 		if ( ! SnapWPConfigManager.configsSet ) {
@@ -304,7 +305,8 @@ class SnapWPConfigManager {
 	 * @param config The configuration to validate.
 	 * @param schema The schema to validate the configuration against.
 	 *
-	 * @return The resolved configuration.
+	 * @return {Partial<Type>} The resolved configuration.
+	 *
 	 * @throws {Error} If the configuration is invalid.
 	 */
 	static validateConfig = < T >(
@@ -364,7 +366,7 @@ class SnapWPConfigManager {
 	/**
 	 * Get the GraphQL URL.
 	 *
-	 * @return The GraphQL URL.
+	 * @return {string} The GraphQL URL.
 	 */
 	static getGraphqlUrl(): string {
 		return generateGraphqlUrl(

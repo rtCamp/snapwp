@@ -14,7 +14,7 @@ import type { CoreVerse as CoreVerseType, CoreVerseProps } from '@snapwp/types';
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CoreVerse: CoreVerseType = ( {
 	attributes,

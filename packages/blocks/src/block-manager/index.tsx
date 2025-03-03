@@ -24,7 +24,8 @@ export default class BlockManager {
 	/**
 	 * Function to convert a flat list of blocks to a tree depending on `clientId` and `parentClientId`
 	 * @param blockList - A flat list of blocks.
-	 * @return A tree of blocks.
+	 *
+	 * @return {Array<BlockTreeNode>} A tree of blocks.
 	 */
 	public static flatListToHierarchical(
 		blockList?: BlockData[] | null
@@ -72,7 +73,8 @@ export default class BlockManager {
 	/**
 	 * Pre processes a flat list of blocks for rendering.
 	 * @param blockList - A flat list of blocks.
-	 * @return A tree of blocks with render functions.
+	 *
+	 * @return {Array<BlockTreeNode>} A tree of blocks with render functions.
 	 */
 	public static parseBlockForRendering(
 		blockList?: BlockData[] | null

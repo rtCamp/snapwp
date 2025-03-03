@@ -14,7 +14,8 @@ type EditorBlocksRendererProps = {
  * @param props - Props.
  * @param props.editorBlocks - A list of blocks to be rendered.
  * @param props.blockDefinitions - Blocks rendering functions.
- * @return The rendered template
+ *
+ * @return {React.JSX.Element} The rendered template.
  */
 export default function EditorBlocksRenderer( {
 	editorBlocks,

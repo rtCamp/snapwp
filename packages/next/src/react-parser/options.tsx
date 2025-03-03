@@ -17,7 +17,8 @@ export const defaultOptions: HTMLReactParserOptions = {
 	 * Replaces anchor tags with Next.js Link components.
 	 *
 	 * @param domNode - The DOM node being processed.
-	 * @return A React element if the node is an anchor tag, otherwise undefined.
+	 *
+	 * @return {React.JSX.Element|undefined} A React element if the node is an anchor tag, otherwise undefined.
 	 */
 	replace: ( domNode ) => {
 		if ( domNode instanceof Element ) {

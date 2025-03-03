@@ -12,7 +12,7 @@ import type {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CorePostContent: CorePostContentType = ( {
 	renderedHtml,

@@ -10,7 +10,8 @@ import { getConfig } from '@snapwp/core/config';
  *
  * @param props - The props for the component.
  * @param props.scripts - Array of script objects to be rendered.
- * @return A collection of `<Script />` components.
+ *
+ * @return {React.JSX.Element} A collection of `<Script />` components.
  */
 const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
 	<>
@@ -31,7 +32,8 @@ const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
  *
  * @param props - The props for the component.
  * @param props.scriptModules - Array of script module objects to generate import map from.
- * @return A Script component containing the import map if dependencies exist.
+ *
+ * @return {React.JSX.Element|null} A Script component containing the import map if dependencies exist.
  */
 const ImportMap = ( {
 	scriptModules,
@@ -79,7 +81,8 @@ const ImportMap = ( {
  *
  * @param props - The props for the component.
  * @param props.scriptModules - Array of script module objects to be rendered.
- * @return A collection of `<ScriptModule />` components.
+ *
+ * @return {React.JSX.Element} A collection of `<ScriptModule />` components.
  */
 const ScriptModuleMap = ( {
 	scriptModules,
@@ -161,7 +164,8 @@ const ScriptModuleMap = ( {
  * @param props.scripts - Array of script objects to be included in the page.
  * @param props.children - The children elements to be rendered.
  * @param props.scriptModules - Array of script module objects to be included in the page.
- * @return A collection of script elements.
+ *
+ * @return {React.JSX.Element} A collection of script elements.
  */
 export function TemplateScripts( {
 	children,

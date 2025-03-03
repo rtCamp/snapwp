@@ -2,7 +2,8 @@
  * Extracts class names from the `class` attribute in an HTML string.
  *
  * @param html - The HTML string to parse.
- * @return An array of class names.
+ *
+ * @return {Array<string>} An array of class names.
  */
 export default function getClassNamesFromString( html: string ): string[] {
 	// Match the first occurrence of the class attribute

@@ -12,7 +12,7 @@ import React from 'react';
  * @param root0.error - The error.
  * @param root0.reset - The reset function.
  *
- * @return The default error component.
+ * @return {React.JSX.Element} The default error component.
  */
 export default function DefaultError( {
 	error,

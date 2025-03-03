@@ -17,7 +17,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element|null} The rendered block.
  */
 const CoreFile: CoreFileType = ( {
 	attributes,

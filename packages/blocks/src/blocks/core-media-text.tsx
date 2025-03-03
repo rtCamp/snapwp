@@ -28,7 +28,8 @@ const DEFAULT_MEDIA_SIZE_SLUG = 'full';
  * @param focalPoint - The focal point of the image.
  * @param focalPoint.x - The x-coordinate of the focal point (0 to 1).
  * @param focalPoint.y - The y-coordinate of the focal point (0 to 1).
- * @return CSS styles for the image fill.
+ *
+ * @return {Object} CSS styles for the image fill.
  */
 function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
 	return url
@@ -51,7 +52,8 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
  * @param props.renderedHtml - Raw HTML string from WordPress
  * @param props.connectedMediaItem - Connected media item
  * @param props.mediaDetails - Media details
- * @return Rendered component or null if no content
+ *
+ * @return {React.JSX.Element} Rendered component or null if no content
  */
 const CoreMediaText: CoreMediaTextType = ( {
 	attributes = {},

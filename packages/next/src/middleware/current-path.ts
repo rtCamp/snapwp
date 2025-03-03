@@ -8,7 +8,8 @@ import type { MiddlewareFactory } from './utils';
  * which contains the current pathname of the request.
  *
  * @param  next - Next middleware
- * @return The response object with modified headers
+ *
+ * @return {(request:NextRequest, _next:NextFetchEvent) => Promise<Response|void|undefined|null>} The response object with modified headers
  */
 export const currentPath: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {

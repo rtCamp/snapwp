@@ -13,7 +13,7 @@ import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
  *
  * @throws Throws an error if the query data is missing or invalid.
  *
- * @return An object containing parsed template data.
+ * @return {GlobalHeadProps} An object containing parsed template data.
  */
 export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetGlobalStylesQuery >

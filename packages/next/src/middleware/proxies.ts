@@ -14,7 +14,8 @@ import type { MiddlewareFactory } from './utils';
  * This middleware adds custom proxies.
  *
  * @param  next - Next middleware
- * @return Custom redirection or NextMiddleware.
+ *
+ * @return {(request:NextRequest, _next:NextFetchEvent) => Promise<Response|void|undefined|null>} Custom redirection or NextMiddleware.
  */
 export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {

@@ -16,7 +16,8 @@ import { Logger } from '@snapwp/core';
  * assuming env vars NEXT_PUBLIC_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WORDPRESS_URL to https://examplewp.com
  *
  * @param  next - Next middleware
- * @return The response object with modified headers
+ *
+ * @return {(request:NextRequest, _next:NextFetchEvent) => Promise<Response|void|undefined|null>} The response object with modified headers.
  */
 export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
@@ -56,8 +57,8 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 					'Content-Security-Policy': "default-src 'self'",
 				},
 			} );
-		} catch ( error ) {
-			Logger.error( 'Proxy error:', error );
+		} catch ( error: unknown ) {
+			Logger.error( 'Proxy error:', error as Error );
 			return NextResponse.json(
 				{ error: 'Internal Server Error' },
 				{ status: 500 }

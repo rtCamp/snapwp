@@ -28,7 +28,7 @@ import type {
  * @param [props.rel] - The rel for the link.
  * @param [props.lightbox] - The lightbox attribute.
  *
- * @return The rendered figure element.
+ * @return {React.JSX.Element} The rendered figure element.
  */
 const Figure = ( {
 	children,
@@ -77,7 +77,8 @@ const Figure = ( {
  * @param [props.connectedMediaItem] - The connected media item.
  * @param [props.mediaDetails] - The media details.
  * @param [props.renderedHtml] - The rendered HTML.
- * @return The rendered core image block or null if no URL is provided.
+ *
+ * @return {React.JSX.Element|null} The rendered core image block or null if no URL is provided.
  */
 const CoreImage: CoreImageType = ( {
 	attributes,
@@ -170,7 +171,7 @@ const CoreImage: CoreImageType = ( {
  * @param [connectedMediaItem] The connected media item.
  * @param [mediaDetails] The media details.
  *
- * @return The props for the image component.
+ * @return {Object} The props for the image component.
  */
 const getImageProps = (
 	attributes?: CoreImageAttributes,
@@ -244,7 +245,7 @@ const getImageProps = (
  *
  * @param lightbox - The lightbox attribute.
  *
- * @return Whether the lightbox is enabled.
+ * @return {boolean} Whether the lightbox is enabled.
  */
 //@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ) => {
@@ -265,7 +266,7 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
  * @param element - The element to extract attributes for.
  * @param renderedHtml - The rendered HTML.
  *
- * @return The extracted interactivity attributes.
+ * @return {Object} The extracted interactivity attributes.
  */
 const extractInteractivityAttributesForElement = (
 	element: string,
@@ -305,7 +306,7 @@ const extractInteractivityAttributesForElement = (
  * @param element - The element to extract attributes for.
  * @param renderedHtml - The rendered HTML.
  *
- * @return The extracted ARIA attributes.
+ * @return {Object} The extracted ARIA attributes.
  */
 const extractAriaAttributesForElement = (
 	element: string,

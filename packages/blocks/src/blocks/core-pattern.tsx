@@ -10,7 +10,7 @@ import type {
  * @param props - The props for the block component.
  * @param props.children - The block's children.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CorePattern: CorePatternType = ( { children }: CorePatternProps ) => {
 	// Patterns contain only children, so we just return them.

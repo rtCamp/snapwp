@@ -1,7 +1,8 @@
 /**
  * Parses given string into remote patterns.
  * @param str URLs for external image sources in a comma seperated fashion.
- * @return an array of remote patterns to be used in next.config.js
+ *
+ * @return {Array<Object>} an array of remote patterns to be used in next.config.js
  *
  * @internal
  */

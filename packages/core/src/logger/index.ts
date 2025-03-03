@@ -60,7 +60,7 @@ class Logger {
 	 *
 	 * @example Logger.debug("This is a debug message.")
 	 *
-	 * @return void
+	 * @return {void}
 	 */
 	static debug = ( ...args: any[] ): void => log( LOGTYPE.DEBUG, ...args );
 
@@ -71,7 +71,7 @@ class Logger {
 	 *
 	 * @example Logger.info("This is an info message.")
 	 *
-	 * @return void
+	 * @return {void}
 	 */
 	static info = ( ...args: any[] ): void => log( LOGTYPE.INFO, ...args );
 
@@ -82,7 +82,7 @@ class Logger {
 	 *
 	 * @example Logger.warn("You should do/change something.")
 	 *
-	 * @return void
+	 * @return {void}
 	 */
 	static warn = ( ...args: any[] ): void => log( LOGTYPE.WARN, ...args );
 
@@ -93,7 +93,7 @@ class Logger {
 	 *
 	 * @example Logger.error("An error occurred.")
 	 *
-	 * @return void
+	 * @return {void}
 	 */
 	static error = ( ...args: any[] ): void => log( LOGTYPE.ERROR, ...args );
 
@@ -104,7 +104,7 @@ class Logger {
 	 *
 	 * @example Logger.log("This is a message.")
 	 *
-	 * @return void
+	 * @return {void}
 	 */
 	static log = ( ...args: any[] ): void => log( LOGTYPE.LOG, ...args );
 }

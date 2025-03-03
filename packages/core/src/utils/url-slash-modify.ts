@@ -3,7 +3,7 @@
  *
  * @param url The URL to modify.
  *
- * @return The modified URL.
+ * @return {string} The modified URL.
  *
  * @internal
  */
@@ -16,7 +16,7 @@ export function removeTrailingSlash( url: string ): string {
  *
  * @param url The URL to modify.
  *
- * @return The modified URL.
+ * @return {string} The modified URL.
  *
  * @internal
  */
@@ -29,7 +29,7 @@ export function addTrailingSlash( url: string ): string {
  *
  * @param url The URL to modify.
  *
- * @return The modified URL.
+ * @return {string} The modified URL.
  *
  * @internal
  */
@@ -42,7 +42,7 @@ export function removeLeadingSlash( url: string ): string {
  *
  * @param url The URL to modify.
  *
- * @return The modified URL.
+ * @return {string} The modified URL.
  *
  * @internal
  */

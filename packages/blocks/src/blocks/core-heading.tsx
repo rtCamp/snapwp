@@ -12,7 +12,7 @@ import type {
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
 	const { style, cssClassName, content, level } = attributes || {};

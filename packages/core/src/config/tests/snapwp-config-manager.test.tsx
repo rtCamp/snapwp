@@ -12,7 +12,7 @@ import React from 'react';
 /**
  * A mock React component used for testing block definitions.
  *
- * @return A div containing "Test Block".
+ * @return {React.JSX.Element} A div containing "Test Block".
  */
 const MockBlockComponent = () => <div>Test Block</div>;
 

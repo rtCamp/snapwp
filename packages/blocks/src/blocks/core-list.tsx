@@ -9,7 +9,7 @@ import type { CoreList as CoreListType, CoreListProps } from '@snapwp/types';
  * @param props.attributes - Block attributes.
  * @param props.children - The block's children.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CoreList: CoreListType = ( { attributes, children }: CoreListProps ) => {
 	const { cssClassName, ordered, reversed, start, style, type } =

@@ -17,7 +17,7 @@ import type {
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element} The rendered block.
  */
 const CoreSpacer: CoreSpacerType = ( {
 	attributes,

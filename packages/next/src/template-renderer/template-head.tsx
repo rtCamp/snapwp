@@ -6,7 +6,8 @@ import { type TemplateHeadProps } from '@snapwp/core';
  *
  * @param props - The props for the component.
  * @param props.stylesheets - An array of additional stylesheets and inline styles.
- * @return A head element containing the provided styles and links.
+ *
+ * @return {Array<React.JSX.Element>|null} A head element containing the provided styles and links.
  */
 export function TemplateHead( { stylesheets }: TemplateHeadProps ) {
 	if ( ! stylesheets ) {

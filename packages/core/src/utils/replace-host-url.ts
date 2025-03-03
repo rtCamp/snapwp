@@ -4,7 +4,8 @@
  * @param url - WP url.
  * @param hostUrl - Host url to be replaced.
  * @param newHostUrl - Host url to be replaced with.
- * @return The internal url.
+ *
+ * @return {string} The internal url.
  *
  * @internal
  */

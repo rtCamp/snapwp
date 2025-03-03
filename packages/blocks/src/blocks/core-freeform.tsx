@@ -11,7 +11,7 @@ import type {
  * @param props - The props for the block component.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return The rendered block.
+ * @return {React.JSX.Element|null} The rendered block.
  */
 const CoreFreeform: CoreFreeformType = ( {
 	renderedHtml,

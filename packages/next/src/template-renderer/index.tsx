@@ -18,7 +18,8 @@ export type TemplateRendererProps = {
  * @param props - The props for the component..
  * @param props.getTemplateData - A async callback to get template styles and content.
  * @param props.children - The block content to render.
- * @return A complete HTML document structure.
+ *
+ * @return {React.JSX.Element} A complete HTML document structure.
  */
 export async function TemplateRenderer( {
 	getTemplateData = QueryEngine.getTemplateData,

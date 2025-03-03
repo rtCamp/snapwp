@@ -10,7 +10,8 @@ import { type GlobalHeadProps } from '@snapwp/core';
  * @param props.customCss - Custom CSS to be included.
  * @param props.globalStylesheet - Global stylesheet for the page.
  * @param props.renderedFontFaces - Font faces rendered locally.
- * @return A head element containing the provided styles and links.
+ *
+ * @return {React.JSX.Element} A head element containing the provided styles and links.
  */
 export function GlobalHead( {
 	customCss,

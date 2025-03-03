@@ -23,7 +23,7 @@ const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
  *
  * @param focalPoint - The focal point coordinates object containing x and y values.
  *
- * @return CSS position string or undefined if no focal point
+ * @return {string} CSS position string or undefined if no focal point
  */
 const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
 	if ( ! focalPoint ) {
@@ -42,7 +42,8 @@ const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
  * @param root0.renderedHtml - Pre-rendered HTML string for class extraction
  * @param root0.connectedMediaItem - The connected media item object
  * @param root0.mediaDetails - The media details object
- * @return The rendered cover block or null if using featured image
+ *
+ * @return {React.JSX.Element} The rendered cover block or null if using featured image
  */
 const CoreCover: CoreCoverType = ( {
 	attributes,

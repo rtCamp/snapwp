@@ -12,7 +12,7 @@ export type RootLayoutProps = {
  * @param props.getGlobalStyles - A async callback to get global styles.
  * @param props.children - Child components.
  *
- * @return The rendered template
+ * @return {React.JSX.Element} The rendered template.
  */
 export async function RootLayout( {
 	getGlobalStyles = QueryEngine.getGlobalStyles,
