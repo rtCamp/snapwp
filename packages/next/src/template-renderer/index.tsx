@@ -5,6 +5,7 @@ import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 import Script from 'next/script';
 import type { BlockData } from '@snapwp/types';
+import DefaultError from '@/components/default-error';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
@@ -40,8 +41,17 @@ export async function TemplateRenderer( {
 			>
 				<main>
 					<div className="wp-site-blocks">
-						{ /** TODO: fallback if editorBlocks isn't defined. */ }
-						{ editorBlocks && children( editorBlocks ) }
+						{ editorBlocks ? (
+							children( editorBlocks )
+						) : (
+							<DefaultError
+								error={
+									new Error(
+										'Error: Unable to render content. `editorBlocks` is not defined. This may be due to missing template data or an issue with data fetching.'
+									)
+								}
+							/>
+						) }
 					</div>
 				</main>
 			</TemplateScripts>
