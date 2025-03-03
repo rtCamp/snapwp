@@ -6,7 +6,8 @@
 		"outDir": "./dist",
 		"baseUrl": ".",
 		"paths": {
-			"@/*": [ "./src/*" ]
+			"@/*": [ "./src/*" ],
+			"next/link": [ "../types/src/global/link.ts" ]
 		}
 	},
 	"include": [ "src/**/*" ],

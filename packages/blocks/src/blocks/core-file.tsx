@@ -81,7 +81,6 @@ const CoreFile: CoreFileType = ( {
 				<Link
 					href={ href }
 					className="wp-block-file__button wp-element-button"
-					//@ts-ignore allowing download prop in link
 					download
 					aria-describedby={ fileId || undefined }
 				>

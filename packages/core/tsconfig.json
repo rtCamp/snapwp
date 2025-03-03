@@ -6,12 +6,17 @@
 		"outDir": "./dist",
 		"baseUrl": ".",
 		"paths": {
-			"@/*": [ "./src/*" ]
+			"@/*": [ "./src/*" ],
+			"next/link": [ "../types/src/global/link.ts" ]
 		},
 		"types": [ "jest", "node" ],
 		"typeRoots": [ "../../node_modules/@types" ]
 	},
-	"include": [ "src/**/*", "../types/dist/types/global/env.d.ts" ],
+	"include": [
+		"src/**/*",
+		"../types/dist/types/global/env.d.ts",
+		"../types/dist/types/global/link.d.ts"
+	],
 	"exclude": [ "node_modules", "dist" ],
 	"references": [ { "path": "../types" } ]
 }

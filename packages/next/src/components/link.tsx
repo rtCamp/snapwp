@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import NextLink, { type LinkProps } from 'next/link';
+import { Link as NextLink, type LinkProps } from '@snapwp/types';
 
 interface LinkInterface {
 	href?: string;
@@ -62,7 +62,6 @@ export default function Link( {
 	}
 
 	return (
-		//@ts-ignore fix this
 		<NextLink
 			{ ...props }
 			className={ className }
