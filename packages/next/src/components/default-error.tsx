@@ -19,7 +19,7 @@ export default function DefaultError( {
 	reset,
 }: {
 	error: Error & { digest?: string };
-	reset: () => void;
+	reset?: () => void;
 } ) {
 	const unknownError =
 		'An unexpected error has occurred. Please check the logs for more details.';
@@ -45,9 +45,11 @@ export default function DefaultError( {
 			<div className="error-digest">
 				{ error?.digest && error.digest }
 			</div>
-			<div className="buttons">
-				<button onClick={ reset }>{ tryAgain }</button>
-			</div>
+			{ reset && (
+				<div className="buttons">
+					<button onClick={ reset }>{ tryAgain }</button>
+				</div>
+			) }
 			<style>{ `
 				.error-container {
 					display: flex;
