@@ -17,7 +17,7 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 
 | Variable                          | Required | Default Value                            | Description                                                                       | Available via `getConfig() |
 | --------------------------------- | -------- | ---------------------------------------- | --------------------------------------------------------------------------------- | -------------------------- |
-| `NEXT_PUBLIC_FRONTEND_URL`                 | Yes      |                                          | The URL of the Next.js site.                                                      | `nextUrl`                  |
+| `NEXT_PUBLIC_FRONTEND_URL`        | Yes      |                                          | The URL of the Next.js site.                                                      | `nextUrl`                  |
 | `NEXT_PUBLIC_WP_HOME_URL`         | Yes      |                                          | The WordPress frontend domain URL.                                                | `homeUrl`                  |
 | `NEXT_PUBLIC_WP_SITE_URL`         | Yes      |                                          | The WordPress site URL.                                                           | `siteUrl`                  |
 | `INTROSPECTION_TOKEN`             | Yes      |                                          | Token used for authenticating GraphQL introspection queries with GraphQL Codegen. | N/A                        |
