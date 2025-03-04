@@ -3,7 +3,7 @@
 	"plugins": [
 		"https://downloads.wordpress.org/plugin/wp-graphql.zip",
 		"https://github.com/wpengine/wp-graphql-content-blocks/releases/latest/download/wp-graphql-content-blocks.zip",
-		"https://github.com/rtCamp/snapwp-helper/releases/download/0.1.0/snapwp-helper.zip"
+		"https://github.com/rtCamp/snapwp-helper/releases/latest/download/snapwp-helper.zip"
 	],
 	"themes": [ "https://downloads.wordpress.org/theme/twentytwentyfour.zip" ],
 	"config": {
