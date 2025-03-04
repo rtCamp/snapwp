@@ -106,6 +106,12 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	setConfig();
 	const homeUrl = new URL( getConfig().homeUrl );
 
+	const userImages = nextConfig && nextConfig.images ? nextConfig.images : {};
+	const userRemotePatterns =
+		nextConfig && nextConfig.images && nextConfig.images.remotePatterns
+			? nextConfig.images.remotePatterns
+			: [];
+
 	return {
 		...nextConfig,
 		images: {
@@ -118,8 +124,10 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 					protocol: 'https',
 					hostname: homeUrl.hostname,
 				},
-				...( ( nextConfig && nextConfig[ 'remotePatterns' ] ) || [] ),
+				...userRemotePatterns,
 			],
+			// User image config is appended after default config to allow overriding
+			...userImages,
 		},
 		webpack: modifyWebpackConfig( snapWPConfigPath ),
 	};
