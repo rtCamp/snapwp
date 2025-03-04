@@ -1,5 +1,11 @@
 # @snapwp/types
 
+## 0.1.1
+
+### Patch Changes
+
+-   [#87](https://github.com/rtCamp/snapwp/pull/87) [`71bd814`](https://github.com/rtCamp/snapwp/commit/71bd81452935736170e81dabe8fea48b6d2b8085) Thanks [@BhumikP](https://github.com/BhumikP)! - dev: Implement noPropertyAccessFromIndexSignature rule in tsconfig base
+
 ## 0.1.0
 
 ### Minor Changes

@@ -121,7 +121,7 @@ The Script component is a flexible wrapper around Next.js' `<Script>`, allowing 
 -   `extraData`: Extra information needed for the script
 -   `handle`: A unique identifier for the script.
 -   `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
--   `location`: Defines where the script should be loaded (header or footer).
+-   `groupLocation`: Defines where the script should be loaded (header or footer).
 -   `src`: The source of the asset.
 
 This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
@@ -137,7 +137,7 @@ export default function ScriptExample() {
                 src="https://example.com/main.js"
                 handle="example-main-script"
                 loadingStrategy="ASYNC"
-                location="header"
+                groupLocation="HEADER"
             />
         </div>
     );
