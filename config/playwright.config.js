@@ -12,24 +12,14 @@ export default defineConfig( {
 	},
 	projects: [
 		{
-			name: 'setup wordpress',
-			testMatch: /setup-wordpress\.ts/,
-		},
-		{
-			name: 'setup next app',
-			testMatch: /setup-next-app\.ts/,
-			dependencies: [ 'setup wordpress' ],
-		},
-		{
-			name: 'start next app',
-			testMatch: /start-next-app\.ts/,
-			dependencies: [ 'setup next app' ],
+			name: 'setup wordpress and next app',
+			testMatch: /setup\.ts/,
 			teardown: 'teardown',
 		},
 		{
 			name: 'chromium',
 			use: { ...devices[ 'Desktop Chrome' ] },
-			dependencies: [ 'start next app' ],
+			dependencies: [ 'setup wordpress and next app' ],
 		},
 		{
 			name: 'teardown',
