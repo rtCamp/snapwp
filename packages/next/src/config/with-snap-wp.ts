@@ -107,10 +107,7 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	const homeUrl = new URL( getConfig().homeUrl );
 
 	const userImages = nextConfig && nextConfig.images ? nextConfig.images : {};
-	const userRemotePatterns =
-		userImages && userImages.remotePatterns
-			? userImages.remotePatterns
-			: [];
+	const userRemotePatterns = userImages.remotePatterns ?? [];
 
 	return {
 		...nextConfig,
