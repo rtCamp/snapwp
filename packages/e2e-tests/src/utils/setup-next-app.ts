@@ -1,9 +1,12 @@
-import { test as setup } from '@playwright/test';
 import { spawn } from 'child_process';
 import { promises as fs } from 'fs';
 import path from 'path';
 
-setup( 'setup Next.js app', async () => {
+/**
+ * Sets up the Next.js app by creating a test directory, writing environment variables,
+ * and running the SnapWP setup.
+ */
+export default async function setupNextApp() {
 	console.log( 'Setting up Next.js app...' );
 	const testAppDir = path.join( process.cwd(), 'test-app' );
 
@@ -47,4 +50,4 @@ NEXT_PUBLIC_GRAPHQL_ENDPOINT="graphql"
 		console.error( 'Failed to set up Next.js app:', error );
 		throw error;
 	}
-} );
+}

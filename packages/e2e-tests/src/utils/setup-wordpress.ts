@@ -1,9 +1,11 @@
-import { test as setup } from '@playwright/test';
 import { execSync } from 'child_process';
 import waitForServer from './wait-for-server';
 
-setup( 'setup WordPress', async () => {
-	setup.setTimeout( 600000 );
+/**
+ * Sets up the WordPress environment by starting the server,
+ * waiting for it to be available, and configuring permalinks.
+ */
+export default async function setupWordPress() {
 	console.log( 'Starting WordPress environment...' );
 
 	try {
@@ -14,9 +16,7 @@ setup( 'setup WordPress', async () => {
 		console.log( "Setting permalinks to 'postname'..." );
 		execSync(
 			'npm run wp-env run cli -- wp rewrite structure "/%postname%/"',
-			{
-				stdio: 'inherit',
-			}
+			{ stdio: 'inherit' }
 		);
 
 		console.log( 'Permalinks set successfully!' );
@@ -24,4 +24,4 @@ setup( 'setup WordPress', async () => {
 		console.error( 'Failed to start WordPress:', error );
 		throw error;
 	}
-} );
+}

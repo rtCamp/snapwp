@@ -1,10 +1,12 @@
-import { test as setup } from '@playwright/test';
 import { spawn } from 'child_process';
 import path from 'path';
 import waitForServer from './wait-for-server';
 
-setup( 'Start the Next.js app', async () => {
-	setup.setTimeout( 600000 );
+/**
+ * Starts the Next.js app by installing dependencies, building the project, and running the server.
+ */
+export default async function startNextApp() {
+	console.log( 'Starting Next.js app...' );
 	const testAppDir = path.join( process.cwd(), 'test-app' );
 
 	try {
@@ -72,4 +74,4 @@ setup( 'Start the Next.js app', async () => {
 		console.error( 'Failed to start Next.js app:', error );
 		throw error;
 	}
-} );
+}
