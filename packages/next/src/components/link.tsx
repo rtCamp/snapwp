@@ -5,7 +5,8 @@ import React, {
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import { Link as NextLink, type LinkProps } from '@snapwp/types';
+import { type OptionalUndefinedType } from '@snapwp/types';
+import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
 	href?: string;
@@ -31,7 +32,11 @@ export default function Link( {
 	children,
 	...props
 }: PropsWithChildren<
-	LinkInterface & ( LinkProps | AnchorHTMLAttributes< HTMLAnchorElement > )
+	LinkInterface &
+		(
+			| OptionalUndefinedType< LinkProps >
+			| AnchorHTMLAttributes< HTMLAnchorElement >
+		)
 > ) {
 	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();
 
@@ -63,7 +68,8 @@ export default function Link( {
 
 	return (
 		<NextLink
-			{ ...props }
+			//to override the default ts props behavior of NextLink
+			{ ...( props as LinkProps ) }
 			className={ className }
 			href={ internalUri || '' }
 			style={ style }
