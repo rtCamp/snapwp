@@ -34,3 +34,4 @@ coverage
 
 # Build output
 dist/
+test-app/
