@@ -26,6 +26,6 @@ export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
 	'parentClientId'
 > & {
 	children: BlockTreeNode[] | null;
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Renderer should be able to render any React Component.
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- @todo Need to figure out the type of renderer (Type should not be any).
 	renderer: React.ComponentType< any >;
 };
