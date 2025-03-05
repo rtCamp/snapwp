@@ -34,4 +34,7 @@ coverage
 
 # Build output
 dist/
+
+# E2E test files
 test-app/
+snapwp-helper/
