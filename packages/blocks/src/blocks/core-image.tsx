@@ -1,5 +1,4 @@
 import { decode } from 'html-entities';
-import * as React from 'react';
 import { type ComponentProps, type CSSProperties } from 'react';
 import {
 	cn,

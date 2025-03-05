@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { type PropsWithChildren } from 'react';
 import NextScript from 'next/script';
 import Script from '@/components/script';

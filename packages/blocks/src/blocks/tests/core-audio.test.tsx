@@ -1,4 +1,3 @@
-import * as React from 'react';
 import CoreAudio from '../core-audio';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';

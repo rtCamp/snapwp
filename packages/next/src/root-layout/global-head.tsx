@@ -1,4 +1,3 @@
-import * as React from 'react';
 import Fonts from '@/components/font';
 import { type GlobalHeadProps } from '@snapwp/core';
 

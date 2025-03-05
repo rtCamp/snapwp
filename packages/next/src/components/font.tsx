@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 /**
  * A wrapper for loading fonts dynamically using next/font.
  *

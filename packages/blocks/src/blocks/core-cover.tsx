@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { type ComponentProps } from 'react';
 import {
 	getStylesFromAttributes,

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { type ButtonHTMLAttributes } from 'react';
 import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';

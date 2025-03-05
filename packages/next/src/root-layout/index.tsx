@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { type PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
