@@ -39,8 +39,10 @@ export default function EditorBlocksRenderer( {
 		delete props[ 'renderer' ];
 		delete props[ 'children' ];
 
+		const { key, ...properties } = props;
+
 		return (
-			<node.renderer { ...props }>
+			<node.renderer key={ key } { ...properties }>
 				{ node.children && node.children.map( renderNode ) }
 			</node.renderer>
 		);
