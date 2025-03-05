@@ -1,4 +1,4 @@
-import { type PropsWithoutRef } from 'react';
+import type { PropsWithoutRef } from 'react';
 import NextScript, { type ScriptProps } from 'next/script';
 
 interface ScriptInterface {

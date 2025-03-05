@@ -1,5 +1,5 @@
 import { decode } from 'html-entities';
-import { type ComponentProps, type CSSProperties } from 'react';
+import type { ComponentProps, CSSProperties } from 'react';
 import {
 	cn,
 	getClassNamesFromString,

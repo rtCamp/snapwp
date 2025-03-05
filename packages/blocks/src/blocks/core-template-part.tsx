@@ -1,4 +1,4 @@
-import { type JSX } from 'react';
+import type { JSX } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
 import type {
 	CoreTemplatePart as CoreTemplatePartType,
