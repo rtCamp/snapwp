@@ -11,9 +11,10 @@ export default async function setupNextApp() {
 	const testAppDir = path.join( process.cwd(), 'test-app' );
 
 	console.log( 'Setting up Next.js app...' );
-	startProxyRegistry();
 
 	try {
+		startProxyRegistry();
+
 		await fs.rm( testAppDir, { recursive: true, force: true } );
 		await fs.mkdir( testAppDir, { recursive: true } );
 

@@ -7,10 +7,10 @@ import setupSnapWPHelper from './setup-snapwp-helper';
  * waiting for it to be available, and configuring permalinks.
  */
 export default async function setupWordPress() {
-	setupSnapWPHelper();
 	console.log( 'Starting WordPress environment...' );
 
 	try {
+		setupSnapWPHelper();
 		execSync( 'npm run wp-env start', { stdio: 'inherit' } );
 		await waitForServer( 'http://localhost:8888/' );
 		console.log( 'WordPress is ready!' );
