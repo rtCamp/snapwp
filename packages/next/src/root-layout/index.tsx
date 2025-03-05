@@ -1,6 +1,7 @@
 import React, { type PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
+import type { Metadata } from 'next';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -29,4 +30,20 @@ export async function RootLayout( {
 			<body suppressHydrationWarning>{ children }</body>
 		</html>
 	);
+}
+
+/**
+ * Export our custom metadata like icons, manifest, SEO metadata etc.
+ * This function can be async (https://nextjs.org/docs/app/api-reference/functions/generate-metadata#async-function) and we can also use fetch API or make a GraphQL request to fetch data from server.
+ *
+ * @return Merged metadata.
+ */
+export function generateRootMetaData(): Metadata {
+	return {
+		icons: {
+			// This is an interim solution for the favicon.ico making a separate GraphQL request, we are setting # as icon so Browser won't make any default request to /favicon.ico path.
+			// Todo: Once the site icon field is exposed make graphQL request to get that URL and replace it with # and remove these both comments.
+			icon: '#',
+		},
+	};
 }
