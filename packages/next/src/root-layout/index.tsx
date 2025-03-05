@@ -40,10 +40,19 @@ export async function RootLayout( {
  */
 export function generateRootMetaData(): Metadata {
 	return {
-		icons: {
-			// This is an interim solution for the favicon.ico making a separate GraphQL request, we are setting # as icon so Browser won't make any default request to /favicon.ico path.
-			// Todo: Once the site icon field is exposed make graphQL request to get that URL and replace it with # and remove these both comments.
-			icon: '#',
-		},
+		icons: generateIconsMetaData(),
 	};
 }
+
+/**
+ * Generate Icons metadata for nextJS
+ *
+ * @return Icons metadata.
+ */
+const generateIconsMetaData = (): Metadata[ 'icons' ] => {
+	return {
+		// This is an interim solution for the favicon.ico making a separate GraphQL request, we are setting # as icon so Browser won't make any default request to /favicon.ico path.
+		// Todo: Once the site icon field is exposed make graphQL request to get that URL and replace it with # and remove these both comments.
+		icon: '#',
+	};
+};
