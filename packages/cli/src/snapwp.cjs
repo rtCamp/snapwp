@@ -9,7 +9,7 @@ const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
 
-const defaultEnvContent  = `
+const defaultEnvContent = `
 # Enable if connecting to a self-signed cert
 # NODE_TLS_REJECT_UNAUTHORIZED=0
 
