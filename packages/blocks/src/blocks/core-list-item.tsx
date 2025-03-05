@@ -39,7 +39,7 @@ const CoreListItem: CoreListItemType = ( {
 
 	return (
 		<li
-			className={ classNames || undefined }
+			{ ...( classNames && { className: classNames } ) }
 			{ ...( style && {
 				style: getStylesFromAttributes( { style } ),
 			} ) }

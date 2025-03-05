@@ -113,7 +113,9 @@ const CoreVideo: CoreVideoType = ( {
 				src={ src }
 				playsInline={ playsInline || undefined }
 			>
-				<Tracks tracks={ formattedTracks || [] } />
+				<Tracks
+					{ ...( formattedTracks && { tracks: formattedTracks } ) }
+				/>
 			</video>
 
 			{ caption && (

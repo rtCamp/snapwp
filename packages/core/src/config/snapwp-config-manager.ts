@@ -78,7 +78,7 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  *
  * @return The configuration object.
  */
-//@ts-ignore - ignore check for nextUrl,homeUrl to run missing environment variable test.
+// @ts-ignore - ignore check for nextUrl,homeUrl to run missing environment variable test.
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
 	nextUrl: process.env.NEXT_PUBLIC_URL,

@@ -138,8 +138,6 @@ const CoreMediaText: CoreMediaTextType = ( {
 		? getClassNamesFromString( renderedHtml )
 		: '';
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
-
 	let gridTemplateColumns;
 	if ( mediaWidth !== DEFAULT_MEDIA_WIDTH ) {
 		gridTemplateColumns =
@@ -149,7 +147,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	}
 
 	const gridStyle = {
-		...styleObject,
+		...( style && { ...getStylesFromAttributes( { style } ) } ),
 		gridTemplateColumns,
 	};
 

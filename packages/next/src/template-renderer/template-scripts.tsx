@@ -140,7 +140,7 @@ const ScriptModuleMap = ( {
 							key={ handle || id }
 							{ ...( handle && { handle } ) }
 							{ ...( shouldLoadMainScript && { src } ) }
-							extraData={ extraData ? extraData : null }
+							{ ...( extraData && { extraData } ) }
 							{ ...( dependencies?.length && { dependencies } ) }
 						/>
 					);

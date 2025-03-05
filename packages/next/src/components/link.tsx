@@ -5,7 +5,7 @@ import React, {
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import { type OptionalUndefinedType } from '@snapwp/types';
+import { type PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
@@ -34,7 +34,7 @@ export default function Link( {
 }: PropsWithChildren<
 	LinkInterface &
 		(
-			| OptionalUndefinedType< LinkProps >
+			| PartialWithUndefined< LinkProps >
 			| AnchorHTMLAttributes< HTMLAnchorElement >
 		)
 > ) {
@@ -68,7 +68,7 @@ export default function Link( {
 
 	return (
 		<NextLink
-			//to override the default ts props behavior of NextLink
+			// LinkProps conflicts with exactOptionalPropertyTypes: https://github.com/vercel/next.js/issues/50561
 			{ ...( props as LinkProps ) }
 			className={ className }
 			href={ internalUri || '' }
