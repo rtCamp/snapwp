@@ -26,7 +26,7 @@ export async function RootLayout( {
 				<GlobalHead { ...globalHeadProps } />
 			</head>
 			{ /* suppressHydrationWarning is added to suppress warnings when classes for body are updated on the client */ }
-			<body suppressHydrationWarning={ true }>{ children }</body>
+			<body suppressHydrationWarning>{ children }</body>
 		</html>
 	);
 }

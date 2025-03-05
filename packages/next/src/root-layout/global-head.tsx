@@ -20,7 +20,7 @@ export function GlobalHead( {
 		<>
 			{ globalStylesheet && (
 				<style
-					id={ 'stylesheet' }
+					id="stylesheet"
 					dangerouslySetInnerHTML={ { __html: globalStylesheet } }
 				></style>
 			) }
@@ -31,7 +31,7 @@ export function GlobalHead( {
 
 			{ customCss && (
 				<style
-					id={ 'customCSS' }
+					id="customCSS"
 					dangerouslySetInnerHTML={ { __html: customCss } }
 				></style>
 			) }

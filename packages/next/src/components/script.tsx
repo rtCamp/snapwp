@@ -7,7 +7,7 @@ interface ScriptInterface {
 	extraData?: string | null;
 	handle?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
-	location?: string | null;
+	groupLocation?: 'HEADER' | 'FOOTER' | null;
 	src?: string | null;
 }
 
@@ -20,7 +20,7 @@ interface ScriptInterface {
  * @param props.extraData - Additional data to be included in the script.
  * @param props.handle - The handle for the script.
  * @param props.loadingStrategy - The loading strategy for the script (async or defer).
- * @param props.location - The location where the script should be loaded.
+ * @param props.groupLocation - The location where the script should be loaded.
  * @param props.src - The source URL for the script.
  * @return The rendered script element.
  */
@@ -29,7 +29,7 @@ export default function Script( {
 	before,
 	extraData,
 	handle,
-	location,
+	groupLocation,
 	src,
 	loadingStrategy,
 	...props
@@ -41,7 +41,7 @@ export default function Script( {
 
 	// Determine the strategy for the script.
 	const nextStrategy =
-		location === 'header' ? 'beforeInteractive' : 'afterInteractive';
+		groupLocation === 'HEADER' ? 'beforeInteractive' : 'afterInteractive';
 
 	// Generate an inline script for additional data if provided.
 	const ExtraDataScript = extraData && (

@@ -16,7 +16,6 @@ const SnapWPConfigManager = _private.SnapWPConfigManager!;
 const MockBlockComponent = () => <div>Test Block</div>;
 
 describe( 'SnapWPConfigManager functions', () => {
-	// eslint-disable-next-line n/no-process-env
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
 	const validSnapWPEnvConfig: Partial< SnapWPEnv > = {
@@ -39,7 +38,6 @@ describe( 'SnapWPConfigManager functions', () => {
 		SnapWPConfigManager.configsSet = false;
 		jest.spyOn( Logger, 'error' ).mockImplementation( jest.fn() );
 		jest.resetModules();
-		// eslint-disable-next-line n/no-process-env
 		ORIG_ENV = { ...process.env };
 		// @ts-ignore Allow emptying global variable for testing
 		global.backupSnapWPConfig = { ...global.__snapWPConfig };
