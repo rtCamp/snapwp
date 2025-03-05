@@ -9,6 +9,29 @@ const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
 
+const defaultEnvContent  = `
+# Enable if connecting to a self-signed cert
+# NODE_TLS_REJECT_UNAUTHORIZED=0
+
+# The headless frontend domain URL
+NEXT_PUBLIC_URL=
+
+# The WordPress "frontend" domain URL
+NEXT_PUBLIC_WORDPRESS_URL=
+
+# The WordPress GraphQL endpoint
+NEXT_PUBLIC_GRAPHQL_ENDPOINT=
+
+# The WordPress Uploads directory path
+# NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH=/wp-content/uploads
+
+# The WordPress REST URL Prefix
+# NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX=/wp-json
+
+# Token used for authenticating GraphQL introspection queries
+INTROSPECTION_TOKEN=
+`;
+
 program
 	.option( '--proxy', 'Use proxy registry.' )
 	.option( '--use-defaults', 'Use default values.', false ) // Optional flag for using default value
@@ -181,10 +204,12 @@ const openEditor = ( filePath ) => {
 					console.error( 'Error:', error );
 					process.exit( 1 );
 				}
+			} else {
+				await fs.writeFile( envPath, defaultEnvContent.trim() );
+				prompt(
+					'Please Update .env file once project gets created successfully '
+				);
 			}
-			prompt(
-				'Please add .env file once project gets created successfully '
-			);
 		}
 
 		if ( ! options.useDefaults ) {
