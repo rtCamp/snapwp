@@ -3,6 +3,7 @@ import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreTemplatePartAttributes = BaseAttributes & {
 	templatePartTagName?: string;
+	area?: string;
 };
 
 export type CoreTemplatePartProps = PropsWithChildren<
