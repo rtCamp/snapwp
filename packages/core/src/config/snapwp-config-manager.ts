@@ -82,17 +82,17 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  */
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
+	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_WP_GRAPHQL_ENDPOINT,
+	homeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
 	nextUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
+	restUrlPrefix: process.env.NEXT_PUBLIC_WP_REST_URL_PREFIX,
 	// If `siteUrl` is not provided, use `homeUrl`.
 	siteUrl:
 		process.env.NEXT_PUBLIC_WP_SITE_URL ||
 		process.env.NEXT_PUBLIC_WP_HOME_URL,
-	homeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
-	graphqlEndpoint: process.env.NEXT_PUBLIC_WP_GRAPHQL_ENDPOINT,
 	uploadsDirectory: process.env.NEXT_PUBLIC_WP_UPLOADS_PATH,
-	restUrlPrefix: process.env.NEXT_PUBLIC_WP_REST_URL_PREFIX,
 	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
-	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	/* eslint-enable n/no-process-env -- Rule restored. */
 } );
 

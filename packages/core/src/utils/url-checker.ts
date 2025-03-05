@@ -9,9 +9,7 @@ import { getConfig } from '@/config';
  */
 export const isWPHomeUrl = ( url: string ): boolean => {
 	const { homeUrl } = getConfig();
-	return (
-		url.startsWith( '/' ) || url === homeUrl || url.startsWith( homeUrl )
-	);
+	return url === homeUrl || url.startsWith( homeUrl );
 };
 
 /**
@@ -23,7 +21,7 @@ export const isWPHomeUrl = ( url: string ): boolean => {
  */
 export const isWPSiteUrl = ( url: string ): boolean => {
 	const { siteUrl } = getConfig();
-	return url.startsWith( siteUrl );
+	return url === siteUrl || url.startsWith( siteUrl );
 };
 
 /**
@@ -34,5 +32,5 @@ export const isWPSiteUrl = ( url: string ): boolean => {
  * @return Whether the URL is internal.
  */
 export const isInternalUrl = ( url: string ): boolean => {
-	return isWPHomeUrl( url ) || isWPSiteUrl( url );
+	return url.startsWith( '/' ) || isWPHomeUrl( url ) || isWPSiteUrl( url );
 };

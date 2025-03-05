@@ -3,7 +3,7 @@ import React, {
 	type CSSProperties,
 	type PropsWithChildren,
 } from 'react';
-import { toInternalUrl, isInternalUrl } from '@snapwp/core';
+import { toFrontendUri, isInternalUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import NextLink, { type LinkProps } from 'next/link';
 
@@ -36,7 +36,7 @@ export default function Link( {
 	const { graphqlEndpoint } = getConfig();
 
 	const internalUri = href
-		? toInternalUrl( href )?.replace( `/${ graphqlEndpoint }`, '' )
+		? toFrontendUri( href )?.replace( `/${ graphqlEndpoint }`, '' ) // @todo: Remove replace when the graphql endpoint is removed from the pagination links.
 		: '';
 
 	if ( ! isInternalUrl( internalUri ) ) {

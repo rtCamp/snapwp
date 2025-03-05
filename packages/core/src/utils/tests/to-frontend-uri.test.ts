@@ -1,16 +1,16 @@
-import { addTrailingSlash, toInternalUrl } from '@/utils';
+import { addTrailingSlash, toFrontendUri } from '@/utils';
 import { getConfig } from '@/config';
 
-describe( 'toInternalUrl', () => {
+describe( 'toFrontendUri', () => {
 	it( 'should return the original URL if it is not an internal URL', () => {
 		const url = 'http://external.com';
-		expect( toInternalUrl( url ) ).toBe( url );
+		expect( toFrontendUri( url ) ).toBe( url );
 	} );
 
 	it( 'should convert a relative internal URL to an absolute URL', () => {
 		const url = '/path';
 		const { nextUrl } = getConfig();
-		expect( toInternalUrl( url ) ).toBe(
+		expect( toFrontendUri( url ) ).toBe(
 			new URL( url, nextUrl ).toString()
 		);
 	} );
@@ -19,7 +19,7 @@ describe( 'toInternalUrl', () => {
 		const url = 'https://env-home.example.com/path?query=1#hash';
 		const { nextUrl } = getConfig();
 
-		expect( toInternalUrl( url ) ).toBe(
+		expect( toFrontendUri( url ) ).toBe(
 			addTrailingSlash( nextUrl ) + 'path?query=1#hash'
 		);
 	} );
