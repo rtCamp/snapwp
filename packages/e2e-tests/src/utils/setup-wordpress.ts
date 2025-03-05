@@ -1,11 +1,13 @@
 import { execSync } from 'child_process';
 import waitForServer from './wait-for-server';
+import setupSnapWPHelper from './setup-snapwp-helper';
 
 /**
  * Sets up the WordPress environment by starting the server,
  * waiting for it to be available, and configuring permalinks.
  */
 export default async function setupWordPress() {
+	setupSnapWPHelper();
 	console.log( 'Starting WordPress environment...' );
 
 	try {
