@@ -52,7 +52,7 @@ export function generateRootMetaData(): Metadata {
 const generateIconsMetaData = (): Metadata[ 'icons' ] => {
 	return {
 		// This is an interim solution for the favicon.ico making a separate GraphQL request, we are setting # as icon so Browser won't make any default request to /favicon.ico path.
-		// Todo: Once the site icon field is exposed make graphQL request to get that URL and replace it with # and remove these both comments.
+		// @todo: Once the site icon field is exposed make graphQL request to get that URL and replace it with # and remove these both comments.
 		icon: '#',
 	};
 };
