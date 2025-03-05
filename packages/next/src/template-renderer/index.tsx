@@ -30,7 +30,7 @@ export async function TemplateRenderer( {
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
 		await getTemplateData( pathname || '/' );
 
-	if ( ! editorBlocks || editorBlocks.length === 0 ) {
+	if ( ! editorBlocks?.length ) {
 		throw new Error(
 			'Error: Unable to render content. `editorBlocks` is not defined. This may be due to missing template data or an issue with data fetching.'
 		);
