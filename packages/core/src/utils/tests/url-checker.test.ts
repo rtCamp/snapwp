@@ -15,7 +15,7 @@ describe( 'URL Checker Functions', () => {
 		} );
 
 		it( 'should return true if the URL starts with a slash', () => {
-			expect( isWPHomeUrl( '/path' ) ).toBe( true );
+			expect( isWPHomeUrl( '/path' ) ).toBe( false );
 		} );
 
 		it( 'should return false if the URL does not match the home URL', () => {

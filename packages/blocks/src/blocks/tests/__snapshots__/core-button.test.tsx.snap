@@ -81,7 +81,7 @@ exports[`CoreButton Component renders with corrected url 1`] = `
   >
     <a
       class="link-class"
-      href="https://env-next.example.com/sub"
+      href="/sub"
       rel="noopener"
       style="color: red;"
       target="_blank"

@@ -9,7 +9,7 @@ import type { MiddlewareFactory } from './utils';
 import { Logger } from '@snapwp/core';
 
 /**
- * Facilitates proxying resources from WP resources. Any request with `corsProxyPrefix`
+ * Facilitates proxying resources from WP resources. Any request with `hasCorsProxy`
  * as the first path element will be proxied to WP server.
  *
  * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
@@ -22,15 +22,18 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
 ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
-		const { homeUrl, corsProxyPrefix } = getConfig();
+		const config = getConfig();
+		const { homeUrl } = config;
+		// We have already checked whether hasCorsProxy has value or not in /middleware/utils.ts
+		const hasCorsProxy = config.hasCorsProxy as string;
 
-		if ( ! request.nextUrl.pathname.startsWith( corsProxyPrefix ) ) {
+		if ( ! request.nextUrl.pathname.startsWith( hasCorsProxy ) ) {
 			return next( request, _next );
 		}
 
 		// Construct the target URL
 		const targetUrl =
-			homeUrl + request.nextUrl.pathname.replace( corsProxyPrefix, '' );
+			homeUrl + request.nextUrl.pathname.replace( hasCorsProxy, '' );
 		try {
 			// Forward the request to the external API
 			const response = await fetch( targetUrl, {

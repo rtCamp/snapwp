@@ -61,7 +61,7 @@ describe( 'CoreButton Component', () => {
 	} );
 
 	test( 'renders with corrected url', () => {
-		const { homeUrl, nextUrl } = getConfig();
+		const { homeUrl } = getConfig();
 		const exampleAttributes = {
 			cssClassName: 'test-class',
 			linkClassName: 'link-class',
@@ -80,7 +80,7 @@ describe( 'CoreButton Component', () => {
 		);
 		const linkElement = screen.getByRole( 'link', { name: 'Click Me' } );
 
-		expect( linkElement ).toHaveAttribute( 'href', nextUrl + '/sub' );
+		expect( linkElement ).toHaveAttribute( 'href', '/sub' );
 		expect( asFragment() ).toMatchSnapshot();
 	} );
 

@@ -20,7 +20,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
 	const validSnapWPEnvConfig: Partial< SnapWPEnv > = {
-		nextUrl: 'https://env-next.example.com',
+		frontendUrl: 'https://env-next.example.com',
 		homeUrl: 'https://env-home.example.com',
 		graphqlEndpoint: 'env-index.php?graphql',
 		uploadsDirectory: '/env-wp-content/uploads',
@@ -31,8 +31,7 @@ describe( 'SnapWPConfigManager functions', () => {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
-		corsProxyPrefix: '/proxy',
-		useCorsProxy: false,
+		hasCorsProxy: false,
 	};
 
 	beforeEach( () => {
@@ -66,7 +65,7 @@ describe( 'SnapWPConfigManager functions', () => {
 		} catch ( e ) {
 			if ( e instanceof Error ) {
 				expect( e.message ).toBe(
-					'Missing required property: nextUrl.'
+					'Missing required property: frontendUrl.'
 				);
 			}
 		}
@@ -89,30 +88,30 @@ describe( 'SnapWPConfigManager functions', () => {
 		);
 	} );
 
-	it( 'should throw an error if nextUrl is missing', () => {
+	it( 'should throw an error if frontendUrl is missing', () => {
 		process.env.NEXT_PUBLIC_FRONTEND_URL = '';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
-			'Missing required property: nextUrl'
+			'Missing required property: frontendUrl'
 		);
 	} );
 
-	it( 'should throw an error if nextUrl is not a string', () => {
+	it( 'should throw an error if frontendUrl is not a string', () => {
 		process.env.NEXT_PUBLIC_FRONTEND_URL = 123 as unknown as string;
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
-			'Property nextUrl should be of type string'
+			'Property frontendUrl should be of type string'
 		);
 	} );
 
-	it( 'should throw an error if nextUrl is not a valid URL', () => {
+	it( 'should throw an error if frontendUrl is not a valid URL', () => {
 		process.env.NEXT_PUBLIC_FRONTEND_URL = 'invalid-url';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
-			'`nextUrl` should be a valid URL.'
+			'`frontendUrl` should be a valid URL.'
 		);
 	} );
 
@@ -154,7 +153,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	it( 'should prioritize envConfig over validConfig and defaultConfig', () => {
 		// @ts-ignore Allow setting global variable for testing
 		const envConfig = global.__envConfig;
-		expect( getConfig().nextUrl ).toBe( envConfig.nextUrl );
+		expect( getConfig().frontendUrl ).toBe( envConfig.frontendUrl );
 		expect( getConfig().homeUrl ).toBe( envConfig.homeUrl );
 
 		expect( getConfig().graphqlEndpoint ).toBe( envConfig.graphqlEndpoint );
@@ -169,9 +168,9 @@ describe( 'SnapWPConfigManager functions', () => {
 	it( 'should handle missing environment variables correctly', () => {
 		delete process.env.NEXT_PUBLIC_FRONTEND_URL;
 		delete process.env.NEXT_PUBLIC_WP_HOME_URL;
-		delete process.env.NEXT_PUBLIC_WP_GRAPHQL_ENDPOINT;
-		delete process.env.NEXT_PUBLIC_WP_UPLOADS_PATH;
-		delete process.env.NEXT_PUBLIC_WP_REST_URL_PREFIX;
+		delete process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+		delete process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY;
+		delete process.env.NEXT_PUBLIC_REST_URL_PREFIX;
 		delete process.env.NEXT_PUBLIC_WP_SITE_URL;
 
 		expect( getConfig() ).toEqual( {
@@ -190,7 +189,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if restUrlPrefix does not have forward slash', () => {
-		process.env.NEXT_PUBLIC_WP_REST_URL_PREFIX = 'wp-json';
+		process.env.NEXT_PUBLIC_REST_URL_PREFIX = 'wp-json';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -199,7 +198,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if uploadsDirectory does not have forward slash', () => {
-		process.env.NEXT_PUBLIC_WP_UPLOADS_PATH = 'wp-content/uploads';
+		process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY = 'wp-content/uploads';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -213,7 +212,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		const config = getConfig();
 
-		expect( config.nextUrl ).toBe( 'https://localhost:3000' );
+		expect( config.frontendUrl ).toBe( 'https://localhost:3000' );
 		expect( config.homeUrl ).toBe( 'https://wordpress.example.com' );
 	} );
 

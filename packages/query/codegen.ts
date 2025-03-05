@@ -13,7 +13,7 @@ const config: CodegenConfig = {
 		{
 			[ generateGraphqlUrl(
 				process.env.NEXT_PUBLIC_WP_HOME_URL,
-				process.env.NEXT_PUBLIC_WP_GRAPHQL_ENDPOINT
+				process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT
 			) ]: {
 				headers: {
 					Authorization: `${ process.env.INTROSPECTION_TOKEN }`,
