@@ -12,7 +12,7 @@ export default function setupSnapWPHelper() {
 		execSync( 'git clone https://github.com/rtCamp/snapwp-helper.git', {
 			stdio: 'inherit',
 		} );
-		execSync( 'npm run install-local-deps && npm run build:dist', {
+		execSync( 'npm run install-local-deps', {
 			cwd: pluginPath,
 			stdio: 'inherit',
 		} );
