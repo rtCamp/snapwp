@@ -206,9 +206,6 @@ const openEditor = ( filePath ) => {
 				}
 			} else {
 				await fs.writeFile( envPath, defaultEnvContent.trim() );
-				prompt(
-					'Please Update .env file once project gets created successfully '
-				);
 			}
 		}
 
@@ -276,12 +273,22 @@ const openEditor = ( filePath ) => {
 		// New line for clarity.
 		console.log( '' );
 
+		if ( options.useDefaults ) {
+			console.log(
+				'For setting up environment variables, please refer to the documentation at: https://github.com/rtCamp/snapwp/blob/b7c0472d95be624244ad2a5d01d4bcdaa29e91f3/packages/cli/README.md'
+			);
+			console.log( '' );
+		}
+
 		console.log(
 			'To start your headless WordPress project, please run the following commands:'
 		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
 		console.log( `npm run dev` );
+		if ( options.useDefaults ) {
+			process.exit( 1 );
+		}
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );

@@ -58,6 +58,20 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     3. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
     4. Visit the `NEXT_PUBLIC_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
 
+### `npx snapwp --use-defaults`
+
+To create a new headless WordPress app with default directory, follow these steps:
+
+1. Run the scaffolding wizard:
+
+    ```bash
+    npx snapwp --use-defaults
+    ```
+
+2. Automatically use the default directory path(`/snapwp-frontend`).
+
+3. Creates an empty .env file for you to configure later.
+
 ## Contributing
 
 This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
