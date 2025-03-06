@@ -12,3 +12,20 @@ export interface GeneralSettingsProps {
 		} | null;
 	} | null;
 }
+
+export type IconTypes = {
+	faviconIcons: FormattedIcon[];
+	appleIcons: FormattedIcon[];
+	msApplicationTileIcon: Icon;
+};
+
+export type Icon = {
+	sourceUrl: string;
+	height: string;
+	width: string;
+};
+
+export type FormattedIcon = {
+	url: string;
+	sizes: string;
+};
