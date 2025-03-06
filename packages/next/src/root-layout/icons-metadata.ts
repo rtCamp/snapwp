@@ -47,7 +47,7 @@ export const getIcons = async (): Promise< Partial< IconTypes > > => {
 
 	const filteredAppleIcons = filterIconsBySize( validIcons, [ '180x180' ] );
 	const formattedAppleIcons: FormattedIcon[] = filteredAppleIcons
-		? formatIcons( filteredFaviconIcons )
+		? formatIcons( filteredAppleIcons )
 		: [];
 
 	return {
