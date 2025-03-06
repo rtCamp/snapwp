@@ -1,0 +1,14 @@
+query GetGeneralSettings {
+	generalSettings {
+		siteIcon {
+			mediaDetails {
+				sizes {
+					width
+					height
+					sourceUrl
+				}
+			}
+			mediaItemUrl
+		}
+	}
+}

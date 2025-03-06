@@ -11,9 +11,11 @@ export default function Layout( { children }: { children: React.ReactNode } ) {
 
 /**
  * Generate custom metadata with rootMetadata generated using generateRootMeraData.
+ *
+ * @return dynamic metadata generated from generateRootMetaData() and custom logic.
  */
 export async function generateMetadata(): Promise< Metadata > {
-	const rootMetaData = generateRootMetaData();
+	const rootMetaData = await generateRootMetaData();
 	return {
 		...rootMetaData,
 	};

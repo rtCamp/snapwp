@@ -1,6 +1,7 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
+	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
 import {
@@ -70,6 +71,42 @@ export class QueryEngine {
 			} );
 
 			return parseGlobalStyles( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				// If there are networkError throw the error with proper message.
+				if ( error.networkError ) {
+					// Throw the error with proper message.
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches the general settings, like favicon icon.
+	 *
+	 * @return General settings data.
+	 */
+	static getGeneralSettings = async () => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+
+		try {
+			const data = await QueryEngine.apolloClient.query( {
+				query: GetGeneralSettingsDocument,
+				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+				errorPolicy: 'all',
+			} );
+
+			return data.data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
