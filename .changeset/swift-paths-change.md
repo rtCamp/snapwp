@@ -5,4 +5,4 @@
 "@snapwp/next": patch
 ---
 
-Update jsx compiler
+chore: Enforce "import/default" eslint ruleset.
