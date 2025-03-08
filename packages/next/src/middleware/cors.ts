@@ -57,13 +57,15 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 				},
 			} );
 		} catch ( error ) {
-			if ( error instanceof Error ) {
-				Logger.error( 'Proxy error:', error );
-				return NextResponse.json(
-					{ error: 'Internal Server Error' },
-					{ status: 500 }
-				);
+			if ( ! ( error instanceof Error ) ) {
+				return;
 			}
+
+			Logger.error( 'Proxy error:', error );
+			return NextResponse.json(
+				{ error: 'Internal Server Error' },
+				{ status: 500 }
+			);
 		}
 	};
 };
