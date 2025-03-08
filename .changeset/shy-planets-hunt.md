@@ -2,4 +2,4 @@
 "snapwp": patch
 ---
 
-chore: lint fixes
+chore: Apply and enforce ESLint rules to `bin` and `cli` files
