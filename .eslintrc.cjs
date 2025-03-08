@@ -108,7 +108,6 @@ module.exports = {
 						},
 					},
 				],
-				'import/default': [ 'off' ],
 			},
 		},
 		// Disable n/no-process-env for `codegen.ts` file.
