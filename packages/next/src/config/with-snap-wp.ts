@@ -23,6 +23,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	 * @see node_modules/next/dist/server/config-shared.js:169
 	 * @return The modified webpack configuration.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
 	return ( config: any ) => {
 		const configPath = `
 			import __snapWPConfig from '${ snapWPConfigPath }';

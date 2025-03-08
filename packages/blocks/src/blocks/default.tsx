@@ -1,4 +1,3 @@
-import React from 'react';
 import { Parse } from '@snapwp/next';
 import type { Default as DefaultType, DefaultProps } from '@snapwp/types';
 
