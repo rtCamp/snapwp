@@ -81,6 +81,9 @@ module.exports = {
 			{ children: 'never', props: 'never' },
 		],
 		'react/jsx-boolean-value': 'error',
+
+		// Prevent the use of any in type annotation.
+		'@typescript-eslint/no-explicit-any': 'error',
 	},
 	overrides: [
 		{
@@ -105,7 +108,6 @@ module.exports = {
 						},
 					},
 				],
-				'import/default': [ 'off' ],
 			},
 		},
 		// Disable n/no-process-env for `codegen.ts` file.

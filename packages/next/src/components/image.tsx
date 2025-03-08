@@ -1,4 +1,4 @@
-import React, {
+import {
 	type CSSProperties,
 	type ImgHTMLAttributes,
 	type PropsWithoutRef,
