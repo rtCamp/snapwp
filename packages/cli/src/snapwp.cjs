@@ -123,7 +123,7 @@ const openEditor = ( filePath ) => {
 		} else {
 			prompt(
 				'Thanks for using SnapWP!\n' +
-					`\nUsing default values , your project directory will be created at ${ projectDir } path.\n`
+					`\nUsing default values, your project directory will be created at ${ projectDir } path.\n`
 			);
 		}
 		const projectDirPath = path.resolve( projectDir );
