@@ -1,4 +1,3 @@
-import React from 'react';
 import BlockManager from '@/block-manager';
 import { getConfig } from '@snapwp/core/config';
 
@@ -32,7 +31,7 @@ export default function EditorBlocksRenderer( {
 
 	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
 	const renderNode = ( node: BlockTreeNode ) => {
-		const props: Record< any, any > = {
+		const props: Record< string, unknown > = {
 			key: node.clientId,
 			...node,
 		};
@@ -40,8 +39,10 @@ export default function EditorBlocksRenderer( {
 		delete props[ 'renderer' ];
 		delete props[ 'children' ];
 
+		const { key, ...properties } = props;
+
 		return (
-			<node.renderer { ...props }>
+			<node.renderer key={ key } { ...properties }>
 				{ node.children && node.children.map( renderNode ) }
 			</node.renderer>
 		);
