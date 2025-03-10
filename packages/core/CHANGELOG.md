@@ -1,5 +1,11 @@
 # @snapwp/core
 
+## 0.2.1
+
+### Patch Changes
+
+-   [#108](https://github.com/rtCamp/snapwp/pull/108) [`c1ee556`](https://github.com/rtCamp/snapwp/commit/c1ee5564e1046411dac0ccb5ace99c59fe337959) Thanks [@Pathan-Amaankhan](https://github.com/Pathan-Amaankhan)! - chore: Enforce "import/default" eslint ruleset.
+
 ## 0.2.0
 
 ### Minor Changes
