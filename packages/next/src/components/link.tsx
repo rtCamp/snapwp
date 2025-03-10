@@ -1,4 +1,4 @@
-import React, {
+import {
 	type AnchorHTMLAttributes,
 	type CSSProperties,
 	type PropsWithChildren,
