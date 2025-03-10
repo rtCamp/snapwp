@@ -1,5 +1,15 @@
 # @snapwp/blocks
 
+## 0.1.2
+
+### Patch Changes
+
+-   [#108](https://github.com/rtCamp/snapwp/pull/108) [`c1ee556`](https://github.com/rtCamp/snapwp/commit/c1ee5564e1046411dac0ccb5ace99c59fe337959) Thanks [@Pathan-Amaankhan](https://github.com/Pathan-Amaankhan)! - chore: Enforce "import/default" eslint ruleset.
+
+-   Updated dependencies [[`ade29f3`](https://github.com/rtCamp/snapwp/commit/ade29f32cc3215c25e447c785eb864f081ffce4d), [`d7b87dc`](https://github.com/rtCamp/snapwp/commit/d7b87dc2b2dc0e0221fa074cdd951e39ed44a0ab), [`c1ee556`](https://github.com/rtCamp/snapwp/commit/c1ee5564e1046411dac0ccb5ace99c59fe337959)]:
+    -   @snapwp/next@0.2.1
+    -   @snapwp/core@0.2.1
+
 ## 0.1.1
 
 ### Patch Changes
