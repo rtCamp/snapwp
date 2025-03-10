@@ -110,6 +110,16 @@ module.exports = {
 				],
 			},
 		},
+		// Rules for bin and cli files.
+		{
+			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
+			rules: {
+				// Enable the use of console log.
+				'no-console': 'off',
+				// Enable the use of process-env.
+				'n/no-process-env': 'off',
+			},
+		},
 		// Disable n/no-process-env for `codegen.ts` file.
 		{
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
