@@ -5,7 +5,7 @@
  * This component ensures that all dependencies of a script module are loaded before the main script.
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
  */
-import React, { type PropsWithoutRef } from 'react';
+import type { PropsWithoutRef } from 'react';
 import Script from 'next/script';
 
 interface ScriptModuleInterface {
@@ -49,7 +49,8 @@ export default function ScriptModule( {
 
 		const { src: depSrc, handle: depHandle } = dep.connectedScriptModule;
 
-		if ( 'static' === dep.importType ) {
+		// @todo Remove `toUpperCase()` when we drop support for snapwp-helper v0.1.0.
+		if ( 'STATIC' === dep.importType?.toUpperCase() ) {
 			return (
 				<link
 					// We use "preload" instead of "modulepreload" to resolve the race condition where the script runs before the state is loaded.

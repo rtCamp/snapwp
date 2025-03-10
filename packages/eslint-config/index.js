@@ -4,40 +4,11 @@ module.exports = {
 		browser: true,
 		es6: true,
 	},
-	parser: '@typescript-eslint/parser',
-	plugins: [ '@wordpress/eslint-plugin', 'jsdoc', 'import', 'n' ],
+	plugins: [ '@wordpress/eslint-plugin', 'import', 'jsdoc', 'n' ],
 	extends: [
 		'plugin:@wordpress/eslint-plugin/recommended',
-		'plugin:jsdoc/recommended-typescript',
 		'plugin:import/typescript',
-	],
-	ignorePatterns: [ '**/config/*.js', '**/dist' ],
-	settings: {},
-	overrides: [
-		{
-			files: '**/*.test.ts',
-			env: {
-				jest: true,
-			},
-		},
-		{
-			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
-			rules: {
-				'jsdoc/require-jsdoc': [
-					'error',
-					{
-						require: {
-							ArrowFunctionExpression: true,
-							ClassDeclaration: true,
-							ClassExpression: true,
-							FunctionExpression: true,
-							MethodDefinition: true,
-						},
-					},
-				],
-				'import/default': [ 'off' ],
-			},
-		},
+		'plugin:jsdoc/recommended-typescript',
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],

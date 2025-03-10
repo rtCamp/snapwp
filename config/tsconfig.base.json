@@ -11,7 +11,7 @@
 		"noFallthroughCasesInSwitch": true,
 		"noImplicitOverride": true,
 		"noImplicitReturns": true,
-		"noPropertyAccessFromIndexSignature": false, // @todo Enable this.
+		"noPropertyAccessFromIndexSignature": true,
 		"noUncheckedIndexedAccess": true,
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
@@ -34,7 +34,7 @@
 		"verbatimModuleSyntax": true,
 
 		// Language and Environment
-		"jsx": "react",
+		"jsx": "react-jsx",
 		"lib": [ "ES2022", "DOM" ],
 		"moduleDetection": "force",
 		"target": "ES2022",

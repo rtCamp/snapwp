@@ -17,7 +17,7 @@ export type CoreVideoAttributes = BaseAttributes & {
 	poster?: string;
 	src?: string;
 	style?: string;
-	tracks: Array< any >;
+	tracks: Array< Object | string >;
 	videoPreload: string;
 };
 
