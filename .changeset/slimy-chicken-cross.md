@@ -2,4 +2,4 @@
 "snapwp": patch
 ---
 
-Implement default cli option
+feat: Implement default cli option

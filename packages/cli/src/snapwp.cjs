@@ -3,62 +3,22 @@ const registryURL = 'http://localhost:4873';
 const npmrcContent = `@snapwp:registry=${ registryURL }`;
 
 // Scaffold a new directory with the SnapWP build and the .env file.
-const { execSync, spawn } = require( 'child_process' );
+const { spawn } = require( 'child_process' );
 const fs = require( 'fs/promises' );
 const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
 
-const defaultEnvContent = `
-# Enable if connecting to a self-signed cert
-# NODE_TLS_REJECT_UNAUTHORIZED=0
-
-# The headless frontend domain URL
-NEXT_PUBLIC_URL=
-
-# The WordPress "frontend" domain URL
-NEXT_PUBLIC_WORDPRESS_URL=
-
-# The WordPress GraphQL endpoint
-NEXT_PUBLIC_GRAPHQL_ENDPOINT=
-
-# The WordPress Uploads directory path
-# NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH=/wp-content/uploads
-
-# The WordPress REST URL Prefix
-# NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX=/wp-json
-
-# Token used for authenticating GraphQL introspection queries
-INTROSPECTION_TOKEN=
-`;
-
-program
-	.option( '--proxy', 'Use proxy registry.' )
-	.option( '--use-defaults', 'Use default values.', false ) // Optional flag for using default value
-	.parse();
+program.option( '--proxy', 'Use proxy registry.' ).parse();
 
 const options = program.opts();
 
-// Utility function to execute shell commands
 /**
+ * Prompts the user for input.
  *
- * @param command
- * @param options
- */
-const exec = ( command, options = {} ) => {
-	console.log( `Executing: ${ command }` );
-	execSync( command, {
-		stdio: 'inherit',
-		shell: true,
-		env: { ...process.env, PATH: process.env.PATH },
-		...options,
-	} );
-};
-
-// Prompt the user for input
-/**
+ * @param {string} query Prompt query.
  *
- * @param query
+ * @return {Promise<string>} User input.
  */
 const prompt = ( query ) => {
 	const rl = readline.createInterface( {
@@ -95,7 +55,7 @@ const openEditor = ( filePath ) => {
 				stdio: 'inherit',
 			} );
 
-			child.on( 'exit', function ( e, code ) {
+			child.on( 'exit', function () {
 				resolve( {
 					success: true,
 					message: `File created at "${ path.resolve( filePath ) }"`,
@@ -112,21 +72,15 @@ const openEditor = ( filePath ) => {
 
 ( async () => {
 	try {
-		let projectDir = './snapwp-frontend';
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
-		if ( ! options.useDefaults ) {
-			projectDir = await prompt(
-				'Thanks for using SnapWP!\n' +
-					'\nWhere would you like to create your new Headless WordPress frontend?\n' +
-					'Please enter a relative or absolute path: '
-			);
-		} else {
-			prompt(
-				'Thanks for using SnapWP!\n' +
-					`\nUsing default values, your project directory will be created at ${ projectDir } path.\n`
-			);
-		}
-		const projectDirPath = path.resolve( projectDir );
+		const projectDir = await prompt(
+			'Thanks for using SnapWP!\n' +
+				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
+				'Please enter a relative or absolute path: '
+		);
+		const projectDirPath = path.resolve(
+			projectDir || './snapwp-frontend'
+		);
 
 		// Create the project directory if not exists.
 		try {
@@ -162,71 +116,54 @@ const openEditor = ( filePath ) => {
 				process.exit( 1 );
 			}
 
-			if ( ! options.useDefaults ) {
-				await prompt(
-					`\nNo .env file found in "${ projectDirPath }". Please \n` +
-						'  1. Press any key to open a new .env file in your default editor,\n' +
-						'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-						'  3. Save and close the file to continue the installation. \n' +
-						'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
-				);
+			await prompt(
+				`\nNo .env file found in "${ projectDirPath }". Please \n` +
+					'  1. Press any key to open a new .env file in your default editor,\n' +
+					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
+					'  3. Save and close the file to continue the installation. \n' +
+					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
+			);
 
-				/**
-				 * Create an empty file before opening to prevent: "saving file with default editor extension".
-				 * E.g.,
-				 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
-				 * Creating a file before opening will prevent bugs due to default editor extensions.
-				 */
-				await fs.writeFile( envPath, '' );
+			/**
+			 * Create an empty file before opening to prevent: "saving file with default editor extension".
+			 * E.g.,
+			 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
+			 * Creating a file before opening will prevent bugs due to default editor extensions.
+			 */
+			await fs.writeFile( envPath, '' );
 
-				const envFileCreationStatus = await openEditor( envPath );
+			const envFileCreationStatus = await openEditor( envPath );
 
-				if ( envFileCreationStatus.success ) {
-					console.log( envFileCreationStatus.message );
-				} else {
-					console.error( envFileCreationStatus.message );
-					process.exit( 1 );
-				}
-
-				// Throw error if .env file still does not exist or if exists, its empty.
-				try {
-					await fs.access( envPath );
-				} catch ( error ) {
-					// Throw error if .env file still does not exist.
-					if ( 'ENOENT' === error.code ) {
-						console.error(
-							`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
-						);
-						process.exit( 1 );
-					}
-
-					// Exit if any other unknown error occurred.
-					console.error( 'Error:', error );
-					process.exit( 1 );
-				}
+			if ( envFileCreationStatus.success ) {
+				console.log( envFileCreationStatus.message );
 			} else {
-				await fs.writeFile( envPath, defaultEnvContent.trim() );
+				console.error( envFileCreationStatus.message );
+				process.exit( 1 );
 			}
-		}
 
-		if ( ! options.useDefaults ) {
-			// Fetch the `.env` file size.
-			const { size } = await fs.stat( envPath );
+			// Throw error if .env file still does not exist or if exists, its empty.
+			try {
+				await fs.access( envPath );
+			} catch ( err ) {
+				// Throw error if .env file still does not exist.
+				if ( 'ENOENT' === err.code ) {
+					console.error(
+						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
+					);
+					process.exit( 1 );
+				}
 
-			// Throw error if .env file is empty.
-			if ( 0 === size ) {
-				console.error(
-					`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
-				);
-
-				await fs.rm( envPath, { force: true } ); // Delete old env for a fresh start.
-
+				// Exit if any other unknown error occurred.
+				console.error( 'Error:', err );
 				process.exit( 1 );
 			}
 		}
+
 		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
 		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
 		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
+
+		console.log( 'Copying frontend folder to project directory...' );
 		await fs.cp( nextJsStarterPath, projectDirPath, {
 			recursive: true,
 			filter: ( source ) => {
@@ -273,22 +210,17 @@ const openEditor = ( filePath ) => {
 		// New line for clarity.
 		console.log( '' );
 
-		if ( options.useDefaults ) {
-			console.log(
-				'For setting up environment variables, please refer to the documentation at: https://github.com/rtCamp/snapwp/blob/b7c0472d95be624244ad2a5d01d4bcdaa29e91f3/packages/cli/README.md'
-			);
-			console.log( '' );
-		}
+		console.log(
+			'For setting up environment variables, please refer to the documentation at: https://github.com/rtCamp/snapwp/blob/b7c0472d95be624244ad2a5d01d4bcdaa29e91f3/packages/cli/README.md'
+		);
 
+		console.log( '' );
 		console.log(
 			'To start your headless WordPress project, please run the following commands:'
 		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
 		console.log( `npm run dev` );
-		if ( options.useDefaults ) {
-			process.exit( 1 );
-		}
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );
