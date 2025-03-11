@@ -73,8 +73,6 @@ module.exports = {
 		'jsdoc/no-types': [ 'off' ],
 		'jsdoc/require-returns-type': [ 'warn' ],
 
-		'@typescript-eslint/explicit-function-return-type': 'error',
-
 		// Restrict the use of empty functions.
 		'no-empty-function': 'error',
 
@@ -136,6 +134,7 @@ module.exports = {
 			rules: {
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': 'error',
+				'@typescript-eslint/explicit-function-return-type': 'error',
 			},
 			parserOptions: {
 				project: true,

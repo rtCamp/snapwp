@@ -8,7 +8,6 @@ const fs = require( 'fs/promises' );
 const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
-const {string} = require("../../../../../../wp-includes/js/clipboard.js");
 
 program.option( '--proxy', 'Use proxy registry.' ).parse();
 
@@ -43,7 +42,8 @@ const prompt = ( query ) => {
  * This function resolves with a success object indicating the result of the operation.
  *
  * @param filePath - The path to the file to be opened in the editor.
- * @return - A promise that resolves to an object containing:
+ *
+ * @return {Promise<Object>} - A promise that resolves to an object containing:
  *                              - success: {boolean} Indicates if the operation was successful.
  *                              - message: {string} Provides additional information or error details.
  */
