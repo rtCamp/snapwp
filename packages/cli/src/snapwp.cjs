@@ -73,8 +73,7 @@ const openEditor = ( filePath ) => {
 ( async () => {
 	try {
 		let useDefaultPath = false;
-		const defaultProjectPath = './snapwp-frontend';
-		let projectDirPath = path.resolve( defaultProjectPath );
+		let projectPath = './snapwp-frontend';
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
 			'Thanks for using SnapWP!\n' +
@@ -83,14 +82,14 @@ const openEditor = ( filePath ) => {
 		);
 		if ( projectDir.trim() === '' ) {
 			useDefaultPath = true;
-		}
-		if ( useDefaultPath ) {
 			console.log(
-				`\nUsing default values, your project directory will be created at ${ defaultProjectPath } path.\n`
+				`\nUsing default values, your project directory will be created at ${ projectPath } path.\n`
 			);
 		} else {
-			projectDirPath = path.resolve( projectDir );
+			projectPath = projectDir;
 		}
+
+		const projectDirPath = path.resolve( projectPath );
 
 		// Create the project directory if not exists.
 		try {
