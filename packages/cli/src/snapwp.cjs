@@ -72,15 +72,25 @@ const openEditor = ( filePath ) => {
 
 ( async () => {
 	try {
+		let useDefaultPath = false;
+		const defaultProjectPath = './snapwp-frontend';
+		let projectDirPath = path.resolve( defaultProjectPath );
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
 			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
 				'Please enter a relative or absolute path: '
 		);
-		const projectDirPath = path.resolve(
-			projectDir || './snapwp-frontend'
-		);
+		if ( projectDir.trim() === '' ) {
+			useDefaultPath = true;
+		}
+		if ( useDefaultPath ) {
+			console.log(
+				`\nUsing default values, your project directory will be created at ${ defaultProjectPath } path.\n`
+			);
+		} else {
+			projectDirPath = path.resolve( projectDir );
+		}
 
 		// Create the project directory if not exists.
 		try {
@@ -116,49 +126,73 @@ const openEditor = ( filePath ) => {
 				process.exit( 1 );
 			}
 
-			await prompt(
-				`\nNo .env file found in "${ projectDirPath }". Please \n` +
-					'  1. Press any key to open a new .env file in your default editor,\n' +
-					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-					'  3. Save and close the file to continue the installation. \n' +
-					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
-			);
+			if ( ! useDefaultPath ) {
+				await prompt(
+					`\nNo .env file found in "${ projectDirPath }". Please \n` +
+						'  1. Press any key to open a new .env file in your default editor,\n' +
+						'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
+						'  3. Save and close the file to continue the installation. \n' +
+						'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
+				);
 
-			/**
-			 * Create an empty file before opening to prevent: "saving file with default editor extension".
-			 * E.g.,
-			 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
-			 * Creating a file before opening will prevent bugs due to default editor extensions.
-			 */
-			await fs.writeFile( envPath, '' );
+				/**
+				 * Create an empty file before opening to prevent: "saving file with default editor extension".
+				 * E.g.,
+				 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
+				 * Creating a file before opening will prevent bugs due to default editor extensions.
+				 */
+				await fs.writeFile( envPath, '' );
 
-			const envFileCreationStatus = await openEditor( envPath );
+				const envFileCreationStatus = await openEditor( envPath );
 
-			if ( envFileCreationStatus.success ) {
-				console.log( envFileCreationStatus.message );
-			} else {
-				console.error( envFileCreationStatus.message );
-				process.exit( 1 );
-			}
-
-			// Throw error if .env file still does not exist or if exists, its empty.
-			try {
-				await fs.access( envPath );
-			} catch ( err ) {
-				// Throw error if .env file still does not exist.
-				if ( 'ENOENT' === err.code ) {
-					console.error(
-						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
-					);
+				if ( envFileCreationStatus.success ) {
+					console.log( envFileCreationStatus.message );
+				} else {
+					console.error( envFileCreationStatus.message );
 					process.exit( 1 );
 				}
 
-				// Exit if any other unknown error occurred.
-				console.error( 'Error:', err );
-				process.exit( 1 );
+				// Throw error if .env file still does not exist or if exists, its empty.
+				try {
+					await fs.access( envPath );
+				} catch ( err ) {
+					// Throw error if .env file still does not exist.
+					if ( 'ENOENT' === err.code ) {
+						console.error(
+							`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
+						);
+						process.exit( 1 );
+					}
+
+					// Exit if any other unknown error occurred.
+					console.error( 'Error:', err );
+					process.exit( 1 );
+				}
+			} else {
+				//copy .env.example to .env of the directory
+				const srcPath = path.resolve(
+					__dirname,
+					'../../../.env.example'
+				);
+
+				const destPath = path.resolve( envPath );
+				await fs.cp( srcPath, destPath );
 			}
 		}
 
+		// Fetch the `.env` file size.
+		const { size } = await fs.stat( envPath );
+
+		// Throw error if .env file is empty.
+		if ( 0 === size ) {
+			console.error(
+				`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
+			);
+
+			await fs.rm( envPath, { force: true } ); // Delete old env for a fresh start.
+
+			process.exit( 1 );
+		}
 		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
 		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
 		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
@@ -210,17 +244,22 @@ const openEditor = ( filePath ) => {
 		// New line for clarity.
 		console.log( '' );
 
-		console.log(
-			'For setting up environment variables, please refer to the documentation at: https://github.com/rtCamp/snapwp/blob/b7c0472d95be624244ad2a5d01d4bcdaa29e91f3/packages/cli/README.md'
-		);
+		if ( useDefaultPath ) {
+			console.log(
+				'For setting up environment variables, please refer to the documentation at: https://github.com/rtCamp/snapwp/blob/b7c0472d95be624244ad2a5d01d4bcdaa29e91f3/packages/cli/README.md'
+			);
+			console.log( '' );
+		}
 
-		console.log( '' );
 		console.log(
 			'To start your headless WordPress project, please run the following commands:'
 		);
 		console.log( `cd ${ projectDirPath }` );
 		console.log( `npm install` );
 		console.log( `npm run dev` );
+		if ( useDefaultPath ) {
+			process.exit( 1 );
+		}
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );
