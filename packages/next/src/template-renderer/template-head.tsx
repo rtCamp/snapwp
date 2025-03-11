@@ -9,7 +9,9 @@ import { type TemplateHeadProps } from '@snapwp/core';
  *
  * @return {Array<React.JSX.Element>|null} A head element containing the provided styles and links.
  */
-export function TemplateHead( { stylesheets }: TemplateHeadProps ) {
+export function TemplateHead( {
+	stylesheets,
+}: TemplateHeadProps ): Array< React.JSX.Element > | null {
 	if ( ! stylesheets ) {
 		return null;
 	}

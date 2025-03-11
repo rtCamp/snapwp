@@ -223,7 +223,7 @@ class SnapWPConfigManager {
 	 *
 	 * @return {Partial<Type>} The normalized configuration.
 	 */
-	static normalizeConfig = < T >( cfg: Partial< T > ) => {
+	static normalizeConfig = < T >( cfg: Partial< T > ): Partial< T > => {
 		// Removing empty values.
 		( Object.keys( cfg ) as Array< keyof T > ).forEach(
 			( key: keyof T ) => {
@@ -324,7 +324,7 @@ class SnapWPConfigManager {
 		 *
 		 * @throws {Error} If the property is invalid.
 		 */
-		const validateProperty = ( key: keyof T ) => {
+		const validateProperty = ( key: keyof T ): void => {
 			const prop = schema[ key ];
 			const value = config[ key ];
 

@@ -41,7 +41,7 @@ export default function ScriptModule( {
 	dependencies,
 	extraData,
 	...props
-}: PropsWithoutRef< ScriptModuleInterface > ) {
+}: PropsWithoutRef< ScriptModuleInterface > ): React.JSX.Element {
 	// Generate dependency scripts
 	const DependencyScripts = dependencies?.map( ( dep, index ) => {
 		if ( ! dep?.connectedScriptModule ) {

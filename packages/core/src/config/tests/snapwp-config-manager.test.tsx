@@ -14,7 +14,7 @@ import React from 'react';
  *
  * @return {React.JSX.Element} A div containing "Test Block".
  */
-const MockBlockComponent = () => <div>Test Block</div>;
+const MockBlockComponent = (): React.JSX.Element => <div>Test Block</div>;
 
 describe( 'SnapWPConfigManager functions', () => {
 	let ORIG_ENV: NodeJS.ProcessEnv;

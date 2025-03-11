@@ -12,12 +12,12 @@ export type RootLayoutProps = {
  * @param props.getGlobalStyles - A async callback to get global styles.
  * @param props.children - Child components.
  *
- * @return {React.JSX.Element} The rendered template.
+ * @return {Promise<React.JSX.Element>} The rendered template.
  */
 export async function RootLayout( {
 	getGlobalStyles = QueryEngine.getGlobalStyles,
 	children,
-}: PropsWithChildren< RootLayoutProps > ) {
+}: PropsWithChildren< RootLayoutProps > ): Promise< React.JSX.Element > {
 	const globalHeadProps = await getGlobalStyles();
 
 	return (

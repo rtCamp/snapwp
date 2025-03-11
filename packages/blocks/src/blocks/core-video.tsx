@@ -19,7 +19,11 @@ import type {
  *
  * @return {React.JSX.Element|null} A list of `<track>` elements or `null` if no tracks are provided.
  */
-const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
+const Tracks = ( {
+	tracks,
+}: {
+	tracks?: TrackProps[];
+} ): React.JSX.Element | null => {
 	if ( ! tracks || tracks.length === 0 ) {
 		return null;
 	}

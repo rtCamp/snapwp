@@ -11,7 +11,7 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
  *
  * @return {React.JSX.Element} The rendered React components.
  */
-export default function Parse( { html }: { html: string } ) {
+export default function Parse( { html }: { html: string } ): React.JSX.Element {
 	const {
 		parserOptions = defaultOptions,
 	}: { parserOptions?: HTMLReactParserOptions } = getConfig();

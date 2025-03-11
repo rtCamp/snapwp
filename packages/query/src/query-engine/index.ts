@@ -13,7 +13,14 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import { Logger, type GlobalHeadProps } from '@snapwp/core';
+import type { BlockData } from '@snapwp/types';
+import {
+	Logger,
+	type GlobalHeadProps,
+	type EnqueuedScriptProps,
+	type StyleSheetProps,
+	type ScriptModuleProps,
+} from '@snapwp/core';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -29,7 +36,7 @@ export class QueryEngine {
 	/**
 	 * Initializer.
 	 */
-	public static initialize() {
+	public static initialize(): void {
 		QueryEngine.graphqlEndpoint = getGraphqlUrl();
 
 		const { homeUrl } = getConfig();
@@ -94,9 +101,17 @@ export class QueryEngine {
 	 * Fetches blocks, scripts and styles for the given uri.
 	 * @param uri - The URL of the seed node.
 	 *
-	 * @return {object|undefined} The template data fetched for the uri.
+	 * @return {Promise<Object>} The template data fetched for the uri.
 	 */
-	static getTemplateData = async ( uri: string ) => {
+	static getTemplateData = async (
+		uri: string
+	): Promise< {
+		stylesheets: StyleSheetProps[] | undefined;
+		editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
+		scripts: EnqueuedScriptProps[] | undefined;
+		scriptModules: ScriptModuleProps[] | undefined;
+		bodyClasses: string[] | undefined;
+	} > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -135,7 +150,7 @@ export class QueryEngine {
  *
  * @param error - The Apollo error.
  */
-const logApolloErrors = ( error: ApolloError ) => {
+const logApolloErrors = ( error: ApolloError ): void => {
 	// If there are graphQLErrors log them.
 	error.graphQLErrors.forEach( ( graphQLError ) => {
 		Logger.error( graphQLError.message );

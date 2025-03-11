@@ -32,7 +32,7 @@ export default function Link( {
 	...props
 }: PropsWithChildren<
 	LinkInterface & ( LinkProps | AnchorHTMLAttributes< HTMLAnchorElement > )
-> ) {
+> ): React.JSX.Element {
 	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();
 
 	const internalUri = href

@@ -13,7 +13,7 @@ export default function replaceHostUrl(
 	url: string,
 	hostUrl: string,
 	newHostUrl: string
-) {
+): string {
 	if ( url && hostUrl && url.startsWith( hostUrl ) ) {
 		return url.replace( hostUrl, newHostUrl );
 	}

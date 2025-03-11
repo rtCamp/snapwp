@@ -15,12 +15,12 @@ type EditorBlocksRendererProps = {
  * @param props.editorBlocks - A list of blocks to be rendered.
  * @param props.blockDefinitions - Blocks rendering functions.
  *
- * @return {React.JSX.Element} The rendered template.
+ * @return {Array<React.JSX.Element>} The rendered template.
  */
 export default function EditorBlocksRenderer( {
 	editorBlocks,
 	blockDefinitions,
-}: EditorBlocksRendererProps ) {
+}: EditorBlocksRendererProps ): React.JSX.Element[] {
 	const { blockDefinitions: globalBlockDefinitions } = getConfig();
 
 	const resolvedBlockDefinitions = globalBlockDefinitions ?? blockDefinitions;
@@ -32,7 +32,7 @@ export default function EditorBlocksRenderer( {
 	const parsedTree = BlockManager.parseBlockForRendering( editorBlocks );
 
 	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
-	const renderNode = ( node: BlockTreeNode ) => {
+	const renderNode = ( node: BlockTreeNode ): React.JSX.Element => {
 		const props: Record< any, any > = {
 			key: node.clientId,
 			...node,

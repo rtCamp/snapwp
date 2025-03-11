@@ -5,7 +5,7 @@
  *
  * @internal
  */
-export default function isValidUrl( str: string ) {
+export default function isValidUrl( str: string ): boolean {
 	// When an invalid URL is passed, URL() throws an error. If an error is thrown, we will return false.
 	try {
 		const url = new URL( str );

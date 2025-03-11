@@ -21,7 +21,12 @@ import type {
  *
  * @return {React.JSX.Element} The rendered HTML element or the children if no tag name is provided.
  */
-const Tag = ( { name, className, style, children }: TagProps ) => {
+const Tag = ( {
+	name,
+	className,
+	style,
+	children,
+}: TagProps ): React.JSX.Element => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}

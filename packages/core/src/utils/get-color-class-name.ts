@@ -9,7 +9,7 @@
 export default function getColorClassName(
 	colorContextName?: string,
 	colorSlug?: string
-) {
+): string | undefined {
 	if ( ! colorContextName || ! colorSlug ) {
 		return undefined;
 	}

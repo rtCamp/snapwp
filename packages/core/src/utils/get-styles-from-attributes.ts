@@ -1,5 +1,6 @@
 import { compileCSS } from '@wordpress/style-engine';
 import getStyleObjectFromString from './get-style-object-from-string';
+import type { CSSProperties } from 'react';
 
 interface AttributesWithStyle {
 	style?: string;
@@ -14,7 +15,7 @@ interface AttributesWithStyle {
  */
 export default function getStylesFromAttributes(
 	attributes: AttributesWithStyle
-) {
+): CSSProperties {
 	if ( ! attributes?.style ) {
 		return {};
 	}

@@ -39,7 +39,7 @@ const Figure = ( {
 	linkTarget,
 	rel,
 	lightbox,
-}: FigureProps ) => {
+}: FigureProps ): React.JSX.Element => {
 	let props: ComponentProps< 'figure' > = {};
 
 	if ( isLightboxEnabled( lightbox ) ) {
@@ -248,7 +248,7 @@ const getImageProps = (
  * @return {boolean} Whether the lightbox is enabled.
  */
 //@ts-ignore -- Stubbed until lightbox support is fixed.
-const isLightboxEnabled = ( lightbox?: string | null ) => {
+const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
 	// if ( ! lightbox ) {
 	// 	return false;
 	// }
@@ -271,7 +271,7 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
 const extractInteractivityAttributesForElement = (
 	element: string,
 	renderedHtml?: string | null
-) => {
+): Record< string, string > => {
 	if ( ! renderedHtml ) {
 		return {};
 	}
@@ -311,7 +311,7 @@ const extractInteractivityAttributesForElement = (
 const extractAriaAttributesForElement = (
 	element: string,
 	renderedHtml?: string | null
-) => {
+): Record< string, string > => {
 	if ( ! renderedHtml ) {
 		return {};
 	}

@@ -24,7 +24,7 @@ export type TemplateRendererProps = {
 export async function TemplateRenderer( {
 	getTemplateData = QueryEngine.getTemplateData,
 	children,
-}: TemplateRendererProps ) {
+}: TemplateRendererProps ): Promise< React.JSX.Element > {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 

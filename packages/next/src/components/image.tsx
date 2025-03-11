@@ -60,7 +60,7 @@ export default function Image( {
 	...props
 }: PropsWithoutRef<
 	ImageInterface & ( ImageProps | ImgHTMLAttributes< HTMLImageElement > )
-> ) {
+> ): React.JSX.Element | null {
 	const altText = alt || image?.altText || '';
 	const originalWidth = image?.mediaDetails?.width;
 	const originalHeight = image?.mediaDetails?.height;

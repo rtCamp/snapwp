@@ -14,7 +14,9 @@ export default class BlockManager {
 	 * Update block definitions to be used while rendering blocks.
 	 * @param blockDefinitions - rendering implementaion for blocks.
 	 */
-	public static addBlockDefinitions( blockDefinitions: BlockDefinitions ) {
+	public static addBlockDefinitions(
+		blockDefinitions: BlockDefinitions
+	): void {
 		BlockManager.blockDefinitions = {
 			...BlockManager.blockDefinitions,
 			...blockDefinitions,

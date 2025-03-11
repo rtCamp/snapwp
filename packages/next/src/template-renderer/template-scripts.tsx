@@ -13,7 +13,11 @@ import { getConfig } from '@snapwp/core/config';
  *
  * @return {React.JSX.Element} A collection of `<Script />` components.
  */
-const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
+const ScriptMap = ( {
+	scripts,
+}: {
+	scripts: EnqueuedScriptProps[];
+} ): React.JSX.Element => (
 	<>
 		{ scripts?.map( ( { handle, src, ...rest }, id ) => {
 			return (
@@ -39,7 +43,7 @@ const ImportMap = ( {
 	scriptModules,
 }: {
 	scriptModules: ScriptModuleProps[];
-} ) => {
+} ): React.JSX.Element | null => {
 	// Generate import map from all module dependencies
 	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
 
@@ -82,13 +86,13 @@ const ImportMap = ( {
  * @param props - The props for the component.
  * @param props.scriptModules - Array of script module objects to be rendered.
  *
- * @return {React.JSX.Element} A collection of `<ScriptModule />` components.
+ * @return {React.JSX.Element|null} A collection of `<ScriptModule />` components.
  */
 const ScriptModuleMap = ( {
 	scriptModules,
 }: {
 	scriptModules?: ScriptModuleProps[];
-} ) => {
+} ): React.JSX.Element | null => {
 	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
@@ -174,7 +178,7 @@ export function TemplateScripts( {
 }: PropsWithChildren< {
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
-} > ) {
+} > ): React.JSX.Element {
 	// Separate scripts by location
 	const headerScripts =
 		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ??

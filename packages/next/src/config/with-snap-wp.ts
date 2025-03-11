@@ -25,7 +25,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	 *
 	 * @return {any} The modified webpack configuration.
 	 */
-	return ( config: any ) => {
+	return ( config: any ): any => {
 		const configPath = `
 			import __snapWPConfig from '${ snapWPConfigPath }';
 		`;
@@ -41,7 +41,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 						 *
 						 * @return {boolean} `true` if the module should be modified, otherwise `false`.
 						 */
-						test: ( normalModule ) => {
+						test: ( normalModule ): boolean => {
 							const userRequest = normalModule.userRequest || '';
 
 							const startIndex =
