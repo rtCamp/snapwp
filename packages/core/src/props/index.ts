@@ -29,7 +29,7 @@ export type EnqueuedScriptProps = {
 	before?: ( string | null )[] | null;
 	extraData?: string | null;
 	handle?: string | null;
-	location?: string | null;
+	groupLocation?: 'HEADER' | 'FOOTER' | null;
 	src?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
 	version?: string | null;

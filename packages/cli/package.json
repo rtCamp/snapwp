@@ -1,6 +1,6 @@
 {
 	"name": "snapwp",
-	"version": "0.1.0",
+	"version": "0.1.2",
 	"license": "AGPL-3.0",
 	"author": "rtCamp",
 	"description": "A better way to build headless WordPress applications.",

@@ -1,4 +1,4 @@
-import React, { type PropsWithoutRef } from 'react';
+import type { PropsWithoutRef } from 'react';
 import NextScript, { type ScriptProps } from 'next/script';
 
 interface ScriptInterface {
@@ -7,7 +7,7 @@ interface ScriptInterface {
 	extraData?: string | null;
 	handle?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
-	location?: string | null;
+	groupLocation?: 'HEADER' | 'FOOTER' | null;
 	src?: string | null;
 }
 
@@ -20,7 +20,7 @@ interface ScriptInterface {
  * @param {ScriptInterface.extraData}       props.extraData       Additional data to be included in the script.
  * @param {ScriptInterface.handle}          props.handle          The handle for the script.
  * @param {ScriptInterface.loadingStrategy} props.loadingStrategy The loading strategy for the script (async or defer).
- * @param {ScriptInterface.location}        props.location        The location where the script should be loaded.
+ * @param {ScriptInterface.location}        props.groupLocation   The location where the script should be loaded.
  * @param {ScriptInterface.src}             props.src             The source URL for the script.
  *
  * @return The rendered script element.
@@ -30,7 +30,7 @@ export default function Script( {
 	before,
 	extraData,
 	handle,
-	location,
+	groupLocation,
 	src,
 	loadingStrategy,
 	...props
@@ -42,7 +42,7 @@ export default function Script( {
 
 	// Determine the strategy for the script.
 	const nextStrategy =
-		location === 'header' ? 'beforeInteractive' : 'afterInteractive';
+		groupLocation === 'HEADER' ? 'beforeInteractive' : 'afterInteractive';
 
 	// Generate an inline script for additional data if provided.
 	const ExtraDataScript = extraData && (

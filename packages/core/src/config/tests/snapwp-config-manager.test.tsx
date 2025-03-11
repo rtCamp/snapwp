@@ -7,7 +7,6 @@ import {
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
-import React from 'react';
 
 /**
  * A mock React component used for testing block definitions.
@@ -17,7 +16,6 @@ import React from 'react';
 const MockBlockComponent = () => <div>Test Block</div>;
 
 describe( 'SnapWPConfigManager functions', () => {
-	// eslint-disable-next-line n/no-process-env
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
 	const validSnapWPEnvConfig: Partial< SnapWPEnv > = {
@@ -38,9 +36,8 @@ describe( 'SnapWPConfigManager functions', () => {
 
 	beforeEach( () => {
 		SnapWPConfigManager.configsSet = false;
-		jest.spyOn( Logger, 'error' ).mockImplementation( () => {} );
+		jest.spyOn( Logger, 'error' ).mockImplementation( jest.fn() );
 		jest.resetModules();
-		// eslint-disable-next-line n/no-process-env
 		ORIG_ENV = { ...process.env };
 		// @ts-ignore Allow emptying global variable for testing
 		global.backupSnapWPConfig = { ...global.__snapWPConfig };
@@ -233,7 +230,9 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		const config = getConfig();
 		expect( config.blockDefinitions ).toEqual( mockBlockDefinitions );
-		expect( config.blockDefinitions?.myBlock ).toBe( MockBlockComponent );
+		expect( config.blockDefinitions?.[ 'myBlock' ] ).toBe(
+			MockBlockComponent
+		);
 	} );
 
 	it( 'should throw an error if blockDefinitions is not an object', () => {

@@ -6,6 +6,7 @@ module.exports = {
 	extends: [
 		'@snapwp/eslint-config',
 		'plugin:@eslint-community/eslint-comments/recommended',
+		'plugin:@typescript-eslint/eslint-recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	plugins: [ '@typescript-eslint', 'jest' ],
@@ -52,6 +53,9 @@ module.exports = {
 			},
 		],
 
+		// Enforce description on directive comments.
+		'@eslint-community/eslint-comments/require-description': 'error',
+
 		// Enforce the use of dot notation over square brackets.
 		'dot-notation': [ 'error', { allowKeywords: false } ],
 
@@ -68,6 +72,19 @@ module.exports = {
 		// Turn of JSdoc types and use TypeScript types instead.
 		'jsdoc/no-types': [ 'off' ],
 		'jsdoc/require-param-type': [ 'error' ],
+
+		// Restrict the use of empty functions.
+		'no-empty-function': 'error',
+
+		// Disallow unnecessary JSX curly braces when literals alone are enough.
+		'react/jsx-curly-brace-presence': [
+			'error',
+			{ children: 'never', props: 'never' },
+		],
+		'react/jsx-boolean-value': 'error',
+
+		// Prevent the use of any in type annotation.
+		'@typescript-eslint/no-explicit-any': 'error',
 	},
 	overrides: [
 		{
@@ -92,7 +109,16 @@ module.exports = {
 						},
 					},
 				],
-				'import/default': [ 'off' ],
+			},
+		},
+		// Rules for bin and cli files.
+		{
+			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
+			rules: {
+				// Enable the use of console log.
+				'no-console': 'off',
+				// Enable the use of process-env.
+				'n/no-process-env': 'off',
 			},
 		},
 		// Disable n/no-process-env for `codegen.ts` file.
@@ -100,6 +126,17 @@ module.exports = {
 			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
 			rules: {
 				'n/no-process-env': 'off',
+			},
+		},
+		{
+			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
+			excludedFiles: [ '**/codegen.ts' ],
+			rules: {
+				'dot-notation': 'off',
+				'@typescript-eslint/dot-notation': 'error',
+			},
+			parserOptions: {
+				project: true,
 			},
 		},
 	],

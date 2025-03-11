@@ -39,15 +39,15 @@ function cssToReactStyle( str: string ): CSSProperties {
 	const style: { [ key: string ]: string } = {}; // add index signature here
 
 	str.split( ';' ).forEach( ( el ) => {
-		// eslint-disable-next-line @wordpress/no-unused-vars-before-return
-		const [ property, ...value ] = el.split( ':' );
+		const splitEl = el.split( ':' );
+		const property = splitEl.shift();
 
 		if ( ! property ) {
 			return;
 		}
 
 		const formattedProperty = formatStringToCamelCase( property.trim() );
-		style[ formattedProperty ] = value.join( ':' ).trim();
+		style[ formattedProperty ] = splitEl.join( ':' ).trim();
 	} );
 
 	return style;
