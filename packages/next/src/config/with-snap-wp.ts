@@ -23,6 +23,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	 * @see node_modules/next/dist/server/config-shared.js:169
 	 * @return The modified webpack configuration.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
 	return ( config: any ) => {
 		const configPath = `
 			import __snapWPConfig from '${ snapWPConfigPath }';
@@ -106,9 +107,14 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	setConfig();
 	const homeUrl = new URL( getConfig().homeUrl );
 
+	const userImages = nextConfig?.images ?? {};
+	const userRemotePatterns = userImages.remotePatterns ?? [];
+
 	return {
 		...nextConfig,
 		images: {
+			// User image config is appended before default config. Otherwise default remote patterns will be overridden
+			...userImages,
 			remotePatterns: [
 				{
 					protocol: 'http',
@@ -118,6 +124,7 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 					protocol: 'https',
 					hostname: homeUrl.hostname,
 				},
+				...userRemotePatterns,
 			],
 		},
 		webpack: modifyWebpackConfig( snapWPConfigPath ),

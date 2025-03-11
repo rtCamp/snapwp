@@ -1,4 +1,4 @@
-import React, { type JSX } from 'react';
+import type { JSX } from 'react';
 import { headers } from 'next/headers';
 import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
