@@ -1,6 +1,7 @@
 query GetGeneralSettings {
 	generalSettings {
 		siteIcon {
+			id
 			mediaDetails {
 				sizes {
 					width

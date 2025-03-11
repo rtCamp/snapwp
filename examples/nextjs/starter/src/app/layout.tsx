@@ -1,7 +1,8 @@
 import { RootLayout, generateRootMetaData } from '@snapwp/next';
 import type { Metadata } from 'next';
+import { PropsWithChildren } from 'react';
 
-export default function Layout( { children }: { children: React.ReactNode } ) {
+export default function Layout( { children }: PropsWithChildren ) {
 	return (
 		<RootLayout>
 			<>{ children }</>

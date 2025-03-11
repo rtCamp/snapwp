@@ -1,10 +1,36 @@
-import type {
-	GeneralSettingsProps,
-	FormattedIcon,
-	Icon,
-	IconTypes,
-} from '@snapwp/types';
 import { QueryEngine } from '@snapwp/query';
+
+interface GeneralSettingsProps {
+	generalSettings?: {
+		siteIcon?: {
+			mediaItemUrl?: string | null;
+			mediaDetails?: {
+				sizes?: Array< {
+					width?: string | null;
+					height?: string | null;
+					sourceUrl?: string | null;
+				} | null > | null;
+			} | null;
+		} | null;
+	} | null;
+}
+
+type IconMetaData = {
+	faviconIcons: FormattedIconData[];
+	appleIcons: FormattedIconData[];
+	msApplicationTileIcon: IconData;
+};
+
+type IconData = {
+	sourceUrl: string;
+	height: string;
+	width: string;
+};
+
+type FormattedIconData = {
+	url: string;
+	sizes: string;
+};
 
 /**
  * Fetch site icon data and filter them into categorized formats.
@@ -12,7 +38,7 @@ import { QueryEngine } from '@snapwp/query';
  *
  * @return Categorized icons.
  */
-export const getIcons = async (): Promise< Partial< IconTypes > > => {
+export const getIcons = async (): Promise< Partial< IconMetaData > > => {
 	const settings: GeneralSettingsProps =
 		await QueryEngine.getGeneralSettings();
 
@@ -29,9 +55,9 @@ export const getIcons = async (): Promise< Partial< IconTypes > > => {
 	}
 
 	// Filter out valid icons
-	const validIcons: Icon[] = sizes.filter(
+	const validIcons: IconData[] = sizes.filter(
 		( icon ) => !! ( icon?.sourceUrl && icon?.height && icon?.width )
-	) as Icon[];
+	) as IconData[];
 
 	if ( ! validIcons.length ) {
 		return {};
@@ -41,12 +67,12 @@ export const getIcons = async (): Promise< Partial< IconTypes > > => {
 		'32x32',
 		'192x192',
 	] );
-	const formattedFaviconIcons: FormattedIcon[] = filteredFaviconIcons
+	const formattedFaviconIcons: FormattedIconData[] = filteredFaviconIcons
 		? formatIcons( filteredFaviconIcons )
 		: [ { url: '#', sizes: '' } ];
 
 	const filteredAppleIcons = filterIconsBySize( validIcons, [ '180x180' ] );
-	const formattedAppleIcons: FormattedIcon[] = filteredAppleIcons
+	const formattedAppleIcons: FormattedIconData[] = filteredAppleIcons
 		? formatIcons( filteredAppleIcons )
 		: [];
 
@@ -64,7 +90,10 @@ export const getIcons = async (): Promise< Partial< IconTypes > > => {
  * @param sizes - Array of sizes in "WxH" format (e.g., "32x32").
  * @return Filtered list of icons.
  */
-export const filterIconsBySize = ( icons: Icon[], sizes: string[] ): Icon[] =>
+export const filterIconsBySize = (
+	icons: IconData[],
+	sizes: string[]
+): IconData[] =>
 	icons.filter( ( icon ) =>
 		sizes.includes( `${ icon.width }x${ icon.height }` )
 	);
@@ -77,9 +106,9 @@ export const filterIconsBySize = ( icons: Icon[], sizes: string[] ): Icon[] =>
  * @return The first matching icon or undefined.
  */
 export const findIconBySize = (
-	icons: Icon[],
+	icons: IconData[],
 	size: string
-): Icon | undefined =>
+): IconData | undefined =>
 	icons.find( ( icon ) => `${ icon.width }x${ icon.height }` === size );
 
 /**
@@ -89,7 +118,7 @@ export const findIconBySize = (
  *
  * @return Formatted list of icons.
  */
-const formatIcons = ( icons: Icon[] ): FormattedIcon[] =>
+const formatIcons = ( icons: IconData[] ): FormattedIconData[] =>
 	icons.map( ( { sourceUrl, width, height } ) => ( {
 		url: sourceUrl,
 		sizes: `${ width }x${ height }`,
