@@ -6,9 +6,9 @@
  * This component is exported directly from `package.json` to prevent conflicts with other components when importing it from the Next.js package.
  * This resolves the issue of `You're importing a component that needs "next/headers". That only works in a Server Component which is not supported in the pages/ directory`
  *
- * @param {Object}   root0       The props.
- * @param {Error}    root0.error The error.
- * @param {Function} root0.reset The reset function.
+ * @param {Object}   props       The props.
+ * @param {Error}    props.error The error.
+ * @param {Function} props.reset The reset function.
  *
  * @return The default error component.
  */

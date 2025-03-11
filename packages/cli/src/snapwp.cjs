@@ -41,7 +41,8 @@ const prompt = ( query ) => {
  * Opens a file in the default or specified editor and waits for the editor process to exit.
  * This function resolves with a success object indicating the result of the operation.
  *
- * @param filePath - The path to the file to be opened in the editor.
+ * @param {string} filePath - The path to the file to be opened in the editor.
+ *
  * @return - A promise that resolves to an object containing:
  *                              - success: {boolean} Indicates if the operation was successful.
  *                              - message: {string} Provides additional information or error details.
