@@ -84,6 +84,9 @@ module.exports = {
 			{ children: 'never', props: 'never' },
 		],
 		'react/jsx-boolean-value': 'error',
+
+		// Prevent the use of any in type annotation.
+		'@typescript-eslint/no-explicit-any': 'error',
 	},
 	overrides: [
 		{
@@ -108,7 +111,16 @@ module.exports = {
 						},
 					},
 				],
-				'import/default': [ 'off' ],
+			},
+		},
+		// Rules for bin and cli files.
+		{
+			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
+			rules: {
+				// Enable the use of console log.
+				'no-console': 'off',
+				// Enable the use of process-env.
+				'n/no-process-env': 'off',
 			},
 		},
 		// Disable n/no-process-env for `codegen.ts` file.

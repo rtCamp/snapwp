@@ -3,36 +3,23 @@ const registryURL = 'http://localhost:4873';
 const npmrcContent = `@snapwp:registry=${ registryURL }`;
 
 // Scaffold a new directory with the SnapWP build and the .env file.
-const { execSync, spawn } = require( 'child_process' );
+const { spawn } = require( 'child_process' );
 const fs = require( 'fs/promises' );
 const path = require( 'path' );
 const readline = require( 'readline' );
 const { program } = require( 'commander' );
+const {string} = require("../../../../../../wp-includes/js/clipboard.js");
 
 program.option( '--proxy', 'Use proxy registry.' ).parse();
 
 const options = program.opts();
 
-// Utility function to execute shell commands
 /**
+ * Prompts the user for input.
  *
- * @param command
- * @param options
- */
-const exec = ( command, options = {} ) => {
-	console.log( `Executing: ${ command }` );
-	execSync( command, {
-		stdio: 'inherit',
-		shell: true,
-		env: { ...process.env, PATH: process.env.PATH },
-		...options,
-	} );
-};
-
-// Prompt the user for input
-/**
+ * @param {string} query Prompt query.
  *
- * @param query
+ * @return {Promise<string>} User input.
  */
 const prompt = ( query ) => {
 	const rl = readline.createInterface( {
@@ -69,7 +56,7 @@ const openEditor = ( filePath ) => {
 				stdio: 'inherit',
 			} );
 
-			child.on( 'exit', function ( e, code ) {
+			child.on( 'exit', function () {
 				resolve( {
 					success: true,
 					message: `File created at "${ path.resolve( filePath ) }"`,
@@ -156,9 +143,9 @@ const openEditor = ( filePath ) => {
 			// Throw error if .env file still does not exist or if exists, its empty.
 			try {
 				await fs.access( envPath );
-			} catch ( error ) {
+			} catch ( err ) {
 				// Throw error if .env file still does not exist.
-				if ( 'ENOENT' === error.code ) {
+				if ( 'ENOENT' === err.code ) {
 					console.error(
 						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
 					);
@@ -166,7 +153,7 @@ const openEditor = ( filePath ) => {
 				}
 
 				// Exit if any other unknown error occurred.
-				console.error( 'Error:', error );
+				console.error( 'Error:', err );
 				process.exit( 1 );
 			}
 		}

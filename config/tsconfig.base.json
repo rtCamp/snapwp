@@ -34,7 +34,7 @@
 		"verbatimModuleSyntax": true,
 
 		// Language and Environment
-		"jsx": "react",
+		"jsx": "react-jsx",
 		"lib": [ "ES2022", "DOM" ],
 		"moduleDetection": "force",
 		"target": "ES2022",
