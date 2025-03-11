@@ -15,7 +15,7 @@ const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ) => {
 
 	return (
 		<pre
-			className={ cssClassName || '' }
+			{ ...( cssClassName && { className: cssClassName } ) }
 			{ ...( style && { style: getStylesFromAttributes( { style } ) } ) }
 		>
 			<code>{ !! content && <Parse html={ content } /> }</code>

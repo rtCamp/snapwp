@@ -46,7 +46,7 @@ const CoreGroup: CoreGroupType = ( {
 }: CoreGroupProps ) => {
 	const { style, tagName } = attributes ?? {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
+	const styleObject = getStylesFromAttributes( { style } );
 
 	/**
 	 * @todo replace with cssClassName once it's supported.

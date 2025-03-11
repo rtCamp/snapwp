@@ -8,7 +8,7 @@ interface ScriptInterface {
 	handle?: string | null;
 	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
 	groupLocation?: 'HEADER' | 'FOOTER' | null;
-	src?: string | null;
+	src?: string | null | undefined;
 }
 
 /**

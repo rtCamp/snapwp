@@ -68,7 +68,7 @@ const CoreFile: CoreFileType = ( {
 			) }
 			{ fileName && textLinkHref && (
 				<Link
-					id={ fileId || undefined }
+					{ ...( fileId && { id: fileId } ) }
 					href={ textLinkHref }
 					{ ...( textLinkTarget && { target: textLinkTarget } ) }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }

@@ -62,7 +62,7 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 				<Link
 					href={ href }
 					{ ...( linkTarget && { target: linkTarget } ) }
-					rel={ rel ?? undefined }
+					{ ...( rel && { rel } ) }
 					{ ...commonProps }
 				>
 					{ !! text && <Parse html={ text } /> }

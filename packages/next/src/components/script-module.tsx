@@ -9,8 +9,8 @@ import type { PropsWithoutRef } from 'react';
 import Script from 'next/script';
 
 interface ScriptModuleInterface {
-	handle?: string | null;
-	src?: string | null;
+	handle?: string | null | undefined;
+	src?: string | null | undefined;
 	dependencies?:
 		| {
 				importType?: string | null;
@@ -19,8 +19,9 @@ interface ScriptModuleInterface {
 					src: string;
 				} | null;
 		  }[]
-		| null;
-	extraData?: string | null;
+		| null
+		| undefined;
+	extraData?: string | null | undefined;
 }
 
 /**

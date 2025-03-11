@@ -36,7 +36,7 @@ const CoreSpacer: CoreSpacerType = ( {
 	const classNames = cn( classNamesFromString );
 
 	const combinedStyle = {
-		...( style && getStylesFromAttributes( { style } ) ),
+		...getStylesFromAttributes( { style } ),
 		height: getSpacingPresetCssVar( finalHeight ),
 		width: getSpacingPresetCssVar( width ),
 	};

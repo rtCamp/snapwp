@@ -2,7 +2,7 @@ import { compileCSS } from '@wordpress/style-engine';
 import getStyleObjectFromString from './get-style-object-from-string';
 
 interface AttributesWithStyle {
-	style?: string;
+	style?: string | undefined;
 }
 
 /**

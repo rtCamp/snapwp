@@ -27,7 +27,7 @@ const CoreParagraph: CoreParagraphType = ( {
 		textColor,
 	} = attributes || {};
 
-	const styleObject = style ? getStylesFromAttributes( { style } ) : {};
+	const styleObject = getStylesFromAttributes( { style } );
 
 	/**
 	 * Add missing styles to the style object

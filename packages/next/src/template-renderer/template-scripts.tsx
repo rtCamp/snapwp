@@ -16,7 +16,11 @@ const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
 	<>
 		{ scripts?.map( ( { handle, src, ...rest }, id ) => {
 			return (
-				<Script key={ handle || id } src={ src || '' } { ...rest } />
+				<Script
+					key={ handle || id }
+					{ ...( src && { src } ) }
+					{ ...rest }
+				/>
 			);
 		} ) }
 	</>
@@ -138,10 +142,10 @@ const ScriptModuleMap = ( {
 					return (
 						<ScriptModule
 							key={ handle || id }
-							{ ...( handle && { handle } ) }
+							handle={ handle }
 							{ ...( shouldLoadMainScript && { src } ) }
-							{ ...( extraData && { extraData } ) }
-							{ ...( dependencies?.length && { dependencies } ) }
+							extraData={ extraData }
+							dependencies={ dependencies }
 						/>
 					);
 				}

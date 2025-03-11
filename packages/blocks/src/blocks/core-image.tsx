@@ -124,7 +124,7 @@ const CoreImage: CoreImageType = ( {
 
 	return (
 		<Figure
-			renderedHtml={ renderedHtml ?? null }
+			{ ...( renderedHtml && { renderedHtml } ) }
 			classNames={ classNames }
 			{ ...attributes }
 		>
@@ -271,7 +271,7 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
  */
 const extractInteractivityAttributesForElement = (
 	element: string,
-	renderedHtml?: string | null
+	renderedHtml?: string | null | undefined
 ) => {
 	if ( ! renderedHtml ) {
 		return {};

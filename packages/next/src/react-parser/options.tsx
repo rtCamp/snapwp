@@ -28,7 +28,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 				return (
 					<Link
 						{ ...attributes }
-						href={ href || '' }
+						{ ...( href && { href } ) }
 						{ ...( style && {
 							style: getStyleObjectFromString( { style } ),
 						} ) }
@@ -77,7 +77,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 						} ) }
 						{ ...( height && { height } ) }
 						{ ...( width && { width } ) }
-						className={ className || '' }
+						{ ...( className && { className } ) }
 						fill={ shouldFill }
 						{ ...( style && {
 							style: getStyleObjectFromString( { style } ),
