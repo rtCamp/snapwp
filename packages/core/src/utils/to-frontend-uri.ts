@@ -18,11 +18,9 @@ export const toFrontendUri = ( url: string ): string => {
 		return url;
 	}
 
-	const { homeUrl, siteUrl } = getConfig();
+	const { wpHomeUrl, wpSiteUrl } = getConfig();
 
-	if ( isWPHomeUrl( url ) ) {
-		return addLeadingSlash( url.replace( homeUrl, '' ) );
-	}
+	const domainToUpdate = isWPHomeUrl( url ) ? wpHomeUrl : wpSiteUrl;
 
-	return addLeadingSlash( url.replace( siteUrl, '' ) );
+	return addLeadingSlash( url.replace( domainToUpdate, '' ) );
 };

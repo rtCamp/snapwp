@@ -22,18 +22,15 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
 ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
-		const config = getConfig();
-		const { homeUrl } = config;
-		// We have already checked whether hasCorsProxy has value or not in /middleware/utils.ts
-		const hasCorsProxy = config.hasCorsProxy as string;
+		const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
-		if ( ! request.nextUrl.pathname.startsWith( hasCorsProxy ) ) {
+		if ( ! request.nextUrl.pathname.startsWith( corsProxyPrefix ) ) {
 			return next( request, _next );
 		}
 
 		// Construct the target URL
 		const targetUrl =
-			homeUrl + request.nextUrl.pathname.replace( hasCorsProxy, '' );
+			wpHomeUrl + request.nextUrl.pathname.replace( corsProxyPrefix, '' );
 		try {
 			// Forward the request to the external API
 			const response = await fetch( targetUrl, {

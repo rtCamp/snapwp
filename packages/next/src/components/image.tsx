@@ -105,8 +105,8 @@ export default function Image( {
 	}
 
 	// @todo replace src?.startsWith conditional check with something more robust that will incorporate both frontend/backend domain & anything in the list of allowed images domain in the config (ref: https://github.com/rtCamp/headless/pull/241#discussion_r1824274200). TBD after https://github.com/rtCamp/headless/issues/218.
-	const { homeUrl } = getConfig();
-	const normalizedHomeUrl = homeUrl?.replace( /https?:\/\//, '' );
+	const { wpHomeUrl } = getConfig();
+	const normalizedHomeUrl = wpHomeUrl?.replace( /https?:\/\//, '' );
 	const normalizedSrc = src?.replace( /https?:\/\//, '' );
 
 	if (

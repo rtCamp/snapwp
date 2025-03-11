@@ -6,7 +6,6 @@ import type {
 } from '@snapwp/types';
 import type { ButtonHTMLAttributes } from 'react';
 
-
 /**
  * Renders the core/button block.
  *

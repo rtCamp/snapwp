@@ -39,14 +39,14 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
-	const { homeUrl, hasCorsProxy } = getConfig();
+	const { wpHomeUrl, hasCorsProxy, corsProxyPrefix } = getConfig();
 
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
 				acc[ handle ] = hasCorsProxy
-					? src.replace( homeUrl, hasCorsProxy )
+					? src.replace( wpHomeUrl, corsProxyPrefix )
 					: src;
 			} );
 			return acc;
@@ -86,7 +86,7 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
-	const { homeUrl, hasCorsProxy } = getConfig();
+	const { wpHomeUrl, hasCorsProxy, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -132,7 +132,7 @@ const ScriptModuleMap = ( {
 					}
 
 					src = hasCorsProxy
-						? src.replace( homeUrl, hasCorsProxy )
+						? src.replace( wpHomeUrl, corsProxyPrefix )
 						: src;
 
 					// We use this to prevent (re)loading the main script module if it's already included in the page.

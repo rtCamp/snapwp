@@ -60,14 +60,14 @@ describe( 'CoreButton Component', () => {
 	} );
 
 	test( 'renders with corrected url', () => {
-		const { homeUrl } = getConfig();
+		const { wpHomeUrl } = getConfig();
 		const exampleAttributes = {
 			cssClassName: 'test-class',
 			linkClassName: 'link-class',
 			style: JSON.stringify( { color: 'red' } ),
 			text: 'Click Me',
 			title: 'Test Button',
-			url: homeUrl + '/sub',
+			url: wpHomeUrl + '/sub',
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',

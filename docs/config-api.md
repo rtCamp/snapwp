@@ -18,8 +18,8 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 | Variable                           | Required | Default Value                                               | Description                                                                       | Available via `getConfig() |
 | ---------------------------------- | -------- | ----------------------------------------------------------- | --------------------------------------------------------------------------------- | -------------------------- |
 | `NEXT_PUBLIC_FRONTEND_URL`         | Yes      |                                                             | The URL of the Next.js site.                                                      | `frontendUrl`              |
-| `NEXT_PUBLIC_WP_HOME_URL`          | Yes      |                                                             | The WordPress frontend domain URL.                                                | `homeUrl`                  |
-| `NEXT_PUBLIC_WP_SITE_URL`          | Yes      |                                                             | The WordPress site URL.                                                           | `siteUrl`                  |
+| `NEXT_PUBLIC_WP_HOME_URL`          | Yes      |                                                             | The WordPress frontend domain URL.                                                | `wpHomeUrl`                |
+| `NEXT_PUBLIC_WP_SITE_URL`          | Yes      |                                                             | The WordPress site URL.                                                           | `wpSiteUrl`                |
 | `INTROSPECTION_TOKEN`              | Yes      |                                                             | Token used for authenticating GraphQL introspection queries with GraphQL Codegen. | N/A                        |
 | `NEXT_PUBLIC_GRAPHQL_ENDPOINT`     | No       | `index.php?graphql`                                         | The relative path to the WordPress GraphQL endpoint.                              | `graphqlEndpoint`          |
 | `NEXT_PUBLIC_WP_UPLOADS_DIRECTORY` | No       | `/wp-content/uploads`                                       | The relative path to the WordPress uploads directory.                             | `uploadsDirectory`         |
@@ -82,5 +82,5 @@ You can access the configuration values in your application code using the `getC
 import { getConfig } from '@snapwp/core/config';
 
 // Or any other valid configuration property.
-const { frontendUrl, homeUrl, parserOptions } = getConfig();
+const { frontendUrl, wpHomeUrl, parserOptions } = getConfig();
 ```
