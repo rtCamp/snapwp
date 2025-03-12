@@ -3,21 +3,21 @@
  *
  * @internal
  */
-export enum LOGTYPE {
-	DEBUG,
-	INFO,
-	WARN,
-	ERROR,
-	LOG,
-}
+export const LOGTYPE = {
+	DEBUG: 0,
+	INFO: 1,
+	WARN: 2,
+	ERROR: 3,
+	LOG: 4,
+};
 
 /**
  * Logs a message to the console.
  *
- * @param {LOGTYPE} type The type of log message.
- * @param {Array}   args The arguments to log.
+ * @param {number} type The type of log message.
+ * @param {Array}  args The arguments to log.
  */
-const log = ( type: LOGTYPE, ...args: unknown[] ): void => {
+const log = ( type: number, ...args: unknown[] ): void => {
 	if (
 		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env to check the current environment.
 		'production' === process.env.NODE_ENV ||
