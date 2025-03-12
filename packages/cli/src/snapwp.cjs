@@ -12,15 +12,16 @@ const { program } = require( 'commander' );
 program.option( '--proxy', 'Use proxy registry.' ).parse();
 
 const options = program.opts();
-
+const DEFAULT_PROJECT_PATH = './snapwp-frontend';
 /**
  * Prompts the user for input.
  *
  * @param {string} query Prompt query.
+ * @param {string} defaultValue Prompt default value.
  *
  * @return {Promise<string>} User input.
  */
-const prompt = ( query ) => {
+const prompt = ( query, defaultValue ) => {
 	const rl = readline.createInterface( {
 		input: process.stdin,
 		output: process.stdout,
@@ -32,7 +33,7 @@ const prompt = ( query ) => {
 			if ( answer.includes( '\\n' ) ) {
 				answer = answer.split( '\\n' ).join( '\n' );
 			}
-			resolve( answer );
+			resolve( answer || defaultValue );
 		} );
 	} );
 };
@@ -73,23 +74,21 @@ const openEditor = ( filePath ) => {
 ( async () => {
 	try {
 		let useDefaultPath = false;
-		let projectPath = './snapwp-frontend';
 		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
 		const projectDir = await prompt(
 			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
-				'Please enter a relative or absolute path: '
+				'Please enter a relative or absolute path: ',
+			DEFAULT_PROJECT_PATH
 		);
-		if ( projectDir.trim() === '' ) {
+		if ( projectDir === DEFAULT_PROJECT_PATH ) {
 			useDefaultPath = true;
 			console.log(
-				`\nUsing default values, your project directory will be created at ${ projectPath } path.\n`
+				`\nUsing default values, your project directory will be created at ${ DEFAULT_PROJECT_PATH } path.\n`
 			);
-		} else {
-			projectPath = projectDir;
 		}
 
-		const projectDirPath = path.resolve( projectPath );
+		const projectDirPath = path.resolve( projectDir );
 
 		// Create the project directory if not exists.
 		try {
