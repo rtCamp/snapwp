@@ -2,8 +2,8 @@ import type { PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreTemplatePartAttributes = BaseAttributes & {
-	templatePartTagName?: string;
-	area?: string;
+	templatePartTagName?: string | undefined;
+	area?: string | undefined;
 };
 
 export type CoreTemplatePartProps = PropsWithChildren<

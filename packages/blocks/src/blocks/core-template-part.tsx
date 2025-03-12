@@ -22,13 +22,7 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 }: CoreTemplatePartProps ) => {
 	const { templatePartTagName, area } = attributes || {};
 
-	let htmlTag = 'div';
-
-	if ( templatePartTagName ) {
-		htmlTag = templatePartTagName;
-	} else if ( typeof area === 'string' && area.trim() !== '' ) {
-		htmlTag = area;
-	}
+	const htmlTag = templatePartTagName || area || 'div';
 
 	const TagName = htmlTag as keyof JSX.IntrinsicElements;
 

@@ -4,4 +4,4 @@
 "@snapwp/types": minor
 ---
 
-fix: Support area attribute as a fallback for templatePartTagName in CoreTemplatePart.
+fix: Use `area` attribute as HTML tag fallback in `CoreTemplatePart` block component.
