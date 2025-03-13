@@ -3,21 +3,15 @@
  *
  * @internal
  */
-export const LOGTYPE = {
-	DEBUG: 0,
-	INFO: 1,
-	WARN: 2,
-	ERROR: 3,
-	LOG: 4,
-};
+export type LOGTYPE = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR' | 'LOG';
 
 /**
  * Logs a message to the console.
  *
- * @param {number} type The type of log message.
+ * @param {LOGTYPE} type The type of log message.
  * @param {Array}  args The arguments to log.
  */
-const log = ( type: number, ...args: unknown[] ): void => {
+const log = ( type: LOGTYPE, ...args: unknown[] ): void => {
 	if (
 		// eslint-disable-next-line n/no-process-env -- Allow the use of process.env to check the current environment.
 		'production' === process.env.NODE_ENV ||
@@ -30,19 +24,19 @@ const log = ( type: number, ...args: unknown[] ): void => {
 	const prefix = 'SnapWP:';
 	/* eslint-disable no-console -- Allow the use of console for loggers. */
 	switch ( type ) {
-		case LOGTYPE.DEBUG:
+		case 'DEBUG':
 			console.debug( prefix, ...args );
 			break;
-		case LOGTYPE.INFO:
+		case 'INFO':
 			console.info( prefix, ...args );
 			break;
-		case LOGTYPE.WARN:
+		case 'WARN':
 			console.warn( prefix, ...args );
 			break;
-		case LOGTYPE.ERROR:
+		case 'ERROR':
 			console.error( prefix, ...args );
 			break;
-		case LOGTYPE.LOG:
+		case 'LOG':
 			console.log( prefix, ...args );
 			break;
 	}
@@ -62,8 +56,7 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static debug = ( ...args: unknown[] ): void =>
-		log( LOGTYPE.DEBUG, ...args );
+	static debug = ( ...args: unknown[] ): void => log( 'DEBUG', ...args );
 
 	/**
 	 * Logs an info message in the console in dev mode
@@ -74,7 +67,7 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static info = ( ...args: unknown[] ): void => log( LOGTYPE.INFO, ...args );
+	static info = ( ...args: unknown[] ): void => log( 'INFO', ...args );
 
 	/**
 	 * Logs a warning in the console in dev mode
@@ -85,7 +78,7 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static warn = ( ...args: unknown[] ): void => log( LOGTYPE.WARN, ...args );
+	static warn = ( ...args: unknown[] ): void => log( 'WARN', ...args );
 
 	/**
 	 * Logs an error in the console in dev mode
@@ -96,8 +89,7 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static error = ( ...args: unknown[] ): void =>
-		log( LOGTYPE.ERROR, ...args );
+	static error = ( ...args: unknown[] ): void => log( 'ERROR', ...args );
 
 	/**
 	 * Logs a message in the console in dev mode
@@ -108,7 +100,7 @@ class Logger {
 	 *
 	 * @return void
 	 */
-	static log = ( ...args: unknown[] ): void => log( LOGTYPE.LOG, ...args );
+	static log = ( ...args: unknown[] ): void => log( 'LOG', ...args );
 }
 
 export { Logger };
