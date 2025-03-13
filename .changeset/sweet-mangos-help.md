@@ -1,5 +1,5 @@
 ---
-"@snapwp/e2e-tests": minor
+"@snapwp/e2e-tests": patch
 ---
 
-tests: Setup E2E testing with playwright
+tests: Setup E2E testing with Playwright
