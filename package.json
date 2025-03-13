@@ -51,6 +51,7 @@
 		"format": "prettier . --config config/.prettierrc.cjs --write --paren-spacing",
 		"format:check": "prettier . --config config/.prettierrc.cjs --check --paren-spacing",
 		"test:e2e": "playwright test -c config/playwright.config.js",
+		"test:e2e:headed": "npm run test:e2e -- --headed",
 		"test:unit": "jest --config=config/jest.config.js --passWithNoTests",
 		"pretest:unit": "npm run clean-ts-build && npm run build",
 		"test:unit:updatesnapshot": "npm run test:unit -- --updateSnapshot",
@@ -59,7 +60,8 @@
 		"local-registry:stop": "docker compose --project-directory ./.verdaccio/ -f \"./.verdaccio/docker-compose.yml\" down",
 		"publish:version": "changeset version && npm update $(npm query .workspace | jq -rc '.[].name' | tr '\\n' ' ')",
 		"publish:local": "sh ./bin/publish-local.sh",
-		"changeset": "changeset"
+		"changeset": "changeset",
+		"wp-env": "wp-env"
 	},
 	"workspaces": [
 		"packages/*"
@@ -79,6 +81,7 @@
 		"@types/react": "^19.0.8",
 		"@typescript-eslint/eslint-plugin": "^6.4.1",
 		"@typescript-eslint/parser": "^6.0.0",
+		"@wordpress/env": "^10.18.0",
 		"babel-jest": "^29.7.0",
 		"eslint": "^8.57.1",
 		"jest-environment-jsdom": "^29.7.0",
