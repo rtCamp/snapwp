@@ -2,4 +2,4 @@
 "snapwp": patch
 ---
 
-feat: Implement default cli option
+dev: Refactor CLI script to support default prompt values and improve maintainability.
