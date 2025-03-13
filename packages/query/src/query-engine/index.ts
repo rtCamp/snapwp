@@ -2,6 +2,7 @@ import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
+	GetSeoDataDocument,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -14,6 +15,7 @@ import {
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import { Logger, type GlobalHeadProps } from '@snapwp/core';
+import parseSeoData, { type ParsedSeoData } from '@/utils/parse-seo-data';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -122,6 +124,42 @@ export class QueryEngine {
 			}
 
 			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches SEO data for a given uri.
+	 * @param uri - The URL of the node.
+	 * @return The SEO data for the given uri.
+	 */
+	static getSEOData = async (
+		uri: string
+	): Promise< ParsedSeoData | null > => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+
+		try {
+			const { data } = await QueryEngine.apolloClient.query( {
+				query: GetSeoDataDocument,
+				variables: { uri },
+				fetchPolicy: 'network-only',
+				errorPolicy: 'all',
+			} );
+
+			return parseSeoData( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				if ( error.networkError ) {
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
 			throw error;
 		}
 	};
