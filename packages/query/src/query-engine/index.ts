@@ -15,6 +15,7 @@ import {
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import { Logger, type GlobalHeadProps } from '@snapwp/core';
+import parseGeneralSettings from '@/utils/parse-general-settings';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -106,7 +107,7 @@ export class QueryEngine {
 				errorPolicy: 'all',
 			} );
 
-			return data.data;
+			return parseGeneralSettings( data );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );

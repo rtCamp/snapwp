@@ -1,18 +1,14 @@
 import { QueryEngine } from '@snapwp/query';
 
 interface GeneralSettingsProps {
-	generalSettings?: {
-		siteIcon?: {
-			mediaItemUrl?: string | null;
-			mediaDetails?: {
-				sizes?: Array< {
-					width?: string | null;
-					height?: string | null;
-					sourceUrl?: string | null;
-				} | null > | null;
-			} | null;
-		} | null;
-	} | null;
+	generalSettings: {
+		siteIcon: {
+			mediaItemUrl?: string;
+			mediaDetails: {
+				sizes?: IconData[];
+			};
+		};
+	};
 }
 
 type IconMetaData = {
@@ -39,39 +35,58 @@ type FormattedIconData = {
  * @return Categorized icons.
  */
 export const getIcons = async (): Promise< Partial< IconMetaData > > => {
-	const settings: GeneralSettingsProps =
+	const settings: GeneralSettingsProps | undefined =
 		await QueryEngine.getGeneralSettings();
 
-	const sizes = settings?.generalSettings?.siteIcon?.mediaDetails?.sizes;
-
-	// Early return if no sizes exist
-	if ( ! sizes ) {
-		const fallbackUrl = settings?.generalSettings?.siteIcon?.mediaItemUrl;
-		return fallbackUrl
-			? {
-					faviconIcons: [ { sizes: '512x512', url: fallbackUrl } ],
-			  }
-			: {};
-	}
-
-	// Filter out valid icons
-	const validIcons: IconData[] = sizes.filter(
-		( icon ) => !! ( icon?.sourceUrl && icon?.height && icon?.width )
-	) as IconData[];
-
-	if ( ! validIcons.length ) {
+	if ( ! settings ) {
 		return {};
 	}
 
+	let fallBackIcons = {};
+
+	// Creating fallback icons if siteIcon is present but mediaDetails is not.
+	if ( settings.generalSettings.siteIcon.mediaItemUrl ) {
+		fallBackIcons = {
+			faviconIcons: [
+				{
+					sizes: '512x512',
+					url: settings.generalSettings.siteIcon.mediaItemUrl,
+				},
+			],
+		};
+	}
+
+	// Return fallback icons if sizes are not present.
+	if ( ! settings.generalSettings.siteIcon.mediaDetails.sizes ) {
+		return fallBackIcons;
+	}
+
+	const sizes = settings.generalSettings.siteIcon.mediaDetails.sizes;
+
+	// Filter out valid icons
+	const validIcons: IconData[] = sizes.filter(
+		( icon ) => !! ( icon.sourceUrl && icon.height && icon.width )
+	) as IconData[];
+
+	// Return fallback icons if no valid icons are found.
+	if ( ! validIcons.length ) {
+		return fallBackIcons;
+	}
+
+	// Filter icons by sizes.
 	const filteredFaviconIcons = filterIconsBySize( validIcons, [
 		'32x32',
 		'192x192',
 	] );
+
+	// Format icons into required metadata structure. If filteredFaviconIcons is empty, return # as url of icon.
 	const formattedFaviconIcons: FormattedIconData[] = filteredFaviconIcons
 		? formatIcons( filteredFaviconIcons )
 		: [ { url: '#', sizes: '' } ];
 
 	const filteredAppleIcons = filterIconsBySize( validIcons, [ '180x180' ] );
+
+	// Format icons into required metadata structure.
 	const formattedAppleIcons: FormattedIconData[] = filteredAppleIcons
 		? formatIcons( filteredAppleIcons )
 		: [];
