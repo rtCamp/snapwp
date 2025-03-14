@@ -1,7 +1,6 @@
 import type { PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
-import { SEO } from '@/seo';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -25,7 +24,6 @@ export async function RootLayout( {
 		<html lang="en">
 			<head>
 				<GlobalHead { ...globalHeadProps } />
-				<SEO />
 			</head>
 			{ /* suppressHydrationWarning is added to suppress warnings when classes for body are updated on the client */ }
 			<body suppressHydrationWarning>{ children }</body>
