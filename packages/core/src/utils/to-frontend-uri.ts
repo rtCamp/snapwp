@@ -1,5 +1,5 @@
 import { getConfig } from '@/config';
-import { isInternalUrl, isWPHomeUrl } from '@/utils/url-checker';
+import { isInternalUrl, isWPSiteUrl } from '@/utils/url-checker';
 import { addLeadingSlash } from '@/utils/url-slash-modify';
 
 /**
@@ -21,7 +21,8 @@ export const toFrontendUri = ( url: string ): string => {
 
 	const { wpHomeUrl, wpSiteUrl } = getConfig();
 
-	const domainToUpdate = isWPHomeUrl( url ) ? wpHomeUrl : wpSiteUrl;
+	// Not ignoring protocol as we want to check for complete site URL.
+	const domainToUpdate = isWPSiteUrl( url ) ? wpSiteUrl : wpHomeUrl;
 
 	return addLeadingSlash( url.replace( domainToUpdate, '' ) );
 };

@@ -32,13 +32,16 @@ export const isWPHomeUrl = (
  * Check if a URL is the site URL.
  *
  * @param url The URL to check.
- * @param ignoreProtocol - Ignore HTTP protocol when comparing URLs.
+ * @param {boolean} ignoreProtocol - Whether to ignore the HTTP protocol when comparing URLs.
+ * Defaults to `false` for `siteUrl` since a different `siteUrl` often indicates a different
+ * `homeUrl` or WordPress directory. If `true`, only the domain is compared, which may lead to
+ * incorrect matches.
  *
  * @return Whether the URL is the site URL.
  */
 export const isWPSiteUrl = (
 	url: string,
-	ignoreProtocol: boolean = true
+	ignoreProtocol: boolean = false
 ): boolean => {
 	if ( ! isValidUrl( url ) ) {
 		return false;
