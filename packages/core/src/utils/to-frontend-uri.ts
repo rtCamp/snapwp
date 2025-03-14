@@ -14,6 +14,7 @@ export const toFrontendUri = ( url: string ): string => {
 		return url;
 	}
 
+	// Bail if already a URI.
 	if ( url.startsWith( '/' ) ) {
 		return url;
 	}

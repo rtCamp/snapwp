@@ -67,10 +67,6 @@ export const isInternalUrl = (
 	url: string,
 	ignoreProtocol: boolean = true
 ): boolean => {
-	if ( ! isValidUrl( url ) ) {
-		return false;
-	}
-
 	return (
 		url.startsWith( '/' ) ||
 		isWPHomeUrl( url, ignoreProtocol ) ||
