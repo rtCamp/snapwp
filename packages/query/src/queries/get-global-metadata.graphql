@@ -1,0 +1,7 @@
+query GetGlobalMetadata {
+	generalSettings {
+		title
+		description
+		language
+	}
+}

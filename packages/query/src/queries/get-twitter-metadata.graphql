@@ -1,0 +1,31 @@
+query GetTwitterMetadata($uri: String!) {
+	nodeByUri(uri: $uri) {
+		__typename
+		... on Page {
+			uri
+			title
+			featuredImage {
+				node {
+					sourceUrl
+					mediaDetails {
+						width
+						height
+					}
+				}
+			}
+		}
+		... on Post {
+			uri
+			title
+			featuredImage {
+				node {
+					sourceUrl
+					mediaDetails {
+						width
+						height
+					}
+				}
+			}
+		}
+	}
+}
