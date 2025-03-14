@@ -16,12 +16,15 @@ export const isWPHomeUrl = (
 	if ( ! isValidUrl( url ) ) {
 		return false;
 	}
+
 	const { wpHomeUrl } = getConfig();
 
 	if ( ignoreProtocol ) {
+		// Compare just the domains.
 		return new URL( url ).host === new URL( wpHomeUrl ).host;
 	}
 
+	// Compare with the protocol.
 	return url === wpHomeUrl || url.startsWith( wpHomeUrl );
 };
 
@@ -40,12 +43,15 @@ export const isWPSiteUrl = (
 	if ( ! isValidUrl( url ) ) {
 		return false;
 	}
+
 	const { wpSiteUrl } = getConfig();
 
 	if ( ignoreProtocol ) {
+		// Compare just the domains.
 		return new URL( url ).host === new URL( wpSiteUrl ).host;
 	}
 
+	// Compare with the protocol.
 	return url === wpSiteUrl || url.startsWith( wpSiteUrl );
 };
 

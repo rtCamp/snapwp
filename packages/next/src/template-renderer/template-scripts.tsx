@@ -39,13 +39,13 @@ const ImportMap = ( {
 	scriptModules: ScriptModuleProps[];
 } ) => {
 	// Generate import map from all module dependencies
-	const { wpHomeUrl, hasCorsProxy, corsProxyPrefix } = getConfig();
+	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = hasCorsProxy
+				acc[ handle ] = corsProxyPrefix
 					? src.replace( wpHomeUrl, corsProxyPrefix )
 					: src;
 			} );
@@ -86,7 +86,7 @@ const ScriptModuleMap = ( {
 }: {
 	scriptModules?: ScriptModuleProps[];
 } ) => {
-	const { wpHomeUrl, hasCorsProxy, corsProxyPrefix } = getConfig();
+	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -131,7 +131,7 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
-					src = hasCorsProxy
+					src = corsProxyPrefix
 						? src.replace( wpHomeUrl, corsProxyPrefix )
 						: src;
 

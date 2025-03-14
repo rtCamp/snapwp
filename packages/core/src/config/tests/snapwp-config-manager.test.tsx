@@ -19,7 +19,8 @@ describe( 'SnapWPConfigManager functions', () => {
 	let ORIG_ENV: NodeJS.ProcessEnv;
 
 	const validSnapWPEnvConfig: Partial< SnapWPEnv > = {
-		corsProxyPrefix: '/proxy',
+		corsProxyPrefix:
+			process.env.NODE_ENV === 'development' ? '/proxy' : undefined,
 		frontendUrl: 'https://env-next.example.com',
 		wpHomeUrl: 'https://env-home.example.com',
 		graphqlEndpoint: 'env-index.php?graphql',
@@ -28,11 +29,11 @@ describe( 'SnapWPConfigManager functions', () => {
 	};
 
 	const defaultConfig: Partial< SnapWPEnv > = {
-		corsProxyPrefix: '/proxy',
+		corsProxyPrefix:
+			process.env.NODE_ENV === 'development' ? '/proxy' : undefined,
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
-		hasCorsProxy: false,
 	};
 
 	beforeEach( () => {

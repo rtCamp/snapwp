@@ -8,7 +8,7 @@ export interface SnapWPEnv {
 	/**
 	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
-	corsProxyPrefix: string;
+	corsProxyPrefix?: string;
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_FRONTEND_URL`.
 	 */
@@ -18,25 +18,21 @@ export interface SnapWPEnv {
 	 */
 	graphqlEndpoint: string;
 	/**
-	 * Flag to enable cors middleware which proxies assets from WP server.
+	 * REST URL prefix. Defaults to `/wp-json`.
 	 */
-	hasCorsProxy: boolean;
+	restUrlPrefix: string;
+	/**
+	 * Uploads directory. Defaults to `/wp-content/uploads`.
+	 */
+	uploadsDirectory: string;
 	/**
 	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_HOME_URL`.
 	 */
 	wpHomeUrl: string;
 	/**
-	 * REST URL prefix. Defaults to `/wp-json`.
-	 */
-	restUrlPrefix: string;
-	/**
 	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_SITE_URL`.
 	 */
 	wpSiteUrl: string;
-	/**
-	 * Uploads directory. Defaults to `/wp-content/uploads`.
-	 */
-	uploadsDirectory: string;
 }
 
 export interface SnapWPConfig {
@@ -65,12 +61,12 @@ type ConfigSchema< T > = {
  * Default configuration.
  */
 const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
-	corsProxyPrefix: '/proxy',
+	corsProxyPrefix:
+		// eslint-disable-next-line n/no-process-env -- We're using `NODE_ENV` to derive a default value.
+		process.env.NODE_ENV === 'development' ? '/proxy' : undefined,
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
-	// eslint-disable-next-line n/no-process-env -- We're using `NODE_ENV` to derive a default value.
-	hasCorsProxy: true,
 };
 
 /**
@@ -85,7 +81,6 @@ const envConfig = (): Partial< SnapWPEnv > => ( {
 	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
 	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-	hasCorsProxy: !! process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
 	wpHomeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
 	restUrlPrefix: process.env.NEXT_PUBLIC_REST_URL_PREFIX,
 	// If `wpSiteUrl` is not provided, use `wpHomeUrl`.
@@ -149,10 +144,6 @@ class SnapWPConfigManager {
 		},
 		graphqlEndpoint: {
 			type: 'string',
-			required: false,
-		},
-		hasCorsProxy: {
-			type: 'boolean',
 			required: false,
 		},
 		wpHomeUrl: {
