@@ -23,7 +23,9 @@ export default function parseGeneralSettings(
 		return undefined;
 	}
 
-	let sizes;
+	const sizes:
+		| undefined
+		| { sourceUrl: string; height: string; width: string }[] = [];
 
 	// If mediaDetails and sizes are present, parse the sizes.
 	if ( queryData.data.generalSettings.siteIcon.mediaDetails?.sizes ) {
