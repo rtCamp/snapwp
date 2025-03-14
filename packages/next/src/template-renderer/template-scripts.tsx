@@ -18,7 +18,7 @@ const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
 			return (
 				<Script
 					key={ handle || id }
-					{ ...( src && { src } ) }
+					src={ src || undefined }
 					{ ...rest }
 				/>
 			);

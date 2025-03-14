@@ -150,7 +150,7 @@ const CoreCover: CoreCoverType = ( {
 						style={ { objectPosition } }
 						data-object-fit="cover"
 						data-object-position={ objectPosition }
-						{ ...( imageProps?.alt && { alt: imageProps.alt } ) }
+						alt={ imageProps.alt }
 					/>
 				) : (
 					<div

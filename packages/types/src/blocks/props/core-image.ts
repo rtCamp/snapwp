@@ -51,6 +51,6 @@ export interface LightBoxProp {
 }
 
 export interface FigureProps extends CoreImageAttributes, PropsWithChildren {
-	renderedHtml?: string | null;
+	renderedHtml?: string | null | undefined;
 	classNames?: string;
 }

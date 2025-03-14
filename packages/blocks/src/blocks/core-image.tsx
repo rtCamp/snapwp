@@ -55,8 +55,8 @@ const Figure = ( {
 				<Link
 					href={ href }
 					className={ linkClass }
-					{ ...( linkTarget && { target: linkTarget } ) }
-					{ ...( rel && { rel } ) }
+					target={ linkTarget }
+					rel={ rel }
 				>
 					{ children }
 				</Link>
@@ -124,7 +124,7 @@ const CoreImage: CoreImageType = ( {
 
 	return (
 		<Figure
-			{ ...( renderedHtml && { renderedHtml } ) }
+			renderedHtml={ renderedHtml }
 			classNames={ classNames }
 			{ ...attributes }
 		>

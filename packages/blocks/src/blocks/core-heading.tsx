@@ -23,10 +23,8 @@ const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
 
 	return (
 		<HeadingTag
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
-			{ ...( cssClassName && { className: cssClassName } ) }
+			style={ getStylesFromAttributes( { style } ) }
+			className={ cssClassName }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</HeadingTag>

@@ -9,7 +9,7 @@ import { type PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
-	href?: string;
+	href: string | undefined;
 	style?: CSSProperties | undefined;
 	className?: string | undefined;
 }

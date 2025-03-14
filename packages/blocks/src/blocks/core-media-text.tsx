@@ -110,7 +110,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 		<Image
 			{ ...imageProps }
 			src={ mediaUrl }
-			{ ...( mediaAlt && { alt: mediaAlt } ) }
+			alt={ mediaAlt }
 			className={ imageClasses }
 			style={ positionStyles }
 		/>
@@ -121,7 +121,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 			<Link
 				className={ linkClass }
 				href={ href }
-				{ ...( linkTarget && { target: linkTarget } ) }
+				target={ linkTarget }
 				rel={ newRel }
 			>
 				{ image }
@@ -147,7 +147,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	}
 
 	const gridStyle = {
-		...( style && { ...getStylesFromAttributes( { style } ) } ),
+		...getStylesFromAttributes( { style } ),
 		gridTemplateColumns,
 	};
 

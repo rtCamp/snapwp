@@ -23,15 +23,16 @@ export const defaultOptions: HTMLReactParserOptions = {
 			const { attribs, children, name, type } = domNode;
 			const { class: className, style, ...attributes } = attribs;
 			const { href } = attribs;
+			const styleObject = style
+				? getStyleObjectFromString( style )
+				: undefined;
 
 			if ( type === 'tag' && name === 'a' ) {
 				return (
 					<Link
 						{ ...attributes }
-						{ ...( href && { href } ) }
-						{ ...( style && {
-							style: getStyleObjectFromString( { style } ),
-						} ) }
+						href={ href }
+						style={ styleObject }
 						className={ className }
 					>
 						{ domToReact( children as DOMNode[], defaultOptions ) }
@@ -69,19 +70,13 @@ export const defaultOptions: HTMLReactParserOptions = {
 				return (
 					<Image
 						{ ...attributes }
-						{ ...( attributes[ 'alt' ] && {
-							alt: attributes[ 'alt' ],
-						} ) }
-						{ ...( attributes[ 'src' ] && {
-							src: attributes[ 'src' ],
-						} ) }
-						{ ...( height && { height } ) }
-						{ ...( width && { width } ) }
-						{ ...( className && { className } ) }
+						src={ attribs[ 'src' ] }
+						alt={ attribs[ 'alt' ] }
+						height={ height }
+						width={ width }
+						className={ className }
 						fill={ shouldFill }
-						{ ...( style && {
-							style: getStyleObjectFromString( { style } ),
-						} ) }
+						style={ styleObject }
 						image={ imageAttributes }
 					/>
 				);

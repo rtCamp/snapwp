@@ -22,7 +22,7 @@ const CoreColumn: CoreColumnType = ( {
 	const classNames = cn( cssClassName );
 
 	const combinedStyles: React.CSSProperties = {
-		...{ ...( style && { style: getStylesFromAttributes( { style } ) } ) },
+		...getStylesFromAttributes( { style } ),
 		flexBasis: width ?? undefined,
 	};
 

@@ -61,8 +61,8 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 			<div className={ classNames }>
 				<Link
 					href={ href }
-					{ ...( linkTarget && { target: linkTarget } ) }
-					{ ...( rel && { rel } ) }
+					target={ linkTarget }
+					rel={ rel }
 					{ ...commonProps }
 				>
 					{ !! text && <Parse html={ text } /> }
