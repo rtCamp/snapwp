@@ -1,8 +1,11 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
+	GetGlobalMetadataDocument,
 	GetGlobalStylesDocument,
-	GetSeoDataDocument,
+	GetOpenGraphMetadataDocument,
+	GetRouteMetadataDocument,
+	GetTwitterMetadataDocument,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -15,7 +18,16 @@ import {
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import { Logger, type GlobalHeadProps } from '@snapwp/core';
-import parseSeoData, { type ParsedSeoData } from '@/utils/parse-seo-data';
+import parseGlobalMetadata from '@/utils/parse-global-metadata';
+import parseRouteMetadata from '@/utils/parse-route-metadata';
+import parseOpenGraphMetadata from '@/utils/parse-opengraph-metadata';
+import parseTwitterMetadata from '@/utils/parse-twitter-metadata';
+import type {
+	ParsedGlobalMetadata,
+	ParsedRouteMetadata,
+	ParsedOpenGraphMetadata,
+	ParsedTwitterMetadata,
+} from '@snapwp/types';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -129,26 +141,137 @@ export class QueryEngine {
 	};
 
 	/**
-	 * Fetches SEO data for a given uri.
-	 * @param uri - The URL of the node.
-	 * @return The SEO data for the given uri.
+	 * Fetches global site metadata, including title, description, and locale.
+	 *
+	 * @return Parsed global metadata.
 	 */
-	static getSEOData = async (
-		uri: string
-	): Promise< ParsedSeoData | null > => {
+	static getGlobalMetadata = async (): Promise< ParsedGlobalMetadata > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
 
 		try {
 			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetSeoDataDocument,
-				variables: { uri },
+				query: GetGlobalMetadataDocument,
 				fetchPolicy: 'network-only',
 				errorPolicy: 'all',
 			} );
 
-			return parseSeoData( data );
+			return parseGlobalMetadata( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				if ( error.networkError ) {
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches metadata for a specific route.
+	 *
+	 * @param uri - The URI of the route.
+	 * @return Parsed route metadata.
+	 */
+	static getRouteMetadata = async (
+		uri: string
+	): Promise< ParsedRouteMetadata > => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+		const variables = { uri };
+
+		try {
+			const { data } = await QueryEngine.apolloClient.query( {
+				query: GetRouteMetadataDocument,
+				variables,
+				fetchPolicy: 'network-only',
+				errorPolicy: 'all',
+			} );
+
+			return parseRouteMetadata( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				if ( error.networkError ) {
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches Open Graph metadata for a specific route.
+	 *
+	 * @param uri - The URI of the route.
+	 * @return Parsed Open Graph metadata.
+	 */
+	static getOpenGraphMetadata = async (
+		uri: string
+	): Promise< ParsedOpenGraphMetadata > => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+		const variables = { uri };
+
+		try {
+			const { data } = await QueryEngine.apolloClient.query( {
+				query: GetOpenGraphMetadataDocument,
+				variables,
+				fetchPolicy: 'network-only',
+				errorPolicy: 'all',
+			} );
+
+			return parseOpenGraphMetadata( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				if ( error.networkError ) {
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches Twitter metadata for a specific route.
+	 *
+	 * @param uri - The URI of the route.
+	 * @return Parsed Twitter metadata.
+	 */
+	static getTwitterMetadata = async (
+		uri: string
+	): Promise< ParsedTwitterMetadata > => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+		const variables = { uri };
+
+		try {
+			const { data } = await QueryEngine.apolloClient.query( {
+				query: GetTwitterMetadataDocument,
+				variables,
+				fetchPolicy: 'network-only',
+				errorPolicy: 'all',
+			} );
+
+			return parseTwitterMetadata( data );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
