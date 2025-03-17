@@ -19,7 +19,7 @@ const CoreList: CoreListType = ( { attributes, children }: CoreListProps ) => {
 	const classNames = cn( cssClassName );
 
 	const combinedStyles: React.CSSProperties = {
-		...( style && getStylesFromAttributes( { style } ) ),
+		...getStylesFromAttributes( { style } ),
 		listStyleType: type ?? undefined,
 	};
 

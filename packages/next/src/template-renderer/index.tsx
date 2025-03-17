@@ -26,14 +26,12 @@ export async function TemplateRenderer( {
 }: TemplateRendererProps ) {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
-
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
 		await getTemplateData( pathname || '/' );
-
 	// @todo: Script modules should load before styles to handle ordering properly
 	return (
 		<>
-			<TemplateHead { ...( stylesheets && { stylesheets } ) } />
+			<TemplateHead stylesheets={ stylesheets } />
 			<TemplateScripts
 				scripts={ scripts }
 				scriptModules={ scriptModules }

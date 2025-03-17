@@ -1,5 +1,5 @@
 export type TemplateHeadProps = {
-	stylesheets?: StyleSheetProps[] | null;
+	stylesheets?: StyleSheetProps[] | null | undefined;
 };
 
 export type ScriptModuleDependencyProps = {

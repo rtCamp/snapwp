@@ -93,7 +93,7 @@ const CoreCover: CoreCoverType = ( {
 	const isImgElement = ! ( hasParallax || isRepeated );
 
 	const styleObject = {
-		...( style && getStylesFromAttributes( { style } ) ),
+		...getStylesFromAttributes( { style } ),
 		minHeight: minHeight || undefined,
 	};
 
@@ -150,7 +150,7 @@ const CoreCover: CoreCoverType = ( {
 						style={ { objectPosition } }
 						data-object-fit="cover"
 						data-object-position={ objectPosition }
-						alt={ imageProps.alt }
+						alt={ alt }
 					/>
 				) : (
 					<div

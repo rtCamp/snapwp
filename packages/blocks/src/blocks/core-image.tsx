@@ -190,7 +190,7 @@ const getImageProps = (
 	} = attributes || {};
 
 	const imageStyles: CSSProperties = {
-		...( style && getStylesFromAttributes( { style } ) ),
+		...getStylesFromAttributes( { style } ),
 		aspectRatio,
 		objectFit: scale as CSSProperties[ 'objectFit' ],
 	};
