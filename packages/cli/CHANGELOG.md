@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+### Patch Changes
+
+-   [#116](https://github.com/rtCamp/snapwp/pull/116) [`e7d4a56`](https://github.com/rtCamp/snapwp/commit/e7d4a56b1a6cf230bca87a25a4ac25b69180cabe) Thanks [@Pathan-Amaankhan](https://github.com/Pathan-Amaankhan)! - chore: Apply and enforce ESLint rules to `bin` and `cli` files
+
 ## 0.1.1
 
 ### Patch Changes
