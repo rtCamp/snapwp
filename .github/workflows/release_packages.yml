@@ -37,6 +37,17 @@ jobs:
                   commit: 'chore: version bump'
                   title: 'chore: Release packages 🏷️'
 
+            - name: Fix prettier on changesets pull request
+              if: steps.changesets.outputs.hasChangesets == 'true'
+              shell: bash
+              env:
+                  GH_TOKEN: ${{ github.token }}
+              run: |
+                  gh pr checkout ${{ steps.changesets.outputs.pullRequestNumber }}
+                  npm run format
+                  # If there are changes, commit, otherwise exit successfully
+                  git diff --exit-code || git commit -am "chore: format changesets" && git push orign HEAD
+
             - name: Check what packages to publish
               id: check_publish
               if: steps.changesets.outputs.hasChangesets == 'false'
