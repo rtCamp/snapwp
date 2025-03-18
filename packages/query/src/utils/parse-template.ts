@@ -142,12 +142,13 @@ function parseEnqueuedStylesheets(
 	templateByUri?: GetCurrentTemplateQuery[ 'templateByUri' ]
 ): StyleSheetProps[] | undefined {
 	return templateByUri?.enqueuedStylesheets?.nodes?.map( ( stylesheet ) => ( {
-		before: stylesheet?.before?.join( '' ) ?? null,
-		after: stylesheet?.after?.join( '' ) ?? null,
-		src: stylesheet?.src?.startsWith( '/' )
-			? wordpressUrl + stylesheet.src
-			: stylesheet.src ?? null,
-		handle: stylesheet.handle ?? null,
+		before: stylesheet?.before?.join( '' ) || null,
+		after: stylesheet?.after?.join( '' ) || null,
+		src:
+			( stylesheet?.src?.startsWith( '/' )
+				? wordpressUrl + stylesheet.src
+				: stylesheet?.src ) || null,
+		handle: stylesheet?.handle || null,
 	} ) );
 }
 
@@ -169,7 +170,7 @@ function parseScriptModules(
 			src: script?.src?.startsWith( '/' )
 				? `${ wordpressUrl }${ script.src }`
 				: script?.src ?? null,
-			extraData: script?.extraData ?? null,
+			extraData: script?.extraData || null,
 			dependencies:
 				script?.dependencies
 					?.filter(

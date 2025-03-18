@@ -68,6 +68,8 @@ const CoreVideo: CoreVideoType = ( {
 		return null;
 	}
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -96,9 +98,7 @@ const CoreVideo: CoreVideoType = ( {
 	return (
 		<figure
 			className={ classNames }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			<video
 				autoPlay={ autoplay || undefined }
@@ -112,9 +112,7 @@ const CoreVideo: CoreVideoType = ( {
 				src={ src }
 				playsInline={ playsInline || undefined }
 			>
-				<Tracks
-					{ ...( formattedTracks && { tracks: formattedTracks } ) }
-				/>
+				<Tracks tracks={ formattedTracks } />
 			</video>
 
 			{ caption && (

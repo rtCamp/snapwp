@@ -25,7 +25,9 @@ const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
  *
  * @return CSS position string or undefined if no focal point
  */
-const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
+const mediaPosition = (
+	focalPoint?: FocalPoint | null | undefined
+): string => {
 	if ( ! focalPoint ) {
 		focalPoint = DEFAULT_FOCAL_POINT;
 	}
@@ -146,11 +148,11 @@ const CoreCover: CoreCoverType = ( {
 					<Image
 						{ ...imageProps }
 						className={ imgClasses }
+						alt={ alt }
 						src={ url }
 						style={ { objectPosition } }
 						data-object-fit="cover"
 						data-object-position={ objectPosition }
-						alt={ alt }
 					/>
 				) : (
 					<div

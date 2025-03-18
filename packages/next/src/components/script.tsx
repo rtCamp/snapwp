@@ -1,13 +1,13 @@
-import type { PropsWithoutRef } from 'react';
 import NextScript, { type ScriptProps } from 'next/script';
+import type { PropsWithoutRef } from 'react';
 
 interface ScriptInterface {
-	after?: ( string | null )[] | null;
-	before?: ( string | null )[] | null;
-	extraData?: string | null;
-	handle?: string | null;
-	loadingStrategy?: 'ASYNC' | 'DEFER' | null;
-	groupLocation?: 'HEADER' | 'FOOTER' | null;
+	after?: ( string | null )[] | null | undefined;
+	before?: ( string | null )[] | null | undefined;
+	extraData?: string | null | undefined;
+	handle?: string | null | undefined;
+	loadingStrategy?: 'ASYNC' | 'DEFER' | null | undefined;
+	groupLocation?: 'HEADER' | 'FOOTER' | null | undefined;
 	src?: string | null | undefined;
 }
 

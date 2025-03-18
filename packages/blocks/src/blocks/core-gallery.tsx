@@ -25,6 +25,8 @@ const CoreGallery: CoreGalleryType = ( {
 }: CoreGalleryProps ) => {
 	const { caption, style } = attributes || {};
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -36,9 +38,7 @@ const CoreGallery: CoreGalleryType = ( {
 	return (
 		<figure
 			className={ className }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ children }
 			{ caption && (

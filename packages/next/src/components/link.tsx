@@ -5,7 +5,7 @@ import {
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import { type PartialWithUndefined } from '@snapwp/types';
+import type { PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
@@ -34,8 +34,8 @@ export default function Link( {
 }: PropsWithChildren<
 	LinkInterface &
 		(
-			| PartialWithUndefined< LinkProps >
 			| AnchorHTMLAttributes< HTMLAnchorElement >
+			| PartialWithUndefined< LinkProps >
 		)
 > ) {
 	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();

@@ -189,21 +189,19 @@ const getImageProps = (
 		sizeSlug,
 	} = attributes || {};
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	const imageStyles: CSSProperties = {
-		...getStylesFromAttributes( { style } ),
+		...styleObject,
 		aspectRatio,
 		objectFit: scale as CSSProperties[ 'objectFit' ],
 	};
 
 	const imageProps: ComponentProps< typeof Image > = {
 		title,
+		alt,
+		src: url,
 	};
-	if ( url ) {
-		imageProps.src = url;
-	}
-	if ( alt ) {
-		imageProps.alt = alt;
-	}
 
 	if ( connectedMediaItem?.node ) {
 		imageProps.sizes = connectedMediaItem.node.sizes;

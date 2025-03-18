@@ -24,6 +24,8 @@ const CoreAudio: CoreAudioType = ( {
 		return null;
 	}
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -36,9 +38,7 @@ const CoreAudio: CoreAudioType = ( {
 	return (
 		<figure
 			className={ classNames }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			<audio
 				controls

@@ -44,15 +44,15 @@ const CoreFile: CoreFileType = ( {
 		: '';
 	const classNames = cn( classNamesFromString );
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	const ariaLabel = fileName || FALLBACK_ARIA_LABEL;
 	const downloadText = downloadButtonText || FALLBACK_DOWNLOAD_BUTTON_TEXT;
 
 	return (
 		<div
 			className={ classNames }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ displayPreview && (
 				<object

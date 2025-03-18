@@ -19,12 +19,13 @@ const CoreColumns: CoreColumnsType = ( {
 }: CoreColumnsProps ) => {
 	const { cssClassName, style } = attributes || {};
 
+	const styleObject = getStylesFromAttributes( { style } );
 	const classNames = cn( cssClassName );
 
 	return (
 		<div
 			className={ classNames }
-			{ ...( style && { style: getStylesFromAttributes( { style } ) } ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ children }
 		</div>

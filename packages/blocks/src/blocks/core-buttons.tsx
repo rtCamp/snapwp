@@ -20,10 +20,12 @@ const CoreButtons: CoreButtonsType = ( {
 	const { cssClassName, style } = attributes || {};
 	const classNames = cn( cssClassName );
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	return (
 		<div
 			className={ classNames }
-			{ ...( style && { style: getStylesFromAttributes( { style } ) } ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ children }
 		</div>

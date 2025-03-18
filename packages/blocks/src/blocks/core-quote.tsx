@@ -17,12 +17,12 @@ const CoreQuote: CoreQuoteType = ( {
 }: CoreQuoteProps ) => {
 	const { style, citation, cssClassName } = attributes || {};
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	return (
 		<blockquote
-			className={ cssClassName || '' }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			className={ cssClassName || undefined }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ children }
 

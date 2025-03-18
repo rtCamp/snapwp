@@ -24,6 +24,8 @@ const CorePreformatted: CorePreformattedType = ( {
 }: CorePreformattedProps ) => {
 	const { content, style } = attributes || {};
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -36,9 +38,7 @@ const CorePreformatted: CorePreformattedType = ( {
 	return (
 		<pre
 			className={ classNames }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</pre>

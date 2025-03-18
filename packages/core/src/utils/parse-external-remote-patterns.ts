@@ -5,7 +5,9 @@
  *
  * @internal
  */
-export default function parseExternalRemotePatterns( str?: string ) {
+export default function parseExternalRemotePatterns(
+	str?: string | undefined
+) {
 	if ( ! str ) {
 		return [
 			{
@@ -14,6 +16,7 @@ export default function parseExternalRemotePatterns( str?: string ) {
 			},
 		];
 	}
+
 	return str
 		.split( ',' )
 		.map( ( urlString ) => {

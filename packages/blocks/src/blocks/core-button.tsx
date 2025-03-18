@@ -56,6 +56,7 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 
 	if ( url ) {
 		const href = replaceHostUrl( url, homeUrl, nextUrl );
+
 		return (
 			<div className={ classNames }>
 				<Link

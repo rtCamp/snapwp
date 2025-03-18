@@ -24,6 +24,11 @@ export default function flatListToHierarchical(
 		childrenKey = 'children',
 	}: Options = {}
 ): Data[] {
+	// Bail out if there is no data.
+	if ( ! data.length ) {
+		return [];
+	}
+
 	const tree: Data[] = [];
 	const childrenOf = new Map< string | number, Data[] >();
 

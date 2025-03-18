@@ -68,13 +68,13 @@ export default function ScriptModule( {
 			<Script
 				key={ depHandle || `${ handle }-dep-${ index }` }
 				type="module"
-				id={ depHandle }
 				src={ depSrc }
 				/*
 				 * Use lazyOnload strategy for dependencies to ensure they are loaded asynchronously.
 				 * This strategy is recommended for non-blocking scripts and they prevent preload warnings.
 				 */
 				strategy="lazyOnload"
+				{ ...( depHandle && { id: depHandle } ) }
 				{ ...props }
 			/>
 		);

@@ -234,12 +234,11 @@ class SnapWPConfigManager {
 					( key === 'homeUrl' || key === 'nextUrl' ) &&
 					typeof cfg[ key ] === 'string'
 				) {
-					cfg[ key ] = ( cfg[ key ] as string ).endsWith( '/' )
-						? ( ( cfg[ key ] as string ).slice(
-								0,
-								-1
-						  ) as T[ keyof T ] )
-						: cfg[ key ];
+					const value = cfg[ key ] as string;
+
+					cfg[ key ] = ( value.endsWith( '/' )
+						? value.slice( 0, -1 )
+						: value ) as unknown as T[ keyof T ];
 				}
 			}
 		);

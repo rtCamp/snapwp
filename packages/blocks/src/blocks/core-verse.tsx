@@ -21,6 +21,8 @@ const CoreVerse: CoreVerseType = ( {
 }: CoreVerseProps ) => {
 	const { style, content } = attributes ?? {};
 
+	const styleObject = getStylesFromAttributes( { style } );
+
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
@@ -33,9 +35,7 @@ const CoreVerse: CoreVerseType = ( {
 	return (
 		<pre
 			className={ classNames }
-			{ ...( style && {
-				style: getStylesFromAttributes( { style } ),
-			} ) }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</pre>

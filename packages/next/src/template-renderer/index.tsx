@@ -26,6 +26,7 @@ export async function TemplateRenderer( {
 }: TemplateRendererProps ) {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
+
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
 		await getTemplateData( pathname || '/' );
 
@@ -50,6 +51,7 @@ export async function TemplateRenderer( {
 				</main>
 			</TemplateScripts>
 			{ /* Hot Fix for adding classes to the body outside the root layout */ }
+
 			<Script
 				strategy="beforeInteractive"
 				dangerouslySetInnerHTML={ {
