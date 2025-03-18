@@ -46,7 +46,7 @@ jobs:
                   gh pr checkout ${{ steps.changesets.outputs.pullRequestNumber }}
                   npm run format
                   # If there are changes, commit, otherwise exit successfully
-                  git diff --exit-code || git commit -am "chore: format changesets" && git push orign HEAD
+                  git diff --exit-code || git commit -am "chore: format changesets" && git push origin HEAD
 
             - name: Check what packages to publish
               id: check_publish
