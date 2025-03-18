@@ -20,13 +20,11 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 	children,
 	attributes,
 }: CoreTemplatePartProps ) => {
-	const { templatePartTagName } = attributes || {};
-	/**
-	 * @todo add support for area_tag.
-	 * @see https://github.com/WordPress/gutenberg/blob/4775e7052b9e2ed7df46429e6e738de3faf2fb18/packages/block-library/src/template-part/index.php#L165
-	 */
-	const TagName = ( templatePartTagName ||
-		'div' ) as keyof JSX.IntrinsicElements;
+	const { templatePartTagName, area } = attributes || {};
+
+	const htmlTag = templatePartTagName || area || 'div';
+
+	const TagName = htmlTag as keyof JSX.IntrinsicElements;
 
 	/**
 	 * @todo replace with cssClassName once it's supported.
