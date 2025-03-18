@@ -1,4 +1,4 @@
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
 import type { Metadata } from 'next';
