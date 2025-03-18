@@ -2,8 +2,8 @@
 
 To ensure consistency and enable composability across the SnapWP framework, we use a shared configuration API that unifies two source:
 
-- The environment variables in the `.env` file.
-- The `snapwp.config.ts` config.
+-   The environment variables in the `.env` file.
+-   The `snapwp.config.ts` config.
 
 Configurations are used to power behavior behind the scenes, but can also be used directly in your application code with the `getConfig` function.
 
@@ -64,11 +64,11 @@ Config values are available via their respective keys in the `getConfig()` funct
 SnapWP extends the Next.js configuration using the `withSnapWP` function to configure certain settings automatically based on your Config API, such as using the WordPress URL for [`images.remotePatterns`](https://nextjs.org/docs/app/api-reference/components/image#remotepatterns).
 
 ```ts
-import withSnapWP from "@snapwp/next/withSnapWP";
+import withSnapWP from '@snapwp/next/withSnapWP';
 
-export default await withSnapWP({
-  // Your Next.js configuration
-});
+export default await withSnapWP( {
+	// Your Next.js configuration
+} );
 ```
 
 This function automatically loads configurations from `.env` and `snapwp.config.js|mjs|ts`, making them available for your Next.js application.
@@ -78,7 +78,7 @@ This function automatically loads configurations from `.env` and `snapwp.config.
 You can access the configuration values in your application code using the `getConfig` function from `@snapwp/config`.
 
 ```ts
-import { getConfig } from "@snapwp/core/config";
+import { getConfig } from '@snapwp/core/config';
 
 // Or any other valid configuration property.
 const { frontendUrl, wpHomeUrl, parserOptions } = getConfig();
