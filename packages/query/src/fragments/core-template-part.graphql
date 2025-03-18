@@ -1,6 +1,7 @@
 fragment CoreTemplatePartFrag on CoreTemplatePart {
 	renderedHtml
 	attributes {
+		area
 		className
 		slug
 		templatePartTagName: tagName
