@@ -1,8 +1,8 @@
-import type { PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
+import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
-import { getIcons } from '@/root-layout/icons-metadata';
+import type { PropsWithChildren } from 'react';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
