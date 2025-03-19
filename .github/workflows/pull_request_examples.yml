@@ -409,7 +409,7 @@ jobs:
             - name: Install dependencies
               working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: npm install
-            
+
             - name: Copy .env.example to .env
               working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
