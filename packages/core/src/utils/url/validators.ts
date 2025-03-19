@@ -1,5 +1,4 @@
 import { getConfig } from '@/config';
-import { isValidUrl } from '@/utils';
 
 /**
  * Check if a URL is the home URL.
@@ -77,4 +76,20 @@ export const isInternalUrl = (
 		isWPSiteUrl( url, ignoreProtocol ) ||
 		isWPHomeUrl( url, ignoreProtocol )
 	);
+};
+
+/**
+ * @param str A string to be validated as a Url.
+ * @return flag signifying validity.
+ *
+ * @internal
+ */
+export const isValidUrl = ( str: string ) => {
+	// When an invalid URL is passed, URL() throws an error. If an error is thrown, we will return false.
+	try {
+		const url = new URL( str );
+		return !! url;
+	} catch ( e ) {
+		return false;
+	}
 };
