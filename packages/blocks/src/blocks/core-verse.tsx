@@ -33,7 +33,10 @@ const CoreVerse: CoreVerseType = ( {
 	const classNames = cn( classNamesFromString );
 
 	return (
-		<pre className={ classNames } style={ styleObject }>
+		<pre
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ !! content && <Parse html={ content } /> }
 		</pre>
 	);
