@@ -13,6 +13,7 @@ const prompt = ( query, defaultValue = '' ) => {
 		input: process.stdin,
 		output: process.stdout,
 	} );
+
 	return new Promise( ( resolve ) => {
 		rl.question(
 			// Append default value to the query.

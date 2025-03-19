@@ -13,7 +13,7 @@ const updatePackageVersions = async ( projectDirPath ) => {
 		encoding: 'utf8',
 	} );
 
-	// Todo: This should be the latest version number of the packages.
+	// @todo: This should be the latest version number of the packages.
 	const updatedPackageJsonData = packageJsonData.replaceAll(
 		/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
 		'*'

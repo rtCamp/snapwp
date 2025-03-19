@@ -1,6 +1,8 @@
 const path = require( 'path' );
 const fs = require( 'fs/promises' );
-const { EXCLUDED_FILES_PATTERN } = require( '../constant.cjs' );
+
+const EXCLUDED_FILES_PATTERN =
+	/\/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$/;
 
 /**
  * Copies starter template to project directory.

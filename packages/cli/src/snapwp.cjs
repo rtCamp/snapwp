@@ -3,26 +3,34 @@
 // Dependencies
 const path = require( 'path' );
 const { program } = require( 'commander' );
-const { DEFAULT_PROJECT_PATH } = require( './constant.cjs' );
 const { prompt } = require( './utils/prompt.cjs' );
 const {
 	createProjectDirectory,
-} = require( './utils/createProjectDirectory.cjs' );
-const { setupEnvFile } = require( './utils/setupEnv.cjs' );
-const { copyStarterTemplate } = require( './utils/copyStarterTemplate.cjs' );
-const { setupNpmrc } = require( './utils/setupNpmrc.cjs' );
-const { updatePackageVersions } = require( './utils/updatePackagVersion.cjs' );
-const { printInstructions } = require( './utils/printInstructions.cjs' );
+} = require( './create-app/createProjectDirectory.cjs' );
+const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
+const {
+	copyStarterTemplate,
+} = require( './create-app/copyStarterTemplate.cjs' );
+const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
+const {
+	updatePackageVersions,
+} = require( './create-app/updatePackageVersions.cjs' );
+const {
+	printSuccessMessage,
+} = require( './create-app/printSuccessMessage.cjs' );
 
 /**
- * Main function to orchestrate the scaffolding process.
+ * Default project path if user doesn't provide any.
+ */
+const DEFAULT_PROJECT_PATH = './snapwp-app';
+
+/**
+ * Main function to create a new SnapWP project.
  */
 ( async () => {
 	try {
 		program.option( '--proxy', 'Use proxy registry.' ).parse();
 		const options = program.opts();
-
-		let useDefaultPath = false;
 
 		// Step 1: Get project directory from user
 		const projectDir = await prompt(
@@ -32,12 +40,10 @@ const { printInstructions } = require( './utils/printInstructions.cjs' );
 			DEFAULT_PROJECT_PATH
 		);
 
-		// Check if user is using default path
-		if ( projectDir.trim() === DEFAULT_PROJECT_PATH ) {
-			useDefaultPath = true;
-		}
-
 		const projectDirPath = path.resolve( projectDir );
+
+		// Check if user is using default path
+		const useDefaultPath = projectDir.trim() === DEFAULT_PROJECT_PATH;
 
 		// Step 2: Create project directory
 		await createProjectDirectory( projectDirPath );
@@ -47,8 +53,7 @@ const { printInstructions } = require( './utils/printInstructions.cjs' );
 		//        1. With --interactive: prompt for each env variable value and generate the .env file in projectDirPath.
 		//        2. With env variable flags (e.g. --{specific_env_variable}={value}): directly create the .env file using these values.
 		//        3. With --env_file: copy the provided .env file path into projectDirPath.
-
-		await setupEnvFile( projectDirPath, useDefaultPath );
+		await setupEnvFile( projectDirPath, false );
 
 		// Step 4: Copy starter template to project directory
 		await copyStarterTemplate( projectDirPath );
@@ -60,7 +65,7 @@ const { printInstructions } = require( './utils/printInstructions.cjs' );
 		await updatePackageVersions( projectDirPath );
 
 		// Step 7: Print instructions
-		printInstructions( projectDirPath, useDefaultPath );
+		printSuccessMessage( projectDirPath, false );
 
 		if ( useDefaultPath ) {
 			process.exit( 1 );
