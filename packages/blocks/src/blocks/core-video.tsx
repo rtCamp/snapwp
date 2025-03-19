@@ -18,7 +18,7 @@ import type {
  *
  * @return A list of `<track>` elements or `null` if no tracks are provided.
  */
-const Tracks = ( { tracks }: { tracks?: TrackProps[] } ) => {
+const Tracks = ( { tracks }: { tracks?: TrackProps[] | undefined } ) => {
 	if ( ! tracks || tracks.length === 0 ) {
 		return null;
 	}
@@ -96,7 +96,10 @@ const CoreVideo: CoreVideoType = ( {
 		.filter( ( track ): track is TrackProps => track !== null );
 
 	return (
-		<figure className={ classNames } style={ styleObject }>
+		<figure
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<video
 				autoPlay={ autoplay || undefined }
 				controls={ controls || undefined }

@@ -1,5 +1,6 @@
 import { cn, getStylesFromAttributes } from '@snapwp/core';
 import type { CoreList as CoreListType, CoreListProps } from '@snapwp/types';
+import type { CSSProperties } from 'react';
 
 /**
  * Renders the core/list block.
@@ -20,7 +21,7 @@ const CoreList: CoreListType = ( { attributes, children }: CoreListProps ) => {
 
 	const styleObject = getStylesFromAttributes( { style } );
 
-	const combinedStyles: React.CSSProperties = {
+	const combinedStyles: CSSProperties = {
 		...styleObject,
 		listStyleType: type ?? undefined,
 	};

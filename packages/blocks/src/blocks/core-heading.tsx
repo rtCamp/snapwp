@@ -25,8 +25,8 @@ const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
 
 	return (
 		<HeadingTag
-			style={ styleObject }
-			className={ cssClassName || undefined }
+			className={ cssClassName }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</HeadingTag>

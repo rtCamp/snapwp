@@ -16,16 +16,16 @@ interface MediaItem {
 }
 
 interface ImageInterface {
-	alt?: string;
-	className?: string;
+	alt?: string | undefined;
+	className?: string | undefined;
 	fill?: boolean;
-	height?: number;
+	height?: number | undefined;
 	image?: MediaItem;
 	priority?: boolean;
 	sizes?: string;
-	style?: CSSProperties;
-	width?: number;
-	src?: string;
+	style?: CSSProperties | undefined;
+	width?: number | undefined;
+	src?: string | undefined;
 	srcSet?: string;
 	fetchPriority?: 'high' | 'low' | 'auto';
 }
@@ -151,7 +151,7 @@ export default function Image( {
 			className={ cn( className, imageProps?.fill && 'object-cover' ) }
 			src={ src }
 			alt={ altText }
-			priority={ priority }
+			{ ...( priority && { priority } ) }
 		/>
 	) : null;
 }

@@ -7,7 +7,7 @@ export type CoreParagraphAttributes = BaseAttributes & {
 	direction?: string;
 	fontFamily?: string;
 	fontSize?: string;
-	style?: string;
+	style?: string | undefined;
 	textColor?: string;
 };
 
