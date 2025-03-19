@@ -59,15 +59,20 @@ function cssToReactStyle( str: string ): CSSProperties {
  */
 export default function getStyleObjectFromString(
 	css: object | string
-): CSSProperties {
+): CSSProperties | undefined {
 	// If object is given, return object (could be react style object mistakenly provided)
 	if ( typeof css === 'object' ) {
+		// If it's an empty object, return undefined
+		if ( Object.keys( css ).length === 0 ) {
+			return undefined;
+		}
+
 		return css as CSSProperties;
 	}
 
 	// If falsy, then probably empty string or null, nothing to be done there
 	if ( ! css ) {
-		return {} as CSSProperties;
+		return undefined;
 	}
 
 	// Only accepts strings
@@ -75,7 +80,7 @@ export default function getStyleObjectFromString(
 		Logger.error(
 			`Unexpected type "${ typeof css }" when expecting string, with value "${ css }"`
 		);
-		return {} as CSSProperties;
+		return undefined;
 	}
 
 	const style = cssToReactStyle( css );

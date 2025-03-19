@@ -8,7 +8,7 @@ export interface SnapWPEnv {
 	/**
 	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
-	corsProxyPrefix?: string;
+	corsProxyPrefix?: string | undefined;
 	/**
 	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_FRONTEND_URL`.
 	 */
@@ -76,6 +76,7 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
  *
  * @return The configuration object.
  */
+// @ts-ignore - ignore check for nextUrl,homeUrl to run missing environment variable test.
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
 	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
@@ -233,12 +234,11 @@ class SnapWPConfigManager {
 						key === 'wpSiteUrl' ) &&
 					typeof cfg[ key ] === 'string'
 				) {
-					cfg[ key ] = ( cfg[ key ] as string ).endsWith( '/' )
-						? ( ( cfg[ key ] as string ).slice(
-								0,
-								-1
-						  ) as T[ keyof T ] )
-						: cfg[ key ];
+					const value = cfg[ key ] as string;
+
+					cfg[ key ] = ( value.endsWith( '/' )
+						? value.slice( 0, -1 )
+						: value ) as unknown as T[ keyof T ];
 				}
 			}
 		);

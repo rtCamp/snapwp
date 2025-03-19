@@ -1,4 +1,4 @@
-import type { PropsWithChildren, CSSProperties, ReactNode } from 'react';
+import type { PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreGroupAttributes = BaseAttributes & {
@@ -11,10 +11,3 @@ export type CoreGroupProps = PropsWithChildren<
 >;
 
 export type CoreGroup = React.ComponentType< CoreGroupProps >;
-
-export interface TagProps {
-	name?: string;
-	className: string;
-	style: CSSProperties;
-	children: ReactNode;
-}

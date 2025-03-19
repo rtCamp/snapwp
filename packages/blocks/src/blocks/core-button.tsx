@@ -53,13 +53,12 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	}
 
 	if ( url ) {
-		// No need to convert URL to internal URL as the Link component handles it.
 		return (
 			<div className={ classNames }>
 				<Link
-					href={ url }
-					target={ linkTarget ?? undefined }
-					rel={ rel ?? undefined }
+					href={ url } // No need to convert URL to internal URL as the Link component handles it.
+					target={ linkTarget }
+					rel={ rel }
 					{ ...commonProps }
 				>
 					{ !! text && <Parse html={ text } /> }

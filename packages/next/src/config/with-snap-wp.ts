@@ -77,7 +77,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
  * @param nextConfig The Next.js configuration object.
  * @return The extended configuration object.
  */
-const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
+const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	const possibleSnapWPConfigPaths = [
 		'snapwp.config.ts',
 		'snapwp.config.js',

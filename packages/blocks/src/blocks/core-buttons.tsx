@@ -23,7 +23,10 @@ const CoreButtons: CoreButtonsType = ( {
 	const styleObject = getStylesFromAttributes( { style } );
 
 	return (
-		<div className={ classNames } style={ styleObject }>
+		<div
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ children }
 		</div>
 	);

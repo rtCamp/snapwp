@@ -36,7 +36,10 @@ const CoreAudio: CoreAudioType = ( {
 	const classNames = cn( classNamesFromString );
 
 	return (
-		<figure className={ classNames } style={ styleObject }>
+		<figure
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<audio
 				controls
 				src={ src }

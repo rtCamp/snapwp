@@ -6,6 +6,7 @@ import {
 	getGraphqlUrl,
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
+
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
 
 /**
