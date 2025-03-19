@@ -48,7 +48,7 @@ export const getIcons = async (): Promise< IconMetaData > => {
 		};
 	}
 
-	let fallBackIcons: IconMetaData = {
+	let fallbackIcons: IconMetaData = {
 		faviconIcons: [],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,
@@ -56,8 +56,8 @@ export const getIcons = async (): Promise< IconMetaData > => {
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
 	if ( settings.generalSettings.siteIcon.mediaItemUrl ) {
-		fallBackIcons = {
-			...fallBackIcons,
+		fallbackIcons = {
+			...fallbackIcons,
 			faviconIcons: [
 				{
 					sizes: '512x512',
@@ -69,7 +69,7 @@ export const getIcons = async (): Promise< IconMetaData > => {
 
 	// Return fallback icons if sizes are not present.
 	if ( ! settings.generalSettings.siteIcon.mediaDetails.sizes ) {
-		return fallBackIcons;
+		return fallbackIcons;
 	}
 
 	const sizes = settings.generalSettings.siteIcon.mediaDetails.sizes;
@@ -81,7 +81,7 @@ export const getIcons = async (): Promise< IconMetaData > => {
 
 	// Return fallback icons if no valid icons are found.
 	if ( ! validIcons.length ) {
-		return fallBackIcons;
+		return fallbackIcons;
 	}
 
 	// Filter icons by sizes.
