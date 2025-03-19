@@ -17,6 +17,7 @@ export default function Layout( { children }: PropsWithChildren ) {
  */
 export async function generateMetadata(): Promise< Metadata > {
 	const rootMetaData = await generateRootMetaData();
+
 	return {
 		...rootMetaData,
 	};

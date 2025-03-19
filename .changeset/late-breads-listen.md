@@ -1,5 +1,7 @@
 ---
-"snapwp": minor
+"@snapwp/query": patch
+"@snapwp/next": patch
+"snapwp": patch
 ---
 
-Fix: Favicon loading request was getting served as a page request
+feat: load default favicon metadata from WordPress
