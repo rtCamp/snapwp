@@ -11,22 +11,22 @@ interface GeneralSettingsProps {
 	};
 }
 
-type IconMetaData = {
+interface IconMetaData {
 	faviconIcons: FormattedIconData[];
 	appleIcons: FormattedIconData[];
 	msApplicationTileIcon: IconData;
-};
+}
 
-type IconData = {
+interface IconData {
 	sourceUrl: string;
 	height: string;
 	width: string;
-};
+}
 
-type FormattedIconData = {
+interface FormattedIconData {
 	url: string;
 	sizes: string;
-};
+}
 
 /**
  * Fetch site icon data and filter them into categorized formats.
