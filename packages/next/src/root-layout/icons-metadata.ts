@@ -3,9 +3,9 @@ import { QueryEngine } from '@snapwp/query';
 interface GeneralSettingsProps {
 	generalSettings: {
 		siteIcon: {
-			mediaItemUrl?: string;
+			mediaItemUrl: string | undefined;
 			mediaDetails: {
-				sizes?: IconData[];
+				sizes: IconData[];
 			};
 		};
 	};
@@ -13,8 +13,8 @@ interface GeneralSettingsProps {
 
 interface IconMetaData {
 	faviconIcons: FormattedIconData[];
-	appleIcons: FormattedIconData[];
-	msApplicationTileIcon: IconData;
+	appleIcons: FormattedIconData[] | undefined;
+	msApplicationTileIcon: IconData | undefined;
 }
 
 interface IconData {
@@ -36,19 +36,28 @@ interface FormattedIconData {
  *
  * @return Categorized icons.
  */
-export const getIcons = async (): Promise< Partial< IconMetaData > > => {
+export const getIcons = async (): Promise< IconMetaData > => {
 	const settings: GeneralSettingsProps | undefined =
 		await QueryEngine.getGeneralSettings();
 
 	if ( ! settings ) {
-		return {};
+		return {
+			faviconIcons: [],
+			appleIcons: undefined,
+			msApplicationTileIcon: undefined,
+		};
 	}
 
-	let fallBackIcons = {};
+	let fallBackIcons: IconMetaData = {
+		faviconIcons: [],
+		appleIcons: undefined,
+		msApplicationTileIcon: undefined,
+	};
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
 	if ( settings.generalSettings.siteIcon.mediaItemUrl ) {
 		fallBackIcons = {
+			...fallBackIcons,
 			faviconIcons: [
 				{
 					sizes: '512x512',
