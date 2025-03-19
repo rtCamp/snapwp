@@ -6,4 +6,4 @@
 "@snapwp/next": patch
 ---
 
-refctor: Add TS exactOptionalPropertyType rule
+refactor: Enforce `exactOptionalPropertyType` TypeScript rule
