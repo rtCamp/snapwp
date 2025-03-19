@@ -21,8 +21,11 @@ export const toFrontendUri = ( url: string ): string => {
 
 	const { wpHomeUrl, wpSiteUrl } = getConfig();
 
-	// Not ignoring protocol as we want to check for complete site URL.
 	const domainToUpdate = isWPSiteUrl( url ) ? wpSiteUrl : wpHomeUrl;
 
-	return addLeadingSlash( url.replace( domainToUpdate, '' ) );
+	// Remove protocol before replacement.
+	const normalizedDomain = domainToUpdate.replace( /^https?:\/\//, '' );
+	const normalizedUrl = url.replace( /^https?:\/\//, '' );
+
+	return addLeadingSlash( normalizedUrl.replace( normalizedDomain, '' ) );
 };

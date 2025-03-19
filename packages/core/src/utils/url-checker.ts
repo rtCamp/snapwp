@@ -33,15 +33,12 @@ export const isWPHomeUrl = (
  *
  * @param url The URL to check.
  * @param {boolean} ignoreProtocol - Whether to ignore the HTTP protocol when comparing URLs.
- * Defaults to `false` for `siteUrl` since a different `siteUrl` often indicates a different
- * `homeUrl` or WordPress directory. If `true`, only the domain is compared, which may lead to
- * incorrect matches.
  *
  * @return Whether the URL is the site URL.
  */
 export const isWPSiteUrl = (
 	url: string,
-	ignoreProtocol: boolean = false
+	ignoreProtocol: boolean = true
 ): boolean => {
 	if ( ! isValidUrl( url ) ) {
 		return false;
@@ -50,8 +47,13 @@ export const isWPSiteUrl = (
 	const { wpSiteUrl } = getConfig();
 
 	if ( ignoreProtocol ) {
-		// Compare just the domains.
-		return new URL( url ).host === new URL( wpSiteUrl ).host;
+		const urlObject = new URL( url );
+		const siteUrlObject = new URL( wpSiteUrl );
+		// Compare domain and path.
+		return (
+			urlObject.host === siteUrlObject.host &&
+			urlObject.pathname.startsWith( siteUrlObject.pathname )
+		);
 	}
 
 	// Compare with the protocol.
@@ -72,7 +74,7 @@ export const isInternalUrl = (
 ): boolean => {
 	return (
 		url.startsWith( '/' ) ||
-		isWPHomeUrl( url, ignoreProtocol ) ||
-		isWPSiteUrl( url, ignoreProtocol )
+		isWPSiteUrl( url, ignoreProtocol ) ||
+		isWPHomeUrl( url, ignoreProtocol )
 	);
 };

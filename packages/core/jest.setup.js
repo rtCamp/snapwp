@@ -3,7 +3,7 @@ global.__snapWPConfig = {};
 global.__envConfig = {
 	frontendUrl: 'https://env-next.example.com',
 	wpHomeUrl: 'https://env-home.example.com',
-	wpSiteUrl: 'https://env-home.example.com',
+	wpSiteUrl: 'https://env-home.example.com/wp',
 	graphqlEndpoint: 'env-index.php?graphql',
 	uploadsDirectory: '/env-wp-content/uploads',
 	restUrlPrefix: '/env-wp-json',
