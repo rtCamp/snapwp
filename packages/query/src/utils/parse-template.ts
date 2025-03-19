@@ -97,8 +97,8 @@ function parseEnqueuedScripts(
 				// Ensure the src is an absolute URL.
 				src: script?.src?.startsWith( '/' )
 					? wordpressUrl + script.src
-					: script.src,
-				handle: script.handle,
+					: script.src ?? null,
+				handle: script.handle ? script.handle : null,
 			};
 		}
 	);
@@ -142,12 +142,13 @@ function parseEnqueuedStylesheets(
 	templateByUri?: GetCurrentTemplateQuery[ 'templateByUri' ]
 ): StyleSheetProps[] | undefined {
 	return templateByUri?.enqueuedStylesheets?.nodes?.map( ( stylesheet ) => ( {
-		before: stylesheet?.before?.join( '' ),
-		after: stylesheet?.after?.join( '' ),
-		src: stylesheet?.src?.startsWith( '/' )
-			? wordpressUrl + stylesheet.src
-			: stylesheet.src,
-		handle: stylesheet.handle,
+		before: stylesheet?.before?.join( '' ) || null,
+		after: stylesheet?.after?.join( '' ) || null,
+		src:
+			( stylesheet?.src?.startsWith( '/' )
+				? wordpressUrl + stylesheet.src
+				: stylesheet?.src ) || null,
+		handle: stylesheet?.handle || null,
 	} ) );
 }
 
@@ -169,7 +170,7 @@ function parseScriptModules(
 			src: script?.src?.startsWith( '/' )
 				? `${ wordpressUrl }${ script.src }`
 				: script?.src ?? null,
-			extraData: script?.extraData,
+			extraData: script?.extraData || null,
 			dependencies:
 				script?.dependencies
 					?.filter(
