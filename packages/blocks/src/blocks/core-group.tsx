@@ -1,14 +1,14 @@
-import { createElement } from 'react';
+import {
+	createElement,
+	type CSSProperties,
+	type PropsWithChildren,
+} from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import type {
-	CoreGroup as CoreGroupType,
-	CoreGroupProps,
-	TagProps,
-} from '@snapwp/types';
+import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
 
 /**
  * Renders an HTML element with the specified tag name.
@@ -21,7 +21,16 @@ import type {
  *
  * @return The rendered HTML element or the children if no tag name is provided.
  */
-const Tag = ( { name, className, style, children }: TagProps ) => {
+const Tag = ( {
+	name,
+	className,
+	style,
+	children,
+}: PropsWithChildren< {
+	name?: string;
+	className: string;
+	style?: CSSProperties;
+} > ) => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}
@@ -59,7 +68,11 @@ const CoreGroup: CoreGroupType = ( {
 	const tag = tagName || 'div';
 
 	return (
-		<Tag name={ tag } className={ classNames } style={ styleObject }>
+		<Tag
+			name={ tag }
+			className={ classNames }
+			{ ...( !! styleObject && { style: styleObject } ) }
+		>
 			{ children }
 		</Tag>
 	);

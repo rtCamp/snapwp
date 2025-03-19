@@ -56,7 +56,7 @@ const Figure = ( {
 					href={ href }
 					className={ linkClass }
 					target={ linkTarget }
-					{ ...( rel && { rel } ) }
+					rel={ rel }
 				>
 					{ children }
 				</Link>
@@ -198,9 +198,9 @@ const getImageProps = (
 	};
 
 	const imageProps: ComponentProps< typeof Image > = {
-		src: url,
-		alt,
 		title,
+		alt,
+		src: url,
 	};
 
 	if ( connectedMediaItem?.node ) {
@@ -269,7 +269,7 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
  */
 const extractInteractivityAttributesForElement = (
 	element: string,
-	renderedHtml?: string | null
+	renderedHtml?: string | null | undefined
 ) => {
 	if ( ! renderedHtml ) {
 		return {};

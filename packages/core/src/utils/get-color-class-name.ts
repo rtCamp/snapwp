@@ -6,8 +6,8 @@
  * @return The generated CSS class name or undefined if parameters are missing.
  */
 export default function getColorClassName(
-	colorContextName?: string,
-	colorSlug?: string
+	colorContextName?: string | undefined,
+	colorSlug?: string | undefined
 ) {
 	if ( ! colorContextName || ! colorSlug ) {
 		return undefined;

@@ -31,8 +31,8 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 
 	const classNames = cn( cssClassName );
 	const styleObject = getStylesFromAttributes( { style } );
-
 	const { homeUrl, nextUrl } = getConfig();
+
 	const commonProps = {
 		className: linkClassName ?? undefined,
 		style: styleObject,
@@ -56,12 +56,13 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 
 	if ( url ) {
 		const href = replaceHostUrl( url, homeUrl, nextUrl );
+
 		return (
 			<div className={ classNames }>
 				<Link
 					href={ href }
-					target={ linkTarget ?? undefined }
-					rel={ rel ?? undefined }
+					target={ linkTarget }
+					rel={ rel }
 					{ ...commonProps }
 				>
 					{ !! text && <Parse html={ text } /> }

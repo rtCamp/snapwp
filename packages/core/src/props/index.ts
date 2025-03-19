@@ -1,8 +1,4 @@
-export type TemplateHeadProps = {
-	stylesheets?: StyleSheetProps[] | null;
-};
-
-export type ScriptModuleDependencyProps = {
+type ScriptModuleDependencyProps = {
 	importType?: string | null;
 	connectedScriptModule?: {
 		handle: string;
