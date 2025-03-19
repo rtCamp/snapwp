@@ -39,7 +39,11 @@ export async function RootLayout( {
  * @return Merged metadata.
  */
 export async function generateRootMetaData(): Promise< Metadata > {
-	// Fetch icons in required format, apply faviconIcons and apple touch icons in icons metadata property while apply msapplication-TileImage in other metadata property
+	/**
+	 * Fetch icons in required format, apply faviconIcons and apple touch icons in icons metadata property while apply msapplication-TileImage in other metadata property.
+	 *
+	 * @todo Review composability when implementing SEO metadata
+	 */
 	const { faviconIcons, appleIcons, msApplicationTileIcon } =
 		await getIcons();
 

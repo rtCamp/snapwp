@@ -32,6 +32,8 @@ interface FormattedIconData {
  * Fetch site icon data and filter them into categorized formats.
  * @see - https://developer.wordpress.org/reference/functions/wp_site_icon/#:~:text=Displays%20site%20icon%20meta%20tags. Reason why we are different resolution icons into individual category.
  *
+ * @todo Refactor for composability alongside SEO metadata patterns
+ *
  * @return Categorized icons.
  */
 export const getIcons = async (): Promise< Partial< IconMetaData > > => {
