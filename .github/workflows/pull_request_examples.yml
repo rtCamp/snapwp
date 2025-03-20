@@ -1,4 +1,5 @@
 name: CI - Examples
+
 on:
     pull_request:
         branches:
@@ -23,6 +24,10 @@ on:
                 default: '[20]'
                 type: string
 
+permissions:
+    contents: read
+    pull-requests: read
+
 env:
     #  NODE_VERSIONS: '[18, 20, 22]'
     NODE_VERSIONS: '[20]'
@@ -41,7 +46,7 @@ jobs:
               uses: actions/checkout@v4
             - name: Filter paths
               id: filter
-              uses: dorny/paths-filter@v3
+              uses: dorny/paths-filter@de90cc6fb38fc0963ad72b210f1f284cd68cea36
               with:
                   filters: ${{ env.PATHS }}
         outputs:
@@ -96,7 +101,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run ESLint
@@ -145,7 +150,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
                   npm run codegen
 
@@ -184,7 +189,7 @@ jobs:
               uses: actions/checkout@v4
               with:
                   token: '${{ secrets.GITHUB_TOKEN }}'
-                  repository: '${{ github.repository_owner }}/snapwp-helper'
+                  repository: 'rtcamp/snapwp-helper'
                   path: snapwp-helper
                   ref: ${{ env.SNAPWP_HELPER_REF }}
 
@@ -194,7 +199,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
 
             - name: Setup PHP
-              uses: shivammathur/setup-php@v2
+              uses: shivammathur/setup-php@9e72090525849c5e82e596468b86eb55e9cc5401 # 2.32.0
               with:
                   php-version: '8.2'
                   extensions: mbstring, intl
@@ -212,7 +217,7 @@ jobs:
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
             - name: Install Composer deps for SnapWP Helper
-              uses: ramsey/composer-install@v3
+              uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # 3.0.0
               with:
                   working-directory: '${{ github.workspace }}/snapwp-helper'
                   composer-options: '--no-progress'
@@ -237,7 +242,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Build assets
@@ -287,7 +292,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run unit tests
@@ -336,7 +341,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run npm audit
@@ -385,7 +390,7 @@ jobs:
             - name: Install dependencies
               run: |
                   cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm ci
+                  npm install
                   cp .env.example .env
 
             - name: Run Prettier

@@ -121,7 +121,7 @@ The Script component is a flexible wrapper around Next.js' `<Script>`, allowing 
 -   `extraData`: Extra information needed for the script
 -   `handle`: A unique identifier for the script.
 -   `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
--   `location`: Defines where the script should be loaded (header or footer).
+-   `groupLocation`: Defines where the script should be loaded (header or footer).
 -   `src`: The source of the asset.
 
 This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
@@ -137,7 +137,7 @@ export default function ScriptExample() {
                 src="https://example.com/main.js"
                 handle="example-main-script"
                 loadingStrategy="ASYNC"
-                location="header"
+                groupLocation="HEADER"
             />
         </div>
     );
@@ -167,16 +167,16 @@ export default function ScriptModuleExample() {
             <ScriptModule
                 src="https://example.com/main.js"
                 handle="example-main-script"
-                dependencies=[
-                 {
-                importType: 'static',
-                connectedScriptModule: {
-                    handle: '@module',
-                    src: 'http://example.com/index.min.js'
-                     }
-                 }
-                ]
-             />
+                dependencies={[
+                    {
+                        importType: 'STATIC',
+                        connectedScriptModule: {
+                            handle: '@module',
+                            src: 'http://example.com/index.min.js'
+                        }
+                    }
+                ]}
+            />
         </div>
     );
 }
@@ -206,6 +206,38 @@ export default function CustomFonts() {
     );
 }
 ```
+
+### `getGlobalStyles()`
+
+Global styles can be modified by passing the `getGlobalStyles` attribute to the [RootLayout](./src/root-layout/index.tsx) within the `src/app/layout.tsx` file of the frontend application.
+
+`getGlobalStyles` takes an async callback function that returns an object containing global styles.
+
+The default definition for `getGlobalStyles` function passed in `getGlobalStyles` attribute can be found in [@snapwp/query](../packages/query/README.md) package.
+
+Type Definition of `getGlobalStyles`:
+
+```typescript
+type getGlobalStyles = () => Promise< GlobalHeadProps >;
+```
+
+Type definition of `GlobalHeadProps` can be found in [@snapwp/core](../packages/core/README.md) package.
+
+### `getTemplateData()`
+
+Template data can be modified by passing `getTemplateData` attribute to the [TemplateRenderer](./src/template-renderer/index.tsx) within `src/app/[[...path]]/page.tsx` file of the frontend application.
+
+`getTemplateData` takes an async callback to get template styles and content.
+
+The default definition for `getTemplateData` function passed in `getTemplateData` attribute can be found in [@snapwp/query](../packages/query/README.md) package.
+
+Type Definition of `getTemplateData`:
+
+```typescript
+type getTemplateData = ( uri: string ) => Promise< TemplateData >;
+```
+
+Type definition of `TemplateData` can be found in [@snapwp/core](../packages/core/README.md) package.
 
 ## Contributing
 

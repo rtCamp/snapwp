@@ -1,17 +1,14 @@
-import {
-	type BlockData,
-	type BlockTreeNode,
-	type BlockDefinitions,
-} from '@snapwp/core';
 import defaultBlockDefinitions from '@/blocks';
+import Default from '@/blocks/default';
 import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
+import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 /**
  * Singleton class that renders blocks using defined React components.
  * Falls back to a default block if the type isn't found.
  */
 export default class BlockManager {
-	private static blockDefinitions: BlockDefinitions = defaultBlockDefinitions;
+	private static blockDefinitions = defaultBlockDefinitions;
 
 	/**
 	 * Update block definitions to be used while rendering blocks.
@@ -48,13 +45,22 @@ export default class BlockManager {
 	 * @param node - A flat list of blocks.
 	 */
 	public static attachRendererToTreeNode = ( node: BlockTreeNode ): void => {
-		if (
-			BlockManager.blockDefinitions[ node.type ] !== undefined &&
-			BlockManager.blockDefinitions[ node.type ] !== null
-		) {
-			node.renderer = BlockManager.blockDefinitions[ node.type ];
+		const customBlockDefinition =
+			BlockManager.blockDefinitions[ node.type ];
+		const defaultBlockDefinition = defaultBlockDefinitions[ node.type ];
+
+		if ( customBlockDefinition === null ) {
+			// If explicitly set to null in custom definitions, use default renderer
+			node.renderer = BlockManager.blockDefinitions.default || Default;
+		} else if ( customBlockDefinition ) {
+			// If custom definition exists, use it
+			node.renderer = customBlockDefinition;
+		} else if ( defaultBlockDefinition ) {
+			// If no custom definition but default definition exists, use default
+			node.renderer = defaultBlockDefinition;
 		} else {
-			node.renderer = BlockManager.blockDefinitions.default;
+			// If no definition found anywhere, use default renderer and prune children
+			node.renderer = BlockManager.blockDefinitions.default || Default;
 			node.children = null;
 		}
 

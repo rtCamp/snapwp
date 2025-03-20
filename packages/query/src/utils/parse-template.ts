@@ -1,14 +1,13 @@
-import { ApolloQueryResult } from '@apollo/client';
-import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 import {
-	BlockData,
 	Logger,
 	type EnqueuedScriptProps,
 	type StyleSheetProps,
 	type ScriptModuleProps,
-	TemplateData,
 	TemplateParseError,
 } from '@snapwp/core';
+import type { BlockData } from '@snapwp/types';
+import type { ApolloQueryResult } from '@apollo/client';
+import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
 /**
  * Parses template query data into props for rendering a template.
@@ -23,7 +22,7 @@ export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
 	wordpressUrl: string,
 	uri: string
-): TemplateData {
+) {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error(
@@ -34,14 +33,11 @@ export default function parseQueryResult(
 		} );
 	}
 
-	// Check if data.templateByUri is null
-	if ( ! queryData.data.templateByUri ) {
-		throw new TemplateParseError(
-			`Error fetching template data for uri: ${ uri }`
-		);
-	}
-
-	if ( ! queryData.data && queryData.errors?.length ) {
+	// If there is no data or templateByUri in the query data and there are errors, throw an error.
+	if (
+		( ! queryData.data || ! queryData.data.templateByUri ) &&
+		queryData.errors?.length
+	) {
 		throw new TemplateParseError(
 			`Error fetching template data for uri: ${ uri }`
 		);

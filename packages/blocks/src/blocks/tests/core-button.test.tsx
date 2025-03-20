@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CoreButton from '../core-button';
@@ -43,6 +42,7 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 
 		const { asFragment } = render(
@@ -71,6 +71,7 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 
 		const { asFragment } = render(
@@ -118,6 +119,7 @@ describe( 'CoreButton Component', () => {
 			url: 'https://example.com',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 		const { asFragment } = render(
 			<CoreButton attributes={ attributesWithoutTag } />
@@ -140,6 +142,7 @@ describe( 'CoreButton Component', () => {
 			tagName: 'a',
 			rel: 'noopener',
 			linkTarget: '_blank',
+			buttonType: 'button',
 		};
 		const { asFragment } = render(
 			<CoreButton attributes={ attributesWithoutText } />
@@ -195,18 +198,6 @@ describe( 'CoreButton Component', () => {
 	test( 'renders with empty attributes object', () => {
 		const { asFragment, container } = render(
 			<CoreButton attributes={ {} } />
-		);
-		const linkElement = container.querySelector( 'a' );
-
-		expect( linkElement ).not.toBeNull();
-		expect( linkElement!.tagName ).toBe( 'A' );
-		expect( linkElement ).toBeEmptyDOMElement();
-		expect( asFragment() ).toMatchSnapshot();
-	} );
-
-	test( 'renders with null attributes', () => {
-		const { asFragment, container } = render(
-			<CoreButton attributes={ null } />
 		);
 		const linkElement = container.querySelector( 'a' );
 

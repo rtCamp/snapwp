@@ -23,6 +23,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	 * @see node_modules/next/dist/server/config-shared.js:169
 	 * @return The modified webpack configuration.
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
 	return ( config: any ) => {
 		const configPath = `
 			import __snapWPConfig from '${ snapWPConfigPath }';
@@ -78,14 +79,17 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
  */
 const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 	const possibleSnapWPConfigPaths = [
-		process.cwd() + '/snapwp.config.js',
-		process.cwd() + '/snapwp.config.mjs',
+		'snapwp.config.ts',
+		'snapwp.config.js',
+		'snapwp.config.mjs',
 	];
 
 	// Locate the SnapWP configuration file.
 	let snapWPConfigPath = possibleSnapWPConfigPaths.find(
 		( possibleSnapWPConfigPath ) => {
-			return fs.existsSync( possibleSnapWPConfigPath );
+			return fs.existsSync(
+				`${ process.cwd() }/${ possibleSnapWPConfigPath }`
+			);
 		}
 	);
 
@@ -93,21 +97,24 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 		throw new Error( 'SnapWP configuration file not found.' );
 	}
 
-	// Platform-specific handling
-	if ( process.platform === 'win32' ) {
-		// Use path.normalize to replace backslashes correctly
-		snapWPConfigPath = path.normalize( snapWPConfigPath );
-		// Convert it to a file:// URL
-		snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
-	}
+	// Use path.normalize to replace backslashes correctly
+	snapWPConfigPath = path.normalize(
+		`${ process.cwd() }/${ snapWPConfigPath }`
+	);
+	// Convert it to a file:// URL
+	snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
 
-	const snapWPConfig = ( await import( snapWPConfigPath ) ).default;
-	setConfig( snapWPConfig );
+	setConfig();
 	const homeUrl = new URL( getConfig().homeUrl );
+
+	const userImages = nextConfig?.images ?? {};
+	const userRemotePatterns = userImages.remotePatterns ?? [];
 
 	return {
 		...nextConfig,
 		images: {
+			// User image config is appended before default config. Otherwise default remote patterns will be overridden
+			...userImages,
 			remotePatterns: [
 				{
 					protocol: 'http',
@@ -117,6 +124,7 @@ const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
 					protocol: 'https',
 					hostname: homeUrl.hostname,
 				},
+				...userRemotePatterns,
 			],
 		},
 		webpack: modifyWebpackConfig( snapWPConfigPath ),

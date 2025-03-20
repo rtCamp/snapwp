@@ -1,5 +1,4 @@
 name: Deploy Example on merge
-
 on:
     push:
         branches:
@@ -14,6 +13,9 @@ on:
                 options:
                     - nextjs/starter
                 default: nextjs/starter
+
+permissions:
+    contents: read
 
 env:
     # The commands to run to build/start the example. They will run relative to the selected example directory.
@@ -106,11 +108,11 @@ jobs:
                   rm "$GITHUB_WORKSPACE/.ssh/__deploy_key__"
 
             - name: Slack Notification
-              uses: rtCamp/action-slack-notify@master
+              uses: rtCamp/action-slack-notify@c33737706dea87cd7784c687dadc9adf1be59990 # v2.3.2
               env:
                   SLACK_CHANNEL: bots-wp-decoupled
                   SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
 
             - name: Cleanup
               if: always()
-              uses: rtCamp/action-cleanup@master
+              uses: rtCamp/action-cleanup@b7d0ca1703e3255f54d69b4da4cadccee99a44e6 # v1.2.0

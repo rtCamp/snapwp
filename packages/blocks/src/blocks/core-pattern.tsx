@@ -1,4 +1,7 @@
-import React from 'react';
+import type {
+	CorePattern as CorePatternType,
+	CorePatternProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/pattern block.
@@ -8,7 +11,9 @@ import React from 'react';
  *
  * @return The rendered block.
  */
-export default function CorePattern( { children }: any ) {
+const CorePattern: CorePatternType = ( { children }: CorePatternProps ) => {
 	// Patterns contain only children, so we just return them.
 	return <>{ children }</>;
-}
+};
+
+export default CorePattern;

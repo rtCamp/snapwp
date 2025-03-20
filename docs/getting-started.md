@@ -7,7 +7,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 ### Prerequisites
 
 -   **PHP**: v7.4+
--   **WordPress**: v6.0+
+-   **WordPress**: v6.7+
 -   A **[Block Theme](https://wordpress.org/documentation/article/block-themes/)**
 
 ### Installation Steps
@@ -50,17 +50,18 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     1. Enter the path to the directory where you want to create the app, e.g. `./my-headless-app`
     2. Create an Environment File:
 
-        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper into the file created.
+        1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` into the file created.
 
          <a href="./images/snapwp-helper-env.png">
            <figure>
              <!--@todo: link to snapwp-helper repo for image-->
-             <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
+             <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;" />
+             <br />
              <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
            </figure>
          </a>
 
-        2. Uncomment and update the `NEXT_PUBLIC_URL` variable to match the URL of your frontend app, and adjust any other [environment variables as needed](./config-api.md#environment-variables).
+        2. Adjust any [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
     3. Return to the terminal and press `Enter` to continue the setup process.
@@ -73,7 +74,83 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 ### Manual Installation
 
-@todo
+1. Install the required packages in your Next.js project:
+
+    ```bash
+    npm install --save @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
+    ```
+
+2. Create an `.env` file in the project root. The contents for the .env file can be copied from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from your [WordPress backend](#backend-setup).
+
+3. Create `snapwp.config.ts` in the project root with the following content.
+
+    ```typescript
+    // snapwp.config.ts
+    import type { SnapWPConfig } from '@snapwp/core/config';
+
+    const config: SnapWPConfig = {};
+
+    export default config;
+    ```
+
+4. Update your [NextJS Config file](https://nextjs.org/docs/api-reference/next.config.js/introduction).
+
+    **Important**: Make sure to use the `*.mjs` filetype for your config (i.e `next.config.mjs` ) so that top-level `await` can be used.
+
+    ```javascript
+    // next.config.mjs
+    import withSnapWP from '@snapwp/next/withSnapWP';
+
+    export default await withSnapWP( {} );
+    ```
+
+5. Create a default app route at the path `src/app/[[...path]]/page.tsx`. Use the `TemplateRenderer` and `EditorBlocksRenderer` to create the route.
+
+    ```typescript
+    // src/app/[[...path]]/page.tsx
+    import { TemplateRenderer } from '@snapwp/next';
+    import { EditorBlocksRenderer } from '@snapwp/blocks';
+
+    export default function Page() {
+      return (
+        <TemplateRenderer>
+          { ( editorBlocks ) => {
+            return <EditorBlocksRenderer editorBlocks={ editorBlocks } />;
+          } }
+        </TemplateRenderer>
+      );
+    }
+    ```
+
+    **Important**: Make sure you have no other routes of the same specificity in your app. If you have an `app/page.tsx` file, you should delete it and instead integrate the code into the `src/app/[[...path]]/page.tsx` file.
+
+6. Create the Root Layout to load Global Styles, Fonts and WordPress's enqueued scripts/styles for the route. Make a file `src/app/layout.tsx`
+
+    ```typescript
+    // src/app/layout.tsx
+    import { RootLayout } from '@snapwp/next';
+
+    export default function Layout( { children }: React.PropsWithChildren<{}> ) {
+      return (
+        <RootLayout>
+          <>{ children }</>
+        </RootLayout>
+      );
+    }
+    ```
+
+> [!NOTE]
+> Currently, SnapWP only supports webpack for local development. If your existing project uses Turbopack, you will need to remove the `--turbopack` flag from the `dev` script in your `package.json` file.
+>
+> ```diff
+> ...
+>   "scripts": {
+> -    "dev": "next dev --turbopack",
+> +    "dev": "next dev",
+>     ...
+>   },
+> ...
+> ```
 
 ### Deployment
 
@@ -81,7 +158,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 ### Troubleshooting
 
-@todo
+If you encounter issues, check the [GitHub Issues](https://github.com/rtCamp/snapwp/issues) for known problems and workarounds.
 
 ## Additional Resources
 

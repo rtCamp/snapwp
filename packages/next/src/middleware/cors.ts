@@ -1,7 +1,12 @@
-import { NextResponse } from 'next/server';
-import type { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
+import {
+	NextResponse,
+	type NextFetchEvent,
+	type NextMiddleware,
+	type NextRequest,
+} from 'next/server';
 import { getConfig } from '@snapwp/core/config';
-import { MiddlewareFactory } from './utils';
+import type { MiddlewareFactory } from './utils';
+import { Logger } from '@snapwp/core';
 
 /**
  * Facilitates proxying resources from WP resources. Any request with `corsProxyPrefix`
@@ -52,8 +57,11 @@ export const corsProxyMiddleware: MiddlewareFactory = (
 				},
 			} );
 		} catch ( error ) {
-			// eslint-disable-next-line no-console
-			console.error( 'Proxy error:', error );
+			if ( ! ( error instanceof Error ) ) {
+				return;
+			}
+
+			Logger.error( 'Proxy error:', error );
 			return NextResponse.json(
 				{ error: 'Internal Server Error' },
 				{ status: 500 }

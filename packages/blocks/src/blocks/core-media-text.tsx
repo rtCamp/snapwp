@@ -1,54 +1,15 @@
-import React, { type ComponentProps, PropsWithChildren } from 'react';
+import type { ComponentProps } from 'react';
 import {
-	type BlockData,
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-
-/**
- * Props interface for CoreMediaText component
- */
-interface CoreMediaTextProps extends PropsWithChildren< BlockData > {
-	attributes?: CoreMediaTextAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	renderedHtml?: string | null;
-	mediaDetails?: MediaDetails;
-}
-
-interface CoreMediaTextAttributes {
-	href?: string;
-	linkClass?: string;
-	linkTarget?: string;
-	mediaAlt?: string;
-	mediaId?: number;
-	mediaPosition?: 'left' | 'right';
-	mediaSizeSlug?: string;
-	mediaType?: 'image' | 'video';
-	mediaUrl?: string;
-	mediaWidth?: number;
-	rel?: string;
-	style?: string;
-	imageFill?: boolean;
-	focalPoint?: FocalPoint;
-}
-
-interface FocalPoint {
-	x: number;
-	y: number;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		sizes: string;
-	};
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-}
+import type {
+	CoreMediaText as CoreMediaTextType,
+	CoreMediaTextProps,
+	FocalPoint,
+} from '@snapwp/types';
 
 /**
  * Default width for media content as percentage
@@ -92,13 +53,13 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
  * @param props.mediaDetails - Media details
  * @return Rendered component or null if no content
  */
-export default function CoreMediaText( {
+const CoreMediaText: CoreMediaTextType = ( {
 	attributes = {},
 	children,
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ) {
+}: CoreMediaTextProps ) => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;
@@ -213,4 +174,6 @@ export default function CoreMediaText( {
 			<div className="wp-block-media-text__content">{ children }</div>
 		</div>
 	);
-}
+};
+
+export default CoreMediaText;

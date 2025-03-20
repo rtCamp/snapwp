@@ -1,4 +1,3 @@
-import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import CoreButtons from '../core-buttons';
@@ -38,7 +37,7 @@ describe( 'CoreButtons', () => {
 		const children = <button>Click Me</button>;
 
 		const { asFragment } = render(
-			<CoreButtons attributes={ null }>{ children }</CoreButtons>
+			<CoreButtons>{ children }</CoreButtons>
 		);
 
 		const divElement = screen.getByRole( 'button', {

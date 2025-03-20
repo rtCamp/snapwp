@@ -1,15 +1,15 @@
 name: Publish to NPM
 
 on:
-    release:
-        types: [published]
-    # TODO: Remove when ready to publish
-    workflow_dispatch:
+    workflow_call:
         inputs:
-            tag:
-                description: 'The tag to publish to NPM'
+            updated:
+                description: 'JSON Array of updated packages'
                 required: true
-                default: 'v0.0.0'
+                type: string
+
+permissions:
+    contents: write
 
 env:
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
@@ -19,7 +19,7 @@ jobs:
         name: Generate WPGraphQL schema
         uses: './.github/workflows/generate-schema.yml'
         with:
-            ref: 'develop'
+            ref: 'main'
         secrets: inherit
 
     publish:
@@ -54,7 +54,24 @@ jobs:
             - name: Authenticate with npm
               run: echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" > ~/.npmrc
 
-            - name: Publish all packages in NPM Workspace to NPM
-              run: npm publish --access public --workspaces
+            - name: Publish to NPM
+              run: |
+                  sudo apt install jq
+                  declare -a package_array=($(echo '${{ inputs.updated }}' | jq -r '.[]'))
+                  for package in "${package_array[@]}"; do
+                    echo "Publishing $package"
+                    location="$(npm query ".workspace#$package" | jq -r '.[0].location')"
+                    version="$(npm query ".workspace#$package" | jq -r '.[0].version')"
+                    npm publish --access public --workspace "$location" "$package"
+                    # Make a GitHub Release
+                    bash '${{ github.workspace }}/.github/scripts/release_content.sh' "${{ github.workspace }}/$location/CHANGELOG.md" "$version"
+                    gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
+                  done
+
+                  git fetch origin main
+                  git fetch origin develop --shallow-since="$(git log -1 --pretty=format:"%aI" origin/main)"
+                  git pull --set-upstream origin develop:main
+                  git push origin develop:main
               env:
                   NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+                  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

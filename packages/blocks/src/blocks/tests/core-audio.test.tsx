@@ -1,4 +1,3 @@
-import React from 'react';
 import CoreAudio from '../core-audio';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
@@ -8,7 +7,6 @@ describe( 'CoreAudio', () => {
 		autoplay: true,
 		caption: 'Sample Caption',
 		loop: true,
-		preload: null,
 		src: 'sample-audio.mp3',
 		style: JSON.stringify( {
 			spacing: {
@@ -67,7 +65,7 @@ describe( 'CoreAudio', () => {
 	test( 'renders null when src is not provided', () => {
 		const attributesWithoutSrc = {
 			...attributes,
-			src: null,
+			src: undefined,
 		};
 
 		const { container, asFragment } = render(

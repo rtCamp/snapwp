@@ -1,8 +1,8 @@
-import React, { type PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';
-import { type EnqueuedScriptProps, type ScriptModuleProps } from '@snapwp/core';
+import type { EnqueuedScriptProps, ScriptModuleProps } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 
 /**
@@ -173,9 +173,11 @@ export function TemplateScripts( {
 } > ) {
 	// Separate scripts by location
 	const headerScripts =
-		scripts?.filter( ( script ) => script.location === 'header' ) ?? [];
+		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ??
+		[];
 	const footerScripts =
-		scripts?.filter( ( script ) => script.location === 'footer' ) ?? [];
+		scripts?.filter( ( script ) => script.groupLocation === 'FOOTER' ) ??
+		[];
 
 	return (
 		<>

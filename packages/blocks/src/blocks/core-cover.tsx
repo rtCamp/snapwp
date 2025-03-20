@@ -1,64 +1,17 @@
-import React, {
-	type ComponentProps,
-	type PropsWithChildren,
-	type ElementType,
-} from 'react';
+import type { ComponentProps } from 'react';
 import {
-	type BlockData,
 	getStylesFromAttributes,
 	findElementAndGetClassNames,
 	getColorClassName,
 	cn,
 } from '@snapwp/core';
 import { Image, Parse } from '@snapwp/next';
+import type {
+	CoreCover as CoreCoverType,
+	CoreCoverProps,
+	FocalPoint,
+} from '@snapwp/types';
 
-interface CoreCoverAttributes {
-	alt?: string;
-	backgroundType?: string;
-	contentPosition?: string;
-	customGradient?: string;
-	customOverlayColor?: string;
-	dimRatio?: number;
-	focalPoint?: FocalPoint;
-	gradient?: string;
-	hasParallax?: boolean;
-	id?: number;
-	isDark?: boolean;
-	isRepeated?: boolean;
-	minHeight?: number;
-	minHeightUnit?: string;
-	overlayColor?: string;
-	sizeSlug?: string;
-	style?: string;
-	tagName?: ElementType;
-	url?: string;
-	useFeaturedImage?: boolean;
-}
-
-interface CoreCoverProps extends PropsWithChildren< BlockData > {
-	attributes?: CoreCoverAttributes;
-	connectedMediaItem?: ConnectedMediaItem;
-	mediaDetails?: MediaDetails;
-	renderedHtml?: string | null;
-}
-
-interface ConnectedMediaItem {
-	node: {
-		databaseId: number;
-		sizes: string;
-		srcSet: string;
-		mediaItemUrl: string;
-	};
-}
-interface FocalPoint {
-	x: number;
-	y: number;
-}
-
-interface MediaDetails {
-	height: number;
-	width: number;
-}
 const IMAGE_BACKGROUND_TYPE = 'image';
 const VIDEO_BACKGROUND_TYPE = 'video';
 const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
@@ -91,13 +44,13 @@ const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
  * @param root0.mediaDetails - The media details object
  * @return The rendered cover block or null if using featured image
  */
-export default function CoreCover( {
+const CoreCover: CoreCoverType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,
 	children,
 	renderedHtml,
-}: CoreCoverProps ) {
+}: CoreCoverProps ) => {
 	// Rest of the component implementation remains unchanged
 	const {
 		alt,
@@ -231,4 +184,6 @@ export default function CoreCover( {
 			<div className={ innerContainerClassNames }>{ children }</div>
 		</Tag>
 	);
-}
+};
+
+export default CoreCover;

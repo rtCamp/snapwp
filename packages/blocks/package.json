@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/blocks",
-	"version": "0.0.1",
+	"version": "0.1.2",
 	"license": "AGPL-3.0",
 	"description": "Library for handling Gutenberg blocks.",
 	"author": "rtCamp",
@@ -40,7 +40,8 @@
 		"isomorphic-fetch": "^3.0.0",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"@snapwp/types": "*"
 	},
 	"peerDependencies": {
 		"@snapwp/core": "*",

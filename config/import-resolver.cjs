@@ -1,5 +1,3 @@
-/* eslint-env es6 */
-
 /**
  * External dependencies.
  */

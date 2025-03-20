@@ -2,7 +2,10 @@
 
 This is a headless WordPress application built with [Next.js](https://nextjs.org/), powered by [WPGraphQL](https://www.wpgraphql.com/) and [SnapWP](https://github.com/rtCamp/snapwp).
 
-## Getting Started
+## Quick Start
+
+> [!TIP]
+> We recommend reading the [Getting Started guide](https://github.com/rtCamp/snapwp/blob/develop/docs/getting-started.md) for a more in-depth overview of SnapWP.
 
 ```bash
 # Install dependencies
@@ -14,7 +17,16 @@ npm run dev
 
 Your Next.js app will be available at http://localhost:3000 🎉
 
-## Commands
+## Features
+
+@todo: Add features
+
+## Usage
+
+> [!TIP]
+> For detailed instructions on how to use SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/docs).
+
+### Commands
 
 `npm run <command>`
 
@@ -27,13 +39,40 @@ Your Next.js app will be available at http://localhost:3000 🎉
 
 For more information about developing with SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/DEVELOPMENT.md).
 
-## Usage
+### Directory Structure
 
-For detailed instructions on how to use SnapWP, please refer to the [SnapWP documentation](https://github.com/rtCamp/snapwp/blob/develop/docs).
+The starter example has the following structure:
 
-## Features
+<details>
+<summary> Click to expand </summary>
 
-@todo - Add directory structure and features.
+```log
+/examples/nextjs/starter
+├── src/
+│   │   # This example uses the NextJS app router
+│   ├── app/
+│   │   ├── [[...path]]/             # WordPress catch-all route handler
+│   │   │   ├── error.tsx
+│   │   │   └── page.tsx
+│   │   ├── example-route/           # Example of a custom route
+│   │   │   ├── page.tsx
+│   │   │   └── styles.module.css
+│   │   ├── global-error.tsx
+│   │   └── layout.tsx               # Root layout with WP styles/settings
+│   └── middleware.ts                # Next.js middleware
+│
+├── .eslintrc.json                   # ESLint config
+├── .nvmrc                           # Node version
+├── .prettierrc.cjs                  # Prettier config
+├── codegen.ts                       # GraphQL Codegen config
+├── jest.config.js                   # Jest config
+├── next.config.mjs                  # Next.js config
+├── package.json
+├── snapwp.config.ts                 # SnapWP config
+└── tsconfig.json                    # TypeScript config
+```
+
+</details>
 
 ### Route Handling
 

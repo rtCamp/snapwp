@@ -2,3 +2,4 @@
 .next/
 .github/ISSUE_TEMPLATE
 .github/PULL_REQUEST_TEMPLATE.md
+.changeset

@@ -7,10 +7,8 @@ Please make sure to review the [Contribution Guidelines](../DEVELOPMENT.md) befo
 <!-- In a few words, what does this PR actually change -->
 
 
-
 ## Why
 <!-- Why is this PR necessary? Please any existing previous issue(s) or PR(s) and include a short summary here, too. -->
-
 
 
 ### Related Issue(s):
@@ -19,10 +17,8 @@ Please make sure to review the [Contribution Guidelines](../DEVELOPMENT.md) befo
 -->
 
 
-
 ## How
 <!-- How does your PR address the issue at hand? What are the implementation details? Please be specific. -->
-
 
 
 ## Testing Instructions
@@ -31,14 +27,13 @@ Please make sure to review the [Contribution Guidelines](../DEVELOPMENT.md) befo
 <!-- 2. Insert a Heading Block. -->
 <!-- 3. etc. -->
 
+
 ## Screenshots
 <!-- Include relevant screenshots proving the PR works as intended. -->
 
 
-
 ## Additional Info
 <!-- Please include any relevant logs, error output, etc -->
-
 
 
 ## Checklist
@@ -53,4 +48,5 @@ Contributing Guidelines: https://github.com/rtCamp/snapwp/blob/develop/.github/C
 -   [ ] My code passes all lints (ESLint, tsc, prettier etc.).
 -   [ ] My code has detailed inline documentation.
 -   [ ] I have added unit tests to verify the code works as intended.
--   [ ] I have updated the project documentation accordingly.
+-   [ ] I have updated the project documentation as needed.
+-   [ ] I have added a changeset for this PR using `npm run changeset`.

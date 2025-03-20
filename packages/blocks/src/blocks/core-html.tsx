@@ -1,5 +1,5 @@
-import React from 'react';
 import { Parse } from '@snapwp/next';
+import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
 
 /**
  * Renders the core/html block.
@@ -9,11 +9,13 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreHtml( { renderedHtml }: any ) {
+const CoreHtml: CoreHtmlType = ( { renderedHtml }: CoreHtmlProps ) => {
 	// @todo use attributes.content instead of renderedHtml once it's available
 	if ( ! renderedHtml ) {
 		return null;
 	}
 
 	return <Parse html={ renderedHtml } />;
-}
+};
+
+export default CoreHtml;

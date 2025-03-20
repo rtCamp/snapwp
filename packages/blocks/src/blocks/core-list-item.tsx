@@ -1,10 +1,13 @@
-import React from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
+import type {
+	CoreListItem as CoreListItemType,
+	CoreListItemProps,
+} from '@snapwp/types';
 
 /**
  * Renders the core/list-item block.
@@ -16,11 +19,11 @@ import { Parse } from '@snapwp/next';
  *
  * @return The rendered block.
  */
-export default function CoreListItem( {
+const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: any ) {
+}: CoreListItemProps ) => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -41,4 +44,6 @@ export default function CoreListItem( {
 			{ children }
 		</li>
 	);
-}
+};
+
+export default CoreListItem;

@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/next",
-	"version": "0.0.2",
+	"version": "0.2.1",
 	"license": "AGPL-3.0",
 	"description": "Utility functions and components for SnapWP application",
 	"author": "rtCamp",
@@ -21,6 +21,11 @@
 		"./withSnapWP": {
 			"import": "./dist/config/with-snap-wp.js",
 			"require": "./dist/config/with-snap-wp.js"
+		},
+		"./defaultError": {
+			"import": "./dist/components/default-error.js",
+			"require": "./dist/components/default-error.js",
+			"types": "./dist/types/components/default-error.d.ts"
 		}
 	},
 	"scripts": {
@@ -48,6 +53,7 @@
 		"@types/react-dom": "*",
 		"typescript": "*",
 		"resolve-tspaths": "*",
-		"tsc-watch": "*"
+		"tsc-watch": "*",
+		"@snapwp/types": "*"
 	}
 }
