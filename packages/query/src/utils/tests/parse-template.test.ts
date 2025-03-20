@@ -1,7 +1,7 @@
-import { ApolloQueryResult } from '@apollo/client';
+import { type ApolloQueryResult } from '@apollo/client';
 import { Logger, TemplateParseError } from '@snapwp/core';
 import parseQueryResult from '@/utils/parse-template';
-import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
+import { type GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
 jest.mock( '@snapwp/core', () => ( {
 	...jest.requireActual( '@snapwp/core' ),
