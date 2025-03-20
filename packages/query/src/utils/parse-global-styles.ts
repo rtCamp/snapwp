@@ -39,8 +39,8 @@ export default function parseQueryResult(
 	const globalStyles = queryData.data?.globalStyles;
 
 	return {
-		customCss: globalStyles?.customCss,
-		globalStylesheet: globalStyles?.stylesheet,
-		renderedFontFaces: globalStyles?.renderedFontFaces,
+		customCss: globalStyles?.customCss || null,
+		globalStylesheet: globalStyles?.stylesheet || null,
+		renderedFontFaces: globalStyles?.renderedFontFaces || null,
 	};
 }
