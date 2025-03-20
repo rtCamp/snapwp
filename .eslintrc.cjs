@@ -129,7 +129,11 @@ module.exports = {
 		},
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
-			excludedFiles: [ '**/codegen.ts', 'packages/query/src/**/tests/*', 'packages/next/src/**/tests/*' ],
+			excludedFiles: [
+				'**/codegen.ts',
+				'packages/query/src/**/tests/*',
+				'packages/next/src/**/tests/*',
+			],
 			rules: {
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': 'error',
