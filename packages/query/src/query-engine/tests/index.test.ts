@@ -33,11 +33,23 @@ describe( 'QueryEngine', () => {
 
 		expect( getGraphqlUrl ).toHaveBeenCalled();
 		expect( getConfig ).toHaveBeenCalled();
-		expect( ( QueryEngine as any ).graphqlEndpoint ).toBe( graphqlUrl );
-		expect( ( QueryEngine as any ).homeUrl ).toBe( validConfig.homeUrl );
-		expect( ( QueryEngine as any ).apolloClient ).toBeInstanceOf(
-			ApolloClient
+		expect(
+			( QueryEngine as unknown as { graphqlEndpoint: string } )
+				.graphqlEndpoint
+		).toBe( graphqlUrl );
+		interface QueryEngineType {
+			homeUrl: string;
+		}
+		expect( ( QueryEngine as unknown as QueryEngineType ).homeUrl ).toBe(
+			validConfig.homeUrl
 		);
+		expect(
+			(
+				QueryEngine as unknown as {
+					apolloClient: ApolloClient< unknown >;
+				}
+			 ).apolloClient
+		).toBeInstanceOf( ApolloClient );
 	} );
 
 	it( 'should be a singleton', () => {

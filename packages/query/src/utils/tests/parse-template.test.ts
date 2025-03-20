@@ -1,10 +1,5 @@
 import { ApolloQueryResult } from '@apollo/client';
-import {
-	BlockData,
-	Logger,
-	TemplateParseError,
-	TemplateData,
-} from '@snapwp/core';
+import { Logger, TemplateParseError } from '@snapwp/core';
 import parseQueryResult from '@/utils/parse-template';
 import { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
@@ -67,7 +62,7 @@ describe( 'parseQueryResult', () => {
 
 		const result = parseQueryResult( queryData, wordpressUrl, uri );
 
-		expect( result ).toEqual< TemplateData >( {
+		expect( result ).toEqual( {
 			stylesheets: [
 				{
 					src: 'https://test.com/style.css',
