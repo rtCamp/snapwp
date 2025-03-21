@@ -15,16 +15,16 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 > We recommend copying the `.env` variables from the SnapWP Helper plugin settings screen and pasting them into your `.env` file, then modifying them as needed.
 > See the [Getting Started](getting-started.md#backend-setup) guide for more information.
 
-| Variable                           | Required | Default Value         | Description                                                                       | Available via `getConfig() |
-| ---------------------------------- | -------- | --------------------- | --------------------------------------------------------------------------------- | -------------------------- |
-| `NEXT_PUBLIC_CORS_PROXY_PREFIX`    | No       |                       | The prefix for the CORS proxy.                                                    | `corsProxyPrefix`          |
-| `NEXT_PUBLIC_FRONTEND_URL`         | Yes      |                       | The URL of the Next.js site.                                                      | `frontendUrl`              |
-| `NEXT_PUBLIC_WP_HOME_URL`          | Yes      |                       | The WordPress frontend domain URL.                                                | `wpHomeUrl`                |
-| `NEXT_PUBLIC_WP_SITE_URL`          | No       |                       | The WordPress site URL.                                                           | `wpSiteUrl`                |
-| `INTROSPECTION_TOKEN`              | Yes      |                       | Token used for authenticating GraphQL introspection queries with GraphQL Codegen. | N/A                        |
-| `NEXT_PUBLIC_GRAPHQL_ENDPOINT`     | No       | `index.php?graphql`   | The relative path to the WordPress GraphQL endpoint.                              | `graphqlEndpoint`          |
-| `NEXT_PUBLIC_WP_UPLOADS_DIRECTORY` | No       | `/wp-content/uploads` | The relative path to the WordPress uploads directory.                             | `uploadsDirectory`         |
-| `NEXT_PUBLIC_REST_URL_PREFIX`      | No       | `/wp-json`            | The WordPress REST API URL prefix.                                                | `restUrlPrefix`            |
+| Variable                           | Required | Default Value         | Description                                                                                                                                                                                      | Available via `getConfig() |
+| ---------------------------------- | -------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `NEXT_PUBLIC_FRONTEND_URL`         | Yes      |                       | The URL of the Next.js (headless) frontend. <br />E.g. `http://localhost:3000`                                                                                                                   | `frontendUrl`              |
+| `NEXT_PUBLIC_WP_HOME_URL`          | Yes      |                       | The traditional WordPress _frontend_ domain URL. <br />E.g `https://mywpsite.local`                                                                                                              | `wpHomeUrl`                |
+| `NEXT_PUBLIC_WP_SITE_URL`          | No       |                       | The _backend_ "WordPress Address" domain URL where your WordPress core files reside.<br />Only necessary if different than `NEXT_PUBLIC_WP_HOME_URL`<br />E.g. `https://api.mywpsite.local/wp` . | `wpSiteUrl`                |
+| `NEXT_PUBLIC_GRAPHQL_ENDPOINT`     | No       | `index.php?graphql`   | The relative path to the WordPress GraphQL endpoint.                                                                                                                                             | `graphqlEndpoint`          |
+| `NEXT_PUBLIC_REST_URL_PREFIX`      | No       | `/wp-json`            | The WordPress REST API URL prefix.                                                                                                                                                               | `restUrlPrefix`            |
+| `NEXT_PUBLIC_WP_UPLOADS_DIRECTORY` | No       | `/wp-content/uploads` | The relative path to the WordPress uploads directory.                                                                                                                                            | `uploadsDirectory`         |
+| `NEXT_PUBLIC_CORS_PROXY_PREFIX`    | No       |                       | The prefix for the CORS proxy. If unset, no proxy will be used.                                                                                                                                  | `corsProxyPrefix`          |
+| `INTROSPECTION_TOKEN`              | Yes      |                       | Token used for authenticating GraphQL introspection queries with GraphQL Codegen.                                                                                                                | N/A                        |
 
 Additionally, if you are running a local development environment without a valid SSL certificate, you can set the following environment variable:
 
