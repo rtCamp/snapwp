@@ -5,9 +5,9 @@ import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 import Script from 'next/script';
 import type { BlockData } from '@snapwp/types';
+import { QueryEngineRegistry } from '@/query-engine-registry';
 
 export type TemplateRendererProps = {
-	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
 	children: ( editorBlocks: BlockData[] ) => JSX.Element;
 };
 
@@ -15,20 +15,19 @@ export type TemplateRendererProps = {
  * Renders a full HTML document including the head, body, and scripts.
  * Combines custom styles, block content, and scripts into a complete page.
  *
- * @param props - The props for the component..
- * @param props.getTemplateData - A async callback to get template styles and content.
+ * @param props - The props for the component.
  * @param props.children - The block content to render.
  * @return A complete HTML document structure.
  */
-export async function TemplateRenderer( {
-	getTemplateData = QueryEngine.getTemplateData,
-	children,
-}: TemplateRendererProps ) {
+export async function TemplateRenderer( { children }: TemplateRendererProps ) {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 
+	const queryEngine = QueryEngineRegistry.getInstance().getQueryEngine();
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
-		await getTemplateData( pathname || '/' );
+		await QueryEngine.getInstance( queryEngine ).getTemplateData(
+			pathname || '/'
+		);
 
 	if ( ! editorBlocks?.length ) {
 		throw new Error(

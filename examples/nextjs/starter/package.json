@@ -24,6 +24,7 @@
 		"@snapwp/core": "file:../../../packages/core",
 		"@snapwp/next": "file:../../../packages/next",
 		"@snapwp/query": "file:../../../packages/query",
+		"@snapwp/tanstack": "file:../../../packages/tanstack",
 		"graphql": "^16.10.0",
 		"next": "^15.1.0",
 		"react": "^19.0.0",
