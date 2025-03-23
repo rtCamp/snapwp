@@ -3,6 +3,7 @@ import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
 import type { BlockDefinitions } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
+import type { QueryEngineBase } from '@/query-engine-base';
 
 export interface SnapWPEnv {
 	/**
@@ -44,6 +45,10 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Query Engine
+	 */
+	queryEngine?: QueryEngineBase< unknown, unknown >;
 }
 
 /**
@@ -115,6 +120,10 @@ class SnapWPConfigManager {
 			required: false,
 		},
 		parserOptions: {
+			type: 'object',
+			required: false,
+		},
+		queryEngine: {
 			type: 'object',
 			required: false,
 		},

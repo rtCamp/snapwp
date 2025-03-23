@@ -1,85 +1,65 @@
-import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
 import {
-	ApolloClient,
 	ApolloError,
-	InMemoryCache,
-	type NormalizedCacheObject,
 	type ServerError,
 	type ServerParseError,
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import type { BlockData } from '@snapwp/types';
 import {
 	Logger,
 	type GlobalHeadProps,
-	type EnqueuedScriptProps,
-	type StyleSheetProps,
-	type ScriptModuleProps,
+	type QueryEngineBase,
 } from '@snapwp/core';
 import parseGeneralSettings from '@/utils/parse-general-settings';
+import { getConfig } from '@snapwp/core/config';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
  */
 export class QueryEngine {
 	private static instance: QueryEngine | null = null;
-	private static graphqlEndpoint: string;
-	private static homeUrl: string;
-	private static apolloClient: ApolloClient< NormalizedCacheObject >;
-
-	private static isClientInitialized = false;
+	private static engine: QueryEngineBase< unknown, unknown >;
 
 	/**
-	 * Initializer.
+	 *
+	 * @param engine
 	 */
-	public static initialize(): void {
-		QueryEngine.graphqlEndpoint = getGraphqlUrl();
-
-		const { wpHomeUrl } = getConfig();
-		QueryEngine.homeUrl = wpHomeUrl;
-
-		QueryEngine.apolloClient = new ApolloClient( {
-			uri: QueryEngine.graphqlEndpoint,
-			cache: new InMemoryCache(),
-		} );
+	private constructor( engine: QueryEngineBase< unknown, unknown > ) {
+		QueryEngine.engine = engine;
 	}
 
 	/**
 	 * Returns the singleton instance of QueryEngine.
+	 * @param engine
 	 * @throws Throws error if instance is not initialized with config.
-	 *
 	 * @return The QueryEngine instance.
 	 */
-	public static getInstance(): QueryEngine {
+	public static getInstance(
+		engine: QueryEngineBase< unknown, unknown >
+	): QueryEngine {
 		if ( ! QueryEngine.instance ) {
-			QueryEngine.instance = new QueryEngine();
+			QueryEngine.instance = new QueryEngine( engine );
 		}
 		return QueryEngine.instance;
 	}
 
 	/**
 	 * Fetches global styles.
-	 *
 	 * @return The template data fetched for the uri.
 	 */
-	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-
+	getGlobalStyles = async (): Promise< GlobalHeadProps > => {
 		try {
-			const data = await QueryEngine.apolloClient.query( {
+			const data = await QueryEngine.engine.fetchQuery( {
+				key: [ 'globalStyles' ],
 				query: GetGlobalStylesDocument,
-				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-				errorPolicy: 'all',
 			} );
 
+			// @ts-ignore
 			return parseGlobalStyles( data );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
@@ -104,34 +84,14 @@ export class QueryEngine {
 	 *
 	 * @return General settings data.
 	 */
-	static getGeneralSettings = async (): Promise<
-		| {
-				generalSettings: {
-					siteIcon: {
-						mediaItemUrl: string | undefined;
-						mediaDetails: {
-							sizes: {
-								sourceUrl: string;
-								height: string;
-								width: string;
-							}[];
-						};
-					};
-				};
-		  }
-		| undefined
-	> => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-
+	getGeneralSettings = async () => {
 		try {
-			const data = await QueryEngine.apolloClient.query( {
+			const data = await QueryEngine.engine.fetchQuery( {
+				key: [ 'generalSettings' ],
 				query: GetGeneralSettingsDocument,
-				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-				errorPolicy: 'all',
 			} );
 
+			// @ts-ignore
 			return parseGeneralSettings( data );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
@@ -154,32 +114,21 @@ export class QueryEngine {
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
 	 * @param uri - The URL of the seed node.
-	 *
 	 * @return The template data fetched for the uri.
 	 */
-	static getTemplateData = async (
-		uri: string
-	): Promise< {
-		stylesheets: StyleSheetProps[] | undefined;
-		editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
-		scripts: EnqueuedScriptProps[] | undefined;
-		scriptModules: ScriptModuleProps[] | undefined;
-		bodyClasses: string[] | undefined;
-	} > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
+	getTemplateData = async ( uri: string ) => {
 		const variables = { uri };
 
 		try {
-			const data = await QueryEngine.apolloClient.query( {
+			const data = await QueryEngine.engine.fetchQuery( {
+				key: [ 'templateData', uri ],
 				query: GetCurrentTemplateDocument,
 				variables,
-				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-				errorPolicy: 'all',
 			} );
 
-			return parseTemplate( data, QueryEngine.homeUrl, uri );
+			const { homeUrl } = getConfig();
+			// @ts-ignore
+			return parseTemplate( data, homeUrl, uri );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
@@ -204,7 +153,7 @@ export class QueryEngine {
  *
  * @param error - The Apollo error.
  */
-const logApolloErrors = ( error: ApolloError ): void => {
+const logApolloErrors = ( error: ApolloError ) => {
 	// If there are graphQLErrors log them.
 	error.graphQLErrors.forEach( ( graphQLError ) => {
 		Logger.error( graphQLError.message );

@@ -45,7 +45,8 @@
 		"react": "^19.0.0",
 		"react-dom": "^19.0.0",
 		"@snapwp/core": "*",
-		"@snapwp/query": "*"
+		"@snapwp/query": "*",
+		"@snapwp/apollo": "*"
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
