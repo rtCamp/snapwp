@@ -36,7 +36,10 @@ const CorePullquote: CorePullquoteType = ( {
 	const classNames = cn( classNamesFromString );
 
 	return (
-		<figure style={ styleObject } className={ classNames }>
+		<figure
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<blockquote>
 				{ pullquoteValue && (
 					<p>

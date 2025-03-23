@@ -9,8 +9,8 @@ import { getClassNamesFromString, cn } from '@/utils';
  * @return {string} The extracted class names from the first occurrence of the specified element or an empty string if the element is not found.
  */
 export default function findElementAndGetClassNames(
-	renderedHtml?: string | null,
-	elementSelector?: string
+	renderedHtml?: string | null | undefined,
+	elementSelector?: string | undefined
 ): string {
 	if ( ! renderedHtml ) {
 		return '';

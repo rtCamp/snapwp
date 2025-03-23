@@ -38,8 +38,8 @@ const CoreDetails: CoreDetailsType = ( {
 	return (
 		<details
 			className={ classNames }
-			style={ styleObject }
 			open={ showContent }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
 			<summary>{ summary }</summary>
 			{ children }

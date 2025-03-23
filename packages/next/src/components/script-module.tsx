@@ -9,8 +9,8 @@ import type { PropsWithoutRef } from 'react';
 import Script from 'next/script';
 
 interface ScriptModuleInterface {
-	handle?: string | null;
-	src?: string | null;
+	handle?: string | null | undefined;
+	src?: string | null | undefined;
 	dependencies?:
 		| {
 				importType?: string | null;
@@ -19,8 +19,9 @@ interface ScriptModuleInterface {
 					src: string;
 				} | null;
 		  }[]
-		| null;
-	extraData?: string | null;
+		| null
+		| undefined;
+	extraData?: string | null | undefined;
 }
 
 /**
@@ -67,7 +68,6 @@ export default function ScriptModule( {
 		return (
 			<Script
 				key={ depHandle || `${ handle }-dep-${ index }` }
-				id={ depHandle || undefined }
 				type="module"
 				src={ depSrc }
 				/*
@@ -75,6 +75,7 @@ export default function ScriptModule( {
 				 * This strategy is recommended for non-blocking scripts and they prevent preload warnings.
 				 */
 				strategy="lazyOnload"
+				{ ...( depHandle && { id: depHandle } ) }
 				{ ...props }
 			/>
 		);
@@ -97,9 +98,9 @@ export default function ScriptModule( {
 		<Script
 			type="module"
 			src={ src }
-			id={ handle || undefined }
 			strategy="lazyOnload"
 			{ ...props }
+			{ ...( handle && { id: handle } ) }
 		/>
 	);
 

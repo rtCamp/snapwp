@@ -36,7 +36,10 @@ const CoreGallery: CoreGalleryType = ( {
 	const className = cn( classNamesFromString ) || undefined;
 
 	return (
-		<figure className={ className } style={ styleObject }>
+		<figure
+			className={ className }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ children }
 			{ caption && (
 				<figcaption className="wp-element-caption">

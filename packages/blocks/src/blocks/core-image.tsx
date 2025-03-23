@@ -56,7 +56,7 @@ const Figure = ( {
 					href={ href }
 					className={ linkClass }
 					target={ linkTarget }
-					{ ...( rel && { rel } ) }
+					rel={ rel }
 				>
 					{ children }
 				</Link>
@@ -85,7 +85,7 @@ const CoreImage: CoreImageType = ( {
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ) => {
+}: CoreImageProps ): React.JSX.Element | null => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 
@@ -199,9 +199,9 @@ const getImageProps = (
 	};
 
 	const imageProps: ComponentProps< typeof Image > = {
-		src: url,
-		alt,
 		title,
+		alt,
+		src: url,
 	};
 
 	if ( connectedMediaItem?.node ) {
@@ -270,7 +270,7 @@ const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
  */
 const extractInteractivityAttributesForElement = (
 	element: string,
-	renderedHtml?: string | null
+	renderedHtml?: string | null | undefined
 ): Record< string, string > => {
 	if ( ! renderedHtml ) {
 		return {};

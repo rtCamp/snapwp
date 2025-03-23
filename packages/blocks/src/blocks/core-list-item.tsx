@@ -39,7 +39,10 @@ const CoreListItem: CoreListItemType = ( {
 	const firstLineContent = content ? content.split( '\n' )[ 0 ] : undefined;
 
 	return (
-		<li className={ classNames || undefined } style={ styleObject }>
+		<li
+			className={ classNames || undefined }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ firstLineContent && <Parse html={ firstLineContent } /> }
 			{ children }
 		</li>

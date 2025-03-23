@@ -1,14 +1,14 @@
-import { createElement } from 'react';
+import {
+	createElement,
+	type CSSProperties,
+	type PropsWithChildren,
+} from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-import type {
-	CoreGroup as CoreGroupType,
-	CoreGroupProps,
-	TagProps,
-} from '@snapwp/types';
+import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
 
 /**
  * Renders an HTML element with the specified tag name.
@@ -26,7 +26,11 @@ const Tag = ( {
 	className,
 	style,
 	children,
-}: TagProps ): React.JSX.Element => {
+}: PropsWithChildren< {
+	name?: string;
+	className: string;
+	style?: CSSProperties;
+} > ): React.JSX.Element => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}
@@ -48,7 +52,7 @@ const CoreGroup: CoreGroupType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreGroupProps ) => {
+}: CoreGroupProps ): React.JSX.Element => {
 	const { style, tagName } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -64,7 +68,11 @@ const CoreGroup: CoreGroupType = ( {
 	const tag = tagName || 'div';
 
 	return (
-		<Tag name={ tag } className={ classNames } style={ styleObject }>
+		<Tag
+			name={ tag }
+			className={ classNames }
+			{ ...( !! styleObject && { style: styleObject } ) }
+		>
 			{ children }
 		</Tag>
 	);

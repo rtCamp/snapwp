@@ -21,7 +21,7 @@ import type {
 const Tracks = ( {
 	tracks,
 }: {
-	tracks?: TrackProps[];
+	tracks?: TrackProps[] | undefined;
 } ): React.JSX.Element | null => {
 	if ( ! tracks || tracks.length === 0 ) {
 		return null;
@@ -53,7 +53,7 @@ const Tracks = ( {
 const CoreVideo: CoreVideoType = ( {
 	attributes,
 	renderedHtml,
-}: CoreVideoProps ) => {
+}: CoreVideoProps ): React.JSX.Element | null => {
 	const {
 		autoplay,
 		caption,
@@ -100,7 +100,10 @@ const CoreVideo: CoreVideoType = ( {
 		.filter( ( track ): track is TrackProps => track !== null );
 
 	return (
-		<figure className={ classNames } style={ styleObject }>
+		<figure
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<video
 				autoPlay={ autoplay || undefined }
 				controls={ controls || undefined }

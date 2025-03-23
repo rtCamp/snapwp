@@ -23,7 +23,10 @@ const CoreColumns: CoreColumnsType = ( {
 	const classNames = cn( cssClassName );
 
 	return (
-		<div className={ classNames } style={ styleObject }>
+		<div
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ children }
 		</div>
 	);

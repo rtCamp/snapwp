@@ -6,7 +6,9 @@
  *
  * @internal
  */
-export default function parseExternalRemotePatterns( str?: string ): ( {
+export default function parseExternalRemotePatterns(
+	str?: string | undefined
+): ( {
 	protocol?: string;
 	hostname?: string;
 	port?: string;
@@ -20,6 +22,7 @@ export default function parseExternalRemotePatterns( str?: string ): ( {
 			},
 		];
 	}
+
 	return str
 		.split( ',' )
 		.map( ( urlString ) => {

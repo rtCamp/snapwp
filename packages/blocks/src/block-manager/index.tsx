@@ -30,8 +30,12 @@ export default class BlockManager {
 	 * @return {Array<BlockTreeNode>} A tree of blocks.
 	 */
 	public static flatListToHierarchical(
-		blockList?: BlockData[] | null
+		blockList?: BlockData[] | null | undefined
 	): BlockTreeNode[] {
+		if ( ! blockList ) {
+			return [];
+		}
+
 		return flatListToHierarchical(
 			blockList as unknown as Record< string | number, unknown >[],
 			{
@@ -79,9 +83,17 @@ export default class BlockManager {
 	 * @return {Array<BlockTreeNode>} A tree of blocks with render functions.
 	 */
 	public static parseBlockForRendering(
-		blockList?: BlockData[] | null
+		blockList?: BlockData[] | null | undefined
 	): BlockTreeNode[] {
+		if ( ! blockList ) {
+			return [];
+		}
+
 		const BlockTreeNodeArray = this.flatListToHierarchical( blockList );
+
+		if ( ! BlockTreeNodeArray ) {
+			return [];
+		}
 
 		BlockTreeNodeArray.forEach( this.attachRendererToTreeNode );
 

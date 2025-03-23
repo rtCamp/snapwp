@@ -27,7 +27,7 @@ const CoreParagraph: CoreParagraphType = ( {
 		textColor,
 	} = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = getStylesFromAttributes( { style } ) || {};
 
 	/**
 	 * Add missing styles to the style object
@@ -50,8 +50,10 @@ const CoreParagraph: CoreParagraphType = ( {
 	return (
 		<p
 			className={ cssClassName || undefined }
-			style={ styleObject }
 			dir={ direction || undefined }
+			{ ...( Object.keys( styleObject ).length > 0 && {
+				style: styleObject,
+			} ) }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</p>

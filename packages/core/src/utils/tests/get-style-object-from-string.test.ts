@@ -1,9 +1,9 @@
 import getStyleObjectFromString from '../get-style-object-from-string';
 
 describe( 'getStyleObjectFromString', () => {
-	it( 'should return an empty object for an empty string', () => {
+	it( 'should return undefined for an empty string', () => {
 		const result = getStyleObjectFromString( '' );
-		expect( result ).toEqual( {} );
+		expect( result ).toEqual( undefined );
 	} );
 
 	it( 'should return the input object if an object is provided', () => {
@@ -26,9 +26,9 @@ describe( 'getStyleObjectFromString', () => {
 		expect( result ).toEqual( expected );
 	} );
 
-	it( 'should return an empty object if an invalid type is provided', () => {
+	it( 'should return undefined if an invalid type is provided', () => {
 		const cssString = 123 as unknown as string;
 		const result = getStyleObjectFromString( cssString );
-		expect( result ).toEqual( {} );
+		expect( result ).toEqual( undefined );
 	} );
 } );

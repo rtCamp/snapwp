@@ -4,8 +4,8 @@ import { getConfig } from '@snapwp/core/config';
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
 type EditorBlocksRendererProps = {
-	editorBlocks?: BlockData[] | null;
-	blockDefinitions?: BlockDefinitions | null;
+	editorBlocks?: BlockData[] | null | undefined;
+	blockDefinitions?: BlockDefinitions | null | undefined;
 };
 
 /**

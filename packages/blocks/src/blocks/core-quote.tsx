@@ -20,7 +20,10 @@ const CoreQuote: CoreQuoteType = ( {
 	const styleObject = getStylesFromAttributes( { style } );
 
 	return (
-		<blockquote className={ cssClassName || '' } style={ styleObject }>
+		<blockquote
+			className={ cssClassName || undefined }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ children }
 
 			{ !! citation && (

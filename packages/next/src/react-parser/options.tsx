@@ -72,7 +72,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 					<Image
 						{ ...attributes }
 						src={ attribs[ 'src' ] }
-						alt={ attribs[ 'alt' ] || '' }
+						alt={ attribs[ 'alt' ] }
 						height={ height }
 						width={ width }
 						className={ className }

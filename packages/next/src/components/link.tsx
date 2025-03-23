@@ -5,10 +5,11 @@ import {
 } from 'react';
 import { replaceHostUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
+import type { PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
 
 interface LinkInterface {
-	href?: string;
+	href: string | undefined;
 	style?: CSSProperties | undefined;
 	className?: string | undefined;
 }
@@ -31,7 +32,11 @@ export default function Link( {
 	children,
 	...props
 }: PropsWithChildren<
-	LinkInterface & ( LinkProps | AnchorHTMLAttributes< HTMLAnchorElement > )
+	LinkInterface &
+		(
+			| AnchorHTMLAttributes< HTMLAnchorElement >
+			| PartialWithUndefined< LinkProps >
+		)
 > ): React.JSX.Element {
 	const { homeUrl, nextUrl, graphqlEndpoint } = getConfig();
 
@@ -63,7 +68,8 @@ export default function Link( {
 
 	return (
 		<NextLink
-			{ ...props }
+			// LinkProps conflicts with exactOptionalPropertyTypes: https://github.com/vercel/next.js/issues/50561
+			{ ...( props as LinkProps ) }
 			className={ className }
 			href={ internalUri || '' }
 			style={ style }

@@ -1,5 +1,9 @@
 import { Fragment } from 'react';
-import type { TemplateHeadProps } from '@snapwp/core';
+import type { StyleSheetProps } from '@snapwp/core';
+
+export interface TemplateHeadProps {
+	stylesheets?: StyleSheetProps[] | null | undefined;
+}
 
 /**
  * Renders the head section with additional stylesheets for a template.
