@@ -5,7 +5,7 @@
  * @param hostUrl - Host url to be replaced.
  * @param newHostUrl - Host url to be replaced with.
  *
- * @return {string} The internal url.
+ * @return The internal url.
  *
  * @internal
  */

@@ -14,7 +14,7 @@ import {
  *
  * @param snapWPConfigPath The path to the SnapWP configuration file.
  *
- * @return {(config: any) => any} A function that modifies the webpack configuration.
+ * @return A function that modifies the webpack configuration.
  */
 const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	/**
@@ -23,7 +23,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 	 * @param config The webpack configuration. Using `any` type as the parameter type is `any` in Next.js.
 	 * @see node_modules/next/dist/server/config-shared.js:169
 	 *
-	 * @return {any} The modified webpack configuration.
+	 * @return The modified webpack configuration.
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
 	return ( config: any ): any => {
@@ -40,7 +40,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
 						 *
 						 * @param normalModule The normal module being processed.
 						 *
-						 * @return {boolean} `true` if the module should be modified, otherwise `false`.
+						 * @return `true` if the module should be modified, otherwise `false`.
 						 */
 						test: ( normalModule ): boolean => {
 							const userRequest = normalModule.userRequest || '';
@@ -79,7 +79,7 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
  *
  * @param nextConfig The Next.js configuration object.
  *
- * @return {Promise<NextConfig>} The extended configuration object.
+ * @return The extended configuration object.
  */
 const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	const possibleSnapWPConfigPaths = [

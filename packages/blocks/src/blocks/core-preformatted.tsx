@@ -16,12 +16,12 @@ import type {
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CorePreformatted: CorePreformattedType = ( {
 	attributes,
 	renderedHtml,
-}: CorePreformattedProps ) => {
+}: CorePreformattedProps ): React.JSX.Element => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

@@ -6,7 +6,7 @@ import { getClassNamesFromString, cn } from '@/utils';
  * @param renderedHtml - The rendered HTML string.
  * @param elementSelector - The element selector (class, id, or tag name) If selector is not provided then it will select the first element and will return it's classNames.
  *
- * @return {string} The extracted class names from the first occurrence of the specified element or an empty string if the element is not found.
+ * @return The extracted class names from the first occurrence of the specified element or an empty string if the element is not found.
  */
 export default function findElementAndGetClassNames(
 	renderedHtml?: string | null | undefined,

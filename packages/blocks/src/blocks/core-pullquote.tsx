@@ -16,12 +16,12 @@ import type {
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
-}: CorePullquoteProps ) => {
+}: CorePullquoteProps ): React.JSX.Element => {
 	const { style, pullquoteValue, citation } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

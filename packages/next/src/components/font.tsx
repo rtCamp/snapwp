@@ -4,7 +4,7 @@
  * @param props - Props for the Font component.
  * @param props.renderedFontFaces - Font face data as a string.
  *
- * @return {React.JSX.Element} A style tag with the rendered font faces.
+ * @return A style tag with the rendered font faces.
  *
  * @todo Implement next/font once a solution for handling literal types is determined.
  */

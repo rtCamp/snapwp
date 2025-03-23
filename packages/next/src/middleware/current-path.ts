@@ -9,7 +9,7 @@ import type { MiddlewareFactory } from './utils';
  *
  * @param  next - Next middleware
  *
- * @return {(request:NextRequest, _next:NextFetchEvent) => Promise<Response|void|undefined|null>} The response object with modified headers
+ * @return The response object with modified headers
  */
 export const currentPath: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {

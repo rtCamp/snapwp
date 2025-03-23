@@ -16,13 +16,13 @@ import type {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreDetails: CoreDetailsType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreDetailsProps ) => {
+}: CoreDetailsProps ): React.JSX.Element => {
 	const { style, showContent, summary } = attributes ?? {};
 	const styleObject = getStylesFromAttributes( { style } );
 

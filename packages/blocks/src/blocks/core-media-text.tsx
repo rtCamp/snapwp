@@ -29,7 +29,7 @@ const DEFAULT_MEDIA_SIZE_SLUG = 'full';
  * @param focalPoint.x - The x-coordinate of the focal point (0 to 1).
  * @param focalPoint.y - The y-coordinate of the focal point (0 to 1).
  *
- * @return {Object} CSS styles for the image fill.
+ * @return CSS styles for the image fill.
  */
 function imageFillStyles(
 	url?: string,
@@ -56,7 +56,7 @@ function imageFillStyles(
  * @param props.connectedMediaItem - Connected media item
  * @param props.mediaDetails - Media details
  *
- * @return {React.JSX.Element} Rendered component or null if no content
+ * @return Rendered component or null if no content
  */
 const CoreMediaText: CoreMediaTextType = ( {
 	attributes = {},
@@ -64,7 +64,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ) => {
+}: CoreMediaTextProps ): React.JSX.Element => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;

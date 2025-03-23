@@ -46,7 +46,7 @@ interface ImageInterface {
  * @param props.fill - If true, fills the container.
  * @param props.src - Source URL for the image.
  *
- * @return {React.JSX.Element|null} The rendered image.
+ * @return The rendered image.
  */
 export default function Image( {
 	alt,

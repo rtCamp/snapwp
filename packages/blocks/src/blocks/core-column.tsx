@@ -12,12 +12,12 @@ import type { CSSProperties } from 'react';
  * @param props.attributes - Block attributes.
  * @param props.children - The block's children.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreColumn: CoreColumnType = ( {
 	attributes,
 	children,
-}: CoreColumnProps ) => {
+}: CoreColumnProps ): React.JSX.Element => {
 	const { cssClassName, style, width } = attributes || {};
 
 	const classNames = cn( cssClassName );

@@ -9,9 +9,12 @@ import type { CSSProperties } from 'react';
  * @param props.attributes - Block attributes.
  * @param props.children - The block's children.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
-const CoreList: CoreListType = ( { attributes, children }: CoreListProps ) => {
+const CoreList: CoreListType = ( {
+	attributes,
+	children,
+}: CoreListProps ): React.JSX.Element => {
 	const { cssClassName, ordered, reversed, start, style, type } =
 		attributes || {};
 

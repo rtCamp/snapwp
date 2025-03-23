@@ -7,9 +7,11 @@ import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
  * @param props - The props for the block component.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element|null} The rendered block.
+ * @return The rendered block.
  */
-const CoreHtml: CoreHtmlType = ( { renderedHtml }: CoreHtmlProps ) => {
+const CoreHtml: CoreHtmlType = ( {
+	renderedHtml,
+}: CoreHtmlProps ): React.JSX.Element | null => {
 	// @todo use attributes.content instead of renderedHtml once it's available
 	if ( ! renderedHtml ) {
 		return null;

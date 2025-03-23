@@ -5,8 +5,6 @@
  * @param timeout - Max wait time per attempt in ms.
  * @param retries - Number of retry attempts (default: 5).
  * @throws If the server doesn't respond after all retries.
- *
- * @return {Promise<void>}
  */
 export default async function waitForServer(
 	url: string,

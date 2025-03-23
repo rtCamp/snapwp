@@ -16,7 +16,7 @@ import type {
  * @param props - The props for the component.
  * @param props.tracks - An array of track objects containing `src`, `kind`, `srclang`, and `label`.
  *
- * @return {React.JSX.Element|null} A list of `<track>` elements or `null` if no tracks are provided.
+ * @return A list of `<track>` elements or `null` if no tracks are provided.
  */
 const Tracks = ( {
 	tracks,
@@ -48,7 +48,7 @@ const Tracks = ( {
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element|null} The rendered block.
+ * @return The rendered block.
  */
 const CoreVideo: CoreVideoType = ( {
 	attributes,

@@ -1,7 +1,7 @@
 /**
  * @param str A string to be validated as a Url.
  *
- * @return {boolean} flag signifying validity.
+ * @return flag signifying validity.
  *
  * @internal
  */

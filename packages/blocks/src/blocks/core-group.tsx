@@ -19,7 +19,7 @@ import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
  * @param props.style - Inline styles.
  * @param props.children - The content to render inside the element.
  *
- * @return {React.JSX.Element} The rendered HTML element or the children if no tag name is provided.
+ * @return The rendered HTML element or the children if no tag name is provided.
  */
 const Tag = ( {
 	name,
@@ -46,7 +46,7 @@ const Tag = ( {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreGroup: CoreGroupType = ( {
 	attributes,

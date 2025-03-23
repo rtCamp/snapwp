@@ -12,12 +12,12 @@ import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element|null} The rendered block.
+ * @return The rendered block.
  */
 const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
-}: CoreAudioProps ) => {
+}: CoreAudioProps ): React.JSX.Element | null => {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {

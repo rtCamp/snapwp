@@ -10,7 +10,7 @@
  * @param root0.error - The error.
  * @param root0.reset - The reset function.
  *
- * @return {React.JSX.Element} The default error component.
+ * @return The default error component.
  */
 export default function DefaultError( {
 	error,

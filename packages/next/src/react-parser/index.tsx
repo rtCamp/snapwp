@@ -8,7 +8,7 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
  * @param props - The props for the parser.
  * @param props.html - The HTML string to parse and render.
  *
- * @return {React.JSX.Element} The rendered React components.
+ * @return The rendered React components.
  */
 export default function Parse( { html }: { html: string } ): React.JSX.Element {
 	const {

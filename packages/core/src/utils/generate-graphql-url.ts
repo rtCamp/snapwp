@@ -6,7 +6,7 @@ import { Logger } from '@/logger';
  * @param homeUrl The home URL.
  * @param graphqlEndpoint The GraphQL endpoint.
  *
- * @return {string} The complete GraphQL URL.
+ * @return The complete GraphQL URL.
  */
 export default function generateGraphqlUrl(
 	homeUrl?: string,

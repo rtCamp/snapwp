@@ -11,12 +11,12 @@ import type {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CorePostContent: CorePostContentType = ( {
 	renderedHtml,
 	children,
-}: CorePostContentProps ) => {
+}: CorePostContentProps ): React.JSX.Element => {
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */

@@ -34,7 +34,7 @@ interface ScriptModuleInterface {
  * @param props.extraData - Additional data required by the script module
  * @param props.dependencies - Dependencies required by the script module
  *
- * @return {React.JSX.Element} The rendered script module elements
+ * @return The rendered script module elements
  */
 export default function ScriptModule( {
 	handle,

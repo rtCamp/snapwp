@@ -54,7 +54,7 @@ export class QueryEngine {
 	 * Returns the singleton instance of QueryEngine.
 	 * @throws Throws error if instance is not initialized with config.
 	 *
-	 * @return {QueryEngine} The QueryEngine instance.
+	 * @return The QueryEngine instance.
 	 */
 	public static getInstance(): QueryEngine {
 		if ( ! QueryEngine.instance ) {
@@ -66,7 +66,7 @@ export class QueryEngine {
 	/**
 	 * Fetches global styles.
 	 *
-	 * @return {Promise<GlobalHeadProps>} The template data fetched for the uri.
+	 * @return The template data fetched for the uri.
 	 */
 	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
 		if ( ! QueryEngine.isClientInitialized ) {
@@ -155,7 +155,7 @@ export class QueryEngine {
 	 * Fetches blocks, scripts and styles for the given uri.
 	 * @param uri - The URL of the seed node.
 	 *
-	 * @return {Promise<Object>} The template data fetched for the uri.
+	 * @return The template data fetched for the uri.
 	 */
 	static getTemplateData = async (
 		uri: string
@@ -226,7 +226,7 @@ const logApolloErrors = ( error: ApolloError ): void => {
  *
  * @param networkError - The network error.
  *
- * @return {string} The network error message.
+ * @return The network error message.
  */
 const getNetworkErrorMessage = (
 	networkError: Error | ServerParseError | ServerError

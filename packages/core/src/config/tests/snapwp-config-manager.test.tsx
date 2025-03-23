@@ -11,7 +11,7 @@ const SnapWPConfigManager = _private.SnapWPConfigManager!;
 /**
  * A mock React component used for testing block definitions.
  *
- * @return {React.JSX.Element} A div containing "Test Block".
+ * @return A div containing "Test Block".
  */
 const MockBlockComponent = (): React.JSX.Element => <div>Test Block</div>;
 

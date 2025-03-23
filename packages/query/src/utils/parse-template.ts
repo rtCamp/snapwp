@@ -16,7 +16,7 @@ import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
  * @param wordpressUrl - The base URL of the WordPress site.
  * @param uri - The URI of the template.
  *
- * @return {Object} An object containing parsed template data.
+ * @return An object containing parsed template data.
  */
 export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
@@ -65,7 +65,7 @@ export default function parseQueryResult(
  *
  * @param templateByUri The template data fetched for the uri.
  *
- * @return {Array<string>|undefined} The body classes.
+ * @return The body classes.
  */
 function parseBodyClasses(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ]
@@ -91,7 +91,7 @@ function parseBodyClasses(
  * @param templateByUri The template data fetched for the uri.
  * @param wordpressUrl The base URL of the WordPress site.
  *
- * @return {Array<EnqueuedScriptProps>|undefined} The enqueued scripts.
+ * @return The enqueued scripts.
  */
 function parseEnqueuedScripts(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ],
@@ -115,7 +115,7 @@ function parseEnqueuedScripts(
  *
  * @param templateByUri The template data fetched for the uri.
  *
- * @return {Array<BlockData>|undefined} The editor blocks.
+ * @return The editor blocks.
  */
 function parseEditorBlocks(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ]
@@ -141,7 +141,7 @@ function parseEditorBlocks(
  * @param wordpressUrl The base URL of the WordPress site.
  * @param templateByUri The template data fetched for the uri.
  *
- * @return {Array<StyleSheetProps>|undefined} The enqueued stylesheets.
+ * @return The enqueued stylesheets.
  */
 function parseEnqueuedStylesheets(
 	wordpressUrl: string,
@@ -164,7 +164,7 @@ function parseEnqueuedStylesheets(
  * @param templateByUri The template data fetched for the uri.
  * @param wordpressUrl The base URL of the WordPress site.
  *
- * @return {Array<ScriptModuleProps>|undefined} The script modules.
+ * @return The script modules.
  */
 function parseScriptModules(
 	templateByUri: GetCurrentTemplateQuery[ 'templateByUri' ],

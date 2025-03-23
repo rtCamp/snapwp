@@ -13,13 +13,13 @@ import type {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,
-}: CoreTemplatePartProps ) => {
+}: CoreTemplatePartProps ): React.JSX.Element => {
 	const { templatePartTagName, area } = attributes || {};
 
 	const htmlTag = templatePartTagName || area || 'div';

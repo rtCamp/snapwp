@@ -11,12 +11,12 @@ import type {
  * @param props.attributes - Block attributes.
  * @param props.children - The block's children.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreColumns: CoreColumnsType = ( {
 	attributes,
 	children,
-}: CoreColumnsProps ) => {
+}: CoreColumnsProps ): React.JSX.Element => {
 	const { cssClassName, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

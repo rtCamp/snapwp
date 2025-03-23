@@ -6,9 +6,11 @@ import type { Default as DefaultType, DefaultProps } from '@snapwp/types';
  * @param props - The props for the component.
  * @param props.renderedHtml - The rendered HTML.
  *
- * @return {React.JSX.Element|null} The rendered default block.
+ * @return The rendered default block.
  */
-const Default: DefaultType = ( { renderedHtml }: DefaultProps ) => {
+const Default: DefaultType = ( {
+	renderedHtml,
+}: DefaultProps ): React.JSX.Element | null => {
 	if ( ! renderedHtml ) {
 		return null;
 	}

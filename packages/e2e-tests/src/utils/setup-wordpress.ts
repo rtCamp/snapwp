@@ -5,8 +5,6 @@ import setupSnapWPHelper from './setup-snapwp-helper';
 /**
  * Sets up the WordPress environment by starting the server,
  * waiting for it to be available, and configuring permalinks.
- *
- * @return {Promise<void>}
  */
 export default async function setupWordPress(): Promise< void > {
 	console.log( 'Starting WordPress environment...' );

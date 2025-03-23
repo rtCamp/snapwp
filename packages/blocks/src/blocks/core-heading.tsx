@@ -12,9 +12,11 @@ import type {
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
-const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
+const CoreHeading: CoreHeadingType = ( {
+	attributes,
+}: CoreHeadingProps ): React.JSX.Element => {
 	const { style, cssClassName, content, level } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

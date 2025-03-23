@@ -11,11 +11,11 @@ import type {
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreParagraph: CoreParagraphType = ( {
 	attributes,
-}: CoreParagraphProps ) => {
+}: CoreParagraphProps ): React.JSX.Element => {
 	const {
 		backgroundColor,
 		content,

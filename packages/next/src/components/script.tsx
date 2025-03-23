@@ -23,7 +23,7 @@ interface ScriptInterface {
  * @param props.groupLocation - The location where the script should be loaded.
  * @param props.src - The source URL for the script.
  *
- * @return {React.JSX.Element} The rendered script element.
+ * @return The rendered script element.
  */
 export default function Script( {
 	after,

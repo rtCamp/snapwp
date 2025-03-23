@@ -10,11 +10,11 @@ import type {
  * @param props - The props for the block component.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreSeparator: CoreSeparatorType = ( {
 	renderedHtml,
-}: CoreSeparatorProps ) => {
+}: CoreSeparatorProps ): React.JSX.Element => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
 };

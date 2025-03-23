@@ -11,7 +11,7 @@ export interface TemplateHeadProps {
  * @param props - The props for the component.
  * @param props.stylesheets - An array of additional stylesheets and inline styles.
  *
- * @return {Array<React.JSX.Element>|null} A head element containing the provided styles and links.
+ * @return A head element containing the provided styles and links.
  */
 export function TemplateHead( {
 	stylesheets,

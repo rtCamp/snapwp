@@ -15,7 +15,7 @@ type Data = Record< string | number, unknown >;
  * @param options.parentKey The key for the parent identifier.
  * @param options.childrenKey The key for the children.
  *
- * @return {Array<Data>} Data Array
+ * @return Data Array.
  */
 export default function flatListToHierarchical(
 	data: Data[] = [],

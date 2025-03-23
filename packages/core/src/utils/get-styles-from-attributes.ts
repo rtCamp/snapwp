@@ -12,7 +12,7 @@ interface AttributesWithStyle {
  * @param attributes - Object containing a style string.
  * @param attributes.style - The style string to compile.
  *
- * @return {CSSProperties} Compiled styles as an object or an empty object if no styles exist.
+ * @return Compiled styles as an object or an empty object if no styles exist.
  */
 export default function getStylesFromAttributes( {
 	style,

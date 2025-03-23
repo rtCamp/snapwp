@@ -9,12 +9,12 @@ import type { CoreQuote as CoreQuoteType, CoreQuoteProps } from '@snapwp/types';
  * @param props.attributes - Block attributes.
  * @param props.children - The block's children.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreQuote: CoreQuoteType = ( {
 	attributes,
 	children,
-}: CoreQuoteProps ) => {
+}: CoreQuoteProps ): React.JSX.Element => {
 	const { style, citation, cssClassName } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

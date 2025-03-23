@@ -5,7 +5,7 @@ import { type ClassValue, clsx } from 'clsx';
  *
  * @param  inputs - Class names or objects to combine.
  *
- * @return {string} Joined class names.
+ * @return Joined class names.
  *
  * @internal
  */

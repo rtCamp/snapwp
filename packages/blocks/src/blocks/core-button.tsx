@@ -13,9 +13,11 @@ import type {
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
-const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
+const CoreButton: CoreButtonType = ( {
+	attributes,
+}: CoreButtonProps ): React.JSX.Element => {
 	const {
 		buttonType,
 		cssClassName,

@@ -6,7 +6,7 @@ import { Logger } from '@/logger';
  *
  * @param str - The input string.
  *
- * @return {string} The camelcased string.
+ * @return The camelcased string.
  *
  * @internal
  */
@@ -33,7 +33,7 @@ function formatStringToCamelCase( str: string ): string {
  *
  * @param str - The CSS string.
  *
- * @return {CSSProperties} The style object.
+ * @return The style object.
  */
 function cssToReactStyle( str: string ): CSSProperties {
 	const style: { [ key: string ]: string } = {}; // add index signature here
@@ -58,7 +58,7 @@ function cssToReactStyle( str: string ): CSSProperties {
  *
  * @param css - The CSS string.
  *
- * @return {CSSProperties} The style object.
+ * @return The style object.
  */
 export default function getStyleObjectFromString(
 	css: object | string

@@ -8,9 +8,11 @@ import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
  * @param props - The props for the block component.
  * @param props.attributes - Block attributes.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
-const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ) => {
+const CoreCode: CoreCodeType = ( {
+	attributes,
+}: CoreCodeProps ): React.JSX.Element => {
 	const { style, cssClassName, content } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

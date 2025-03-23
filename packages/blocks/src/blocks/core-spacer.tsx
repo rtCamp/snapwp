@@ -16,12 +16,12 @@ import type {
  * @param props.attributes - Block attributes.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
-}: CoreSpacerProps ) => {
+}: CoreSpacerProps ): React.JSX.Element => {
 	const { height, width, style } = attributes || {};
 
 	const parsedStyle = style ? JSON.parse( style ) : {};

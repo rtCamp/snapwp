@@ -4,7 +4,7 @@
  * @param colorContextName - The context name for the color (e.g., 'background', 'text').
  * @param colorSlug - The slug for the color (e.g., 'primary', 'secondary').
  *
- * @return {string|undefined} The generated CSS class name or undefined if parameters are missing.
+ * @return The generated CSS class name or undefined if parameters are missing.
  */
 export default function getColorClassName(
 	colorContextName?: string | undefined,

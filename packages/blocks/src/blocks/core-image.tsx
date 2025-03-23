@@ -28,7 +28,7 @@ import type {
  * @param [props.rel] - The rel for the link.
  * @param [props.lightbox] - The lightbox attribute.
  *
- * @return {React.JSX.Element} The rendered figure element.
+ * @return The rendered figure element.
  */
 const Figure = ( {
 	children,
@@ -78,7 +78,7 @@ const Figure = ( {
  * @param [props.mediaDetails] - The media details.
  * @param [props.renderedHtml] - The rendered HTML.
  *
- * @return {React.JSX.Element|null} The rendered core image block or null if no URL is provided.
+ * @return The rendered core image block or null if no URL is provided.
  */
 const CoreImage: CoreImageType = ( {
 	attributes,
@@ -171,7 +171,7 @@ const CoreImage: CoreImageType = ( {
  * @param [connectedMediaItem] The connected media item.
  * @param [mediaDetails] The media details.
  *
- * @return {Object} The props for the image component.
+ * @return The props for the image component.
  */
 const getImageProps = (
 	attributes?: CoreImageAttributes,
@@ -245,7 +245,7 @@ const getImageProps = (
  *
  * @param lightbox - The lightbox attribute.
  *
- * @return {boolean} Whether the lightbox is enabled.
+ * @return Whether the lightbox is enabled.
  */
 //@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
@@ -266,7 +266,7 @@ const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
  * @param element - The element to extract attributes for.
  * @param renderedHtml - The rendered HTML.
  *
- * @return {Object} The extracted interactivity attributes.
+ * @return The extracted interactivity attributes.
  */
 const extractInteractivityAttributesForElement = (
 	element: string,
@@ -306,7 +306,7 @@ const extractInteractivityAttributesForElement = (
  * @param element - The element to extract attributes for.
  * @param renderedHtml - The rendered HTML.
  *
- * @return {Object} The extracted ARIA attributes.
+ * @return The extracted ARIA attributes.
  */
 const extractAriaAttributesForElement = (
 	element: string,

@@ -16,13 +16,13 @@ import type {
  * @param props.children - The block's children.
  * @param props.renderedHtml - The block's rendered HTML.
  *
- * @return {React.JSX.Element} The rendered block.
+ * @return The rendered block.
  */
 const CoreGallery: CoreGalleryType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreGalleryProps ) => {
+}: CoreGalleryProps ): React.JSX.Element => {
 	const { caption, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

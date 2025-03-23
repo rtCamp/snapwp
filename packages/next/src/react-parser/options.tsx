@@ -17,7 +17,7 @@ export const defaultOptions: HTMLReactParserOptions = {
 	 *
 	 * @param domNode - The DOM node being processed.
 	 *
-	 * @return {React.JSX.Element|undefined} A React element if the node is an anchor tag, otherwise undefined.
+	 * @return A React element if the node is an anchor tag, otherwise undefined.
 	 */
 	replace: ( domNode ) => {
 		if ( domNode instanceof Element ) {

@@ -3,7 +3,7 @@
  *
  * @param sizeAttribute - The size attribute string (e.g., "10em", "50%").
  *
- * @return {number} The size in pixels.
+ * @return The size in pixels.
  *
  * @internal
  */
