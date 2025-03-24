@@ -2,6 +2,7 @@ import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalMetadataDocument,
+	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 	GetOpenGraphMetadataDocument,
 	GetRouteMetadataDocument,
@@ -28,6 +29,7 @@ import type {
 	ParsedOpenGraphMetadata,
 	ParsedTwitterMetadata,
 } from '@snapwp/types';
+import parseGeneralSettings from '@/utils/parse-general-settings';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -84,6 +86,42 @@ export class QueryEngine {
 			} );
 
 			return parseGlobalStyles( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				// If there are networkError throw the error with proper message.
+				if ( error.networkError ) {
+					// Throw the error with proper message.
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches the general settings, like favicon icon.
+	 *
+	 * @return General settings data.
+	 */
+	static getGeneralSettings = async () => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+
+		try {
+			const data = await QueryEngine.apolloClient.query( {
+				query: GetGeneralSettingsDocument,
+				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+				errorPolicy: 'all',
+			} );
+
+			return parseGeneralSettings( data );
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
