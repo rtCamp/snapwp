@@ -30,7 +30,7 @@
 	},
 	"dependencies": {
 		"html-entities": "^2.5.2",
-		"next": "^15"
+		"next": "^15.2.3"
 	},
 	"devDependencies": {
 		"@testing-library/jest-dom": "*",
