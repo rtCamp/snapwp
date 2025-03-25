@@ -1,4 +1,4 @@
-import { QueryEngine } from '@/query-engine';
+import { QueryEngine } from '../index';
 import { getConfig, getGraphqlUrl } from '@snapwp/core/config';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
@@ -14,7 +14,7 @@ jest.mock( '@apollo/client', () => ( {
 
 describe( 'QueryEngine', () => {
 	const validConfig = {
-		homeUrl: 'https://home.example.com',
+		wpHomeUrl: 'https://home.example.com',
 	};
 	const graphqlUrl = 'https://graphql.example.com';
 
@@ -41,7 +41,7 @@ describe( 'QueryEngine', () => {
 			homeUrl: string;
 		}
 		expect( ( QueryEngine as unknown as QueryEngineType ).homeUrl ).toBe(
-			validConfig.homeUrl
+			validConfig.wpHomeUrl
 		);
 		expect(
 			(
