@@ -27,7 +27,7 @@ const classNames = findElementAndGetClassNames( renderedHTML, '#div-2' ); // cla
 ```javascript
 import { generateGraphqlUrl } from '@snapwp/core';
 
-const url = generateGraphqlUrl( homeUrl, graphqlEndpoint );
+const url = generateGraphqlUrl( wpHomeUrl, graphqlEndpoint );
 ```
 
 ```javascript

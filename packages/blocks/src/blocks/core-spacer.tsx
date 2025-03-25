@@ -8,6 +8,7 @@ import type {
 	CoreSpacer as CoreSpacerType,
 	CoreSpacerProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/spacer block.
@@ -21,7 +22,7 @@ import type {
 const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
-}: CoreSpacerProps ) => {
+}: CoreSpacerProps ): ReactNode => {
 	const { height, width, style } = attributes || {};
 
 	const parsedStyle = style ? JSON.parse( style ) : {};

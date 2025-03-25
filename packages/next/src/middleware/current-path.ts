@@ -8,6 +8,7 @@ import type { MiddlewareFactory } from './utils';
  * which contains the current pathname of the request.
  *
  * @param  next - Next middleware
+ *
  * @return The response object with modified headers
  */
 export const currentPath: MiddlewareFactory = ( next: NextMiddleware ) => {

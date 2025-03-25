@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CorePreformattedAttributes = BaseAttributes & {
@@ -7,4 +8,4 @@ export type CorePreformattedAttributes = BaseAttributes & {
 
 export type CorePreformattedProps = BaseProps< CorePreformattedAttributes >;
 
-export type CorePreformatted = React.ComponentType< CorePreformattedProps >;
+export type CorePreformatted = ComponentType< CorePreformattedProps >;

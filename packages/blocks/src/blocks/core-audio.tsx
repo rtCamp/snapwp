@@ -4,6 +4,7 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/audio block.
@@ -17,7 +18,7 @@ import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
 const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
-}: CoreAudioProps ) => {
+}: CoreAudioProps ): ReactNode => {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {

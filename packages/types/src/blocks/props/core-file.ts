@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreFileAttributes = BaseAttributes & {
@@ -15,4 +16,4 @@ export type CoreFileAttributes = BaseAttributes & {
 
 export type CoreFileProps = BaseProps< CoreFileAttributes >;
 
-export type CoreFile = React.ComponentType< CoreFileProps >;
+export type CoreFile = ComponentType< CoreFileProps >;

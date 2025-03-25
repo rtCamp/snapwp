@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreHeadingAttributes = BaseAttributes & {
@@ -9,4 +10,4 @@ export type CoreHeadingAttributes = BaseAttributes & {
 
 export type CoreHeadingProps = BaseProps< CoreHeadingAttributes >;
 
-export type CoreHeading = React.ComponentType< CoreHeadingProps >;
+export type CoreHeading = ComponentType< CoreHeadingProps >;

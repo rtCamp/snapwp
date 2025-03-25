@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreColumnAttributes = BaseAttributes & {
@@ -11,4 +11,4 @@ export type CoreColumnProps = PropsWithChildren<
 	BaseProps< CoreColumnAttributes >
 >;
 
-export type CoreColumn = React.ComponentType< CoreColumnProps >;
+export type CoreColumn = ComponentType< CoreColumnProps >;

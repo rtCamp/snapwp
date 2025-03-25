@@ -1,3 +1,5 @@
+import type { ComponentType } from 'react';
+
 export interface BaseAttributes {
 	[ key: string ]: unknown;
 }
@@ -8,7 +10,7 @@ export interface BaseProps< TAttributes > {
 	attributes?: TAttributes;
 }
 
-export type BaseBlock = React.ComponentType< BaseProps< BaseAttributes > >;
+export type BaseBlock = ComponentType< BaseProps< BaseAttributes > >;
 
 export interface BlockData<
 	T extends Record< string, unknown > = Record< string, unknown >,
@@ -27,5 +29,5 @@ export type BlockTreeNode< TBlockProps extends BlockData = BlockData > = Omit<
 > & {
 	children: BlockTreeNode[] | null;
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- @todo Need to figure out the type of renderer (Type should not be any).
-	renderer: React.ComponentType< any >;
+	renderer: ComponentType< any >;
 };
