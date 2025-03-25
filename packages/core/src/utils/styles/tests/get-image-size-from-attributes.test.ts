@@ -3,7 +3,7 @@ import getImageSizeFromAttributes, {
 } from '../get-image-size-from-attributes';
 import getPxForSizeAttribute from '../get-px-for-size-attribute';
 
-jest.mock( '../../utils/get-px-for-size-attribute' );
+jest.mock( '../get-px-for-size-attribute' );
 
 describe( 'getImageSizeFromAttributes', () => {
 	beforeEach( () => {

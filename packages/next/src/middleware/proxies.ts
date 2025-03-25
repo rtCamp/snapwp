@@ -21,7 +21,7 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
 		const nextPath = request.nextUrl.pathname;
 
-		const { homeUrl, uploadsDirectory, restUrlPrefix } = getConfig();
+		const { wpHomeUrl, uploadsDirectory, restUrlPrefix } = getConfig();
 
 		// Proxy for WordPress uploads.
 		const uploadsRegex = new RegExp(
@@ -32,24 +32,28 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 			const match = uploadsRegex.exec( nextPath );
 
 			if ( match && match[ 0 ] ) {
-				return NextResponse.redirect( new URL( match[ 0 ], homeUrl ) );
+				return NextResponse.redirect(
+					new URL( match[ 0 ], wpHomeUrl )
+				);
 			}
 		}
 
 		// Proxy for WordPress APIs.
-		// If nextPath starts with restUrlPrefix, redirect to homeUrl/pathName.
+		// If nextPath starts with restUrlPrefix, redirect to wpHomeUrl/pathName.
 		if ( nextPath.startsWith( restUrlPrefix ) ) {
 			const APIRegex = new RegExp( `${ restUrlPrefix }.*` );
 			const match = APIRegex.exec( request.nextUrl.toString() );
 			if ( match && match[ 0 ] ) {
-				return NextResponse.redirect( new URL( match[ 0 ], homeUrl ) );
+				return NextResponse.redirect(
+					new URL( match[ 0 ], wpHomeUrl )
+				);
 			}
 		}
 
 		// Proxy for Admin AJAX.
 		if ( '/wp-admin/admin-ajax.php' === nextPath ) {
 			return NextResponse.redirect(
-				new URL( '/wp-admin/admin-ajax.php', homeUrl )
+				new URL( '/wp-admin/admin-ajax.php', wpHomeUrl )
 			);
 		}
 
