@@ -2,6 +2,7 @@ import {
 	type CSSProperties,
 	type ImgHTMLAttributes,
 	type PropsWithoutRef,
+	type ReactNode,
 } from 'react';
 import NextImage, { type ImageProps } from 'next/image';
 import { cn } from '@snapwp/core';
@@ -60,7 +61,7 @@ export default function Image( {
 	...props
 }: PropsWithoutRef<
 	ImageInterface & ( ImageProps | ImgHTMLAttributes< HTMLImageElement > )
-> ): React.ReactNode {
+> ): ReactNode {
 	const altText = alt || image?.altText || '';
 	const originalWidth = image?.mediaDetails?.width;
 	const originalHeight = image?.mediaDetails?.height;

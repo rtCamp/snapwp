@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -64,7 +64,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ): React.ReactNode => {
+}: CoreMediaTextProps ): ReactNode => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;

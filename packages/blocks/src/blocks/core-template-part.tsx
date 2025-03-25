@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
 import type {
 	CoreTemplatePart as CoreTemplatePartType,
@@ -19,7 +19,7 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,
-}: CoreTemplatePartProps ): React.ReactNode => {
+}: CoreTemplatePartProps ): ReactNode => {
 	const { templatePartTagName, area } = attributes || {};
 
 	const htmlTag = templatePartTagName || area || 'div';

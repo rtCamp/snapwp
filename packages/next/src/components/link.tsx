@@ -2,6 +2,7 @@ import {
 	type AnchorHTMLAttributes,
 	type CSSProperties,
 	type PropsWithChildren,
+	type ReactNode,
 } from 'react';
 import { toFrontendUri, isInternalUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
@@ -37,7 +38,7 @@ export default function Link( {
 			| AnchorHTMLAttributes< HTMLAnchorElement >
 			| PartialWithUndefined< LinkProps >
 		)
-> ): React.ReactNode {
+> ): ReactNode {
 	const { graphqlEndpoint } = getConfig();
 
 	const internalUri = href

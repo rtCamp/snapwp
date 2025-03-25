@@ -2,6 +2,7 @@ import BlockManager from '@/block-manager';
 import { getConfig } from '@snapwp/core/config';
 
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 type EditorBlocksRendererProps = {
 	editorBlocks?: BlockData[] | null | undefined;
@@ -19,7 +20,7 @@ type EditorBlocksRendererProps = {
 export default function EditorBlocksRenderer( {
 	editorBlocks,
 	blockDefinitions,
-}: EditorBlocksRendererProps ): React.ReactNode {
+}: EditorBlocksRendererProps ): ReactNode {
 	const { blockDefinitions: globalBlockDefinitions } = getConfig();
 
 	const resolvedBlockDefinitions = globalBlockDefinitions ?? blockDefinitions;
@@ -31,7 +32,7 @@ export default function EditorBlocksRenderer( {
 	const parsedTree = BlockManager.parseBlockForRendering( editorBlocks );
 
 	// eslint-disable-next-line jsdoc/require-jsdoc -- Disable jsdoc for local function.
-	const renderNode = ( node: BlockTreeNode ): React.ReactNode => {
+	const renderNode = ( node: BlockTreeNode ): ReactNode => {
 		const props: Record< string, unknown > = {
 			key: node.clientId,
 			...node,

@@ -1,5 +1,5 @@
 import { decode } from 'html-entities';
-import type { ComponentProps, CSSProperties } from 'react';
+import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -39,7 +39,7 @@ const Figure = ( {
 	linkTarget,
 	rel,
 	lightbox,
-}: FigureProps ): React.ReactNode => {
+}: FigureProps ): ReactNode => {
 	let props: ComponentProps< 'figure' > = {};
 
 	if ( isLightboxEnabled( lightbox ) ) {
@@ -85,7 +85,7 @@ const CoreImage: CoreImageType = ( {
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ): React.ReactNode => {
+}: CoreImageProps ): ReactNode => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 

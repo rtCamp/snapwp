@@ -53,7 +53,7 @@ const CoreCover: CoreCoverType = ( {
 	mediaDetails,
 	children,
 	renderedHtml,
-}: CoreCoverProps ): React.ReactNode => {
+}: CoreCoverProps ): ReactNode => {
 	// Rest of the component implementation remains unchanged
 	const {
 		alt,

@@ -2,6 +2,7 @@ import Parser from 'html-react-parser';
 import { getConfig } from '@snapwp/core/config';
 import { defaultOptions } from './options';
 import type { HTMLReactParserOptions } from 'html-react-parser';
+import type { ReactNode } from 'react';
 /**
  * Parses HTML string into React components.
  *
@@ -10,7 +11,7 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
  *
  * @return The rendered React components.
  */
-export default function Parse( { html }: { html: string } ): React.ReactNode {
+export default function Parse( { html }: { html: string } ): ReactNode {
 	const {
 		parserOptions = defaultOptions,
 	}: { parserOptions?: HTMLReactParserOptions } = getConfig();

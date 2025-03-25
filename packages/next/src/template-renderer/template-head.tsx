@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import type { StyleSheetProps } from '@snapwp/core';
 
 export interface TemplateHeadProps {
@@ -13,9 +13,7 @@ export interface TemplateHeadProps {
  *
  * @return A head element containing the provided styles and links.
  */
-export function TemplateHead( {
-	stylesheets,
-}: TemplateHeadProps ): Array< React.ReactNode > | null {
+export function TemplateHead( { stylesheets }: TemplateHeadProps ): ReactNode {
 	if ( ! stylesheets ) {
 		return null;
 	}

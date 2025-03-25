@@ -8,6 +8,7 @@ import type {
 	CorePreformatted as CorePreformattedType,
 	CorePreformattedProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/preformatted block.
@@ -21,7 +22,7 @@ import type {
 const CorePreformatted: CorePreformattedType = ( {
 	attributes,
 	renderedHtml,
-}: CorePreformattedProps ): React.ReactNode => {
+}: CorePreformattedProps ): ReactNode => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

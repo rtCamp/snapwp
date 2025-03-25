@@ -1,5 +1,7 @@
 'use client';
 
+import type { ReactNode } from 'react';
+
 /**
  * Default error component.
  *
@@ -18,7 +20,7 @@ export default function DefaultError( {
 }: {
 	error: Error & { digest?: string };
 	reset: () => void;
-} ): React.ReactNode {
+} ): ReactNode {
 	const unknownError =
 		'An unexpected error has occurred. Please check the logs for more details.';
 	const tryAgain = 'Try Again';

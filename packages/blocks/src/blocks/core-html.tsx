@@ -1,5 +1,6 @@
 import { Parse } from '@snapwp/next';
 import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/html block.
@@ -11,7 +12,7 @@ import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
  */
 const CoreHtml: CoreHtmlType = ( {
 	renderedHtml,
-}: CoreHtmlProps ): React.ReactNode => {
+}: CoreHtmlProps ): ReactNode => {
 	// @todo use attributes.content instead of renderedHtml once it's available
 	if ( ! renderedHtml ) {
 		return null;

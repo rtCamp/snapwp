@@ -7,6 +7,7 @@ import type {
 	CoreGallery as CoreGalleryType,
 	CoreGalleryProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/gallery block.
@@ -22,7 +23,7 @@ const CoreGallery: CoreGalleryType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreGalleryProps ): React.ReactNode => {
+}: CoreGalleryProps ): ReactNode => {
 	const { caption, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

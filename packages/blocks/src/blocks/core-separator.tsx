@@ -3,6 +3,7 @@ import type {
 	CoreSeparator as CoreSeparatorType,
 	CoreSeparatorProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/separator block.
@@ -14,7 +15,7 @@ import type {
  */
 const CoreSeparator: CoreSeparatorType = ( {
 	renderedHtml,
-}: CoreSeparatorProps ): React.ReactNode => {
+}: CoreSeparatorProps ): ReactNode => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
 };

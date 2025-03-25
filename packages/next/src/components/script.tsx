@@ -1,5 +1,5 @@
 import NextScript, { type ScriptProps } from 'next/script';
-import type { PropsWithoutRef } from 'react';
+import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptInterface {
 	after?: ( string | null )[] | null | undefined;
@@ -34,7 +34,7 @@ export default function Script( {
 	src,
 	loadingStrategy,
 	...props
-}: PropsWithoutRef< ScriptInterface & ScriptProps > ): React.ReactNode {
+}: PropsWithoutRef< ScriptInterface & ScriptProps > ): ReactNode {
 	const beforeScript = Array.isArray( before )
 		? before.join( ' ' )
 		: undefined;

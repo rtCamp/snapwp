@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreSpacerAttributes = BaseAttributes & {
@@ -8,4 +9,4 @@ export type CoreSpacerAttributes = BaseAttributes & {
 
 export type CoreSpacerProps = BaseProps< CoreSpacerAttributes >;
 
-export type CoreSpacer = React.ComponentType< CoreSpacerProps >;
+export type CoreSpacer = ComponentType< CoreSpacerProps >;

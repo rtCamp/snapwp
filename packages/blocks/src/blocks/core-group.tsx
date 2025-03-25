@@ -2,6 +2,7 @@ import {
 	createElement,
 	type CSSProperties,
 	type PropsWithChildren,
+	type ReactNode,
 } from 'react';
 import {
 	cn,
@@ -30,7 +31,7 @@ const Tag = ( {
 	name?: string;
 	className: string;
 	style?: CSSProperties;
-} > ): React.ReactNode => {
+} > ): ReactNode => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}
@@ -52,7 +53,7 @@ const CoreGroup: CoreGroupType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreGroupProps ): React.ReactNode => {
+}: CoreGroupProps ): ReactNode => {
 	const { style, tagName } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );

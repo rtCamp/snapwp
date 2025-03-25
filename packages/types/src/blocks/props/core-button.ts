@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreButtonAttributes = BaseAttributes & {
@@ -15,4 +16,4 @@ export type CoreButtonAttributes = BaseAttributes & {
 
 export type CoreButtonProps = BaseProps< CoreButtonAttributes >;
 
-export type CoreButton = React.ComponentType< CoreButtonProps >;
+export type CoreButton = ComponentType< CoreButtonProps >;
