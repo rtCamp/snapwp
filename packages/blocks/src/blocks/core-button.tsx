@@ -4,7 +4,7 @@ import type {
 	CoreButton as CoreButtonType,
 	CoreButtonProps,
 } from '@snapwp/types';
-import type { ButtonHTMLAttributes } from 'react';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 /**
  * Renders the core/button block.
@@ -14,7 +14,9 @@ import type { ButtonHTMLAttributes } from 'react';
  *
  * @return The rendered block.
  */
-const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
+const CoreButton: CoreButtonType = ( {
+	attributes,
+}: CoreButtonProps ): ReactNode => {
 	const {
 		buttonType,
 		cssClassName,

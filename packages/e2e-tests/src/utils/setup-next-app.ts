@@ -7,7 +7,7 @@ import startProxyRegistry from './start-proxy-registry';
  * Sets up the Next.js app by creating a test directory, writing environment variables,
  * and running the SnapWP setup.
  */
-export default async function setupNextApp() {
+export default async function setupNextApp(): Promise< void > {
 	const testAppDir = path.join( process.cwd(), 'test-app' );
 
 	console.log( 'Setting up Next.js app...' );

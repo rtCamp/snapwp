@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreTemplatePartAttributes = BaseAttributes & {
@@ -10,4 +10,4 @@ export type CoreTemplatePartProps = PropsWithChildren<
 	BaseProps< CoreTemplatePartAttributes >
 >;
 
-export type CoreTemplatePart = React.ComponentType< CoreTemplatePartProps >;
+export type CoreTemplatePart = ComponentType< CoreTemplatePartProps >;

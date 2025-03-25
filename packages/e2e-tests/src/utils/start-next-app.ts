@@ -5,7 +5,7 @@ import waitForServer from './wait-for-server';
 /**
  * Starts the Next.js app by installing dependencies, building the project, and running the server.
  */
-export default async function startNextApp() {
+export default async function startNextApp(): Promise< void > {
 	console.log( 'Starting Next.js app...' );
 	const testAppDir = path.join( process.cwd(), 'test-app' );
 

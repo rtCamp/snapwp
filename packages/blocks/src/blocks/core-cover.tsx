@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
 	getStylesFromAttributes,
 	findElementAndGetClassNames,
@@ -44,6 +44,7 @@ const mediaPosition = (
  * @param root0.renderedHtml - Pre-rendered HTML string for class extraction
  * @param root0.connectedMediaItem - The connected media item object
  * @param root0.mediaDetails - The media details object
+ *
  * @return The rendered cover block or null if using featured image
  */
 const CoreCover: CoreCoverType = ( {
@@ -52,7 +53,7 @@ const CoreCover: CoreCoverType = ( {
 	mediaDetails,
 	children,
 	renderedHtml,
-}: CoreCoverProps ) => {
+}: CoreCoverProps ): ReactNode => {
 	// Rest of the component implementation remains unchanged
 	const {
 		alt,

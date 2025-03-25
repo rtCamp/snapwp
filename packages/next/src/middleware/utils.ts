@@ -17,7 +17,7 @@ export type MiddlewareFactory = (
  * @param stackDefaultMiddlewares Weather to add load default middlewares with custom ones.
  *                                Pass false to skip loading default middlewares.
  *
- * @return NextMiddleware
+ * @return NextJS Middleware.
  */
 export function appMiddlewares(
 	functions: MiddlewareFactory[] = [],
@@ -47,7 +47,9 @@ export function appMiddlewares(
  *
  * @return Array combining default middlewares and custom middlewares.
  */
-export function stackMiddlewares( middlewares: MiddlewareFactory[] = [] ) {
+export function stackMiddlewares(
+	middlewares: MiddlewareFactory[] = []
+): Array< MiddlewareFactory > {
 	const { corsProxyPrefix } = getConfig();
 
 	const defaultMiddlewares = [ cm, proxies ];

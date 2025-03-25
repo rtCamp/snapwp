@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CorePullquoteAttributes = BaseAttributes & {
@@ -9,4 +10,4 @@ export type CorePullquoteAttributes = BaseAttributes & {
 
 export type CorePullquoteProps = BaseProps< CorePullquoteAttributes >;
 
-export type CorePullquote = React.ComponentType< CorePullquoteProps >;
+export type CorePullquote = ComponentType< CorePullquoteProps >;

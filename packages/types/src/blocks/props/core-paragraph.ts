@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreParagraphAttributes = BaseAttributes & {
@@ -13,4 +14,4 @@ export type CoreParagraphAttributes = BaseAttributes & {
 
 export type CoreParagraphProps = BaseProps< CoreParagraphAttributes >;
 
-export type CoreParagraph = React.ComponentType< CoreParagraphProps >;
+export type CoreParagraph = ComponentType< CoreParagraphProps >;

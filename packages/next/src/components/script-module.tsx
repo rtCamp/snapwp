@@ -5,7 +5,7 @@
  * This component ensures that all dependencies of a script module are loaded before the main script.
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
  */
-import type { PropsWithoutRef } from 'react';
+import type { PropsWithoutRef, ReactNode } from 'react';
 import Script from 'next/script';
 
 interface ScriptModuleInterface {
@@ -33,6 +33,7 @@ interface ScriptModuleInterface {
  * @param props.src - The source URL for the script module
  * @param props.extraData - Additional data required by the script module
  * @param props.dependencies - Dependencies required by the script module
+ *
  * @return The rendered script module elements
  */
 export default function ScriptModule( {
@@ -41,7 +42,7 @@ export default function ScriptModule( {
 	dependencies,
 	extraData,
 	...props
-}: PropsWithoutRef< ScriptModuleInterface > ) {
+}: PropsWithoutRef< ScriptModuleInterface > ): ReactNode {
 	// Generate dependency scripts
 	const DependencyScripts = dependencies?.map( ( dep, index ) => {
 		if ( ! dep?.connectedScriptModule ) {

@@ -1,4 +1,4 @@
-import type { JSX } from 'react';
+import type { JSX, ReactNode } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
 import type {
@@ -14,7 +14,9 @@ import type {
  *
  * @return The rendered block.
  */
-const CoreHeading: CoreHeadingType = ( { attributes }: CoreHeadingProps ) => {
+const CoreHeading: CoreHeadingType = ( {
+	attributes,
+}: CoreHeadingProps ): ReactNode => {
 	const { style, cssClassName, content, level } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

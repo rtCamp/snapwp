@@ -1,5 +1,5 @@
 import { decode } from 'html-entities';
-import type { ComponentProps, CSSProperties } from 'react';
+import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -39,7 +39,7 @@ const Figure = ( {
 	linkTarget,
 	rel,
 	lightbox,
-}: FigureProps ) => {
+}: FigureProps ): ReactNode => {
 	let props: ComponentProps< 'figure' > = {};
 
 	if ( isLightboxEnabled( lightbox ) ) {
@@ -77,6 +77,7 @@ const Figure = ( {
  * @param [props.connectedMediaItem] - The connected media item.
  * @param [props.mediaDetails] - The media details.
  * @param [props.renderedHtml] - The rendered HTML.
+ *
  * @return The rendered core image block or null if no URL is provided.
  */
 const CoreImage: CoreImageType = ( {
@@ -84,7 +85,7 @@ const CoreImage: CoreImageType = ( {
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ) => {
+}: CoreImageProps ): ReactNode => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 
@@ -247,7 +248,7 @@ const getImageProps = (
  * @return Whether the lightbox is enabled.
  */
 //@ts-ignore -- Stubbed until lightbox support is fixed.
-const isLightboxEnabled = ( lightbox?: string | null ) => {
+const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
 	// if ( ! lightbox ) {
 	// 	return false;
 	// }
@@ -270,7 +271,7 @@ const isLightboxEnabled = ( lightbox?: string | null ) => {
 const extractInteractivityAttributesForElement = (
 	element: string,
 	renderedHtml?: string | null | undefined
-) => {
+): Record< string, string > => {
 	if ( ! renderedHtml ) {
 		return {};
 	}
@@ -310,7 +311,7 @@ const extractInteractivityAttributesForElement = (
 const extractAriaAttributesForElement = (
 	element: string,
 	renderedHtml?: string | null
-) => {
+): Record< string, string > => {
 	if ( ! renderedHtml ) {
 		return {};
 	}

@@ -31,6 +31,7 @@ const imageSizeToHeight: {
  * Retrieves the width and height based on image attributes.
  *
  * @param attributes - Image size attributes including sizeSlug, width, and height.
+ *
  * @return An object containing the width and height in pixels.
  *
  * @internal

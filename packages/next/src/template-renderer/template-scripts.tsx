@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';
@@ -10,9 +10,14 @@ import { getConfig } from '@snapwp/core/config';
  *
  * @param props - The props for the component.
  * @param props.scripts - Array of script objects to be rendered.
+ *
  * @return A collection of `<Script />` components.
  */
-const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
+const ScriptMap = ( {
+	scripts,
+}: {
+	scripts: EnqueuedScriptProps[];
+} ): ReactNode => (
 	<>
 		{ scripts?.map( ( { handle, src, ...rest }, id ) => {
 			return (
@@ -31,13 +36,14 @@ const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
  *
  * @param props - The props for the component.
  * @param props.scriptModules - Array of script module objects to generate import map from.
+ *
  * @return A Script component containing the import map if dependencies exist.
  */
 const ImportMap = ( {
 	scriptModules,
 }: {
 	scriptModules: ScriptModuleProps[];
-} ) => {
+} ): ReactNode => {
 	// Generate import map from all module dependencies
 	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
@@ -79,13 +85,14 @@ const ImportMap = ( {
  *
  * @param props - The props for the component.
  * @param props.scriptModules - Array of script module objects to be rendered.
+ *
  * @return A collection of `<ScriptModule />` components.
  */
 const ScriptModuleMap = ( {
 	scriptModules,
 }: {
 	scriptModules?: ScriptModuleProps[];
-} ) => {
+} ): ReactNode => {
 	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
@@ -161,6 +168,7 @@ const ScriptModuleMap = ( {
  * @param props.scripts - Array of script objects to be included in the page.
  * @param props.children - The children elements to be rendered.
  * @param props.scriptModules - Array of script module objects to be included in the page.
+ *
  * @return A collection of script elements.
  */
 export function TemplateScripts( {
@@ -170,7 +178,7 @@ export function TemplateScripts( {
 }: PropsWithChildren< {
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
-} > ) {
+} > ): ReactNode {
 	// Separate scripts by location
 	const headerScripts =
 		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ??

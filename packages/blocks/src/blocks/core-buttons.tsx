@@ -3,6 +3,7 @@ import type {
 	CoreButtons as CoreButtonsType,
 	CoreButtonsProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/buttons block.
@@ -16,7 +17,7 @@ import type {
 const CoreButtons: CoreButtonsType = ( {
 	attributes,
 	children,
-}: CoreButtonsProps ) => {
+}: CoreButtonsProps ): ReactNode => {
 	const { cssClassName, style } = attributes || {};
 	const classNames = cn( cssClassName );
 

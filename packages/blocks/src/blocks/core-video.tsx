@@ -9,6 +9,7 @@ import type {
 	CoreVideoProps,
 	TrackProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders a list of `<track>` elements for a video.
@@ -18,7 +19,11 @@ import type {
  *
  * @return A list of `<track>` elements or `null` if no tracks are provided.
  */
-const Tracks = ( { tracks }: { tracks?: TrackProps[] | undefined } ) => {
+const Tracks = ( {
+	tracks,
+}: {
+	tracks?: TrackProps[] | undefined;
+} ): ReactNode => {
 	if ( ! tracks || tracks.length === 0 ) {
 		return null;
 	}
@@ -49,7 +54,7 @@ const Tracks = ( { tracks }: { tracks?: TrackProps[] | undefined } ) => {
 const CoreVideo: CoreVideoType = ( {
 	attributes,
 	renderedHtml,
-}: CoreVideoProps ) => {
+}: CoreVideoProps ): ReactNode => {
 	const {
 		autoplay,
 		caption,

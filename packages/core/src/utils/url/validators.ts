@@ -84,7 +84,7 @@ export const isInternalUrl = (
  *
  * @internal
  */
-export const isValidUrl = ( str: string ) => {
+export const isValidUrl = ( str: string ): boolean => {
 	// When an invalid URL is passed, URL() throws an error. If an error is thrown, we will return false.
 	try {
 		const url = new URL( str );

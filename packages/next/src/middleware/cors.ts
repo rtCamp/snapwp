@@ -16,7 +16,8 @@ import { Logger } from '@snapwp/core';
  * assuming env vars NEXT_PUBLIC_FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
  *
  * @param  next - Next middleware
- * @return The response object with modified headers
+ *
+ * @return The response object with modified headers.
  */
 export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware

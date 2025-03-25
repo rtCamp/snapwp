@@ -14,7 +14,9 @@ export default class BlockManager {
 	 * Update block definitions to be used while rendering blocks.
 	 * @param blockDefinitions - rendering implementaion for blocks.
 	 */
-	public static addBlockDefinitions( blockDefinitions: BlockDefinitions ) {
+	public static addBlockDefinitions(
+		blockDefinitions: BlockDefinitions
+	): void {
 		BlockManager.blockDefinitions = {
 			...BlockManager.blockDefinitions,
 			...blockDefinitions,
@@ -24,6 +26,7 @@ export default class BlockManager {
 	/**
 	 * Function to convert a flat list of blocks to a tree depending on `clientId` and `parentClientId`
 	 * @param blockList - A flat list of blocks.
+	 *
 	 * @return A tree of blocks.
 	 */
 	public static flatListToHierarchical(
@@ -76,6 +79,7 @@ export default class BlockManager {
 	/**
 	 * Pre processes a flat list of blocks for rendering.
 	 * @param blockList - A flat list of blocks.
+	 *
 	 * @return A tree of blocks with render functions.
 	 */
 	public static parseBlockForRendering(
