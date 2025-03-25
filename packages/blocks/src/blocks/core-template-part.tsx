@@ -19,7 +19,7 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,
-}: CoreTemplatePartProps ): React.JSX.Element => {
+}: CoreTemplatePartProps ): React.ReactNode => {
 	const { templatePartTagName, area } = attributes || {};
 
 	const htmlTag = templatePartTagName || area || 'div';

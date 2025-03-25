@@ -21,7 +21,7 @@ import type {
 const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
-}: CorePullquoteProps ): React.JSX.Element => {
+}: CorePullquoteProps ): React.ReactNode => {
 	const { style, pullquoteValue, citation } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

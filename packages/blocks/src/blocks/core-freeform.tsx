@@ -14,7 +14,7 @@ import type {
  */
 const CoreFreeform: CoreFreeformType = ( {
 	renderedHtml,
-}: CoreFreeformProps ): React.JSX.Element | null => {
+}: CoreFreeformProps ): React.ReactNode => {
 	// @todo `attribues.content` is not populated in GraphQL. Using `renderedHtml` for now.
 	if ( ! renderedHtml ) {
 		return null;

@@ -12,7 +12,7 @@ import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
  */
 const CoreCode: CoreCodeType = ( {
 	attributes,
-}: CoreCodeProps ): React.JSX.Element => {
+}: CoreCodeProps ): React.ReactNode => {
 	const { style, cssClassName, content } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

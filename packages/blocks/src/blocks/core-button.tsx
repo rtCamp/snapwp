@@ -16,7 +16,7 @@ import type { ButtonHTMLAttributes } from 'react';
  */
 const CoreButton: CoreButtonType = ( {
 	attributes,
-}: CoreButtonProps ): React.JSX.Element => {
+}: CoreButtonProps ): React.ReactNode => {
 	const {
 		buttonType,
 		cssClassName,

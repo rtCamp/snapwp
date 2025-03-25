@@ -22,7 +22,7 @@ const Tracks = ( {
 	tracks,
 }: {
 	tracks?: TrackProps[] | undefined;
-} ): React.JSX.Element | null => {
+} ): React.ReactNode => {
 	if ( ! tracks || tracks.length === 0 ) {
 		return null;
 	}
@@ -53,7 +53,7 @@ const Tracks = ( {
 const CoreVideo: CoreVideoType = ( {
 	attributes,
 	renderedHtml,
-}: CoreVideoProps ): React.JSX.Element | null => {
+}: CoreVideoProps ): React.ReactNode => {
 	const {
 		autoplay,
 		caption,

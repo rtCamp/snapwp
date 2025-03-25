@@ -34,7 +34,7 @@ export default function Script( {
 	src,
 	loadingStrategy,
 	...props
-}: PropsWithoutRef< ScriptInterface & ScriptProps > ): React.JSX.Element {
+}: PropsWithoutRef< ScriptInterface & ScriptProps > ): React.ReactNode {
 	const beforeScript = Array.isArray( before )
 		? before.join( ' ' )
 		: undefined;

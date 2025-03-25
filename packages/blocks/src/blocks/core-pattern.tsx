@@ -13,7 +13,7 @@ import type {
  */
 const CorePattern: CorePatternType = ( {
 	children,
-}: CorePatternProps ): React.JSX.Element => {
+}: CorePatternProps ): React.ReactNode => {
 	// Patterns contain only children, so we just return them.
 	return <>{ children }</>;
 };

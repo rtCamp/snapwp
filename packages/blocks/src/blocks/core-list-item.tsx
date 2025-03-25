@@ -23,7 +23,7 @@ const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreListItemProps ): React.JSX.Element => {
+}: CoreListItemProps ): React.ReactNode => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

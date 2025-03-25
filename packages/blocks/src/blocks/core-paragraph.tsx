@@ -15,7 +15,7 @@ import type {
  */
 const CoreParagraph: CoreParagraphType = ( {
 	attributes,
-}: CoreParagraphProps ): React.JSX.Element => {
+}: CoreParagraphProps ): React.ReactNode => {
 	const {
 		backgroundColor,
 		content,

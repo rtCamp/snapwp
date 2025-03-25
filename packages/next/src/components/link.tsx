@@ -37,7 +37,7 @@ export default function Link( {
 			| AnchorHTMLAttributes< HTMLAnchorElement >
 			| PartialWithUndefined< LinkProps >
 		)
-> ): React.JSX.Element {
+> ): React.ReactNode {
 	const { graphqlEndpoint } = getConfig();
 
 	const internalUri = href

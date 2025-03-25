@@ -14,7 +14,7 @@ import type { CSSProperties } from 'react';
 const CoreList: CoreListType = ( {
 	attributes,
 	children,
-}: CoreListProps ): React.JSX.Element => {
+}: CoreListProps ): React.ReactNode => {
 	const { cssClassName, ordered, reversed, start, style, type } =
 		attributes || {};
 

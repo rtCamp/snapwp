@@ -15,7 +15,7 @@ export interface TemplateHeadProps {
  */
 export function TemplateHead( {
 	stylesheets,
-}: TemplateHeadProps ): Array< React.JSX.Element > | null {
+}: TemplateHeadProps ): Array< React.ReactNode > | null {
 	if ( ! stylesheets ) {
 		return null;
 	}

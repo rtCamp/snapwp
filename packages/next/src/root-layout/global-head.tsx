@@ -16,7 +16,7 @@ export function GlobalHead( {
 	customCss,
 	globalStylesheet,
 	renderedFontFaces,
-}: GlobalHeadProps ): React.JSX.Element {
+}: GlobalHeadProps ): React.ReactNode {
 	return (
 		<>
 			{ globalStylesheet && (

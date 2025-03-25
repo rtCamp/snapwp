@@ -14,7 +14,7 @@ const SnapWPConfigManager = _private.SnapWPConfigManager!;
  *
  * @return A div containing "Test Block".
  */
-const MockBlockComponent = (): React.JSX.Element => <div>Test Block</div>;
+const MockBlockComponent = (): React.ReactNode => <div>Test Block</div>;
 
 describe( 'SnapWPConfigManager functions', () => {
 	let ORIG_ENV: NodeJS.ProcessEnv;

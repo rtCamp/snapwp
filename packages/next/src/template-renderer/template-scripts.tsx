@@ -17,7 +17,7 @@ const ScriptMap = ( {
 	scripts,
 }: {
 	scripts: EnqueuedScriptProps[];
-} ): React.JSX.Element => (
+} ): React.ReactNode => (
 	<>
 		{ scripts?.map( ( { handle, src, ...rest }, id ) => {
 			return (
@@ -43,7 +43,7 @@ const ImportMap = ( {
 	scriptModules,
 }: {
 	scriptModules: ScriptModuleProps[];
-} ): React.JSX.Element | null => {
+} ): React.ReactNode => {
 	// Generate import map from all module dependencies
 	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
@@ -92,7 +92,7 @@ const ScriptModuleMap = ( {
 	scriptModules,
 }: {
 	scriptModules?: ScriptModuleProps[];
-} ): React.JSX.Element | null => {
+} ): React.ReactNode => {
 	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
@@ -178,7 +178,7 @@ export function TemplateScripts( {
 }: PropsWithChildren< {
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
-} > ): React.JSX.Element {
+} > ): React.ReactNode {
 	// Separate scripts by location
 	const headerScripts =
 		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ??

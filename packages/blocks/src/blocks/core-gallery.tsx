@@ -22,7 +22,7 @@ const CoreGallery: CoreGalleryType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreGalleryProps ): React.JSX.Element => {
+}: CoreGalleryProps ): React.ReactNode => {
 	const { caption, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

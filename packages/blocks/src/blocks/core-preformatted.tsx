@@ -21,7 +21,7 @@ import type {
 const CorePreformatted: CorePreformattedType = ( {
 	attributes,
 	renderedHtml,
-}: CorePreformattedProps ): React.JSX.Element => {
+}: CorePreformattedProps ): React.ReactNode => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

@@ -18,7 +18,7 @@ import type { CoreVerse as CoreVerseType, CoreVerseProps } from '@snapwp/types';
 const CoreVerse: CoreVerseType = ( {
 	attributes,
 	renderedHtml,
-}: CoreVerseProps ): React.JSX.Element => {
+}: CoreVerseProps ): React.ReactNode => {
 	const { style, content } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );

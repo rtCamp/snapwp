@@ -64,7 +64,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ): React.JSX.Element => {
+}: CoreMediaTextProps ): React.ReactNode => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;

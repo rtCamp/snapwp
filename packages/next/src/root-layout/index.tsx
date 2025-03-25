@@ -19,7 +19,7 @@ export type RootLayoutProps = {
 export async function RootLayout( {
 	getGlobalStyles = QueryEngine.getGlobalStyles,
 	children,
-}: PropsWithChildren< RootLayoutProps > ): Promise< React.JSX.Element > {
+}: PropsWithChildren< RootLayoutProps > ): Promise< React.ReactNode > {
 	const globalHeadProps = await getGlobalStyles();
 
 	return (

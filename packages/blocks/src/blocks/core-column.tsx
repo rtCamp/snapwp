@@ -17,7 +17,7 @@ import type { CSSProperties } from 'react';
 const CoreColumn: CoreColumnType = ( {
 	attributes,
 	children,
-}: CoreColumnProps ): React.JSX.Element => {
+}: CoreColumnProps ): React.ReactNode => {
 	const { cssClassName, style, width } = attributes || {};
 
 	const classNames = cn( cssClassName );

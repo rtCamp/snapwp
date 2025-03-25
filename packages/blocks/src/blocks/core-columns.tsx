@@ -16,7 +16,7 @@ import type {
 const CoreColumns: CoreColumnsType = ( {
 	attributes,
 	children,
-}: CoreColumnsProps ): React.JSX.Element => {
+}: CoreColumnsProps ): React.ReactNode => {
 	const { cssClassName, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

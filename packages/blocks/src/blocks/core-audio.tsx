@@ -17,7 +17,7 @@ import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
 const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
-}: CoreAudioProps ): React.JSX.Element | null => {
+}: CoreAudioProps ): React.ReactNode => {
 	const { autoplay, caption, loop, preload, src, style } = attributes || {};
 
 	if ( ! src ) {

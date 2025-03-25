@@ -30,7 +30,7 @@ const Tag = ( {
 	name?: string;
 	className: string;
 	style?: CSSProperties;
-} > ): React.JSX.Element => {
+} > ): React.ReactNode => {
 	if ( ! name ) {
 		return <>{ children }</>;
 	}
@@ -52,7 +52,7 @@ const CoreGroup: CoreGroupType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreGroupProps ): React.JSX.Element => {
+}: CoreGroupProps ): React.ReactNode => {
 	const { style, tagName } = attributes ?? {};
 
 	const styleObject = getStylesFromAttributes( { style } );

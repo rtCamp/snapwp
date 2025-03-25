@@ -16,7 +16,7 @@ import type {
 const CoreButtons: CoreButtonsType = ( {
 	attributes,
 	children,
-}: CoreButtonsProps ): React.JSX.Element => {
+}: CoreButtonsProps ): React.ReactNode => {
 	const { cssClassName, style } = attributes || {};
 	const classNames = cn( cssClassName );
 

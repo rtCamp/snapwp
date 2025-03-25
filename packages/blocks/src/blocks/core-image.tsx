@@ -39,7 +39,7 @@ const Figure = ( {
 	linkTarget,
 	rel,
 	lightbox,
-}: FigureProps ): React.JSX.Element => {
+}: FigureProps ): React.ReactNode => {
 	let props: ComponentProps< 'figure' > = {};
 
 	if ( isLightboxEnabled( lightbox ) ) {
@@ -85,7 +85,7 @@ const CoreImage: CoreImageType = ( {
 	connectedMediaItem,
 	mediaDetails,
 	renderedHtml,
-}: CoreImageProps ): React.JSX.Element | null => {
+}: CoreImageProps ): React.ReactNode => {
 	// @todo: fetchPriority is missing
 	const { caption, url, lightbox } = attributes || {};
 

@@ -16,7 +16,7 @@ import type {
  */
 const CoreHeading: CoreHeadingType = ( {
 	attributes,
-}: CoreHeadingProps ): React.JSX.Element => {
+}: CoreHeadingProps ): React.ReactNode => {
 	const { style, cssClassName, content, level } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

@@ -21,7 +21,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
 const CoreFile: CoreFileType = ( {
 	attributes,
 	renderedHtml,
-}: CoreFileProps ): React.JSX.Element | null => {
+}: CoreFileProps ): React.ReactNode => {
 	const {
 		displayPreview,
 		downloadButtonText,

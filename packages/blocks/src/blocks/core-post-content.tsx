@@ -16,7 +16,7 @@ import type {
 const CorePostContent: CorePostContentType = ( {
 	renderedHtml,
 	children,
-}: CorePostContentProps ): React.JSX.Element => {
+}: CorePostContentProps ): React.ReactNode => {
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */

@@ -10,7 +10,7 @@ import type { Default as DefaultType, DefaultProps } from '@snapwp/types';
  */
 const Default: DefaultType = ( {
 	renderedHtml,
-}: DefaultProps ): React.JSX.Element | null => {
+}: DefaultProps ): React.ReactNode => {
 	if ( ! renderedHtml ) {
 		return null;
 	}

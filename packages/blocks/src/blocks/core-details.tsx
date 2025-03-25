@@ -22,7 +22,7 @@ const CoreDetails: CoreDetailsType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreDetailsProps ): React.JSX.Element => {
+}: CoreDetailsProps ): React.ReactNode => {
 	const { style, showContent, summary } = attributes ?? {};
 	const styleObject = getStylesFromAttributes( { style } );
 

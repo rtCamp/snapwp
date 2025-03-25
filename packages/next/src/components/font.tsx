@@ -10,7 +10,7 @@
  */
 export default function Fonts( props: {
 	renderedFontFaces: string;
-} ): React.JSX.Element {
+} ): React.ReactNode {
 	const { renderedFontFaces } = props;
 
 	// @todo: we might need to proxy these for CORS.

@@ -14,7 +14,7 @@ import type { CoreQuote as CoreQuoteType, CoreQuoteProps } from '@snapwp/types';
 const CoreQuote: CoreQuoteType = ( {
 	attributes,
 	children,
-}: CoreQuoteProps ): React.JSX.Element => {
+}: CoreQuoteProps ): React.ReactNode => {
 	const { style, citation, cssClassName } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );

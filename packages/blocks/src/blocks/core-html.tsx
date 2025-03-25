@@ -11,7 +11,7 @@ import type { CoreHtml as CoreHtmlType, CoreHtmlProps } from '@snapwp/types';
  */
 const CoreHtml: CoreHtmlType = ( {
 	renderedHtml,
-}: CoreHtmlProps ): React.JSX.Element | null => {
+}: CoreHtmlProps ): React.ReactNode => {
 	// @todo use attributes.content instead of renderedHtml once it's available
 	if ( ! renderedHtml ) {
 		return null;

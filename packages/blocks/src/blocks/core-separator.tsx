@@ -14,7 +14,7 @@ import type {
  */
 const CoreSeparator: CoreSeparatorType = ( {
 	renderedHtml,
-}: CoreSeparatorProps ): React.JSX.Element => {
+}: CoreSeparatorProps ): React.ReactNode => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
 };

@@ -21,7 +21,7 @@ import type {
 const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
-}: CoreSpacerProps ): React.JSX.Element => {
+}: CoreSpacerProps ): React.ReactNode => {
 	const { height, width, style } = attributes || {};
 
 	const parsedStyle = style ? JSON.parse( style ) : {};
