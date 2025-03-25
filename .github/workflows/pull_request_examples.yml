@@ -99,15 +99,18 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
 
             - name: Run ESLint
-              run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm run --if-present lint
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run --if-present lint
 
     typecheck:
         name: TS Typecheck
@@ -148,16 +151,23 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
-                  npm run codegen
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+            - name: Run Codegen
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run codegen
 
             - name: Run TypeScript type check
               # TODO: Why are we catching the error?
-              run: |
-                  npm run --if-present typecheck
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run --if-present typecheck
 
     test-build:
         name: Test Build (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -240,15 +250,18 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
 
             - name: Build assets
-              run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm run --if-present build
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run --if-present build
 
     unit:
         name: Unit Tests (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -290,15 +303,18 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
 
             - name: Run unit tests
-              run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm run --if-present test
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run --if-present test
 
     security:
         name: Dependencies Audit
@@ -339,15 +355,18 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
 
             - name: Run npm audit
-              run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm audit --audit-level=high
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm audit --audit-level=high
 
     prettier:
         name: Check Formatting
@@ -388,12 +407,15 @@ jobs:
                   npm run --if-present build
 
             - name: Install dependencies
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm install
+
+            - name: Copy .env.example to .env
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
               run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm install
                   cp .env.example .env
+                  sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
 
             - name: Run Prettier
-              run: |
-                  cd '${{ github.workspace }}/examples/${{ matrix.example }}'
-                  npm run --if-present format-check
+              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              run: npm run --if-present format-check

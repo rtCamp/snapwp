@@ -1,4 +1,4 @@
-import findElementAndGetClassNames from '@/utils/find-element-and-get-class-names';
+import findElementAndGetClassNames from '../find-element-and-get-class-names';
 
 describe( 'findElementAndGetClassNames', () => {
 	it( 'returns class names when renderedHtml contains the specified class selector', () => {

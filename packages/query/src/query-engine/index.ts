@@ -34,8 +34,8 @@ export class QueryEngine {
 	public static initialize() {
 		QueryEngine.graphqlEndpoint = getGraphqlUrl();
 
-		const { homeUrl } = getConfig();
-		QueryEngine.homeUrl = homeUrl;
+		const { wpHomeUrl } = getConfig();
+		QueryEngine.homeUrl = wpHomeUrl;
 
 		QueryEngine.apolloClient = new ApolloClient( {
 			uri: QueryEngine.graphqlEndpoint,

@@ -48,11 +48,11 @@ export function appMiddlewares(
  * @return Array combining default middlewares and custom middlewares.
  */
 export function stackMiddlewares( middlewares: MiddlewareFactory[] = [] ) {
-	const { useCorsProxy } = getConfig();
+	const { corsProxyPrefix } = getConfig();
 
 	const defaultMiddlewares = [ cm, proxies ];
 
-	if ( useCorsProxy ) {
+	if ( corsProxyPrefix ) {
 		defaultMiddlewares.push( corsProxyMiddleware );
 	}
 

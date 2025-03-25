@@ -105,7 +105,7 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
 
 	setConfig();
-	const homeUrl = new URL( getConfig().homeUrl );
+	const homeUrl = new URL( getConfig().wpHomeUrl );
 
 	const userImages = nextConfig?.images ?? {};
 	const userRemotePatterns = userImages.remotePatterns ?? [];
