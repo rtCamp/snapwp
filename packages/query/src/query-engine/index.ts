@@ -5,8 +5,8 @@ import {
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 	GetOpenGraphMetadataDocument,
-	GetRouteMetadataDocument,
 	GetTwitterMetadataDocument,
+	GetRouteMetadataDocument,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -19,10 +19,10 @@ import {
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import type {
-	ParsedGlobalMetadata,
-	ParsedRouteMetadata,
-	ParsedOpenGraphMetadata,
-	ParsedTwitterMetadata,
+	FetchRootMetadata,
+	FetchRouteMetadata,
+	FetchRouteOpenGraphMetadata,
+	FetchRouteTwitterMetadata,
 	BlockData,
 } from '@snapwp/types';
 import {
@@ -209,11 +209,11 @@ export class QueryEngine {
 	};
 
 	/**
-	 * Fetches global site metadata, including title, description, and locale.
+	 * Fetches global site metadata.
 	 *
-	 * @return Parsed global metadata.
+	 * @return Global metadata.
 	 */
-	static getGlobalMetadata = async (): Promise< ParsedGlobalMetadata > => {
+	static fetchRootMetadata: FetchRootMetadata = async () => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -225,7 +225,7 @@ export class QueryEngine {
 				errorPolicy: 'all',
 			} );
 
-			return parseGlobalMetadata( data );
+			return data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
@@ -245,11 +245,9 @@ export class QueryEngine {
 	 * Fetches metadata for a specific route.
 	 *
 	 * @param uri - The URI of the route.
-	 * @return Parsed route metadata.
+	 * @return Route metadata.
 	 */
-	static getRouteMetadata = async (
-		uri: string
-	): Promise< ParsedRouteMetadata > => {
+	static fetchRouteMetadata: FetchRouteMetadata = async ( uri: string ) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -263,7 +261,7 @@ export class QueryEngine {
 				errorPolicy: 'all',
 			} );
 
-			return parseRouteMetadata( data );
+			return data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
@@ -283,11 +281,11 @@ export class QueryEngine {
 	 * Fetches Open Graph metadata for a specific route.
 	 *
 	 * @param uri - The URI of the route.
-	 * @return Parsed Open Graph metadata.
+	 * @return Open Graph metadata.
 	 */
-	static getOpenGraphMetadata = async (
+	static fetchRouteOpenGraphMetadata: FetchRouteOpenGraphMetadata = async (
 		uri: string
-	): Promise< ParsedOpenGraphMetadata > => {
+	) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -300,8 +298,7 @@ export class QueryEngine {
 				fetchPolicy: 'network-only',
 				errorPolicy: 'all',
 			} );
-
-			return parseOpenGraphMetadata( data );
+			return data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
@@ -321,11 +318,11 @@ export class QueryEngine {
 	 * Fetches Twitter metadata for a specific route.
 	 *
 	 * @param uri - The URI of the route.
-	 * @return Parsed Twitter metadata.
+	 * @return Twitter metadata.
 	 */
-	static getTwitterMetadata = async (
+	static fetchRouteTwitterMetadata: FetchRouteTwitterMetadata = async (
 		uri: string
-	): Promise< ParsedTwitterMetadata > => {
+	) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -338,8 +335,7 @@ export class QueryEngine {
 				fetchPolicy: 'network-only',
 				errorPolicy: 'all',
 			} );
-
-			return parseTwitterMetadata( data );
+			return data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
