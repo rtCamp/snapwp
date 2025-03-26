@@ -2,5 +2,5 @@
 "@snapwp/next": patch
 ---
 
-Fix: Expose type declaration for `withSnapWP` HOC
+fix: Expose type declaration for `withSnapWP` HOC
 
