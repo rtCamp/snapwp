@@ -45,7 +45,7 @@
 		"resolve-paths:query": "npm run resolve-paths -w @snapwp/query",
 		"resolve-paths:codegen": "npm run resolve-paths -w @snapwp/codegen-config",
 		"dev": "tsc-watch -b --onSuccess \"npm-run-all resolve-paths:*\"",
-		"typecheck": "tsc --noEmit",
+		"typecheck": "sh ./bin/type-check.sh",
 		"lint": "eslint . --config ./.eslintrc.cjs",
 		"lint:fix": "eslint . --config ./.eslintrc.cjs --fix",
 		"format": "prettier . --config config/.prettierrc.cjs --write --paren-spacing",

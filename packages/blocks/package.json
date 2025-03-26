@@ -26,7 +26,8 @@
 		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
 		"resolve-paths": "resolve-tspaths",
 		"lint": "eslint . --config ../../.eslintrc.json",
-		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"html-entities": "^2.5.2",
