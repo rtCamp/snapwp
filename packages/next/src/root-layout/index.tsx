@@ -3,6 +3,7 @@ import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
+import { getRootMetadata } from '..';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -47,6 +48,8 @@ export async function generateRootMetaData(): Promise< Metadata > {
 	const { faviconIcons, appleIcons, msApplicationTileIcon } =
 		await getIcons();
 
+	const rootMetadata = await getRootMetadata();
+
 	return {
 		icons: {
 			icon: faviconIcons,
@@ -57,5 +60,6 @@ export async function generateRootMetaData(): Promise< Metadata > {
 				'msapplication-TileImage': msApplicationTileIcon.sourceUrl,
 			} ),
 		},
+		...rootMetadata,
 	};
 }
