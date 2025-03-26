@@ -8,3 +8,4 @@ export { default as Fonts } from './components/font';
 export { default as Image } from './components/image';
 export { default as Link } from './components/link';
 export { default as Script } from './components/script';
+export * from './seo';

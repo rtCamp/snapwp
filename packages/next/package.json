@@ -39,21 +39,21 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
 	"peerDependencies": {
+		"@snapwp/core": "*",
+		"@snapwp/query": "*",
 		"next": "^15",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"@snapwp/core": "*",
-		"@snapwp/query": "*"
+		"react-dom": "^19.0.0"
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
 		"modify-source-webpack-plugin": "^4.1.0"
 	},
 	"devDependencies": {
+		"@snapwp/types": "*",
 		"@types/react-dom": "*",
-		"typescript": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"@snapwp/types": "*"
+		"typescript": "*"
 	}
 }
