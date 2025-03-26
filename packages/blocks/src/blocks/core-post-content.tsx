@@ -3,6 +3,7 @@ import type {
 	CorePostContent as CorePostContentType,
 	CorePostContentProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/post-content block.
@@ -16,7 +17,7 @@ import type {
 const CorePostContent: CorePostContentType = ( {
 	renderedHtml,
 	children,
-}: CorePostContentProps ) => {
+}: CorePostContentProps ): ReactNode => {
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */

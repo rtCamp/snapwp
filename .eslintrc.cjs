@@ -71,6 +71,7 @@ module.exports = {
 
 		// Turn of JSdoc types and use TypeScript types instead.
 		'jsdoc/no-types': [ 'off' ],
+		'jsdoc/require-returns': [ 'warn' ],
 
 		// Restrict the use of empty functions.
 		'no-empty-function': 'error',
@@ -129,10 +130,15 @@ module.exports = {
 		},
 		{
 			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
-			excludedFiles: [ '**/codegen.ts' ],
+			excludedFiles: [
+				'**/codegen.ts',
+				'packages/query/src/**/tests/*',
+				'packages/next/src/**/tests/*',
+			],
 			rules: {
 				'dot-notation': 'off',
 				'@typescript-eslint/dot-notation': 'error',
+				'@typescript-eslint/explicit-function-return-type': 'error',
 			},
 			parserOptions: {
 				project: true,

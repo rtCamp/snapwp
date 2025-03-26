@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreImageAttributes = BaseAttributes & {
@@ -24,7 +24,7 @@ export type CoreImageProps = BaseProps< CoreImageAttributes > & {
 	mediaDetails?: CoreImageMediaDetails;
 };
 
-export type CoreImage = React.ComponentType< CoreImageProps >;
+export type CoreImage = ComponentType< CoreImageProps >;
 
 export interface CoreImageConnectedMediaItem {
 	node: {

@@ -1,11 +1,10 @@
-import type { ButtonHTMLAttributes } from 'react';
-import { cn, getStylesFromAttributes, replaceHostUrl } from '@snapwp/core';
-import { getConfig } from '@snapwp/core/config';
+import { cn, getStylesFromAttributes } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
 import type {
 	CoreButton as CoreButtonType,
 	CoreButtonProps,
 } from '@snapwp/types';
+import type { ButtonHTMLAttributes, ReactNode } from 'react';
 
 /**
  * Renders the core/button block.
@@ -15,7 +14,9 @@ import type {
  *
  * @return The rendered block.
  */
-const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
+const CoreButton: CoreButtonType = ( {
+	attributes,
+}: CoreButtonProps ): ReactNode => {
 	const {
 		buttonType,
 		cssClassName,
@@ -31,7 +32,6 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 
 	const classNames = cn( cssClassName );
 	const styleObject = getStylesFromAttributes( { style } );
-	const { homeUrl, nextUrl } = getConfig();
 
 	const commonProps = {
 		className: linkClassName ?? undefined,
@@ -55,12 +55,10 @@ const CoreButton: CoreButtonType = ( { attributes }: CoreButtonProps ) => {
 	}
 
 	if ( url ) {
-		const href = replaceHostUrl( url, homeUrl, nextUrl );
-
 		return (
 			<div className={ classNames }>
 				<Link
-					href={ href }
+					href={ url } // No need to convert URL to internal URL as the Link component handles it.
 					target={ linkTarget }
 					rel={ rel }
 					{ ...commonProps }

@@ -1,13 +1,19 @@
 /**
  * Parses given string into remote patterns.
  * @param str URLs for external image sources in a comma seperated fashion.
+ *
  * @return an array of remote patterns to be used in next.config.js
  *
  * @internal
  */
 export default function parseExternalRemotePatterns(
 	str?: string | undefined
-) {
+): ( {
+	protocol?: string;
+	hostname?: string;
+	port?: string;
+	pathname?: string;
+} | null )[] {
 	if ( ! str ) {
 		return [
 			{

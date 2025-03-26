@@ -22,7 +22,13 @@ export default function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
 	wordpressUrl: string,
 	uri: string
-) {
+): {
+	stylesheets: StyleSheetProps[] | undefined;
+	editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
+	scripts: EnqueuedScriptProps[] | undefined;
+	scriptModules: ScriptModuleProps[] | undefined;
+	bodyClasses: string[] | undefined;
+} {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error(

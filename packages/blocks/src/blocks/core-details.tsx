@@ -7,6 +7,7 @@ import type {
 	CoreDetails as CoreDetailsType,
 	CoreDetailsProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/details block.
@@ -22,7 +23,7 @@ const CoreDetails: CoreDetailsType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreDetailsProps ) => {
+}: CoreDetailsProps ): ReactNode => {
 	const { style, showContent, summary } = attributes ?? {};
 	const styleObject = getStylesFromAttributes( { style } );
 

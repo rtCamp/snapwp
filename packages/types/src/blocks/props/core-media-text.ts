@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 import type { FocalPoint } from '.';
 
@@ -27,7 +27,7 @@ export type CoreMediaTextProps = PropsWithChildren<
 	mediaDetails?: CoreMediaTextMediaDetails;
 };
 
-export type CoreMediaText = React.ComponentType< CoreMediaTextProps >;
+export type CoreMediaText = ComponentType< CoreMediaTextProps >;
 
 export interface CoreMediaTextConnectedMediaItem {
 	node: {

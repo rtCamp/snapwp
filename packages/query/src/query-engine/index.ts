@@ -18,17 +18,20 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import { Logger, type GlobalHeadProps } from '@snapwp/core';
-import parseGlobalMetadata from '@/utils/parse-global-metadata';
-import parseRouteMetadata from '@/utils/parse-route-metadata';
-import parseOpenGraphMetadata from '@/utils/parse-opengraph-metadata';
-import parseTwitterMetadata from '@/utils/parse-twitter-metadata';
 import type {
 	ParsedGlobalMetadata,
 	ParsedRouteMetadata,
 	ParsedOpenGraphMetadata,
 	ParsedTwitterMetadata,
+	BlockData,
 } from '@snapwp/types';
+import {
+	Logger,
+	type GlobalHeadProps,
+	type EnqueuedScriptProps,
+	type StyleSheetProps,
+	type ScriptModuleProps,
+} from '@snapwp/core';
 import parseGeneralSettings from '@/utils/parse-general-settings';
 
 /**
@@ -45,11 +48,11 @@ export class QueryEngine {
 	/**
 	 * Initializer.
 	 */
-	public static initialize() {
+	public static initialize(): void {
 		QueryEngine.graphqlEndpoint = getGraphqlUrl();
 
-		const { homeUrl } = getConfig();
-		QueryEngine.homeUrl = homeUrl;
+		const { wpHomeUrl } = getConfig();
+		QueryEngine.homeUrl = wpHomeUrl;
 
 		QueryEngine.apolloClient = new ApolloClient( {
 			uri: QueryEngine.graphqlEndpoint,
@@ -60,6 +63,7 @@ export class QueryEngine {
 	/**
 	 * Returns the singleton instance of QueryEngine.
 	 * @throws Throws error if instance is not initialized with config.
+	 *
 	 * @return The QueryEngine instance.
 	 */
 	public static getInstance(): QueryEngine {
@@ -71,6 +75,7 @@ export class QueryEngine {
 
 	/**
 	 * Fetches global styles.
+	 *
 	 * @return The template data fetched for the uri.
 	 */
 	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
@@ -109,7 +114,23 @@ export class QueryEngine {
 	 *
 	 * @return General settings data.
 	 */
-	static getGeneralSettings = async () => {
+	static getGeneralSettings = async (): Promise<
+		| {
+				generalSettings: {
+					siteIcon: {
+						mediaItemUrl: string | undefined;
+						mediaDetails: {
+							sizes: {
+								sourceUrl: string;
+								height: string;
+								width: string;
+							}[];
+						};
+					};
+				};
+		  }
+		| undefined
+	> => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -143,9 +164,18 @@ export class QueryEngine {
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
 	 * @param uri - The URL of the seed node.
+	 *
 	 * @return The template data fetched for the uri.
 	 */
-	static getTemplateData = async ( uri: string ) => {
+	static getTemplateData = async (
+		uri: string
+	): Promise< {
+		stylesheets: StyleSheetProps[] | undefined;
+		editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
+		scripts: EnqueuedScriptProps[] | undefined;
+		scriptModules: ScriptModuleProps[] | undefined;
+		bodyClasses: string[] | undefined;
+	} > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -331,7 +361,7 @@ export class QueryEngine {
  *
  * @param error - The Apollo error.
  */
-const logApolloErrors = ( error: ApolloError ) => {
+const logApolloErrors = ( error: ApolloError ): void => {
 	// If there are graphQLErrors log them.
 	error.graphQLErrors.forEach( ( graphQLError ) => {
 		Logger.error( graphQLError.message );

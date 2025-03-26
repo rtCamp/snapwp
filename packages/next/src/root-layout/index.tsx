@@ -2,7 +2,7 @@ import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -14,12 +14,12 @@ export type RootLayoutProps = {
  * @param props.getGlobalStyles - A async callback to get global styles.
  * @param props.children - Child components.
  *
- * @return The rendered template
+ * @return The rendered template.
  */
 export async function RootLayout( {
 	getGlobalStyles = QueryEngine.getGlobalStyles,
 	children,
-}: PropsWithChildren< RootLayoutProps > ) {
+}: PropsWithChildren< RootLayoutProps > ): Promise< ReactNode > {
 	const globalHeadProps = await getGlobalStyles();
 
 	return (

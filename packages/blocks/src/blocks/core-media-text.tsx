@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -28,9 +28,13 @@ const DEFAULT_MEDIA_SIZE_SLUG = 'full';
  * @param focalPoint - The focal point of the image.
  * @param focalPoint.x - The x-coordinate of the focal point (0 to 1).
  * @param focalPoint.y - The y-coordinate of the focal point (0 to 1).
+ *
  * @return CSS styles for the image fill.
  */
-function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
+function imageFillStyles(
+	url?: string,
+	focalPoint?: FocalPoint
+): { objectPosition: string } | { objectPosition?: undefined } {
 	return url
 		? {
 				objectPosition: focalPoint
@@ -51,6 +55,7 @@ function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
  * @param props.renderedHtml - Raw HTML string from WordPress
  * @param props.connectedMediaItem - Connected media item
  * @param props.mediaDetails - Media details
+ *
  * @return Rendered component or null if no content
  */
 const CoreMediaText: CoreMediaTextType = ( {
@@ -59,7 +64,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ) => {
+}: CoreMediaTextProps ): ReactNode => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;
