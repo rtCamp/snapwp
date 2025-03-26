@@ -1,3 +1,3 @@
 export * from './blocks';
-export * from './query-engine';
+export * from './seo';
 export * from './utils';
