@@ -18,6 +18,7 @@ describe( 'Logger', () => {
 
 	it( 'should log a debug message', () => {
 		// @ts-ignore - Overriding NODE_ENV for testing logger behavior in different environments.
+		process.env.NODE_ENV = 'development';
 		Logger.debug( 'Debug message' );
 		expect( console.debug ).toHaveBeenCalledWith(
 			'SnapWP:',
