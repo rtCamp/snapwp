@@ -1,17 +1,20 @@
 import { QueryEngine } from '@snapwp/query';
-import type { GetIconMetadata } from '@snapwp/types';
+import type { IconsMetaData } from './types';
 import parseIconMetadata from './parser';
+import type { Getter } from '../type';
 
 /**
- * Fetches and parses icons metadata form WP server.
+ * Retrieves the Icon metadata using the provided options.
  *
- * @param options - Optional functions for fetching and parsing metadata.
- * @return Parsed icons metadata.
+ * @param options - Options for fetching and parsing Icon metadata.
+ * @return A promise resolving to the Icon metadata for the route.
  */
-const getIcons: GetIconMetadata = async ( options ) => {
-	const { fetchMetadata, parseMetadata } = options || {};
-	const fetcher = fetchMetadata || QueryEngine.getGeneralSettings;
-	const parser = parseMetadata || parseIconMetadata;
+const getIcons: Getter< IconsMetaData > = async ( options = {} ) => {
+	const {
+		fetcher = QueryEngine.getGeneralSettings,
+		parser = parseIconMetadata,
+	} = options;
+
 	const metadata = await fetcher();
 	const { faviconIcons, appleIcons, msApplicationTileIcon } =
 		parser( metadata );

@@ -1,17 +1,20 @@
 import { QueryEngine } from '@snapwp/query';
-import type { GetSiteMetadata } from '@snapwp/types';
 import parseRootMetadata from './parser';
+import type { SiteMetadata } from './types';
+import type { Getter } from '../type';
 
 /**
- * Fetches and parses the root metadata for the site.
+ * Retrieves the Site metadata using the provided options.
  *
- * @param options - Optional functions for fetching and parsing metadata.
- * @return Parsed root metadata.
+ * @param options - Options for fetching and parsing Site metadata.
+ * @return A promise resolving to the Site metadata.
  */
-const getSiteMetadata: GetSiteMetadata = async ( options ) => {
-	const { fetchMetadata, parseMetadata } = options || {};
-	const fetcher = fetchMetadata || QueryEngine.fetchSiteMetadata;
-	const parser = parseMetadata || parseRootMetadata;
+const getSiteMetadata: Getter< SiteMetadata > = async ( options = {} ) => {
+	const {
+		fetcher = QueryEngine.fetchSiteMetadata,
+		parser = parseRootMetadata,
+	} = options;
+
 	const metadata = await fetcher();
 	const { siteTitle, description, locale } = parser( metadata );
 	return {

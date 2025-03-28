@@ -1,10 +1,9 @@
 import type { Metadata } from 'next';
 import getIcons from './icons-metadata/getter';
 import getSiteMetadata from './site-metadata/getter';
-import type {
-	GetIconMetadataOptions,
-	GetSiteMetadataOptions,
-} from '@snapwp/types';
+import type { GetterOptions } from './type';
+import type { IconsMetaData } from './icons-metadata/types';
+import type { SiteMetadata } from './site-metadata/types';
 
 /**
  * Fetches and parses Metadata from WordPress server
@@ -14,8 +13,8 @@ import type {
  * @return Metadata for RootLayout
  */
 export async function getRootMetadata( options?: {
-	getIconsOptions?: GetIconMetadataOptions;
-	getSiteOptions?: GetSiteMetadataOptions;
+	getIconsOptions?: GetterOptions< IconsMetaData >;
+	getSiteOptions?: GetterOptions< SiteMetadata >;
 } ): Promise< Metadata > {
 	const iconsMetaData = await getIcons( options?.getIconsOptions );
 	const siteMetaData = await getSiteMetadata( options?.getSiteOptions );

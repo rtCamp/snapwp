@@ -1,18 +1,14 @@
-import {
-	IconsMetaDataSchema,
-	type FormattedIconData,
-	type IconData,
-	type IconMetaData,
-	type ParseIconMetadata,
-} from '@snapwp/types';
+import { IconsMetaDataSchema } from '@snapwp/types';
+import type { FormattedIconData, IconData, IconsMetaData } from './types';
+import type { Parser } from '../type';
 
 /**
- * Parses the Twitter metadata.
+ * Validates and parses Icon metadata for a route into consumable state.
  *
- * @param data - The data to parse for Twitter information.
- * @return Parsed Twitter metadata for the given route.
+ * @param data object to be validated and parsed
+ * @return Parsed Icon metadata
  */
-const parseIconMetadata: ParseIconMetadata = ( data ) => {
+const parseIconMetadata: Parser< IconsMetaData > = ( data ) => {
 	const parsedData = IconsMetaDataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.generalSettings ) {
 		return {
@@ -32,7 +28,7 @@ const parseIconMetadata: ParseIconMetadata = ( data ) => {
 		};
 	}
 
-	let fallbackIcons: IconMetaData = {
+	let fallbackIcons: IconsMetaData = {
 		faviconIcons: [],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,

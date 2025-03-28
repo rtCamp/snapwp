@@ -7,6 +7,10 @@ import {
 	GetTwitterMetadataDocument,
 	GetRouteMetadataDocument,
 	GetSiteMetadataDocument,
+	type GetSiteMetadataQuery,
+	type GetRouteMetadataQuery,
+	type GetOpenGraphMetadataQuery,
+	type GetTwitterMetadataQuery,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -18,13 +22,7 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import type {
-	FetchSiteRouteMetadata,
-	FetchRouteOpenGraphMetadata,
-	FetchRouteTwitterMetadata,
-	BlockData,
-	FetchSiteMetadata,
-} from '@snapwp/types';
+import type { BlockData } from '@snapwp/types';
 import {
 	Logger,
 	type GlobalHeadProps,
@@ -213,7 +211,7 @@ export class QueryEngine {
 	 *
 	 * @return Global metadata.
 	 */
-	static fetchSiteMetadata: FetchSiteMetadata = async () => {
+	static fetchSiteMetadata = async (): Promise< GetSiteMetadataQuery > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -247,9 +245,9 @@ export class QueryEngine {
 	 * @param uri - The URI of the route.
 	 * @return Route metadata.
 	 */
-	static fetchRouteMetadata: FetchSiteRouteMetadata = async (
+	static fetchRouteMetadata = async (
 		uri: string
-	) => {
+	): Promise< GetRouteMetadataQuery > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -285,9 +283,9 @@ export class QueryEngine {
 	 * @param uri - The URI of the route.
 	 * @return Open Graph metadata.
 	 */
-	static fetchRouteOpenGraphMetadata: FetchRouteOpenGraphMetadata = async (
+	static fetchRouteOpenGraphMetadata = async (
 		uri: string
-	) => {
+	): Promise< GetOpenGraphMetadataQuery > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -322,9 +320,9 @@ export class QueryEngine {
 	 * @param uri - The URI of the route.
 	 * @return Twitter metadata.
 	 */
-	static fetchRouteTwitterMetadata: FetchRouteTwitterMetadata = async (
+	static fetchRouteTwitterMetadata = async (
 		uri: string
-	) => {
+	): Promise< GetTwitterMetadataQuery > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
