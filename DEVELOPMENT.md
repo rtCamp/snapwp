@@ -77,7 +77,13 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     nvm use
     ```
 
-3. Build the packages locally.
+3. Install the NPM dependencies.
+
+    ```bash
+    npm install
+    ```
+
+4. Build the packages locally.
 
     ```bash
     npm run build
@@ -85,7 +91,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
     At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
 
-4. (Optional) Start the packages in watch mode.
+5. (Optional) Start the packages in watch mode.
 
     ```bash
     npm run dev
