@@ -1,12 +1,11 @@
 import type { Metadata } from 'next';
-import type {
-	GetRouteOpenGraphMetadataOptions,
-	GetRouteTwitterMetadataOptions,
-	GetSiteRouteMetadataOptions,
-} from '@snapwp/types';
 import getRouteOpenGraphMetadata from './opengraph-metadata/getter';
 import getRouteTwitterMetadata from './twitter-metadata/getter';
 import getSiteMetadata from './site-metadata/getter';
+import type { GetterOptions } from './type';
+import type { OpenGraphMetadata } from './opengraph-metadata/types';
+import type { TwitterMetadata } from './twitter-metadata/types';
+import type { SiteMetadata } from './site-metadata/types';
 
 /**
  * Fetches and parses Metadata from WordPress server
@@ -20,9 +19,9 @@ import getSiteMetadata from './site-metadata/getter';
 export async function getRouteMetadata(
 	path = '/',
 	options?: {
-		getRouteOpenGraphMetadataOptions: GetRouteOpenGraphMetadataOptions;
-		getRouteTwitterMetadataOptions: GetRouteTwitterMetadataOptions;
-		getSiteRouteMetadataOptions: GetSiteRouteMetadataOptions;
+		getRouteOpenGraphMetadataOptions: GetterOptions< OpenGraphMetadata >;
+		getRouteTwitterMetadataOptions: GetterOptions< TwitterMetadata >;
+		getSiteRouteMetadataOptions: GetterOptions< SiteMetadata >;
 	}
 ): Promise< Metadata > {
 	const ogMetaData = await getRouteOpenGraphMetadata(

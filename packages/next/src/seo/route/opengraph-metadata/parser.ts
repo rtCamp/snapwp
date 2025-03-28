@@ -1,9 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
-import {
-	RouteOpenGraphMetadataSchema,
-	type ParseRouteOpenGraphMetadata,
-	type RouteOpenGraphMetadata,
-} from '@snapwp/types';
+import type { Parser } from '../type';
+import type { OpenGraphMetadata } from './types';
+import { RouteOpenGraphMetadataSchema } from '@snapwp/types';
 
 /**
  * Parses the Open Graph metadata for a specific route.
@@ -12,14 +10,14 @@ import {
  * @param data - The data to parse for Open Graph information.
  * @return Parsed Open Graph metadata for the given route.
  */
-const parseOpenGraphMetadata: ParseRouteOpenGraphMetadata = ( path, data ) => {
+const parseOpenGraphMetadata: Parser< OpenGraphMetadata > = ( path, data ) => {
 	const parsedData = RouteOpenGraphMetadataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.nodeByUri ) {
 		return {};
 	}
 
 	const node = parsedData.data.nodeByUri;
-	const result: RouteOpenGraphMetadata = {
+	const result: OpenGraphMetadata = {
 		url: node.uri || path,
 		type: node.__typename === 'Post' ? 'article' : 'website',
 	};

@@ -1,9 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
-import {
-	RouteTwitterMetadataSchema,
-	type ParseRouteTwitterMetadata,
-	type RouteTwitterMetadata,
-} from '@snapwp/types';
+import { RouteTwitterMetadataSchema } from '@snapwp/types';
+import type { TwitterMetadata } from './types';
+import type { Parser } from '../type';
 
 /**
  * Parses the Twitter metadata.
@@ -11,14 +9,16 @@ import {
  * @param data - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-const parseRouteTwitterMetadata: ParseRouteTwitterMetadata = ( data ) => {
+const parseRouteTwitterMetadata: Parser< TwitterMetadata > = (
+	data: unknown
+) => {
 	const parsedData = RouteTwitterMetadataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.nodeByUri ) {
 		return {};
 	}
 
 	const node = parsedData.data.nodeByUri;
-	const metadata: RouteTwitterMetadata = {};
+	const metadata: TwitterMetadata = {};
 
 	switch ( node.__typename ) {
 		case 'Page':

@@ -1,6 +1,7 @@
 import { QueryEngine } from '@snapwp/query';
-import type { GetRouteTwitterMetadata } from '@snapwp/types';
 import parseRouteTwitterMetadata from './parser';
+import type { Getter } from '../type';
+import type { TwitterMetadata } from './types';
 
 /**
  * Fetches and parses Twitter metadata for a given route.
@@ -9,15 +10,17 @@ import parseRouteTwitterMetadata from './parser';
  * @param options - Optional functions for fetching and parsing metadata.
  * @return Parsed Twitter metadata.
  */
-const getRouteTwitterMetadata: GetRouteTwitterMetadata = async (
-	path,
-	options
+const getRouteTwitterMetadata: Getter< TwitterMetadata > = async (
+	path = '/',
+	options = {}
 ) => {
-	const { fetchMetadata, parseMetadata } = options || {};
-	const fetcher = fetchMetadata || QueryEngine.fetchRouteTwitterMetadata;
-	const parser = parseMetadata || parseRouteTwitterMetadata;
+	const {
+		fetcher = QueryEngine.fetchRouteTwitterMetadata,
+		parser = parseRouteTwitterMetadata,
+	} = options;
+
 	const metadata = await fetcher( path );
-	const { image, description, title } = parser( metadata );
+	const { image, description, title } = parser( path, metadata );
 	return {
 		twitter: {
 			title,
