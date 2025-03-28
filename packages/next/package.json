@@ -47,7 +47,8 @@
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
-		"modify-source-webpack-plugin": "^4.1.0"
+		"modify-source-webpack-plugin": "^4.1.0",
+		"zod": "^3.24.2"
 	},
 	"devDependencies": {
 		"@snapwp/types": "*",

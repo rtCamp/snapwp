@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
-import { RouteMetadataSchema } from '@snapwp/types';
 import type { Parser } from '../type';
 import type { SiteMetadata } from './types';
+import { RouteMetadataSchema } from './schema';
 
 /**
  * Parses the route metadata from the given data.

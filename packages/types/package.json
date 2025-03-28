@@ -31,8 +31,7 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
 	"dependencies": {
-		"react": "^19.0.0",
-		"zod": "^3.24.2"
+		"react": "^19.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "*",

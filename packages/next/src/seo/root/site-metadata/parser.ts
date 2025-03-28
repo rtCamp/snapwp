@@ -1,6 +1,6 @@
-import { RootMetadataSchema } from '@snapwp/types';
 import type { SiteMetadata } from './types';
 import type { Parser } from '../type';
+import { RootMetadataSchema } from './schema';
 
 /**
  * Parses the root metadata from the given data.

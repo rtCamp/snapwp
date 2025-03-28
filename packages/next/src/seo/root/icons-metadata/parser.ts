@@ -1,6 +1,6 @@
-import { IconsMetaDataSchema } from '@snapwp/types';
 import type { FormattedIconData, IconData, IconsMetaData } from './types';
 import type { Parser } from '../type';
+import { IconsMetaDataSchema } from './schema';
 
 /**
  * Validates and parses Icon metadata for a route into consumable state.
