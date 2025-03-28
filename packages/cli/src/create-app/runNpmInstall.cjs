@@ -26,7 +26,7 @@ const runNpmInstall = async ( projectDirPath ) => {
 		console.warn(
 			'You will need to run "npm install" manually after setup completes.'
 		);
-		// We don't throw the error so the process can continue
+		// We don't throw the error so the process can continue.
 	}
 };
 
