@@ -17,10 +17,8 @@ const {
 } = require( './create-app/updatePackageVersions.cjs' );
 const {
 	printSuccessMessage,
-} = require('./create-app/printSuccessMessage.cjs');
-const {
-	runNpmInstall,
-} = require('./create-app/runNpmInstall.cjs');
+} = require( './create-app/printSuccessMessage.cjs' );
+const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
 
 /**
  * Default project path if user doesn't provide any.
@@ -65,10 +63,10 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		await setupNpmrc( projectDirPath, options.proxy );
 
 		// Step 6: Update package versions
-		await updatePackageVersions(projectDirPath);
-		
+		await updatePackageVersions( projectDirPath );
+
 		// Step 7: Install dependencies silently
-		await runNpmInstall(projectDirPath);	
+		await runNpmInstall( projectDirPath );
 
 		// Step 8: Print instructions
 		printSuccessMessage( projectDirPath, false );
