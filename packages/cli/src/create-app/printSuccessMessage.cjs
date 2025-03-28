@@ -20,7 +20,6 @@ const printSuccessMessage = ( projectDirPath, useDefaultEnv ) => {
 		'To start your headless WordPress project, please run the following commands:'
 	);
 	console.log( `cd ${ projectDirPath }` );
-	console.log( 'npm install' );
 	console.log( 'npm run dev' );
 };
 
