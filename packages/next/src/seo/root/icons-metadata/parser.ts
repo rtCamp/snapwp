@@ -1,44 +1,28 @@
-import { QueryEngine } from '@snapwp/query';
-
-interface GeneralSettingsProps {
-	generalSettings: {
-		siteIcon: {
-			mediaItemUrl: string | undefined;
-			mediaDetails: {
-				sizes: IconData[];
-			};
-		};
-	};
-}
-
-interface IconMetaData {
-	faviconIcons: FormattedIconData[];
-	appleIcons: FormattedIconData[] | undefined;
-	msApplicationTileIcon: IconData | undefined;
-}
-
-interface IconData {
-	sourceUrl: string;
-	height: string;
-	width: string;
-}
-
-interface FormattedIconData {
-	url: string;
-	sizes: string;
-}
+import {
+	IconsMetaDataSchema,
+	type FormattedIconData,
+	type IconData,
+	type IconMetaData,
+	type ParseIconMetadata,
+} from '@snapwp/types';
 
 /**
- * Fetch site icon data and filter them into categorized formats.
- * @see - https://developer.wordpress.org/reference/functions/wp_site_icon/#:~:text=Displays%20site%20icon%20meta%20tags. Reason why we are different resolution icons into individual category.
+ * Parses the Twitter metadata.
  *
- * @todo Refactor for composability alongside SEO metadata patterns
- *
- * @return Categorized icons.
+ * @param data - The data to parse for Twitter information.
+ * @return Parsed Twitter metadata for the given route.
  */
-export const getIcons = async (): Promise< IconMetaData > => {
-	const settings: GeneralSettingsProps | undefined =
-		await QueryEngine.getGeneralSettings();
+const parseIconMetadata: ParseIconMetadata = ( data ) => {
+	const parsedData = IconsMetaDataSchema.safeParse( data );
+	if ( ! parsedData.success || ! parsedData.data.generalSettings ) {
+		return {
+			faviconIcons: [],
+			appleIcons: undefined,
+			msApplicationTileIcon: undefined,
+		};
+	}
+
+	const settings = parsedData.data;
 
 	if ( ! settings ) {
 		return {
@@ -149,3 +133,5 @@ const formatIcons = ( icons: IconData[] ): FormattedIconData[] =>
 		url: sourceUrl,
 		sizes: `${ width }x${ height }`,
 	} ) );
+
+export default parseIconMetadata;

@@ -1,9 +1,9 @@
+import { getCleanExcerpt } from '@/seo/utils';
 import {
 	RouteMetadataSchema,
-	type RouteMetadata,
-	type ParseRouteMetadata,
+	type SiteRouteMetadata,
+	type ParseSiteRouteMetadata,
 } from '@snapwp/types';
-import { getCleanExcerpt } from '../utils';
 
 /**
  * Parses the route metadata from the given data.
@@ -11,14 +11,14 @@ import { getCleanExcerpt } from '../utils';
  * @param data - The data to parse.
  * @return The parsed route metadata.
  */
-const parseRouteMetadata: ParseRouteMetadata = ( data ) => {
+const parseRouteMetadata: ParseSiteRouteMetadata = ( data ) => {
 	const parsedData = RouteMetadataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.nodeByUri ) {
 		return {};
 	}
 
 	const node = parsedData.data.nodeByUri;
-	const metadata: RouteMetadata = {};
+	const metadata: SiteRouteMetadata = {};
 
 	switch ( node.__typename ) {
 		case 'Page':

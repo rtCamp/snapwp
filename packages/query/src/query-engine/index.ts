@@ -1,12 +1,12 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
-	GetGlobalMetadataDocument,
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 	GetOpenGraphMetadataDocument,
 	GetTwitterMetadataDocument,
 	GetRouteMetadataDocument,
+	GetSiteMetadataDocument,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -19,11 +19,11 @@ import {
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import type {
-	FetchRootMetadata,
-	FetchRouteMetadata,
+	FetchSiteRouteMetadata,
 	FetchRouteOpenGraphMetadata,
 	FetchRouteTwitterMetadata,
 	BlockData,
+	FetchSiteMetadata,
 } from '@snapwp/types';
 import {
 	Logger,
@@ -213,14 +213,14 @@ export class QueryEngine {
 	 *
 	 * @return Global metadata.
 	 */
-	static fetchRootMetadata: FetchRootMetadata = async () => {
+	static fetchSiteMetadata: FetchSiteMetadata = async () => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
 
 		try {
 			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetGlobalMetadataDocument,
+				query: GetSiteMetadataDocument,
 				fetchPolicy: 'network-only',
 				errorPolicy: 'all',
 			} );
@@ -247,7 +247,9 @@ export class QueryEngine {
 	 * @param uri - The URI of the route.
 	 * @return Route metadata.
 	 */
-	static fetchRouteMetadata: FetchRouteMetadata = async ( uri: string ) => {
+	static fetchRouteMetadata: FetchSiteRouteMetadata = async (
+		uri: string
+	) => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}

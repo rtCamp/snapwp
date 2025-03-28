@@ -1,4 +1,4 @@
-query GetGlobalMetadata {
+query GetSiteMetadata {
 	generalSettings {
 		title
 		description

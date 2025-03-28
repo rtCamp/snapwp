@@ -1,9 +1,9 @@
+import { getCleanExcerpt } from '@/seo/utils';
 import {
 	RouteOpenGraphMetadataSchema,
 	type ParseRouteOpenGraphMetadata,
 	type RouteOpenGraphMetadata,
 } from '@snapwp/types';
-import { getCleanExcerpt } from '../utils';
 
 /**
  * Parses the Open Graph metadata for a specific route.

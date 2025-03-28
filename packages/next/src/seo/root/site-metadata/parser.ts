@@ -1,7 +1,7 @@
 import {
-	type ParseRootMetadata,
-	type RootMetadata,
+	type ParseSiteMetadata,
 	RootMetadataSchema,
+	type SiteMetadata,
 } from '@snapwp/types';
 
 /**
@@ -10,11 +10,11 @@ import {
  * @param data - The data to parse.
  * @return The parsed root metadata.
  */
-const parseRootMetadata: ParseRootMetadata = ( data ) => {
+const parseRootMetadata: ParseSiteMetadata = ( data ) => {
 	const { generalSettings } = RootMetadataSchema.parse( data );
 	const { title, description, language } = generalSettings || {};
 
-	const result: RootMetadata = {};
+	const result: SiteMetadata = {};
 	if ( title ) {
 		result.siteTitle = title;
 	}

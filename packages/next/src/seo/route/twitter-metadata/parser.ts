@@ -1,9 +1,9 @@
+import { getCleanExcerpt } from '@/seo/utils';
 import {
 	RouteTwitterMetadataSchema,
 	type ParseRouteTwitterMetadata,
 	type RouteTwitterMetadata,
 } from '@snapwp/types';
-import { getCleanExcerpt } from '../utils';
 
 /**
  * Parses the Twitter metadata.

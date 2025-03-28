@@ -1,9 +1,8 @@
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
-import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { getRootMetadata } from '..';
+import { getRootMetadata } from '@/seo/root';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -40,26 +39,7 @@ export async function RootLayout( {
  * @return Merged metadata.
  */
 export async function generateRootMetaData(): Promise< Metadata > {
-	/**
-	 * Fetch icons in required format, apply faviconIcons and apple touch icons in icons metadata property while apply msapplication-TileImage in other metadata property.
-	 *
-	 * @todo Review composability when implementing SEO metadata
-	 */
-	const { faviconIcons, appleIcons, msApplicationTileIcon } =
-		await getIcons();
-
 	const rootMetadata = await getRootMetadata();
 
-	return {
-		icons: {
-			icon: faviconIcons,
-			apple: appleIcons,
-		},
-		other: {
-			...( msApplicationTileIcon && {
-				'msapplication-TileImage': msApplicationTileIcon.sourceUrl,
-			} ),
-		},
-		...rootMetadata,
-	};
+	return rootMetadata;
 }

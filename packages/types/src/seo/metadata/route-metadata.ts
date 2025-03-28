@@ -1,31 +1,23 @@
-import type { Metadata } from 'next';
-import type {
-	GetRouteOpenGraphMetadataOptions,
-	RouteOpenGraphMetadata,
-} from './open-graph-metadata';
-import type {
-	GetRouteTwitterMetadataOptions,
-	RouteTwitterMetadata,
-} from './twitter-metadata';
-
 /**
  * Represents the metadata for a route.
  */
-export type RouteMetadata = Partial<
-	RouteOpenGraphMetadata &
-		RouteTwitterMetadata & {
-			authors: { name: string }[];
-		}
->;
+export type SiteRouteMetadata = Partial< {
+	title: string;
+	description: string;
+	authors: { name: string }[];
+	image: {
+		url?: string;
+		width?: number;
+		height?: number;
+	};
+} >;
 
 /**
  * Options for fetching and parsing the metadata for a route.
  */
-export type GetRouteMetadataOptions = {
-	getRouteOpenGraphMetadataOptions: GetRouteOpenGraphMetadataOptions;
-	getRouteTwitterMetadataOptions: GetRouteTwitterMetadataOptions;
-	fetchMetadata?: FetchRouteMetadata;
-	parseMetadata?: ParseRouteMetadata;
+export type GetSiteRouteMetadataOptions = {
+	fetchMetadata?: FetchSiteRouteMetadata;
+	parseMetadata?: ParseSiteRouteMetadata;
 };
 
 /**
@@ -34,21 +26,21 @@ export type GetRouteMetadataOptions = {
  * @param options - Options for fetching and parsing the metadata.
  * @return A promise resolving to the metadata for the route.
  */
-export type GetRouteMetadata = (
+export type GetSiteRouteMetadata = (
 	path: string,
-	options?: GetRouteMetadataOptions
-) => Promise< Metadata >;
+	options?: GetSiteRouteMetadataOptions
+) => Promise< SiteRouteMetadata >;
 
 /**
  * Queries data required to generate metadata for a route.
  *
  * @param path Pathname of a route
  */
-export type FetchRouteMetadata = ( path: string ) => Promise< unknown >;
+export type FetchSiteRouteMetadata = ( path: string ) => Promise< unknown >;
 
 /**
  * Validates and parses metadata for a route into consumable state.
  *
  * @param data object to be validated and parsed
  */
-export type ParseRouteMetadata = ( data: unknown ) => RouteMetadata;
+export type ParseSiteRouteMetadata = ( data: unknown ) => SiteRouteMetadata;
