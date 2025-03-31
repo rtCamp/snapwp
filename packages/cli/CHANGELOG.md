@@ -1,5 +1,32 @@
 # Changelog
 
+## 0.2.0
+
+### Minor Changes
+
+-   [#111](https://github.com/rtCamp/snapwp/pull/111) [`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat!: Add and improve robust WordPress and internal URI handling.
+
+    **Breaking Changes:**
+
+    The [Environment Variables and Config API](../docs/config-api.md) have been updated, with many of the variables renamed or removed. Please review the updated documentation for the latest changes.
+
+    | Old value                             | Replace with                     |
+    | ------------------------------------- | -------------------------------- |
+    | NEXT_PUBLIC_URL                       | NEXT_PUBLIC_FRONTEND_URL         |
+    | NEXT_PUBLIC_WORDPRESS_URL             | NEXT_PUBLIC_WP_HOME_URL          |
+    | NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH    | NEXT_PUBLIC_WP_UPLOADS_DIRECTORY |
+    | NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX | NEXT_PUBLIC_REST_URL_PREFIX      |
+    | getConfig().nextUrl                   | getConfig().frontendUrl          |
+    | getConfig().homeUrl                   | getConfig().wpHomeUrl            |
+
+### Patch Changes
+
+-   [#119](https://github.com/rtCamp/snapwp/pull/119) [`f5ef79a`](https://github.com/rtCamp/snapwp/commit/f5ef79a83f3f13fead3ee3075a32c4f7533ff525) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat: load default favicon metadata from WordPress
+
+-   [#124](https://github.com/rtCamp/snapwp/pull/124) [`c031942`](https://github.com/rtCamp/snapwp/commit/c031942f387d7699be54f068e84dbbcac005025b) Thanks [@justlevine](https://github.com/justlevine)! - dev: Refactor CLI script to support default prompt values and improve maintainability.
+
+-   [#133](https://github.com/rtCamp/snapwp/pull/133) [`ba300f9`](https://github.com/rtCamp/snapwp/commit/ba300f984bfbff8cd18f5517250d55d54b1562b7) Thanks [@Swanand01](https://github.com/Swanand01)! - fix: Bump `next` package to version `15.2.3` to fix the CVE-2025-29927 vulnerability
+
 ## 0.1.2
 
 ### Patch Changes
