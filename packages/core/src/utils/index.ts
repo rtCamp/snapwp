@@ -1,6 +1,5 @@
 export { default as generateGraphqlUrl } from './generate-graphql-url';
 export { default as parseExternalRemotePatterns } from './parse-external-remote-patterns';
-export { default as deepMerge } from './deep-merge';
 
 // Style Attribute utilities
 export { default as cn } from './styles/cn';
