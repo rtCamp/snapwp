@@ -1,5 +1,5 @@
+import type { Validator } from '../types';
 import type { SiteMetadata } from './types';
-import type { Validator } from '@/seo/types';
 
 import { z } from 'zod';
 

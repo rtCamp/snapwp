@@ -1,5 +1,5 @@
 import { QueryEngine } from '@snapwp/query';
-import type { RouteFetcher } from '@/seo/types';
+import type { RouteFetcher } from '../types';
 
 /**
  * Fetches and parses the route metadata, including Open Graph and Twitter metadata.

@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
 import type { SiteMetadata } from './types';
 import { RouteMetadataSchema } from './schema';
-import type { RouteValidator } from '@/seo/types';
+import type { RouteValidator } from '../types';
 
 /**
  * Validates the route metadata from the given data.

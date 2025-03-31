@@ -1,5 +1,5 @@
+import type { Parser } from '../types';
 import type { SiteMetadata } from './types';
-import type { Parser } from '@/seo/types';
 
 /**
  * Parses the root metadata from the given data.

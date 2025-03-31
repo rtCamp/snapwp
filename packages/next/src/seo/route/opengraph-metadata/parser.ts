@@ -1,6 +1,6 @@
 import { getConfig } from '@snapwp/core/config';
 import type { OpenGraphMetadata } from './types';
-import type { RouteParser } from '@/seo/types';
+import type { RouteParser } from '../types';
 
 /**
  * Parses the Open Graph metadata for a specific route.

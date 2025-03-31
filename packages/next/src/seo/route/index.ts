@@ -10,7 +10,7 @@ import parseRouteOpenGraphMetadata from './opengraph-metadata/parser';
 
 import fetchRouteTwitterMetadata from './twitter-metadata/fetcher';
 import validateRouteTwitterMetadata from './twitter-metadata/validator';
-import parseRouteTwitterMetadata from './twitter-metadata/parsera';
+import parseRouteTwitterMetadata from './twitter-metadata/parser';
 import fetchRouteSiteMetadata from './site-metadata/fetcher';
 import parseRouteSiteMetadata from './site-metadata/parser';
 import validateRouteSiteMetadata from './site-metadata/validator';

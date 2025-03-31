@@ -1,5 +1,5 @@
+import type { Parser } from '../types';
 import type { IconsMetaData } from './types';
-import type { Parser } from '@/seo/types';
 
 /**
  * Validates and parses Icon metadata for a route into consumable state.

@@ -1,7 +1,7 @@
-import type { RouteValidator } from '@/seo/types';
 import type { OpenGraphMetadata } from './types';
 import { getCleanExcerpt } from '@/seo/utils';
 import { RouteOpenGraphMetadataSchema } from './schema';
+import type { RouteValidator } from '../types';
 
 /**
  * Fetches and parses Open Graph metadata for a given route.

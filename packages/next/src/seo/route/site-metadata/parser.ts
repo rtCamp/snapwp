@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import type { SiteMetadata } from './types';
-import type { RouteParser } from '@/seo/types';
+import type { RouteParser } from '../types';
 
 /**
  * Fetches and parses the route metadata, including Open Graph and Twitter metadata.

@@ -1,5 +1,5 @@
+import type { RouteParser } from '../types';
 import type { TwitterMetadata } from './types';
-import type { RouteParser } from '@/seo/types';
 
 /**
  * Parses the Twitter metadata.

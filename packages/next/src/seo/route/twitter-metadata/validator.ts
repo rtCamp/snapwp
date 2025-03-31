@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
 import type { TwitterMetadata } from './types';
 import { RouteTwitterMetadataSchema } from './schema';
-import type { RouteValidator } from '@/seo/types';
+import type { RouteValidator } from '../types';
 
 /**
  * Parses the Twitter metadata.

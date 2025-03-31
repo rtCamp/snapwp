@@ -1,5 +1,5 @@
 import { QueryEngine } from '@snapwp/query';
-import type { Fetcher } from '@/seo/types';
+import type { Fetcher } from '../types';
 
 /**
  * Retrieves the Site metadata using the provided options.
