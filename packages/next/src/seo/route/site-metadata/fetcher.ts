@@ -1,19 +1,13 @@
-import type { Metadata } from 'next';
-import type { SiteMetadata } from './types';
-import type { RouteParser } from '@/seo/types';
+import { QueryEngine } from '@snapwp/query';
+import type { RouteFetcher } from '@/seo/types';
 
 /**
  * Fetches and parses the route metadata, including Open Graph and Twitter metadata.
  *
  * @param path - The route path to fetch metadata for.
  * @param options - Optional configuration for fetching and parsing metadata.
- * @param data
  * @return Combined metadata including Open Graph, Twitter, and route-specific details.
  */
-const parseRouteSiteMetadata: RouteParser< SiteMetadata > = (
-	data: unknown
-) => {
-	return data as Metadata;
-};
+const fetchRouteSiteMetadata: RouteFetcher = QueryEngine.fetchRouteMetadata;
 
-export default parseRouteSiteMetadata;
+export default fetchRouteSiteMetadata;

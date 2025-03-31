@@ -1,4 +1,5 @@
-import { TemplateRenderer, getRouteMetadata } from '@snapwp/next';
+import { TemplateRenderer } from '@snapwp/next';
+import { getRouteMetadata } from '@snapwp/next/seo/route';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';

@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
 import type { TwitterMetadata } from './types';
 import { RouteTwitterMetadataSchema } from './schema';
-import type { RouteParser } from '@/seo/types';
+import type { RouteValidator } from '@/seo/types';
 
 /**
  * Parses the Twitter metadata.
@@ -9,7 +9,7 @@ import type { RouteParser } from '@/seo/types';
  * @param data - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-const parseRouteTwitterMetadata: RouteParser< TwitterMetadata > = (
+const validateRouteTwitterMetadata: RouteValidator< TwitterMetadata > = (
 	data: unknown
 ) => {
 	const parsedData = RouteTwitterMetadataSchema.safeParse( data );
@@ -47,4 +47,4 @@ const parseRouteTwitterMetadata: RouteParser< TwitterMetadata > = (
 	return metadata;
 };
 
-export default parseRouteTwitterMetadata;
+export default validateRouteTwitterMetadata;

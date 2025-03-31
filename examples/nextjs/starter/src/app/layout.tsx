@@ -1,5 +1,6 @@
-import { RootLayout, generateRootMetaData } from '@snapwp/next';
-import type { Metadata } from 'next';
+import { RootLayout } from '@snapwp/next';
+import { getRootMetadata } from '@snapwp/next/seo/root';
+import { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 
 export default function Layout( { children }: PropsWithChildren ) {
@@ -16,7 +17,7 @@ export default function Layout( { children }: PropsWithChildren ) {
  * @return dynamic metadata generated from generateRootMetaData() and custom logic.
  */
 export async function generateMetadata(): Promise< Metadata > {
-	const rootMetaData = await generateRootMetaData();
+	const rootMetaData = await getRootMetadata();
 
 	return {
 		...rootMetaData,
