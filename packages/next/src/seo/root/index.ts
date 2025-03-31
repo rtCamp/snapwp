@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import type { IconsMetaData } from './icons-metadata/types';
 import type { SiteMetadata } from './site-metadata/types';
-import type { Fetcher, Parser, Validator } from '../types';
+import type { RootMetadataGeneratorPlugin } from './types';
 
 import fetchIcons from './icons-metadata/fetcher';
 import parseIconMetadata from './icons-metadata/parser';
@@ -10,16 +10,6 @@ import validateIconMetadata from './icons-metadata/validator';
 import fetchSiteMetadata from './site-metadata/fetcher';
 import validateSiteMetadata from './site-metadata/validator';
 import parseSiteMetadata from './site-metadata/parser';
-
-interface RootMetadataGeneratorPlugin< TData > {
-	name: string;
-	fetcher: Fetcher;
-	defaultFetchedObject?: unknown;
-	validator: Validator< TData >;
-	defaultValidatedObject?: TData;
-	parser: Parser< TData >;
-	defaultParsedObject?: Metadata;
-}
 
 const plugins: Record< string, RootMetadataGeneratorPlugin< unknown > > = {};
 
@@ -36,7 +26,6 @@ export function registerMetadataGenerator< T extends unknown >(
 }
 
 const IconsMetaDataGenerator: RootMetadataGeneratorPlugin< IconsMetaData > = {
-	name: 'icon',
 	fetcher: fetchIcons,
 	validator: validateIconMetadata,
 	defaultValidatedObject: {
@@ -48,7 +37,6 @@ const IconsMetaDataGenerator: RootMetadataGeneratorPlugin< IconsMetaData > = {
 };
 
 const SiteMetaDataGenerator: RootMetadataGeneratorPlugin< SiteMetadata > = {
-	name: 'site',
 	fetcher: fetchSiteMetadata,
 	validator: validateSiteMetadata,
 	parser: parseSiteMetadata,

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import type { OpenGraphMetadata } from './opengraph-metadata/types';
 import type { TwitterMetadata } from './twitter-metadata/types';
 import type { SiteMetadata } from './site-metadata/types';
-import type { RouteFetcher, RouteParser, RouteValidator } from '../types';
+import type { RouteMetadataGeneratorPlugin } from './types';
 
 import fetchRouteOpenGraphMetadata from './opengraph-metadata/fetcher';
 import validateRouteOpenGraphMetadata from './opengraph-metadata/validator';
@@ -14,16 +14,6 @@ import parseRouteTwitterMetadata from './twitter-metadata/parsera';
 import fetchRouteSiteMetadata from './site-metadata/fetcher';
 import parseRouteSiteMetadata from './site-metadata/parser';
 import validateRouteSiteMetadata from './site-metadata/validator';
-
-interface RouteMetadataGeneratorPlugin< TData > {
-	name: string;
-	fetcher: RouteFetcher;
-	defaultFetchedObject?: unknown;
-	validator: RouteValidator< TData >;
-	defaultValidatedObject?: TData;
-	parser: RouteParser< TData >;
-	defaultParsedObject?: Metadata;
-}
 
 const plugins: Record< string, RouteMetadataGeneratorPlugin< unknown > > = {};
 
@@ -41,7 +31,6 @@ export function registerMetadataGenerator< T extends unknown >(
 
 const OpenGraphMetaDataGenerator: RouteMetadataGeneratorPlugin< OpenGraphMetadata > =
 	{
-		name: 'open-graph',
 		fetcher: fetchRouteOpenGraphMetadata,
 		validator: validateRouteOpenGraphMetadata,
 		parser: parseRouteOpenGraphMetadata,
@@ -49,14 +38,12 @@ const OpenGraphMetaDataGenerator: RouteMetadataGeneratorPlugin< OpenGraphMetadat
 
 const TwitterMetaDataGenerator: RouteMetadataGeneratorPlugin< TwitterMetadata > =
 	{
-		name: 'twitter',
 		fetcher: fetchRouteTwitterMetadata,
 		validator: validateRouteTwitterMetadata,
 		parser: parseRouteTwitterMetadata,
 	};
 
 const SiteMetaDataGenerator: RouteMetadataGeneratorPlugin< SiteMetadata > = {
-	name: 'site',
 	fetcher: fetchRouteSiteMetadata,
 	validator: validateRouteSiteMetadata,
 	parser: parseRouteSiteMetadata,
@@ -66,15 +53,9 @@ const DEFAULT_FETCHED_OBJECT = {};
 const DEFAULT_VALIDATED_OBJECT = {};
 const DEFAULT_PARSED_OBJECT = {};
 
-registerMetadataGenerator(
-	OpenGraphMetaDataGenerator,
-	OpenGraphMetaDataGenerator.name
-);
-registerMetadataGenerator(
-	TwitterMetaDataGenerator,
-	TwitterMetaDataGenerator.name
-);
-registerMetadataGenerator( SiteMetaDataGenerator, SiteMetaDataGenerator.name );
+registerMetadataGenerator( OpenGraphMetaDataGenerator, 'open-graph' );
+registerMetadataGenerator( TwitterMetaDataGenerator, 'twitter' );
+registerMetadataGenerator( SiteMetaDataGenerator, 'site' );
 
 /**
  * Fetches and parses Metadata from WordPress server
