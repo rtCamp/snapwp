@@ -2,10 +2,10 @@ import type { Metadata } from 'next';
 import getRouteOpenGraphMetadata from './opengraph-metadata/getter';
 import getRouteTwitterMetadata from './twitter-metadata/getter';
 import getSiteMetadata from './site-metadata/getter';
-import type { GetterOptions } from './type';
 import type { OpenGraphMetadata } from './opengraph-metadata/types';
 import type { TwitterMetadata } from './twitter-metadata/types';
 import type { SiteMetadata } from './site-metadata/types';
+import type { RouteGetterOptions } from '../types';
 
 /**
  * Fetches and parses Metadata from WordPress server
@@ -19,9 +19,9 @@ import type { SiteMetadata } from './site-metadata/types';
 export async function getRouteMetadata(
 	path = '/',
 	options?: {
-		getRouteOpenGraphMetadataOptions: GetterOptions< OpenGraphMetadata >;
-		getRouteTwitterMetadataOptions: GetterOptions< TwitterMetadata >;
-		getSiteRouteMetadataOptions: GetterOptions< SiteMetadata >;
+		getRouteOpenGraphMetadataOptions: RouteGetterOptions< OpenGraphMetadata >;
+		getRouteTwitterMetadataOptions: RouteGetterOptions< TwitterMetadata >;
+		getSiteRouteMetadataOptions: RouteGetterOptions< SiteMetadata >;
 	}
 ): Promise< Metadata > {
 	const ogMetaData = await getRouteOpenGraphMetadata(

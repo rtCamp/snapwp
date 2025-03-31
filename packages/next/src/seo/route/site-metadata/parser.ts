@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
-import type { Parser } from '../type';
 import type { SiteMetadata } from './types';
 import { RouteMetadataSchema } from './schema';
+import type { RouteParser } from '@/seo/types';
 
 /**
  * Parses the route metadata from the given data.
@@ -9,7 +9,7 @@ import { RouteMetadataSchema } from './schema';
  * @param data - The data to parse.
  * @return The parsed route metadata.
  */
-const parseRouteMetadata: Parser< SiteMetadata > = ( data: unknown ) => {
+const parseRouteMetadata: RouteParser< SiteMetadata > = ( data: unknown ) => {
 	const parsedData = RouteMetadataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.nodeByUri ) {
 		return {};

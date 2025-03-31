@@ -1,7 +1,7 @@
 import { QueryEngine } from '@snapwp/query';
 import parseRouteMetadata from './parser';
-import type { Getter } from '../type';
 import type { SiteMetadata } from './types';
+import type { RouteGetter } from '@/seo/types';
 
 /**
  * Fetches and parses the route metadata, including Open Graph and Twitter metadata.
@@ -10,7 +10,7 @@ import type { SiteMetadata } from './types';
  * @param options - Optional configuration for fetching and parsing metadata.
  * @return Combined metadata including Open Graph, Twitter, and route-specific details.
  */
-const getSiteMetadata: Getter< SiteMetadata > = async (
+const getSiteMetadata: RouteGetter< SiteMetadata > = async (
 	path = '/',
 	options = {}
 ) => {

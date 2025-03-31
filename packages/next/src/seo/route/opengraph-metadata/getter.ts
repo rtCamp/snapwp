@@ -1,8 +1,8 @@
 import { QueryEngine } from '@snapwp/query';
 import parseOpenGraphMetadata from './parser';
 import { getConfig } from '@snapwp/core/config';
-import type { Getter } from '../type';
 import type { OpenGraphMetadata } from './types';
+import type { RouteGetter } from '@/seo/types';
 
 /**
  * Fetches and parses Open Graph metadata for a given route.
@@ -11,7 +11,7 @@ import type { OpenGraphMetadata } from './types';
  * @param options - Optional functions for fetching and parsing metadata.
  * @return Parsed Open Graph metadata.
  */
-const getRouteOpenGraphMetadata: Getter< OpenGraphMetadata > = async (
+const getRouteOpenGraphMetadata: RouteGetter< OpenGraphMetadata > = async (
 	path = '/',
 	options = {}
 ) => {

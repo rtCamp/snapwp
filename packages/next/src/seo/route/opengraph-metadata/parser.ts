@@ -1,7 +1,7 @@
 import { getCleanExcerpt } from '@/seo/utils';
-import type { Parser } from '../type';
 import type { OpenGraphMetadata } from './types';
 import { RouteOpenGraphMetadataSchema } from './schema';
+import type { RouteParser } from '@/seo/types';
 
 /**
  * Parses the Open Graph metadata for a specific route.
@@ -10,7 +10,10 @@ import { RouteOpenGraphMetadataSchema } from './schema';
  * @param data - The data to parse for Open Graph information.
  * @return Parsed Open Graph metadata for the given route.
  */
-const parseOpenGraphMetadata: Parser< OpenGraphMetadata > = ( path, data ) => {
+const parseOpenGraphMetadata: RouteParser< OpenGraphMetadata > = (
+	path,
+	data
+) => {
 	const parsedData = RouteOpenGraphMetadataSchema.safeParse( data );
 	if ( ! parsedData.success || ! parsedData.data.nodeByUri ) {
 		return {};
