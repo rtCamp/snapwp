@@ -28,10 +28,10 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	const userRemotePatterns = userImages.remotePatterns ?? [];
 
 	return {
+		...nextConfig,
+		...userImages,
 		images: {
 			remotePatterns: [ ...snapWPRemotePatterns, ...userRemotePatterns ],
-			// User should allowed to override the configs set by snapwp
-			...userImages,
 		},
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any, jsdoc/require-jsdoc -- Inline function do not require doc. Any comes from NextJs's type
 		webpack: ( config: any, context: WebpackConfigContext ): any => {
@@ -41,8 +41,6 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 			config.plugins.push( ...snapWPWebpackPlugins );
 			return config;
 		},
-		// User should allowed to override the configs set by snapwp
-		...nextConfig,
 	};
 };
 
