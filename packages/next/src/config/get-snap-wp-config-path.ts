@@ -3,6 +3,7 @@ import path from 'path';
 import url from 'url';
 
 /**
+ * Dynamically inds path to the snapwp config file during the build process.
  * @return path to snapwp config file.
  */
 export default function getSnapWPConfigPath(): string {

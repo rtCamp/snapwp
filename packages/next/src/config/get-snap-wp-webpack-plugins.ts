@@ -4,7 +4,7 @@ import {
 } from 'modify-source-webpack-plugin';
 
 /**
- *
+ * Generates webpack plugin array required for SnapWP packges to work.
  * @param snapWPConfigPath -- Path to snapwp config file
  * @return Webpack config
  */
