@@ -27,6 +27,7 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	const userImages = nextConfig?.images ?? {};
 	const userRemotePatterns = userImages.remotePatterns ?? [];
 
+	// When adding a new customization to generated next config, remember to merge user's config.
 	return {
 		...nextConfig,
 		images: {
