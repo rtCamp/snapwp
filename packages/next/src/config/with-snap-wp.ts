@@ -29,8 +29,8 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 
 	return {
 		...nextConfig,
-		...userImages,
 		images: {
+			...userImages,
 			remotePatterns: [ ...snapWPRemotePatterns, ...userRemotePatterns ],
 		},
 		// eslint-disable-next-line @typescript-eslint/no-explicit-any, jsdoc/require-jsdoc -- Inline function do not require doc. Any comes from NextJs's type
