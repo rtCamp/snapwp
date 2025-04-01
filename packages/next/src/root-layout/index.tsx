@@ -2,17 +2,25 @@ import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
+
+export type RootLayoutProps = {
+	getGlobalStyles?: Awaited< QueryEngine[ 'getGlobalStyles' ] >;
+};
 
 /**
  * The RootLayout to be used in a NextJS app.
  * @param props - The props for the renderer.
+ * @param props.getGlobalStyles - A async callback to get global styles.
  * @param props.children - Child components.
  *
- * @return The rendered template
+ * @return The rendered template.
  */
-export async function RootLayout( { children }: PropsWithChildren< {} > ) {
-	const globalHeadProps = await QueryEngine.getInstance().getGlobalStyles();
+export async function RootLayout( {
+	getGlobalStyles = QueryEngine.getInstance().getGlobalStyles,
+	children,
+}: PropsWithChildren< RootLayoutProps > ): Promise< ReactNode > {
+	const globalHeadProps = await getGlobalStyles();
 
 	return (
 		<html lang="en">

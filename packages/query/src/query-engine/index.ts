@@ -3,17 +3,18 @@ import {
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
-import {
-	ApolloError,
-	type ServerError,
-	type ServerParseError,
-} from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import { Logger, type GlobalHeadProps } from '@snapwp/core';
+import {
+	type GlobalHeadProps,
+	type ScriptModuleProps,
+	type EnqueuedScriptProps,
+	type StyleSheetProps,
+} from '@snapwp/core';
 import parseGeneralSettings from '@/utils/parse-general-settings';
 import { getConfig } from '@snapwp/core/config';
 import { QueryAdapterRegistry } from '@/query-adapter-registry';
+import type { BlockData } from '@snapwp/types';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -45,30 +46,13 @@ export class QueryEngine {
 	 * @return The template data fetched for the uri.
 	 */
 	getGlobalStyles = async (): Promise< GlobalHeadProps > => {
-		try {
-			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
-				key: [ 'globalStyles' ],
-				query: GetGlobalStylesDocument,
-			} );
+		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+			key: [ 'globalStyles' ],
+			query: GetGlobalStylesDocument,
+		} );
 
-			// @ts-ignore
-			return parseGlobalStyles( data );
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				// If there are networkError throw the error with proper message.
-				if ( error.networkError ) {
-					// Throw the error with proper message.
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
+		// @ts-ignore
+		return parseGlobalStyles( data );
 	};
 
 	/**
@@ -76,31 +60,30 @@ export class QueryEngine {
 	 *
 	 * @return General settings data.
 	 */
-	getGeneralSettings = async () => {
-		try {
-			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
-				key: [ 'generalSettings' ],
-				query: GetGeneralSettingsDocument,
-			} );
+	getGeneralSettings = async (): Promise<
+		| {
+				generalSettings: {
+					siteIcon: {
+						mediaItemUrl: string | undefined;
+						mediaDetails: {
+							sizes: {
+								sourceUrl: string;
+								height: string;
+								width: string;
+							}[];
+						};
+					};
+				};
+		  }
+		| undefined
+	> => {
+		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+			key: [ 'generalSettings' ],
+			query: GetGeneralSettingsDocument,
+		} );
 
-			// @ts-ignore
-			return parseGeneralSettings( data );
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				// If there are networkError throw the error with proper message.
-				if ( error.networkError ) {
-					// Throw the error with proper message.
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
+		// @ts-ignore
+		return parseGeneralSettings( data );
 	};
 
 	/**
@@ -108,95 +91,27 @@ export class QueryEngine {
 	 * @param uri - The URL of the seed node.
 	 * @return The template data fetched for the uri.
 	 */
-	getTemplateData = async ( uri: string ) => {
+	getTemplateData = async (
+		uri: string
+	): Promise< {
+		stylesheets: StyleSheetProps[] | undefined;
+		editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
+		scripts: EnqueuedScriptProps[] | undefined;
+		scriptModules: ScriptModuleProps[] | undefined;
+		bodyClasses: string[] | undefined;
+	} > => {
 		const variables = { uri };
 
-		try {
-			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
-				key: [ 'templateData', uri ],
-				query: GetCurrentTemplateDocument,
-				options: {
-					variables,
-				},
-			} );
+		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+			key: [ 'templateData', uri ],
+			query: GetCurrentTemplateDocument,
+			options: {
+				variables,
+			},
+		} );
 
-			const { homeUrl } = getConfig();
-			// @ts-ignore
-			return parseTemplate( data, homeUrl, uri );
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				// If there are networkError throw the error with proper message.
-				if ( error.networkError ) {
-					// Throw the error with proper message.
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
+		const { wpHomeUrl } = getConfig();
+		// @ts-ignore
+		return parseTemplate( data, wpHomeUrl, uri );
 	};
 }
-
-/**
- * Logs the Apollo errors.
- *
- * @param error - The Apollo error.
- */
-const logApolloErrors = ( error: ApolloError ) => {
-	// If there are graphQLErrors log them.
-	error.graphQLErrors.forEach( ( graphQLError ) => {
-		Logger.error( graphQLError.message );
-	} );
-
-	// If there are clientErrors log them.
-	error.clientErrors.forEach( ( clientError ) => {
-		Logger.error( clientError.message );
-	} );
-
-	// If there are protocolErrors log them.
-	error.protocolErrors.forEach( ( protocolError ) => {
-		Logger.error( protocolError.message );
-	} );
-};
-
-/**
- * Returns the network error message.
- *
- * @param networkError - The network error.
- *
- * @return The network error message.
- */
-const getNetworkErrorMessage = (
-	networkError: Error | ServerParseError | ServerError
-): string => {
-	let statusCode: number | undefined;
-	let errorMessage: string | undefined;
-	// If networkError is ServerError, get the status code and message.
-	if ( networkError.name === 'ServerError' ) {
-		const serverError = networkError as ServerError;
-		statusCode = serverError.statusCode;
-		if ( typeof serverError.result === 'string' ) {
-			errorMessage = serverError.result;
-		} else {
-			errorMessage = serverError.result[ 'message' ];
-		}
-	} else if (
-		// If networkError is ServerParseError, get the status code and message.
-		networkError.name === 'ServerParseError'
-	) {
-		const serverParseError = networkError as ServerParseError;
-
-		statusCode = serverParseError.statusCode;
-		errorMessage = serverParseError.message;
-	} else {
-		// If networkError is not ServerError or ServerParseError, get the message.
-		errorMessage = networkError.message;
-	}
-
-	return `Network error ${ errorMessage } (Status: ${ statusCode })`;
-};
