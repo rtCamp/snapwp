@@ -7,7 +7,7 @@ import type { BlockData } from '@snapwp/types';
 import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
-	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
+	getTemplateData?: Awaited< QueryEngine[ 'getTemplateData' ] >;
 	children: ( editorBlocks: BlockData[] ) => ReactNode;
 };
 
@@ -22,14 +22,14 @@ export type TemplateRendererProps = {
  * @return A complete HTML document structure.
  */
 export async function TemplateRenderer( {
-	getTemplateData = QueryEngine.getTemplateData,
+	getTemplateData = QueryEngine.getInstance().getTemplateData,
 	children,
 }: TemplateRendererProps ): Promise< ReactNode > {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
-		await QueryEngine.getInstance().getTemplateData( pathname || '/' );
+		await getTemplateData( pathname || '/' );
 
 	if ( ! editorBlocks?.length ) {
 		throw new Error(

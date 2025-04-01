@@ -1,14 +1,8 @@
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { TanStackQueryEngine } from '@snapwp/tanstack';
+import { ApolloQueryClientAdapter } from '@snapwp/apollo';
 
 const config: SnapWPConfig = {
-	queryEngine: new TanStackQueryEngine( {
-		defaultOptions: {
-			queries: {
-				staleTime: Infinity,
-			},
-		},
-	} ),
+	queryEngine: new ApolloQueryClientAdapter(),
 };
 
 export default config;

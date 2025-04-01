@@ -5,7 +5,7 @@ import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
 
 export type RootLayoutProps = {
-	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
+	getGlobalStyles?: Awaited< QueryEngine[ 'getGlobalStyles' ] >;
 };
 
 /**
@@ -17,10 +17,10 @@ export type RootLayoutProps = {
  * @return The rendered template.
  */
 export async function RootLayout( {
-	getGlobalStyles = QueryEngine.getGlobalStyles,
+	getGlobalStyles = QueryEngine.getInstance().getGlobalStyles,
 	children,
 }: PropsWithChildren< RootLayoutProps > ): Promise< ReactNode > {
-	const globalHeadProps = await QueryEngine.getInstance().getGlobalStyles();
+	const globalHeadProps = await getGlobalStyles();
 
 	return (
 		<html lang="en">
