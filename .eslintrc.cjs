@@ -113,7 +113,11 @@ module.exports = {
 		},
 		// Rules for bin and cli files.
 		{
-			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
+			files: [
+				'bin/**/*.js',
+				'bin/**/*.mjs',
+				'**/packages/cli/src/*.cjs',
+			],
 			rules: {
 				// Enable the use of console log.
 				'no-console': 'off',
@@ -145,7 +149,10 @@ module.exports = {
 			},
 		},
 		{
-			files: [ '**/packages/e2e-tests/src/utils/*.ts' ],
+			files: [
+				'**/packages/e2e-tests/src/utils/*.ts',
+				'**/packages/cli/src/**/*.ts',
+			],
 			rules: {
 				'n/no-process-env': 'off',
 				'no-console': 'off',
