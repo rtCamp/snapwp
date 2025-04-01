@@ -1,5 +1,5 @@
 ---
-"snapwp": minor
+"snapwp": patch
 ---
 
-patch: Convert CLI to TypeScript
+feat: Convert CLI to TypeScript
