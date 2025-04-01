@@ -8,14 +8,34 @@
 	"files": [
 		"./dist"
 	],
+	"exports": {
+		".": {
+			"import": "./dist/index.js",
+			"require": "./dist/index.js",
+			"types": "./dist/types/index.d.ts"
+		}
+	},
 	"bin": {
-		"snapwp": "./dist/snapwp.cjs"
+		"snapwp": "./dist/snapwp.js"
 	},
 	"scripts": {
 		"build": "node ./build.cjs",
-		"force-build": "rm -rf dist && npm run build"
+		"force-build": "rm -rf dist && rm -rf tsconfig.tsbuildinfo && npm run build",
+		"postbuild": "npm run resolve-paths",
+		"postforce-build": "npm run resolve-paths",
+		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
+		"resolve-paths": "resolve-tspaths",
+		"lint": "eslint . --config ../../.eslintrc.cjs",
+		"lint:fix": "eslint . --config ../../.eslintrc.cjs --fix"
 	},
 	"dependencies": {
 		"commander": "^13.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "*",
+		"resolve-tspaths": "*",
+		"tsc-watch": "*",
+		"typescript": "*",
+		"@snapwp/types": "*"
 	}
 }
