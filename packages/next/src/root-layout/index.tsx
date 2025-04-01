@@ -1,6 +1,8 @@
 import { QueryEngine } from '@snapwp/query';
+
 import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
+
 import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
 

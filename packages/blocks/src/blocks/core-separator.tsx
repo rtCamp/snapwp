@@ -1,4 +1,5 @@
 import { getClassNamesFromString } from '@snapwp/core';
+
 import type {
 	CoreSeparator as CoreSeparatorType,
 	CoreSeparatorProps,

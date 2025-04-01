@@ -1,13 +1,14 @@
-import {
-	type AnchorHTMLAttributes,
-	type CSSProperties,
-	type PropsWithChildren,
-	type ReactNode,
-} from 'react';
 import { toFrontendUri, isInternalUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import type { PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
+
+import type { PartialWithUndefined } from '@snapwp/types';
+import type {
+	AnchorHTMLAttributes,
+	CSSProperties,
+	PropsWithChildren,
+	ReactNode,
+} from 'react';
 
 interface LinkInterface {
 	href: string | undefined;

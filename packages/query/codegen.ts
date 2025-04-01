@@ -1,7 +1,8 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
-import * as dotenv from 'dotenv';
 import baseConfigs from '@snapwp/codegen-config';
 import { generateGraphqlUrl } from '@snapwp/core';
+import * as dotenv from 'dotenv';
+
+import type { CodegenConfig } from '@graphql-codegen/cli';
 
 dotenv.config( { path: '../../.env' } );
 

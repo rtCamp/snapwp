@@ -1,4 +1,5 @@
 import { cn, getStylesFromAttributes } from '@snapwp/core';
+
 import type {
 	CoreColumn as CoreColumnType,
 	CoreColumnProps,

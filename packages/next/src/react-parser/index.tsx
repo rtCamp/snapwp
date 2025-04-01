@@ -1,8 +1,11 @@
-import Parser from 'html-react-parser';
 import { getConfig } from '@snapwp/core/config';
+import Parser from 'html-react-parser';
+
 import { defaultOptions } from './options';
+
 import type { HTMLReactParserOptions } from 'html-react-parser';
 import type { ReactNode } from 'react';
+
 /**
  * Parses HTML string into React components.
  *

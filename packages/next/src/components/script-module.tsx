@@ -5,8 +5,9 @@
  * This component ensures that all dependencies of a script module are loaded before the main script.
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
  */
-import type { PropsWithoutRef, ReactNode } from 'react';
 import Script from 'next/script';
+
+import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptModuleInterface {
 	handle?: string | null | undefined;

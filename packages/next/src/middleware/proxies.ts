@@ -1,11 +1,12 @@
+import { addTrailingSlash } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
 import {
 	NextResponse,
 	type NextRequest,
 	type NextMiddleware,
 	type NextFetchEvent,
 } from 'next/server';
-import { getConfig } from '@snapwp/core/config';
-import { addTrailingSlash } from '@snapwp/core';
+
 import type { MiddlewareFactory } from './utils';
 
 /**

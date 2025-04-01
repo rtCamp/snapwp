@@ -1,4 +1,5 @@
 import { cn, getClassNamesFromString } from '@snapwp/core';
+
 import type {
 	CorePostContent as CorePostContentType,
 	CorePostContentProps,

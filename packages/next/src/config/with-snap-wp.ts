@@ -1,11 +1,11 @@
+import { getConfig, setConfig } from '@snapwp/core/config';
 import { type NextConfig } from 'next';
+
 import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 
-import { getConfig, setConfig } from '@snapwp/core/config';
-
-import { generateRemotePatterns } from './snapwp-remote-patterns';
-import getWebpackPlugins from './get-snap-wp-webpack-plugins';
 import getSnapWPConfigPath from './get-snap-wp-config-path';
+import getWebpackPlugins from './get-snap-wp-webpack-plugins';
+import { generateRemotePatterns } from './snapwp-remote-patterns';
 
 /**
  * Extends the Next.js configuration with SnapWP configuration.

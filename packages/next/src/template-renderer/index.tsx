@@ -1,8 +1,10 @@
-import { headers } from 'next/headers';
 import { QueryEngine } from '@snapwp/query';
+import { headers } from 'next/headers';
+import Script from 'next/script';
+
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
-import Script from 'next/script';
+
 import type { BlockData } from '@snapwp/types';
 import type { ReactNode } from 'react';
 

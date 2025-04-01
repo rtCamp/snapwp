@@ -1,5 +1,7 @@
 import { compileCSS } from '@wordpress/style-engine';
+
 import getStyleObjectFromString from './get-style-object-from-string';
+
 import type { CSSProperties } from 'react';
 
 interface AttributesWithStyle {

@@ -1,11 +1,11 @@
-import { decode } from 'html-entities';
-import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
+import { decode } from 'html-entities';
+
 import type {
 	CoreImageAttributes,
 	CoreImageConnectedMediaItem,
@@ -14,6 +14,7 @@ import type {
 	CoreImageProps,
 	FigureProps,
 } from '@snapwp/types';
+import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
 /**
  * Renders a figure element with optional link and caption.

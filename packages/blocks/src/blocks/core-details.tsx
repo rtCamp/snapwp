@@ -3,6 +3,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
 import type {
 	CoreDetails as CoreDetailsType,
 	CoreDetailsProps,

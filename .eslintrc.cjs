@@ -85,6 +85,88 @@ module.exports = {
 
 		// Prevent the use of any in type annotation.
 		'@typescript-eslint/no-explicit-any': 'error',
+
+        'import/order': [
+            'error', 
+            {
+                groups: ["builtin", "external", "internal", "parent", "sibling", "index", "type" ],
+                pathGroups: [
+                    {
+                        pattern: "next/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/blocks/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/cli/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/codegen-config/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/core/config",
+                        group: "external",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/e2e-tests/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/eslint-config/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/next/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/prettier-config/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/query/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@snapwp/types/**",
+                        group: "type",
+                        position: "before",
+                    },
+                    {
+                        pattern: "@graphqlTypes/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                    {
+                        pattern: "@/**",
+                        group: "internal",
+                        position: "after",
+                    },
+                ],
+
+                "newlines-between": "always",
+
+                alphabetize: {
+                    order: "asc",
+                    caseInsensitive: true,
+                },
+            },
+        ]
+        
 	},
 	overrides: [
 		{

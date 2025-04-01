@@ -1,7 +1,8 @@
+import { getConfig } from '@snapwp/core/config';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
+
 import CoreButton from '../core-button';
-import { getConfig } from '@snapwp/core/config';
 
 jest.mock( '@wordpress/style-engine', () => {
 	const actual = jest.requireActual( '@wordpress/style-engine' );

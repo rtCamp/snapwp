@@ -1,13 +1,14 @@
 import {
+	getStyleObjectFromString,
+	getImageSizeFromAttributes,
+} from '@snapwp/core';
+import {
 	domToReact,
 	Element,
 	type DOMNode,
 	type HTMLReactParserOptions,
 } from 'html-react-parser';
-import {
-	getStyleObjectFromString,
-	getImageSizeFromAttributes,
-} from '@snapwp/core';
+
 import Image from '@/components/image';
 import Link from '@/components/link';
 
