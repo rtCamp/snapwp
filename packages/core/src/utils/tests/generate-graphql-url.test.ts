@@ -8,10 +8,10 @@ describe( 'generateGraphqlUrl', () => {
 		jest.clearAllMocks();
 	} );
 
-	it( 'should return an empty string and log an error if homeUrl is not provided', () => {
+	it( 'should return an empty string and log an error if wpHomeUrl is not provided', () => {
 		const result = generateGraphqlUrl( undefined, '/graphql' );
 		expect( result ).toBe( '' );
-		expect( Logger.error ).toHaveBeenCalledWith( 'homeUrl is not set' );
+		expect( Logger.error ).toHaveBeenCalledWith( 'wpHomeUrl is not set' );
 	} );
 
 	it( 'should return an empty string and log an error if graphqlEndpoint is not provided', () => {
@@ -22,12 +22,12 @@ describe( 'generateGraphqlUrl', () => {
 		);
 	} );
 
-	it( 'should return the correct URL when both homeUrl and graphqlEndpoint are provided', () => {
+	it( 'should return the correct URL when both wpHomeUrl and graphqlEndpoint are provided', () => {
 		const result = generateGraphqlUrl( 'https://example.com', '/graphql' );
 		expect( result ).toBe( 'https://example.com/graphql' );
 	} );
 
-	it( 'should handle homeUrl with trailing slash', () => {
+	it( 'should handle wpHomeUrl with trailing slash', () => {
 		const result = generateGraphqlUrl( 'https://example.com/', '/graphql' );
 		expect( result ).toBe( 'https://example.com/graphql' );
 	} );
@@ -37,19 +37,19 @@ describe( 'generateGraphqlUrl', () => {
 		expect( result ).toBe( 'https://example.com/graphql' );
 	} );
 
-	it( 'should handle both homeUrl with trailing slash and graphqlEndpoint without leading slash', () => {
+	it( 'should handle both wpHomeUrl with trailing slash and graphqlEndpoint without leading slash', () => {
 		const result = generateGraphqlUrl( 'https://example.com/', 'graphql' );
 		expect( result ).toBe( 'https://example.com/graphql' );
 	} );
 
-	it( 'should handle both homeUrl without trailing slash and graphqlEndpoint with leading slash', () => {
+	it( 'should handle both wpHomeUrl without trailing slash and graphqlEndpoint with leading slash', () => {
 		const result = generateGraphqlUrl( 'https://example.com', '/graphql' );
 		expect( result ).toBe( 'https://example.com/graphql' );
 	} );
 
-	it( 'should handle empty strings for homeUrl and graphqlEndpoint', () => {
+	it( 'should handle empty strings for wpHomeUrl and graphqlEndpoint', () => {
 		const result = generateGraphqlUrl( '', '' );
 		expect( result ).toBe( '' );
-		expect( Logger.error ).toHaveBeenCalledWith( 'homeUrl is not set' );
+		expect( Logger.error ).toHaveBeenCalledWith( 'wpHomeUrl is not set' );
 	} );
 } );

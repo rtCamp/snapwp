@@ -1,5 +1,5 @@
 import NextScript, { type ScriptProps } from 'next/script';
-import type { PropsWithoutRef } from 'react';
+import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptInterface {
 	after?: ( string | null )[] | null | undefined;
@@ -22,6 +22,7 @@ interface ScriptInterface {
  * @param props.loadingStrategy - The loading strategy for the script (async or defer).
  * @param props.groupLocation - The location where the script should be loaded.
  * @param props.src - The source URL for the script.
+ *
  * @return The rendered script element.
  */
 export default function Script( {
@@ -33,7 +34,7 @@ export default function Script( {
 	src,
 	loadingStrategy,
 	...props
-}: PropsWithoutRef< ScriptInterface & ScriptProps > ) {
+}: PropsWithoutRef< ScriptInterface & ScriptProps > ): ReactNode {
 	const beforeScript = Array.isArray( before )
 		? before.join( ' ' )
 		: undefined;

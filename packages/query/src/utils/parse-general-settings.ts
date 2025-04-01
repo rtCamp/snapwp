@@ -11,7 +11,22 @@ import type { ApolloQueryResult } from '@apollo/client';
  */
 export default function parseGeneralSettings(
 	queryData: ApolloQueryResult< GetGeneralSettingsQuery >
-) {
+):
+	| {
+			generalSettings: {
+				siteIcon: {
+					mediaItemUrl: string | undefined;
+					mediaDetails: {
+						sizes: {
+							sourceUrl: string;
+							height: string;
+							width: string;
+						}[];
+					};
+				};
+			};
+	  }
+	| undefined {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
 			Logger.error( `Error fetching global styles: ${ error }` );

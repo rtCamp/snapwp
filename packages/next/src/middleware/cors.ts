@@ -13,24 +13,28 @@ import { Logger } from '@snapwp/core';
  * as the first path element will be proxied to WP server.
  *
  * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
- * assuming env vars NEXT_PUBLIC_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WORDPRESS_URL to https://examplewp.com
+ * assuming env vars NEXT_PUBLIC_FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
  *
  * @param  next - Next middleware
- * @return The response object with modified headers
+ *
+ * @return The response object with modified headers.
  */
 export const corsProxyMiddleware: MiddlewareFactory = (
 	next: NextMiddleware
 ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
-		const { homeUrl, corsProxyPrefix } = getConfig();
+		const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
-		if ( ! request.nextUrl.pathname.startsWith( corsProxyPrefix ) ) {
+		// Adding nonnull assertion because this middleware will only be called if corsProxyPrefix is set
+		if ( ! request.nextUrl.pathname.startsWith( corsProxyPrefix! ) ) {
 			return next( request, _next );
 		}
 
 		// Construct the target URL
 		const targetUrl =
-			homeUrl + request.nextUrl.pathname.replace( corsProxyPrefix, '' );
+			wpHomeUrl +
+			// Adding nonnull assertion because this middleware will only be called if corsProxyPrefix is set
+			request.nextUrl.pathname.replace( corsProxyPrefix!, '' );
 		try {
 			// Forward the request to the external API
 			const response = await fetch( targetUrl, {

@@ -10,7 +10,7 @@ export default async function waitForServer(
 	url: string,
 	timeout = 10000,
 	retries = 5
-) {
+): Promise< void > {
 	try {
 		await fetch( url, {
 			method: 'HEAD',

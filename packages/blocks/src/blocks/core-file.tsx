@@ -5,6 +5,7 @@ import {
 } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
 import type { CoreFile as CoreFileType, CoreFileProps } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
@@ -21,7 +22,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
 const CoreFile: CoreFileType = ( {
 	attributes,
 	renderedHtml,
-}: CoreFileProps ) => {
+}: CoreFileProps ): ReactNode => {
 	const {
 		displayPreview,
 		downloadButtonText,

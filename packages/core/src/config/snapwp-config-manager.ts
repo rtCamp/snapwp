@@ -6,35 +6,33 @@ import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
 	/**
-	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_URL`.
+	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
 	 */
-	nextUrl: string;
+	corsProxyPrefix?: string | undefined;
 	/**
-	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WORDPRESS_URL`.
-	 *
-	 * TODO: Update variable name from homeUrl to siteUrl. ref: https://github.com/rtCamp/headless/pull/272#discussion_r1907601796
+	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_FRONTEND_URL`.
 	 */
-	homeUrl: string;
+	frontendUrl: string;
 	/**
 	 * The GraphQL endpoint. Defaults to `graphql`.
 	 */
 	graphqlEndpoint: string;
 	/**
-	 * Uploads directory. Defaults to `/wp-content/uploads`.
-	 */
-	uploadsDirectory: string;
-	/**
 	 * REST URL prefix. Defaults to `/wp-json`.
 	 */
 	restUrlPrefix: string;
 	/**
-	 * URL prefix for WP assets loaded from 'wp-includes' dir . Defaults to `/proxy`.
+	 * Uploads directory. Defaults to `/wp-content/uploads`.
 	 */
-	corsProxyPrefix: string;
+	uploadsDirectory: string;
 	/**
-	 * Flag to enable cors middleware which proxies assets from WP server.
+	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_HOME_URL`.
 	 */
-	useCorsProxy?: boolean;
+	wpHomeUrl: string;
+	/**
+	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_SITE_URL`.
+	 */
+	wpSiteUrl: string;
 }
 
 export interface SnapWPConfig {
@@ -67,12 +65,12 @@ type ConfigSchema< T > = {
  * Default configuration.
  */
 const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
+	corsProxyPrefix:
+		// eslint-disable-next-line n/no-process-env -- We're using `NODE_ENV` to derive a default value.
+		process.env.NODE_ENV === 'development' ? '/proxy' : undefined,
 	graphqlEndpoint: 'index.php?graphql',
-	uploadsDirectory: '/wp-content/uploads',
 	restUrlPrefix: '/wp-json',
-	corsProxyPrefix: '/proxy',
-	// eslint-disable-next-line n/no-process-env -- We're using `NODE_ENV` to derive a default value.
-	useCorsProxy: process.env.NODE_ENV === 'development',
+	uploadsDirectory: '/wp-content/uploads',
 };
 
 /**
@@ -85,13 +83,16 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 // @ts-ignore - ignore check for nextUrl,homeUrl to run missing environment variable test.
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
-	nextUrl: process.env.NEXT_PUBLIC_URL,
-	homeUrl: process.env.NEXT_PUBLIC_WORDPRESS_URL,
-	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-	uploadsDirectory: process.env.NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH,
-	restUrlPrefix: process.env.NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX,
-	useCorsProxy: process.env.NEXT_PUBLIC_USE_CORS_PROXY === 'true',
 	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
+	frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
+	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+	wpHomeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
+	restUrlPrefix: process.env.NEXT_PUBLIC_REST_URL_PREFIX,
+	// If `wpSiteUrl` is not provided, use `wpHomeUrl`.
+	wpSiteUrl:
+		process.env.NEXT_PUBLIC_WP_SITE_URL ||
+		process.env.NEXT_PUBLIC_WP_HOME_URL,
+	uploadsDirectory: process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY,
 	/* eslint-enable n/no-process-env -- Rule restored. */
 } );
 
@@ -131,22 +132,11 @@ class SnapWPConfigManager {
 	 * The schema used to validate the configuration.
 	 */
 	static snapWPConfigEnvSchema: ConfigSchema< SnapWPEnv > = {
-		nextUrl: {
+		corsProxyPrefix: {
 			type: 'string',
-			required: true,
-			/**
-			 * Validate the URL.
-			 *
-			 * @param value The value to validate.
-			 * @throws {Error} If the value is invalid.
-			 */
-			validate: ( value ) => {
-				if ( value && ! isValidUrl( value ) ) {
-					throw new Error( '`nextUrl` should be a valid URL.' );
-				}
-			},
+			required: false,
 		},
-		homeUrl: {
+		frontendUrl: {
 			type: 'string',
 			required: true,
 			/**
@@ -157,7 +147,7 @@ class SnapWPConfigManager {
 			 */
 			validate: ( value ) => {
 				if ( value && ! isValidUrl( value ) ) {
-					throw new Error( '`homeUrl` should be a valid URL.' );
+					throw new Error( '`frontendUrl` should be a valid URL.' );
 				}
 			},
 		},
@@ -165,21 +155,33 @@ class SnapWPConfigManager {
 			type: 'string',
 			required: false,
 		},
-		uploadsDirectory: {
+		wpHomeUrl: {
 			type: 'string',
-			required: false,
+			required: true,
 			/**
-			 * Validate the uploads directory.
+			 * Validate the URL.
 			 *
 			 * @param value The value to validate.
-			 *
 			 * @throws {Error} If the value is invalid.
 			 */
 			validate: ( value ) => {
-				if ( value && ! value.startsWith( '/' ) ) {
-					throw new Error(
-						'`uploadsDirectory` should start with a forward slash.'
-					);
+				if ( value && ! isValidUrl( value ) ) {
+					throw new Error( '`wpHomeUrl` should be a valid URL.' );
+				}
+			},
+		},
+		wpSiteUrl: {
+			type: 'string',
+			required: false,
+			/**
+			 * Validate the URL.
+			 *
+			 * @param value The value to validate.
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate: ( value ) => {
+				if ( value && ! isValidUrl( value ) ) {
+					throw new Error( '`wpSiteUrl` should be a valid URL.' );
 				}
 			},
 		},
@@ -201,11 +203,11 @@ class SnapWPConfigManager {
 				}
 			},
 		},
-		corsProxyPrefix: {
+		uploadsDirectory: {
 			type: 'string',
 			required: false,
 			/**
-			 * Validate the CORS proxy prefix.
+			 * Validate the uploads directory.
 			 *
 			 * @param value The value to validate.
 			 *
@@ -214,14 +216,10 @@ class SnapWPConfigManager {
 			validate: ( value ) => {
 				if ( value && ! value.startsWith( '/' ) ) {
 					throw new Error(
-						'`corsProxyPrefix` should start with a forward slash.'
+						'`uploadsDirectory` should start with a forward slash.'
 					);
 				}
 			},
-		},
-		useCorsProxy: {
-			type: 'boolean',
-			required: false,
 		},
 	};
 
@@ -229,9 +227,10 @@ class SnapWPConfigManager {
 	 * Normalizes the configuration.
 	 *
 	 * @param cfg The configuration to normalize.
+	 *
 	 * @return The normalized configuration.
 	 */
-	static normalizeConfig = < T >( cfg: Partial< T > ) => {
+	static normalizeConfig = < T >( cfg: Partial< T > ): Partial< T > => {
 		// Removing empty values.
 		( Object.keys( cfg ) as Array< keyof T > ).forEach(
 			( key: keyof T ) => {
@@ -239,7 +238,9 @@ class SnapWPConfigManager {
 					delete cfg[ key ];
 				} else if (
 					// @todo this should probably be moved into the schema as a sanitize callback.
-					( key === 'homeUrl' || key === 'nextUrl' ) &&
+					( key === 'wpHomeUrl' ||
+						key === 'frontendUrl' ||
+						key === 'wpSiteUrl' ) &&
 					typeof cfg[ key ] === 'string'
 				) {
 					const value = cfg[ key ] as string;
@@ -313,6 +314,7 @@ class SnapWPConfigManager {
 	 * @param schema The schema to validate the configuration against.
 	 *
 	 * @return The resolved configuration.
+	 *
 	 * @throws {Error} If the configuration is invalid.
 	 */
 	static validateConfig = < T >(
@@ -330,7 +332,7 @@ class SnapWPConfigManager {
 		 *
 		 * @throws {Error} If the property is invalid.
 		 */
-		const validateProperty = ( key: keyof T ) => {
+		const validateProperty = ( key: keyof T ): void => {
 			const prop = schema[ key ];
 			const value = config[ key ];
 
@@ -376,7 +378,7 @@ class SnapWPConfigManager {
 	 */
 	static getGraphqlUrl(): string {
 		return generateGraphqlUrl(
-			SnapWPConfigManager.getConfig().homeUrl,
+			SnapWPConfigManager.getConfig().wpHomeUrl,
 			SnapWPConfigManager.getConfig().graphqlEndpoint
 		);
 	}

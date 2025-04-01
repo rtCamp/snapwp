@@ -1,4 +1,5 @@
-import { getClassNamesFromString, cn } from '@/utils';
+import cn from './cn';
+import getClassNamesFromString from './get-class-names-from-string';
 
 /**
  * Extracts the class names from the specified HTML element within the rendered HTML string.

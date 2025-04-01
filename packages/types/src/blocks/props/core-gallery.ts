@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreGalleryAttributes = BaseAttributes & {
@@ -10,4 +10,4 @@ export type CoreGalleryProps = PropsWithChildren<
 	BaseProps< CoreGalleryAttributes >
 >;
 
-export type CoreGallery = React.ComponentType< CoreGalleryProps >;
+export type CoreGallery = ComponentType< CoreGalleryProps >;

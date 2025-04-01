@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreQuoteAttributes = BaseAttributes & {
@@ -11,4 +11,4 @@ export type CoreQuoteProps = PropsWithChildren<
 	BaseProps< CoreQuoteAttributes >
 >;
 
-export type CoreQuote = React.ComponentType< CoreQuoteProps >;
+export type CoreQuote = ComponentType< CoreQuoteProps >;
