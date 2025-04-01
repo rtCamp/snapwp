@@ -1,102 +1,130 @@
-import { QueryEngineBase } from '@snapwp/core';
 import {
-	useQueryClient,
 	QueryClient,
-	type QueryClientConfig,
+	useQuery,
+	type UseQueryOptions,
 } from '@tanstack/react-query';
+import type { QueryClientAdapter } from '@snapwp/types';
 import { request } from 'graphql-request';
-import type { DocumentNode } from 'graphql/language';
+import type { DocumentNode, TypedDocumentNode } from '@apollo/client';
 import { getGraphqlUrl } from '@snapwp/core/config';
 
 /**
- *
+ * TanStack Query Adapter
  */
-export class TanStackQueryEngine extends QueryEngineBase<
-	QueryClient,
-	QueryClientConfig
-> {
+export class TanStackQueryClientAdapter
+	implements QueryClientAdapter< QueryClient >
+{
+	private readonly client: QueryClient;
+
 	/**
 	 * Constructor
-	 *
-	 * @param config configuration
+	 * @param options - Optional client options.
 	 */
-	// eslint-disable-next-line no-useless-constructor -- This is a constructor of child class
-	constructor( config: QueryClientConfig ) {
-		super( config );
+	constructor( options?: QueryClient ) {
+		this.client = options || new QueryClient();
 	}
 
 	/**
-	 * Create a new client
-	 *
-	 * @param config configuration
-	 *
-	 * @return The client
+	 * Returns the TanStack Query Client instance.
+	 * @return The Query Client instance.
 	 */
-	override createClient( config: QueryClientConfig ): QueryClient {
-		return new QueryClient( config );
-	}
-
-	/**
-	 * Get the client
-	 *
-	 * @return The client
-	 */
-	override getClient(): QueryClient {
+	getClient(): QueryClient {
 		return this.client;
 	}
 
 	/**
-	 * Use the client
+	 * Returns the TanStack Query Client instance for server-side use.
 	 *
-	 * @param client Optional client
-	 *
-	 * @return The client
+	 * @return The Query Client instance.
 	 */
-	useClient( client?: QueryClient ) {
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
-		return useQueryClient( client );
+	getServerClient(): QueryClient {
+		return this.client;
 	}
 
 	/**
+	 * Executes a query and returns the data.
 	 *
-	 * @param key.key
-	 * @param key
-	 * @param query
-	 * @param variables
-	 * @param key.query
-	 * @param key.variables
+	 * @param object Root object
+	 * @param object.key - Cache key for the query.
+	 * @param object.query - GraphQL query string.
+	 * @param object.options - Optional query options.
+	 *
+	 * @return A promise that resolves with the query data.
 	 */
-	async fetchQuery( {
+	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
+	async fetchQuery< TData >( {
 		key,
 		query,
-		variables,
+		options,
 	}: {
 		key: string[];
-		query: DocumentNode;
-		variables: Record< string, unknown > | undefined;
-	} ): Promise< unknown > {
-		const graphqlUrl = getGraphqlUrl();
-		const data = await this.client.fetchQuery( {
-			queryKey: key,
-			queryFn: makeGraphQLRequest( graphqlUrl, query, variables ),
-		} );
-		return {
-			data,
+		query: DocumentNode | TypedDocumentNode< TData >;
+		options?: UseQueryOptions< TData > & {
+			variables?: Record< string, unknown >;
 		};
+	} ): Promise< TData > {
+		const graphqlUrl = getGraphqlUrl();
+		return this.client.fetchQuery( {
+			queryKey: key,
+			queryFn: makeGraphQLRequest(
+				graphqlUrl,
+				query,
+				options?.variables
+			),
+			...options,
+		} );
+	}
+
+	// @ts-ignore
+	/**
+	 * Hook to use a query in React components.
+	 *
+	 * @param object Root object
+	 * @param object.key - Cache key for the query.
+	 * @param object.query - GraphQL query string.
+	 * @param object.options - Optional query options.
+	 *
+	 * @return The query result.
+	 */
+	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
+	useQuery< TData >( {
+		key,
+		query,
+		options,
+	}: {
+		key: string[];
+		query: DocumentNode | TypedDocumentNode< TData >;
+		options?: UseQueryOptions< TData > & {
+			variables?: Record< string, unknown >;
+		};
+	} ): ReturnType< typeof useQuery > {
+		const graphqlUrl = getGraphqlUrl();
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
+		return useQuery( {
+			queryKey: key,
+			queryFn: makeGraphQLRequest(
+				graphqlUrl,
+				query,
+				options?.variables
+			),
+			...options,
+		} );
 	}
 }
 
 /**
+ * Function to make a GraphQL request.
+ * @param url - The URL of the GraphQL endpoint.
+ * @param query - The GraphQL query to execute.
+ * @param variables - Optional variables for the query.
  *
- * @param url
- * @param query
- * @param variables
+ * @return A promise that resolves with the query data.
  */
-const makeGraphQLRequest = (
+const makeGraphQLRequest = < TData >(
 	url: string,
-	query: DocumentNode,
+	query: DocumentNode | TypedDocumentNode< TData >,
 	variables: Record< string, unknown > | undefined
-) => {
+): ( () => Promise< TData > ) => {
 	return () => {
 		if ( variables ) {
 			return request( {

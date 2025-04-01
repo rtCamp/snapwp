@@ -10,40 +10,32 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import {
-	Logger,
-	type GlobalHeadProps,
-	type QueryEngineBase,
-} from '@snapwp/core';
+import { Logger, type GlobalHeadProps } from '@snapwp/core';
 import parseGeneralSettings from '@/utils/parse-general-settings';
 import { getConfig } from '@snapwp/core/config';
+import { QueryAdapterRegistry } from '@/query-adapter-registry';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
  */
 export class QueryEngine {
 	private static instance: QueryEngine | null = null;
-	private static engine: QueryEngineBase< unknown, unknown >;
 
 	/**
-	 *
-	 * @param engine
+	 * Private constructor to prevent instantiation.
 	 */
-	private constructor( engine: QueryEngineBase< unknown, unknown > ) {
-		QueryEngine.engine = engine;
-	}
+	// eslint-disable-next-line no-useless-constructor,no-empty-function -- Constructor is private to prevent instantiation.
+	private constructor() {}
 
 	/**
 	 * Returns the singleton instance of QueryEngine.
-	 * @param engine
+	 *
 	 * @throws Throws error if instance is not initialized with config.
 	 * @return The QueryEngine instance.
 	 */
-	public static getInstance(
-		engine: QueryEngineBase< unknown, unknown >
-	): QueryEngine {
+	public static getInstance(): QueryEngine {
 		if ( ! QueryEngine.instance ) {
-			QueryEngine.instance = new QueryEngine( engine );
+			QueryEngine.instance = new QueryEngine();
 		}
 		return QueryEngine.instance;
 	}
@@ -54,7 +46,7 @@ export class QueryEngine {
 	 */
 	getGlobalStyles = async (): Promise< GlobalHeadProps > => {
 		try {
-			const data = await QueryEngine.engine.fetchQuery( {
+			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
 				key: [ 'globalStyles' ],
 				query: GetGlobalStylesDocument,
 			} );
@@ -86,7 +78,7 @@ export class QueryEngine {
 	 */
 	getGeneralSettings = async () => {
 		try {
-			const data = await QueryEngine.engine.fetchQuery( {
+			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
 				key: [ 'generalSettings' ],
 				query: GetGeneralSettingsDocument,
 			} );
@@ -120,10 +112,12 @@ export class QueryEngine {
 		const variables = { uri };
 
 		try {
-			const data = await QueryEngine.engine.fetchQuery( {
+			const data = await QueryAdapterRegistry.adapter.fetchQuery( {
 				key: [ 'templateData', uri ],
 				query: GetCurrentTemplateDocument,
-				variables,
+				options: {
+					variables,
+				},
 			} );
 
 			const { homeUrl } = getConfig();
