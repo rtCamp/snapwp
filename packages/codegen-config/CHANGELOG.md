@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.0
+
+### Patch Changes
+
+-   Updated dependencies [[`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5), [`347216c`](https://github.com/rtCamp/snapwp/commit/347216c21bb0af80c644fc9fe47bbf589eb80fc8), [`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5), [`c956f31`](https://github.com/rtCamp/snapwp/commit/c956f31f3d70361f125db2373f57779df6963e45)]:
+    -   @snapwp/core@0.3.0
+
 ## 0.1.1
 
 ### Patch Changes
