@@ -5,7 +5,6 @@ import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 import Script from 'next/script';
 import type { BlockData } from '@snapwp/types';
-import { QueryEngineRegistry } from '@/query-engine-registry';
 
 export type TemplateRendererProps = {
 	children: ( editorBlocks: BlockData[] ) => JSX.Element;
@@ -23,11 +22,8 @@ export async function TemplateRenderer( { children }: TemplateRendererProps ) {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 
-	const queryEngine = QueryEngineRegistry.getInstance().getQueryEngine();
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
-		await QueryEngine.getInstance( queryEngine ).getTemplateData(
-			pathname || '/'
-		);
+		await QueryEngine.getInstance().getTemplateData( pathname || '/' );
 
 	if ( ! editorBlocks?.length ) {
 		throw new Error(

@@ -20,7 +20,8 @@
 		},
 		"./withSnapWP": {
 			"import": "./dist/config/with-snap-wp.js",
-			"require": "./dist/config/with-snap-wp.js"
+			"require": "./dist/config/with-snap-wp.js",
+			"types": "./dist/types/config/with-snap-wp.d.ts"
 		},
 		"./defaultError": {
 			"import": "./dist/components/default-error.js",

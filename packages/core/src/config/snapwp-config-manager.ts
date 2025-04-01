@@ -1,9 +1,8 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import type { BlockDefinitions } from '@snapwp/types';
+import type { BlockDefinitions, QueryClientAdapter } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
-import type { QueryEngineBase } from '@/query-engine-base';
 
 export interface SnapWPEnv {
 	/**
@@ -50,7 +49,7 @@ export interface SnapWPConfig {
 	/**
 	 * Query Engine
 	 */
-	queryEngine?: QueryEngineBase< unknown, unknown >;
+	queryEngine?: QueryClientAdapter< unknown >;
 }
 
 /**

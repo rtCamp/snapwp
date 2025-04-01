@@ -1,99 +1,146 @@
-import { QueryEngineBase } from '@snapwp/core';
 import {
 	ApolloClient,
-	type ApolloClientOptions,
-	type DocumentNode,
 	InMemoryCache,
 	type NormalizedCacheObject,
+	type DocumentNode,
+	type ApolloClientOptions,
 	useApolloClient,
+	type QueryOptions,
+	useQuery,
+	type QueryHookOptions,
+	type TypedDocumentNode,
+	type OperationVariables,
 } from '@apollo/client';
+import type { QueryClientAdapter } from '@snapwp/types';
 import { getGraphqlUrl } from '@snapwp/core/config';
 
 /**
  *
  */
-export class ApolloQueryEngine extends QueryEngineBase<
-	ApolloClient< NormalizedCacheObject >,
-	ApolloClientOptions< NormalizedCacheObject >
-> {
+export class ApolloQueryClientAdapter
+	implements QueryClientAdapter< ApolloClient< NormalizedCacheObject > >
+{
+	private readonly client: ApolloClient< NormalizedCacheObject >;
+
 	/**
 	 * Constructor
-	 *
-	 * @param config configuration
+	 * @param options - Optional client options.
 	 */
-	// eslint-disable-next-line no-useless-constructor -- This is a constructor of child class
-	constructor(
-		config: ApolloClientOptions< NormalizedCacheObject > = {
-			uri: getGraphqlUrl(),
+	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
+		const defaultOptions: ApolloClientOptions< NormalizedCacheObject > = {
 			cache: new InMemoryCache(),
-		}
-	) {
-		super( config );
+			uri: getGraphqlUrl(),
+		};
+
+		options =
+			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
+
+		this.client = new ApolloClient( { ...defaultOptions, ...options } );
 	}
 
 	/**
-	 * Create a new client
+	 * Returns the Apollo Client instance.
+	 * @param [options] - Optional client options.
 	 *
-	 * @param config configuration
-	 *
-	 * @return The client
+	 * @return The Apollo Client instance.
 	 */
-	override createClient(
-		config: ApolloClientOptions< NormalizedCacheObject >
+	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
+	getClient(
+		options?: ApolloClientOptions< NormalizedCacheObject >
 	): ApolloClient< NormalizedCacheObject > {
-		return new ApolloClient( config );
+		const defaultOptions: ApolloClientOptions< NormalizedCacheObject > = {
+			cache: new InMemoryCache(),
+			uri: getGraphqlUrl(),
+		};
+
+		options =
+			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
+
+		return new ApolloClient( { ...defaultOptions, ...options } );
 	}
 
 	/**
-	 * Get the client
+	 * Returns the Apollo Client instance for server-side use.
 	 *
-	 * @return The client
+	 * @return The Apollo Client instance.
 	 */
-	override getClient(): ApolloClient< NormalizedCacheObject > {
+	getServerClient(): ApolloClient< NormalizedCacheObject > {
 		return this.client;
 	}
 
 	/**
-	 * Use the client
+	 * Returns the Apollo Client instance for client-side use.
 	 *
-	 * @param client Optional client
-	 *
-	 * @return The client
+	 * @param client - The Apollo Client instance.
+	 * @return The Apollo Client instance or undefined.
 	 */
-	useClient( client?: ApolloClient< NormalizedCacheObject > ) {
+	useClient(
+		client?: ApolloClient< NormalizedCacheObject >
+	): ApolloClient< NormalizedCacheObject > {
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
-		return useApolloClient( client );
+		return useApolloClient(
+			client as ApolloClient< object >
+		) as ApolloClient< NormalizedCacheObject >;
 	}
 
 	/**
-	 *
-	 * @param _key
-	 * @param _key.key
-	 * @param query
-	 * @param _key.query
-	 * @param _key.variables
+	 * Executes a GraphQL query and returns the da
+	 * @param object Root object
+	 * @param object.key - Cache key for the query.
+	 * @param object.query - GraphQL query string.
+	 * @param object.options - Optional query options.
+	 * @return A promise that resolves with the query data.
 	 */
-	fetchQuery( {
+	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
+	async fetchQuery< TData, TQueryOptions extends QueryOptions >( {
+		key,
 		query,
-		variables,
+		options,
 	}: {
 		key: string[];
-		query: DocumentNode;
-		variables?: Record< string, unknown >;
-	} ): Promise< unknown > {
-		if ( variables ) {
-			return this.client.query( {
-				query,
-				variables,
-				fetchPolicy: 'cache-first',
-				errorPolicy: 'all',
-			} );
-		}
-
-		return this.client.query( {
+		query: DocumentNode | TypedDocumentNode< TData >;
+		options?: TQueryOptions;
+	} ): Promise< TData > {
+		const { data } = await this.client.query< TData >( {
 			query,
-			fetchPolicy: 'cache-first',
-			errorPolicy: 'all',
+			...options,
 		} );
+
+		this.client.writeQuery< TData >( {
+			query,
+			// @ts-ignore
+			data,
+			id: key.join( ':' ),
+			variables: options?.variables,
+		} );
+
+		return data;
+	}
+
+	/**
+	 * Hook to use a query in React components.
+	 *
+	 * @param object Root object
+	 * @param object.key - Cache key for the query.
+	 * @param object.query - GraphQL query string.
+	 * @param object.options - Optional query options.
+	 *
+	 * @return The query result.
+	 */
+	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
+	useQuery< TData = ReturnType< typeof useQuery > >( {
+		// @ts-ignore -- We have to ignore this in apollo as it is required in tanstack.
+		key,
+		query,
+		options,
+	}: {
+		key: string[];
+		query: DocumentNode | TypedDocumentNode< TData >;
+		options?: OperationVariables;
+	} ): TData {
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
+		return useQuery< TData, OperationVariables >( query, {
+			...options,
+		} as QueryHookOptions< TData > ) as TData;
 	}
 }

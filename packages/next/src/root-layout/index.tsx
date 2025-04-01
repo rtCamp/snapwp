@@ -3,7 +3,6 @@ import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
 import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
-import { QueryEngineRegistry } from '@/query-engine-registry';
 
 /**
  * The RootLayout to be used in a NextJS app.
@@ -13,9 +12,7 @@ import { QueryEngineRegistry } from '@/query-engine-registry';
  * @return The rendered template
  */
 export async function RootLayout( { children }: PropsWithChildren< {} > ) {
-	const queryEngine = QueryEngineRegistry.getInstance().getQueryEngine();
-	const globalHeadProps =
-		await QueryEngine.getInstance( queryEngine ).getGlobalStyles();
+	const globalHeadProps = await QueryEngine.getInstance().getGlobalStyles();
 
 	return (
 		<html lang="en">
