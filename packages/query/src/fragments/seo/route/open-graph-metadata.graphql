@@ -1,0 +1,37 @@
+fragment featuredImageFrag on NodeWithFeaturedImage {
+	featuredImage {
+		node {
+			sourceUrl
+			mediaDetails {
+				width
+				height
+			}
+		}
+	}
+}
+
+fragment termFrag on TermNode {
+    name,
+    description
+}
+
+fragment titleFrag on NodeWithTitle{
+	title
+}
+
+fragment uriFrag on ContentNode{
+	uri
+}
+
+fragment openGraphMetadataFrag on RenderedTemplate {
+	id
+    connectedNode {
+	    __typename,
+        ... on NodeWithFeaturedImage{
+            ...featuredImageFrag,
+        }
+        ... on TermNode{
+            ...termFrag
+        }
+    }
+}

@@ -1,0 +1,29 @@
+fragment featuredImageFrag on NodeWithFeaturedImage {
+	featuredImage {
+		node {
+			sourceUrl
+			mediaDetails {
+				width
+				height
+			}
+		}
+	}
+}
+
+fragment titleFrag on NodeWithTitle{
+	title
+}
+
+fragment uriFrag on ContentNode{
+	uri
+}
+
+fragment twitterMetadataFrag on RenderedTemplate {
+	id
+    connectedNode {
+	    __typename,
+        ...uriFrag,
+        ...titleFrag,
+        ...featuredImageFrag
+    }
+}

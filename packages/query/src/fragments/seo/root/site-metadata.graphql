@@ -1,0 +1,5 @@
+fragment siteMetadataFrag on GeneralSettings{
+    title
+    description
+    language
+}

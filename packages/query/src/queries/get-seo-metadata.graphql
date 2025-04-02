@@ -1,0 +1,10 @@
+query GetSeoMetaData($uri: String!) {
+    generalSettings{
+        ...iconMetadataFrag
+    }
+	templateByUri(uri: $uri) {
+        ...openGraphMetadataFrag,
+        ...routeMetadataFrag,
+        ...twitterMetadataFrag
+    }
+}

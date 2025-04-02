@@ -1,0 +1,13 @@
+fragment iconMetadataFrag on GeneralSettings{
+    siteIcon {
+        id
+        mediaDetails {
+            sizes {
+                width
+                height
+                sourceUrl
+            }
+        }
+        mediaItemUrl
+    }
+}

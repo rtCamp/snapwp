@@ -40,9 +40,5 @@ query GetOpenGraphMetadata($uri: String!) {
 			name
 			description
 		}
-		... on User {
-			name
-			description
-		}
 	}
 }

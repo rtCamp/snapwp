@@ -39,7 +39,7 @@ export class QueryEngine {
 	private static instance: QueryEngine | null = null;
 	private static graphqlEndpoint: string;
 	private static homeUrl: string;
-	private static apolloClient: ApolloClient< NormalizedCacheObject >;
+	static apolloClient: ApolloClient< NormalizedCacheObject >;
 
 	private static isClientInitialized = false;
 
