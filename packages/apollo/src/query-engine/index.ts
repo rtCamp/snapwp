@@ -102,7 +102,8 @@ export class ApolloQueryClientAdapter
 		client: ApolloClient< NormalizedCacheObject > | undefined
 	): ApolloClient< NormalizedCacheObject > | undefined {
 		return client
-			? ( useApolloClient(
+			? // eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
+			  ( useApolloClient(
 					client as ApolloClient< object >
 			  ) as ApolloClient< NormalizedCacheObject > )
 			: undefined;
@@ -179,6 +180,7 @@ export class ApolloQueryClientAdapter
 		query: DocumentNode | TypedDocumentNode< TData >;
 		options?: TQueryOptions;
 	} ): TData {
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		return useApolloQuery< TData, OperationVariables >(
 			query,
 			options as QueryHookOptions< TData, OperationVariables >

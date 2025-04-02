@@ -6,13 +6,10 @@
 		"outDir": "./dist",
 		"baseUrl": ".",
 		"paths": {
-			"@/*": [ "./src/*" ],
+			"@/*": [ "./src/*" ]
 		}
 	},
 	"include": [ "src/**/*" ],
 	"exclude": [ "node_modules", "dist", "src/**/tests/*" ],
-	"references": [
-		{ "path": "../types" },
-		{ "path": "../core" }
-	]
+	"references": [ { "path": "../types" }, { "path": "../core" } ]
 }
