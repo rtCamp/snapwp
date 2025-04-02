@@ -8,4 +8,4 @@
 "@snapwp/next": patch
 ---
 
-fix: type check command failure issue
+fix: ensure `npm run typecheck` scans all packages.
