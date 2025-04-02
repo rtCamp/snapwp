@@ -6,7 +6,7 @@ import {
 	type ApolloClientOptions,
 	useApolloClient,
 	type QueryOptions,
-	useQuery,
+	useQuery as useApolloQuery,
 	type QueryHookOptions,
 	type TypedDocumentNode,
 	type OperationVariables,
@@ -17,86 +17,110 @@ import {
 import type { QueryClientAdapter } from '@snapwp/types';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { Logger } from '@snapwp/core';
+import { ApolloQueryProvider } from '@/query-provider';
 
 /**
- *
+ * An adapter for Apollo Client that implements the QueryClientAdapter interface.
+ * This adapter provides methods for obtaining an Apollo Client instance, executing queries,
+ * and using queries as hooks.
  */
 export class ApolloQueryClientAdapter
-	implements QueryClientAdapter< ApolloClient< NormalizedCacheObject > >
+	implements
+		QueryClientAdapter<
+			ApolloClient< NormalizedCacheObject >,
+			ApolloClientOptions< NormalizedCacheObject >
+		>
 {
-	private readonly client: ApolloClient< NormalizedCacheObject >;
+	private client?: ApolloClient< NormalizedCacheObject >;
+	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
 
 	/**
-	 * Constructor
-	 * @param options - Optional client options.
+	 * Creates a new instance of ApolloQueryClientAdapter.
+	 * @param options Optional ApolloClientOptions to configure the client instance.
 	 */
 	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
-		const defaultOptions: ApolloClientOptions< NormalizedCacheObject > = {
-			cache: new InMemoryCache(),
-			uri: getGraphqlUrl(),
-		};
-
 		options =
 			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
 
-		this.client = new ApolloClient( { ...defaultOptions, ...options } );
+		this.clientOptions = options;
 	}
 
 	/**
-	 * Returns the Apollo Client instance.
-	 * @param [options] - Optional client options.
+	 * Initializes a new ApolloClient instance with default options and merges them with provided options.
 	 *
-	 * @return The Apollo Client instance.
+	 * @param options Optional ApolloClientOptions to merge with the default configuration.
+	 *
+	 * @return A new instance of ApolloClient with the merged configuration.
 	 */
-	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
-	getClient(
+	init(
 		options?: ApolloClientOptions< NormalizedCacheObject >
 	): ApolloClient< NormalizedCacheObject > {
 		const defaultOptions: ApolloClientOptions< NormalizedCacheObject > = {
 			cache: new InMemoryCache(),
 			uri: getGraphqlUrl(),
 		};
+		const mergedOptions = {
+			...defaultOptions,
+			...( ( options as Partial<
+				ApolloClientOptions< NormalizedCacheObject >
+			> ) || {} ),
+		};
 
-		options =
-			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
-
-		return new ApolloClient( { ...defaultOptions, ...options } );
+		return new ApolloClient( mergedOptions );
 	}
 
 	/**
-	 * Returns the Apollo Client instance for server-side use.
+	 * Returns a new ApolloClient instance using merged default and provided options.
+	 * @param options Optional client options to merge with the default configuration.
+	 * @return A new instance of ApolloClient with the merged configuration.
+	 */
+	getClient(
+		options?: ApolloClientOptions< NormalizedCacheObject >
+	): ApolloClient< NormalizedCacheObject > {
+		return this.init( options );
+	}
+
+	/**
+	 * Returns the ApolloClient instance used on the server.
 	 *
-	 * @return The Apollo Client instance.
+	 * @return The ApolloClient instance created during initialization.
 	 */
 	getServerClient(): ApolloClient< NormalizedCacheObject > {
+		if ( ! this.client ) {
+			this.client = this.init( this.clientOptions );
+		}
 		return this.client;
 	}
 
 	/**
-	 * Returns the Apollo Client instance for client-side use.
-	 *
-	 * @param client - The Apollo Client instance.
-	 * @return The Apollo Client instance or undefined.
+	 * Returns an ApolloClient instance from a provided client or undefined.
+	 * This method is useful when you need to use the ApolloClient hook.
+	 * @param client An optional ApolloClient instance.
+	 * @return The ApolloClient instance if provided; otherwise, undefined.
 	 */
 	useClient(
-		client?: ApolloClient< NormalizedCacheObject >
-	): ApolloClient< NormalizedCacheObject > {
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
-		return useApolloClient(
-			client as ApolloClient< object >
-		) as ApolloClient< NormalizedCacheObject >;
+		client: ApolloClient< NormalizedCacheObject > | undefined
+	): ApolloClient< NormalizedCacheObject > | undefined {
+		return client
+			? ( useApolloClient(
+					client as ApolloClient< object >
+			  ) as ApolloClient< NormalizedCacheObject > )
+			: undefined;
 	}
 
 	/**
-	 * Executes a GraphQL query and returns the da
-	 * @param object Root object
-	 * @param object.key - Cache key for the query.
-	 * @param object.query - GraphQL query string.
-	 * @param object.options - Optional query options.
-	 * @return A promise that resolves with the query data.
+	 * Executes a GraphQL query using the Apollo Client instance and writes the result to the cache.
+	 * @param param0 An object containing:
+	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param param0.options - Optional query options compatible with Apollo's QueryOptions.
+	 * @return A promise that resolves with the query data of type TData.
+	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
-	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
-	async fetchQuery< TData, TQueryOptions extends QueryOptions >( {
+	async fetchQuery<
+		TData,
+		TQueryOptions extends QueryOptions = QueryOptions,
+	>( {
 		key,
 		query,
 		options,
@@ -106,101 +130,90 @@ export class ApolloQueryClientAdapter
 		options?: TQueryOptions;
 	} ): Promise< TData > {
 		try {
-			const { data } = await this.client.query< TData >( {
+			const queryResult = await this.getServerClient().query< TData >( {
+				...( options as QueryOptions ),
 				query,
-				...options,
 			} );
 
-			this.client.writeQuery< TData >( {
-				query,
-				// @ts-ignore
-				data,
-				id: key.join( ':' ),
-				variables: options?.variables,
-			} );
+			if ( queryResult.errors?.length ) {
+				queryResult.errors?.forEach( ( error ) => {
+					Logger.error(
+						`Error fetching ${ key.join( ':' ) }: ${ error }`
+					);
+				} );
+			}
 
-			return data;
+			return queryResult.data;
 		} catch ( error ) {
 			if ( error instanceof ApolloError ) {
 				logApolloErrors( error );
 
-				// If there are networkError throw the error with proper message.
 				if ( error.networkError ) {
-					// Throw the error with proper message.
 					throw new Error(
 						getNetworkErrorMessage( error.networkError )
 					);
 				}
 			}
-
-			// If error is not an instance of ApolloError, throw the error again.
 			throw error;
 		}
 	}
 
 	/**
-	 * Hook to use a query in React components.
-	 *
-	 * @param object Root object
-	 * @param object.key - Cache key for the query.
-	 * @param object.query - GraphQL query string.
-	 * @param object.options - Optional query options.
-	 *
-	 * @return The query result.
+	 * Executes a GraphQL query as a React hook using Apollo's useQuery.
+	 * @param param0 An object containing:
+	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param param0.options - Optional query options compatible with Apollo's QueryHookOptions.
+	 * @return The query result data of type TData.
 	 */
-	// @ts-ignore -- It is strictly checking generic type with guardrail type for Apollo.
-	useQuery< TData = ReturnType< typeof useQuery > >( {
-		// @ts-ignore -- We have to ignore this in apollo as it is required in tanstack.
+	useQuery<
+		TData,
+		TQueryOptions extends QueryHookOptions = QueryHookOptions,
+	>( {
+		// @ts-ignore
 		key,
 		query,
 		options,
 	}: {
 		key: string[];
 		query: DocumentNode | TypedDocumentNode< TData >;
-		options?: OperationVariables;
+		options?: TQueryOptions;
 	} ): TData {
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook
-		return useQuery< TData, OperationVariables >( query, {
-			...options,
-		} as QueryHookOptions< TData > ) as TData;
+		return useApolloQuery< TData, OperationVariables >(
+			query,
+			options as QueryHookOptions< TData, OperationVariables >
+		).data as TData;
 	}
+	QueryProvider = ApolloQueryProvider;
 }
 
 /**
- * Logs the Apollo errors.
- *
- * @param error - The Apollo error.
+ * Logs Apollo errors by outputting error messages for GraphQL, client, and protocol errors.
+ * @param error The ApolloError object containing error details.
  */
 const logApolloErrors = ( error: ApolloError ): void => {
-	// If there are graphQLErrors log them.
 	error.graphQLErrors.forEach( ( graphQLError ) => {
 		Logger.error( graphQLError.message );
 	} );
-
-	// If there are clientErrors log them.
 	error.clientErrors.forEach( ( clientError ) => {
 		Logger.error( clientError.message );
 	} );
-
-	// If there are protocolErrors log them.
 	error.protocolErrors.forEach( ( protocolError ) => {
 		Logger.error( protocolError.message );
 	} );
 };
 
 /**
- * Returns the network error message.
- *
- * @param networkError - The network error.
- *
- * @return The network error message.
+ * Constructs a user-friendly network error message based on the type of network error.
+ * @param networkError The network error, which may be a generic Error, ServerParseError, or ServerError.
+ * @return A formatted string with the error message and status code.
  */
 const getNetworkErrorMessage = (
 	networkError: Error | ServerParseError | ServerError
 ): string => {
 	let statusCode: number | undefined;
 	let errorMessage: string | undefined;
-	// If networkError is ServerError, get the status code and message.
+
 	if ( networkError.name === 'ServerError' ) {
 		const serverError = networkError as ServerError;
 		statusCode = serverError.statusCode;
@@ -209,16 +222,11 @@ const getNetworkErrorMessage = (
 		} else {
 			errorMessage = serverError.result[ 'message' ];
 		}
-	} else if (
-		// If networkError is ServerParseError, get the status code and message.
-		networkError.name === 'ServerParseError'
-	) {
+	} else if ( networkError.name === 'ServerParseError' ) {
 		const serverParseError = networkError as ServerParseError;
-
 		statusCode = serverParseError.statusCode;
 		errorMessage = serverParseError.message;
 	} else {
-		// If networkError is not ServerError or ServerParseError, get the message.
 		errorMessage = networkError.message;
 	}
 

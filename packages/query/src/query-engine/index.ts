@@ -49,9 +49,9 @@ export class QueryEngine {
 		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
 			key: [ 'globalStyles' ],
 			query: GetGlobalStylesDocument,
+			options: {},
 		} );
 
-		// @ts-ignore
 		return parseGlobalStyles( data );
 	};
 
@@ -82,7 +82,6 @@ export class QueryEngine {
 			query: GetGeneralSettingsDocument,
 		} );
 
-		// @ts-ignore
 		return parseGeneralSettings( data );
 	};
 
@@ -111,7 +110,7 @@ export class QueryEngine {
 		} );
 
 		const { wpHomeUrl } = getConfig();
-		// @ts-ignore
+
 		return parseTemplate( data, wpHomeUrl, uri );
 	};
 }

@@ -1,12 +1,10 @@
 import {
-	Logger,
 	type EnqueuedScriptProps,
 	type StyleSheetProps,
 	type ScriptModuleProps,
 	TemplateParseError,
 } from '@snapwp/core';
 import type { BlockData } from '@snapwp/types';
-import type { ApolloQueryResult } from '@apollo/client';
 import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
 /**
@@ -19,7 +17,7 @@ import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
  * @return An object containing parsed template data.
  */
 export default function parseQueryResult(
-	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
+	queryData: GetCurrentTemplateQuery,
 	wordpressUrl: string,
 	uri: string
 ): {
@@ -29,27 +27,14 @@ export default function parseQueryResult(
 	scriptModules: ScriptModuleProps[] | undefined;
 	bodyClasses: string[] | undefined;
 } {
-	if ( queryData.errors?.length ) {
-		queryData.errors?.forEach( ( error ) => {
-			Logger.error(
-				`Error fetching template data: ${ error?.message }.`,
-				'(Please refer to our FAQs for steps to debug and fix)', // @TODO: update FAQs with URL.
-				error
-			);
-		} );
-	}
-
 	// If there is no data or templateByUri in the query data and there are errors, throw an error.
-	if (
-		( ! queryData.data || ! queryData.data.templateByUri ) &&
-		queryData.errors?.length
-	) {
+	if ( ! queryData || ! queryData.templateByUri ) {
 		throw new TemplateParseError(
 			`Error fetching template data for uri: ${ uri }`
 		);
 	}
 
-	const templateByUri = queryData.data?.templateByUri;
+	const templateByUri = queryData.templateByUri;
 
 	return {
 		stylesheets: parseEnqueuedStylesheets( wordpressUrl, templateByUri ),
