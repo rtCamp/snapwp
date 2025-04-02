@@ -1,5 +1,40 @@
 # Changelog
 
+## 0.3.0
+
+### Minor Changes
+
+-   [#111](https://github.com/rtCamp/snapwp/pull/111) [`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat!: Add and improve robust WordPress and internal URI handling.
+
+    **Breaking Changes:**
+
+    The [Environment Variables and Config API](../docs/config-api.md) have been updated, with many of the variables renamed or removed. Please review the updated documentation for the latest changes.
+
+    | Old value                             | Replace with                     |
+    | ------------------------------------- | -------------------------------- |
+    | NEXT_PUBLIC_URL                       | NEXT_PUBLIC_FRONTEND_URL         |
+    | NEXT_PUBLIC_WORDPRESS_URL             | NEXT_PUBLIC_WP_HOME_URL          |
+    | NEXT_PUBLIC_WORDPRESS_UPLOADS_PATH    | NEXT_PUBLIC_WP_UPLOADS_DIRECTORY |
+    | NEXT_PUBLIC_WORDPRESS_REST_URL_PREFIX | NEXT_PUBLIC_REST_URL_PREFIX      |
+    | getConfig().nextUrl                   | getConfig().frontendUrl          |
+    | getConfig().homeUrl                   | getConfig().wpHomeUrl            |
+
+### Patch Changes
+
+-   [#137](https://github.com/rtCamp/snapwp/pull/137) [`a435f08`](https://github.com/rtCamp/snapwp/commit/a435f08b574be81da7f13741587da5405c6eeebd) Thanks [@SH4LIN](https://github.com/SH4LIN)! - fix: Expose type declaration for `withSnapWP` HOC
+
+-   [#119](https://github.com/rtCamp/snapwp/pull/119) [`f5ef79a`](https://github.com/rtCamp/snapwp/commit/f5ef79a83f3f13fead3ee3075a32c4f7533ff525) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat: load default favicon metadata from WordPress
+
+-   [#136](https://github.com/rtCamp/snapwp/pull/136) [`f88d942`](https://github.com/rtCamp/snapwp/commit/f88d9428b2cd60ce4871c2d62c8bc02bcb00b460) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - fix: allow users to extend webpack config.
+
+-   [#115](https://github.com/rtCamp/snapwp/pull/115) [`347216c`](https://github.com/rtCamp/snapwp/commit/347216c21bb0af80c644fc9fe47bbf589eb80fc8) Thanks [@Pathan-Amaankhan](https://github.com/Pathan-Amaankhan)! - chore: Add and enforce explicit return types on method signatures.
+
+-   [#90](https://github.com/rtCamp/snapwp/pull/90) [`c956f31`](https://github.com/rtCamp/snapwp/commit/c956f31f3d70361f125db2373f57779df6963e45) Thanks [@BhumikP](https://github.com/BhumikP)! - refactor: Enforce `exactOptionalPropertyType` TypeScript rule
+
+-   Updated dependencies [[`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5), [`f5ef79a`](https://github.com/rtCamp/snapwp/commit/f5ef79a83f3f13fead3ee3075a32c4f7533ff525), [`347216c`](https://github.com/rtCamp/snapwp/commit/347216c21bb0af80c644fc9fe47bbf589eb80fc8), [`57f3c09`](https://github.com/rtCamp/snapwp/commit/57f3c098ba238acb89c43ea52c588e09094ae7d5), [`603bd86`](https://github.com/rtCamp/snapwp/commit/603bd869f9f5c36d373c73f67fb2d2991e0de11d), [`0a4d1e0`](https://github.com/rtCamp/snapwp/commit/0a4d1e0fba4666b6dea351098df10620ed379662), [`c956f31`](https://github.com/rtCamp/snapwp/commit/c956f31f3d70361f125db2373f57779df6963e45)]:
+    -   @snapwp/query@0.3.0
+    -   @snapwp/core@0.3.0
+
 ## 0.2.1
 
 ### Patch Changes
