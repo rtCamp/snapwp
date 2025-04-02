@@ -1,6 +1,4 @@
-import { Logger } from '@snapwp/core';
 import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
-import type { ApolloQueryResult } from '@apollo/client';
 
 /**
  * @param queryData - The data fetched from the general settings query.
@@ -10,7 +8,7 @@ import type { ApolloQueryResult } from '@apollo/client';
  * @return An object containing parsed general settings data.
  */
 export default function parseGeneralSettings(
-	queryData: ApolloQueryResult< GetGeneralSettingsQuery >
+	queryData: GetGeneralSettingsQuery
 ):
 	| {
 			generalSettings: {
@@ -27,14 +25,8 @@ export default function parseGeneralSettings(
 			};
 	  }
 	| undefined {
-	if ( queryData.errors?.length ) {
-		queryData.errors?.forEach( ( error ) => {
-			Logger.error( `Error fetching global styles: ${ error }` );
-		} );
-	}
-
 	// If queryData does not have generalSettings or siteIcon, return undefined because without siteIcon, generalSettings is not valid.
-	if ( ! queryData.data.generalSettings?.siteIcon ) {
+	if ( ! queryData.generalSettings?.siteIcon ) {
 		return undefined;
 	}
 
@@ -43,8 +35,8 @@ export default function parseGeneralSettings(
 		| { sourceUrl: string; height: string; width: string }[] = [];
 
 	// If mediaDetails and sizes are present, parse the sizes.
-	if ( queryData.data.generalSettings.siteIcon.mediaDetails?.sizes ) {
-		queryData.data.generalSettings.siteIcon.mediaDetails.sizes.forEach(
+	if ( queryData.generalSettings.siteIcon.mediaDetails?.sizes ) {
+		queryData.generalSettings.siteIcon.mediaDetails.sizes.forEach(
 			( size ) => {
 				// If size is null or undefined skip the iteration.
 				if ( ! size ) {
@@ -71,7 +63,7 @@ export default function parseGeneralSettings(
 			siteIcon: {
 				// If mediaItemUrl is not present, return undefined because it is an optional field.
 				mediaItemUrl:
-					queryData.data.generalSettings.siteIcon.mediaItemUrl ||
+					queryData.generalSettings.siteIcon.mediaItemUrl ||
 					undefined,
 				mediaDetails: {
 					sizes,
