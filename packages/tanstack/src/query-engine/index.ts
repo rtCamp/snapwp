@@ -139,6 +139,7 @@ export class TanStackQueryClientAdapter
 	} ): TData {
 		const graphqlUrl = getGraphqlUrl();
 		// Use TanStack's useQuery hook and extract the data property.
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		const result = useQuery< TData, unknown >( {
 			queryKey: key,
 			queryFn: makeGraphQLRequest< TData >(
