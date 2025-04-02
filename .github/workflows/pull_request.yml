@@ -76,7 +76,7 @@ jobs:
         name: TS Typecheck
         runs-on: ubuntu-latest
         env:
-          GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
+            GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
         needs: generate_schema
 
         steps:
@@ -91,12 +91,12 @@ jobs:
             - name: Get generated schema
               uses: actions/download-artifact@v4
               with:
-                name: schema
-                path: /tmp/schema
+                  name: schema
+                  path: /tmp/schema
 
             - name: Move schema to workspace
               run: |
-                cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
+                  cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
             - name: Install dependencies
               run: npm ci --workspaces --include-workspace-root
