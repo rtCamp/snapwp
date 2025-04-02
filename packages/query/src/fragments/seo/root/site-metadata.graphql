@@ -1,5 +1,7 @@
-fragment siteMetadataFrag on GeneralSettings{
-    title
-    description
-    language
+fragment siteMetadataFrag on RootQuery {
+    generalSettings {
+        title
+        description
+        language
+    }
 }

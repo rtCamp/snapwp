@@ -1,7 +1,0 @@
-query GetSiteMetadata {
-	generalSettings {
-		title
-		description
-		language
-	}
-}

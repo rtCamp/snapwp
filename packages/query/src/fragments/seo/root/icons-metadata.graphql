@@ -1,13 +1,15 @@
-fragment iconMetadataFrag on GeneralSettings{
-    siteIcon {
-        id
-        mediaDetails {
-            sizes {
-                width
-                height
-                sourceUrl
-            }
-        }
-        mediaItemUrl
-    }
+fragment iconMetadataFrag on RootQuery {
+	generalSettings {
+		siteIcon {
+			id
+			mediaDetails {
+				sizes {
+					width
+					height
+					sourceUrl
+				}
+			}
+			mediaItemUrl
+		}
+	}
 }

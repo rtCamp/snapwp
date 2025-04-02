@@ -1,13 +1,10 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
-	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 	GetOpenGraphMetadataDocument,
 	GetTwitterMetadataDocument,
 	GetRouteMetadataDocument,
-	GetSiteMetadataDocument,
-	type GetSiteMetadataQuery,
 	type GetRouteMetadataQuery,
 	type GetOpenGraphMetadataQuery,
 	type GetTwitterMetadataQuery,
@@ -30,7 +27,6 @@ import {
 	type StyleSheetProps,
 	type ScriptModuleProps,
 } from '@snapwp/core';
-import parseGeneralSettings from '@/utils/parse-general-settings';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -108,58 +104,6 @@ export class QueryEngine {
 	};
 
 	/**
-	 * Fetches the general settings, like favicon icon.
-	 *
-	 * @return General settings data.
-	 */
-	static getGeneralSettings = async (): Promise<
-		| {
-				generalSettings: {
-					siteIcon: {
-						mediaItemUrl: string | undefined;
-						mediaDetails: {
-							sizes: {
-								sourceUrl: string;
-								height: string;
-								width: string;
-							}[];
-						};
-					};
-				};
-		  }
-		| undefined
-	> => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-
-		try {
-			const data = await QueryEngine.apolloClient.query( {
-				query: GetGeneralSettingsDocument,
-				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
-				errorPolicy: 'all',
-			} );
-
-			return parseGeneralSettings( data );
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				// If there are networkError throw the error with proper message.
-				if ( error.networkError ) {
-					// Throw the error with proper message.
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
-	};
-
-	/**
 	 * Fetches blocks, scripts and styles for the given uri.
 	 * @param uri - The URL of the seed node.
 	 *
@@ -202,39 +146,6 @@ export class QueryEngine {
 			}
 
 			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
-	};
-
-	/**
-	 * Fetches global site metadata.
-	 *
-	 * @return Global metadata.
-	 */
-	static fetchSiteMetadata = async (): Promise< GetSiteMetadataQuery > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-
-		try {
-			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetSiteMetadataDocument,
-				fetchPolicy: 'network-only',
-				errorPolicy: 'all',
-			} );
-
-			return data;
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				if ( error.networkError ) {
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
 			throw error;
 		}
 	};

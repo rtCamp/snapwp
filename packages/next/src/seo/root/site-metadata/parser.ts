@@ -1,19 +1,23 @@
+import type { SiteMetadataFragFragment } from '@snapwp/query';
 import type { Parser } from '../types';
-import type { SiteMetadata } from './types';
 
 /**
- * Parses the root metadata from the given data.
+ * Parses fragment into metadata format consumable by next
  *
  * @param data - The data to parse.
  * @return The parsed root metadata.
  */
-const parseSiteMetadata: Parser< SiteMetadata > = ( data ) => {
-	const { siteTitle, description, locale } = data;
+const parseSiteMetadata: Parser< SiteMetadataFragFragment > = ( data ) => {
+	if ( ! data.generalSettings ) {
+		return {};
+	}
 	return {
-		title: siteTitle,
-		description,
+		title: data.generalSettings.title,
+		description: data.generalSettings.description,
 		openGraph: {
-			locale,
+			locale: data.generalSettings.language
+				? data.generalSettings.language
+				: undefined,
 		},
 	};
 };
