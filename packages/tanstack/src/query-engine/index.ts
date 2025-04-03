@@ -18,8 +18,25 @@ import { TanStackQueryProvider } from '@/query-provider';
 export class TanStackQueryClientAdapter
 	implements QueryClientAdapter< QueryClient, QueryClientConfig >
 {
+	private static instance?: TanStackQueryClientAdapter;
 	private client?: QueryClient;
 	private readonly clientOptions: QueryClientConfig;
+
+	/**
+	 * Singleton instance of the ApolloQueryClientAdapter.
+	 * @param options Optional ApolloClientOptions to configure the client instance.
+	 *
+	 * @return The singleton instance of the ApolloQueryClientAdapter.
+	 */
+	static getInstance(
+		options?: QueryClientConfig
+	): TanStackQueryClientAdapter {
+		if ( ! TanStackQueryClientAdapter.instance ) {
+			TanStackQueryClientAdapter.instance =
+				new TanStackQueryClientAdapter( options );
+		}
+		return TanStackQueryClientAdapter.instance;
+	}
 
 	/**
 	 * Creates a new instance of TanStackQueryClientAdapter.

@@ -31,14 +31,34 @@ export class ApolloQueryClientAdapter
 			ApolloClientOptions< NormalizedCacheObject >
 		>
 {
+	private static instance?: ApolloQueryClientAdapter;
 	private client?: ApolloClient< NormalizedCacheObject >;
 	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
+
+	/**
+	 * Singleton instance of the ApolloQueryClientAdapter.
+	 * @param options Optional ApolloClientOptions to configure the client instance.
+	 *
+	 * @return The singleton instance of the ApolloQueryClientAdapter.
+	 */
+	static getInstance(
+		options?: ApolloClientOptions< NormalizedCacheObject >
+	): ApolloQueryClientAdapter {
+		if ( ! ApolloQueryClientAdapter.instance ) {
+			ApolloQueryClientAdapter.instance = new ApolloQueryClientAdapter(
+				options
+			);
+		}
+		return ApolloQueryClientAdapter.instance;
+	}
 
 	/**
 	 * Creates a new instance of ApolloQueryClientAdapter.
 	 * @param options Optional ApolloClientOptions to configure the client instance.
 	 */
-	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
+	private constructor(
+		options?: ApolloClientOptions< NormalizedCacheObject >
+	) {
 		options =
 			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
 
