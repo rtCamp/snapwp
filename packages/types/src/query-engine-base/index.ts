@@ -2,7 +2,10 @@ import type { DocumentNode } from 'graphql/language';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import type { PropsWithChildren } from 'react';
 
-export interface QueryClientAdapter< TClient, TClientOptions = unknown > {
+export interface QueryClientAdapter<
+	TClient = unknown,
+	TClientOptions = unknown,
+> {
 	init( options?: TClientOptions ): TClient;
 	getClient( options?: TClientOptions ): TClient;
 	getServerClient( options?: TClientOptions ): TClient;
