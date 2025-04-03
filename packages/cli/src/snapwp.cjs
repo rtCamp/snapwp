@@ -27,69 +27,6 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 /**
  * Main function to create a new SnapWP project.
  */
-
-program.option( '--proxy', 'Use proxy registry.' ).parse();
-
-const options = program.opts();
-
-/**
- * Prompts the user for input.
- *
- * @param {string} query Prompt query.
- *
- * @return {Promise<string>} User input.
- */
-const prompt = ( query ) => {
-	const rl = readline.createInterface( {
-		input: process.stdin,
-		output: process.stdout,
-	} );
-
-	return new Promise( ( resolve ) => {
-		rl.question( query, ( answer ) => {
-			rl.close();
-			if ( answer.includes( '\\n' ) ) {
-				answer = answer.split( '\\n' ).join( '\n' );
-			}
-			resolve( answer );
-		} );
-	} );
-};
-
-/**
- * Opens a file in the default or specified editor and waits for the editor process to exit.
- * This function resolves with a success object indicating the result of the operation.
- *
- * @param {string} filePath - The path to the file to be opened in the editor.
- *
- * @return - A promise that resolves to an object containing:
- *                              - success: {boolean} Indicates if the operation was successful.
- *                              - message: {string} Provides additional information or error details.
- */
-const openEditor = ( filePath ) => {
-	return new Promise( ( resolve ) => {
-		try {
-			const editor = process.env.EDITOR || 'vi';
-
-			const child = spawn( editor, [ filePath ], {
-				stdio: 'inherit',
-			} );
-
-			child.on( 'exit', function () {
-				resolve( {
-					success: true,
-					message: `File created at "${ path.resolve( filePath ) }"`,
-				} );
-			} );
-		} catch ( error ) {
-			resolve( {
-				success: false,
-				message: `Error: ${ error.message }`,
-			} );
-		}
-	} );
-};
-
 ( async () => {
 	try {
 		program.option( '--proxy', 'Use proxy registry.' ).parse();
