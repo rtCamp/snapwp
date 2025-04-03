@@ -48,7 +48,7 @@ registerMetadataGenerator( SiteMetaDataGenerator, 'site' );
  * @param options.getSiteOptions
  * @return Metadata for RootLayout
  */
-export async function getRootMetadata(): Promise< Metadata > {
+export async function getSiteMetadata(): Promise< Metadata > {
 	// Collect fragments
 	const fragmentDocMap = Object.fromEntries(
 		Object.entries( plugins ).map( ( [ key, plugin ] ) => {

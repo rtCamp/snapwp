@@ -28,10 +28,10 @@
 			"require": "./dist/components/default-error.js",
 			"types": "./dist/types/components/default-error.d.ts"
 		},
-		"./seo/root": {
-			"import": "./dist/seo/root/index.js",
-			"require": "./dist/seo/root/index.js",
-			"types": "./dist/types/seo/root/index.js"
+		"./seo/site": {
+			"import": "./dist/seo/site/index.js",
+			"require": "./dist/seo/site/index.js",
+			"types": "./dist/types/seo/site/index.js"
 		},
 		"./seo/route": {
 			"import": "./dist/seo/route/index.js",

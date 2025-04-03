@@ -1,8 +1,6 @@
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
-import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
-import { getRootMetadata } from '@/seo/root';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -31,15 +29,4 @@ export async function RootLayout( {
 			<body suppressHydrationWarning>{ children }</body>
 		</html>
 	);
-}
-
-/**
- * Generate and return root metadata, including icons and other metadata.
- *
- * @return Merged metadata.
- */
-export async function generateRootMetaData(): Promise< Metadata > {
-	const rootMetadata = await getRootMetadata();
-
-	return rootMetadata;
 }
