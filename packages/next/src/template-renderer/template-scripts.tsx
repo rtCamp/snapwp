@@ -10,8 +10,8 @@ import type { PropsWithChildren, ReactNode } from 'react';
 /**
  * Renders a list of script elements from a given array of script data.
  *
- * @param props - The props for the component.
- * @param props.scripts - Array of script objects to be rendered.
+ * @param {Object}                     props         The props for the component.
+ * @param {Array<EnqueuedScriptProps>} props.scripts Array of script objects to be rendered.
  *
  * @return A collection of `<Script />` components.
  */
@@ -36,8 +36,8 @@ const ScriptMap = ( {
 /**
  * Generates and renders the import map for script modules.
  *
- * @param props - The props for the component.
- * @param props.scriptModules - Array of script module objects to generate import map from.
+ * @param {Object}                   props               The props for the component.
+ * @param {Array<ScriptModuleProps>} props.scriptModules Array of script module objects to generate an import map from.
  *
  * @return A Script component containing the import map if dependencies exist.
  */
@@ -85,8 +85,8 @@ const ImportMap = ( {
 /**
  * Renders a list of script module elements from a given array of script module data.
  *
- * @param props - The props for the component.
- * @param props.scriptModules - Array of script module objects to be rendered.
+ * @param {Object}                   props               The props for the component.
+ * @param {Array<ScriptModuleProps>} props.scriptModules Array of script module objects to be rendered.
  *
  * @return A collection of `<ScriptModule />` components.
  */
@@ -166,10 +166,10 @@ const ScriptModuleMap = ( {
 /**
  * Renders a list of scripts.
  *
- * @param props - The props for the component.
- * @param props.scripts - Array of script objects to be included in the page.
- * @param props.children - The children elements to be rendered.
- * @param props.scriptModules - Array of script module objects to be included in the page.
+ * @param {Object}                               props               The props for the component.
+ * @param {Array<EnqueuedScriptProps>|undefined} props.scripts       Array of script objects to be included in the page.
+ * @param {ReactNode}                            props.children      The children elements to be rendered.
+ * @param {Array<ScriptModuleProps>|undefined}   props.scriptModules Array of script module objects to be included in the page.
  *
  * @return A collection of script elements.
  */

@@ -9,13 +9,13 @@ type Data = Record< string | number, unknown >;
 /**
  * Converts a flat list to hierarchical.
  *
- * @param data The data items as an array.
- * @param options The data item property keys.
- * @param options.idKey The key for the unique identifier.
- * @param options.parentKey The key for the parent identifier.
- * @param options.childrenKey The key for the children.
+ * @param {Array<Data>}            data                The data items as an array.
+ * @param {Options}                options             The data item property keys.
+ * @param {Options['idKey']}       options.idKey       The key for the unique identifier.
+ * @param {Options['parentKey']}   options.parentKey   The key for the parent identifier.
+ * @param {Options['childrenKey']} options.childrenKey The key for the children.
  *
- * @return Data Array.
+ * @return Data Array
  */
 export default function flatListToHierarchical(
 	data: Data[] = [],

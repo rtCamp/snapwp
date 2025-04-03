@@ -10,7 +10,7 @@ import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
 /**
  * Parses template query data into props for rendering a template.
  *
- * @param queryData - The data fetched from the template query.
+ * @param {ApolloQueryResult<GetGlobalStylesQuery>} queryData The data fetched from the template query.
  *
  * @throws Throws an error if the query data is missing or invalid.
  *

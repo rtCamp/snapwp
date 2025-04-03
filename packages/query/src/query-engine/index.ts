@@ -156,7 +156,7 @@ export class QueryEngine {
 
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
-	 * @param uri - The URL of the seed node.
+	 * @param {string} uri - The URL of the seed node.
 	 *
 	 * @return The template data fetched for the uri.
 	 */
@@ -205,7 +205,7 @@ export class QueryEngine {
 /**
  * Logs the Apollo errors.
  *
- * @param error - The Apollo error.
+ * @param {ApolloError} error The Apollo error.
  */
 const logApolloErrors = ( error: ApolloError ): void => {
 	// If there are graphQLErrors log them.
@@ -227,7 +227,7 @@ const logApolloErrors = ( error: ApolloError ): void => {
 /**
  * Returns the network error message.
  *
- * @param networkError - The network error.
+ * @param {Error|ServerParseError|ServerError} networkError The network error.
  *
  * @return The network error message.
  */

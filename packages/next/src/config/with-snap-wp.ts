@@ -10,7 +10,7 @@ import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 /**
  * Extends the Next.js configuration with SnapWP configuration.
  *
- * @param nextConfig The Next.js configuration object.
+ * @param {NextConfig} nextConfig The Next.js configuration object.
  *
  * @return The extended configuration object.
  */

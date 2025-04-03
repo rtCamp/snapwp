@@ -4,8 +4,8 @@ import getClassNamesFromString from './get-class-names-from-string';
 /**
  * Extracts the class names from the specified HTML element within the rendered HTML string.
  *
- * @param renderedHtml - The rendered HTML string.
- * @param elementSelector - The element selector (class, id, or tag name) If selector is not provided then it will select the first element and will return it's classNames.
+ * @param {string|null|undefined} renderedHtml    The rendered HTML string.
+ * @param {string|undefined}      elementSelector The element selector (class, id, or tag name) If selector is not provided then it will select the first element and will return it's classNames.
  *
  * @return The extracted class names from the first occurrence of the specified element or an empty string if the element is not found.
  */

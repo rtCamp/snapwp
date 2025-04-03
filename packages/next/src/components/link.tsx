@@ -19,11 +19,11 @@ interface LinkInterface {
 /**
  * Link component to handle internal and external links.
  *
- * @param props - Props for the component.
- * @param props.href - Link's href attribute.
- * @param props.style - CSS style object.
- * @param props.className - CSS class name.
- * @param props.children - Block's Children.
+ * @param {Object}                     props           Props for the component.
+ * @param {LinkInterface['href']}      props.href      Link's href attribute.
+ * @param {LinkInterface['style']}     props.style     CSS style object.
+ * @param {LinkInterface['className']} props.className CSS class name.
+ * @param {ReactNode}                  props.children  Block's Children.
  *
  * @return The rendered link.
  */

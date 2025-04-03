@@ -16,7 +16,7 @@ import type { MiddlewareFactory } from './utils';
  * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
  * assuming env vars NEXT_PUBLIC_FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
  *
- * @param  next - Next middleware
+ * @param {NextMiddleware} next Next middleware.
  *
  * @return The response object with modified headers.
  */

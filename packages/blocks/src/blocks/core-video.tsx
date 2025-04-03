@@ -14,8 +14,8 @@ import type { ReactNode } from 'react';
 /**
  * Renders a list of `<track>` elements for a video.
  *
- * @param props - The props for the component.
- * @param props.tracks - An array of track objects containing `src`, `kind`, `srclang`, and `label`.
+ * @param {Object}            props        The props for the component.
+ * @param {Array<TrackProps>} props.tracks An array of track objects containing `src`, `kind`, `srclang`, and `label`.
  *
  * @return A list of `<track>` elements or `null` if no tracks are provided.
  */
@@ -45,9 +45,9 @@ const Tracks = ( {
 /**
  * Renders the core/video block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                         props              The props for the block component.
+ * @param {CoreVideoProps['attributes']}   props.attributes   Block attributes.
+ * @param {CoreVideoProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

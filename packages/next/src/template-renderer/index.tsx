@@ -16,9 +16,9 @@ export type TemplateRendererProps = {
  * Renders a full HTML document including the head, body, and scripts.
  * Combines custom styles, block content, and scripts into a complete page.
  *
- * @param props - The props for the component..
- * @param props.getTemplateData - A async callback to get template styles and content.
- * @param props.children - The block content to render.
+ * @param {Object}                                   props                 The props for the component.
+ * @param {TemplateRendererProps['getTemplateData']} props.getTemplateData A async callback to get template styles and content.
+ * @param {TemplateRendererProps['children']}        props.children        The block content to render.
  *
  * @return A complete HTML document structure.
  */
