@@ -10,6 +10,7 @@ import { request } from 'graphql-request';
 import type { DocumentNode } from 'graphql';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { TanStackQueryProvider } from '@/query-provider';
+import { TanStackHydrationBoundary } from '@/hydration-boundary';
 
 /**
  * TanStack Query Client Adapter that implements the QueryClientAdapter interface.
@@ -153,6 +154,7 @@ export class TanStackQueryClientAdapter
 	}
 
 	QueryProvider = TanStackQueryProvider;
+	HydrationBoundary = TanStackHydrationBoundary;
 }
 
 /**

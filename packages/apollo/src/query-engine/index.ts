@@ -18,6 +18,7 @@ import type { QueryClientAdapter } from '@snapwp/types';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { Logger } from '@snapwp/core';
 import { ApolloQueryProvider } from '@/query-provider';
+import { ApolloHydrationBoundary } from '@/hydration-boundary';
 
 /**
  * An adapter for Apollo Client that implements the QueryClientAdapter interface.
@@ -187,6 +188,7 @@ export class ApolloQueryClientAdapter
 		).data as TData;
 	}
 	QueryProvider = ApolloQueryProvider;
+	HydrationBoundary = ApolloHydrationBoundary;
 }
 
 /**
