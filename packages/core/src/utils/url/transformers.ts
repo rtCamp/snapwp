@@ -4,7 +4,7 @@ import { isInternalUrl, isWPSiteUrl } from './validators';
 /**
  * Convert a URL to an internal URL.
  *
- * @param url The URL to convert.
+ * @param {string} url The URL to convert.
  *
  * @return The internal URL.
  */

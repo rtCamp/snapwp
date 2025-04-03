@@ -153,7 +153,7 @@ export class QueryEngine {
 
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
-	 * @param uri - The URL of the seed node.
+	 * @param {string} uri - The URL of the seed node.
 	 *
 	 * @return The template data fetched for the uri.
 	 */

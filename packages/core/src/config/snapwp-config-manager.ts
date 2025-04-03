@@ -170,7 +170,7 @@ class SnapWPConfigManager {
 			/**
 			 * Validate the URL.
 			 *
-			 * @param value The value to validate.
+			 * @param {string} value The value to validate.
 			 * @throws {Error} If the value is invalid.
 			 */
 			validate: ( value ) => {

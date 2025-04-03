@@ -3,8 +3,8 @@ import { getConfig } from '@/config';
 /**
  * Check if a URL is the home URL.
  *
- * @param url The URL to check.
- * @param ignoreProtocol - Ignore HTTP protocol when comparing URLs.
+ * @param {string} url The URL to check.
+ * @param {boolean} ignoreProtocol - Ignore HTTP protocol when comparing URLs.
  *
  * @return Whether the URL is the home URL.
  */
@@ -30,7 +30,7 @@ export const isWPHomeUrl = (
 /**
  * Check if a URL is the site URL.
  *
- * @param url The URL to check.
+ * @param {string} url The URL to check.
  * @param {boolean} ignoreProtocol - Whether to ignore the HTTP protocol when comparing URLs.
  *
  * @return Whether the URL is the site URL.
@@ -62,8 +62,8 @@ export const isWPSiteUrl = (
 /**
  * Check if a URL is internal (Site URL or Home Url).
  *
- * @param url The URL to check.
- * @param ignoreProtocol - Ignore HTTP protocol when comparing URLs.
+ * @param {string} url The URL to check.
+ * @param {boolean} ignoreProtocol - Ignore HTTP protocol when comparing URLs.
  *
  * @return Whether the URL is internal.
  */
@@ -79,7 +79,7 @@ export const isInternalUrl = (
 };
 
 /**
- * @param str A string to be validated as a Url.
+ * @param {string} str A string to be validated as a Url.
  * @return flag signifying validity.
  *
  * @internal

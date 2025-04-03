@@ -3,7 +3,7 @@ import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
 import type { ApolloQueryResult } from '@apollo/client';
 
 /**
- * @param queryData - The data fetched from the general settings query.
+ * @param {ApolloQueryResult} queryData - The data fetched from the general settings query.
  *
  * @throws Throws an error if the query data is missing or invalid.
  *
