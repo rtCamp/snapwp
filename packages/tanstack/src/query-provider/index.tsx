@@ -4,12 +4,12 @@ import { type JSX, type PropsWithChildren } from 'react';
 import { type QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 /**
- *
+ * TanStack Query Provider component.
  * @param root0 - The root object.
  * @param root0.children - The child components.
- * @param root0.client - The Apollo Client instance.
+ * @param root0.client - The TanStack Client instance.
  *
- * @return The rendered ApolloProvider component.
+ * @return The rendered TanStackProvider component.
  */
 export const TanStackQueryProvider: ( {
 	client,

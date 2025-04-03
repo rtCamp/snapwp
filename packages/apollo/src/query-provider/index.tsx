@@ -8,6 +8,7 @@ import {
 import { type JSX, type PropsWithChildren } from 'react';
 
 /**
+ * Apollo Query Provider component.
  *
  * @param root0 - The root object.
  * @param root0.children - The child components.

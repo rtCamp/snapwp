@@ -23,10 +23,10 @@ export class TanStackQueryClientAdapter
 	private readonly clientOptions: QueryClientConfig;
 
 	/**
-	 * Singleton instance of the ApolloQueryClientAdapter.
-	 * @param options Optional ApolloClientOptions to configure the client instance.
+	 * Singleton instance of the TanStackQueryClientAdapter.
+	 * @param options Optional TanStackClientOptions to configure the client instance.
 	 *
-	 * @return The singleton instance of the ApolloQueryClientAdapter.
+	 * @return The singleton instance of the TanStackQueryClientAdapter.
 	 */
 	static getInstance(
 		options?: QueryClientConfig
@@ -49,11 +49,11 @@ export class TanStackQueryClientAdapter
 	}
 
 	/**
-	 * Initializes a new ApolloClient instance with default options and merges them with provided options.
+	 * Initializes a new TanStackClient instance with default options and merges them with provided options.
 	 *
-	 * @param options Optional ApolloClientOptions to merge with the default configuration.
+	 * @param options Optional TanStackClientOptions to merge with the default configuration.
 	 *
-	 * @return A new instance of ApolloClient with the merged configuration.
+	 * @return A new instance of TanStackClient with the merged configuration.
 	 */
 	init( options?: QueryClientConfig ): QueryClient {
 		return new QueryClient( options );
@@ -97,9 +97,8 @@ export class TanStackQueryClientAdapter
 	 * @param param0 An object containing:
 	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
 	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param param0.options - Optional query options compatible with Apollo's QueryOptions.
+	 * @param param0.options - Optional query options compatible with TanStack's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
-	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
 	async fetchQuery<
 		TData,
@@ -135,7 +134,7 @@ export class TanStackQueryClientAdapter
 	 * @param param0 An object containing:
 	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
 	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param param0.options - Optional query options compatible with Apollo's QueryHookOptions.
+	 * @param param0.options - Optional query options compatible with TanStack's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
 	useQuery<
