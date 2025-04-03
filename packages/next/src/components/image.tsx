@@ -1,6 +1,7 @@
+import NextImage, { type ImageProps } from 'next/image';
 import { cn } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import NextImage, { type ImageProps } from 'next/image';
+
 import type {
 	CSSProperties,
 	ImgHTMLAttributes,

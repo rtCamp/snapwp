@@ -1,6 +1,6 @@
-import type { ApolloQueryResult } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 
+import type { ApolloQueryResult } from '@apollo/client';
 import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
 
 /**

@@ -1,6 +1,5 @@
-import type { ComponentType } from 'react';
-
 import type { BaseAttributes, BaseProps } from '..';
+import type { ComponentType } from 'react';
 
 export interface TrackProps {
 	src: string;

@@ -1,6 +1,5 @@
-import type { ComponentType } from 'react';
-
 import type { BaseAttributes, BaseProps } from '../base';
+import type { ComponentType } from 'react';
 
 export type CoreParagraphAttributes = BaseAttributes & {
 	backgroundColor?: string;

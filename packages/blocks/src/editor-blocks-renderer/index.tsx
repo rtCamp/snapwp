@@ -1,8 +1,8 @@
 import { getConfig } from '@snapwp/core/config';
+import BlockManager from '@/block-manager';
+
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 import type { ReactNode } from 'react';
-
-import BlockManager from '@/block-manager';
 
 type EditorBlocksRendererProps = {
 	editorBlocks?: BlockData[] | null | undefined;

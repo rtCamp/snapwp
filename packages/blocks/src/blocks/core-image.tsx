@@ -1,18 +1,19 @@
+import { decode } from 'html-entities';
 import {
 	cn,
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
+
 import type {
+	CoreImage as CoreImageType,
 	CoreImageAttributes,
 	CoreImageConnectedMediaItem,
 	CoreImageMediaDetails,
-	CoreImage as CoreImageType,
 	CoreImageProps,
 	FigureProps,
 } from '@snapwp/types';
-import { decode } from 'html-entities';
 import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
 /**

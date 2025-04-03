@@ -1,4 +1,4 @@
-import { type ClassValue, clsx } from 'clsx';
+import { clsx, type ClassValue } from 'clsx';
 
 /**
  * Combines class names.

@@ -1,11 +1,11 @@
-import { QueryEngine } from '@snapwp/query';
-import type { BlockData } from '@snapwp/types';
 import { headers } from 'next/headers';
 import Script from 'next/script';
-import type { ReactNode } from 'react';
-
+import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
+
+import type { BlockData } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];

@@ -1,11 +1,11 @@
-import { Logger } from '@snapwp/core';
-import { getConfig } from '@snapwp/core/config';
 import {
 	NextResponse,
 	type NextFetchEvent,
 	type NextMiddleware,
 	type NextRequest,
 } from 'next/server';
+import { Logger } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
 
 import type { MiddlewareFactory } from './utils';
 

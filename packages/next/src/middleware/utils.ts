@@ -1,6 +1,5 @@
-import { getConfig } from '@snapwp/core/config';
 import { NextResponse, type NextMiddleware } from 'next/server';
-
+import { getConfig } from '@snapwp/core/config';
 import { corsProxyMiddleware } from './cors';
 import { currentPath as cm } from './current-path';
 import { proxies } from './proxies';

@@ -1,10 +1,10 @@
-import type { ApolloQueryResult } from '@apollo/client';
 import {
 	GlobalStylesParseError,
 	Logger,
 	type GlobalHeadProps,
 } from '@snapwp/core';
 
+import type { ApolloQueryResult } from '@apollo/client';
 import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
 
 /**

@@ -1,6 +1,5 @@
-import type { ComponentType } from 'react';
-
 import type { BaseProps } from '../base';
+import type { ComponentType } from 'react';
 
 export type CoreHtmlProps = BaseProps< {} >;
 

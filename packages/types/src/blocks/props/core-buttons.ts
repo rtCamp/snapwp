@@ -1,6 +1,5 @@
-import type { ComponentType, PropsWithChildren } from 'react';
-
 import type { BaseAttributes, BaseProps } from '..';
+import type { ComponentType, PropsWithChildren } from 'react';
 
 export type CoreButtonsAttributes = BaseAttributes & {
 	cssClassName?: string;
