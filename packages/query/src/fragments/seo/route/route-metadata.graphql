@@ -27,7 +27,7 @@ fragment termFrag on TermNode{
     description
 }
 
-fragment routeMetadataFrag on RenderedTemplate {
+fragment RouteMetadataFrag on RenderedTemplate {
 	id
     connectedNode {
 	    __typename,

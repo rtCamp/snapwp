@@ -18,7 +18,7 @@ fragment uriFrag on ContentNode{
 	uri
 }
 
-fragment twitterMetadataFrag on RenderedTemplate {
+fragment TwitterMetadataFrag on RenderedTemplate {
 	id
     connectedNode {
 	    __typename,

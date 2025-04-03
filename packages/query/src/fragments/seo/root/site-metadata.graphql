@@ -1,4 +1,4 @@
-fragment siteMetadataFrag on RootQuery {
+fragment SiteMetadataFrag on RootQuery {
     generalSettings {
         title
         description

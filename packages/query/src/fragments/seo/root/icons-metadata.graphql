@@ -1,4 +1,4 @@
-fragment iconMetadataFrag on RootQuery {
+fragment IconMetadataFrag on RootQuery {
 	generalSettings {
 		siteIcon {
 			id
