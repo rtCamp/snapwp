@@ -6,4 +6,4 @@
 "@snapwp/next": patch
 ---
 
-lint: Enforced parameter type in function documentation by adding the `jsdoc/require-param-type` ESLint rule.
+chore: Enforce `jsdoc/require-param-type` ESLint rule in repository ruleset.
