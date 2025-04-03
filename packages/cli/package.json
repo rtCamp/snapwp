@@ -5,7 +5,9 @@
 	"author": "rtCamp",
 	"description": "A better way to build headless WordPress applications.",
 	"type": "module",
-	"files": [ "./dist" ],
+	"files": [
+		"./dist"
+	],
 	"bin": {
 		"snapwp": "./dist/snapwp.js"
 	},
