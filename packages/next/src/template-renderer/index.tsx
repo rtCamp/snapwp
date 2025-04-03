@@ -7,7 +7,7 @@ import type { BlockData } from '@snapwp/types';
 import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
-	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
+	getTemplateData?: Awaited< QueryEngine[ 'getTemplateData' ] >;
 	children: ( editorBlocks: BlockData[] ) => ReactNode;
 };
 
@@ -15,14 +15,14 @@ export type TemplateRendererProps = {
  * Renders a full HTML document including the head, body, and scripts.
  * Combines custom styles, block content, and scripts into a complete page.
  *
- * @param props - The props for the component..
+ * @param props - The props for the component.
  * @param props.getTemplateData - A async callback to get template styles and content.
  * @param props.children - The block content to render.
  *
  * @return A complete HTML document structure.
  */
 export async function TemplateRenderer( {
-	getTemplateData = QueryEngine.getTemplateData,
+	getTemplateData = QueryEngine.getInstance().getTemplateData,
 	children,
 }: TemplateRendererProps ): Promise< ReactNode > {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.

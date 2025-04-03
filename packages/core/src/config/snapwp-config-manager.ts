@@ -1,7 +1,7 @@
 'use snapWPConfig';
 import { isValidUrl, generateGraphqlUrl } from '@/utils';
 import { Logger } from '@/logger';
-import type { BlockDefinitions } from '@snapwp/types';
+import type { BlockDefinitions, QueryClientAdapter } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -44,6 +44,11 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Query Engine
+	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the type of the query engine, so we use `any`. unknown will cause type error.
+	queryEngine?: QueryClientAdapter< any >;
 }
 
 /**
@@ -115,6 +120,10 @@ class SnapWPConfigManager {
 			required: false,
 		},
 		parserOptions: {
+			type: 'object',
+			required: false,
+		},
+		queryEngine: {
 			type: 'object',
 			required: false,
 		},

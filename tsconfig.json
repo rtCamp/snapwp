@@ -4,7 +4,9 @@
 		{ "path": "packages/blocks" },
 		{ "path": "packages/core" },
 		{ "path": "packages/query" },
-		{ "path": "packages/codegen-config" }
+		{ "path": "packages/codegen-config" },
+		{ "path": "packages/tanstack" },
+		{ "path": "packages/apollo" }
 	],
 	"files": []
 }

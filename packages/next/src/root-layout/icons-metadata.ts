@@ -38,7 +38,7 @@ interface FormattedIconData {
  */
 export const getIcons = async (): Promise< IconMetaData > => {
 	const settings: GeneralSettingsProps | undefined =
-		await QueryEngine.getGeneralSettings();
+		await QueryEngine.getInstance().getGeneralSettings();
 
 	if ( ! settings ) {
 		return {
