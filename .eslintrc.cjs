@@ -86,36 +86,35 @@ module.exports = {
 		// Prevent the use of any in type annotation.
 		'@typescript-eslint/no-explicit-any': 'error',
 
-        'import/order': [
-            'error', 
-            {
-                pathGroups: [
-                    {
-                        pattern: "@snapwp/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@graphqlTypes/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                ],
+		'import/order': [
+			'error',
+			{
+				pathGroups: [
+					{
+						pattern: '@snapwp/**',
+						group: 'internal',
+						position: 'after',
+					},
+					{
+						pattern: '@graphqlTypes/**',
+						group: 'internal',
+						position: 'after',
+					},
+					{
+						pattern: '@/**',
+						group: 'internal',
+						position: 'after',
+					},
+				],
 
-                "newlines-between": "always",
+				'newlines-between': 'always',
 
-                alphabetize: {
-                    order: "asc",
-                    caseInsensitive: true,
-                },
-            },
-        ]
-        
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: true,
+				},
+			},
+		],
 	},
 	overrides: [
 		{
