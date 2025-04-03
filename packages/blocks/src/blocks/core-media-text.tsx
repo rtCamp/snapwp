@@ -1,4 +1,3 @@
-import type { ComponentProps, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -10,6 +9,7 @@ import type {
 	CoreMediaTextProps,
 	FocalPoint,
 } from '@snapwp/types';
+import type { ComponentProps, ReactNode } from 'react';
 
 /**
  * Default width for media content as percentage

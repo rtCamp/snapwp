@@ -85,6 +85,52 @@ module.exports = {
 
 		// Prevent the use of any in type annotation.
 		'@typescript-eslint/no-explicit-any': 'error',
+
+		// Sort import statements consistently.
+		'import/order': [
+			'error',
+			{
+				groups: [
+					'builtin',
+					'external',
+					'internal',
+					'parent',
+					'sibling',
+					'index',
+					'type',
+				],
+				pathGroups: [
+					{
+						pattern: '@snapwp/**',
+						group: 'internal',
+						position: 'after',
+					},
+					{
+						pattern: '@graphqlTypes/**',
+						group: 'internal',
+						position: 'after',
+					},
+					{
+						pattern: '@/**',
+						group: 'internal',
+						position: 'after',
+					},
+				],
+				distinctGroup: false,
+				pathGroupsExcludedImportTypes: [ 'type' ],
+				// @todo enable and add 'newlines-between-types': 'never' once released in eslint-plugin-import@>2.3.1
+				'newlines-between': 'ignore',
+				alphabetize: {
+					order: 'asc',
+					caseInsensitive: true,
+				},
+				named: {
+					import: true,
+					export: true,
+					types: 'types-last',
+				},
+			},
+		],
 	},
 	overrides: [
 		{

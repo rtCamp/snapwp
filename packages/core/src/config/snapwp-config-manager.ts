@@ -1,6 +1,8 @@
 'use snapWPConfig';
-import { isValidUrl, generateGraphqlUrl } from '@/utils';
+
 import { Logger } from '@/logger';
+import { generateGraphqlUrl, isValidUrl } from '@/utils';
+
 import type { BlockDefinitions } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 

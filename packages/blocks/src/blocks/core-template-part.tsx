@@ -1,9 +1,9 @@
-import type { JSX, ReactNode } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
 import type {
 	CoreTemplatePart as CoreTemplatePartType,
 	CoreTemplatePartProps,
 } from '@snapwp/types';
+import type { JSX, ReactNode } from 'react';
 
 /**
  * Renders the core/template-part block.

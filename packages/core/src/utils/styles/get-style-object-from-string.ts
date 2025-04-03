@@ -1,5 +1,5 @@
-import type { CSSProperties } from 'react';
 import { Logger } from '@/logger';
+import type { CSSProperties } from 'react';
 
 /**
  * Formats a string to camel case.

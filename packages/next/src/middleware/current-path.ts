@@ -1,5 +1,5 @@
-import type { NextFetchEvent, NextRequest, NextMiddleware } from 'next/server';
 import type { MiddlewareFactory } from './utils';
+import type { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
 
 /**
  * Middleware function for Next.js

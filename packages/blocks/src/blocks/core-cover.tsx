@@ -1,16 +1,17 @@
-import type { ComponentProps, ReactNode } from 'react';
 import {
-	getStylesFromAttributes,
+	cn,
 	findElementAndGetClassNames,
 	getColorClassName,
-	cn,
+	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Parse } from '@snapwp/next';
+
 import type {
 	CoreCover as CoreCoverType,
 	CoreCoverProps,
 	FocalPoint,
 } from '@snapwp/types';
+import type { ComponentProps, ReactNode } from 'react';
 
 const IMAGE_BACKGROUND_TYPE = 'image';
 const VIDEO_BACKGROUND_TYPE = 'video';

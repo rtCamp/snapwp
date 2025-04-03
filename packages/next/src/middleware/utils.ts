@@ -1,8 +1,8 @@
 import { NextResponse, type NextMiddleware } from 'next/server';
-import { proxies } from './proxies';
-import { currentPath as cm } from './current-path';
-import { corsProxyMiddleware } from './cors';
 import { getConfig } from '@snapwp/core/config';
+import { corsProxyMiddleware } from './cors';
+import { currentPath as cm } from './current-path';
+import { proxies } from './proxies';
 
 export type MiddlewareFactory = (
 	middleware: NextMiddleware

@@ -1,4 +1,4 @@
-import { TemplateParseError, GlobalStylesParseError } from '@/errors';
+import { GlobalStylesParseError, TemplateParseError } from '@/errors';
 
 describe( 'TemplateParseError', () => {
 	it( 'should create an error with the correct message and name', () => {

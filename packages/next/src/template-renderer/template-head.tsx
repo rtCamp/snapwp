@@ -1,4 +1,5 @@
 import { Fragment, type ReactNode } from 'react';
+
 import type { StyleSheetProps } from '@snapwp/core';
 
 export interface TemplateHeadProps {
