@@ -5,16 +5,7 @@
 	"author": "rtCamp",
 	"description": "A better way to build headless WordPress applications.",
 	"type": "module",
-	"files": [
-		"./dist"
-	],
-	"exports": {
-		".": {
-			"import": "./dist/index.js",
-			"require": "./dist/index.js",
-			"types": "./dist/types/index.d.ts"
-		}
-	},
+	"files": [ "./dist" ],
 	"bin": {
 		"snapwp": "./dist/snapwp.js"
 	},
@@ -35,7 +26,6 @@
 		"@types/node": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*",
-		"@snapwp/types": "*"
+		"typescript": "*"
 	}
 }
