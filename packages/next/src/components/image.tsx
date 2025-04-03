@@ -2,6 +2,7 @@ import {
 	type CSSProperties,
 	type ImgHTMLAttributes,
 	type PropsWithoutRef,
+	type ReactNode,
 } from 'react';
 import NextImage, { type ImageProps } from 'next/image';
 import { cn } from '@snapwp/core';
@@ -16,16 +17,16 @@ interface MediaItem {
 }
 
 interface ImageInterface {
-	alt?: string;
-	className?: string;
+	alt?: string | undefined;
+	className?: string | undefined;
 	fill?: boolean;
-	height?: number;
+	height?: number | undefined;
 	image?: MediaItem;
 	priority?: boolean;
 	sizes?: string;
-	style?: CSSProperties;
-	width?: number;
-	src?: string;
+	style?: CSSProperties | undefined;
+	width?: number | undefined;
+	src?: string | undefined;
 	srcSet?: string;
 	fetchPriority?: 'high' | 'low' | 'auto';
 }
@@ -60,7 +61,7 @@ export default function Image( {
 	...props
 }: PropsWithoutRef<
 	ImageInterface & ( ImageProps | ImgHTMLAttributes< HTMLImageElement > )
-> ) {
+> ): ReactNode {
 	const altText = alt || image?.altText || '';
 	const originalWidth = image?.mediaDetails?.width;
 	const originalHeight = image?.mediaDetails?.height;
@@ -105,8 +106,8 @@ export default function Image( {
 	}
 
 	// @todo replace src?.startsWith conditional check with something more robust that will incorporate both frontend/backend domain & anything in the list of allowed images domain in the config (ref: https://github.com/rtCamp/headless/pull/241#discussion_r1824274200). TBD after https://github.com/rtCamp/headless/issues/218.
-	const { homeUrl } = getConfig();
-	const normalizedHomeUrl = homeUrl?.replace( /https?:\/\//, '' );
+	const { wpHomeUrl } = getConfig();
+	const normalizedHomeUrl = wpHomeUrl?.replace( /https?:\/\//, '' );
 	const normalizedSrc = src?.replace( /https?:\/\//, '' );
 
 	if (
@@ -151,7 +152,7 @@ export default function Image( {
 			className={ cn( className, imageProps?.fill && 'object-cover' ) }
 			src={ src }
 			alt={ altText }
-			priority={ priority }
+			{ ...( priority && { priority } ) }
 		/>
 	) : null;
 }

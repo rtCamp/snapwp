@@ -8,6 +8,7 @@ import type {
 	CoreListItem as CoreListItemType,
 	CoreListItemProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/list-item block.
@@ -23,7 +24,7 @@ const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,
-}: CoreListItemProps ) => {
+}: CoreListItemProps ): ReactNode => {
 	const { content, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -39,7 +40,10 @@ const CoreListItem: CoreListItemType = ( {
 	const firstLineContent = content ? content.split( '\n' )[ 0 ] : undefined;
 
 	return (
-		<li className={ classNames || undefined } style={ styleObject }>
+		<li
+			className={ classNames || undefined }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ firstLineContent && <Parse html={ firstLineContent } /> }
 			{ children }
 		</li>

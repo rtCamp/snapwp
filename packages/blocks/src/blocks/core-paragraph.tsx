@@ -4,6 +4,7 @@ import type {
 	CoreParagraph as CoreParagraphType,
 	CoreParagraphProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/paragraph block.
@@ -15,7 +16,7 @@ import type {
  */
 const CoreParagraph: CoreParagraphType = ( {
 	attributes,
-}: CoreParagraphProps ) => {
+}: CoreParagraphProps ): ReactNode => {
 	const {
 		backgroundColor,
 		content,
@@ -27,7 +28,7 @@ const CoreParagraph: CoreParagraphType = ( {
 		textColor,
 	} = attributes || {};
 
-	const styleObject = getStylesFromAttributes( { style } );
+	const styleObject = getStylesFromAttributes( { style } ) || {};
 
 	/**
 	 * Add missing styles to the style object
@@ -50,8 +51,10 @@ const CoreParagraph: CoreParagraphType = ( {
 	return (
 		<p
 			className={ cssClassName || undefined }
-			style={ styleObject }
 			dir={ direction || undefined }
+			{ ...( Object.keys( styleObject ).length > 0 && {
+				style: styleObject,
+			} ) }
 		>
 			{ !! content && <Parse html={ content } /> }
 		</p>

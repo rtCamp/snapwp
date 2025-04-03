@@ -1,5 +1,6 @@
 import Fonts from '@/components/font';
 import { type GlobalHeadProps } from '@snapwp/core';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the head section with custom styles, block styles, global stylesheet,
@@ -16,7 +17,7 @@ export function GlobalHead( {
 	customCss,
 	globalStylesheet,
 	renderedFontFaces,
-}: GlobalHeadProps ) {
+}: GlobalHeadProps ): ReactNode {
 	return (
 		<>
 			{ globalStylesheet && (

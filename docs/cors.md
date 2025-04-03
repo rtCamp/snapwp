@@ -62,25 +62,8 @@ To further mitigate CORS issues, SnapWP includes a CORS middleware that proxies 
 
 ### Enabling the CORS Middleware
 
-To enable the CORS proxy feature, update your `snapwp.config.mjs` file:
+To enable the CORS proxy feature, update your `.env` file:
 
-```javascript
-/** @type {import('@snapwp/core/config').SnapWPConfig} */
-const config = {
-	// Other configuration options
-	useCorsProxy: true,
-};
-
-export default config;
-```
-
-### Customizing the Proxy Prefix
-
-By default, the proxy prefix is set to `/proxy`. If needed, you can override this by specifying `corsProxyPrefix` in the configuration.
-
-```javascript
-const config = {
-	useCorsProxy: process.env.NODE_ENV !== 'production', // Enable CORS proxy in nonproduction environments.
-	corsProxyPrefix: '/custom-proxy', // Optional custom prefix
-};
+```dotenv
+NEXT_PUBLIC_CORS_PROXY_PREFIX={prefix-value}
 ```

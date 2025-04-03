@@ -1,14 +1,14 @@
-import type { JSX } from 'react';
 import { headers } from 'next/headers';
 import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 import Script from 'next/script';
 import type { BlockData } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
-	children: ( editorBlocks: BlockData[] ) => JSX.Element;
+	children: ( editorBlocks: BlockData[] ) => ReactNode;
 };
 
 /**
@@ -24,7 +24,7 @@ export type TemplateRendererProps = {
 export async function TemplateRenderer( {
 	getTemplateData = QueryEngine.getTemplateData,
 	children,
-}: TemplateRendererProps ) {
+}: TemplateRendererProps ): Promise< ReactNode > {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 
@@ -52,6 +52,7 @@ export async function TemplateRenderer( {
 				</main>
 			</TemplateScripts>
 			{ /* Hot Fix for adding classes to the body outside the root layout */ }
+
 			<Script
 				strategy="beforeInteractive"
 				dangerouslySetInnerHTML={ {

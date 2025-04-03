@@ -1,79 +1,11 @@
 import { type NextConfig } from 'next';
-import fs from 'fs';
-import path from 'path';
-import url from 'url';
+import type { WebpackConfigContext } from 'next/dist/server/config-shared';
+
 import { getConfig, setConfig } from '@snapwp/core/config';
-import {
-	ModifySourcePlugin,
-	ReplaceOperation,
-} from 'modify-source-webpack-plugin';
 
-/**
- * Modifies the webpack configuration to include SnapWP configuration.
- * TODO: Explore a better approach to support Turbopack.
- *
- * @param {string} snapWPConfigPath The path to the SnapWP configuration file.
- *
- * @return A function that modifies the webpack configuration.
- */
-const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
-	/**
-	 * Modifies the webpack configuration. This function is called by Next.js.
-	 *
-	 * @param {any} config The webpack configuration. Using `any` type as the parameter type is `any` in Next.js.
-	 *
-	 * @see node_modules/next/dist/server/config-shared.js:169
-	 *
-	 * @return The modified webpack configuration.
-	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
-	return ( config: any ) => {
-		const configPath = `
-			import __snapWPConfig from '${ snapWPConfigPath }';
-		`;
-
-		config.plugins.push(
-			new ModifySourcePlugin( {
-				rules: [
-					{
-						/**
-						 * Tests whether the module should be modified.
-						 *
-						 * @param {NormalModule} normalModule The normal module being processed.
-						 *
-						 * @return `true` if the module should be modified, otherwise `false`.
-						 */
-						test: ( normalModule ) => {
-							const userRequest = normalModule.userRequest || '';
-
-							const startIndex =
-								userRequest.lastIndexOf( '!' ) === -1
-									? 0
-									: userRequest.lastIndexOf( '!' ) + 1;
-
-							const moduleRequest = userRequest
-								.substring( startIndex )
-								.replace( /\\/g, '/' );
-
-							return /snapwp-config-manager.(ts|js)$/.test(
-								moduleRequest
-							);
-						},
-						operations: [
-							new ReplaceOperation(
-								'once',
-								"'use snapWPConfig';",
-								configPath
-							),
-						],
-					},
-				],
-			} )
-		);
-
-		return config;
-	};
-};
+import { generateRemotePatterns } from './snapwp-remote-patterns';
+import getWebpackPlugins from './get-snap-wp-webpack-plugins';
+import getSnapWPConfigPath from './get-snap-wp-config-path';
 
 /**
  * Extends the Next.js configuration with SnapWP configuration.
@@ -82,57 +14,34 @@ const modifyWebpackConfig = ( snapWPConfigPath: string ) => {
  *
  * @return The extended configuration object.
  */
-const withSnapWP = async ( nextConfig?: NextConfig ): Promise< NextConfig > => {
-	const possibleSnapWPConfigPaths = [
-		'snapwp.config.ts',
-		'snapwp.config.js',
-		'snapwp.config.mjs',
-	];
-
-	// Locate the SnapWP configuration file.
-	let snapWPConfigPath = possibleSnapWPConfigPaths.find(
-		( possibleSnapWPConfigPath ) => {
-			return fs.existsSync(
-				`${ process.cwd() }/${ possibleSnapWPConfigPath }`
-			);
-		}
-	);
-
-	if ( ! snapWPConfigPath ) {
-		throw new Error( 'SnapWP configuration file not found.' );
-	}
-
-	// Use path.normalize to replace backslashes correctly
-	snapWPConfigPath = path.normalize(
-		`${ process.cwd() }/${ snapWPConfigPath }`
-	);
-	// Convert it to a file:// URL
-	snapWPConfigPath = url.pathToFileURL( snapWPConfigPath ).href;
-
+const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 	setConfig();
-	const homeUrl = new URL( getConfig().homeUrl );
+
+	const snapWPConfigPath = getSnapWPConfigPath();
+	const homeUrl = new URL( getConfig().wpHomeUrl );
+
+	const snapWPRemotePatterns = generateRemotePatterns( homeUrl );
+
+	const snapWPWebpackPlugins = getWebpackPlugins( snapWPConfigPath );
 
 	const userImages = nextConfig?.images ?? {};
 	const userRemotePatterns = userImages.remotePatterns ?? [];
 
+	// When adding a new customization to generated next config, remember to merge user's config.
 	return {
 		...nextConfig,
 		images: {
-			// User image config is appended before default config. Otherwise default remote patterns will be overridden
 			...userImages,
-			remotePatterns: [
-				{
-					protocol: 'http',
-					hostname: homeUrl.hostname,
-				},
-				{
-					protocol: 'https',
-					hostname: homeUrl.hostname,
-				},
-				...userRemotePatterns,
-			],
+			remotePatterns: [ ...snapWPRemotePatterns, ...userRemotePatterns ],
 		},
-		webpack: modifyWebpackConfig( snapWPConfigPath ),
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any, jsdoc/require-jsdoc -- Inline function do not require doc. Any comes from NextJs's type
+		webpack: ( config: any, context: WebpackConfigContext ): any => {
+			if ( nextConfig.webpack ) {
+				config = nextConfig.webpack( config, context );
+			}
+			config.plugins.push( ...snapWPWebpackPlugins );
+			return config;
+		},
 	};
 };
 

@@ -8,6 +8,7 @@ import type {
 	CorePullquote as CorePullquoteType,
 	CorePullquoteProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/pullquote block.
@@ -21,7 +22,7 @@ import type {
 const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
-}: CorePullquoteProps ) => {
+}: CorePullquoteProps ): ReactNode => {
 	const { style, pullquoteValue, citation } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -36,7 +37,10 @@ const CorePullquote: CorePullquoteType = ( {
 	const classNames = cn( classNamesFromString );
 
 	return (
-		<figure style={ styleObject } className={ classNames }>
+		<figure
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<blockquote>
 				{ pullquoteValue && (
 					<p>

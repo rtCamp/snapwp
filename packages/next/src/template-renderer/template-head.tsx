@@ -1,5 +1,9 @@
-import { Fragment } from 'react';
-import type { TemplateHeadProps } from '@snapwp/core';
+import { Fragment, type ReactNode } from 'react';
+import type { StyleSheetProps } from '@snapwp/core';
+
+export interface TemplateHeadProps {
+	stylesheets?: StyleSheetProps[] | null | undefined;
+}
 
 /**
  * Renders the head section with additional stylesheets for a template.
@@ -9,7 +13,7 @@ import type { TemplateHeadProps } from '@snapwp/core';
  *
  * @return A head element containing the provided styles and links.
  */
-export function TemplateHead( { stylesheets }: TemplateHeadProps ) {
+export function TemplateHead( { stylesheets }: TemplateHeadProps ): ReactNode {
 	if ( ! stylesheets ) {
 		return null;
 	}

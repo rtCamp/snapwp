@@ -1,4 +1,5 @@
-import { getClassNamesFromString, cn } from '@/utils';
+import cn from './cn';
+import getClassNamesFromString from './get-class-names-from-string';
 
 /**
  * Extracts the class names from the specified HTML element within the rendered HTML string.
@@ -9,8 +10,8 @@ import { getClassNamesFromString, cn } from '@/utils';
  * @return The extracted class names from the first occurrence of the specified element or an empty string if the element is not found.
  */
 export default function findElementAndGetClassNames(
-	renderedHtml?: string | null,
-	elementSelector?: string
+	renderedHtml?: string | null | undefined,
+	elementSelector?: string | undefined
 ): string {
 	if ( ! renderedHtml ) {
 		return '';

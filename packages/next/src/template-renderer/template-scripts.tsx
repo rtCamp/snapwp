@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { PropsWithChildren, ReactNode } from 'react';
 import NextScript from 'next/script';
 import Script from '@/components/script';
 import ScriptModule from '@/components/script-module';
@@ -13,7 +13,11 @@ import { getConfig } from '@snapwp/core/config';
  *
  * @return A collection of `<Script />` components.
  */
-const ScriptMap = ( { scripts }: { scripts: EnqueuedScriptProps[] } ) => (
+const ScriptMap = ( {
+	scripts,
+}: {
+	scripts: EnqueuedScriptProps[];
+} ): ReactNode => (
 	<>
 		{ scripts?.map( ( { handle, src, ...rest }, id ) => {
 			return (
@@ -39,16 +43,16 @@ const ImportMap = ( {
 	scriptModules,
 }: {
 	scriptModules: ScriptModuleProps[];
-} ) => {
+} ): ReactNode => {
 	// Generate import map from all module dependencies
-	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
+	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 
 	const imports = scriptModules.reduce< Record< string, string > >(
 		( acc, module ) => {
 			module.dependencies?.forEach( ( dep ) => {
 				const { handle, src } = dep?.connectedScriptModule!;
-				acc[ handle ] = useCorsProxy
-					? src.replace( homeUrl, corsProxyPrefix )
+				acc[ handle ] = corsProxyPrefix
+					? src.replace( wpHomeUrl, corsProxyPrefix )
 					: src;
 			} );
 			return acc;
@@ -88,8 +92,8 @@ const ScriptModuleMap = ( {
 	scriptModules,
 }: {
 	scriptModules?: ScriptModuleProps[];
-} ) => {
-	const { homeUrl, corsProxyPrefix, useCorsProxy } = getConfig();
+} ): ReactNode => {
+	const { wpHomeUrl, corsProxyPrefix } = getConfig();
 	// Array to store handles of script modules that should not be loaded
 	const uniqueScriptModuleDependencies = new Set< string >();
 
@@ -134,8 +138,8 @@ const ScriptModuleMap = ( {
 						return null;
 					}
 
-					src = useCorsProxy
-						? src.replace( homeUrl, corsProxyPrefix )
+					src = corsProxyPrefix
+						? src.replace( wpHomeUrl, corsProxyPrefix )
 						: src;
 
 					// We use this to prevent (re)loading the main script module if it's already included in the page.
@@ -174,7 +178,7 @@ export function TemplateScripts( {
 }: PropsWithChildren< {
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
-} > ) {
+} > ): ReactNode {
 	// Separate scripts by location
 	const headerScripts =
 		scripts?.filter( ( script ) => script.groupLocation === 'HEADER' ) ??

@@ -1,4 +1,4 @@
-import type { ElementType, PropsWithChildren } from 'react';
+import type { ComponentType, ElementType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export interface FocalPoint {
@@ -51,4 +51,4 @@ export type CoreCoverProps = PropsWithChildren<
 	renderedHtml?: string | null;
 };
 
-export type CoreCover = React.ComponentType< CoreCoverProps >;
+export type CoreCover = ComponentType< CoreCoverProps >;

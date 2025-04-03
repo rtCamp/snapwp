@@ -20,8 +20,16 @@ export default function parseQueryResult(
 ): GlobalHeadProps {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
-			Logger.error( `Error fetching global styles: ${ error }` );
+			Logger.error(
+				`Error fetching global styles: ${ error?.message }`,
+				error
+			);
 		} );
+	}
+
+	// Check if globalStyles is null.
+	if ( queryData.data.globalStyles === null ) {
+		throw new GlobalStylesParseError( `Error fetching global styles.` );
 	}
 
 	if ( ! queryData.data && queryData.errors?.length ) {
@@ -31,8 +39,8 @@ export default function parseQueryResult(
 	const globalStyles = queryData.data?.globalStyles;
 
 	return {
-		customCss: globalStyles?.customCss,
-		globalStylesheet: globalStyles?.stylesheet,
-		renderedFontFaces: globalStyles?.renderedFontFaces,
+		customCss: globalStyles?.customCss || null,
+		globalStylesheet: globalStyles?.stylesheet || null,
+		renderedFontFaces: globalStyles?.renderedFontFaces || null,
 	};
 }

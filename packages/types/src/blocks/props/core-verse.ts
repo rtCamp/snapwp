@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreVerseAttributes = BaseAttributes & {
@@ -7,4 +8,4 @@ export type CoreVerseAttributes = BaseAttributes & {
 
 export type CoreVerseProps = BaseProps< CoreVerseAttributes >;
 
-export type CoreVerse = React.ComponentType< CoreVerseProps >;
+export type CoreVerse = ComponentType< CoreVerseProps >;

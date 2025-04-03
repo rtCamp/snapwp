@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
 	getStylesFromAttributes,
 	findElementAndGetClassNames,
@@ -25,7 +25,9 @@ const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
  *
  * @return CSS position string or undefined if no focal point
  */
-const mediaPosition = ( focalPoint?: FocalPoint | null ): string => {
+const mediaPosition = (
+	focalPoint?: FocalPoint | null | undefined
+): string => {
 	if ( ! focalPoint ) {
 		focalPoint = DEFAULT_FOCAL_POINT;
 	}
@@ -52,7 +54,7 @@ const CoreCover: CoreCoverType = ( {
 	mediaDetails,
 	children,
 	renderedHtml,
-}: CoreCoverProps ) => {
+}: CoreCoverProps ): ReactNode => {
 	// Rest of the component implementation remains unchanged
 	const {
 		alt,

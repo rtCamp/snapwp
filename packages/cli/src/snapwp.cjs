@@ -1,13 +1,32 @@
 #!/usr/bin/env node
-const registryURL = 'http://localhost:4873';
-const npmrcContent = `@snapwp:registry=${ registryURL }`;
 
-// Scaffold a new directory with the SnapWP build and the .env file.
-const { spawn } = require( 'child_process' );
-const fs = require( 'fs/promises' );
+// Dependencies
 const path = require( 'path' );
-const readline = require( 'readline' );
 const { program } = require( 'commander' );
+const { prompt } = require( './utils/prompt.cjs' );
+const {
+	createProjectDirectory,
+} = require( './create-app/createProjectDirectory.cjs' );
+const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
+const {
+	copyStarterTemplate,
+} = require( './create-app/copyStarterTemplate.cjs' );
+const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
+const {
+	updatePackageVersions,
+} = require( './create-app/updatePackageVersions.cjs' );
+const {
+	printSuccessMessage,
+} = require( './create-app/printSuccessMessage.cjs' );
+
+/**
+ * Default project path if user doesn't provide any.
+ */
+const DEFAULT_PROJECT_PATH = './snapwp-app';
+
+/**
+ * Main function to create a new SnapWP project.
+ */
 
 program.option( '--proxy', 'Use proxy registry.' ).parse();
 
@@ -73,162 +92,47 @@ const openEditor = ( filePath ) => {
 
 ( async () => {
 	try {
-		// Step 1: Prompt the user to input the directory where the project needs to be scaffolded.
+		program.option( '--proxy', 'Use proxy registry.' ).parse();
+		const options = program.opts();
+
+		// Step 1: Get project directory from user
 		const projectDir = await prompt(
 			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
-				'Please enter a relative or absolute path: '
+				'Please enter a relative or absolute path: ',
+			DEFAULT_PROJECT_PATH
 		);
+
 		const projectDirPath = path.resolve( projectDir );
 
-		// Create the project directory if not exists.
-		try {
-			await fs.access( projectDirPath );
-		} catch ( error ) {
-			if ( 'ENOENT' !== error.code ) {
-				console.error( 'Error:', error );
-				process.exit( 1 );
-			}
+		// Check if user is using default path
+		const useDefaultPath = projectDir.trim() === DEFAULT_PROJECT_PATH;
 
-			await fs.mkdir( projectDirPath, { recursive: true } );
-		}
+		// Step 2: Create project directory
+		await createProjectDirectory( projectDirPath );
 
-		const nextJsStarterPath = path.resolve(
-			__dirname,
-			'./examples/nextjs/starter/'
-		);
+		// Step 3: Setup environment file
+		// @todo:
+		//        1. With --interactive: prompt for each env variable value and generate the .env file in projectDirPath.
+		//        2. With env variable flags (e.g. --{specific_env_variable}={value}): directly create the .env file using these values.
+		//        3. With --env_file: copy the provided .env file path into projectDirPath.
+		await setupEnvFile( projectDirPath, false );
 
-		// @todo: Add interactive support to prompt for the env variable values one-at-a-time, create `.env` file using it in projectDirPath if --interactive is passed & skip `Step 2`.
+		// Step 4: Copy starter template to project directory
+		await copyStarterTemplate( projectDirPath );
 
-		// @todo: Create `.env` file directly with env_variables if --{specific_env_variable}={value} or --interactive is passed & skip `Step 2`.
+		// Step 5: Create .npmrc file if needed
+		await setupNpmrc( projectDirPath, options.proxy );
 
-		// @todo: Copy `.env` file to projectDirPath if file-path passed via --env_file={string or path} & skip `Step 2`.
+		// Step 6: Update package versions
+		await updatePackageVersions( projectDirPath );
 
-		// Step 2: Check if there is an `.env` file in projectDirPath.
-		const envPath = path.join( projectDirPath, '.env' );
+		// Step 7: Print instructions
+		printSuccessMessage( projectDirPath, false );
 
-		try {
-			await fs.access( envPath );
-		} catch ( error ) {
-			if ( 'ENOENT' !== error.code ) {
-				console.error( 'Error:', error );
-				process.exit( 1 );
-			}
-
-			await prompt(
-				`\nNo .env file found in "${ projectDirPath }". Please \n` +
-					'  1. Press any key to open a new .env file in your default editor,\n' +
-					'  2. Paste in the environment variables from your WordPress site, and update the values as needed. \n' +
-					'  3. Save and close the file to continue the installation. \n' +
-					'\n (For more information on configuring your .env file, see the SnapWP documentation.)' // @todo Update with the link to the documentation.
-			);
-
-			/**
-			 * Create an empty file before opening to prevent: "saving file with default editor extension".
-			 * E.g.,
-			 * In Windows, if notepad is default editor, it saves files in `.txt` extension by default.
-			 * Creating a file before opening will prevent bugs due to default editor extensions.
-			 */
-			await fs.writeFile( envPath, '' );
-
-			const envFileCreationStatus = await openEditor( envPath );
-
-			if ( envFileCreationStatus.success ) {
-				console.log( envFileCreationStatus.message );
-			} else {
-				console.error( envFileCreationStatus.message );
-				process.exit( 1 );
-			}
-
-			// Throw error if .env file still does not exist or if exists, its empty.
-			try {
-				await fs.access( envPath );
-			} catch ( err ) {
-				// Throw error if .env file still does not exist.
-				if ( 'ENOENT' === err.code ) {
-					console.error(
-						`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
-					);
-					process.exit( 1 );
-				}
-
-				// Exit if any other unknown error occurred.
-				console.error( 'Error:', err );
-				process.exit( 1 );
-			}
-		}
-
-		// Fetch the `.env` file size.
-		const { size } = await fs.stat( envPath );
-
-		// Throw error if .env file is empty.
-		if ( 0 === size ) {
-			console.error(
-				`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
-			);
-
-			await fs.rm( envPath, { force: true } ); // Delete old env for a fresh start.
-
+		if ( useDefaultPath ) {
 			process.exit( 1 );
 		}
-
-		// Step 3: Copy the _entire_ `nextJsStarterPath` contents to the project directory.
-		const nextJSStarterEnvPath = path.join( nextJsStarterPath, '.env' );
-		await fs.rm( nextJSStarterEnvPath, { force: true } ); // Delete `.env` from starter if present, to prevent override of `.env`.
-
-		console.log( 'Copying frontend folder to project directory...' );
-		await fs.cp( nextJsStarterPath, projectDirPath, {
-			recursive: true,
-			filter: ( source ) => {
-				const fileCheck = new RegExp(
-					`/${ nextJsStarterPath }/(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)$`
-				);
-				return ! fileCheck.test( source );
-			},
-		} );
-
-		// Step 4: Create .npmrc file in project directory if running via proxy registry.
-		if ( options.proxy ) {
-			console.log( 'Found --proxy flag, generating `.npmrc` file.' );
-			await fs.writeFile(
-				path.join( projectDirPath, '.npmrc' ),
-				npmrcContent
-			);
-			console.log(
-				`\`.npmrc\` file generated successfully. Please make sure the proxy registry is running on ${ registryURL }`
-			);
-		}
-
-		// Step 5: update @snapwp package version numbers in package.json.
-		const packageJsonData = await fs.readFile(
-			path.join( projectDirPath, 'package.json' ),
-			{ encoding: 'utf8' }
-		);
-		const updatedPackageJsonData = packageJsonData.replaceAll(
-			/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
-			'*'
-		);
-		await fs.writeFile(
-			path.join( projectDirPath, 'package.json' ),
-			updatedPackageJsonData
-		);
-
-		// New line for clarity.
-		console.log( '' );
-
-		console.log(
-			`Your project has been scaffolded at: ${ projectDirPath }.`
-		);
-
-		// New line for clarity.
-		console.log( '' );
-
-		console.log(
-			'To start your headless WordPress project, please run the following commands:'
-		);
-		console.log( `cd ${ projectDirPath }` );
-		console.log( `npm install` );
-		console.log( `npm run dev` );
 	} catch ( error ) {
 		console.error( 'Error:', error );
 		process.exit( 1 );

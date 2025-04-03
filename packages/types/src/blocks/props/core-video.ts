@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '..';
 
 export interface TrackProps {
@@ -23,4 +24,4 @@ export type CoreVideoAttributes = BaseAttributes & {
 
 export type CoreVideoProps = BaseProps< CoreVideoAttributes >;
 
-export type CoreVideo = React.ComponentType< CoreVideoProps >;
+export type CoreVideo = ComponentType< CoreVideoProps >;

@@ -3,6 +3,7 @@ import type {
 	CoreFreeform as CoreFreeformType,
 	CoreFreeformProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/freeform block.
@@ -14,7 +15,7 @@ import type {
  */
 const CoreFreeform: CoreFreeformType = ( {
 	renderedHtml,
-}: CoreFreeformProps ) => {
+}: CoreFreeformProps ): ReactNode => {
 	// @todo `attribues.content` is not populated in GraphQL. Using `renderedHtml` for now.
 	if ( ! renderedHtml ) {
 		return null;

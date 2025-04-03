@@ -1,4 +1,4 @@
-import type { ComponentProps } from 'react';
+import type { ComponentProps, ReactNode } from 'react';
 import {
 	cn,
 	getClassNamesFromString,
@@ -31,7 +31,10 @@ const DEFAULT_MEDIA_SIZE_SLUG = 'full';
  *
  * @return CSS styles for the image fill.
  */
-function imageFillStyles( url?: string, focalPoint?: FocalPoint ) {
+function imageFillStyles(
+	url?: string,
+	focalPoint?: FocalPoint
+): { objectPosition: string } | { objectPosition?: undefined } {
 	return url
 		? {
 				objectPosition: focalPoint
@@ -61,7 +64,7 @@ const CoreMediaText: CoreMediaTextType = ( {
 	renderedHtml,
 	connectedMediaItem,
 	mediaDetails,
-}: CoreMediaTextProps ) => {
+}: CoreMediaTextProps ): ReactNode => {
 	// If there is no media URL or children, render the parsed HTML
 	if ( ! attributes?.mediaUrl && ! children ) {
 		return <Parse html={ renderedHtml || '' } />;

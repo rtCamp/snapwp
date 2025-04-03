@@ -1,3 +1,4 @@
+import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreAudioAttributes = BaseAttributes & {
@@ -11,4 +12,4 @@ export type CoreAudioAttributes = BaseAttributes & {
 
 export type CoreAudioProps = BaseProps< CoreAudioAttributes >;
 
-export type CoreAudio = React.ComponentType< CoreAudioProps >;
+export type CoreAudio = ComponentType< CoreAudioProps >;

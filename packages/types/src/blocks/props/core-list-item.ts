@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreListItemAttributes = BaseAttributes & {
@@ -10,4 +10,4 @@ export type CoreListItemProps = PropsWithChildren<
 	BaseProps< CoreListItemAttributes >
 >;
 
-export type CoreListItem = React.ComponentType< CoreListItemProps >;
+export type CoreListItem = ComponentType< CoreListItemProps >;

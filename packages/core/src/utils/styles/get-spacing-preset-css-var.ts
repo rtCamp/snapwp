@@ -5,7 +5,7 @@
  *
  * @param {string|null|undefined} value Value to convert.
  *
- * @return  CSS var string for given spacing preset value.
+ * @return CSS var string for given spacing preset value.
  */
 export default function getSpacingPresetCssVar(
 	value: string | null | undefined

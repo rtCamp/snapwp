@@ -1,6 +1,7 @@
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
+	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
 import {
@@ -13,7 +14,15 @@ import {
 } from '@apollo/client';
 import parseTemplate from '@/utils/parse-template';
 import parseGlobalStyles from '@/utils/parse-global-styles';
-import { Logger, type GlobalHeadProps } from '@snapwp/core';
+import type { BlockData } from '@snapwp/types';
+import {
+	Logger,
+	type GlobalHeadProps,
+	type EnqueuedScriptProps,
+	type StyleSheetProps,
+	type ScriptModuleProps,
+} from '@snapwp/core';
+import parseGeneralSettings from '@/utils/parse-general-settings';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -29,11 +38,11 @@ export class QueryEngine {
 	/**
 	 * Initializer.
 	 */
-	public static initialize() {
+	public static initialize(): void {
 		QueryEngine.graphqlEndpoint = getGraphqlUrl();
 
-		const { homeUrl } = getConfig();
-		QueryEngine.homeUrl = homeUrl;
+		const { wpHomeUrl } = getConfig();
+		QueryEngine.homeUrl = wpHomeUrl;
 
 		QueryEngine.apolloClient = new ApolloClient( {
 			uri: QueryEngine.graphqlEndpoint,
@@ -44,6 +53,7 @@ export class QueryEngine {
 	/**
 	 * Returns the singleton instance of QueryEngine.
 	 * @throws Throws error if instance is not initialized with config.
+	 *
 	 * @return The QueryEngine instance.
 	 */
 	public static getInstance(): QueryEngine {
@@ -55,6 +65,7 @@ export class QueryEngine {
 
 	/**
 	 * Fetches global styles.
+	 *
 	 * @return The template data fetched for the uri.
 	 */
 	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
@@ -89,13 +100,72 @@ export class QueryEngine {
 	};
 
 	/**
-	 * Fetches blocks, scripts, and styles for the given uri.
+	 * Fetches the general settings, like favicon icon.
 	 *
-	 * @param {string} uri The URL of the seed node.
+	 * @return General settings data.
+	 */
+	static getGeneralSettings = async (): Promise<
+		| {
+				generalSettings: {
+					siteIcon: {
+						mediaItemUrl: string | undefined;
+						mediaDetails: {
+							sizes: {
+								sourceUrl: string;
+								height: string;
+								width: string;
+							}[];
+						};
+					};
+				};
+		  }
+		| undefined
+	> => {
+		if ( ! QueryEngine.isClientInitialized ) {
+			QueryEngine.initialize();
+		}
+
+		try {
+			const data = await QueryEngine.apolloClient.query( {
+				query: GetGeneralSettingsDocument,
+				fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+				errorPolicy: 'all',
+			} );
+
+			return parseGeneralSettings( data );
+		} catch ( error ) {
+			if ( error instanceof ApolloError ) {
+				logApolloErrors( error );
+
+				// If there are networkError throw the error with proper message.
+				if ( error.networkError ) {
+					// Throw the error with proper message.
+					throw new Error(
+						getNetworkErrorMessage( error.networkError )
+					);
+				}
+			}
+
+			// If error is not an instance of ApolloError, throw the error again.
+			throw error;
+		}
+	};
+
+	/**
+	 * Fetches blocks, scripts and styles for the given uri.
+	 * @param uri - The URL of the seed node.
 	 *
 	 * @return The template data fetched for the uri.
 	 */
-	static getTemplateData = async ( uri: string ) => {
+	static getTemplateData = async (
+		uri: string
+	): Promise< {
+		stylesheets: StyleSheetProps[] | undefined;
+		editorBlocks: BlockData< Record< string, unknown > >[] | undefined;
+		scripts: EnqueuedScriptProps[] | undefined;
+		scriptModules: ScriptModuleProps[] | undefined;
+		bodyClasses: string[] | undefined;
+	} > => {
 		if ( ! QueryEngine.isClientInitialized ) {
 			QueryEngine.initialize();
 		}
@@ -134,7 +204,7 @@ export class QueryEngine {
  *
  * @param {ApolloError} error The Apollo error.
  */
-const logApolloErrors = ( error: ApolloError ) => {
+const logApolloErrors = ( error: ApolloError ): void => {
 	// If there are graphQLErrors log them.
 	error.graphQLErrors.forEach( ( graphQLError ) => {
 		Logger.error( graphQLError.message );

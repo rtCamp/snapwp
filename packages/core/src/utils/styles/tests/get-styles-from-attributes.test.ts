@@ -10,14 +10,14 @@ describe( 'getStylesFromAttributes', () => {
 		jest.clearAllMocks();
 	} );
 
-	it( 'should return an empty object if attributes have no style property', () => {
+	it( 'should return undefined if attributes have no style property', () => {
 		const result = getStylesFromAttributes( {} );
-		expect( result ).toEqual( {} );
+		expect( result ).toEqual( undefined );
 	} );
 
-	it( 'should return an empty object if the style string is empty', () => {
+	it( 'should return undefined if the style string is empty', () => {
 		const result = getStylesFromAttributes( { style: '' } );
-		expect( result ).toEqual( {} );
+		expect( result ).toEqual( undefined );
 	} );
 
 	it( 'should compile styles and convert them to a React style object', () => {
@@ -39,7 +39,7 @@ describe( 'getStylesFromAttributes', () => {
 		);
 	} );
 
-	it( 'should return an empty object if compiledStyles is undefined', () => {
+	it( 'should return undefined if compiledStyles is undefined', () => {
 		( compileCSS as jest.Mock ).mockReturnValue( undefined );
 
 		const attributes = {
@@ -49,7 +49,7 @@ describe( 'getStylesFromAttributes', () => {
 		};
 
 		const result = getStylesFromAttributes( attributes );
-		expect( result ).toEqual( {} );
+		expect( result ).toEqual( undefined );
 	} );
 
 	it( 'should handle complex styles and return the correct React style object', () => {

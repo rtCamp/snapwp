@@ -12,7 +12,7 @@ const config: CodegenConfig = {
 	schema: process.env.GRAPHQL_SCHEMA_FILE ?? [
 		{
 			[ generateGraphqlUrl(
-				process.env.NEXT_PUBLIC_WORDPRESS_URL,
+				process.env.NEXT_PUBLIC_WP_HOME_URL,
 				process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT
 			) ]: {
 				headers: {

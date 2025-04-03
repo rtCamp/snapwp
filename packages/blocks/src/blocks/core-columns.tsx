@@ -3,6 +3,7 @@ import type {
 	CoreColumns as CoreColumnsType,
 	CoreColumnsProps,
 } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/columns block.
@@ -16,14 +17,17 @@ import type {
 const CoreColumns: CoreColumnsType = ( {
 	attributes,
 	children,
-}: CoreColumnsProps ) => {
+}: CoreColumnsProps ): ReactNode => {
 	const { cssClassName, style } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
 	const classNames = cn( cssClassName );
 
 	return (
-		<div className={ classNames } style={ styleObject }>
+		<div
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ children }
 		</div>
 	);

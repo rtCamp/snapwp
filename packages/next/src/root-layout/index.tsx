@@ -1,6 +1,8 @@
-import type { PropsWithChildren } from 'react';
 import { QueryEngine } from '@snapwp/query';
 import { GlobalHead } from './global-head';
+import { getIcons } from './icons-metadata';
+import type { Metadata } from 'next';
+import type { PropsWithChildren, ReactNode } from 'react';
 
 export type RootLayoutProps = {
 	getGlobalStyles?: ( typeof QueryEngine )[ 'getGlobalStyles' ];
@@ -13,12 +15,12 @@ export type RootLayoutProps = {
  * @param {RootLayoutProps.getGlobalStyles} props.getGlobalStyles A async callback to get global styles.
  * @param {ReactNode}                       props.children        Child components.
  *
- * @return The rendered template
+ * @return The rendered template.
  */
 export async function RootLayout( {
 	getGlobalStyles = QueryEngine.getGlobalStyles,
 	children,
-}: PropsWithChildren< RootLayoutProps > ) {
+}: PropsWithChildren< RootLayoutProps > ): Promise< ReactNode > {
 	const globalHeadProps = await getGlobalStyles();
 
 	return (
@@ -30,4 +32,31 @@ export async function RootLayout( {
 			<body suppressHydrationWarning>{ children }</body>
 		</html>
 	);
+}
+
+/**
+ * Generate and return root metadata, including icons and other metadata.
+ *
+ * @return Merged metadata.
+ */
+export async function generateRootMetaData(): Promise< Metadata > {
+	/**
+	 * Fetch icons in required format, apply faviconIcons and apple touch icons in icons metadata property while apply msapplication-TileImage in other metadata property.
+	 *
+	 * @todo Review composability when implementing SEO metadata
+	 */
+	const { faviconIcons, appleIcons, msApplicationTileIcon } =
+		await getIcons();
+
+	return {
+		icons: {
+			icon: faviconIcons,
+			apple: appleIcons,
+		},
+		other: {
+			...( msApplicationTileIcon && {
+				'msapplication-TileImage': msApplicationTileIcon.sourceUrl,
+			} ),
+		},
+	};
 }

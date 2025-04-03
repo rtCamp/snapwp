@@ -1,6 +1,7 @@
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
 import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 /**
  * Renders the core/code block.
@@ -10,12 +11,16 @@ import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
  *
  * @return The rendered block.
  */
-const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ) => {
+const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ): ReactNode => {
 	const { style, cssClassName, content } = attributes || {};
+
 	const styleObject = getStylesFromAttributes( { style } );
 
 	return (
-		<pre className={ cssClassName || '' } style={ styleObject }>
+		<pre
+			{ ...( cssClassName && { className: cssClassName } ) }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			<code>{ !! content && <Parse html={ content } /> }</code>
 		</pre>
 	);

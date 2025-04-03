@@ -5,6 +5,7 @@ import {
 } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
 import type { CoreFile as CoreFileType, CoreFileProps } from '@snapwp/types';
+import type { ReactNode } from 'react';
 
 const FALLBACK_DOWNLOAD_BUTTON_TEXT = 'Download';
 const FALLBACK_ARIA_LABEL = 'PDF embed';
@@ -21,7 +22,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
 const CoreFile: CoreFileType = ( {
 	attributes,
 	renderedHtml,
-}: CoreFileProps ) => {
+}: CoreFileProps ): ReactNode => {
 	const {
 		displayPreview,
 		downloadButtonText,
@@ -50,7 +51,10 @@ const CoreFile: CoreFileType = ( {
 	const downloadText = downloadButtonText || FALLBACK_DOWNLOAD_BUTTON_TEXT;
 
 	return (
-		<div className={ classNames } style={ styleObject }>
+		<div
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
+		>
 			{ displayPreview && (
 				<object
 					className="wp-block-file__embed"
@@ -65,9 +69,9 @@ const CoreFile: CoreFileType = ( {
 			) }
 			{ fileName && textLinkHref && (
 				<Link
-					id={ fileId || undefined }
+					id={ fileId }
 					href={ textLinkHref }
-					target={ textLinkTarget || undefined }
+					target={ textLinkTarget }
 					rel={ textLinkTarget ? 'noreferrer noopener' : undefined }
 				>
 					{ !! fileName && <Parse html={ fileName } /> }

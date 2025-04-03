@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from 'react';
+import type { ComponentType, PropsWithChildren } from 'react';
 import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreButtonsAttributes = BaseAttributes & {
@@ -10,4 +10,4 @@ export type CoreButtonsProps = PropsWithChildren<
 	BaseProps< CoreButtonsAttributes >
 >;
 
-export type CoreButtons = React.ComponentType< CoreButtonsProps >;
+export type CoreButtons = ComponentType< CoreButtonsProps >;
