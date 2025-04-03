@@ -1,4 +1,3 @@
-import { type ApolloQueryResult } from '@apollo/client';
 import { Logger, TemplateParseError } from '@snapwp/core';
 import parseQueryResult from '@/utils/parse-template';
 import { type GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
@@ -19,45 +18,40 @@ describe( 'parseQueryResult', () => {
 	} );
 
 	it( 'should parse valid query data correctly', () => {
-		const queryData: ApolloQueryResult< GetCurrentTemplateQuery > = {
-			data: {
-				templateByUri: {
-					bodyClasses: [ 'class1', 'class2' ],
-					enqueuedScripts: {
-						nodes: [
-							{
-								id: '122',
-								src: '/script.js',
-								handle: 'test-script',
-							},
-							{
-								id: '123',
-								src: 'https://cdn.com/script.js',
-								handle: 'cdn-script',
-							},
-						],
-					},
-					enqueuedStylesheets: {
-						nodes: [
-							{
-								src: '/style.css',
-								handle: 'test-style',
-								before: [ 'before-content' ],
-								after: [ 'after-content' ],
-							},
-						],
-					},
-					editorBlocks: [
+		const queryData: GetCurrentTemplateQuery = {
+			templateByUri: {
+				bodyClasses: [ 'class1', 'class2' ],
+				enqueuedScripts: {
+					nodes: [
 						{
-							type: 'core/paragraph',
-							renderedHtml: '<p>Text</p>',
+							id: '122',
+							src: '/script.js',
+							handle: 'test-script',
+						},
+						{
+							id: '123',
+							src: 'https://cdn.com/script.js',
+							handle: 'cdn-script',
 						},
 					],
 				},
+				enqueuedStylesheets: {
+					nodes: [
+						{
+							src: '/style.css',
+							handle: 'test-style',
+							before: [ 'before-content' ],
+							after: [ 'after-content' ],
+						},
+					],
+				},
+				editorBlocks: [
+					{
+						type: 'core/paragraph',
+						renderedHtml: '<p>Text</p>',
+					},
+				],
 			},
-			errors: [],
-			loading: false,
-			networkStatus: 7,
 		};
 
 		const result = parseQueryResult( queryData, wordpressUrl, uri );
@@ -87,21 +81,12 @@ describe( 'parseQueryResult', () => {
 	} );
 
 	it( 'should throw an error if `data` is null and errors exist', () => {
-		const queryData: ApolloQueryResult< GetCurrentTemplateQuery > = {
-			data: { templateByUri: null },
-			errors: [ { message: 'Critical error occurred' } ],
-			loading: false,
-			networkStatus: 7,
+		const queryData: GetCurrentTemplateQuery = {
+			templateByUri: null,
 		};
 
 		expect( () =>
 			parseQueryResult( queryData, wordpressUrl, uri )
 		).toThrow( TemplateParseError );
-
-		expect( Logger.error ).toHaveBeenCalledWith(
-			'Error fetching template data: Critical error occurred.',
-			'(Please refer to our FAQs for steps to debug and fix)',
-			{ message: 'Critical error occurred' }
-		);
 	} );
 } );
