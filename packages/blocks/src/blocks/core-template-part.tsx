@@ -8,9 +8,9 @@ import type {
 /**
  * Renders the core/template-part block.
  *
- * @param {Object}                             props              The props for the block component.
+ * @param {Object}                                props              The props for the block component.
  * @param {CoreTemplatePartProps['attributes']}   props.attributes   Block attributes.
- * @param {ReactNode}                          props.children     The block's children.
+ * @param {ReactNode}                             props.children     The block's children.
  * @param {CoreTemplatePartProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.

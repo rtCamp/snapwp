@@ -8,7 +8,7 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/separator block.
  *
- * @param {Object}                          props              The props for the block component.
+ * @param {Object}                             props              The props for the block component.
  * @param {CoreSeparatorProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.

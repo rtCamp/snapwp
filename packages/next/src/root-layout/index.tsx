@@ -11,9 +11,9 @@ export type RootLayoutProps = {
 /**
  * The RootLayout to be used in a NextJS app.
  *
- * @param {Object}                          props                 The props for the renderer.
+ * @param {Object}                             props                 The props for the renderer.
  * @param {RootLayoutProps['getGlobalStyles']} props.getGlobalStyles A async callback to get global styles.
- * @param {ReactNode}                       props.children        Child components.
+ * @param {ReactNode}                          props.children        Child components.
  *
  * @return The rendered template.
  */

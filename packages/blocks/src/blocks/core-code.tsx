@@ -6,7 +6,7 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/code block.
  *
- * @param {Object}                   props            The props for the block component.
+ * @param {Object}                      props            The props for the block component.
  * @param {CoreCodeProps['attributes']} props.attributes Block attributes.
  *
  * @return The rendered block.

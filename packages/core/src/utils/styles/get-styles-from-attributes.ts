@@ -9,7 +9,7 @@ interface AttributesWithStyle {
 /**
  * Extracts and compiles styles from attributes.
  *
- * @param {Object} attributes - Object containing a style string.
+ * @param {Object}                       attributes - Object containing a style string.
  * @param {AttributesWithStyle['style']} attributes.style - The style string to compile.
  *
  * @return Compiled styles as an object or an empty object if no styles exist.
