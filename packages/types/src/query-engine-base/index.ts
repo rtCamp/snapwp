@@ -34,7 +34,4 @@ export interface QueryClientAdapter<
 	QueryProvider: React.ComponentType<
 		PropsWithChildren< { client: TClient } >
 	>;
-	HydrationBoundary: React.ComponentType<
-		PropsWithChildren< { client: TClient } >
-	>;
 }
