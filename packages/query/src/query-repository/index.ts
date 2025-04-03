@@ -19,33 +19,12 @@ import type { BlockData } from '@snapwp/types';
 /**
  * Singleton class to handle GraphQL queries using Apollo.
  */
-export class QueryEngine {
-	private static instance: QueryEngine | null = null;
-
-	/**
-	 * Private constructor to prevent instantiation.
-	 */
-	// eslint-disable-next-line no-useless-constructor,no-empty-function -- Constructor is private to prevent instantiation.
-	private constructor() {}
-
-	/**
-	 * Returns the singleton instance of QueryEngine.
-	 *
-	 * @throws Throws error if instance is not initialized with config.
-	 * @return The QueryEngine instance.
-	 */
-	public static getInstance(): QueryEngine {
-		if ( ! QueryEngine.instance ) {
-			QueryEngine.instance = new QueryEngine();
-		}
-		return QueryEngine.instance;
-	}
-
+export class QueryRepository {
 	/**
 	 * Fetches global styles.
 	 * @return The template data fetched for the uri.
 	 */
-	getGlobalStyles = async (): Promise< GlobalHeadProps > => {
+	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
 		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
 			key: [ 'globalStyles' ],
 			query: GetGlobalStylesDocument,
@@ -60,7 +39,7 @@ export class QueryEngine {
 	 *
 	 * @return General settings data.
 	 */
-	getGeneralSettings = async (): Promise<
+	static getGeneralSettings = async (): Promise<
 		| {
 				generalSettings: {
 					siteIcon: {
@@ -90,7 +69,7 @@ export class QueryEngine {
 	 * @param uri - The URL of the seed node.
 	 * @return The template data fetched for the uri.
 	 */
-	getTemplateData = async (
+	static getTemplateData = async (
 		uri: string
 	): Promise< {
 		stylesheets: StyleSheetProps[] | undefined;

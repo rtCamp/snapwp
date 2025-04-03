@@ -1,4 +1,4 @@
-import { QueryEngine } from '@snapwp/query';
+import { QueryRepository } from '@snapwp/query';
 
 interface GeneralSettingsProps {
 	generalSettings: {
@@ -38,7 +38,7 @@ interface FormattedIconData {
  */
 export const getIcons = async (): Promise< IconMetaData > => {
 	const settings: GeneralSettingsProps | undefined =
-		await QueryEngine.getInstance().getGeneralSettings();
+		await QueryRepository.getGeneralSettings();
 
 	if ( ! settings ) {
 		return {
