@@ -5,14 +5,14 @@ import { getConfig } from '@snapwp/core/config';
  * Query Engine Registry
  */
 export class QueryAdapterRegistry {
-	private static _adapter: QueryClientAdapter< unknown > | undefined;
+	private static _adapter: QueryClientAdapter | undefined;
 
 	/**
 	 * Get the query engine
 	 *
 	 * @return The query engine
 	 */
-	public static get adapter(): QueryClientAdapter< unknown > {
+	public static get adapter(): QueryClientAdapter {
 		if ( ! QueryAdapterRegistry._adapter ) {
 			const { queryEngine } = getConfig();
 
@@ -28,7 +28,7 @@ export class QueryAdapterRegistry {
 	/**
 	 * Set the query engine
 	 */
-	private static set adapter( queryEngine: QueryClientAdapter< unknown > ) {
+	private static set adapter( queryEngine: QueryClientAdapter ) {
 		QueryAdapterRegistry._adapter = queryEngine;
 	}
 }

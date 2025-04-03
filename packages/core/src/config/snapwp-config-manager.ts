@@ -47,7 +47,8 @@ export interface SnapWPConfig {
 	/**
 	 * Query Engine
 	 */
-	queryEngine?: QueryClientAdapter< unknown >;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the type of the query engine, so we use `any`. unknown will cause type error.
+	queryEngine?: QueryClientAdapter< any >;
 }
 
 /**
