@@ -13,9 +13,9 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/spacer block.
  *
- * @param {Object}                       props              The props for the block component.
- * @param {CoreSpacerProps.attributes}   props.attributes   Block attributes.
- * @param {CoreSpacerProps.renderedHtml} props.renderedHtml The block's rendered HTML.
+ * @param {Object}                          props              The props for the block component.
+ * @param {CoreSpacerProps['attributes']}   props.attributes   Block attributes.
+ * @param {CoreSpacerProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

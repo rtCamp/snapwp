@@ -13,10 +13,10 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/list-item block.
  *
- * @param {Object}                         props              The props for the block component.
- * @param {CoreListItemProps.attributes}   props.attributes   Block attributes.
- * @param {ReactNode}                      props.children     The block's children.
- * @param {CoreListItemProps.renderedHtml} props.renderedHtml The block's rendered HTML.
+ * @param {Object}                             props              The props for the block component.
+ * @param {CoreListItemProps.['attributes']}   props.attributes   Block attributes.
+ * @param {ReactNode}                          props.children     The block's children.
+ * @param {CoreListItemProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

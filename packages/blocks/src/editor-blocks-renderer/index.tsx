@@ -12,9 +12,9 @@ type EditorBlocksRendererProps = {
 /**
  * A react component to render editor blocks.
  *
- * @param {Object}                                     props                  Props.
- * @param {EditorBlocksRendererProps.editorBlocks}     props.editorBlocks     A list of blocks to be rendered.
- * @param {EditorBlocksRendererProps.blockDefinitions} props.blockDefinitions Blocks rendering functions.
+ * @param {Object}                                        props                  Props.
+ * @param {EditorBlocksRendererProps['editorBlocks']}     props.editorBlocks     A list of blocks to be rendered.
+ * @param {EditorBlocksRendererProps['blockDefinitions']} props.blockDefinitions Blocks rendering functions.
  *
  * @return The rendered template
  */

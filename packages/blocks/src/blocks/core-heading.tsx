@@ -9,8 +9,8 @@ import type {
 /**
  * Renders the core/heading block.
  *
- * @param {Object}                      props            The props for the block component.
- * @param {CoreHeadingProps.attributes} props.attributes Block attributes.
+ * @param {Object}                         props            The props for the block component.
+ * @param {CoreHeadingProps['attributes']} props.attributes Block attributes.
  *
  * @return The rendered block.
  */

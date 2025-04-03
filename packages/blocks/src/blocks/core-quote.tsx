@@ -7,7 +7,7 @@ import type { ReactNode } from 'react';
  * Renders the core/quote block.
  *
  * @param {Object}                    props            The props for the block component.
- * @param {CoreQuoteProps.attributes} props.attributes Block attributes.
+ * @param {CoreQuoteProps['attributes']} props.attributes Block attributes.
  * @param {ReactNode}                 props.children   The block's children.
  *
  * @return The rendered block.

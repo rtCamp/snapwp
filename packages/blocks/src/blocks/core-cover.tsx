@@ -39,12 +39,12 @@ const mediaPosition = (
 /**
  * Renders the core/cover block.
  *
- * @param {Object}                            props                    The component props object
- * @param {CoreCoverProps.attributes}         props.attributes         Block attributes including styling and media settings
- * @param {ReactNode}                         props.children           Child elements to render inside the cover
- * @param {CoreCoverProps.renderedHtml}       props.renderedHtml       Pre-rendered HTML string for class extraction
- * @param {CoreCoverProps.connectedMediaItem} props.connectedMediaItem The connected media item object
- * @param {CoreCoverProps.mediaDetails}       props.mediaDetails       The media details object
+ * @param {Object}                               props                    The component props object
+ * @param {CoreCoverProps['attributes']}         props.attributes         Block attributes including styling and media settings
+ * @param {ReactNode}                            props.children           Child elements to render inside the cover
+ * @param {CoreCoverProps['renderedHtml']}       props.renderedHtml       Pre-rendered HTML string for class extraction
+ * @param {CoreCoverProps['connectedMediaItem']} props.connectedMediaItem The connected media item object
+ * @param {CoreCoverProps['mediaDetails']}       props.mediaDetails       The media details object
  *
  * @return The rendered cover block or null if using featured image
  */

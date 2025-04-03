@@ -63,7 +63,7 @@ export default function parseQueryResult(
 /**
  * Gets and validates the body classes from the query data.
  *
- * @param {GetCurrentTemplateQuery.templateByUri} templateByUri The template data fetched for the uri.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The body classes.
  */
@@ -88,8 +88,8 @@ function parseBodyClasses(
 /**
  * Gets and validates the enqueued scripts from the query data.
  *
- * @param {GetCurrentTemplateQuery.templateByUri} templateByUri The template data fetched for the uri.
- * @param {string}                                wordpressUrl  The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
  *
  * @return The enqueued scripts.
  */
@@ -113,7 +113,7 @@ function parseEnqueuedScripts(
 /**
  * Gets and validates the editor blocks from the query data.
  *
- * @param {GetCurrentTemplateQuery.templateByUri} templateByUri The template data fetched for the uri.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The editor blocks.
  */
@@ -138,8 +138,8 @@ function parseEditorBlocks(
 /**
  * Gets and validates the enqueued stylesheets from the query data.
  *
- * @param {string}                                wordpressUrl  The base URL of the WordPress site.
- * @param {GetCurrentTemplateQuery.templateByUri} templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The enqueued stylesheets.
  */
@@ -161,8 +161,8 @@ function parseEnqueuedStylesheets(
 /**
  * Gets and validates the script modules from the query data.
  *
- * @param {GetCurrentTemplateQuery.templateByUri} templateByUri The template data fetched for the uri.
- * @param {string}                                wordpressUrl  The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
  *
  * @return The script modules.
  */

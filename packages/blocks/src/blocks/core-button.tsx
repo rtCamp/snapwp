@@ -10,7 +10,7 @@ import type { ButtonHTMLAttributes, ReactNode } from 'react';
  * Renders the core/button block.
  *
  * @param {Object}                     props            The props for the block component.
- * @param {CoreButtonProps.attributes} props.attributes Block attributes.
+ * @param {CoreButtonProps['attributes']} props.attributes Block attributes.
  *
  * @return The rendered block.
  */

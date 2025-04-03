@@ -18,15 +18,15 @@ import type {
 /**
  * Renders a figure element with optional link and caption.
  *
- * @param {Object}                   props              The properties for the figure element.
- * @param {ReactNode}                props.children     The children of the figure element.
- * @param {FigureProps.classNames}   props.classNames   The class names for the figure element.
- * @param {FigureProps.renderedHtml} props.renderedHtml The rendered HTML.
- * @param {FigureProps.href}         props.href         The href for the link.
- * @param {FigureProps.linkClass}    props.linkClass    The class for the link.
- * @param {FigureProps.linkTarget}   props.linkTarget   The target for the link.
- * @param {FigureProps.rel}          props.rel          The rel for the link.
- * @param {FigureProps.lightbox}     props.lightbox     The lightbox attribute.
+ * @param {Object}                      props              The properties for the figure element.
+ * @param {ReactNode}                   props.children     The children of the figure element.
+ * @param {FigureProps['classNames']}   props.classNames   The class names for the figure element.
+ * @param {FigureProps['renderedHtml']} props.renderedHtml The rendered HTML.
+ * @param {FigureProps['href']}         props.href         The href for the link.
+ * @param {FigureProps['linkClass']}    props.linkClass    The class for the link.
+ * @param {FigureProps['linkTarget']}   props.linkTarget   The target for the link.
+ * @param {FigureProps['rel']}          props.rel          The rel for the link.
+ * @param {FigureProps['lightbox']}     props.lightbox     The lightbox attribute.
  *
  * @return The rendered figure element.
  */
@@ -72,11 +72,11 @@ const Figure = ( {
  *
  * @todo Expose context and state to frontend for lightbox functionality.
  *
- * @param {Object}                            props                    The properties for the core image block.
- * @param {CoreImageProps.attributes}         props.attributes         The attributes for the image.
- * @param {CoreImageProps.connectedMediaItem} props.connectedMediaItem The connected media item.
- * @param {CoreImageProps.mediaDetails}       props.mediaDetails       The media details.
- * @param {CoreImageProps.renderedHtml}       props.renderedHtml       The rendered HTML.
+ * @param {Object}                               props                    The properties for the core image block.
+ * @param {CoreImageProps['attributes']}         props.attributes         The attributes for the image.
+ * @param {CoreImageProps['connectedMediaItem']} props.connectedMediaItem The connected media item.
+ * @param {CoreImageProps['mediaDetails']}       props.mediaDetails       The media details.
+ * @param {CoreImageProps['renderedHtml']}       props.renderedHtml       The rendered HTML.
  *
  * @return The rendered core image block or null if no URL is provided.
  */

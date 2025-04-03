@@ -6,7 +6,7 @@ import type { CSSProperties, ReactNode } from 'react';
  * Renders the core/list block.
  *
  * @param {Object}                   props            The props for the block component.
- * @param {CoreListProps.attributes} props.attributes Block attributes.
+ * @param {CoreListProps['attributes']} props.attributes Block attributes.
  * @param {ReactNode}                props.children   The block's children.
  *
  * @return The rendered block.

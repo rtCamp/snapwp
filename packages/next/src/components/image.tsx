@@ -37,15 +37,15 @@ interface ImageInterface {
  * Note: The next/image component applies style { color: transparent; } to an image when it loads successfully, ensuring the alt text is hidden. If the image fails to load, this style isn’t applied, making the alt text visible instead.
  * @see https://github.com/vercel/next.js/blob/v15.1.3/packages/next/src/shared/lib/get-img-props.ts#L625
  *
- * @param {Object}                   props           Props for the component.
- * @param {ImageInterface.alt}       props.alt       Alt text for the image.
- * @param {ImageInterface.image}     props.image     Media item containing image details.
- * @param {ImageInterface.width}     props.width     Width of the image.
- * @param {ImageInterface.height}    props.height    Height of the image.
- * @param {ImageInterface.className} props.className CSS class names.
- * @param {ImageInterface.priority}  props.priority  If true, loads the image with higher priority.
- * @param {ImageInterface.fill}      props.fill      If true, fills the container.
- * @param {ImageInterface.src}       props.src       Source URL for the image.
+ * @param {Object}                      props           Props for the component.
+ * @param {ImageInterface['alt']}       props.alt       Alt text for the image.
+ * @param {ImageInterface['image']}     props.image     Media item containing image details.
+ * @param {ImageInterface['width']}     props.width     Width of the image.
+ * @param {ImageInterface['height']}    props.height    Height of the image.
+ * @param {ImageInterface['className']} props.className CSS class names.
+ * @param {ImageInterface['priority']}  props.priority  If true, loads the image with higher priority.
+ * @param {ImageInterface['fill']}      props.fill      If true, fills the container.
+ * @param {ImageInterface['src']}       props.src       Source URL for the image.
  *
  * @return The rendered image.
  */

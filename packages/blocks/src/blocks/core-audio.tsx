@@ -10,8 +10,8 @@ import type { ReactNode } from 'react';
  * Renders the core/audio block.
  *
  * @param {Object}                      props              The props for the block component.
- * @param {CoreAudioProps.attributes}   props.attributes   Block attributes.
- * @param {CoreAudioProps.renderedHtml} props.renderedHtml The block's rendered HTML.
+ * @param {CoreAudioProps['attributes']}   props.attributes   Block attributes.
+ * @param {CoreAudioProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

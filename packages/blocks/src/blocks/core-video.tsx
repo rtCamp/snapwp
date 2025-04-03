@@ -46,8 +46,8 @@ const Tracks = ( {
  * Renders the core/video block.
  *
  * @param {Object}                      props              The props for the block component.
- * @param {CoreVideoProps.attributes}   props.attributes   Block attributes.
- * @param {CoreVideoProps.renderedHtml} props.renderedHtml The block's rendered HTML.
+ * @param {CoreVideoProps['attributes']}   props.attributes   Block attributes.
+ * @param {CoreVideoProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
