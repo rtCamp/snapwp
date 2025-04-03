@@ -5,8 +5,8 @@ import {
 	type HTMLReactParserOptions,
 } from 'html-react-parser';
 import {
-	getStyleObjectFromString,
 	getImageSizeFromAttributes,
+	getStyleObjectFromString,
 } from '@snapwp/core';
 import Image from '@/components/image';
 import Link from '@/components/link';

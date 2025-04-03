@@ -9,6 +9,7 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+
 import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
 
 /**

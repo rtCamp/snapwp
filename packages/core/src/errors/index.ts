@@ -28,4 +28,4 @@ class GlobalStylesParseError extends Error {
 	}
 }
 
-export { TemplateParseError, GlobalStylesParseError };
+export { GlobalStylesParseError, TemplateParseError };

@@ -1,5 +1,5 @@
-import type { ComponentType } from 'react';
 import type { BaseAttributes, BaseProps } from '../base';
+import type { ComponentType } from 'react';
 
 export type CoreVerseAttributes = BaseAttributes & {
 	content?: string;
