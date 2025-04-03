@@ -6,7 +6,6 @@
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
  */
 import Script from 'next/script';
-
 import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptModuleInterface {

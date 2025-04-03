@@ -1,6 +1,5 @@
 import { getConfig, setConfig } from '@snapwp/core/config';
 import { type NextConfig } from 'next';
-
 import type { WebpackConfigContext } from 'next/dist/server/config-shared';
 
 import getSnapWPConfigPath from './get-snap-wp-config-path';

@@ -14,6 +14,7 @@ import {
 	type ScriptModuleProps,
 } from '@snapwp/core';
 import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
+import type { BlockData } from '@snapwp/types';
 
 import {
 	GetCurrentTemplateDocument,
@@ -24,8 +25,6 @@ import {
 import parseGeneralSettings from '@/utils/parse-general-settings';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import parseTemplate from '@/utils/parse-template';
-
-import type { BlockData } from '@snapwp/types';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.

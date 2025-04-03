@@ -4,8 +4,6 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-import { decode } from 'html-entities';
-
 import type {
 	CoreImageAttributes,
 	CoreImageConnectedMediaItem,
@@ -14,6 +12,7 @@ import type {
 	CoreImageProps,
 	FigureProps,
 } from '@snapwp/types';
+import { decode } from 'html-entities';
 import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
 /**

@@ -1,5 +1,6 @@
-import type { BaseProps } from '../base';
 import type { ComponentType, PropsWithChildren } from 'react';
+
+import type { BaseProps } from '../base';
 
 export type CorePatternProps = PropsWithChildren< BaseProps< {} > >;
 

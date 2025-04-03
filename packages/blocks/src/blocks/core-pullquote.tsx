@@ -4,7 +4,6 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-
 import type {
 	CorePullquote as CorePullquoteType,
 	CorePullquoteProps,

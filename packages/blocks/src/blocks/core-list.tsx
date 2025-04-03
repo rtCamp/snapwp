@@ -1,5 +1,4 @@
 import { cn, getStylesFromAttributes } from '@snapwp/core';
-
 import type { CoreList as CoreListType, CoreListProps } from '@snapwp/types';
 import type { CSSProperties, ReactNode } from 'react';
 

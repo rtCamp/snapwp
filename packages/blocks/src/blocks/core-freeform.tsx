@@ -1,5 +1,4 @@
 import { Parse } from '@snapwp/next';
-
 import type {
 	CoreFreeform as CoreFreeformType,
 	CoreFreeformProps,

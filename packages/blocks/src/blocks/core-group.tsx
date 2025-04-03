@@ -3,14 +3,13 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
+import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
 import {
 	createElement,
 	type CSSProperties,
 	type PropsWithChildren,
 	type ReactNode,
 } from 'react';
-
-import type { CoreGroup as CoreGroupType, CoreGroupProps } from '@snapwp/types';
 
 /**
  * Renders an HTML element with the specified tag name.

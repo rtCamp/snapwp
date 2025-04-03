@@ -1,6 +1,6 @@
-import { getConfig } from '@/config';
-
 import { isInternalUrl, isWPSiteUrl } from './validators';
+
+import { getConfig } from '@/config';
 
 /**
  * Convert a URL to an internal URL.

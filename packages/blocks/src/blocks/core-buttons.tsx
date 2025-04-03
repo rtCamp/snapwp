@@ -1,5 +1,4 @@
 import { cn, getStylesFromAttributes } from '@snapwp/core';
-
 import type {
 	CoreButtons as CoreButtonsType,
 	CoreButtonsProps,

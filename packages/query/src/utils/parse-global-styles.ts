@@ -1,3 +1,4 @@
+import type { ApolloQueryResult } from '@apollo/client';
 import {
 	GlobalStylesParseError,
 	Logger,
@@ -5,8 +6,6 @@ import {
 } from '@snapwp/core';
 
 import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
-
-import type { ApolloQueryResult } from '@apollo/client';
 
 /**
  * Parses template query data into props for rendering a template.

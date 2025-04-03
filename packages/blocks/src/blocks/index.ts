@@ -1,3 +1,5 @@
+import type { BlockDefinitions } from '@snapwp/types';
+
 import CoreAudio from './core-audio';
 import CoreButton from './core-button';
 import CoreButtons from './core-buttons';
@@ -28,8 +30,6 @@ import CoreTemplatePart from './core-template-part';
 import CoreVerse from './core-verse';
 import CoreVideo from './core-video';
 import Default from './default';
-
-import type { BlockDefinitions } from '@snapwp/types';
 
 const blocks: BlockDefinitions = {
 	CoreAudio,

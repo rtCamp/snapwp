@@ -1,5 +1,4 @@
 import { cn, getClassNamesFromString } from '@snapwp/core';
-
 import type {
 	CoreTemplatePart as CoreTemplatePartType,
 	CoreTemplatePartProps,

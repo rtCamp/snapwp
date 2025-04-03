@@ -1,5 +1,6 @@
-import type { BaseAttributes, BaseProps } from '..';
 import type { ComponentType } from 'react';
+
+import type { BaseAttributes, BaseProps } from '..';
 
 export type CoreAudioAttributes = BaseAttributes & {
 	autoplay?: boolean;

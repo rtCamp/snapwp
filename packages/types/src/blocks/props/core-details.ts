@@ -1,5 +1,6 @@
-import type { BaseAttributes, BaseProps } from '../base';
 import type { ComponentType, PropsWithChildren } from 'react';
+
+import type { BaseAttributes, BaseProps } from '../base';
 
 export type CoreDetailsAttributes = BaseAttributes & {
 	style?: string;

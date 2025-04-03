@@ -1,8 +1,7 @@
 import { toFrontendUri, isInternalUrl } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import NextLink, { type LinkProps } from 'next/link';
-
 import type { PartialWithUndefined } from '@snapwp/types';
+import NextLink, { type LinkProps } from 'next/link';
 import type {
 	AnchorHTMLAttributes,
 	CSSProperties,

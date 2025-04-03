@@ -1,6 +1,5 @@
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-
 import type {
 	CoreParagraph as CoreParagraphType,
 	CoreParagraphProps,

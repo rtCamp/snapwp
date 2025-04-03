@@ -4,7 +4,6 @@ import {
 	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Link, Parse } from '@snapwp/next';
-
 import type {
 	CoreMediaText as CoreMediaTextType,
 	CoreMediaTextProps,

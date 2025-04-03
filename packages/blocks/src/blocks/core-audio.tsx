@@ -3,7 +3,6 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-
 import type { CoreAudio as CoreAudioType, CoreAudioProps } from '@snapwp/types';
 import type { ReactNode } from 'react';
 

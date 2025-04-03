@@ -89,62 +89,11 @@ module.exports = {
         'import/order': [
             'error', 
             {
-                groups: ["builtin", "external", "internal", "parent", "sibling", "index", "type" ],
                 pathGroups: [
                     {
-                        pattern: "next/**",
+                        pattern: "@snapwp/**",
                         group: "internal",
                         position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/blocks/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/cli/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/codegen-config/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/core/config",
-                        group: "external",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/e2e-tests/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/eslint-config/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/next/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/prettier-config/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/query/**",
-                        group: "internal",
-                        position: "after",
-                    },
-                    {
-                        pattern: "@snapwp/types/**",
-                        group: "type",
-                        position: "before",
                     },
                     {
                         pattern: "@graphqlTypes/**",

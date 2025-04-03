@@ -1,6 +1,5 @@
 import { cn, getStylesFromAttributes } from '@snapwp/core';
 import { Link, Parse } from '@snapwp/next';
-
 import type {
 	CoreButton as CoreButtonType,
 	CoreButtonProps,

@@ -5,7 +5,6 @@ import {
 	cn,
 } from '@snapwp/core';
 import { Image, Parse } from '@snapwp/next';
-
 import type {
 	CoreCover as CoreCoverType,
 	CoreCoverProps,

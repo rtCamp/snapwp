@@ -4,7 +4,6 @@ import {
 	getSpacingPresetCssVar,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-
 import type {
 	CoreSpacer as CoreSpacerType,
 	CoreSpacerProps,

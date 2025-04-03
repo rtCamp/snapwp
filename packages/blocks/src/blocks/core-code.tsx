@@ -1,6 +1,5 @@
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
-
 import type { CoreCode as CoreCodeType, CoreCodeProps } from '@snapwp/types';
 import type { ReactNode } from 'react';
 

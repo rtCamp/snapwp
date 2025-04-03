@@ -3,7 +3,6 @@ import {
 	getClassNamesFromString,
 	getStylesFromAttributes,
 } from '@snapwp/core';
-
 import type {
 	CoreGallery as CoreGalleryType,
 	CoreGalleryProps,

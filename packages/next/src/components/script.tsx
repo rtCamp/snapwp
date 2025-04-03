@@ -1,5 +1,4 @@
 import NextScript, { type ScriptProps } from 'next/script';
-
 import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptInterface {

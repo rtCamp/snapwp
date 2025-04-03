@@ -1,8 +1,7 @@
+import type { ApolloQueryResult } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 
 import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
-
-import type { ApolloQueryResult } from '@apollo/client';
 
 /**
  * @param queryData - The data fetched from the general settings query.

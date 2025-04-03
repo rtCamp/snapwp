@@ -1,9 +1,9 @@
 import { type ApolloQueryResult } from '@apollo/client';
 import { Logger, GlobalStylesParseError } from '@snapwp/core';
 
-import { type GetGlobalStylesQuery } from '@graphqlTypes/graphql';
-
 import parseQueryResult from '../parse-global-styles';
+
+import { type GetGlobalStylesQuery } from '@graphqlTypes/graphql';
 
 jest.mock( '@snapwp/core', () => ( {
 	...jest.requireActual( '@snapwp/core' ),
