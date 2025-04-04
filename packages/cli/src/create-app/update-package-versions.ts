@@ -1,5 +1,5 @@
-import path from 'path';
 import fs from 'fs/promises';
+import path from 'path';
 
 /**
  * Updates package versions in package.json to use published versions

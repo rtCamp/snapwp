@@ -1,5 +1,5 @@
-import path from 'path';
 import fs from 'fs/promises';
+import path from 'path';
 import { fileURLToPath } from 'url';
 
 const EXCLUDED_FILES_PATTERN =
@@ -29,11 +29,11 @@ export default async function copyStarterTemplate(
 	console.log( 'Copying frontend folder to project directory...' );
 	await fs.cp( nextJsStarterPath, projectDirPath, {
 		recursive: true,
+
 		/**
 		 * Excludes specific files from copying.
-		 *
-		 * @param source - File or directory path.
-		 * @return - Whether to include the file.
+		 * @param {string} source - File or directory path.
+		 * @return {boolean} - Whether to include the file.
 		 */
 		filter: ( source: string ) => {
 			const fileCheck = new RegExp(

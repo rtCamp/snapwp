@@ -1,5 +1,5 @@
-import path from 'path';
 import fs from 'fs/promises';
+import path from 'path';
 import openEditor from '../utils/open-editor';
 import prompt from '../utils/prompt';
 

@@ -1,5 +1,5 @@
-import path from 'path';
 import { spawn } from 'child_process';
+import path from 'path';
 
 /**
  * Opens a file in the default or specified editor and waits for the editor process to exit.

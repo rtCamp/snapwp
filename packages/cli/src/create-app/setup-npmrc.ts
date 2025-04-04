@@ -1,5 +1,5 @@
-import path from 'path';
 import fs from 'fs/promises';
+import path from 'path';
 
 const REGISTRY_URL = 'http://localhost:4873';
 const NPMRC_CONTENT = `@snapwp:registry=${ REGISTRY_URL }`;
