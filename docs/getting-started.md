@@ -68,9 +68,8 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
 3. Start your headless WordPress app:
     1. Navigate to the newly created app.
-    2. Run `npm install`.
-    3. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
-    4. Visit the `NEXT_PUBLIC_FRONTEND_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
+    2. Run `npm run dev` (for development) or `npm run build && npm run start` (for production)
+    3. Visit the `NEXT_PUBLIC_FRONTEND_URL` from `.env` (updated in Step 2), in your browser to see SnapWP in action!
 
 ### Manual Installation
 
