@@ -1,6 +1,7 @@
 import { QueryRepository } from '@snapwp/query';
 import { GlobalHead } from './global-head';
 import { getIcons } from './icons-metadata';
+
 import type { Metadata } from 'next';
 import type { PropsWithChildren, ReactNode } from 'react';
 
@@ -10,9 +11,10 @@ export type RootLayoutProps = {
 
 /**
  * The RootLayout to be used in a NextJS app.
- * @param props - The props for the renderer.
- * @param props.getGlobalStyles - A async callback to get global styles.
- * @param props.children - Child components.
+ *
+ * @param {Object}                             props                 The props for the renderer.
+ * @param {RootLayoutProps['getGlobalStyles']} props.getGlobalStyles A async callback to get global styles.
+ * @param {ReactNode}                          props.children        Child components.
  *
  * @return The rendered template.
  */

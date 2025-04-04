@@ -112,8 +112,8 @@ export const getIcons = async (): Promise< IconMetaData > => {
 /**
  * Filter icons by multiple size formats.
  *
- * @param icons - List of all available icons.
- * @param sizes - Array of sizes in "WxH" format (e.g., "32x32").
+ * @param {Array<IconData>} icons - List of all available icons.
+ * @param {Array<string>} sizes - Array of sizes in "WxH" format (e.g., "32x32").
  * @return Filtered list of icons.
  */
 export const filterIconsBySize = (
@@ -127,8 +127,8 @@ export const filterIconsBySize = (
 /**
  * Find a single icon matching the specified size.
  *
- * @param icons - List of icons.
- * @param size - Size in "WxH" format (e.g., "270x270").
+ * @param {Array<IconData>} icons - List of icons.
+ * @param {Array<string>} size - Size in "WxH" format (e.g., "270x270").
  * @return The first matching icon or undefined.
  */
 export const findIconBySize = (
@@ -140,7 +140,7 @@ export const findIconBySize = (
 /**
  * Format icons into the required metadata structure.
  *
- * @param icons - List of icons.
+ * @param {Array<IconData>} icons - List of icons.
  *
  * @return Formatted list of icons.
  */

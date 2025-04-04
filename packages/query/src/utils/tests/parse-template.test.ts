@@ -1,6 +1,8 @@
 import { Logger, TemplateParseError } from '@snapwp/core';
-import parseQueryResult from '@/utils/parse-template';
+
 import { type GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
+
+import parseQueryResult from '@/utils/parse-template';
 
 jest.mock( '@snapwp/core', () => ( {
 	...jest.requireActual( '@snapwp/core' ),

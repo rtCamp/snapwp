@@ -3,8 +3,8 @@ import type { ReactNode } from 'react';
 /**
  * A wrapper for loading fonts dynamically using next/font.
  *
- * @param props - Props for the Font component.
- * @param props.renderedFontFaces - Font face data as a string.
+ * @param {Object} props                   Props for the Font component.
+ * @param {string} props.renderedFontFaces Font face data as a string.
  *
  * @return A style tag with the rendered font faces.
  *
