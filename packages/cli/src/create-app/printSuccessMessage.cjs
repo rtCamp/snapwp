@@ -3,8 +3,13 @@
  *
  * @param {string} projectDirPath - Path to the project directory.
  * @param {boolean} useDefaultEnv - Whether using default env or not.
+ * @param {boolean} needsManualInstall - Whether the user needs to run npm install manually.
  */
-const printSuccessMessage = ( projectDirPath, useDefaultEnv ) => {
+const printSuccessMessage = (
+	projectDirPath,
+	useDefaultEnv,
+	needsManualInstall = false
+) => {
 	console.log( '' );
 	console.log( `Your project has been scaffolded at: ${ projectDirPath }.` );
 	console.log( '' );
@@ -20,7 +25,11 @@ const printSuccessMessage = ( projectDirPath, useDefaultEnv ) => {
 		'To start your headless WordPress project, please run the following commands:'
 	);
 	console.log( `cd ${ projectDirPath }` );
-	console.log( 'npm install' );
+
+	if ( needsManualInstall ) {
+		console.log( 'npm install' );
+	}
+
 	console.log( 'npm run dev' );
 };
 

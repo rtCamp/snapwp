@@ -16,6 +16,7 @@
 		"force-build": "rm -rf dist && npm run build"
 	},
 	"dependencies": {
-		"commander": "^13.1.0"
+		"commander": "^13.1.0",
+		"ora": "^7.0.1"
 	}
 }

@@ -31,8 +31,12 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 1. Run the scaffolding wizard:
 
     ```bash
-    npx snapwp
+    npx snapwp [options]
     ```
+
+    Available options:
+
+    - `--skip-install`: Skip installing npm dependencies during project creation.
 
 2. Answer the CLI prompts:
 
