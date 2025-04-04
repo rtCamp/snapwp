@@ -14,16 +14,13 @@ const {
 const {
 	printSuccessMessage,
 } = require( './create-app/printSuccessMessage.cjs' );
+const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
 const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
 const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
 const {
 	updatePackageVersions,
 } = require( './create-app/updatePackageVersions.cjs' );
-const {
-	printSuccessMessage,
-} = require( './create-app/printSuccessMessage.cjs' );
 const { prompt } = require( './utils/prompt.cjs' );
-const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
 
 /**
  * Default project path if user doesn't provide any.
@@ -75,12 +72,26 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		await updatePackageVersions( projectDirPath );
 
 		// Step 7: Install dependencies (skip if flag is set)
-		const installSuccess = await runNpmInstall( projectDirPath, {
-			skipInstall: options.skipInstall,
-		} );
+		let needsManualInstall = false;
+		if ( ! options.skipInstall ) {
+			try {
+				await runNpmInstall( projectDirPath );
+			} catch ( error ) {
+				// Set flag to inform user they need to run npm install manually
+				needsManualInstall = true;
+			}
+		} else {
+			console.log( 'Skipping NPM dependencies installation...' );
+			// User explicitly skipped installation
+			needsManualInstall = true;
+		}
 
 		// Step 8: Print instructions
-		printSuccessMessage( projectDirPath, useDefaultEnv, ! installSuccess );
+		printSuccessMessage(
+			projectDirPath,
+			useDefaultEnv,
+			needsManualInstall
+		);
 
 		if ( useDefaultPath ) {
 			process.exit( 1 );

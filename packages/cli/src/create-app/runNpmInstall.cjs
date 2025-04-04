@@ -1,22 +1,14 @@
 const { spawnSync } = require( 'child_process' );
-const ora = require( 'ora' ); // Add ora for spinner
+const ora = require( 'ora' );
 
 /**
  * Runs npm install in the project directory with improved output handling.
  *
  * @param {string} projectDirPath - Path to the project directory.
- * @param {Object} options - Configuration options.
- * @param {boolean} options.skipInstall - Whether to skip the installation step.
- * @return {Promise<boolean>} - Returns true if installation was successful or skipped.
+ * @throws {Error} - Throws an error if installation fails.
  */
-const runNpmInstall = async ( projectDirPath, options = {} ) => {
-	// Skip installation if the flag is set
-	if ( options.skipInstall ) {
-		console.log( 'Skipping NPM dependencies installation...' );
-		return true;
-	}
-
-	// Initialize spinner but don't start it yet
+const runNpmInstall = async ( projectDirPath ) => {
+	// Initialize spinner
 	const spinner = ora( {
 		text: 'Installing NPM dependencies',
 		color: 'cyan',
@@ -40,8 +32,7 @@ const runNpmInstall = async ( projectDirPath, options = {} ) => {
 
 		// Handle installation result
 		if ( result.error ) {
-			spinner.fail( `Installation failed: ${ result.error.message }` );
-			return false;
+			throw new Error( `Installation failed: ${ result.error.message }` );
 		}
 
 		// Filter and display important error messages
@@ -66,15 +57,13 @@ const runNpmInstall = async ( projectDirPath, options = {} ) => {
 		} else {
 			spinner.succeed( 'Dependencies installed successfully!' );
 		}
-
-		return true;
 	} catch ( error ) {
 		spinner.fail( 'Could not install dependencies.' );
 		console.warn(
 			'You will need to run "npm install" manually after setup completes.'
 		);
 		console.warn( `Details: ${ error.message }` );
-		return false;
+		throw error;
 	}
 };
 
