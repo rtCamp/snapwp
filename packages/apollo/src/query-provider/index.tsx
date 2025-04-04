@@ -1,8 +1,8 @@
 'use client';
 
 import {
-	type ApolloClient,
 	ApolloProvider,
+	type ApolloClient,
 	type NormalizedCacheObject,
 } from '@apollo/client';
 import { type JSX, type PropsWithChildren } from 'react';
@@ -10,9 +10,9 @@ import { type JSX, type PropsWithChildren } from 'react';
 /**
  * Apollo Query Provider component.
  *
- * @param root0 - The root object.
- * @param root0.children - The child components.
- * @param root0.client - The Apollo Client instance.
+ * @param {Object} root0 - The root object.
+ * @param {ReactNode | undefined} root0.children - The child components.
+ * @param {ApolloClient< NormalizedCacheObject >} root0.client - The Apollo Client instance.
  *
  * @return The rendered ApolloProvider component.
  */

@@ -1,15 +1,16 @@
 import {
-	type FetchQueryOptions,
 	QueryClient,
-	type QueryClientConfig,
 	useQuery,
+	useQueryClient,
+	type FetchQueryOptions,
+	type QueryClientConfig,
 	type UseQueryOptions,
 } from '@tanstack/react-query';
-import type { QueryClientAdapter } from '@snapwp/types';
 import { request } from 'graphql-request';
-import type { DocumentNode } from 'graphql';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { TanStackQueryProvider } from '@/query-provider';
+import type { QueryClientAdapter } from '@snapwp/types';
+import type { DocumentNode } from 'graphql';
 
 /**
  * TanStack Query Client Adapter that implements the QueryClientAdapter interface.
@@ -24,7 +25,7 @@ export class TanStackQueryClientAdapter
 
 	/**
 	 * Singleton instance of the TanStackQueryClientAdapter.
-	 * @param options Optional TanStackClientOptions to configure the client instance.
+	 * @param {QueryClientConfig} options Optional TanStackClientOptions to configure the client instance.
 	 *
 	 * @return The singleton instance of the TanStackQueryClientAdapter.
 	 */
@@ -40,7 +41,7 @@ export class TanStackQueryClientAdapter
 
 	/**
 	 * Creates a new instance of TanStackQueryClientAdapter.
-	 * @param options - Optional QueryClient instance. If not provided, a new QueryClient is created.
+	 * @param {QueryClientConfig} options - Optional QueryClient instance. If not provided, a new QueryClient is created.
 	 */
 	constructor( options?: QueryClientConfig ) {
 		options = options || ( {} as QueryClientConfig );
@@ -51,7 +52,7 @@ export class TanStackQueryClientAdapter
 	/**
 	 * Initializes a new TanStackClient instance with default options and merges them with provided options.
 	 *
-	 * @param options Optional TanStackClientOptions to merge with the default configuration.
+	 * @param {QueryClientConfig} options Optional TanStackClientOptions to merge with the default configuration.
 	 *
 	 * @return A new instance of TanStackClient with the merged configuration.
 	 */
@@ -61,7 +62,7 @@ export class TanStackQueryClientAdapter
 
 	/**
 	 * Returns the TanStack QueryClient instance.
-	 * @param options - Generic client options (not used in this implementation).
+	 * @param {QueryClientConfig} options - Generic client options (not used in this implementation).
 	 * @return The QueryClient instance.
 	 */
 	// @ts-ignore
@@ -85,19 +86,20 @@ export class TanStackQueryClientAdapter
 	/**
 	 * Returns the provided QueryClient instance or undefined.
 	 * This method is useful when an optional client needs to be used.
-	 * @param client - A QueryClient instance or undefined.
+	 * @param {QueryClient | undefined} client - A QueryClient instance or undefined.
 	 * @return The provided QueryClient instance or undefined.
 	 */
-	useClient( client: QueryClient | undefined ): QueryClient | undefined {
-		return client;
+	useClient( client?: QueryClient ): ReturnType< typeof useQueryClient > {
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
+		return useQueryClient( client );
 	}
 
 	/**
 	 * Executes a GraphQL query using the Tanstack Client instance and writes the result to the cache.
-	 * @param param0 An object containing:
-	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param param0.options - Optional query options compatible with TanStack's QueryOptions.
+	 * @param {Object} param0 An object containing:
+	 * @param {string[]} param0.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param {DocumentNode} param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param {TQueryOptions} param0.options - Optional query options compatible with TanStack's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 */
 	async fetchQuery<
@@ -120,21 +122,23 @@ export class TanStackQueryClientAdapter
 		// Here we assume that options may include variables.
 		return this.getServerClient().fetchQuery( {
 			queryKey: key,
-			queryFn: makeGraphQLRequest< TData >(
-				graphqlUrl,
-				query,
-				options?.variables
-			),
+			/**
+			 * The query function that will be called to fetch the data.
+			 *
+			 * @return The result of the GraphQL request.
+			 */
+			queryFn: () =>
+				request< TData >( graphqlUrl, query, options?.variables ),
 			...( options as object ),
 		} );
 	}
 
 	/**
 	 * Executes a GraphQL query as a React hook using Tanstack's useQuery.
-	 * @param param0 An object containing:
-	 * @param param0.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param param0.options - Optional query options compatible with TanStack's QueryHookOptions.
+	 * @param {Object} param0 An object containing:
+	 * @param {string[]} param0.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param {DocumentNode} param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param {TQueryOptions} param0.options - Optional query options compatible with TanStack's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
 	useQuery<
@@ -158,11 +162,13 @@ export class TanStackQueryClientAdapter
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		const result = useQuery< TData, unknown >( {
 			queryKey: key,
-			queryFn: makeGraphQLRequest< TData >(
-				graphqlUrl,
-				query,
-				options?.variables
-			),
+			/**
+			 * The query function that will be called to fetch the data.
+			 *
+			 * @return The result of the GraphQL request.
+			 */
+			queryFn: () =>
+				request< TData >( graphqlUrl, query, options?.variables ),
 			...( options as object ),
 		} as UseQueryOptions< TData, unknown > );
 		return result.data as TData;
@@ -170,21 +176,3 @@ export class TanStackQueryClientAdapter
 
 	QueryProvider = TanStackQueryProvider;
 }
-
-/**
- * Constructs a function to make a GraphQL request using graphql-request.
- * @param url - The URL of the GraphQL endpoint.
- * @param query - The GraphQL query to execute.
- * @param variables - Optional variables for the query.
- * @return A function that, when called, returns a promise resolving with the query data.
- */
-const makeGraphQLRequest = < TData >(
-	url: string,
-	query: DocumentNode,
-	variables: Record< string, unknown > | undefined
-): ( () => Promise< TData > ) => {
-	return () => {
-		// graphql-request's request function accepts (url, query, variables)
-		return request( url, query, variables );
-	};
-};

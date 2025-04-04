@@ -1,5 +1,5 @@
-import type { DocumentNode } from 'graphql/language';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import type { DocumentNode } from 'graphql/language';
 import type { PropsWithChildren } from 'react';
 
 export interface QueryClientAdapter<

@@ -1,19 +1,19 @@
 import {
+	type EnqueuedScriptProps,
+	type GlobalHeadProps,
+	type ScriptModuleProps,
+	type StyleSheetProps,
+} from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
+import {
 	GetCurrentTemplateDocument,
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
-import parseTemplate from '@/utils/parse-template';
-import parseGlobalStyles from '@/utils/parse-global-styles';
-import {
-	type GlobalHeadProps,
-	type ScriptModuleProps,
-	type EnqueuedScriptProps,
-	type StyleSheetProps,
-} from '@snapwp/core';
-import parseGeneralSettings from '@/utils/parse-general-settings';
-import { getConfig } from '@snapwp/core/config';
 import { QueryAdapterRegistry } from '@/query-adapter-registry';
+import parseGeneralSettings from '@/utils/parse-general-settings';
+import parseGlobalStyles from '@/utils/parse-global-styles';
+import parseTemplate from '@/utils/parse-template';
 import type { BlockData } from '@snapwp/types';
 
 /**
@@ -66,7 +66,7 @@ export class QueryRepository {
 
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
-	 * @param uri - The URL of the seed node.
+	 * @param {string} uri - The URL of the seed node.
 	 * @return The template data fetched for the uri.
 	 */
 	static getTemplateData = async (

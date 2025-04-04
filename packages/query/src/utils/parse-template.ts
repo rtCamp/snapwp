@@ -1,5 +1,4 @@
 import {
-	Logger,
 	TemplateParseError,
 	type EnqueuedScriptProps,
 	type ScriptModuleProps,

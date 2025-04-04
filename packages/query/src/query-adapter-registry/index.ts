@@ -1,5 +1,5 @@
-import type { QueryClientAdapter } from '@snapwp/types';
 import { getConfig } from '@snapwp/core/config';
+import type { QueryClientAdapter } from '@snapwp/types';
 
 /**
  * Query Engine Registry
