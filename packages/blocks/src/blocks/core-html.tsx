@@ -5,8 +5,8 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/html block.
  *
- * @param props - The props for the block component.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                        props              The props for the block component.
+ * @param {CoreHtmlProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */

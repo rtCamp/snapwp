@@ -1,6 +1,7 @@
-import { QueryEngine } from '../index';
-import { getConfig, getGraphqlUrl } from '@snapwp/core/config';
 import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { getConfig, getGraphqlUrl } from '@snapwp/core/config';
+
+import { QueryEngine } from '../index';
 
 jest.mock( '@snapwp/core/config', () => ( {
 	getConfig: jest.fn(),

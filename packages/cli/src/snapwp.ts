@@ -3,13 +3,13 @@
 // Dependencies
 import path from 'path';
 import { program } from 'commander';
-import prompt from './utils/prompt';
-import createProjectDirectory from './create-app/create-project-directory';
-import setupEnvFile from './create-app/setup-env-file';
 import copyStarterTemplate from './create-app/copy-starter-template';
+import createProjectDirectory from './create-app/create-project-directory';
+import printSuccessMessage from './create-app/print-success-message';
+import setupEnvFile from './create-app/setup-env-file';
 import setupNpmrc from './create-app/setup-npmrc';
 import updatePackageVersions from './create-app/update-package-versions';
-import printSuccessMessage from './create-app/print-success-message';
+import prompt from './utils/prompt';
 
 /**
  * Default project path if user doesn't provide any.

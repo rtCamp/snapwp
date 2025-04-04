@@ -1,8 +1,8 @@
 import {
-	isWPHomeUrl,
-	isWPSiteUrl,
 	isInternalUrl,
 	isValidUrl,
+	isWPHomeUrl,
+	isWPSiteUrl,
 } from '../validators';
 
 describe( 'URL Validator functions', () => {

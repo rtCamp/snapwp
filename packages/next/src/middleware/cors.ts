@@ -4,9 +4,10 @@ import {
 	type NextMiddleware,
 	type NextRequest,
 } from 'next/server';
-import { getConfig } from '@snapwp/core/config';
-import type { MiddlewareFactory } from './utils';
 import { Logger } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
+
+import type { MiddlewareFactory } from './utils';
 
 /**
  * Facilitates proxying resources from WP resources. Any request with `corsProxyPrefix`
@@ -15,7 +16,7 @@ import { Logger } from '@snapwp/core';
  * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
  * assuming env vars NEXT_PUBLIC_FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
  *
- * @param  next - Next middleware
+ * @param {NextMiddleware} next Next middleware.
  *
  * @return The response object with modified headers.
  */

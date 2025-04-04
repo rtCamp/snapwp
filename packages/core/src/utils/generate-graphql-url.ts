@@ -3,8 +3,8 @@ import { Logger } from '@/logger';
 /**
  * Generates the complete GraphQL URL based on env vars.
  *
- * @param homeUrl The home URL.
- * @param graphqlEndpoint The GraphQL endpoint.
+ * @param {string} homeUrl         The home URL.
+ * @param {string} graphqlEndpoint The GraphQL endpoint.
  *
  * @return The complete GraphQL URL.
  */

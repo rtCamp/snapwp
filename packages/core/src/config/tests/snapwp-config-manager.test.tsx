@@ -1,11 +1,11 @@
-import { Logger } from '@/logger';
 import {
 	_private,
 	getConfig,
-	setConfig,
 	getGraphqlUrl,
+	setConfig,
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
+import { Logger } from '@/logger';
 
 const SnapWPConfigManager = _private.SnapWPConfigManager!;
 
