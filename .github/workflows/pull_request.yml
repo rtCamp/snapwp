@@ -193,7 +193,7 @@ jobs:
                 CC_TEST_REPORTER_ID: TEST_REPORTER_ID  # TODO: Set this
               with:
                 coverageLocations: |
-                  ./coverage/lcov.info:lcov'
+                  ./coverage/lcov.info:lcov
 
             # - name: Upload coverage to Codecov
             #   uses: codecov/codecov-action@v5
