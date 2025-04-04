@@ -1,12 +1,12 @@
 fragment TwitterMetadataFrag on RenderedTemplate {
 	connectedNode {
-        id
+		id
 
-        __typename
+		__typename
 		uri
 
 		... on NodeWithTitle {
-            title
+			title
 		}
 
 		... on NodeWithFeaturedImage {

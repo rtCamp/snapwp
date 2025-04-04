@@ -1,6 +1,6 @@
 fragment OpenGraphMetadataFrag on RenderedTemplate {
-    uri
-    connectedNode {
+	uri
+	connectedNode {
 		uri
 		... on Page {
 			title

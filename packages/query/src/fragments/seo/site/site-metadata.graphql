@@ -1,7 +1,7 @@
 fragment SiteMetadataFrag on RootQuery {
-    generalSettings {
-        title
-        description
-        language
-    }
+	generalSettings {
+		title
+		description
+		language
+	}
 }
