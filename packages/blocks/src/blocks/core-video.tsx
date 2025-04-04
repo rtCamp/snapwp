@@ -51,7 +51,7 @@ const Tracks = ( {
  *
  * @return The rendered block.
  */
-const CoreVideo: CoreVideoType = ( {
+export const CoreVideo: CoreVideoType = ( {
 	attributes,
 	renderedHtml,
 }: CoreVideoProps ): ReactNode => {
@@ -128,5 +128,3 @@ const CoreVideo: CoreVideoType = ( {
 		</figure>
 	);
 };
-
-export default CoreVideo;

@@ -14,7 +14,7 @@ import type { JSX, ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreHeading: CoreHeadingType = ( {
+export const CoreHeading: CoreHeadingType = ( {
 	attributes,
 }: CoreHeadingProps ): ReactNode => {
 	const { style, cssClassName, content, level } = attributes || {};
@@ -34,5 +34,3 @@ const CoreHeading: CoreHeadingType = ( {
 		</HeadingTag>
 	);
 };
-
-export default CoreHeading;

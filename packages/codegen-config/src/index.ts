@@ -1,6 +1,6 @@
 import type { CodegenConfig } from '@graphql-codegen/cli';
 
-const baseConfig: CodegenConfig = {
+export const baseConfig: CodegenConfig = {
 	overwrite: true,
 	generates: {
 		'src/__generated/': {
@@ -14,5 +14,3 @@ const baseConfig: CodegenConfig = {
 		},
 	},
 };
-
-export default baseConfig;

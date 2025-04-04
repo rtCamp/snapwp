@@ -19,7 +19,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CorePreformatted: CorePreformattedType = ( {
+export const CorePreformatted: CorePreformattedType = ( {
 	attributes,
 	renderedHtml,
 }: CorePreformattedProps ): ReactNode => {
@@ -45,5 +45,3 @@ const CorePreformatted: CorePreformattedType = ( {
 		</pre>
 	);
 };
-
-export default CorePreformatted;

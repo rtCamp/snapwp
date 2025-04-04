@@ -14,7 +14,7 @@ import type { CSSProperties, ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreColumn: CoreColumnType = ( {
+export const CoreColumn: CoreColumnType = ( {
 	attributes,
 	children,
 }: CoreColumnProps ): ReactNode => {
@@ -34,5 +34,3 @@ const CoreColumn: CoreColumnType = ( {
 		</div>
 	);
 };
-
-export default CoreColumn;

@@ -6,7 +6,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli';
 
 dotenv.config( { path: '../../.env' } );
 
-const config: CodegenConfig = {
+export const config: CodegenConfig = {
 	...baseConfigs,
 	documents: './src/**/*.graphql',
 	// Use the schema file if it's set by CI.
@@ -23,5 +23,3 @@ const config: CodegenConfig = {
 		},
 	],
 };
-
-export default config;
