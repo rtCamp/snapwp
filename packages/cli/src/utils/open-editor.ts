@@ -25,7 +25,9 @@ export default function openEditor(
 			child.on( 'exit', function () {
 				resolve( {
 					success: true,
-					message: `File created at "${ path.resolve( filePath ) }"`,
+					message: `\nFile created at "${ path.resolve(
+						filePath
+					) }"`,
 				} );
 			} );
 		} catch ( error ) {
@@ -33,8 +35,8 @@ export default function openEditor(
 				success: false,
 				message:
 					error instanceof Error
-						? `Error: ${ error.message }`
-						: 'An unknown error occurred.',
+						? `\nError: ${ error.message }`
+						: '\nAn unknown error occurred.',
 			} );
 		}
 	} );

@@ -26,6 +26,7 @@ export default async function copyStarterTemplate(
 	// Delete .env from starter if present, to prevent override
 	await fs.rm( nextJSStarterEnvPath, { force: true } );
 
+	console.log( '' );
 	console.log( 'Copying frontend folder to project directory...' );
 	await fs.cp( nextJsStarterPath, projectDirPath, {
 		recursive: true,

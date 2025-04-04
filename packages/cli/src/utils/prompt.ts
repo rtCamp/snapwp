@@ -8,10 +8,7 @@ import readline from 'readline';
  *
  * @return {Promise<string>} User input.
  */
-export default function prompt(
-	query: string,
-	defaultValue: string = ''
-): Promise< string > {
+const prompt = ( query: string, defaultValue = '' ): Promise< string > => {
 	const rl = readline.createInterface( {
 		input: process.stdin,
 		output: process.stdout,
@@ -20,8 +17,10 @@ export default function prompt(
 	return new Promise( ( resolve ) => {
 		rl.question(
 			// Append default value to the query.
-			query + ( !! defaultValue ? ` (${ defaultValue })` : '' ),
-			( answer: string ) => {
+			query +
+				( !! defaultValue ? ` [default: ${ defaultValue }]` : '' ) +
+				'\n> ',
+			( answer ) => {
 				rl.close();
 
 				// Replace escaped newlines with actual newlines.
@@ -34,4 +33,6 @@ export default function prompt(
 			}
 		);
 	} );
-}
+};
+
+export default prompt;
