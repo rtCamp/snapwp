@@ -4,8 +4,8 @@ import type { ReactNode } from 'react';
 
 /**
  * Renders the default block.
- * @param props - The props for the component.
- * @param props.renderedHtml - The rendered HTML.
+ * @param {Object}                       props              The props for the component.
+ * @param {DefaultProps['renderedHtml']} props.renderedHtml The rendered HTML.
  *
  * @return The rendered default block.
  */

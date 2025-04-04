@@ -3,7 +3,7 @@
  *
  * @see https://github.com/WordPress/gutenberg/blob/da50610ac45e2cd18b59424d260bb3d693535061/packages/block-editor/src/components/spacing-sizes-control/utils.js#L128
  *
- * @param value Value to convert.
+ * @param {string|null|undefined} value Value to convert.
  *
  * @return CSS var string for given spacing preset value.
  */

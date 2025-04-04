@@ -1,8 +1,8 @@
 import {
-	removeTrailingSlash,
+	addLeadingSlash,
 	addTrailingSlash,
 	removeLeadingSlash,
-	addLeadingSlash,
+	removeTrailingSlash,
 	toFrontendUri,
 } from '../transformers';
 

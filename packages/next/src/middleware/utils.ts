@@ -1,8 +1,8 @@
 import { NextResponse, type NextMiddleware } from 'next/server';
-import { proxies } from './proxies';
-import { currentPath as cm } from './current-path';
-import { corsProxyMiddleware } from './cors';
 import { getConfig } from '@snapwp/core/config';
+import { corsProxyMiddleware } from './cors';
+import { currentPath as cm } from './current-path';
+import { proxies } from './proxies';
 
 export type MiddlewareFactory = (
 	middleware: NextMiddleware
@@ -12,10 +12,10 @@ export type MiddlewareFactory = (
  * Stacks middlewares.
  * Ref: https://reacthustle.com/blog/how-to-chain-multiple-middleware-functions-in-nextjs
  *
- * @param functions               Array containing Middleware.
- * @param index                   Index of current middleware.
- * @param stackDefaultMiddlewares Weather to add load default middlewares with custom ones.
- *                                Pass false to skip loading default middlewares.
+ * @param {Array<MiddlewareFactory>} functions               Array containing Middleware.
+ * @param {number}                   index                   Index of current middleware.
+ * @param {boolean}                  stackDefaultMiddlewares Weather to add load default middlewares with custom ones.
+ *                                                           Pass false to skip loading default middlewares.
  *
  * @return NextJS Middleware.
  */
@@ -43,7 +43,7 @@ export function appMiddlewares(
 /**
  * Stacks default middlewares with the custom middlewares passed by user.
  *
- * @param middlewares Array containing user defined Middlewares.
+ * @param {Array<MiddlewareFactory>} middlewares Array containing user defined Middlewares.
  *
  * @return Array combining default middlewares and custom middlewares.
  */

@@ -14,15 +14,15 @@ export { default as getStylesFromAttributes } from './styles/get-styles-from-att
 
 // URL utilities
 export {
-	addTrailingSlash,
-	removeTrailingSlash,
 	addLeadingSlash,
+	addTrailingSlash,
 	removeLeadingSlash,
+	removeTrailingSlash,
 	toFrontendUri,
 } from './url/transformers';
 export {
-	isWPHomeUrl,
-	isWPSiteUrl,
 	isInternalUrl,
 	isValidUrl,
+	isWPHomeUrl,
+	isWPSiteUrl,
 } from './url/validators';

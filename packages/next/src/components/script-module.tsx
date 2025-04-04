@@ -5,8 +5,8 @@
  * This component ensures that all dependencies of a script module are loaded before the main script.
  * Dependencies are rendered as individual <Script /> components and are typically loaded asynchronously.
  */
-import type { PropsWithoutRef, ReactNode } from 'react';
 import Script from 'next/script';
+import type { PropsWithoutRef, ReactNode } from 'react';
 
 interface ScriptModuleInterface {
 	handle?: string | null | undefined;
@@ -28,11 +28,11 @@ interface ScriptModuleInterface {
  * A reusable wrapper for Next.js Script component to handle script modules and their dependencies.
  * Uses Next.js script loading strategies to optimize loading behavior.
  *
- * @param props - Props for the Script Module component
- * @param props.handle - The unique identifier for the script module
- * @param props.src - The source URL for the script module
- * @param props.extraData - Additional data required by the script module
- * @param props.dependencies - Dependencies required by the script module
+ * @param {Object}                                props              Props for the Script Module component.
+ * @param {ScriptModuleInterface['handle']}       props.handle       The unique identifier for the script module.
+ * @param {ScriptModuleInterface['src']}          props.src          The source URL for the script module.
+ * @param {ScriptModuleInterface['extraData']}    props.extraData    Additional data required by the script module.
+ * @param {ScriptModuleInterface['dependencies']} props.dependencies Dependencies required by the script module.
  *
  * @return The rendered script module elements
  */

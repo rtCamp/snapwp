@@ -4,7 +4,7 @@ import { isInternalUrl, isWPSiteUrl } from './validators';
 /**
  * Convert a URL to an internal URL.
  *
- * @param url The URL to convert.
+ * @param {string} url The URL to convert.
  *
  * @return The internal URL.
  */
@@ -32,7 +32,7 @@ export const toFrontendUri = ( url: string ): string => {
 /**
  * Remove trailing slash from the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -45,7 +45,7 @@ export function removeTrailingSlash( url: string ): string {
 /**
  * Add trailing slash to the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -58,7 +58,7 @@ export function addTrailingSlash( url: string ): string {
 /**
  * Remove leading slash from the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
@@ -71,7 +71,7 @@ export function removeLeadingSlash( url: string ): string {
 /**
  * Add leading slash to the URL.
  *
- * @param url The URL to modify.
+ * @param {string} url The URL to modify.
  *
  * @return The modified URL.
  *
