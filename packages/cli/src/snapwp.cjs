@@ -34,7 +34,7 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 	try {
 		program
 			.option( '--proxy', 'Use proxy registry.' )
-			.option( '--skip-install', 'Skip installing npm dependencies' )
+			.option( '--skip-install', 'Skip installing npm dependencies.' )
 			.parse();
 		const options = program.opts();
 
