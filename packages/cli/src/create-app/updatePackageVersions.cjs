@@ -1,5 +1,5 @@
-const path = require( 'path' );
 const fs = require( 'fs/promises' );
+const path = require( 'path' );
 
 /**
  * Updates package versions in package.json to use published versions
