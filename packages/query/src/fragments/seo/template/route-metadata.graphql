@@ -1,0 +1,62 @@
+fragment PageFrag on Page {
+    title
+    content
+}
+
+fragment PostFrag on Post {
+    title
+    content
+}
+
+fragment AuthorFrag on NodeWithAuthor{
+    author {
+        node {
+            name
+        }
+    }
+}
+
+fragment TermFrag on TermNode{
+    name
+    description
+}
+
+fragment RouteMetadataFrag on RenderedTemplate{
+    connectedNode {
+        id,
+        __typename,
+        uri,
+
+       ... on Page {
+			title
+			content
+			author {
+				node {
+					name
+				}
+			}
+		}
+		... on Post {
+			title
+			excerpt
+			author {
+				node {
+					name
+				}
+			}
+		}
+		... on Category {
+			name
+			description
+		}
+		... on Tag {
+			name
+			description
+		}
+		... on User {
+			name
+			description
+		}
+    }
+
+}

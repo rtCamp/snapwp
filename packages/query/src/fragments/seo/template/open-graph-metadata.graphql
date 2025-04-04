@@ -1,12 +1,14 @@
-query GetOpenGraphMetadata($uri: String!) {
-	nodeByUri(uri: $uri) {
-		__typename
+fragment OpenGraphMetadataFrag on RenderedTemplate {
+    uri
+    connectedNode {
 		uri
 		... on Page {
 			title
+
 			date
 			modified
 			content
+
 			featuredImage {
 				node {
 					sourceUrl
@@ -19,9 +21,11 @@ query GetOpenGraphMetadata($uri: String!) {
 		}
 		... on Post {
 			title
-			excerpt
+
 			date
 			modified
+			excerpt
+
 			featuredImage {
 				node {
 					sourceUrl

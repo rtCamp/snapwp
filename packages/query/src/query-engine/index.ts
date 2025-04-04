@@ -2,12 +2,6 @@ import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
-	GetOpenGraphMetadataDocument,
-	GetTwitterMetadataDocument,
-	GetRouteMetadataDocument,
-	type GetRouteMetadataQuery,
-	type GetOpenGraphMetadataQuery,
-	type GetTwitterMetadataQuery,
 } from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
@@ -146,118 +140,6 @@ export class QueryEngine {
 			}
 
 			// If error is not an instance of ApolloError, throw the error again.
-			throw error;
-		}
-	};
-
-	/**
-	 * Fetches metadata for a specific route.
-	 *
-	 * @param uri - The URI of the route.
-	 * @return Route metadata.
-	 */
-	static fetchRouteMetadata = async (
-		uri: string
-	): Promise< GetRouteMetadataQuery > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-		const variables = { uri };
-
-		try {
-			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetRouteMetadataDocument,
-				variables,
-				fetchPolicy: 'network-only',
-				errorPolicy: 'all',
-			} );
-
-			return data;
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				if ( error.networkError ) {
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			throw error;
-		}
-	};
-
-	/**
-	 * Fetches Open Graph metadata for a specific route.
-	 *
-	 * @param uri - The URI of the route.
-	 * @return Open Graph metadata.
-	 */
-	static fetchRouteOpenGraphMetadata = async (
-		uri: string
-	): Promise< GetOpenGraphMetadataQuery > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-		const variables = { uri };
-
-		try {
-			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetOpenGraphMetadataDocument,
-				variables,
-				fetchPolicy: 'network-only',
-				errorPolicy: 'all',
-			} );
-			return data;
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				if ( error.networkError ) {
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
-			throw error;
-		}
-	};
-
-	/**
-	 * Fetches Twitter metadata for a specific route.
-	 *
-	 * @param uri - The URI of the route.
-	 * @return Twitter metadata.
-	 */
-	static fetchRouteTwitterMetadata = async (
-		uri: string
-	): Promise< GetTwitterMetadataQuery > => {
-		if ( ! QueryEngine.isClientInitialized ) {
-			QueryEngine.initialize();
-		}
-		const variables = { uri };
-
-		try {
-			const { data } = await QueryEngine.apolloClient.query( {
-				query: GetTwitterMetadataDocument,
-				variables,
-				fetchPolicy: 'network-only',
-				errorPolicy: 'all',
-			} );
-			return data;
-		} catch ( error ) {
-			if ( error instanceof ApolloError ) {
-				logApolloErrors( error );
-
-				if ( error.networkError ) {
-					throw new Error(
-						getNetworkErrorMessage( error.networkError )
-					);
-				}
-			}
-
 			throw error;
 		}
 	};
