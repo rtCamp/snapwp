@@ -8,7 +8,7 @@ import path from 'path';
  * - Stops Next.js, WordPress (`wp-env`), and the local registry.
  * - Deletes `snapwp-helper` and `test-app` directories if they exist.
  */
-export default function cleanup(): void {
+export function cleanup(): void {
 	try {
 		if ( process.env[ 'NEXT_PID' ] ) {
 			console.log( 'Stopping Next.js...' );

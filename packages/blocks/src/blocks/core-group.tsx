@@ -50,7 +50,7 @@ const Tag = ( {
  *
  * @return The rendered block.
  */
-const CoreGroup: CoreGroupType = ( {
+export const CoreGroup: CoreGroupType = ( {
 	attributes,
 	renderedHtml,
 	children,
@@ -79,5 +79,3 @@ const CoreGroup: CoreGroupType = ( {
 		</Tag>
 	);
 };
-
-export default CoreGroup;

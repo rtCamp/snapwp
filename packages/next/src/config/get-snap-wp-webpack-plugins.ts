@@ -9,7 +9,7 @@ import {
  * @return Webpack config
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.
-const getWebpackPlugins = ( snapWPConfigPath: string ): any => {
+export const getWebpackPlugins = ( snapWPConfigPath: string ): any => {
 	if ( ! snapWPConfigPath ) {
 		throw new Error( 'SnapWP configuration file not found.' );
 	}
@@ -50,5 +50,3 @@ const getWebpackPlugins = ( snapWPConfigPath: string ): any => {
 		} ),
 	];
 };
-
-export default getWebpackPlugins;

@@ -1,4 +1,4 @@
-import Fonts from '@/components/font';
+import { Fonts } from '@/components/font';
 
 import type { GlobalHeadProps } from '@snapwp/core';
 import type { ReactNode } from 'react';

@@ -7,7 +7,7 @@
  *
  * @throws If the server doesn't respond after all retries.
  */
-export default async function waitForServer(
+export async function waitForServer(
 	url: string,
 	timeout = 10000,
 	retries = 5

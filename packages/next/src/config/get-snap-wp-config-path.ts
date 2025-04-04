@@ -6,7 +6,7 @@ import url from 'url';
  * Dynamically finds path to the snapwp config file during the build process.
  * @return path to snapwp config file.
  */
-export default function getSnapWPConfigPath(): string {
+export function getSnapWPConfigPath(): string {
 	const possibleSnapWPConfigPaths = [
 		'snapwp.config.ts',
 		'snapwp.config.js',

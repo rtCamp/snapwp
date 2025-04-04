@@ -19,7 +19,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreDetails: CoreDetailsType = ( {
+export const CoreDetails: CoreDetailsType = ( {
 	attributes,
 	children,
 	renderedHtml,
@@ -47,5 +47,3 @@ const CoreDetails: CoreDetailsType = ( {
 		</details>
 	);
 };
-
-export default CoreDetails;

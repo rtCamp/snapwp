@@ -5,7 +5,7 @@
  *
  * @return An array of class names.
  */
-export default function getClassNamesFromString( html: string ): string[] {
+export function getClassNamesFromString( html: string ): string[] {
 	// Match the first occurrence of the class attribute
 	const classAttribute = html.match( /class=".*?"/g )?.[ 0 ];
 

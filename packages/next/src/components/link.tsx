@@ -27,7 +27,7 @@ interface LinkInterface {
  *
  * @return The rendered link.
  */
-export default function Link( {
+export function Link( {
 	href,
 	style,
 	className,

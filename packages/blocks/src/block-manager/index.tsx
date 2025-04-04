@@ -1,6 +1,6 @@
-import defaultBlockDefinitions from '@/blocks';
-import Default from '@/blocks/default';
-import flatListToHierarchical from '@/utils/flat-list-to-hierarchical';
+import { blocks as defaultBlockDefinitions } from '@/blocks';
+import { Default } from '@/blocks/default';
+import { flatListToHierarchical } from '@/utils/flat-list-to-hierarchical';
 
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 
@@ -8,7 +8,7 @@ import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
  * Singleton class that renders blocks using defined React components.
  * Falls back to a default block if the type isn't found.
  */
-export default class BlockManager {
+export class BlockManager {
 	private static blockDefinitions = defaultBlockDefinitions;
 
 	/**

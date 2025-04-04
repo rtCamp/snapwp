@@ -1,4 +1,4 @@
-import parseExternalRemotePatterns from '../parse-external-remote-patterns';
+import { parseExternalRemotePatterns } from '../parse-external-remote-patterns';
 
 describe( 'parseExternalRemotePatterns', () => {
 	it( 'should return default pattern if no string is provided', () => {

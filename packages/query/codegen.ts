@@ -24,4 +24,5 @@ const config: CodegenConfig = {
 	],
 };
 
+// eslint-disable-next-line import/no-default-export -- default export is required for compatibility.
 export default config;

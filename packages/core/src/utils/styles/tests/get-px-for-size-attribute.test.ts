@@ -1,4 +1,4 @@
-import getPxForSizeAttribute from '../get-px-for-size-attribute';
+import { getPxForSizeAttribute } from '../get-px-for-size-attribute';
 
 describe( 'getPxForSizeAttribute', () => {
 	it( 'should convert em to pixels', () => {

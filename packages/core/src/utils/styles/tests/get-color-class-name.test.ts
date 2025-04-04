@@ -1,4 +1,4 @@
-import getColorClassName from '../get-color-class-name';
+import { getColorClassName } from '../get-color-class-name';
 
 describe( 'getColorClassName', () => {
 	it( 'returns the correct class name for valid color context and slug', () => {

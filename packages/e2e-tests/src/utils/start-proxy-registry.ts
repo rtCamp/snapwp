@@ -5,7 +5,7 @@ import { execSync } from 'child_process';
  *
  * @throws If the command fails, an error is logged and rethrown.
  */
-export default function startProxyRegistry(): void {
+export function startProxyRegistry(): void {
 	try {
 		execSync( 'npm run publish:local', {
 			stdio: 'inherit',

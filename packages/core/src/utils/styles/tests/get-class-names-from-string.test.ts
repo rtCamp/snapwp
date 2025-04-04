@@ -1,4 +1,4 @@
-import getClassNamesFromString from '../get-class-names-from-string';
+import { getClassNamesFromString } from '../get-class-names-from-string';
 
 describe( 'getClassNamesFromString', () => {
 	it( 'should return an array of class names from a single class attribute', () => {

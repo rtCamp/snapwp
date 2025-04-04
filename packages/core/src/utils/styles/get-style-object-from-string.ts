@@ -60,7 +60,7 @@ function cssToReactStyle( str: string ): CSSProperties {
  *
  * @return The style object.
  */
-export default function getStyleObjectFromString(
+export function getStyleObjectFromString(
 	css: object | string
 ): CSSProperties | undefined {
 	// If object is given, return object (could be react style object mistakenly provided)

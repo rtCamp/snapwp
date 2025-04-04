@@ -6,7 +6,7 @@ import path from 'path';
  *
  * @throws If any command fails, an error is logged and rethrown.
  */
-export default function setupSnapWPHelper(): void {
+export function setupSnapWPHelper(): void {
 	const pluginPath = path.join( process.cwd(), 'snapwp-helper' );
 	try {
 		execSync( 'git clone https://github.com/rtCamp/snapwp-helper.git', {

@@ -13,7 +13,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered React components.
  */
-export default function Parse( { html }: { html: string } ): ReactNode {
+export function Parse( { html }: { html: string } ): ReactNode {
 	const {
 		parserOptions = defaultOptions,
 	}: { parserOptions?: HTMLReactParserOptions } = getConfig();

@@ -8,8 +8,8 @@ import {
 	getImageSizeFromAttributes,
 	getStyleObjectFromString,
 } from '@snapwp/core';
-import Image from '@/components/image';
-import Link from '@/components/link';
+import { Image } from '@/components/image';
+import { Link } from '@/components/link';
 
 export const defaultOptions: HTMLReactParserOptions = {
 	/**

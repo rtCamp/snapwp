@@ -20,7 +20,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreListItem: CoreListItemType = ( {
+export const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,
@@ -49,5 +49,3 @@ const CoreListItem: CoreListItemType = ( {
 		</li>
 	);
 };
-
-export default CoreListItem;

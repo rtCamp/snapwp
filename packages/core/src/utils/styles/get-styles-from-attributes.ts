@@ -1,5 +1,5 @@
 import { compileCSS } from '@wordpress/style-engine';
-import getStyleObjectFromString from './get-style-object-from-string';
+import { getStyleObjectFromString } from './get-style-object-from-string';
 
 import type { CSSProperties } from 'react';
 
@@ -15,7 +15,7 @@ interface AttributesWithStyle {
  *
  * @return Compiled styles as an object or an empty object if no styles exist.
  */
-export default function getStylesFromAttributes( {
+export function getStylesFromAttributes( {
 	style,
 }: AttributesWithStyle ): CSSProperties | undefined {
 	if ( ! style ) {

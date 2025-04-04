@@ -19,7 +19,7 @@ const FALLBACK_ARIA_LABEL = 'PDF embed';
  *
  * @return The rendered block.
  */
-const CoreFile: CoreFileType = ( {
+export const CoreFile: CoreFileType = ( {
 	attributes,
 	renderedHtml,
 }: CoreFileProps ): ReactNode => {
@@ -90,5 +90,3 @@ const CoreFile: CoreFileType = ( {
 		</div>
 	);
 };
-
-export default CoreFile;

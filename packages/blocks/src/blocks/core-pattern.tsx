@@ -12,11 +12,9 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CorePattern: CorePatternType = ( {
+export const CorePattern: CorePatternType = ( {
 	children,
 }: CorePatternProps ): ReactNode => {
 	// Patterns contain only children, so we just return them.
 	return <>{ children }</>;
 };
-
-export default CorePattern;

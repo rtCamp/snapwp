@@ -9,6 +9,6 @@ import { clsx, type ClassValue } from 'clsx';
  *
  * @internal
  */
-export default function cn( ...inputs: ClassValue[] ): string {
+export function cn( ...inputs: ClassValue[] ): string {
 	return clsx( inputs );
 }

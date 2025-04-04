@@ -17,7 +17,7 @@ type Data = Record< string | number, unknown >;
  *
  * @return Data Array
  */
-export default function flatListToHierarchical(
+export function flatListToHierarchical(
 	data: Data[] = [],
 	{
 		idKey = 'id',

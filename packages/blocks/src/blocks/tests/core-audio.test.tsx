@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import CoreAudio from '../core-audio';
+import { CoreAudio } from '../core-audio';
 import '@testing-library/jest-dom';
 
 describe( 'CoreAudio', () => {

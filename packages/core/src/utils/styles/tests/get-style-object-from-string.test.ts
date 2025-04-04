@@ -1,4 +1,4 @@
-import getStyleObjectFromString from '../get-style-object-from-string';
+import { getStyleObjectFromString } from '../get-style-object-from-string';
 
 describe( 'getStyleObjectFromString', () => {
 	it( 'should return undefined for an empty string', () => {

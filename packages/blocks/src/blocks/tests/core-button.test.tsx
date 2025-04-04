@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import { getConfig } from '@snapwp/core/config';
-import CoreButton from '../core-button';
+import { CoreButton } from '../core-button';
 
 import '@testing-library/jest-dom';
 

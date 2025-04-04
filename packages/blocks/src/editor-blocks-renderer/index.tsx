@@ -1,5 +1,5 @@
 import { getConfig } from '@snapwp/core/config';
-import BlockManager from '@/block-manager';
+import { BlockManager } from '@/block-manager';
 
 import type { BlockData, BlockDefinitions, BlockTreeNode } from '@snapwp/types';
 import type { ReactNode } from 'react';
@@ -18,7 +18,7 @@ type EditorBlocksRendererProps = {
  *
  * @return The rendered template
  */
-export default function EditorBlocksRenderer( {
+export function EditorBlocksRenderer( {
 	editorBlocks,
 	blockDefinitions,
 }: EditorBlocksRendererProps ): ReactNode {

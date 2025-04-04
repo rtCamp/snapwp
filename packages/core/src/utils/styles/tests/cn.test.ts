@@ -1,4 +1,4 @@
-import cn from '../cn';
+import { cn } from '../cn';
 
 describe( 'cn', () => {
 	it( 'should combine multiple class names into a single string', () => {

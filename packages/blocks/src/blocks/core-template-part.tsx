@@ -15,7 +15,7 @@ import type { JSX, ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreTemplatePart: CoreTemplatePartType = ( {
+export const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,
@@ -35,5 +35,3 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 	const classNames = cn( classNamesFromString );
 	return <TagName className={ classNames }>{ children }</TagName>;
 };
-
-export default CoreTemplatePart;

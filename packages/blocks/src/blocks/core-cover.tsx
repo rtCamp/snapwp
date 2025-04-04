@@ -49,7 +49,7 @@ const mediaPosition = (
  *
  * @return The rendered cover block or null if using featured image
  */
-const CoreCover: CoreCoverType = ( {
+export const CoreCover: CoreCoverType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,
@@ -190,5 +190,3 @@ const CoreCover: CoreCoverType = ( {
 		</Tag>
 	);
 };
-
-export default CoreCover;

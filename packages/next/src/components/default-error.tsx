@@ -14,7 +14,7 @@ import type { ReactNode } from 'react';
  *
  * @return The default error component.
  */
-export default function DefaultError( {
+export function DefaultError( {
 	error,
 	reset,
 }: {

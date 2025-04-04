@@ -16,7 +16,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreVerse: CoreVerseType = ( {
+export const CoreVerse: CoreVerseType = ( {
 	attributes,
 	renderedHtml,
 }: CoreVerseProps ): ReactNode => {
@@ -42,5 +42,3 @@ const CoreVerse: CoreVerseType = ( {
 		</pre>
 	);
 };
-
-export default CoreVerse;

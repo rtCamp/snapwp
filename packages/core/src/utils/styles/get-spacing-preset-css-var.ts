@@ -7,7 +7,7 @@
  *
  * @return CSS var string for given spacing preset value.
  */
-export default function getSpacingPresetCssVar(
+export function getSpacingPresetCssVar(
 	value: string | null | undefined
 ): string | undefined {
 	if ( ! value ) {

@@ -19,7 +19,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CorePullquote: CorePullquoteType = ( {
+export const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
 }: CorePullquoteProps ): ReactNode => {
@@ -57,5 +57,3 @@ const CorePullquote: CorePullquoteType = ( {
 		</figure>
 	);
 };
-
-export default CorePullquote;
