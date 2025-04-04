@@ -1,7 +1,7 @@
 /**
  * Removes all HTML tags from a given string.
  *
- * @param html - The HTML string to be stripped.
+ * @param {string} html - The HTML string to be stripped.
  * @return The cleaned text without HTML tags.
  */
 export default function getCleanExcerpt( html: string ): string {

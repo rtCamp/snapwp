@@ -1,11 +1,11 @@
-import type { Metadata } from 'next';
-import type { RouteMetadataFragFragment } from '@snapwp/query';
-import type { TemplateMetadataParser } from '../types';
 import getCleanExcerpt from '@/seo/utils/get-clean-excerpt';
+import type { TemplateMetadataParser } from '../types';
+import type { RouteMetadataFragFragment } from '@snapwp/query';
+import type { Metadata } from 'next';
 
 /**
- *
- * @param data
+ * @param {RouteMetadataFragFragment} data Queried data
+ * @return meta data object comsumable by next
  */
 const parseRouteSiteMetadata: TemplateMetadataParser<
 	RouteMetadataFragFragment

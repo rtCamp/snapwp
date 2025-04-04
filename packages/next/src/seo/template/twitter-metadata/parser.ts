@@ -1,11 +1,11 @@
-import type { TwitterMetadataFragFragment } from '@snapwp/query';
 import type { TemplateMetadataParser } from '../types';
+import type { TwitterMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
 
 /**
  * Parses the Twitter metadata.
  *
- * @param data - The data to parse for Twitter information.
+ * @param {TwitterMetadataFragFragment} data - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
 const parseRouteTwitterMetadata: TemplateMetadataParser<

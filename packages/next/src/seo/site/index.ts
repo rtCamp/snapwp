@@ -1,16 +1,15 @@
-import type { Metadata } from 'next';
-import type { RootMetadataGeneratorPlugin } from './types';
-
 import {
+	generateRootQuery,
 	IconMetadataFragFragmentDoc,
-	SiteMetadataFragFragmentDoc,
 	QueryEngine,
+	SiteMetadataFragFragmentDoc,
 	type IconMetadataFragFragment,
 	type SiteMetadataFragFragment,
-	generateRootQuery,
 } from '@snapwp/query';
 import parseIconMetadata from './icons-metadata/parser';
 import parseSiteMetadata from './site-metadata/parser';
+import type { RootMetadataGeneratorPlugin } from './types';
+import type { Metadata } from 'next';
 
 const plugins: Record< string, RootMetadataGeneratorPlugin< unknown > > = {};
 

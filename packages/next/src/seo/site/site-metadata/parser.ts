@@ -1,10 +1,10 @@
-import type { SiteMetadataFragFragment } from '@snapwp/query';
 import type { Parser } from '../types';
+import type { SiteMetadataFragFragment } from '@snapwp/query';
 
 /**
  * Parses fragment into metadata format consumable by next
  *
- * @param data - The data to parse.
+ * @param {SiteMetadataFragFragment} data - The data to parse.
  * @return The parsed root metadata.
  */
 const parseSiteMetadata: Parser< SiteMetadataFragFragment > = ( data ) => {

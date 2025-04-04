@@ -1,10 +1,3 @@
-import type { Metadata } from 'next';
-import type { TemplateMetadataGeneratorPlugin } from './types';
-
-import parseRouteOpenGraphMetadata from './opengraph-metadata/parser';
-
-import parseRouteTwitterMetadata from './twitter-metadata/parser';
-import parseRouteSiteMetadata from './site-metadata/parser';
 import {
 	generateTemplateQuery,
 	OpenGraphMetadataFragFragmentDoc,
@@ -15,6 +8,11 @@ import {
 	type RouteMetadataFragFragment,
 	type TwitterMetadataFragFragment,
 } from '@snapwp/query';
+import parseRouteOpenGraphMetadata from './opengraph-metadata/parser';
+import parseRouteSiteMetadata from './site-metadata/parser';
+import parseRouteTwitterMetadata from './twitter-metadata/parser';
+import type { TemplateMetadataGeneratorPlugin } from './types';
+import type { Metadata } from 'next';
 
 const plugins: Record<
 	string,

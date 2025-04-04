@@ -1,12 +1,12 @@
-import type { IconMetadataFragFragment } from '@snapwp/query';
 import type { Parser } from '../types';
 import type { FormattedIconData, IconData, IconsMetaData } from './types';
+import type { IconMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
 
 /**
  * Validates and parses Icon metadata for a route into consumable state.
  *
- * @param data object to be validated and parsed
+ * @param {IconMetadataFragFragment} data object to be validated and parsed
  * @return Parsed Icon metadata
  */
 const parseIconMetadata: Parser< IconMetadataFragFragment > = ( data ) => {
@@ -80,7 +80,8 @@ const parseIconMetadata: Parser< IconMetadataFragFragment > = ( data ) => {
 
 /**
  *
- * @param data
+ * @param {IconsMetaData} data Meta data in the internal format
+ * @return Meta data consumable by next
  */
 const reshape = ( data: IconsMetaData ): Metadata => {
 	return {

@@ -1,8 +1,9 @@
-import { type DocumentNode, type FragmentDefinitionNode, Kind } from 'graphql';
+import { Kind, type DocumentNode, type FragmentDefinitionNode } from 'graphql';
 
 /**
  *
- * @param fragment
+ * @param {DocumentNode} fragment A fragment
+ * @return Fragment name
  */
 const getFragmentName = ( fragment: DocumentNode ): string | null => {
 	const fragmentDef = fragment.definitions.find(
