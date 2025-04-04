@@ -1,4 +1,4 @@
-const readline = require( 'readline' );
+import readline from 'readline';
 
 /**
  * Prompts the user for input.
@@ -8,7 +8,7 @@ const readline = require( 'readline' );
  *
  * @return {Promise<string>} User input.
  */
-const prompt = ( query, defaultValue = '' ) => {
+const prompt = ( query: string, defaultValue = '' ): Promise< string > => {
 	const rl = readline.createInterface( {
 		input: process.stdin,
 		output: process.stdout,
@@ -35,6 +35,4 @@ const prompt = ( query, defaultValue = '' ) => {
 	} );
 };
 
-module.exports = {
-	prompt,
-};
+export default prompt;

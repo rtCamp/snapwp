@@ -1,0 +1,17 @@
+{
+	"extends": "../../config/tsconfig.base.json",
+	"compilerOptions": {
+		"rootDir": "src",
+		"declarationDir": "./dist/types",
+		"outDir": "./dist",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": [ "./src/*" ]
+		},
+		"types": [ "node" ],
+		"typeRoots": [ "../../node_modules/@types" ]
+	},
+	"include": [ "src/**/*", "../types/dist/types/global/env.d.ts" ],
+	"exclude": [ "node_modules", "dist" ],
+	"references": [ { "path": "../types" } ]
+}
