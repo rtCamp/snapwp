@@ -53,8 +53,5 @@
 		"typescript": "*",
 		"@snapwp/types": "*",
 		"html-react-parser": "^5.1.12"
-	},
-	"peerDependencies": {
-		"graphql": "^16.9.0"
 	}
 }

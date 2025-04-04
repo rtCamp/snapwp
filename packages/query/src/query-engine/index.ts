@@ -19,7 +19,7 @@ import type { BlockData } from '@snapwp/types';
 /**
  * Singleton class to handle GraphQL queries using Apollo.
  */
-export class QueryRepository {
+export class QueryEngine {
 	/**
 	 * Fetches global styles.
 	 * @return The template data fetched for the uri.

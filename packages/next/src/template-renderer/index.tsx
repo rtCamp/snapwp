@@ -1,6 +1,6 @@
 import { headers } from 'next/headers';
 import Script from 'next/script';
-import { QueryRepository } from '@snapwp/query';
+import { QueryEngine } from '@snapwp/query';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 
@@ -8,7 +8,7 @@ import type { BlockData } from '@snapwp/types';
 import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
-	getTemplateData?: ( typeof QueryRepository )[ 'getTemplateData' ];
+	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
 	children: ( editorBlocks: BlockData[] ) => ReactNode;
 };
 
@@ -23,7 +23,7 @@ export type TemplateRendererProps = {
  * @return A complete HTML document structure.
  */
 export async function TemplateRenderer( {
-	getTemplateData = QueryRepository.getTemplateData,
+	getTemplateData = QueryEngine.getTemplateData,
 	children,
 }: TemplateRendererProps ): Promise< ReactNode > {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
