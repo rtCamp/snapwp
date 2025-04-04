@@ -1,6 +1,6 @@
-const path = require( 'path' );
-const fs = require( 'fs/promises' );
 const { exec } = require( 'child_process' );
+const fs = require( 'fs/promises' );
+const path = require( 'path' );
 
 ( async () => {
 	const examplesDir = path.resolve( __dirname, '../../examples' );
@@ -24,6 +24,12 @@ const { exec } = require( 'child_process' );
 			path.resolve( __dirname, './dist/examples' ),
 			{
 				recursive: true,
+				/**
+				 * Filter function to exclude certain files/directories during the copy process
+				 *
+				 * @param {string} source The source file path to check
+				 * @return {boolean} Whether to include the file in the copy operation
+				 */
 				filter: ( source ) =>
 					! /.*(node_modules|package-lock\.json|\.env|\.next|next-env\.d\.ts|src\/__generated)/g.test(
 						source
