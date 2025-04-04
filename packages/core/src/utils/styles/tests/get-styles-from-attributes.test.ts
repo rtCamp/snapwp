@@ -1,4 +1,5 @@
 import { compileCSS } from '@wordpress/style-engine';
+
 import getStylesFromAttributes from '../get-styles-from-attributes';
 
 jest.mock( '@wordpress/style-engine', () => ( {

@@ -1,20 +1,21 @@
 import {
 	Logger,
-	type EnqueuedScriptProps,
-	type StyleSheetProps,
-	type ScriptModuleProps,
 	TemplateParseError,
+	type EnqueuedScriptProps,
+	type ScriptModuleProps,
+	type StyleSheetProps,
 } from '@snapwp/core';
-import type { BlockData } from '@snapwp/types';
+
 import type { ApolloQueryResult } from '@apollo/client';
 import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
+import type { BlockData } from '@snapwp/types';
 
 /**
  * Parses template query data into props for rendering a template.
  *
- * @param queryData - The data fetched from the template query.
- * @param wordpressUrl - The base URL of the WordPress site.
- * @param uri - The URI of the template.
+ * @param {ApolloQueryResult<GetCurrentTemplateQuery>} queryData    The data fetched from the template query.
+ * @param {string}                                     wordpressUrl The base URL of the WordPress site.
+ * @param {string}                                     uri          The URI of the template.
  *
  * @return An object containing parsed template data.
  */
@@ -63,7 +64,7 @@ export default function parseQueryResult(
 /**
  * Gets and validates the body classes from the query data.
  *
- * @param templateByUri The template data fetched for the uri.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The body classes.
  */
@@ -88,8 +89,8 @@ function parseBodyClasses(
 /**
  * Gets and validates the enqueued scripts from the query data.
  *
- * @param templateByUri The template data fetched for the uri.
- * @param wordpressUrl The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
  *
  * @return The enqueued scripts.
  */
@@ -113,7 +114,7 @@ function parseEnqueuedScripts(
 /**
  * Gets and validates the editor blocks from the query data.
  *
- * @param templateByUri The template data fetched for the uri.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The editor blocks.
  */
@@ -138,8 +139,8 @@ function parseEditorBlocks(
 /**
  * Gets and validates the enqueued stylesheets from the query data.
  *
- * @param wordpressUrl The base URL of the WordPress site.
- * @param templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
  *
  * @return The enqueued stylesheets.
  */
@@ -161,8 +162,8 @@ function parseEnqueuedStylesheets(
 /**
  * Gets and validates the script modules from the query data.
  *
- * @param templateByUri The template data fetched for the uri.
- * @param wordpressUrl The base URL of the WordPress site.
+ * @param {GetCurrentTemplateQuery['templateByUri']} templateByUri The template data fetched for the uri.
+ * @param {string}                                   wordpressUrl  The base URL of the WordPress site.
  *
  * @return The script modules.
  */
