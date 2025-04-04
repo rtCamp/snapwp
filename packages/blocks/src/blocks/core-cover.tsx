@@ -1,16 +1,17 @@
-import type { ComponentProps, ReactNode } from 'react';
 import {
-	getStylesFromAttributes,
+	cn,
 	findElementAndGetClassNames,
 	getColorClassName,
-	cn,
+	getStylesFromAttributes,
 } from '@snapwp/core';
 import { Image, Parse } from '@snapwp/next';
+
 import type {
 	CoreCover as CoreCoverType,
 	CoreCoverProps,
 	FocalPoint,
 } from '@snapwp/types';
+import type { ComponentProps, ReactNode } from 'react';
 
 const IMAGE_BACKGROUND_TYPE = 'image';
 const VIDEO_BACKGROUND_TYPE = 'video';
@@ -21,7 +22,7 @@ const DEFAULT_FOCAL_POINT = { x: 0.5, y: 0.5 };
  *
  * @see https://github.com/WordPress/gutenberg/blob/887243c1cb2b3280934fbff05d4af8e46a3feddc/packages/block-library/src/cover/shared.js#L27
  *
- * @param focalPoint - The focal point coordinates object containing x and y values.
+ * @param {FocalPoint} focalPoint The focal point coordinates object containing x and y values.
  *
  * @return CSS position string or undefined if no focal point
  */
@@ -38,12 +39,13 @@ const mediaPosition = (
 
 /**
  * Renders the core/cover block.
- * @param root0 - The component props object
- * @param root0.attributes - Block attributes including styling and media settings
- * @param root0.children - Child elements to render inside the cover
- * @param root0.renderedHtml - Pre-rendered HTML string for class extraction
- * @param root0.connectedMediaItem - The connected media item object
- * @param root0.mediaDetails - The media details object
+ *
+ * @param {Object}                               props                    The component props object
+ * @param {CoreCoverProps['attributes']}         props.attributes         Block attributes including styling and media settings
+ * @param {ReactNode}                            props.children           Child elements to render inside the cover
+ * @param {CoreCoverProps['renderedHtml']}       props.renderedHtml       Pre-rendered HTML string for class extraction
+ * @param {CoreCoverProps['connectedMediaItem']} props.connectedMediaItem The connected media item object
+ * @param {CoreCoverProps['mediaDetails']}       props.mediaDetails       The media details object
  *
  * @return The rendered cover block or null if using featured image
  */

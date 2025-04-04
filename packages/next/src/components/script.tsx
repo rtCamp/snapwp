@@ -14,14 +14,14 @@ interface ScriptInterface {
 /**
  * A reusable wrapper for Next.js Script component.
  *
- * @param props - Props for the Script component.
- * @param props.after - Scripts to be executed after the main script.
- * @param props.before - Scripts to be executed before the main script.
- * @param props.extraData - Additional data to be included in the script.
- * @param props.handle - The handle for the script.
- * @param props.loadingStrategy - The loading strategy for the script (async or defer).
- * @param props.groupLocation - The location where the script should be loaded.
- * @param props.src - The source URL for the script.
+ * @param {Object}                             props                 Props for the Script component.
+ * @param {ScriptInterface['after']}           props.after           Scripts to be executed after the main script.
+ * @param {ScriptInterface['before']}          props.before          Scripts to be executed before the main script.
+ * @param {ScriptInterface['extraData']}       props.extraData       Additional data to be included in the script.
+ * @param {ScriptInterface['handle']}          props.handle          The handle for the script.
+ * @param {ScriptInterface['loadingStrategy']} props.loadingStrategy The loading strategy for the script (async or defer).
+ * @param {ScriptInterface['location']}        props.groupLocation   The location where the script should be loaded.
+ * @param {ScriptInterface['src']}             props.src             The source URL for the script.
  *
  * @return The rendered script element.
  */

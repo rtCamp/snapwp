@@ -1,9 +1,9 @@
-import { type ClassValue, clsx } from 'clsx';
+import { clsx, type ClassValue } from 'clsx';
 
 /**
  * Combines class names.
  *
- * @param  inputs - Class names or objects to combine.
+ * @param {Array<ClassValue>} inputs Class names or objects to combine.
  *
  * @return Joined class names.
  *

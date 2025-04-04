@@ -5,7 +5,7 @@ import {
 
 /**
  * Generates webpack plugin array required for SnapWP packges to work.
- * @param snapWPConfigPath -- Path to snapwp config file
+ * @param {string} snapWPConfigPath -- Path to snapwp config file
  * @return Webpack config
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any -- Using `any` type as the parameter type is `any` in Next.js.

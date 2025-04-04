@@ -1,13 +1,14 @@
-import {
-	type AnchorHTMLAttributes,
-	type CSSProperties,
-	type PropsWithChildren,
-	type ReactNode,
-} from 'react';
-import { toFrontendUri, isInternalUrl } from '@snapwp/core';
-import { getConfig } from '@snapwp/core/config';
-import type { PartialWithUndefined } from '@snapwp/types';
 import NextLink, { type LinkProps } from 'next/link';
+import { isInternalUrl, toFrontendUri } from '@snapwp/core';
+import { getConfig } from '@snapwp/core/config';
+
+import type { PartialWithUndefined } from '@snapwp/types';
+import type {
+	AnchorHTMLAttributes,
+	CSSProperties,
+	PropsWithChildren,
+	ReactNode,
+} from 'react';
 
 interface LinkInterface {
 	href: string | undefined;
@@ -18,11 +19,11 @@ interface LinkInterface {
 /**
  * Link component to handle internal and external links.
  *
- * @param props - Props for the component.
- * @param props.href - Link's href attribute.
- * @param props.style - CSS style object.
- * @param props.className - CSS class name.
- * @param props.children - Block's Children.
+ * @param {Object}                     props           Props for the component.
+ * @param {LinkInterface['href']}      props.href      Link's href attribute.
+ * @param {LinkInterface['style']}     props.style     CSS style object.
+ * @param {LinkInterface['className']} props.className CSS class name.
+ * @param {ReactNode}                  props.children  Block's Children.
  *
  * @return The rendered link.
  */

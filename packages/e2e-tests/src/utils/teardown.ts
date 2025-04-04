@@ -1,4 +1,5 @@
 import { test as teardown } from '@playwright/test';
+
 import cleanup from './cleanup';
 
 teardown.describe.configure( { timeout: 600000 } );

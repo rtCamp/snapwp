@@ -2,15 +2,19 @@
 
 // Dependencies
 const path = require( 'path' );
+
 const { program } = require( 'commander' );
-const { prompt } = require( './utils/prompt.cjs' );
-const {
-	createProjectDirectory,
-} = require( './create-app/createProjectDirectory.cjs' );
-const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
+
 const {
 	copyStarterTemplate,
 } = require( './create-app/copyStarterTemplate.cjs' );
+const {
+	createProjectDirectory,
+} = require( './create-app/createProjectDirectory.cjs' );
+const {
+	printSuccessMessage,
+} = require( './create-app/printSuccessMessage.cjs' );
+const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
 const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
 const {
 	updatePackageVersions,
@@ -18,6 +22,7 @@ const {
 const {
 	printSuccessMessage,
 } = require( './create-app/printSuccessMessage.cjs' );
+const { prompt } = require( './utils/prompt.cjs' );
 const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
 
 /**
