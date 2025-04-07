@@ -1,1 +1,1 @@
-export * from './query-engine';
+export * from './adapter';

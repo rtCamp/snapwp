@@ -16,7 +16,7 @@ import {
 } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { ApolloQueryProvider } from '@/query-provider';
+import { ApolloQueryProvider } from './query-provider';
 import type { QueryClientAdapter } from '@snapwp/types';
 
 /**
@@ -37,7 +37,7 @@ export class ApolloQueryClientAdapter
 
 	/**
 	 * Singleton instance of the ApolloQueryClientAdapter.
-	 * @param {ApolloClientOptions< NormalizedCacheObject >} options Optional ApolloClientOptions to configure the client instance.
+	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 *
 	 * @return The singleton instance of the ApolloQueryClientAdapter.
 	 */
@@ -54,7 +54,7 @@ export class ApolloQueryClientAdapter
 
 	/**
 	 * Creates a new instance of ApolloQueryClientAdapter.
-	 * @param {ApolloClientOptions< NormalizedCacheObject >} options Optional ApolloClientOptions to configure the client instance.
+	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 */
 	private constructor(
 		options?: ApolloClientOptions< NormalizedCacheObject >
@@ -68,7 +68,7 @@ export class ApolloQueryClientAdapter
 	/**
 	 * Initializes a new ApolloClient instance with default options and merges them with provided options.
 	 *
-	 * @param {ApolloClientOptions< NormalizedCacheObject >} options Optional ApolloClientOptions to merge with the default configuration.
+	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to merge with the default configuration.
 	 *
 	 * @return A new instance of ApolloClient with the merged configuration.
 	 */
@@ -91,7 +91,7 @@ export class ApolloQueryClientAdapter
 
 	/**
 	 * Returns a new ApolloClient instance using merged default and provided options.
-	 * @param {ApolloClientOptions< NormalizedCacheObject >} options Optional client options to merge with the default configuration.
+	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional client options to merge with the default configuration.
 	 * @return A new instance of ApolloClient with the merged configuration.
 	 */
 	getClient(
@@ -115,7 +115,7 @@ export class ApolloQueryClientAdapter
 	/**
 	 * Returns an ApolloClient instance from a provided client or undefined.
 	 * This method is useful when you need to use the ApolloClient hook.
-	 * @param {ApolloClient< NormalizedCacheObject >} client An optional ApolloClient instance.
+	 * @param { ApolloClient< NormalizedCacheObject > } client An optional ApolloClient instance.
 	 * @return The ApolloClient instance if provided; otherwise, undefined.
 	 */
 	useClient(
@@ -131,10 +131,10 @@ export class ApolloQueryClientAdapter
 
 	/**
 	 * Executes a GraphQL query using the Apollo Client instance and writes the result to the cache.
-	 * @param {Object} param0 An object containing:
-	 * @param {string[]} param0.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param {DocumentNode | TypedDocumentNode< TData >} param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param {TQueryOptions} param0.options - Optional query options compatible with Apollo's QueryOptions.
+	 * @param { Object } props An object containing:
+	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
@@ -181,10 +181,10 @@ export class ApolloQueryClientAdapter
 
 	/**
 	 * Executes a GraphQL query as a React hook using Apollo's useQuery.
-	 * @param {Object} param0 An object containing:
-	 * @param {string[]} param0.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param {DocumentNode | TypedDocumentNode< TData >} param0.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param {TQueryOptions} param0.options - Optional query options compatible with Apollo's QueryHookOptions.
+	 * @param { Object } props An object containing:
+	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
 	useQuery<

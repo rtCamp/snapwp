@@ -2,7 +2,7 @@
 	"name": "@snapwp/apollo",
 	"version": "0.1.0",
 	"license": "AGPL-3.0",
-	"description": "Internal package for SnapWP",
+	"description": "Apollo Client integration for SnapWP.",
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
@@ -29,9 +29,7 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
 	"dependencies": {
-		"@snapwp/core": "*"
-	},
-	"peerDependencies": {
+		"@snapwp/core": "*",
 		"@apollo/client": "^3.13.4"
 	},
 	"devDependencies": {

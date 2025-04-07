@@ -2,7 +2,7 @@
 	"name": "@snapwp/tanstack",
 	"version": "0.1.0",
 	"license": "AGPL-3.0",
-	"description": "Internal package for SnapWP",
+	"description": "TanStack Client integration for SnapWP.",
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {

@@ -5,9 +5,9 @@ import { type JSX, type PropsWithChildren } from 'react';
 
 /**
  * TanStack Query Provider component.
- * @param {Object} root0 - The root object.
- * @param {ReactNode | undefined} root0.children - The child components.
- * @param {QueryClient} root0.client - The TanStack Client instance.
+ * @param { Object } props - The root object.
+ * @param { ReactNode | undefined } props.children - The child components.
+ * @param { QueryClient } props.client - The TanStack Client instance.
  *
  * @return The rendered TanStackProvider component.
  */

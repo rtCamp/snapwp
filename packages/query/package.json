@@ -45,7 +45,6 @@
 		"@snapwp/types": "*"
 	},
 	"peerDependencies": {
-		"react": "^19.0.0",
-		"graphql": "^16.9.0"
+		"react": "^19.0.0"
 	}
 }
