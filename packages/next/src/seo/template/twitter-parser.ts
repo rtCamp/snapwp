@@ -8,7 +8,7 @@ import type { Metadata } from 'next';
  * @param {TwitterMetadataFragFragment} data - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-const parseRouteTwitterMetadata: TemplateMetadataParser<
+export const parseRouteTwitterMetadata: TemplateMetadataParser<
 	TwitterMetadataFragFragment
 > = ( data: TwitterMetadataFragFragment ) => {
 	const twitterMetadata: Metadata[ 'twitter' ] = {};
@@ -41,5 +41,3 @@ const parseRouteTwitterMetadata: TemplateMetadataParser<
 	}
 	return twitterMetadata;
 };
-
-export default parseRouteTwitterMetadata;

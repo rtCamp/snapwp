@@ -1,5 +1,4 @@
 import type { Parser } from '../types';
-import type { FormattedIconData, IconData, IconsMetaData } from './types';
 import type { IconMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
 
@@ -9,7 +8,9 @@ import type { Metadata } from 'next';
  * @param {IconMetadataFragFragment} data object to be validated and parsed
  * @return Parsed Icon metadata
  */
-const parseIconMetadata: Parser< IconMetadataFragFragment > = ( data ) => {
+export const parseIconMetadata: Parser< IconMetadataFragFragment > = (
+	data
+) => {
 	if ( ! data.generalSettings ) {
 		return {};
 	}
@@ -138,4 +139,19 @@ const formatIcons = ( icons: IconData[] ): FormattedIconData[] =>
 		sizes: `${ width }x${ height }`,
 	} ) );
 
-export default parseIconMetadata;
+export interface IconsMetaData {
+	faviconIcons: FormattedIconData[];
+	appleIcons: FormattedIconData[] | undefined;
+	msApplicationTileIcon: IconData | undefined;
+}
+
+export interface IconData {
+	sourceUrl: string;
+	height: string;
+	width: string;
+}
+
+export interface FormattedIconData {
+	url: string;
+	sizes: string;
+}

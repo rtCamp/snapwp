@@ -1,4 +1,4 @@
-import getCleanExcerpt from '@/seo/utils/get-clean-excerpt';
+import { sanitizeHtml } from '@snapwp/core';
 import type { TemplateMetadataParser } from '../types';
 import type { RouteMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
@@ -7,7 +7,7 @@ import type { Metadata } from 'next';
  * @param {RouteMetadataFragFragment} data Queried data
  * @return meta data object comsumable by next
  */
-const parseRouteSiteMetadata: TemplateMetadataParser<
+export const parseRouteSiteMetadata: TemplateMetadataParser<
 	RouteMetadataFragFragment
 > = ( data: RouteMetadataFragFragment ) => {
 	const metadata: Metadata = {};
@@ -24,7 +24,7 @@ const parseRouteSiteMetadata: TemplateMetadataParser<
 				metadata.title = node.title;
 			}
 			if ( node.content ) {
-				metadata.description = getCleanExcerpt( node.content );
+				metadata.description = sanitizeHtml( node.content );
 			}
 			if ( node.author?.node?.name ) {
 				metadata.authors = [ { name: node.author.node.name } ];
@@ -35,7 +35,7 @@ const parseRouteSiteMetadata: TemplateMetadataParser<
 				metadata.title = node.title;
 			}
 			if ( node.excerpt ) {
-				metadata.description = getCleanExcerpt( node.excerpt );
+				metadata.description = sanitizeHtml( node.excerpt );
 			}
 			if ( node.author?.node?.name ) {
 				metadata.authors = [ { name: node.author.node.name } ];
@@ -47,7 +47,7 @@ const parseRouteSiteMetadata: TemplateMetadataParser<
 				metadata.title = node.name;
 			}
 			if ( node.description ) {
-				metadata.description = getCleanExcerpt( node.description );
+				metadata.description = sanitizeHtml( node.description );
 			}
 			break;
 		default:
@@ -56,5 +56,3 @@ const parseRouteSiteMetadata: TemplateMetadataParser<
 
 	return metadata;
 };
-
-export default parseRouteSiteMetadata;

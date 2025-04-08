@@ -7,7 +7,9 @@ import type { SiteMetadataFragFragment } from '@snapwp/query';
  * @param {SiteMetadataFragFragment} data - The data to parse.
  * @return The parsed root metadata.
  */
-const parseSiteMetadata: Parser< SiteMetadataFragFragment > = ( data ) => {
+export const parseSiteMetadata: Parser< SiteMetadataFragFragment > = (
+	data
+) => {
 	if ( ! data.generalSettings ) {
 		return {};
 	}
@@ -21,5 +23,3 @@ const parseSiteMetadata: Parser< SiteMetadataFragFragment > = ( data ) => {
 		},
 	};
 };
-
-export default parseSiteMetadata;

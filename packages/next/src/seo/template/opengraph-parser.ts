@@ -7,10 +7,8 @@ import type { OpenGraphMetadataFragFragment } from '@snapwp/query';
  * @param {OpenGraphMetadataFragFragment} _data data
  * @return Parsed Open Graph metadata for the given route.
  */
-const parseRouteOpenGraphMetadata: TemplateMetadataParser<
+export const parseRouteOpenGraphMetadata: TemplateMetadataParser<
 	OpenGraphMetadataFragFragment
 > = ( _data ) => {
 	return {};
 };
-
-export default parseRouteOpenGraphMetadata;

@@ -1,18 +1,12 @@
 import { TemplateRenderer } from '@snapwp/next';
-import { getRouteMetadata } from '@snapwp/next/seo/route';
+import { getTemplateMetadata } from '@snapwp/next/seo';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
 
 export async function generateMetadata(): Promise< Metadata | undefined > {
 	const headerList = await headers();
-	const uri = headerList.get( 'x-current-path' ) || '/';
-
-	if ( uri === '/' ) {
-		return undefined;
-	}
-
-	const metadata = await getRouteMetadata( uri );
+	const metadata = await getTemplateMetadata( headerList.get( 'x-current-path' ) || '/' );
 	return metadata;
 }
 

@@ -28,15 +28,10 @@
 			"require": "./dist/components/default-error.js",
 			"types": "./dist/types/components/default-error.d.ts"
 		},
-		"./seo/site": {
-			"import": "./dist/seo/site/index.js",
-			"require": "./dist/seo/site/index.js",
-			"types": "./dist/types/seo/site/index.js"
-		},
-		"./seo/route": {
-			"import": "./dist/seo/route/index.js",
-			"require": "./dist/seo/route/index.js",
-			"types": "./dist/types/seo/route/index.js"
+		"./seo": {
+			"import": "./dist/seo/index.js",
+			"require": "./dist/seo/index.js",
+			"types": "./dist/types/seo/index.js"
 		}
 	},
 	"scripts": {
