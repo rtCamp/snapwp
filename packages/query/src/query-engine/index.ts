@@ -10,7 +10,6 @@ import {
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
-import { QueryAdapterRegistry } from '@/query-adapter-registry';
 import parseGeneralSettings from '@/utils/parse-general-settings';
 import parseGlobalStyles from '@/utils/parse-global-styles';
 import parseTemplate from '@/utils/parse-template';
@@ -25,7 +24,7 @@ export class QueryEngine {
 	 * @return The template data fetched for the uri.
 	 */
 	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
-		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+		const data = await getConfig().queryEngine.fetchQuery( {
 			key: [ 'globalStyles' ],
 			query: GetGlobalStylesDocument,
 			options: {},
@@ -56,7 +55,7 @@ export class QueryEngine {
 		  }
 		| undefined
 	> => {
-		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+		const data = await getConfig().queryEngine.fetchQuery( {
 			key: [ 'generalSettings' ],
 			query: GetGeneralSettingsDocument,
 		} );
@@ -80,7 +79,7 @@ export class QueryEngine {
 	} > => {
 		const variables = { uri };
 
-		const data = await QueryAdapterRegistry.adapter.fetchQuery( {
+		const data = await getConfig().queryEngine.fetchQuery( {
 			key: [ 'templateData', uri ],
 			query: GetCurrentTemplateDocument,
 			options: {

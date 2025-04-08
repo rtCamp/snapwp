@@ -1,8 +1,8 @@
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloQueryClientAdapter } from '@snapwp/apollo';
+import { ApolloQueryClientEngine } from '@snapwp/apollo';
 
 const config: SnapWPConfig = {
-	queryEngine: ApolloQueryClientAdapter.getInstance(),
+	queryEngine: ApolloQueryClientEngine.getInstance(),
 };
 
 export default config;

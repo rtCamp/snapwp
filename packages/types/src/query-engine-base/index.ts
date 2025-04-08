@@ -9,7 +9,7 @@ import type { DocumentNode } from 'graphql/language';
  * @template TClient - The type of the GraphQL client instance.
  * @template TClientOptions - The type of options used to initialize the client.
  */
-export interface QueryClientAdapter<
+export interface BaseQueryClientEngine<
 	TClient = unknown,
 	TClientOptions = unknown,
 > {

@@ -17,43 +17,43 @@ import {
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { ApolloQueryProvider } from './query-provider';
-import type { QueryClientAdapter } from '@snapwp/types';
+import type { BaseQueryClientEngine } from '@snapwp/types';
 
 /**
- * An adapter for Apollo Client that implements the QueryClientAdapter interface.
+ * An adapter for Apollo Client that implements the BaseQueryClientEngine interface.
  * This adapter provides methods for obtaining an Apollo Client instance, executing queries,
  * and using queries as hooks.
  */
-export class ApolloQueryClientAdapter
+export class ApolloQueryClientEngine
 	implements
-		QueryClientAdapter<
+		BaseQueryClientEngine<
 			ApolloClient< NormalizedCacheObject >,
 			ApolloClientOptions< NormalizedCacheObject >
 		>
 {
-	private static instance?: ApolloQueryClientAdapter;
+	private static instance?: ApolloQueryClientEngine;
 	private client?: ApolloClient< NormalizedCacheObject >;
 	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
 
 	/**
-	 * Singleton instance of the ApolloQueryClientAdapter.
+	 * Singleton instance of the ApolloQueryClientEngine.
 	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 *
-	 * @return The singleton instance of the ApolloQueryClientAdapter.
+	 * @return The singleton instance of the ApolloQueryClientEngine.
 	 */
 	static getInstance(
 		options?: ApolloClientOptions< NormalizedCacheObject >
-	): ApolloQueryClientAdapter {
-		if ( ! ApolloQueryClientAdapter.instance ) {
-			ApolloQueryClientAdapter.instance = new ApolloQueryClientAdapter(
+	): ApolloQueryClientEngine {
+		if ( ! ApolloQueryClientEngine.instance ) {
+			ApolloQueryClientEngine.instance = new ApolloQueryClientEngine(
 				options
 			);
 		}
-		return ApolloQueryClientAdapter.instance;
+		return ApolloQueryClientEngine.instance;
 	}
 
 	/**
-	 * Creates a new instance of ApolloQueryClientAdapter.
+	 * Creates a new instance of ApolloQueryClientEngine.
 	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 */
 	private constructor(

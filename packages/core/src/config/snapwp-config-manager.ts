@@ -3,7 +3,7 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions, QueryClientAdapter } from '@snapwp/types';
+import type { BaseQueryClientEngine, BlockDefinitions } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -50,7 +50,7 @@ export interface SnapWPConfig {
 	 * Query Engine
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the type of the query engine, so we use `any`. unknown will cause type error.
-	queryEngine: QueryClientAdapter< any >;
+	queryEngine: BaseQueryClientEngine< any >;
 }
 
 /**

@@ -9,38 +9,39 @@ import {
 import { request } from 'graphql-request';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { TanStackQueryProvider } from './query-provider';
-import type { QueryClientAdapter } from '@snapwp/types';
+import type { BaseQueryClientEngine } from '@snapwp/types';
 import type { DocumentNode } from 'graphql';
 
 /**
- * TanStack Query Client Adapter that implements the QueryClientAdapter interface.
+ * TanStack Query Client Adapter that implements the BaseQueryClientEngine interface.
  * This adapter allows you to work with TanStack Query in a generic way.
  */
-export class TanStackQueryClientAdapter
-	implements QueryClientAdapter< QueryClient, QueryClientConfig >
+export class TanStackQueryClientEngine
+	implements BaseQueryClientEngine< QueryClient, QueryClientConfig >
 {
-	private static instance?: TanStackQueryClientAdapter;
+	private static instance?: TanStackQueryClientEngine;
 	private client?: QueryClient;
 	private readonly clientOptions: QueryClientConfig;
 
 	/**
-	 * Singleton instance of the TanStackQueryClientAdapter.
+	 * Singleton instance of the TanStackQueryClientEngine.
 	 * @param { QueryClientConfig } options Optional TanStackClientOptions to configure the client instance.
 	 *
-	 * @return The singleton instance of the TanStackQueryClientAdapter.
+	 * @return The singleton instance of the TanStackQueryClientEngine.
 	 */
 	static getInstance(
 		options?: QueryClientConfig
-	): TanStackQueryClientAdapter {
-		if ( ! TanStackQueryClientAdapter.instance ) {
-			TanStackQueryClientAdapter.instance =
-				new TanStackQueryClientAdapter( options );
+	): TanStackQueryClientEngine {
+		if ( ! TanStackQueryClientEngine.instance ) {
+			TanStackQueryClientEngine.instance = new TanStackQueryClientEngine(
+				options
+			);
 		}
-		return TanStackQueryClientAdapter.instance;
+		return TanStackQueryClientEngine.instance;
 	}
 
 	/**
-	 * Creates a new instance of TanStackQueryClientAdapter.
+	 * Creates a new instance of TanStackQueryClientEngine.
 	 * @param { QueryClientConfig } options - Optional QueryClient instance. If not provided, a new QueryClient is created.
 	 */
 	constructor( options?: QueryClientConfig ) {
@@ -65,7 +66,6 @@ export class TanStackQueryClientAdapter
 	 * @param { QueryClientConfig } options - Generic client options (not used in this implementation).
 	 * @return The QueryClient instance.
 	 */
-	// @ts-ignore
 	getClient( options?: QueryClientConfig ): QueryClient {
 		return this.init( options );
 	}
