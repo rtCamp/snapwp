@@ -19,7 +19,7 @@ import type { BlockData } from '@snapwp/types';
  *
  * @return An object containing parsed template data.
  */
-export default function parseQueryResult(
+export function parseQueryResult(
 	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
 	wordpressUrl: string,
 	uri: string

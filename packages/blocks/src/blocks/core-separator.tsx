@@ -13,11 +13,9 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreSeparator: CoreSeparatorType = ( {
+export const CoreSeparator: CoreSeparatorType = ( {
 	renderedHtml,
 }: CoreSeparatorProps ): ReactNode => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
 };
-
-export default CoreSeparator;

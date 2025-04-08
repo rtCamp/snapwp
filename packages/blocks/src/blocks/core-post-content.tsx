@@ -14,7 +14,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CorePostContent: CorePostContentType = ( {
+export const CorePostContent: CorePostContentType = ( {
 	renderedHtml,
 	children,
 }: CorePostContentProps ): ReactNode => {
@@ -27,5 +27,3 @@ const CorePostContent: CorePostContentType = ( {
 	const classNames = cn( classNamesFromString );
 	return <div className={ classNames }>{ children }</div>;
 };
-
-export default CorePostContent;
