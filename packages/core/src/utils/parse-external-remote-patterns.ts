@@ -7,9 +7,7 @@
  *
  * @internal
  */
-export default function parseExternalRemotePatterns(
-	str?: string | undefined
-): ( {
+export function parseExternalRemotePatterns( str?: string | undefined ): ( {
 	protocol?: string;
 	hostname?: string;
 	port?: string;

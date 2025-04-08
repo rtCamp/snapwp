@@ -11,7 +11,7 @@ import type { CSSProperties, ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreList: CoreListType = ( {
+export const CoreList: CoreListType = ( {
 	attributes,
 	children,
 }: CoreListProps ): ReactNode => {
@@ -40,5 +40,3 @@ const CoreList: CoreListType = ( {
 		</TagName>
 	);
 };
-
-export default CoreList;

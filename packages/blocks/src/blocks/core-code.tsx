@@ -11,7 +11,9 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ): ReactNode => {
+export const CoreCode: CoreCodeType = ( {
+	attributes,
+}: CoreCodeProps ): ReactNode => {
 	const { style, cssClassName, content } = attributes || {};
 
 	const styleObject = getStylesFromAttributes( { style } );
@@ -25,5 +27,3 @@ const CoreCode: CoreCodeType = ( { attributes }: CoreCodeProps ): ReactNode => {
 		</pre>
 	);
 };
-
-export default CoreCode;

@@ -58,7 +58,7 @@ function imageFillStyles(
  *
  * @return Rendered component or null if no content
  */
-const CoreMediaText: CoreMediaTextType = ( {
+export const CoreMediaText: CoreMediaTextType = ( {
 	attributes = {},
 	children,
 	renderedHtml,
@@ -180,5 +180,3 @@ const CoreMediaText: CoreMediaTextType = ( {
 		</div>
 	);
 };
-
-export default CoreMediaText;

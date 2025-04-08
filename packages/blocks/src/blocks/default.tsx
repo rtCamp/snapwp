@@ -9,12 +9,12 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered default block.
  */
-const Default: DefaultType = ( { renderedHtml }: DefaultProps ): ReactNode => {
+export const Default: DefaultType = ( {
+	renderedHtml,
+}: DefaultProps ): ReactNode => {
 	if ( ! renderedHtml ) {
 		return null;
 	}
 
 	return <Parse html={ renderedHtml } />;
 };
-
-export default Default;

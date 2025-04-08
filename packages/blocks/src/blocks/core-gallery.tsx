@@ -19,7 +19,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreGallery: CoreGalleryType = ( {
+export const CoreGallery: CoreGalleryType = ( {
 	attributes,
 	children,
 	renderedHtml,
@@ -50,5 +50,3 @@ const CoreGallery: CoreGalleryType = ( {
 		</figure>
 	);
 };
-
-export default CoreGallery;

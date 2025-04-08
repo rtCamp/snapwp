@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreHtml: CoreHtmlType = ( {
+export const CoreHtml: CoreHtmlType = ( {
 	renderedHtml,
 }: CoreHtmlProps ): ReactNode => {
 	// @todo use attributes.content instead of renderedHtml once it's available
@@ -20,5 +20,3 @@ const CoreHtml: CoreHtmlType = ( {
 
 	return <Parse html={ renderedHtml } />;
 };
-
-export default CoreHtml;

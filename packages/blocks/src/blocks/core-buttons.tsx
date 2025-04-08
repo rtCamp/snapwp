@@ -14,7 +14,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreButtons: CoreButtonsType = ( {
+export const CoreButtons: CoreButtonsType = ( {
 	attributes,
 	children,
 }: CoreButtonsProps ): ReactNode => {
@@ -32,5 +32,3 @@ const CoreButtons: CoreButtonsType = ( {
 		</div>
 	);
 };
-
-export default CoreButtons;

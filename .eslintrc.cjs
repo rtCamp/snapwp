@@ -65,6 +65,7 @@ module.exports = {
 		// Import rules.
 		'import/default': 'error',
 		'import/named': 'error',
+		'import/no-default-export': 'error',
 
 		// Jest rules.
 		'jest/expect-expect': 'off',

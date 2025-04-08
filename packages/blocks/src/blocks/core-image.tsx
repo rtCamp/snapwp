@@ -81,7 +81,7 @@ const Figure = ( {
  *
  * @return The rendered core image block or null if no URL is provided.
  */
-const CoreImage: CoreImageType = ( {
+export const CoreImage: CoreImageType = ( {
 	attributes,
 	connectedMediaItem,
 	mediaDetails,
@@ -340,5 +340,3 @@ const extractAriaAttributesForElement = (
 
 	return result;
 };
-
-export default CoreImage;

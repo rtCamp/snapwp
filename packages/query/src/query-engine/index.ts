@@ -19,8 +19,8 @@ import {
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
 
-import parseGlobalStyles from '@/utils/parse-global-styles';
-import parseTemplate from '@/utils/parse-template';
+import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
+import { parseQueryResult as parseTemplate } from '@/utils/parse-template';
 
 import type { BlockData } from '@snapwp/types';
 

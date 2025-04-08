@@ -1,8 +1,8 @@
 import NextScript from 'next/script';
 import { getConfig } from '@snapwp/core/config';
 
-import Script from '@/components/script';
-import ScriptModule from '@/components/script-module';
+import { Script } from '@/components/script';
+import { ScriptModule } from '@/components/script-module';
 
 import type { EnqueuedScriptProps, ScriptModuleProps } from '@snapwp/core';
 import type { PropsWithChildren, ReactNode } from 'react';

@@ -19,7 +19,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreSpacer: CoreSpacerType = ( {
+export const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
 }: CoreSpacerProps ): ReactNode => {
@@ -52,5 +52,3 @@ const CoreSpacer: CoreSpacerType = ( {
 		/>
 	);
 };
-
-export default CoreSpacer;

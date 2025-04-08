@@ -14,7 +14,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreParagraph: CoreParagraphType = ( {
+export const CoreParagraph: CoreParagraphType = ( {
 	attributes,
 }: CoreParagraphProps ): ReactNode => {
 	const {
@@ -60,5 +60,3 @@ const CoreParagraph: CoreParagraphType = ( {
 		</p>
 	);
 };
-
-export default CoreParagraph;
