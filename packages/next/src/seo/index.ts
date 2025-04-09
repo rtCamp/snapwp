@@ -20,7 +20,7 @@ import type {
 import type { Metadata } from 'next';
 
 /**
- *
+ * Handles Seo related metadata.
  */
 export class Seo {
 	static isInitialized: boolean = false;
@@ -35,7 +35,7 @@ export class Seo {
 	> = {};
 
 	/**
-	 *
+	 * Initializer
 	 */
 	public static initialize(): void {
 		Seo.isInitialized = true;
@@ -43,31 +43,33 @@ export class Seo {
 	}
 
 	/**
-	 *
-	 * @param generator
-	 * @param key
+	 * Loads a plugin to generate site level meta data.
+	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
+	 * @param {string} key key unique to the plugin
 	 */
 	public static registerSiteSeoPlugin(
-		generator: RootMetadataGeneratorPlugin< any >,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- No contraints on the fragment
+		plugin: RootMetadataGeneratorPlugin< any >,
 		key: string
 	): void {
-		Seo.siteSeoPlugins[ key ] = generator;
+		Seo.siteSeoPlugins[ key ] = plugin;
 	}
 
 	/**
-	 *
-	 * @param generator
-	 * @param key
+	 * Loads a plugin to generate route level meta data.
+	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
+	 * @param {string} key key unique to the plugin
 	 */
 	public static registerRouteSeoPlugin(
-		generator: TemplateMetadataGeneratorPlugin< any >,
+		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- No contraints on the fragment
+		plugin: TemplateMetadataGeneratorPlugin< any >,
 		key: string
 	): void {
-		Seo.siteSeoPlugins[ key ] = generator;
+		Seo.siteSeoPlugins[ key ] = plugin;
 	}
 
 	/**
-	 *
+	 * Loads all default plugins.
 	 */
 	private static registerDefaultPlugins(): void {
 		Seo.registerSiteSeoPlugin(
@@ -112,7 +114,8 @@ export class Seo {
 	}
 
 	/**
-	 *
+	 * Uses all loaded plugin to get site level meta data.
+	 * @return metadata
 	 */
 	public static async getSiteMetadata(): Promise< Metadata > {
 		// Collect fragments
@@ -150,8 +153,10 @@ export class Seo {
 	}
 
 	/**
-	 *
-	 * @param path
+	 * Uses all loaded plugin to get route level meta data.
+	 * @todo add params and searchParams
+	 * @param {string} path sub route string
+	 * @return metadata
 	 */
 	public static async getTemplateMetadata( path = '/' ): Promise< Metadata > {
 		// Collect fragments
@@ -194,6 +199,7 @@ export class Seo {
 	}
 }
 
+//@todo attach initialization to lifecycle of the app rather than import
 if ( ! Seo.isInitialized ) {
 	Seo.initialize();
 }

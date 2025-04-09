@@ -6,7 +6,9 @@ import { headers } from 'next/headers';
 
 export async function generateMetadata(): Promise< Metadata | undefined > {
 	const headerList = await headers();
-	const metadata = await getTemplateMetadata( headerList.get( 'x-current-path' ) || '/' );
+	const metadata = await getTemplateMetadata(
+		headerList.get( 'x-current-path' ) || '/'
+	);
 	return metadata;
 }
 
