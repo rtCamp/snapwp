@@ -1,7 +1,7 @@
 'use client';
 
 import { QueryClientProvider, type QueryClient } from '@tanstack/react-query';
-import { type JSX, type PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 
 /**
  * TanStack Query Provider component.
@@ -14,7 +14,7 @@ import { type JSX, type PropsWithChildren } from 'react';
 export const TanStackQueryProvider: ( {
 	client,
 	children,
-}: React.PropsWithChildren< {
+}: PropsWithChildren< {
 	client: QueryClient;
 } > ) => JSX.Element = ( {
 	client,

@@ -5,7 +5,7 @@ import {
 	type ApolloClient,
 	type NormalizedCacheObject,
 } from '@apollo/client';
-import { type JSX, type PropsWithChildren } from 'react';
+import type { JSX, PropsWithChildren } from 'react';
 
 /**
  * Apollo Query Provider component.
@@ -19,7 +19,7 @@ import { type JSX, type PropsWithChildren } from 'react';
 export const ApolloQueryProvider: ( {
 	client,
 	children,
-}: React.PropsWithChildren< {
+}: PropsWithChildren< {
 	client: ApolloClient< NormalizedCacheObject >;
 } > ) => JSX.Element = ( {
 	client,
