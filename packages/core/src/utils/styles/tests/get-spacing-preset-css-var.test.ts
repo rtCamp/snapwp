@@ -1,4 +1,4 @@
-import getSpacingPresetCssVar from '../get-spacing-preset-css-var';
+import { getSpacingPresetCssVar } from '../get-spacing-preset-css-var';
 
 describe( 'getSpacingPresetCssVar', () => {
 	it( 'should return the corresponding CSS variable for a valid spacing preset', () => {

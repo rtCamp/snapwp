@@ -10,7 +10,7 @@ import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
  *
  * @return An object containing parsed general settings data.
  */
-export default function parseGeneralSettings(
+export function parseGeneralSettings(
 	queryData: ApolloQueryResult< GetGeneralSettingsQuery >
 ):
 	| {

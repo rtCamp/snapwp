@@ -15,4 +15,5 @@ const baseConfig: CodegenConfig = {
 	},
 };
 
+// eslint-disable-next-line import/no-default-export -- this serves as an entry point and needs a default export.
 export default baseConfig;

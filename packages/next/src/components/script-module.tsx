@@ -36,7 +36,7 @@ interface ScriptModuleInterface {
  *
  * @return The rendered script module elements
  */
-export default function ScriptModule( {
+export function ScriptModule( {
 	handle,
 	src,
 	dependencies,
