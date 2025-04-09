@@ -1,7 +1,7 @@
 import fs from 'fs/promises';
 import path from 'path';
-import openEditor from '../utils/open-editor';
-import prompt from '../utils/prompt';
+import { openEditor } from '../utils/open-editor';
+import { prompt } from '../utils/prompt';
 
 /**
  * Creates the .env file either using the default template or by prompting the user.
@@ -68,7 +68,7 @@ async function createEnvFile(
  * @param {boolean} useDefaultEnv - Whether to use a default .env file.
  * @return {Promise<void>}
  */
-export default async function setupEnvFile(
+export async function setupEnvFile(
 	projectDirPath: string,
 	useDefaultEnv: boolean
 ): Promise< void > {

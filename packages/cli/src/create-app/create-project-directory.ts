@@ -6,7 +6,7 @@ import fs from 'fs/promises';
  * @param {string} projectDirPath - The path to create.
  * @return {Promise<void>}
  */
-export default async function createProjectDirectory(
+export async function createProjectDirectory(
 	projectDirPath: string
 ): Promise< void > {
 	try {

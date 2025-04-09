@@ -9,7 +9,7 @@ import path from 'path';
  *                              - success: {boolean} Indicates if the operation was successful.
  *                              - message: {string} Provides additional information or error details.
  */
-export default function openEditor(
+export function openEditor(
 	filePath: string
 ): Promise< { success: boolean; message: string } > {
 	return new Promise( ( resolve ) => {

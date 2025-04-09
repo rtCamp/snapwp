@@ -8,7 +8,10 @@ import readline from 'readline';
  *
  * @return {Promise<string>} User input.
  */
-const prompt = ( query: string, defaultValue = '' ): Promise< string > => {
+export const prompt = (
+	query: string,
+	defaultValue = ''
+): Promise< string > => {
 	const rl = readline.createInterface( {
 		input: process.stdin,
 		output: process.stdout,
@@ -34,5 +37,3 @@ const prompt = ( query: string, defaultValue = '' ): Promise< string > => {
 		);
 	} );
 };
-
-export default prompt;

@@ -7,7 +7,7 @@ import path from 'path';
  * @param {string} projectDirPath - Path to the project directory.
  * @return {Promise<void>}
  */
-export default async function updatePackageVersions(
+export async function updatePackageVersions(
 	projectDirPath: string
 ): Promise< void > {
 	const packageJsonPath = path.join( projectDirPath, 'package.json' );

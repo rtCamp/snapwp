@@ -11,7 +11,7 @@ const NPMRC_CONTENT = `@snapwp:registry=${ REGISTRY_URL }`;
  * @param {boolean} useProxy - Whether to use the proxy registry.
  * @return {Promise<void>}
  */
-export default async function setupNpmrc(
+export async function setupNpmrc(
 	projectDirPath: string,
 	useProxy: boolean
 ): Promise< void > {

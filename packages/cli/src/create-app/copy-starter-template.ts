@@ -13,7 +13,7 @@ const __dirname = path.dirname( fileURLToPath( import.meta.url ) );
  * @param {string} projectDirPath - Path to the project directory.
  * @return {Promise<void>}
  */
-export default async function copyStarterTemplate(
+export async function copyStarterTemplate(
 	projectDirPath: string
 ): Promise< void > {
 	const nextJsStarterPath = path.resolve(

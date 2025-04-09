@@ -7,7 +7,9 @@ import { spawn } from 'child_process';
  * @return {Promise<void>} A promise that resolves when installation completes successfully.
  * @throws {Error} When installation fails or is cancelled.
  */
-const runNpmInstall = async ( projectDirPath: string ): Promise< void > => {
+export const runNpmInstall = async (
+	projectDirPath: string
+): Promise< void > => {
 	// Dynamically import ora
 	const { default: ora } = await import( 'ora' );
 
@@ -131,5 +133,3 @@ const runNpmInstall = async ( projectDirPath: string ): Promise< void > => {
 		} );
 	} );
 };
-
-export default runNpmInstall;
