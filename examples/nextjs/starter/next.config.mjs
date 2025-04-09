@@ -1,3 +1,3 @@
-import withSnapWP from '@snapwp/next/withSnapWP';
+import { withSnapWP } from '@snapwp/next/withSnapWP';
 
 export default await withSnapWP( {} );
