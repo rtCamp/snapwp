@@ -1,21 +1,21 @@
-import type { JSX, ReactNode } from 'react';
 import { cn, getClassNamesFromString } from '@snapwp/core';
 import type {
 	CoreTemplatePart as CoreTemplatePartType,
 	CoreTemplatePartProps,
 } from '@snapwp/types';
+import type { JSX, ReactNode } from 'react';
 
 /**
  * Renders the core/template-part block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                                props              The props for the block component.
+ * @param {CoreTemplatePartProps['attributes']}   props.attributes   Block attributes.
+ * @param {ReactNode}                             props.children     The block's children.
+ * @param {CoreTemplatePartProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreTemplatePart: CoreTemplatePartType = ( {
+export const CoreTemplatePart: CoreTemplatePartType = ( {
 	renderedHtml,
 	children,
 	attributes,
@@ -35,5 +35,3 @@ const CoreTemplatePart: CoreTemplatePartType = ( {
 	const classNames = cn( classNamesFromString );
 	return <TagName className={ classNames }>{ children }</TagName>;
 };
-
-export default CoreTemplatePart;

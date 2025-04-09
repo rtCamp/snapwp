@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
+
+import { CoreButtons } from '../core-buttons';
 import '@testing-library/jest-dom';
-import CoreButtons from '../core-buttons';
 
 jest.mock( '@wordpress/style-engine', () => {
 	const actual = jest.requireActual( '@wordpress/style-engine' );

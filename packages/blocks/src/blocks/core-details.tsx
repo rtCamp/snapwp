@@ -12,14 +12,14 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/details block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                           props              The props for the block component.
+ * @param {CoreDetailsProps['attributes']}   props.attributes   Block attributes.
+ * @param {ReactNode}                        props.children     The block's children.
+ * @param {CoreDetailsProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreDetails: CoreDetailsType = ( {
+export const CoreDetails: CoreDetailsType = ( {
 	attributes,
 	children,
 	renderedHtml,
@@ -47,5 +47,3 @@ const CoreDetails: CoreDetailsType = ( {
 		</details>
 	);
 };
-
-export default CoreDetails;

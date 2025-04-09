@@ -5,17 +5,17 @@ import {
 	type HTMLReactParserOptions,
 } from 'html-react-parser';
 import {
-	getStyleObjectFromString,
 	getImageSizeFromAttributes,
+	getStyleObjectFromString,
 } from '@snapwp/core';
-import Image from '@/components/image';
-import Link from '@/components/link';
+import { Image } from '@/components/image';
+import { Link } from '@/components/link';
 
 export const defaultOptions: HTMLReactParserOptions = {
 	/**
 	 * Replaces anchor tags with Next.js Link components.
 	 *
-	 * @param domNode - The DOM node being processed.
+	 * @param {DOMNode} domNode The DOM node being processed.
 	 *
 	 * @return A React element if the node is an anchor tag, otherwise undefined.
 	 */

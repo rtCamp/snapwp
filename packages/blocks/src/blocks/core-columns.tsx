@@ -8,13 +8,13 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/columns block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
+ * @param {Object}                         props            The props for the block component.
+ * @param {CoreColumnsProps['attributes']} props.attributes Block attributes.
+ * @param {ReactNode}                      props.children   The block's children.
  *
  * @return The rendered block.
  */
-const CoreColumns: CoreColumnsType = ( {
+export const CoreColumns: CoreColumnsType = ( {
 	attributes,
 	children,
 }: CoreColumnsProps ): ReactNode => {
@@ -32,5 +32,3 @@ const CoreColumns: CoreColumnsType = ( {
 		</div>
 	);
 };
-
-export default CoreColumns;

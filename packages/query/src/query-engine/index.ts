@@ -1,9 +1,3 @@
-import { getGraphqlUrl, getConfig } from '@snapwp/core/config';
-import {
-	GetCurrentTemplateDocument,
-	GetGeneralSettingsDocument,
-	GetGlobalStylesDocument,
-} from '@graphqlTypes/graphql';
 import {
 	ApolloClient,
 	ApolloError,
@@ -12,17 +6,26 @@ import {
 	type ServerError,
 	type ServerParseError,
 } from '@apollo/client';
-import parseTemplate from '@/utils/parse-template';
-import parseGlobalStyles from '@/utils/parse-global-styles';
-import type { BlockData } from '@snapwp/types';
 import {
 	Logger,
-	type GlobalHeadProps,
 	type EnqueuedScriptProps,
-	type StyleSheetProps,
+	type GlobalHeadProps,
 	type ScriptModuleProps,
+	type StyleSheetProps,
 } from '@snapwp/core';
-import parseGeneralSettings from '@/utils/parse-general-settings';
+import { getConfig, getGraphqlUrl } from '@snapwp/core/config';
+
+import {
+	GetCurrentTemplateDocument,
+	GetGeneralSettingsDocument,
+	GetGlobalStylesDocument,
+} from '@graphqlTypes/graphql';
+
+import { parseGeneralSettings } from '@/utils/parse-general-settings';
+import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
+import { parseQueryResult as parseTemplate } from '@/utils/parse-template';
+
+import type { BlockData } from '@snapwp/types';
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -153,7 +156,7 @@ export class QueryEngine {
 
 	/**
 	 * Fetches blocks, scripts and styles for the given uri.
-	 * @param uri - The URL of the seed node.
+	 * @param {string} uri - The URL of the seed node.
 	 *
 	 * @return The template data fetched for the uri.
 	 */
@@ -202,7 +205,7 @@ export class QueryEngine {
 /**
  * Logs the Apollo errors.
  *
- * @param error - The Apollo error.
+ * @param {ApolloError} error The Apollo error.
  */
 const logApolloErrors = ( error: ApolloError ): void => {
 	// If there are graphQLErrors log them.
@@ -224,7 +227,7 @@ const logApolloErrors = ( error: ApolloError ): void => {
 /**
  * Returns the network error message.
  *
- * @param networkError - The network error.
+ * @param {Error|ServerParseError|ServerError} networkError The network error.
  *
  * @return The network error message.
  */

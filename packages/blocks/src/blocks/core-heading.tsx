@@ -1,20 +1,20 @@
-import type { JSX, ReactNode } from 'react';
 import { getStylesFromAttributes } from '@snapwp/core';
 import { Parse } from '@snapwp/next';
 import type {
 	CoreHeading as CoreHeadingType,
 	CoreHeadingProps,
 } from '@snapwp/types';
+import type { JSX, ReactNode } from 'react';
 
 /**
  * Renders the core/heading block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
+ * @param {Object}                         props            The props for the block component.
+ * @param {CoreHeadingProps['attributes']} props.attributes Block attributes.
  *
  * @return The rendered block.
  */
-const CoreHeading: CoreHeadingType = ( {
+export const CoreHeading: CoreHeadingType = ( {
 	attributes,
 }: CoreHeadingProps ): ReactNode => {
 	const { style, cssClassName, content, level } = attributes || {};
@@ -34,5 +34,3 @@ const CoreHeading: CoreHeadingType = ( {
 		</HeadingTag>
 	);
 };
-
-export default CoreHeading;

@@ -1,7 +1,8 @@
-import type { CodegenConfig } from '@graphql-codegen/cli';
 import * as dotenv from 'dotenv';
 import baseConfigs from '@snapwp/codegen-config';
 import { generateGraphqlUrl } from '@snapwp/core';
+
+import type { CodegenConfig } from '@graphql-codegen/cli';
 
 dotenv.config( { path: '../../.env' } );
 
@@ -23,4 +24,5 @@ const config: CodegenConfig = {
 	],
 };
 
+// eslint-disable-next-line import/no-default-export -- default export is required for compatibility.
 export default config;

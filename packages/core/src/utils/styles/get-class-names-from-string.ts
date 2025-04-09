@@ -1,11 +1,11 @@
 /**
  * Extracts class names from the `class` attribute in an HTML string.
  *
- * @param html - The HTML string to parse.
+ * @param {string} html The HTML string to parse.
  *
  * @return An array of class names.
  */
-export default function getClassNamesFromString( html: string ): string[] {
+export function getClassNamesFromString( html: string ): string[] {
 	// Match the first occurrence of the class attribute
 	const classAttribute = html.match( /class=".*?"/g )?.[ 0 ];
 

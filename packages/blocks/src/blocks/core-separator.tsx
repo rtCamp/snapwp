@@ -8,16 +8,14 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/separator block.
  *
- * @param props - The props for the block component.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                             props              The props for the block component.
+ * @param {CoreSeparatorProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreSeparator: CoreSeparatorType = ( {
+export const CoreSeparator: CoreSeparatorType = ( {
 	renderedHtml,
 }: CoreSeparatorProps ): ReactNode => {
 	const classes = getClassNamesFromString( renderedHtml || '' ).join( ' ' );
 	return <hr className={ classes } />;
 };
-
-export default CoreSeparator;

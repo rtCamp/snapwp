@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/query",
-	"version": "0.2.0",
+	"version": "0.3.0",
 	"license": "AGPL-3.0",
 	"description": "Internal package for SnapWP",
 	"author": "rtCamp",
@@ -28,7 +28,8 @@
 		"codegen": "graphql-codegen --config codegen.ts",
 		"codegen:watch": "graphql-codegen --config codegen.ts --watch",
 		"lint": "eslint . --config ../../.eslintrc.json",
-		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@snapwp/core": "*"

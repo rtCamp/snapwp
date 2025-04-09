@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/codegen-config",
-	"version": "0.1.1",
+	"version": "0.2.0",
 	"license": "AGPL-3.0",
 	"author": "rtCamp",
 	"description": "Frontend Codegen Config",
@@ -19,7 +19,8 @@
 		"force-build": "tsc --build --force",
 		"postforce-build": "npm run resolve-paths",
 		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
-		"resolve-paths": "resolve-tspaths"
+		"resolve-paths": "resolve-tspaths",
+		"typecheck": "tsc --noEmit"
 	},
 	"devDependencies": {
 		"resolve-tspaths": "*",

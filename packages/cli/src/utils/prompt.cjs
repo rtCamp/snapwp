@@ -17,7 +17,9 @@ const prompt = ( query, defaultValue = '' ) => {
 	return new Promise( ( resolve ) => {
 		rl.question(
 			// Append default value to the query.
-			query + ( !! defaultValue ? ` (${ defaultValue })` : '' ),
+			query +
+				( !! defaultValue ? ` [default: ${ defaultValue }]` : '' ) +
+				'\n> ',
 			( answer ) => {
 				rl.close();
 

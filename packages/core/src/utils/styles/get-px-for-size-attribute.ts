@@ -1,13 +1,13 @@
 /**
  * Converts a size attribute to pixels.
  *
- * @param sizeAttribute - The size attribute string (e.g., "10em", "50%").
+ * @param {string} sizeAttribute The size attribute string (e.g., "10em", "50%").
  *
  * @return The size in pixels.
  *
  * @internal
  */
-export default function getPxForSizeAttribute( sizeAttribute: string ): number {
+export function getPxForSizeAttribute( sizeAttribute: string ): number {
 	const sizeFloat = parseFloat( sizeAttribute );
 	const unit = sizeAttribute.replace( sizeFloat.toString(), '' );
 	let size;

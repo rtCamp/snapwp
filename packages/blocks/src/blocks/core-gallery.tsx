@@ -12,14 +12,14 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/gallery block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                           props              The props for the block component.
+ * @param {CoreGalleryProps['attributes']}   props.attributes   Block attributes.
+ * @param {ReactNode}                        props.children     The block's children.
+ * @param {CoreGalleryProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreGallery: CoreGalleryType = ( {
+export const CoreGallery: CoreGalleryType = ( {
 	attributes,
 	children,
 	renderedHtml,
@@ -50,5 +50,3 @@ const CoreGallery: CoreGalleryType = ( {
 		</figure>
 	);
 };
-
-export default CoreGallery;

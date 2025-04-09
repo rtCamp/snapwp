@@ -1,4 +1,6 @@
 ---
+"@snapwp/codegen-config": patch
+"@snapwp/e2e-tests": patch
 "@snapwp/blocks": patch
 "@snapwp/query": patch
 "@snapwp/types": patch
@@ -6,4 +8,4 @@
 "@snapwp/next": patch
 ---
 
-refactor: Enforce `exactOptionalPropertyType` TypeScript rule
+fix: ensure `npm run typecheck` scans all packages.

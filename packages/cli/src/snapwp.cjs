@@ -2,22 +2,25 @@
 
 // Dependencies
 const path = require( 'path' );
+
 const { program } = require( 'commander' );
-const { prompt } = require( './utils/prompt.cjs' );
-const {
-	createProjectDirectory,
-} = require( './create-app/createProjectDirectory.cjs' );
-const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
+
 const {
 	copyStarterTemplate,
 } = require( './create-app/copyStarterTemplate.cjs' );
+const {
+	createProjectDirectory,
+} = require( './create-app/createProjectDirectory.cjs' );
+const {
+	printSuccessMessage,
+} = require( './create-app/printSuccessMessage.cjs' );
+const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
+const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
 const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
 const {
 	updatePackageVersions,
 } = require( './create-app/updatePackageVersions.cjs' );
-const {
-	printSuccessMessage,
-} = require( './create-app/printSuccessMessage.cjs' );
+const { prompt } = require( './utils/prompt.cjs' );
 
 /**
  * Default project path if user doesn't provide any.
@@ -29,7 +32,10 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
  */
 ( async () => {
 	try {
-		program.option( '--proxy', 'Use proxy registry.' ).parse();
+		program
+			.option( '--proxy', 'Use proxy registry.' )
+			.option( '--skip-install', 'Skip installing npm dependencies.' )
+			.parse();
 		const options = program.opts();
 
 		// Step 1: Get project directory from user
@@ -53,7 +59,8 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		//        1. With --interactive: prompt for each env variable value and generate the .env file in projectDirPath.
 		//        2. With env variable flags (e.g. --{specific_env_variable}={value}): directly create the .env file using these values.
 		//        3. With --env_file: copy the provided .env file path into projectDirPath.
-		await setupEnvFile( projectDirPath, false );
+		const useDefaultEnv = false; // This will be updated if you implement the todo items
+		await setupEnvFile( projectDirPath, useDefaultEnv );
 
 		// Step 4: Copy starter template to project directory
 		await copyStarterTemplate( projectDirPath );
@@ -64,8 +71,27 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		// Step 6: Update package versions
 		await updatePackageVersions( projectDirPath );
 
-		// Step 7: Print instructions
-		printSuccessMessage( projectDirPath, false );
+		// Step 7: Install dependencies (skip if flag is set)
+		let needsManualInstall = false;
+		if ( ! options.skipInstall ) {
+			try {
+				await runNpmInstall( projectDirPath );
+			} catch ( error ) {
+				// Set flag to inform user they need to run npm install manually
+				needsManualInstall = true;
+			}
+		} else {
+			console.log( 'Skipping NPM dependencies installation...' );
+			// User explicitly skipped installation
+			needsManualInstall = true;
+		}
+
+		// Step 8: Print instructions
+		printSuccessMessage(
+			projectDirPath,
+			useDefaultEnv,
+			needsManualInstall
+		);
 
 		if ( useDefaultPath ) {
 			process.exit( 1 );

@@ -1,12 +1,13 @@
 /**
  * Waits for a server to respond within a given number of attempts.
  *
- * @param url - The server URL to check.
- * @param timeout - Max wait time per attempt in ms.
- * @param retries - Number of retry attempts (default: 5).
+ * @param {string} url     The server URL to check.
+ * @param {number} timeout Max wait time per attempt in ms.
+ * @param {number} retries Number of retry attempts (default: 5).
+ *
  * @throws If the server doesn't respond after all retries.
  */
-export default async function waitForServer(
+export async function waitForServer(
 	url: string,
 	timeout = 10000,
 	retries = 5

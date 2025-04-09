@@ -13,13 +13,13 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/spacer block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                          props              The props for the block component.
+ * @param {CoreSpacerProps['attributes']}   props.attributes   Block attributes.
+ * @param {CoreSpacerProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreSpacer: CoreSpacerType = ( {
+export const CoreSpacer: CoreSpacerType = ( {
 	attributes,
 	renderedHtml,
 }: CoreSpacerProps ): ReactNode => {
@@ -52,5 +52,3 @@ const CoreSpacer: CoreSpacerType = ( {
 		/>
 	);
 };
-
-export default CoreSpacer;

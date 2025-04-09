@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/next",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"license": "AGPL-3.0",
 	"description": "Utility functions and components for SnapWP application",
 	"author": "rtCamp",
@@ -37,7 +37,8 @@
 		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
 		"resolve-paths": "resolve-tspaths",
 		"lint": "eslint . --config ../../.eslintrc.json",
-		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
+		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
 		"next": "^15",

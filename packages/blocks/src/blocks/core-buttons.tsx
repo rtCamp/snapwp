@@ -8,13 +8,13 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/buttons block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
+ * @param {Object}                         props            The props for the block component.
+ * @param {CoreButtonsProps['attributes']} props.attributes Block attributes.
+ * @param {ReactNode}                      props.children   The block's children.
  *
  * @return The rendered block.
  */
-const CoreButtons: CoreButtonsType = ( {
+export const CoreButtons: CoreButtonsType = ( {
 	attributes,
 	children,
 }: CoreButtonsProps ): ReactNode => {
@@ -32,5 +32,3 @@ const CoreButtons: CoreButtonsType = ( {
 		</div>
 	);
 };
-
-export default CoreButtons;

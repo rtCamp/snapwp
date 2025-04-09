@@ -8,12 +8,12 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/freeform block.
  *
- * @param props - The props for the block component.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                            props              The props for the block component.
+ * @param {CoreFreeformProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreFreeform: CoreFreeformType = ( {
+export const CoreFreeform: CoreFreeformType = ( {
 	renderedHtml,
 }: CoreFreeformProps ): ReactNode => {
 	// @todo `attribues.content` is not populated in GraphQL. Using `renderedHtml` for now.
@@ -23,5 +23,3 @@ const CoreFreeform: CoreFreeformType = ( {
 
 	return <Parse html={ renderedHtml } />;
 };
-
-export default CoreFreeform;

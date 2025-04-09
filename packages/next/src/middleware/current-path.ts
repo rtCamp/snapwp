@@ -1,5 +1,5 @@
-import type { NextFetchEvent, NextRequest, NextMiddleware } from 'next/server';
 import type { MiddlewareFactory } from './utils';
+import type { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
 
 /**
  * Middleware function for Next.js
@@ -7,7 +7,7 @@ import type { MiddlewareFactory } from './utils';
  * This middleware adds a custom header 'x-current-path' to the response,
  * which contains the current pathname of the request.
  *
- * @param  next - Next middleware
+ * @param {NextMiddleware} next Next middleware.
  *
  * @return The response object with modified headers
  */

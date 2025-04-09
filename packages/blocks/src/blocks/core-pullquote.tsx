@@ -13,13 +13,13 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/pullquote block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                             props              The props for the block component.
+ * @param {CorePullquoteProps['attributes']}   props.attributes   Block attributes.
+ * @param {CorePullquoteProps['renderedHtml']} props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CorePullquote: CorePullquoteType = ( {
+export const CorePullquote: CorePullquoteType = ( {
 	attributes,
 	renderedHtml,
 }: CorePullquoteProps ): ReactNode => {
@@ -57,5 +57,3 @@ const CorePullquote: CorePullquoteType = ( {
 		</figure>
 	);
 };
-
-export default CorePullquote;

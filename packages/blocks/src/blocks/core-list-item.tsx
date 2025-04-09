@@ -13,14 +13,14 @@ import type { ReactNode } from 'react';
 /**
  * Renders the core/list-item block.
  *
- * @param props - The props for the block component.
- * @param props.attributes - Block attributes.
- * @param props.children - The block's children.
- * @param props.renderedHtml - The block's rendered HTML.
+ * @param {Object}                             props              The props for the block component.
+ * @param {CoreListItemProps['attributes']}    props.attributes   Block attributes.
+ * @param {ReactNode}                          props.children     The block's children.
+ * @param {CoreListItemProps['renderedHtml']}  props.renderedHtml The block's rendered HTML.
  *
  * @return The rendered block.
  */
-const CoreListItem: CoreListItemType = ( {
+export const CoreListItem: CoreListItemType = ( {
 	attributes,
 	renderedHtml,
 	children,
@@ -49,5 +49,3 @@ const CoreListItem: CoreListItemType = ( {
 		</li>
 	);
 };
-
-export default CoreListItem;
