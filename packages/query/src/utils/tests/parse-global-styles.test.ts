@@ -1,5 +1,5 @@
 import { GlobalStylesParseError, Logger } from '@snapwp/core';
-import parseQueryResult from '../parse-global-styles';
+import { parseQueryResult } from '../parse-global-styles';
 
 import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
 

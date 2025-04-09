@@ -1,7 +1,7 @@
 import { getConfig, setConfig } from '@snapwp/core/config';
 
-import getSnapWPConfigPath from './get-snap-wp-config-path';
-import getWebpackPlugins from './get-snap-wp-webpack-plugins';
+import { getSnapWPConfigPath } from './get-snap-wp-config-path';
+import { getWebpackPlugins } from './get-snap-wp-webpack-plugins';
 import { generateRemotePatterns } from './snapwp-remote-patterns';
 
 import type { NextConfig } from 'next';
@@ -14,7 +14,9 @@ import type { WebpackConfigContext } from 'next/dist/server/config-shared';
  *
  * @return The extended configuration object.
  */
-const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
+export const withSnapWP = async (
+	nextConfig: NextConfig
+): Promise< NextConfig > => {
 	setConfig();
 
 	const snapWPConfigPath = getSnapWPConfigPath();
@@ -44,5 +46,3 @@ const withSnapWP = async ( nextConfig: NextConfig ): Promise< NextConfig > => {
 		},
 	};
 };
-
-export default withSnapWP;

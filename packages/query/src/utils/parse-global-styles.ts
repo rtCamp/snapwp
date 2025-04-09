@@ -11,7 +11,7 @@ import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
  *
  * @return An object containing parsed template data.
  */
-export default function parseQueryResult(
+export function parseQueryResult(
 	queryData: GetGlobalStylesQuery
 ): GlobalHeadProps {
 	// Check if globalStyles is null.

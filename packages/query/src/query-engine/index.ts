@@ -10,9 +10,11 @@ import {
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 } from '@graphqlTypes/graphql';
-import parseGeneralSettings from '@/utils/parse-general-settings';
-import parseGlobalStyles from '@/utils/parse-global-styles';
-import parseTemplate from '@/utils/parse-template';
+
+import { parseGeneralSettings } from '@/utils/parse-general-settings';
+import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
+import { parseQueryResult as parseTemplate } from '@/utils/parse-template';
+
 import type { BlockData } from '@snapwp/types';
 
 /**

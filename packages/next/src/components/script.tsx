@@ -25,7 +25,7 @@ interface ScriptInterface {
  *
  * @return The rendered script element.
  */
-export default function Script( {
+export function Script( {
 	after,
 	before,
 	extraData,

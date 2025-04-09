@@ -50,7 +50,7 @@ interface ImageInterface {
  *
  * @return The rendered image.
  */
-export default function Image( {
+export function Image( {
 	alt,
 	image,
 	width,

@@ -15,7 +15,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreAudio: CoreAudioType = ( {
+export const CoreAudio: CoreAudioType = ( {
 	attributes,
 	renderedHtml,
 }: CoreAudioProps ): ReactNode => {
@@ -56,5 +56,3 @@ const CoreAudio: CoreAudioType = ( {
 		</figure>
 	);
 };
-
-export default CoreAudio;

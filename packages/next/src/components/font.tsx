@@ -10,9 +10,7 @@ import type { ReactNode } from 'react';
  *
  * @todo Implement next/font once a solution for handling literal types is determined.
  */
-export default function Fonts( props: {
-	renderedFontFaces: string;
-} ): ReactNode {
+export function Fonts( props: { renderedFontFaces: string } ): ReactNode {
 	const { renderedFontFaces } = props;
 
 	// @todo: we might need to proxy these for CORS.

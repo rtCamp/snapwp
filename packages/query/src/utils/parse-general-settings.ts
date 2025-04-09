@@ -7,9 +7,7 @@ import type { GetGeneralSettingsQuery } from '@graphqlTypes/graphql';
  *
  * @return An object containing parsed general settings data.
  */
-export default function parseGeneralSettings(
-	queryData: GetGeneralSettingsQuery
-):
+export function parseGeneralSettings( queryData: GetGeneralSettingsQuery ):
 	| {
 			generalSettings: {
 				siteIcon: {
