@@ -130,7 +130,7 @@ export class Seo {
 
 		const { data } = await QueryEngine.apolloClient.query( {
 			query: rootQuery,
-			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+			fetchPolicy: 'no-cache', // @todo figure out a caching strategy, instead of always fetching from network
 			errorPolicy: 'all',
 		} );
 
@@ -178,7 +178,7 @@ export class Seo {
 			variables: {
 				uri: path,
 			},
-			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+			fetchPolicy: 'no-cache', // @todo figure out a caching strategy, instead of always fetching from network
 			errorPolicy: 'all',
 		} );
 
