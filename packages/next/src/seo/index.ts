@@ -65,7 +65,7 @@ export class Seo {
 		plugin: TemplateMetadataGeneratorPlugin< any >,
 		key: string
 	): void {
-		Seo.siteSeoPlugins[ key ] = plugin;
+		Seo.routeSeoPlugins[ key ] = plugin;
 	}
 
 	/**
@@ -130,6 +130,8 @@ export class Seo {
 
 		const { data } = await QueryEngine.apolloClient.query( {
 			query: rootQuery,
+			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+			errorPolicy: 'all',
 		} );
 
 		// Divide data for individual plugins
@@ -176,6 +178,8 @@ export class Seo {
 			variables: {
 				uri: path,
 			},
+			fetchPolicy: 'network-only', // @todo figure out a caching strategy, instead of always fetching from network
+			errorPolicy: 'all',
 		} );
 
 		// Divide data for individual plugins
@@ -201,7 +205,9 @@ export class Seo {
 
 //@todo attach initialization to lifecycle of the app rather than import
 if ( ! Seo.isInitialized ) {
-	Seo.initialize();
+	try {
+		Seo.initialize();
+	} catch ( error ) {}
 }
 
 // Rexports for simpler interface

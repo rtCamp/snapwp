@@ -32,7 +32,7 @@ export function generateTemplateQuery(
         ${ Object.values( fragments ).map( ( fragmentDoc ) =>
 			print( fragmentDoc )
 		) }
-        query getTemplate {
+        query getTemplate($uri: String!) {
             templateByUri(uri: $uri) {
             ${ Object.values( fragments ).map(
 				( fragmentDoc ) => `...${ getFragmentName( fragmentDoc ) }`
