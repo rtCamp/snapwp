@@ -1,6 +1,6 @@
-import { type ComponentType, type PropsWithChildren } from 'react';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import type { DocumentNode } from 'graphql/language';
+import type { ComponentType, PropsWithChildren } from 'react';
 
 /**
  * A generic interface for creating adapters to support different GraphQL clients
