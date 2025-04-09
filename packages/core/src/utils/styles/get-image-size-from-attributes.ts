@@ -1,6 +1,6 @@
 // From https://github.com/blakewilson/faust-gutenberg-decode-demo/blob/main/utils/getImageSizeProps.js
 
-import getPxForSizeAttribute from './get-px-for-size-attribute';
+import { getPxForSizeAttribute } from './get-px-for-size-attribute';
 
 export type ImageSizeAttributes = {
 	sizeSlug?: string | undefined;
@@ -36,9 +36,7 @@ const imageSizeToHeight: {
  *
  * @internal
  */
-export default function getImageSizeFromAttributes(
-	attributes: ImageSizeAttributes
-): {
+export function getImageSizeFromAttributes( attributes: ImageSizeAttributes ): {
 	width: number | undefined;
 	height: number | undefined;
 } {

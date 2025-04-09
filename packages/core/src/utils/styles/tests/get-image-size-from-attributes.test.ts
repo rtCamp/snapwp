@@ -1,7 +1,8 @@
-import getImageSizeFromAttributes, {
+import {
+	getImageSizeFromAttributes,
 	type ImageSizeAttributes,
 } from '../get-image-size-from-attributes';
-import getPxForSizeAttribute from '../get-px-for-size-attribute';
+import { getPxForSizeAttribute } from '../get-px-for-size-attribute';
 
 jest.mock( '../get-px-for-size-attribute' );
 

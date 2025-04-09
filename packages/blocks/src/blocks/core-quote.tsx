@@ -12,7 +12,7 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-const CoreQuote: CoreQuoteType = ( {
+export const CoreQuote: CoreQuoteType = ( {
 	attributes,
 	children,
 }: CoreQuoteProps ): ReactNode => {
@@ -35,5 +35,3 @@ const CoreQuote: CoreQuoteType = ( {
 		</blockquote>
 	);
 };
-
-export default CoreQuote;

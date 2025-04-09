@@ -1,5 +1,5 @@
 import { Logger } from '../../logger';
-import generateGraphqlUrl from '../generate-graphql-url';
+import { generateGraphqlUrl } from '../generate-graphql-url';
 
 jest.mock( '../../logger' );
 
