@@ -1,5 +1,5 @@
-const path = require( 'path' );
-const fs = require( 'fs/promises' );
+import fs from 'fs/promises';
+import path from 'path';
 
 const REGISTRY_URL = 'http://localhost:4873';
 const NPMRC_CONTENT = `@snapwp:registry=${ REGISTRY_URL }`;
@@ -11,7 +11,10 @@ const NPMRC_CONTENT = `@snapwp:registry=${ REGISTRY_URL }`;
  * @param {boolean} useProxy - Whether to use the proxy registry.
  * @return {Promise<void>}
  */
-const setupNpmrc = async ( projectDirPath, useProxy ) => {
+export async function setupNpmrc(
+	projectDirPath: string,
+	useProxy: boolean
+): Promise< void > {
 	if ( useProxy ) {
 		console.log( 'Found --proxy flag, generating `.npmrc` file.' );
 
@@ -24,8 +27,4 @@ const setupNpmrc = async ( projectDirPath, useProxy ) => {
 			`\`.npmrc\` file generated successfully. Please make sure the proxy registry is running on ${ REGISTRY_URL }`
 		);
 	}
-};
-
-module.exports = {
-	setupNpmrc,
-};
+}

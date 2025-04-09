@@ -1,13 +1,15 @@
-const { spawn } = require( 'child_process' );
+import { spawn } from 'child_process';
 
 /**
  * Runs npm install in the project directory with improved output handling.
  *
  * @param {string} projectDirPath - Path to the project directory.
- * @returns {Promise<void>} A promise that resolves when installation completes successfully.
+ * @return {Promise<void>} A promise that resolves when installation completes successfully.
  * @throws {Error} When installation fails or is cancelled.
  */
-const runNpmInstall = async ( projectDirPath ) => {
+export const runNpmInstall = async (
+	projectDirPath: string
+): Promise< void > => {
 	// Dynamically import ora
 	const { default: ora } = await import( 'ora' );
 
@@ -18,7 +20,7 @@ const runNpmInstall = async ( projectDirPath ) => {
 		spinner: 'dots',
 	} );
 
-	return new Promise( ( resolve, reject ) => {
+	return new Promise< void >( ( resolve, reject ) => {
 		// Start the spinner before running npm install
 		spinner.start();
 
@@ -40,17 +42,20 @@ const runNpmInstall = async ( projectDirPath ) => {
 		};
 
 		// Collect stdout data
-		npmProcess.stdout.on( 'data', ( data ) => {
+		npmProcess.stdout?.on( 'data', ( data ) => {
 			output.stdout += data.toString();
 		} );
 
 		// Collect stderr data
-		npmProcess.stderr.on( 'data', ( data ) => {
+		npmProcess.stderr?.on( 'data', ( data ) => {
 			output.stderr += data.toString();
 		} );
 
-		// Handler for termination signals
-		const handleTermination = () => {
+		/**
+		 * Handles termination signals by killing npm process and rejecting the promise.
+		 * @return {void}
+		 */
+		const handleTermination = (): void => {
 			if ( npmProcess && ! npmProcess.killed ) {
 				npmProcess.kill( 'SIGTERM' );
 			}
@@ -63,8 +68,11 @@ const runNpmInstall = async ( projectDirPath ) => {
 		process.once( 'SIGINT', handleTermination );
 		process.once( 'SIGTERM', handleTermination );
 
-		// Clean up event handlers when npm process completes
-		const cleanup = () => {
+		/**
+		 * Cleans up signal event handlers.
+		 * @return {void}
+		 */
+		const cleanup = (): void => {
 			process.off( 'SIGINT', handleTermination );
 			process.off( 'SIGTERM', handleTermination );
 		};
@@ -124,8 +132,4 @@ const runNpmInstall = async ( projectDirPath ) => {
 			reject( error );
 		} );
 	} );
-};
-
-module.exports = {
-	runNpmInstall,
 };

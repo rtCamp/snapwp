@@ -1,26 +1,16 @@
 #!/usr/bin/env node
 
 // Dependencies
-const path = require( 'path' );
-
-const { program } = require( 'commander' );
-
-const {
-	copyStarterTemplate,
-} = require( './create-app/copyStarterTemplate.cjs' );
-const {
-	createProjectDirectory,
-} = require( './create-app/createProjectDirectory.cjs' );
-const {
-	printSuccessMessage,
-} = require( './create-app/printSuccessMessage.cjs' );
-const { runNpmInstall } = require( './create-app/runNpmInstall.cjs' );
-const { setupEnvFile } = require( './create-app/setupEnvFile.cjs' );
-const { setupNpmrc } = require( './create-app/setupNpmrc.cjs' );
-const {
-	updatePackageVersions,
-} = require( './create-app/updatePackageVersions.cjs' );
-const { prompt } = require( './utils/prompt.cjs' );
+import path from 'path';
+import { program } from 'commander';
+import { copyStarterTemplate } from './create-app/copy-starter-template';
+import { createProjectDirectory } from './create-app/create-project-directory';
+import { printSuccessMessage } from './create-app/print-success-message';
+import { runNpmInstall } from './create-app/run-npm-install';
+import { setupEnvFile } from './create-app/setup-env-file';
+import { setupNpmrc } from './create-app/setup-npmrc';
+import { updatePackageVersions } from './create-app/update-package-versions';
+import { prompt } from './utils/prompt';
 
 /**
  * Default project path if user doesn't provide any.
@@ -30,7 +20,7 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 /**
  * Main function to create a new SnapWP project.
  */
-( async () => {
+( async (): Promise< void > => {
 	try {
 		program
 			.option( '--proxy', 'Use proxy registry.' )
@@ -42,7 +32,7 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		const projectDir = await prompt(
 			'Thanks for using SnapWP!\n' +
 				'\nWhere would you like to create your new Headless WordPress frontend?\n' +
-				'Please enter a relative or absolute path: ',
+				'Please enter a relative or absolute path:',
 			DEFAULT_PROJECT_PATH
 		);
 
@@ -66,14 +56,14 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		await copyStarterTemplate( projectDirPath );
 
 		// Step 5: Create .npmrc file if needed
-		await setupNpmrc( projectDirPath, options.proxy );
+		await setupNpmrc( projectDirPath, options[ 'proxy' ] );
 
 		// Step 6: Update package versions
 		await updatePackageVersions( projectDirPath );
 
 		// Step 7: Install dependencies (skip if flag is set)
 		let needsManualInstall = false;
-		if ( ! options.skipInstall ) {
+		if ( ! options[ 'skipInstall' ] ) {
 			try {
 				await runNpmInstall( projectDirPath );
 			} catch ( error ) {

@@ -1,4 +1,4 @@
-const fs = require( 'fs/promises' );
+import fs from 'fs/promises';
 
 /**
  * Creates project directory if it doesn't exist.
@@ -6,20 +6,21 @@ const fs = require( 'fs/promises' );
  * @param {string} projectDirPath - The path to create.
  * @return {Promise<void>}
  */
-const createProjectDirectory = async ( projectDirPath ) => {
+export async function createProjectDirectory(
+	projectDirPath: string
+): Promise< void > {
 	try {
 		// Check if the directory exists.
 		await fs.access( projectDirPath );
 	} catch ( error ) {
-		if ( 'ENOENT' !== error.code ) {
+		if (
+			error instanceof Error &&
+			( error as NodeJS.ErrnoException ).code !== 'ENOENT'
+		) {
 			throw error;
 		}
 
 		// Create the directory if it doesn't exist.
 		await fs.mkdir( projectDirPath, { recursive: true } );
 	}
-};
-
-module.exports = {
-	createProjectDirectory,
-};
+}

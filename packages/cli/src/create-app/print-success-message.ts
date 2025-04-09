@@ -5,11 +5,11 @@
  * @param {boolean} useDefaultEnv - Whether using default env or not.
  * @param {boolean} needsManualInstall - Whether the user needs to run npm install manually.
  */
-const printSuccessMessage = (
-	projectDirPath,
-	useDefaultEnv,
-	needsManualInstall = false
-) => {
+export function printSuccessMessage(
+	projectDirPath: string,
+	useDefaultEnv: boolean,
+	needsManualInstall: boolean = false
+): void {
 	console.log( '' );
 	console.log( `Your project has been scaffolded at: ${ projectDirPath }.` );
 	console.log( '' );
@@ -31,8 +31,4 @@ const printSuccessMessage = (
 	}
 
 	console.log( 'npm run dev' );
-};
-
-module.exports = {
-	printSuccessMessage,
-};
+}
