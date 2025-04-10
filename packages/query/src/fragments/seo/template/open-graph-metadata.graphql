@@ -1,48 +1,34 @@
 fragment OpenGraphMetadataFrag on RenderedTemplate {
 	uri
 	connectedNode {
-		uri
-		... on Page {
+	    __typename
+		... on NodeWithTitle {
 			title
-
-			date
-			modified
-			content
-
-			featuredImage {
-				node {
-					sourceUrl
-					mediaDetails {
-						width
-						height
-					}
-				}
-			}
 		}
-		... on Post {
-			title
-
-			date
-			modified
+		... on NodeWithExcerpt {
 			excerpt
-
-			featuredImage {
-				node {
-					sourceUrl
-					mediaDetails {
-						width
-						height
-					}
-				}
-			}
 		}
-		... on Category {
-			name
-			description
+		... on NodeWithFeaturedImage {
+            featuredImage {
+                node {
+                    sourceUrl
+                    mediaDetails {
+                        width
+                        height
+                    }
+                }
+            }
 		}
-		... on Tag {
-			name
-			description
+		... on ContentNode {
+            date
+            modified
+		}
+		... on TermNode {
+            name
+            description
+		}
+		... on Page {
+			content
 		}
 	}
 }

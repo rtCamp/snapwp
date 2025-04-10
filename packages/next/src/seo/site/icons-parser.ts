@@ -2,6 +2,8 @@ import type { Parser } from '../types';
 import type { IconMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
 
+//@todo simplify parser
+
 /**
  * Validates and parses Icon metadata for a route into consumable state.
  *

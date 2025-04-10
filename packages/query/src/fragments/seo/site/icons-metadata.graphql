@@ -1,7 +1,6 @@
 fragment IconMetadataFrag on RootQuery {
 	generalSettings {
 		siteIcon {
-			id
 			mediaDetails {
 				sizes {
 					width

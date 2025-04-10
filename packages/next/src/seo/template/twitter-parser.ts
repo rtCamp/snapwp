@@ -1,6 +1,6 @@
 import type { TemplateMetadataParser } from '../types';
 import type { TwitterMetadataFragFragment } from '@snapwp/query';
-import type { Metadata } from 'next';
+import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
 
 /**
  * Parses the Twitter metadata.
@@ -11,33 +11,36 @@ import type { Metadata } from 'next';
 export const parseRouteTwitterMetadata: TemplateMetadataParser<
 	TwitterMetadataFragFragment
 > = ( data: TwitterMetadataFragFragment ) => {
-	const twitterMetadata: Metadata[ 'twitter' ] = {};
-
+	// No connected node to the path. No twitter meta data
 	if ( ! data.connectedNode ) {
-		return { ...twitterMetadata };
+		return {};
 	}
 
-	if (
-		data.connectedNode.__typename !== 'Page' &&
-		data.connectedNode.__typename !== 'Post'
-	) {
-		return { ...twitterMetadata };
-	}
+	switch ( data.connectedNode.__typename ) {
+		case 'Page':
+		case 'Post':
+			const title = data.connectedNode.title || undefined;
+			const imageNode = data.connectedNode.featuredImage?.node;
+			let images: Twitter[ 'images' ];
 
-	if ( data.connectedNode.title ) {
-		twitterMetadata.title = data.connectedNode.title;
-	}
+			if ( imageNode && imageNode.sourceUrl ) {
+				images = [
+					{
+						url: imageNode.sourceUrl,
+						width: imageNode.mediaDetails?.width || undefined,
+						height: imageNode.mediaDetails?.height || undefined,
+					},
+				];
+			}
 
-	const imageNode = data.connectedNode.featuredImage?.node;
+			return {
+				twitter: {
+					title,
+					images,
+				},
+			};
 
-	if ( imageNode && imageNode.sourceUrl ) {
-		twitterMetadata.images = [
-			{
-				url: imageNode.sourceUrl,
-				width: imageNode.mediaDetails?.width || undefined,
-				height: imageNode.mediaDetails?.height || undefined,
-			},
-		];
+		default:
+			return {};
 	}
-	return twitterMetadata;
 };

@@ -1,7 +1,5 @@
 fragment TwitterMetadataFrag on RenderedTemplate {
 	connectedNode {
-		id
-
 		__typename
 		uri
 
