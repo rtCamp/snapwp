@@ -58,6 +58,10 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 			);
 		}
 
+		if ( 'favicon.ico' === nextPath ) {
+			return NextResponse.json( {}, { status: 404 } );
+		}
+
 		return next( request, _next );
 	};
 };
