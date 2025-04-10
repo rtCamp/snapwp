@@ -1,5 +1,5 @@
-const fs = require( 'fs/promises' );
-const path = require( 'path' );
+import fs from 'fs/promises';
+import path from 'path';
 
 /**
  * Updates package versions in package.json to use published versions
@@ -7,7 +7,9 @@ const path = require( 'path' );
  * @param {string} projectDirPath - Path to the project directory.
  * @return {Promise<void>}
  */
-const updatePackageVersions = async ( projectDirPath ) => {
+export async function updatePackageVersions(
+	projectDirPath: string
+): Promise< void > {
 	const packageJsonPath = path.join( projectDirPath, 'package.json' );
 	const packageJsonData = await fs.readFile( packageJsonPath, {
 		encoding: 'utf8',
@@ -20,8 +22,4 @@ const updatePackageVersions = async ( projectDirPath ) => {
 	);
 
 	await fs.writeFile( packageJsonPath, updatedPackageJsonData );
-};
-
-module.exports = {
-	updatePackageVersions,
-};
+}

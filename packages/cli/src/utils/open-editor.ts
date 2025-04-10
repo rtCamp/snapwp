@@ -1,5 +1,5 @@
-const path = require( 'path' );
-const { spawn } = require( 'child_process' );
+import { spawn } from 'child_process';
+import path from 'path';
 
 /**
  * Opens a file in the default or specified editor and waits for the editor process to exit.
@@ -9,11 +9,14 @@ const { spawn } = require( 'child_process' );
  *                              - success: {boolean} Indicates if the operation was successful.
  *                              - message: {string} Provides additional information or error details.
  */
-const openEditor = ( filePath ) => {
+export function openEditor(
+	filePath: string
+): Promise< { success: boolean; message: string } > {
 	return new Promise( ( resolve ) => {
 		try {
-			// eslint-disable-next-line n/no-process-env -- Use process.env to get the editor before falling back to 'vi'.
-			const editor = process.env.VISUAL || process.env.EDITOR || 'vi';
+			const editor =
+				// eslint-disable-next-line n/no-process-env -- Use process.env to get the editor before falling back to 'vi'.
+				process.env[ 'VISUAL' ] || process.env.EDITOR || 'vi';
 
 			const child = spawn( editor, [ filePath ], {
 				stdio: 'inherit',
@@ -22,16 +25,19 @@ const openEditor = ( filePath ) => {
 			child.on( 'exit', function () {
 				resolve( {
 					success: true,
-					message: `File created at "${ path.resolve( filePath ) }"`,
+					message: `\nFile created at "${ path.resolve(
+						filePath
+					) }"`,
 				} );
 			} );
 		} catch ( error ) {
 			resolve( {
 				success: false,
-				message: `Error: ${ error.message }`,
+				message:
+					error instanceof Error
+						? `\nError: ${ error.message }`
+						: '\nAn unknown error occurred.',
 			} );
 		}
 	} );
-};
-
-module.exports = { openEditor };
+}
