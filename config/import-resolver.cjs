@@ -1,17 +1,17 @@
 /**
  * External dependencies.
  */
-const resolverTS = require( 'eslint-import-resolver-typescript' );
 const path = require( 'path' );
+const resolverTS = require( 'eslint-import-resolver-typescript' );
 
 exports.interfaceVersion = 2;
 
 /**
  * Eslint configuration for resolving TypeScript aliases.
  *
- * @param source Import string.
- * @param file   File-path in which alias is used.
- * @param config configuration.
+ * @param {string} source Import string.
+ * @param {string} file   File-path in which alias is used.
+ * @param {Object} config configuration.
  *
  * @return Resolved path.
  */
@@ -19,7 +19,7 @@ exports.resolve = function ( source, file, config ) {
 	/**
 	 * Creates a path resolver.
 	 *
-	 * @param sourcePath Import string.
+	 * @param {string} sourcePath Import string.
 	 *
 	 * @return Path resolver.
 	 */
@@ -53,11 +53,11 @@ exports.resolve = function ( source, file, config ) {
 /**
  * Resolves TS paths.
  *
- * @param source    Import string.
- * @param alias     Alias to search.
- * @param aliasPath Alias path.
- * @param file      File-path in which alias is used.
- * @param resolve   Path resolver.
+ * @param {string} source    Import string.
+ * @param {string} alias     Alias to search.
+ * @param {string} aliasPath Alias path.
+ * @param {string} file      File-path in which alias is used.
+ * @param {Function} resolve   Path resolver.
  *
  * @return Resolved path on success | False if alias is not found in import string.
  */

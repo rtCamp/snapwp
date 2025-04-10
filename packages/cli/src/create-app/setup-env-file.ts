@@ -1,8 +1,7 @@
-const path = require( 'path' );
-const fs = require( 'fs/promises' );
-
-const { openEditor } = require( '../utils/openEditor.cjs' );
-const { prompt } = require( '../utils/prompt.cjs' );
+import fs from 'fs/promises';
+import path from 'path';
+import { openEditor } from '../utils/open-editor';
+import { prompt } from '../utils/prompt';
 
 /**
  * Creates the .env file either using the default template or by prompting the user.
@@ -12,7 +11,11 @@ const { prompt } = require( '../utils/prompt.cjs' );
  * @param {boolean} useDefaultEnv - Whether to use a default .env file.
  * @return {Promise<void>}
  */
-const createEnvFile = async ( projectDirPath, envPath, useDefaultEnv ) => {
+async function createEnvFile(
+	projectDirPath: string,
+	envPath: string,
+	useDefaultEnv: boolean
+): Promise< void > {
 	// If using default env, copy .env.example to .env and return
 	if ( useDefaultEnv ) {
 		const srcPath = path.resolve(
@@ -44,16 +47,19 @@ const createEnvFile = async ( projectDirPath, envPath, useDefaultEnv ) => {
 	// Verify .env file exists
 	try {
 		await fs.access( envPath );
-	} catch ( err ) {
-		if ( 'ENOENT' === err.code ) {
+	} catch ( error ) {
+		if (
+			error instanceof Error &&
+			( error as NodeJS.ErrnoException ).code === 'ENOENT'
+		) {
 			throw new Error(
 				`".env" still not found at "${ envPath }". Please create an ".env" and try again.`
 			);
 		}
 
-		throw err;
+		throw error;
 	}
-};
+}
 
 /**
  * Handles the creation and validation of the .env file.
@@ -62,13 +68,19 @@ const createEnvFile = async ( projectDirPath, envPath, useDefaultEnv ) => {
  * @param {boolean} useDefaultEnv - Whether to use a default .env file.
  * @return {Promise<void>}
  */
-const setupEnvFile = async ( projectDirPath, useDefaultEnv ) => {
+export async function setupEnvFile(
+	projectDirPath: string,
+	useDefaultEnv: boolean
+): Promise< void > {
 	const envPath = path.join( projectDirPath, '.env' );
 
 	try {
 		await fs.access( envPath );
 	} catch ( error ) {
-		if ( 'ENOENT' !== error.code ) {
+		if (
+			error instanceof Error &&
+			( error as NodeJS.ErrnoException ).code !== 'ENOENT'
+		) {
 			throw error;
 		}
 
@@ -85,8 +97,4 @@ const setupEnvFile = async ( projectDirPath, useDefaultEnv ) => {
 			`An empty ".env" found at "${ envPath }". Please try again with a non-empty ".env" file.`
 		);
 	}
-};
-
-module.exports = {
-	setupEnvFile,
-};
+}
