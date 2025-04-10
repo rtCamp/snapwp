@@ -9,7 +9,10 @@ import type { ReactNode } from 'react';
 
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
-	children: ( editorBlocks: BlockData[] ) => ReactNode;
+	children: ( args: {
+		editorBlocks: BlockData[];
+		is404: boolean;
+	} ) => ReactNode;
 };
 
 /**
@@ -29,8 +32,14 @@ export async function TemplateRenderer( {
 	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
 	const pathname = headerList.get( 'x-current-path' );
 
-	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
-		await getTemplateData( pathname || '/' );
+	const {
+		editorBlocks,
+		bodyClasses,
+		stylesheets,
+		scripts,
+		scriptModules,
+		is404,
+	} = await getTemplateData( pathname || '/' );
 
 	if ( ! editorBlocks?.length ) {
 		throw new Error(
@@ -48,7 +57,7 @@ export async function TemplateRenderer( {
 			>
 				<main>
 					<div className="wp-site-blocks">
-						{ children( editorBlocks ) }
+						{ children( { editorBlocks, is404 } ) }
 					</div>
 				</main>
 			</TemplateScripts>
