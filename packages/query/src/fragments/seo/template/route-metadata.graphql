@@ -1,25 +1,25 @@
 fragment RouteMetadataFrag on RenderedTemplate {
 	connectedNode {
-        __typename
-        ... on NodeWithTitle{
-            title
-        }
-        ... on NodeWithAuthor{
-            author{
-              node{
-                name
-              }
-            }
-        }
-        ... on NodeWithExcerpt{
-            excerpt
-        }
-        ... on Page {
-            content
-        }
-        ... on TermNode{
-            name
-            description
-        }
+		__typename
+		... on NodeWithTitle {
+			title
+		}
+		... on NodeWithAuthor {
+			author {
+				node {
+					name
+				}
+			}
+		}
+		... on NodeWithExcerpt {
+			excerpt
+		}
+		... on Page {
+			content
+		}
+		... on TermNode {
+			name
+			description
+		}
 	}
 }

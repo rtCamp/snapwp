@@ -1,7 +1,7 @@
 fragment OpenGraphMetadataFrag on RenderedTemplate {
 	uri
 	connectedNode {
-	    __typename
+		__typename
 		... on NodeWithTitle {
 			title
 		}
@@ -9,23 +9,23 @@ fragment OpenGraphMetadataFrag on RenderedTemplate {
 			excerpt
 		}
 		... on NodeWithFeaturedImage {
-            featuredImage {
-                node {
-                    sourceUrl
-                    mediaDetails {
-                        width
-                        height
-                    }
-                }
-            }
+			featuredImage {
+				node {
+					sourceUrl
+					mediaDetails {
+						width
+						height
+					}
+				}
+			}
 		}
 		... on ContentNode {
-            date
-            modified
+			date
+			modified
 		}
 		... on TermNode {
-            name
-            description
+			name
+			description
 		}
 		... on Page {
 			content

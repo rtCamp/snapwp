@@ -1,6 +1,6 @@
 import { gql, type TypedDocumentNode } from '@apollo/client';
 import { print, type DocumentNode } from 'graphql';
-import getFragmentName from './get-fragment-name';
+import { getFragmentName } from './get-fragment-name';
 
 /**
  * @param {TypedDocumentNode<unknown,unknown>} fragments Fragment on RootQuery
