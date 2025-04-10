@@ -136,13 +136,7 @@ module.exports = {
 	},
 	overrides: [
 		{
-			files: '**/*.test.ts',
-			env: {
-				jest: true,
-			},
-		},
-		{
-			files: [ '**/*.js', '**/*.jsx', '**/*.ts', '**/*.tsx' ],
+			files: [ '**/*.{js,jsx,ts,tsx,cjs,mjs,cts,mts}' ],
 			// Mandate doc block for arrow functions, class declarations, class expressions, function expressions, and method definition.
 			rules: {
 				'jsdoc/require-jsdoc': [
@@ -159,25 +153,10 @@ module.exports = {
 				],
 			},
 		},
-		// Rules for bin and cli files.
+
+		// Typescript files.
 		{
-			files: [ 'bin/**/*.js', 'bin/**/*.mjs', 'packages/cli/src/*.cjs' ],
-			rules: {
-				// Enable the use of console log.
-				'no-console': 'off',
-				// Enable the use of process-env.
-				'n/no-process-env': 'off',
-			},
-		},
-		// Disable n/no-process-env for `codegen.ts` file.
-		{
-			files: [ '**/codegen.ts', '**/*.test.*', '**/jest.setup.js' ],
-			rules: {
-				'n/no-process-env': 'off',
-			},
-		},
-		{
-			files: [ '**/*.ts', '**/*.tsx', '**/*.cts', '**/*.mts' ],
+			files: [ '**/*.{ts,tsx,cts,mts}' ],
 			excludedFiles: [
 				'**/codegen.ts',
 				'packages/query/src/**/tests/*',
@@ -192,11 +171,45 @@ module.exports = {
 				project: true,
 			},
 		},
+
+		// CLI package TypeScript files
 		{
-			files: [ '**/packages/e2e-tests/src/utils/*.ts' ],
+			files: [
+				'**/packages/cli/src/**/*.{ts,cts,mts}',
+				'**/packages/cli/build.cjs',
+			],
 			rules: {
 				'n/no-process-env': 'off',
 				'no-console': 'off',
+			},
+		},
+
+		// Jest files.
+		{
+			files: [ '**/*.test.ts' ],
+			env: {
+				jest: true,
+			},
+		},
+
+		// E2E test utility files
+		{
+			files: [ '**/packages/e2e-tests/src/utils/*.{ts,cts,mts}' ],
+			rules: {
+				'n/no-process-env': 'off',
+				'no-console': 'off',
+			},
+		},
+
+		// Config and setup files
+		{
+			files: [
+				'**/codegen.ts',
+				'**/*.test.{js,jsx,ts,tsx,cjs,mjs,cts,mts}',
+				'**/jest.setup.{js,cjs,mjs}',
+			],
+			rules: {
+				'n/no-process-env': 'off',
 			},
 		},
 	],
