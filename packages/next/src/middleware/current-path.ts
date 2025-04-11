@@ -47,7 +47,6 @@ export const currentPath: MiddlewareFactory = ( next: NextMiddleware ) => {
 
 		if ( response ) {
 			response.headers.set( 'x-current-path', pathname );
-			response.headers.set( 'x-snapwp-is404', String( is404 ) );
 
 			if ( is404 ) {
 				return new NextResponse( response.body, {
