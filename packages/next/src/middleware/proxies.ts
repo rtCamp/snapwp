@@ -22,6 +22,10 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
 		const nextPath = request.nextUrl.pathname;
 
+		if ( '/favicon.ico' === nextPath ) {
+			return NextResponse.json( {}, { status: 404 } );
+		}
+
 		const { wpHomeUrl, uploadsDirectory, restUrlPrefix } = getConfig();
 
 		// Proxy for WordPress uploads.
