@@ -13,19 +13,19 @@ import type { Metadata } from 'next';
 export const parseIconMetadata: Parser< IconMetadataFragFragment > = (
 	data
 ) => {
-	if ( ! data.generalSettings ) {
-		return {};
-	}
-
-	if ( ! data.generalSettings.siteIcon ) {
-		return {};
-	}
-
 	let fallbackIcons: IconsMetaData = {
 		faviconIcons: [],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,
 	};
+
+	if ( ! data.generalSettings ) {
+		return reshape( fallbackIcons );
+	}
+
+	if ( ! data.generalSettings.siteIcon ) {
+		return reshape( fallbackIcons );
+	}
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
 	if ( data.generalSettings.siteIcon.mediaItemUrl ) {

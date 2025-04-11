@@ -160,7 +160,12 @@ export class Seo {
 	 * @param {string} path sub route string
 	 * @return metadata
 	 */
-	public static async getTemplateMetadata( path = '/' ): Promise< Metadata > {
+	public static async getTemplateMetadata(
+		path?: string | null
+	): Promise< Metadata > {
+		if ( ! path ) {
+			path = '/';
+		}
 		// Collect fragments
 		const fragmentDocMap = Object.fromEntries(
 			Object.entries( Seo.routeSeoPlugins ).map( ( [ key, plugin ] ) => {
