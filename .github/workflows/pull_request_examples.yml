@@ -15,13 +15,14 @@ on:
         paths:
             - .github/workflows/pull_request_examples.yml
             - examples/**
+            - packages/cli/**
     # TODO: Remove and replace with real matrix.
     workflow_dispatch:
         inputs:
             NODE_VERSIONS:
                 description: 'Node versions to test against. Need a JSON array of versions.'
                 required: true
-                default: '[20]'
+                default: '[20, 22]'
                 type: string
 
 permissions:
@@ -30,11 +31,12 @@ permissions:
 
 env:
     #  NODE_VERSIONS: '[18, 20, 22]'
-    NODE_VERSIONS: '[20]'
+    NODE_VERSIONS: '[20, 22]'
     PATHS: |
         nextjs/starter:
           - .github/workflows/pull_request_examples.yml
           - examples/nextjs/starter/**
+          - packages/cli/**
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
     SNAPWP_HELPER_REF: 'develop' # TODO: Get from PR description.
 
@@ -97,19 +99,24 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
 
             - name: Run ESLint
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present lint
 
     typecheck:
@@ -149,24 +156,29 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
 
             - name: Run Codegen
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run codegen
 
             - name: Run TypeScript type check
               # TODO: Why are we catching the error?
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present typecheck
 
     test-build:
@@ -248,19 +260,25 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
+                  
 
             - name: Build assets
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present build
 
     unit:
@@ -301,19 +319,24 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
 
             - name: Run unit tests
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present test
 
     security:
@@ -353,19 +376,24 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
 
             - name: Run npm audit
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm audit --audit-level=high
 
     prettier:
@@ -405,17 +433,22 @@ jobs:
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present build
+                  mkdir -p snapwp-test-app
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
-
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+            - name: Scaffold Snapwp App
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
+                  for i in '${{ github.workspace }}/packages/'*; do
+                      if [ -d "$i" ]; then
+                          npm i "$i"  # Swap snapwp dependencies for local packages
+                      fi
+                  done
 
             - name: Run Prettier
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present format-check
