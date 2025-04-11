@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+-   [#141](https://github.com/rtCamp/snapwp/pull/141) [`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - chore: Add `eslint-plugin-import` to repository ruleset and lint.
+
+-   [#139](https://github.com/rtCamp/snapwp/pull/139) [`7081895`](https://github.com/rtCamp/snapwp/commit/7081895ecee799cf02b54c23bd4a2e71ae642ec0) Thanks [@ashutoshgautams](https://github.com/ashutoshgautams)! - fix: Improve formatting of default value and user input in CLI prompts.
+
+-   [#140](https://github.com/rtCamp/snapwp/pull/140) [`211a7e5`](https://github.com/rtCamp/snapwp/commit/211a7e53bd8f191aa3bc03fb4bc0316530b40cda) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Convert CLI to TypeScript
+
+-   [#139](https://github.com/rtCamp/snapwp/pull/139) [`7081895`](https://github.com/rtCamp/snapwp/commit/7081895ecee799cf02b54c23bd4a2e71ae642ec0) Thanks [@ashutoshgautams](https://github.com/ashutoshgautams)! - dev: Install NPM dependencies when scaffolding a new project with `npx snapwp`.
+    dev: Add a `--skip-install` flag to the `npx snapwp` command to skip installing NPM dependencies.
+
 ## 0.2.0
 
 ### Minor Changes
