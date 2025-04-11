@@ -3,4 +3,4 @@
 "@snapwp/core": patch
 ---
 
-feat: use SITE_URL for GraphQL endpoint instead of HOME_URL
+fix: use NEXT_PUBLIC_SITE_URL for GraphQL endpoint when available.
