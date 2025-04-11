@@ -4,7 +4,7 @@
 	"private": true,
 	"type": "module",
 	"scripts": {
-		"dev": "concurrently \"next dev\" \"npm run codegen:watch\"",
+		"dev": "concurrently \"NODE_OPTIONS='--inspect' next dev\" \"npm run codegen:watch\"",
 		"build": "next build",
 		"start": "next start",
 		"lint": "next lint",

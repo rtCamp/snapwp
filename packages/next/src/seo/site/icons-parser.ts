@@ -1,87 +1,59 @@
-import { QueryEngine } from '@snapwp/query';
+import type { Parser } from '../types';
+import type { IconMetadataFragFragment } from '@snapwp/query';
+import type { Metadata } from 'next';
 
-interface GeneralSettingsProps {
-	generalSettings: {
-		siteIcon: {
-			mediaItemUrl: string | undefined;
-			mediaDetails: {
-				sizes: IconData[];
-			};
-		};
-	};
-}
-
-interface IconMetaData {
-	faviconIcons: FormattedIconData[];
-	appleIcons: FormattedIconData[] | undefined;
-	msApplicationTileIcon: IconData | undefined;
-}
-
-interface IconData {
-	sourceUrl: string;
-	height: string;
-	width: string;
-}
-
-interface FormattedIconData {
-	url: string;
-	sizes: string;
-}
+//@todo simplify parser
 
 /**
- * Fetch site icon data and filter them into categorized formats.
- * @see - https://developer.wordpress.org/reference/functions/wp_site_icon/#:~:text=Displays%20site%20icon%20meta%20tags. Reason why we are different resolution icons into individual category.
+ * Validates and parses Icon metadata for a route into consumable state.
  *
- * @todo Refactor for composability alongside SEO metadata patterns
- *
- * @return Categorized icons.
+ * @param {IconMetadataFragFragment} data object to be validated and parsed
+ * @return Parsed Icon metadata
  */
-export const getIcons = async (): Promise< IconMetaData > => {
-	const settings: GeneralSettingsProps | undefined =
-		await QueryEngine.getGeneralSettings();
-
-	if ( ! settings ) {
-		return {
-			faviconIcons: [],
-			appleIcons: undefined,
-			msApplicationTileIcon: undefined,
-		};
-	}
-
-	let fallbackIcons: IconMetaData = {
+export const parseIconMetadata: Parser< IconMetadataFragFragment > = (
+	data
+) => {
+	let fallbackIcons: IconsMetaData = {
 		faviconIcons: [],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,
 	};
 
+	if ( ! data.generalSettings ) {
+		return reshape( fallbackIcons );
+	}
+
+	if ( ! data.generalSettings.siteIcon ) {
+		return reshape( fallbackIcons );
+	}
+
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
-	if ( settings.generalSettings.siteIcon.mediaItemUrl ) {
+	if ( data.generalSettings.siteIcon.mediaItemUrl ) {
 		fallbackIcons = {
 			...fallbackIcons,
 			faviconIcons: [
 				{
 					sizes: '512x512',
-					url: settings.generalSettings.siteIcon.mediaItemUrl,
+					url: data.generalSettings.siteIcon.mediaItemUrl,
 				},
 			],
 		};
 	}
 
-	// Return fallback icons if sizes are not present.
-	if ( ! settings.generalSettings.siteIcon.mediaDetails.sizes ) {
-		return fallbackIcons;
+	if ( ! data.generalSettings.siteIcon.mediaDetails?.sizes ) {
+		return reshape( fallbackIcons );
 	}
 
-	const sizes = settings.generalSettings.siteIcon.mediaDetails.sizes;
+	const sizes = data.generalSettings.siteIcon.mediaDetails.sizes;
 
 	// Filter out valid icons
 	const validIcons: IconData[] = sizes.filter(
-		( icon ) => !! ( icon.sourceUrl && icon.height && icon.width )
+		( icon ) => !! ( icon?.sourceUrl && icon.height && icon.width )
 	) as IconData[];
 
 	// Return fallback icons if no valid icons are found.
 	if ( ! validIcons.length ) {
-		return fallbackIcons;
+		return reshape( fallbackIcons );
 	}
 
 	// Filter icons by sizes.
@@ -102,10 +74,29 @@ export const getIcons = async (): Promise< IconMetaData > => {
 		? formatIcons( filteredAppleIcons )
 		: [];
 
-	return {
+	return reshape( {
 		faviconIcons: formattedFaviconIcons,
 		appleIcons: formattedAppleIcons,
 		msApplicationTileIcon: findIconBySize( validIcons, '270x270' ),
+	} );
+};
+
+/**
+ *
+ * @param {IconsMetaData} data Meta data in the internal format
+ * @return Meta data consumable by next
+ */
+const reshape = ( data: IconsMetaData ): Metadata => {
+	return {
+		icons: {
+			icon: data.faviconIcons,
+			apple: data.appleIcons,
+		},
+		other: {
+			...( data.msApplicationTileIcon && {
+				'msapplication-TileImage': data.msApplicationTileIcon.sourceUrl,
+			} ),
+		},
 	};
 };
 
@@ -149,3 +140,20 @@ const formatIcons = ( icons: IconData[] ): FormattedIconData[] =>
 		url: sourceUrl,
 		sizes: `${ width }x${ height }`,
 	} ) );
+
+export interface IconsMetaData {
+	faviconIcons: FormattedIconData[];
+	appleIcons: FormattedIconData[] | undefined;
+	msApplicationTileIcon: IconData | undefined;
+}
+
+export interface IconData {
+	sourceUrl: string;
+	height: string;
+	width: string;
+}
+
+export interface FormattedIconData {
+	url: string;
+	sizes: string;
+}

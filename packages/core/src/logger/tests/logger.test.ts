@@ -1,4 +1,5 @@
 /* eslint-disable no-console -- Allow the use of console for a logger file. */
+// @ts-nocheck
 /// <reference path="../../../../types/dist/types/global/env.d.ts" />
 
 import { Logger } from '../index';
