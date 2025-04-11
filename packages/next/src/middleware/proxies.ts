@@ -22,6 +22,10 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 	return async ( request: NextRequest, _next: NextFetchEvent ) => {
 		const nextPath = request.nextUrl.pathname;
 
+		if ( '/favicon.ico' === nextPath ) {
+			return NextResponse.json( {}, { status: 404 } );
+		}
+
 		const { wpHomeUrl, uploadsDirectory, restUrlPrefix } = getConfig();
 
 		// Proxy for WordPress uploads.
@@ -56,10 +60,6 @@ export const proxies: MiddlewareFactory = ( next: NextMiddleware ) => {
 			return NextResponse.redirect(
 				new URL( '/wp-admin/admin-ajax.php', wpHomeUrl )
 			);
-		}
-
-		if ( '/favicon.ico' === nextPath ) {
-			return NextResponse.json( {}, { status: 404 } );
 		}
 
 		return next( request, _next );

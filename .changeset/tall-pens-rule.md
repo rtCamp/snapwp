@@ -1,5 +1,5 @@
 ---
-"@snapwp/next": minor
+"@snapwp/next": patch
 ---
 
-fix: favicon.ico request making page request to WP server
+fix: avoid unnecessary `favicon.ico` requests when unset.
