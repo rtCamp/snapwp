@@ -1,4 +1,4 @@
-import { sanitizeHtml } from '@snapwp/core';
+import sanitizeHtml from 'sanitize-html';
 import type { TemplateMetadataParser } from '../types';
 import type { RouteMetadataFragFragment } from '@snapwp/query';
 

@@ -1,6 +1,6 @@
 import { RootLayout } from '@snapwp/next';
 import { getSiteMetadata } from '@snapwp/next/seo';
-import { Metadata } from 'next';
+import type { Metadata } from 'next';
 import type { PropsWithChildren } from 'react';
 
 export default function Layout( { children }: PropsWithChildren ) {

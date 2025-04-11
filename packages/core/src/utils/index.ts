@@ -26,7 +26,3 @@ export {
 	isWPHomeUrl,
 	isWPSiteUrl,
 } from './url/validators';
-
-//HTML utilities
-
-export * from './html';
