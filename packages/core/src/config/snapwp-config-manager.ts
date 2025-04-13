@@ -374,7 +374,7 @@ class SnapWPConfigManager {
 	 */
 	static getGraphqlUrl(): string {
 		return generateGraphqlUrl(
-			SnapWPConfigManager.getConfig().wpHomeUrl,
+			SnapWPConfigManager.getConfig().wpSiteUrl,
 			SnapWPConfigManager.getConfig().graphqlEndpoint
 		);
 	}
