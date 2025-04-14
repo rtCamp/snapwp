@@ -1,6 +1,6 @@
-const { exec } = require( 'child_process' );
-const fs = require( 'fs/promises' );
-const path = require( 'path' );
+import { exec } from 'child_process';
+import fs from 'fs/promises';
+import path from 'path';
 
 ( async () => {
 	const examplesDir = path.resolve( __dirname, '../../examples' );

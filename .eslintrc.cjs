@@ -36,6 +36,9 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
+
+		'@typescript-eslint/no-require-imports': 'error',
+
 		'no-restricted-imports': [
 			'error',
 			{
@@ -169,6 +172,17 @@ module.exports = {
 			},
 			parserOptions: {
 				project: true,
+			},
+		},
+
+		{
+			files: [
+				'**/*.config.{js,ts,cjs,mjs}',
+				'**/config/**/*.{js,ts,cjs,mjs}',
+				'**/.eslintrc.{js,ts,cjs,mjs}',
+			],
+			rules: {
+				'@typescript-eslint/no-require-imports': 'off',
 			},
 		},
 
