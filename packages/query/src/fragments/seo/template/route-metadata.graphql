@@ -1,6 +1,6 @@
 fragment RouteMetadataFrag on RenderedTemplate {
 	connectedNode {
-        id
+		id
 		... on NodeWithTitle {
 			title
 		}

@@ -1,6 +1,6 @@
 fragment TwitterMetadataFrag on RenderedTemplate {
 	connectedNode {
-        id
+		id
 		uri
 
 		... on NodeWithTitle {
@@ -10,7 +10,7 @@ fragment TwitterMetadataFrag on RenderedTemplate {
 		... on NodeWithFeaturedImage {
 			featuredImage {
 				node {
-                    id
+					id
 					sourceUrl
 					mediaDetails {
 						width

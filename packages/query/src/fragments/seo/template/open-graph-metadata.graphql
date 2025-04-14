@@ -1,7 +1,7 @@
 fragment OpenGraphMetadataFrag on RenderedTemplate {
 	uri
 	connectedNode {
-        id
+		id
 		... on NodeWithTitle {
 			title
 		}
@@ -11,7 +11,7 @@ fragment OpenGraphMetadataFrag on RenderedTemplate {
 		... on NodeWithFeaturedImage {
 			featuredImage {
 				node {
-                    id
+					id
 					sourceUrl
 					mediaDetails {
 						width
