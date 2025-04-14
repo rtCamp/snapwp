@@ -10,7 +10,6 @@ const baseConfig: CodegenConfig = {
 				enumsAsTypes: true,
 				skipTypename: true,
 				useTypeImports: true,
-				useImplementingTypes: true,
 				avoidOptionals: false,
 			},
 		},
