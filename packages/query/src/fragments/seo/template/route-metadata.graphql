@@ -1,6 +1,6 @@
 fragment RouteMetadataFrag on RenderedTemplate {
 	connectedNode {
-		__typename
+        id
 		... on NodeWithTitle {
 			title
 		}
@@ -14,7 +14,7 @@ fragment RouteMetadataFrag on RenderedTemplate {
 		... on NodeWithExcerpt {
 			excerpt
 		}
-		... on Page {
+		... on NodeWithContentEditor {
 			content
 		}
 		... on TermNode {
