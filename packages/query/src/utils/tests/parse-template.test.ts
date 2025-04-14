@@ -108,7 +108,7 @@ describe( 'parseQueryResult', () => {
 		);
 	} );
 
-	it( 'should return is404 true if `templateByUri.connectedNode` is null', () => {
+	it( 'should return is404 true if `templateByUri.is404` is true', () => {
 		const queryData: ApolloQueryResult< GetCurrentTemplateQuery > = {
 			data: {
 				templateByUri: {
@@ -143,7 +143,7 @@ describe( 'parseQueryResult', () => {
 							renderedHtml: '<p>Text</p>',
 						},
 					],
-					connectedNode: null,
+					is404: true,
 				},
 			},
 			errors: [],
