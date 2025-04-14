@@ -52,7 +52,7 @@ export function parseQueryResult(
 	}
 
 	const templateByUri = queryData.data?.templateByUri;
-	const is404 = templateByUri?.connectedNode === null;
+	const is404 = templateByUri?.is404 ?? false;
 
 	return {
 		stylesheets: parseEnqueuedStylesheets( wordpressUrl, templateByUri ),

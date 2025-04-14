@@ -1,5 +1,6 @@
 query GetCurrentTemplate($uri: String!) {
 	templateByUri(uri: $uri) {
+		is404
 		bodyClasses
 		enqueuedStylesheets(first: 1000) {
 			nodes {
