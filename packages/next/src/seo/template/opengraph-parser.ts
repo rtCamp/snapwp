@@ -11,33 +11,40 @@ import type { OpenGraphMetadataFragFragment } from '@snapwp/query';
 export const parseRouteOpenGraphMetadata: TemplateMetadataParser<
 	OpenGraphMetadataFragFragment
 > = ( data ) => {
-	if ( ! data.connectedNode ) {
+	// Type casting required to not rely on __typename
+	// @todo fix codegen types
+	const node = data.connectedNode as unknown as
+		| {
+				title: string | undefined | null;
+				name: string | undefined | null;
+				description: string | undefined | null;
+				excerpt: string | undefined | null;
+				content: string | undefined | null;
+		  }
+		| null
+		| undefined;
+
+	if ( ! node ) {
 		return {};
 	}
-	const node = data.connectedNode;
 
-	switch ( node.__typename ) {
-		case 'Post':
-		case 'Page':
-			const rawDescription =
-				node.__typename === 'Page' ? node.content : node.excerpt;
-			const description =
-				rawDescription && sanitizeHtml( rawDescription );
-			return {
-				openGraph: {
-					title: node.title || undefined,
-					description: description || undefined,
-				},
-			};
-		case 'Category':
-		case 'Tag':
-			return {
-				openGraph: {
-					title: node.name || undefined,
-					description: node.description || undefined,
-				},
-			};
-		default:
-			return {};
+	const title = node?.title || node?.name || undefined;
+
+	// If there's no description, use the first 150 characters of the content
+	let description = node?.excerpt || node?.description || null;
+
+	if ( ! description ) {
+		const trimmedContent = node?.content?.substring( 0, 150 );
+
+		if ( trimmedContent ) {
+			description = trimmedContent + '...';
+		}
 	}
+
+	return {
+		openGraph: {
+			title,
+			description: description ? sanitizeHtml( description ) : undefined,
+		},
+	};
 };
