@@ -11,36 +11,47 @@ import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
 export const parseRouteTwitterMetadata: TemplateMetadataParser<
 	TwitterMetadataFragFragment
 > = ( data: TwitterMetadataFragFragment ) => {
-	// No connected node to the path. No twitter meta data
-	if ( ! data.connectedNode ) {
+	const node = data.connectedNode as unknown as {
+		title: string | null | undefined;
+		featuredImage:
+			| {
+					node:
+						| {
+								sourceUrl: string | null | undefined;
+								mediaDetails:
+									| {
+											width: number | null | undefined;
+											height: number | null | undefined;
+									  }
+									| null
+									| undefined;
+						  }
+						| null
+						| undefined;
+			  }
+			| null
+			| undefined;
+	};
+
+	if ( ! node ) {
 		return {};
 	}
 
-	switch ( data.connectedNode.__typename ) {
-		case 'Page':
-		case 'Post':
-			const title = data.connectedNode.title || undefined;
-			const imageNode = data.connectedNode.featuredImage?.node;
-			let images: Twitter[ 'images' ];
+	const title = node.title || undefined;
+	const images: Twitter[ 'images' ] = [];
 
-			if ( imageNode && imageNode.sourceUrl ) {
-				images = [
-					{
-						url: imageNode.sourceUrl,
-						width: imageNode.mediaDetails?.width || undefined,
-						height: imageNode.mediaDetails?.height || undefined,
-					},
-				];
-			}
-
-			return {
-				twitter: {
-					title,
-					images,
-				},
-			};
-
-		default:
-			return {};
+	if ( node.featuredImage?.node?.sourceUrl ) {
+		images.push( {
+			url: node.featuredImage.node.sourceUrl,
+			width: node.featuredImage.node.mediaDetails?.width || undefined,
+			height: node.featuredImage.node.mediaDetails?.height || undefined,
+		} );
 	}
+
+	return {
+		twitter: {
+			title,
+			images,
+		},
+	};
 };
