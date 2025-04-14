@@ -36,6 +36,11 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
+
+
+		'@typescript-eslint/no-empty-function': 'error',
+		'no-empty-function': 'error',
+
 		'no-restricted-imports': [
 			'error',
 			{
@@ -169,6 +174,17 @@ module.exports = {
 			},
 			parserOptions: {
 				project: true,
+			},
+		},
+
+		{
+			files: [ '**/*.test.{ts,tsx,js,jsx}' ],
+			env: {
+				jest: true,
+			},
+			rules: {
+				'no-empty-function': 'off',
+				'@typescript-eslint/no-empty-function': 'off',
 			},
 		},
 
