@@ -185,6 +185,7 @@ module.exports = {
 		{
 			files: [
 				'**/config/**/*.{js,cjs}',
+				'**/cli/build.cjs',
 			],
 			rules: {
 				'@typescript-eslint/no-require-imports': 'off',
