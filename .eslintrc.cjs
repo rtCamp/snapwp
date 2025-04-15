@@ -40,9 +40,7 @@ module.exports = {
 		'@typescript-eslint/no-require-imports': [
 			'error',
 			{
-				allow: [
-					'@wordpress/prettier-config',
-				]
+				allow: [ '@wordpress/prettier-config' ],
 			},
 		],
 
@@ -183,10 +181,7 @@ module.exports = {
 		},
 
 		{
-			files: [
-				'**/config/**/*.{js,cjs}',
-				'**/cli/build.cjs',
-			],
+			files: [ '**/config/**/*.{js,cjs}', '**/cli/build.cjs' ],
 			rules: {
 				'@typescript-eslint/no-require-imports': 'off',
 			},
