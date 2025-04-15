@@ -36,6 +36,9 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
+
+		'@typescript-eslint/no-require-imports': 'error',
+
 		'no-restricted-imports': [
 			'error',
 			{
@@ -169,6 +172,18 @@ module.exports = {
 			},
 			parserOptions: {
 				project: true,
+			},
+		},
+
+		// CommonJS files.
+		{
+			files: [
+				'**/*.cjs',
+				'**/config/**/*.js',
+				'**/prettier-config/index.js', // @todo make CJS
+			],
+			rules: {
+				'@typescript-eslint/no-require-imports': 'off',
 			},
 		},
 
