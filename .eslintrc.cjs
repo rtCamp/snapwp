@@ -37,7 +37,6 @@ module.exports = {
 			'lodash',
 		],
 
-
 		'@typescript-eslint/no-empty-function': 'error',
 		'no-empty-function': 'error',
 
