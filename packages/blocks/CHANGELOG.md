@@ -1,5 +1,21 @@
 # @snapwp/blocks
 
+## 0.2.1
+
+### Patch Changes
+
+-   [#141](https://github.com/rtCamp/snapwp/pull/141) [`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - chore: Add `eslint-plugin-import` to repository ruleset and lint.
+
+-   [`bae4118`](https://github.com/rtCamp/snapwp/commit/bae41180f8012b0232f0c87a3c9e470d56603ff2) Thanks [@justlevine](https://github.com/justlevine)! - chore: Enforce named exports and remove default exports.
+
+-   [#138](https://github.com/rtCamp/snapwp/pull/138) [`9ddaf7c`](https://github.com/rtCamp/snapwp/commit/9ddaf7c89a243370afb06894e4ed9d5bde2d5e45) Thanks [@SH4LIN](https://github.com/SH4LIN)! - fix: ensure `npm run typecheck` scans all packages.
+
+-   [#142](https://github.com/rtCamp/snapwp/pull/142) [`c460b31`](https://github.com/rtCamp/snapwp/commit/c460b31679ea6c1817b8a340cb180c180c17a362) Thanks [@Ta5r](https://github.com/Ta5r)! - chore: Enforce `jsdoc/require-param-type` ESLint rule in repository ruleset.
+
+-   Updated dependencies [[`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45), [`22ed5d2`](https://github.com/rtCamp/snapwp/commit/22ed5d2f0b5319adae08be211c70ed929ee626c8), [`278ef2c`](https://github.com/rtCamp/snapwp/commit/278ef2cd96208b89689a4963e69713dcb6fa19eb), [`bae4118`](https://github.com/rtCamp/snapwp/commit/bae41180f8012b0232f0c87a3c9e470d56603ff2), [`2595d68`](https://github.com/rtCamp/snapwp/commit/2595d681b0a48fef75216204539908336a21f655), [`9ddaf7c`](https://github.com/rtCamp/snapwp/commit/9ddaf7c89a243370afb06894e4ed9d5bde2d5e45), [`c460b31`](https://github.com/rtCamp/snapwp/commit/c460b31679ea6c1817b8a340cb180c180c17a362)]:
+    -   @snapwp/core@0.3.1
+    -   @snapwp/next@0.3.1
+
 ## 0.2.0
 
 ### Major Changes

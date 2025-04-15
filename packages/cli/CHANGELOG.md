@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.2.1
+
+### Patch Changes
+
+-   [#141](https://github.com/rtCamp/snapwp/pull/141) [`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - chore: Add `eslint-plugin-import` to repository ruleset and lint.
+
+-   [#156](https://github.com/rtCamp/snapwp/pull/156) [`5b51741`](https://github.com/rtCamp/snapwp/commit/5b51741b91a0a8e5f9abe0edb95703b906687847) Thanks [@Ta5r](https://github.com/Ta5r)! - chore: Enforce `@typescript-eslint/no-empty-function` ESLint rule in repository ruleset.
+
+-   [#139](https://github.com/rtCamp/snapwp/pull/139) [`7081895`](https://github.com/rtCamp/snapwp/commit/7081895ecee799cf02b54c23bd4a2e71ae642ec0) Thanks [@ashutoshgautams](https://github.com/ashutoshgautams)! - fix: Improve formatting of default value and user input in CLI prompts.
+
+-   [#157](https://github.com/rtCamp/snapwp/pull/157) [`278ef2c`](https://github.com/rtCamp/snapwp/commit/278ef2cd96208b89689a4963e69713dcb6fa19eb) Thanks [@justlevine](https://github.com/justlevine)! - chore: update NPM devDependencies to their latest (SemVer-compatible) versions.
+
+-   [#140](https://github.com/rtCamp/snapwp/pull/140) [`211a7e5`](https://github.com/rtCamp/snapwp/commit/211a7e53bd8f191aa3bc03fb4bc0316530b40cda) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Convert CLI to TypeScript
+
+-   [#139](https://github.com/rtCamp/snapwp/pull/139) [`7081895`](https://github.com/rtCamp/snapwp/commit/7081895ecee799cf02b54c23bd4a2e71ae642ec0) Thanks [@ashutoshgautams](https://github.com/ashutoshgautams)! - dev: Install NPM dependencies when scaffolding a new project with `npx snapwp`.
+    dev: Add a `--skip-install` flag to the `npx snapwp` command to skip installing NPM dependencies.
+
+-   [#155](https://github.com/rtCamp/snapwp/pull/155) [`e06f797`](https://github.com/rtCamp/snapwp/commit/e06f79752d8a63d83329c1b1601a3c7aea66e698) Thanks [@Ta5r](https://github.com/Ta5r)! - chore: Enforce `no-require-imports` ESLint rule in repository ruleset.
+
 ## 0.2.0
 
 ### Minor Changes
