@@ -21,9 +21,9 @@ fragment RouteMetadataFrag on RenderedTemplate {
 			name
 			description
 		}
-        ... on User {  
-            name  
-            description  
-        }  
+		... on User {
+			name
+			description
+		}
 	}
 }

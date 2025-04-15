@@ -10,15 +10,13 @@ export function generateRootQuery(
 	fragments: TypedDocumentNode< unknown, unknown >[]
 ): DocumentNode {
 	return gql`
-        ${ Object.values( fragments ).map( ( fragmentDoc ) =>
-			print( fragmentDoc )
-		) }
-        query getRoot{
-            ${ Object.values( fragments ).map(
+		${ Object.values( fragments ).map( ( fragmentDoc ) => print( fragmentDoc ) ) }
+		query getRoot{
+			${ Object.values( fragments ).map(
 				( fragmentDoc ) => `...${ getFragmentName( fragmentDoc ) }`
 			) }
-        }
-    `;
+		}
+	`;
 }
 
 /**
@@ -29,15 +27,13 @@ export function generateTemplateQuery(
 	fragments: TypedDocumentNode< unknown, unknown >[]
 ): DocumentNode {
 	return gql`
-        ${ Object.values( fragments ).map( ( fragmentDoc ) =>
-			print( fragmentDoc )
-		) }
-        query getTemplate($uri: String!) {
-            templateByUri(uri: $uri) {
-            ${ Object.values( fragments ).map(
+		${ Object.values( fragments ).map( ( fragmentDoc ) => print( fragmentDoc ) ) }
+		query getTemplate($uri: String!) {
+			templateByUri(uri: $uri) {
+			${ Object.values( fragments ).map(
 				( fragmentDoc ) => `...${ getFragmentName( fragmentDoc ) }`
 			) }
-            }
-        }
-    `;
+			}
+		}
+	`;
 }
