@@ -16,9 +16,9 @@ export default function Layout( { children }: PropsWithChildren ) {
  * @return Metadata for SEO.
  */
 export async function generateMetadata(): Promise< Metadata > {
-	const metaData = await getSiteMetadata();
+	const metadata = await getSiteMetadata();
 
 	return {
-		...metaData,
+		...metadata,
 	};
 }
