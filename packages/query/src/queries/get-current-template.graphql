@@ -127,8 +127,5 @@ query GetCurrentTemplate($uri: String!) {
 				...CoreVideoFrag
 			}
 		}
-		connectedNode {
-			id
-		}
 	}
 }
