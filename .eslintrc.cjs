@@ -79,7 +79,8 @@ module.exports = {
 		'jsdoc/require-returns': [ 'warn' ],
 
 		// Restrict the use of empty functions.
-		'no-empty-function': 'error',
+		'no-empty-function': 'off',
+		'@typescript-eslint/no-empty-function': 'error',
 
 		// Disallow unnecessary JSX curly braces when literals alone are enough.
 		'react/jsx-curly-brace-presence': [
@@ -204,6 +205,9 @@ module.exports = {
 			files: [ '**/*.test.ts' ],
 			env: {
 				jest: true,
+			},
+			rules: {
+				'@typescript-eslint/no-empty-function': 'off',
 			},
 		},
 
