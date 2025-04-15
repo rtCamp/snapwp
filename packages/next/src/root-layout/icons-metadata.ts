@@ -40,19 +40,15 @@ export const getIcons = async (): Promise< IconMetaData > => {
 	const settings: GeneralSettingsProps | undefined =
 		await QueryEngine.getGeneralSettings();
 
-	if ( ! settings ) {
-		return {
-			faviconIcons: [],
-			appleIcons: undefined,
-			msApplicationTileIcon: undefined,
-		};
-	}
-
 	let fallbackIcons: IconMetaData = {
-		faviconIcons: [],
+		faviconIcons: [ { url: '#', sizes: '' } ],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,
 	};
+
+	if ( ! settings ) {
+		return fallbackIcons;
+	}
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
 	if ( settings.generalSettings.siteIcon.mediaItemUrl ) {

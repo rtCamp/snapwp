@@ -30,7 +30,6 @@
 	"peerDependencies": {
 		"@graphql-codegen/cli": "^5.0.2",
 		"@parcel/watcher": "^2.4.1",
-		"@snapwp/core": "*",
 		"graphql": "^16.9.0"
 	}
 }
