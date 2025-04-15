@@ -37,8 +37,6 @@ module.exports = {
 			'lodash',
 		],
 
-		'@typescript-eslint/no-empty-function': 'error',
-		'no-empty-function': 'error',
 		'@typescript-eslint/no-require-imports': 'error',
 
 		'no-restricted-imports': [
@@ -81,7 +79,8 @@ module.exports = {
 		'jsdoc/require-returns': [ 'warn' ],
 
 		// Restrict the use of empty functions.
-		'no-empty-function': 'error',
+		'no-empty-function': 'off',
+		'@typescript-eslint/no-empty-function': 'error',
 
 		// Disallow unnecessary JSX curly braces when literals alone are enough.
 		'react/jsx-curly-brace-presence': [
@@ -177,15 +176,6 @@ module.exports = {
 			},
 		},
 
-		{
-			files: [ '**/*.test.{ts,tsx,js,jsx}' ],
-			env: {
-				jest: true,
-			},
-			rules: {
-				'no-empty-function': 'off',
-				'@typescript-eslint/no-empty-function': 'off',
-
 		// CommonJS files.
 		{
 			files: [
@@ -215,6 +205,9 @@ module.exports = {
 			files: [ '**/*.test.ts' ],
 			env: {
 				jest: true,
+			},
+			rules: {
+				'@typescript-eslint/no-empty-function': 'off',
 			},
 		},
 
