@@ -37,7 +37,14 @@ module.exports = {
 			'lodash',
 		],
 
-		'@typescript-eslint/no-require-imports': 'error',
+		'@typescript-eslint/no-require-imports': [
+			'error',
+			{
+				allow: [
+					'@wordpress/prettier-config',
+				]
+			},
+		],
 
 		'no-restricted-imports': [
 			'error',
@@ -177,9 +184,7 @@ module.exports = {
 
 		{
 			files: [
-				'**/*.config.{js,ts,cjs,mjs}',
-				'**/config/**/*.{js,ts,cjs,mjs}',
-				'**/.eslintrc.{js,ts,cjs,mjs}',
+				'**/config/**/*.{js,cjs}',
 			],
 			rules: {
 				'@typescript-eslint/no-require-imports': 'off',
