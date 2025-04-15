@@ -4,13 +4,13 @@
 
 ### Patch Changes
 
--   [#141](https://github.com/rtCamp/snapwp/pull/141) [`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - chore: Add `eslint-plugin-import` to repository ruleset and lint.
-
--   [`bae4118`](https://github.com/rtCamp/snapwp/commit/bae41180f8012b0232f0c87a3c9e470d56603ff2) Thanks [@justlevine](https://github.com/justlevine)! - chore: Enforce named exports and remove default exports.
-
 -   [#152](https://github.com/rtCamp/snapwp/pull/152) [`2595d68`](https://github.com/rtCamp/snapwp/commit/2595d681b0a48fef75216204539908336a21f655) Thanks [@SH4LIN](https://github.com/SH4LIN)! - fix: avoid unnecessary `favicon.ico` requests when unset.
 
 -   [#138](https://github.com/rtCamp/snapwp/pull/138) [`9ddaf7c`](https://github.com/rtCamp/snapwp/commit/9ddaf7c89a243370afb06894e4ed9d5bde2d5e45) Thanks [@SH4LIN](https://github.com/SH4LIN)! - fix: ensure `npm run typecheck` scans all packages.
+
+-   [#141](https://github.com/rtCamp/snapwp/pull/141) [`6324467`](https://github.com/rtCamp/snapwp/commit/6324467c240af53c5c5ffd689d39817a9c0e7a45) Thanks [@ayushnirwal](https://github.com/ayushnirwal)! - chore: Add `eslint-plugin-import` to repository ruleset and lint.
+
+-   [#147](https://github.com/rtCamp/snapwp/pull/147) [`bae4118`](https://github.com/rtCamp/snapwp/commit/bae41180f8012b0232f0c87a3c9e470d56603ff2 Thanks [@ta5r](https://github.com/ta5r)! - chore: Enforce named exports and remove default exports.
 
 -   [#142](https://github.com/rtCamp/snapwp/pull/142) [`c460b31`](https://github.com/rtCamp/snapwp/commit/c460b31679ea6c1817b8a340cb180c180c17a362) Thanks [@Ta5r](https://github.com/Ta5r)! - chore: Enforce `jsdoc/require-param-type` ESLint rule in repository ruleset.
 
