@@ -8,32 +8,24 @@ import {
 	SiteMetadataFragFragmentDoc,
 	TwitterMetadataFragFragmentDoc,
 } from '@snapwp/query';
-import { parseIconMetadata } from './site/icons-parser';
-import { parseSiteMetadata } from './site/site-parser';
-import { parseRouteOpenGraphMetadata } from './template/opengraph-parser';
-import { parseRouteSiteMetadata } from './template/template-parser';
-import { parseRouteTwitterMetadata } from './template/twitter-parser';
-import type {
-	RootMetadataGeneratorPlugin,
-	TemplateMetadataGeneratorPlugin,
-} from './types';
+
+import {parseGeneralSettings as iconParser} from './icons-parser';
+import {parseGeneralSettings as siteParser} from './site-parser';
+
+import {parseNode as opengraphParser} from './opengraph-parser';
+import {parseNode as twitterParser} from './twitter-parser';
+import {parseNode as templateParser} from './template-parser';
+
 import type { Metadata } from 'next';
+import type { MetadataPlugin } from './types';
 
 /**
  * Handles Seo related metadata.
  */
 export class Seo {
 	static isInitialized: boolean = false;
-	static siteSeoPlugins: Record<
-		string,
-		RootMetadataGeneratorPlugin< unknown >
-	> = {};
-
-	static routeSeoPlugins: Record<
-		string,
-		TemplateMetadataGeneratorPlugin< unknown >
-	> = {};
-
+	static plugins: MetadataPlugin< any,any >[] = []
+    
 	/**
 	 * Initializer
 	 */
@@ -43,73 +35,58 @@ export class Seo {
 	}
 
 	/**
-	 * Loads a plugin to generate site level meta data.
-	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
-	 * @param {string} key key unique to the plugin
-	 */
-	public static registerSiteSeoPlugin(
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- No contraints on the fragment
-		plugin: RootMetadataGeneratorPlugin< any >,
-		key: string
-	): void {
-		Seo.siteSeoPlugins[ key ] = plugin;
-	}
-
-	/**
 	 * Loads a plugin to generate route level meta data.
 	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
-	 * @param {string} key key unique to the plugin
 	 */
-	public static registerRouteSeoPlugin(
-		// eslint-disable-next-line @typescript-eslint/no-explicit-any -- No contraints on the fragment
-		plugin: TemplateMetadataGeneratorPlugin< any >,
-		key: string
+	public static registerPlugin(
+		plugin: MetadataPlugin< any,any >,
 	): void {
-		Seo.routeSeoPlugins[ key ] = plugin;
+		Seo.plugins.push(plugin);
 	}
 
 	/**
 	 * Loads all default plugins.
 	 */
 	private static registerDefaultPlugins(): void {
-		Seo.registerSiteSeoPlugin(
+		Seo.registerPlugin(
 			{
 				fragmentDoc: IconMetadataFragFragmentDoc,
-				parser: parseIconMetadata,
+				parser: iconParser,
+                type:"root"
 			},
-			'icon'
 		);
 
-		Seo.registerSiteSeoPlugin(
+		Seo.registerPlugin(
 			{
 				fragmentDoc: SiteMetadataFragFragmentDoc,
-				parser: parseSiteMetadata,
+				parser: siteParser,
+                type:"root"
+
 			},
-			'site'
 		);
 
-		Seo.registerRouteSeoPlugin(
+		Seo.registerPlugin(
 			{
 				fragmentDoc: OpenGraphMetadataFragFragmentDoc,
-				parser: parseRouteOpenGraphMetadata,
+				parser: opengraphParser,
+                type:"template"
 			},
-			'open-graph'
 		);
 
-		Seo.registerRouteSeoPlugin(
+		Seo.registerPlugin(
 			{
 				fragmentDoc: TwitterMetadataFragFragmentDoc,
-				parser: parseRouteTwitterMetadata,
+				parser: twitterParser,
+                type:"template"
 			},
-			'twitter'
 		);
 
-		Seo.registerRouteSeoPlugin(
+		Seo.registerPlugin(
 			{
 				fragmentDoc: RouteMetadataFragFragmentDoc,
-				parser: parseRouteSiteMetadata,
+				parser: templateParser,
+                type:"template"
 			},
-			'site'
 		);
 	}
 
@@ -118,15 +95,9 @@ export class Seo {
 	 * @return metadata
 	 */
 	public static async getSiteMetadata(): Promise< Metadata > {
-		// Collect fragments
-		const fragmentDocMap = Object.fromEntries(
-			Object.entries( Seo.siteSeoPlugins ).map( ( [ key, plugin ] ) => {
-				return [ key, plugin.fragmentDoc ];
-			} )
-		);
+        const rootQueryFrags = Seo.plugins.filter(({ type }) => type === "root").map(({fragmentDoc})=>fragmentDoc)
 
-		// Generate Root Query
-		const rootQuery = generateRootQuery( Object.values( fragmentDocMap ) );
+		const rootQuery = generateRootQuery( rootQueryFrags );
 
 		const { data } = await QueryEngine.apolloClient.query( {
 			query: rootQuery,
@@ -134,21 +105,12 @@ export class Seo {
 			errorPolicy: 'all',
 		} );
 
-		// Divide data for individual plugins
-		const fetchedDataMap = Object.fromEntries(
-			Object.entries( Seo.siteSeoPlugins ).map( ( [ key ] ) => {
-				//@todo slice out for the respective fragment.
-				return [ key, data ];
-			} )
-		);
 
-		const parsedDataMap = Object.fromEntries(
-			Object.entries( Seo.siteSeoPlugins ).map( ( [ key, plugin ] ) => {
-				return [ key, plugin.parser( fetchedDataMap[ key ] ) ];
-			} )
-		);
+        const parsers = Seo.plugins.filter(({ type }) => type === "root").map(({parser})=>parser)
 
-		return Object.values( parsedDataMap ).reduce(
+        const metadataArray = parsers.map((parser)=> parser(data.generalSettings))
+
+		return metadataArray.reduce(
 			( acc, obj ) => Object.assign( acc, obj ),
 			{}
 		);
@@ -163,45 +125,26 @@ export class Seo {
 	public static async getTemplateMetadata(
 		path?: string | null
 	): Promise< Metadata > {
-		if ( ! path ) {
-			path = '/';
-		}
-		// Collect fragments
-		const fragmentDocMap = Object.fromEntries(
-			Object.entries( Seo.routeSeoPlugins ).map( ( [ key, plugin ] ) => {
-				return [ key, plugin.fragmentDoc ];
-			} )
-		);
+        path = path ? "/" + path : "/"
 
-		// Generate template query
-		const templateQuery = generateTemplateQuery(
-			Object.values( fragmentDocMap )
-		);
+        const renderedTemplateFrags = Seo.plugins.filter(({ type }) => type === "template").map(({fragmentDoc})=>fragmentDoc)
 
+		const templateQuery = generateTemplateQuery( renderedTemplateFrags );
+        
 		const { data } = await QueryEngine.apolloClient.query( {
 			query: templateQuery,
-			variables: {
-				uri: path,
-			},
 			fetchPolicy: 'no-cache', // @todo figure out a caching strategy, instead of always fetching from network
 			errorPolicy: 'all',
+            variables:{
+                uri: path
+            }
 		} );
 
-		// Divide data for individual plugins
-		const fetchedDataMap = Object.fromEntries(
-			Object.entries( Seo.routeSeoPlugins ).map( ( [ key ] ) => {
-				//@todo slice out for the respective fragment.
-				return [ key, data ];
-			} )
-		);
+        const parsers = Seo.plugins.filter(({ type }) => type === "template").map(({parser})=>parser)
 
-		const parsedDataMap = Object.fromEntries(
-			Object.entries( Seo.routeSeoPlugins ).map( ( [ key, plugin ] ) => {
-				return [ key, plugin.parser( fetchedDataMap[ key ] ) ];
-			} )
-		);
+        const metadataArray = parsers.map((parser)=> parser(data.templateByUri.connectedNode))
 
-		return Object.values( parsedDataMap ).reduce(
+		return metadataArray.reduce(
 			( acc, obj ) => Object.assign( acc, obj ),
 			{}
 		);

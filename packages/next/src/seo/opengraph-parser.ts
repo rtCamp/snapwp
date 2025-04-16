@@ -1,8 +1,9 @@
 import sanitizeHtml from 'sanitize-html';
-import { getNodeDescription } from '../utils';
+import { getNodeDescription } from './utils';
 import type { Metadata } from 'next';
 
 export interface Node {
+    id: string;
 	title?: string | undefined | null;
 	name?: string | undefined | null;
 	description?: string | undefined | null;
