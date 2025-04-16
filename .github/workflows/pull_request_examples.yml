@@ -52,7 +52,6 @@ jobs:
               with:
                   filters: ${{ env.PATHS }}
         outputs:
-            #TODO: the example shouldn't be hardcoded
             changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
 
     generate_schema:
@@ -98,7 +97,19 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -109,15 +120,18 @@ jobs:
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
 
             - name: Run ESLint
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present lint
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
 
     typecheck:
         name: TS Typecheck
@@ -150,12 +164,23 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -163,14 +188,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  snapwp --proxy <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
 
             - name: Run Codegen
               working-directory: ${{ github.workspace }}/snapwp-test-app
@@ -180,6 +199,14 @@ jobs:
               # TODO: Why are we catching the error?
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present typecheck
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                cd '${{ github.workspace }}'
+                npm run --if-present local-registry:stop
 
     test-build:
         name: Test Build (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -254,12 +281,23 @@ jobs:
                   sleep 3
                   curl -IL http://localhost  # Verify that the server is running; will fail and exit workflow if not
 
-            # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -267,19 +305,20 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  snapwp --proxy <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
-                  
 
             - name: Build assets
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present build
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                cd '${{ github.workspace }}'
+                npm run --if-present local-registry:stop
 
     unit:
         name: Unit Tests (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -313,12 +352,23 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-              # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -326,18 +376,20 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  snapwp --proxy <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
 
             - name: Run unit tests
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present test
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                cd '${{ github.workspace }}'
+                npm run --if-present local-registry:stop
 
     security:
         name: Dependencies Audit
@@ -370,12 +422,23 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -383,18 +446,20 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  snapwp --proxy <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
 
             - name: Run npm audit
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm audit --audit-level=high
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                cd '${{ github.workspace }}'
+                npm run --if-present local-registry:stop
 
     prettier:
         name: Check Formatting
@@ -427,12 +492,23 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
             - name: Build Local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
+                
+                  # fixup verdaccio permissions so it runs in ci
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
+                
+                  npm run --if-present publish:local
+                
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -440,15 +516,17 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  snapwp --proxy <<< '.'
                   npm i
-                  for i in '${{ github.workspace }}/packages/'*; do
-                      if [ -d "$i" ]; then
-                          npm i "$i"  # Swap snapwp dependencies for local packages
-                      fi
-                  done
 
             - name: Run Prettier
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: npm run --if-present format-check
+
+            - name: Clean up
+              if: always()
+              working-directory: ${{ github.workspace }}/snapwp-test-app
+              continue-on-error: true
+              run: |
+                cd '${{ github.workspace }}'
+                npm run --if-present local-registry:stop
