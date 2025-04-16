@@ -36,6 +36,9 @@ module.exports = {
 			'classnames',
 			'lodash',
 		],
+
+		'@typescript-eslint/no-require-imports': 'error',
+
 		'no-restricted-imports': [
 			'error',
 			{
@@ -76,7 +79,8 @@ module.exports = {
 		'jsdoc/require-returns': [ 'warn' ],
 
 		// Restrict the use of empty functions.
-		'no-empty-function': 'error',
+		'no-empty-function': 'off',
+		'@typescript-eslint/no-empty-function': 'error',
 
 		// Disallow unnecessary JSX curly braces when literals alone are enough.
 		'react/jsx-curly-brace-presence': [
@@ -172,6 +176,18 @@ module.exports = {
 			},
 		},
 
+		// CommonJS files.
+		{
+			files: [
+				'**/*.cjs',
+				'**/config/**/*.js',
+				'**/prettier-config/index.js', // @todo make CJS
+			],
+			rules: {
+				'@typescript-eslint/no-require-imports': 'off',
+			},
+		},
+
 		// CLI package TypeScript files
 		{
 			files: [
@@ -189,6 +205,9 @@ module.exports = {
 			files: [ '**/*.test.ts' ],
 			env: {
 				jest: true,
+			},
+			rules: {
+				'@typescript-eslint/no-empty-function': 'off',
 			},
 		},
 
