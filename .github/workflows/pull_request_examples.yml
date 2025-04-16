@@ -8,6 +8,7 @@ on:
         paths:
             - .github/workflows/pull_request_examples.yml
             - examples/**
+            - packages/**
     push:
         branches:
             - main
@@ -15,7 +16,7 @@ on:
         paths:
             - .github/workflows/pull_request_examples.yml
             - examples/**
-            - packages/cli/**
+            - packages/**
     # TODO: Remove and replace with real matrix.
     workflow_dispatch:
         inputs:
@@ -30,13 +31,12 @@ permissions:
     pull-requests: read
 
 env:
-    #  NODE_VERSIONS: '[18, 20, 22]'
     NODE_VERSIONS: '[20, 22]'
     PATHS: |
         nextjs/starter:
           - .github/workflows/pull_request_examples.yml
           - examples/nextjs/starter/**
-          - packages/cli/**
+          - packages/**
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
     SNAPWP_HELPER_REF: 'develop' # TODO: Get from PR description.
 
@@ -52,6 +52,7 @@ jobs:
               with:
                   filters: ${{ env.PATHS }}
         outputs:
+            # TODO: the example shouldn't be hardcoded
             changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
 
     generate_schema:
@@ -93,7 +94,7 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -101,7 +102,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -112,7 +113,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
@@ -164,7 +165,7 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -172,7 +173,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -183,7 +184,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
@@ -281,7 +282,7 @@ jobs:
                   sleep 3
                   curl -IL http://localhost  # Verify that the server is running; will fail and exit workflow if not
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -289,7 +290,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -300,7 +301,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
@@ -352,7 +353,7 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -360,7 +361,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -371,7 +372,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
@@ -422,7 +423,7 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -430,7 +431,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -441,7 +442,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
@@ -492,7 +493,7 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
@@ -500,7 +501,7 @@ jobs:
                   npm run --if-present build
                   npm link snapwp
 
-                  # fixup verdaccio permissions so it runs in ci
+                  # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
@@ -511,7 +512,7 @@ jobs:
 
                   mkdir -p snapwp-test-app
 
-            - name: Scaffold Snapwp App
+            - name: Scaffold ${{ matrix.example }} App
               working-directory: ${{ github.workspace }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
