@@ -1,42 +1,36 @@
-import type { TemplateMetadataParser } from '../types';
-import type { TwitterMetadataFragFragment } from '@snapwp/query';
 import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
 
+export interface Node {
+	title: string | null | undefined;
+	featuredImage:
+		| {
+				node:
+					| {
+							sourceUrl: string | null | undefined;
+							mediaDetails:
+								| {
+										width: number | null | undefined;
+										height: number | null | undefined;
+								  }
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+}
+
 /**
- * Parses the Twitter metadata.
+ * Parses out Twitter metadata.
  *
- * @param {TwitterMetadataFragFragment} data - The data to parse for Twitter information.
+ * @param {Node} node - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-export const parseRouteTwitterMetadata: TemplateMetadataParser<
-	TwitterMetadataFragFragment
-> = ( data: TwitterMetadataFragFragment ) => {
-	const node = data.connectedNode as unknown as {
-		title: string | null | undefined;
-		featuredImage:
-			| {
-					node:
-						| {
-								sourceUrl: string | null | undefined;
-								mediaDetails:
-									| {
-											width: number | null | undefined;
-											height: number | null | undefined;
-									  }
-									| null
-									| undefined;
-						  }
-						| null
-						| undefined;
-			  }
-			| null
-			| undefined;
-	};
-
-	if ( ! node ) {
-		return {};
-	}
-
+export const parseNode = < T extends Node >(
+	node: T
+) => {
 	const title = node.title || undefined;
 	const images: Twitter[ 'images' ] = [];
 

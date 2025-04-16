@@ -1,45 +1,27 @@
 import sanitizeHtml from 'sanitize-html';
-import type { TemplateMetadataParser } from '../types';
-import type { OpenGraphMetadataFragFragment } from '@snapwp/query';
+import { getNodeDescription } from '../utils';
+import type { Metadata } from 'next';
+
+export interface Node {
+	title?: string | undefined | null;
+	name?: string | undefined | null;
+	description?: string | undefined | null;
+	excerpt?: string | undefined | null;
+	content?: string | undefined | null;
+}
 
 /**
- * Parses the Open Graph metadata for a specific route.
+ * Parses out open graph metadata. 
  *
  * @param {OpenGraphMetadataFragFragment} data data
  * @return Parsed Open Graph metadata for the given route.
  */
-export const parseRouteOpenGraphMetadata: TemplateMetadataParser<
-	OpenGraphMetadataFragFragment
-> = ( data ) => {
-	// Type casting required to not rely on __typename
-	// @todo fix codegen types
-	const node = data.connectedNode as unknown as
-		| {
-				title: string | undefined | null;
-				name: string | undefined | null;
-				description: string | undefined | null;
-				excerpt: string | undefined | null;
-				content: string | undefined | null;
-		  }
-		| null
-		| undefined;
-
-	if ( ! node ) {
-		return {};
-	}
-
+export const parseNode = < T extends Node >(
+	node: T | null | undefined
+): Metadata => {
 	const title = node?.title || node?.name || undefined;
 
-	// If there's no description, use the first 150 characters of the content
-	let description = node?.excerpt || node?.description || null;
-
-	if ( ! description ) {
-		const trimmedContent = node?.content?.substring( 0, 150 );
-
-		if ( trimmedContent ) {
-			description = trimmedContent + '...';
-		}
-	}
+	const description = getNodeDescription( node );
 
 	return {
 		openGraph: {
