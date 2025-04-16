@@ -100,16 +100,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -171,16 +171,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -205,8 +205,8 @@ jobs:
               working-directory: ${{ github.workspace }}/snapwp-test-app
               continue-on-error: true
               run: |
-                cd '${{ github.workspace }}'
-                npm run --if-present local-registry:stop
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
 
     test-build:
         name: Test Build (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -288,16 +288,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -317,8 +317,8 @@ jobs:
               working-directory: ${{ github.workspace }}/snapwp-test-app
               continue-on-error: true
               run: |
-                cd '${{ github.workspace }}'
-                npm run --if-present local-registry:stop
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
 
     unit:
         name: Unit Tests (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -359,16 +359,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -388,8 +388,8 @@ jobs:
               working-directory: ${{ github.workspace }}/snapwp-test-app
               continue-on-error: true
               run: |
-                cd '${{ github.workspace }}'
-                npm run --if-present local-registry:stop
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
 
     security:
         name: Dependencies Audit
@@ -429,16 +429,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -458,8 +458,8 @@ jobs:
               working-directory: ${{ github.workspace }}/snapwp-test-app
               continue-on-error: true
               run: |
-                cd '${{ github.workspace }}'
-                npm run --if-present local-registry:stop
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
 
     prettier:
         name: Check Formatting
@@ -499,16 +499,16 @@ jobs:
                   npm run --if-present local-registry:start
                   npm run --if-present build
                   npm link snapwp
-                
+
                   # fixup verdaccio permissions so it runs in ci
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
                   mkdir -p .verdaccio/storage/
                   sudo chmod 777 .verdaccio/storage/
                   sudo chmod 777 .verdaccio/
-                
+
                   npm run --if-present publish:local
-                
+
                   mkdir -p snapwp-test-app
 
             - name: Scaffold Snapwp App
@@ -528,5 +528,5 @@ jobs:
               working-directory: ${{ github.workspace }}/snapwp-test-app
               continue-on-error: true
               run: |
-                cd '${{ github.workspace }}'
-                npm run --if-present local-registry:stop
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
