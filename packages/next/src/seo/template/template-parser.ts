@@ -24,7 +24,7 @@ export interface Node {
 
 /**
  * Parses out route metadata
- * 
+ *
  * @param {Node} node Connected node.
  * @return meta data object comsumable by next
  */

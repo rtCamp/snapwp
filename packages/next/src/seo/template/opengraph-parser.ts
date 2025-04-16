@@ -11,7 +11,7 @@ export interface Node {
 }
 
 /**
- * Parses out open graph metadata. 
+ * Parses out open graph metadata.
  *
  * @param {OpenGraphMetadataFragFragment} data data
  * @return Parsed Open Graph metadata for the given route.

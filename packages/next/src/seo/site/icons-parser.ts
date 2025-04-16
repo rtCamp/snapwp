@@ -1,50 +1,69 @@
-import type { Parser } from '../types';
-import type { IconMetadataFragFragment } from '@snapwp/query';
 import type { Metadata } from 'next';
 
-//@todo simplify parser
+export interface GeneralSettings {
+	siteIcon:
+		| {
+				id: string;
+				mediaItemUrl?: string | null | undefined;
+				mediaDetails:
+					| {
+							sizes:
+								| {
+										width: string | null | undefined;
+										height: string | null | undefined;
+										sourceUrl: string | null | undefined;
+								  }[]
+								| null
+								| undefined;
+					  }
+					| null
+					| undefined;
+		  }
+		| null
+		| undefined;
+}
 
 /**
- * Validates and parses Icon metadata for a route into consumable state.
+ * Parses icon metadata from general settings.
  *
- * @param {IconMetadataFragFragment} data object to be validated and parsed
+ * @param {GeneralSettings} data object to be validated and parsed
  * @return Parsed Icon metadata
  */
-export const parseIconMetadata: Parser< IconMetadataFragFragment > = (
-	data
-) => {
+export const parseGeneralSettings = < T extends GeneralSettings >(
+	generalSettings: T | null | undefined
+): Metadata => {
 	let fallbackIcons: IconsMetaData = {
 		faviconIcons: [],
 		appleIcons: undefined,
 		msApplicationTileIcon: undefined,
 	};
 
-	if ( ! data.generalSettings ) {
+	if ( ! generalSettings ) {
 		return reshape( fallbackIcons );
 	}
 
-	if ( ! data.generalSettings.siteIcon ) {
+	if ( ! generalSettings.siteIcon ) {
 		return reshape( fallbackIcons );
 	}
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
-	if ( data.generalSettings.siteIcon.mediaItemUrl ) {
+	if ( generalSettings.siteIcon.mediaItemUrl ) {
 		fallbackIcons = {
 			...fallbackIcons,
 			faviconIcons: [
 				{
 					sizes: '512x512',
-					url: data.generalSettings.siteIcon.mediaItemUrl,
+					url: generalSettings.siteIcon.mediaItemUrl,
 				},
 			],
 		};
 	}
 
-	if ( ! data.generalSettings.siteIcon.mediaDetails?.sizes ) {
+	if ( ! generalSettings.siteIcon.mediaDetails?.sizes ) {
 		return reshape( fallbackIcons );
 	}
 
-	const sizes = data.generalSettings.siteIcon.mediaDetails.sizes;
+	const sizes = generalSettings.siteIcon.mediaDetails.sizes;
 
 	// Filter out valid icons
 	const validIcons: IconData[] = sizes.filter(

@@ -28,9 +28,7 @@ export interface Node {
  * @param {Node} node - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-export const parseNode = < T extends Node >(
-	node: T
-) => {
+export const parseNode = < T extends Node >( node: T ) => {
 	const title = node.title || undefined;
 	const images: Twitter[ 'images' ] = [];
 

@@ -1,13 +1,19 @@
 import type { Parser } from '../types';
 import type { SiteMetadataFragFragment } from '@snapwp/query';
 
+export interface GeneralSettings {
+	title?: string | null | undefined;
+	description?: string | null | undefined;
+	language?: string | null | undefined;
+}
+
 /**
- * Parses fragment into metadata format consumable by next
+ * Parses general settings into site metadata
  *
  * @param {SiteMetadataFragFragment} data - The data to parse.
  * @return The parsed root metadata.
  */
-export const parseSiteMetadata: Parser< SiteMetadataFragFragment > = (
+export const parseGeneralSettings: Parser< SiteMetadataFragFragment > = (
 	data
 ) => {
 	if ( ! data.generalSettings ) {
