@@ -1,7 +1,7 @@
 import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
 
 export interface Node {
-    id: string
+	id: string;
 	title: string | null | undefined;
 	featuredImage:
 		| {
@@ -29,10 +29,10 @@ export interface Node {
  * @param {Node} node - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-export const parseNode = <T extends Node>(node: T | null | undefined) => {
-    if (!node) {
-        return {}
-    }
+export const parseNode = < T extends Node >( node: T | null | undefined ) => {
+	if ( ! node ) {
+		return {};
+	}
 	const title = node.title || undefined;
 	const images: Twitter[ 'images' ] = [];
 
