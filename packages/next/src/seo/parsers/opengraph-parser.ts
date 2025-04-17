@@ -1,5 +1,5 @@
 import sanitizeHtml from 'sanitize-html';
-import { getNodeDescription } from './utils';
+import { getNodeDescription } from '../utils';
 import type { Metadata } from 'next';
 
 export interface Node {
