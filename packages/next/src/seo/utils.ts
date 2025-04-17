@@ -4,9 +4,14 @@ export interface Node {
 	content?: string | undefined | null;
 }
 
-export const getNodeDescription = < T extends Node >(
+/**
+ * Gets description for node for site metatdata
+ * @param {Node } node - node from whihch metadata description will be extracted
+ * @return descrtipion
+ */
+export const getDescriptionFromNode = < T extends Node >(
 	node: T | null | undefined
-) => {
+): string | null => {
 	let description = node?.excerpt || node?.description || null;
 
 	// If there's no description, use the first 150 characters of the content.

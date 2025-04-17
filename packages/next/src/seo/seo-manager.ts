@@ -16,8 +16,15 @@ import { parseGeneralSettings as siteParser } from './parsers/site-parser';
 import { parseNode as templateParser } from './parsers/template-parser';
 import { parseNode as twitterParser } from './parsers/twitter-parser';
 
-import type { MetadataPlugin } from './types';
 import type { Metadata } from 'next';
+
+export type MetadataParser< T > = ( data: T ) => Metadata;
+
+export interface MetadataPlugin< TFrag, TData > {
+	fragmentDoc: TFrag;
+	parser: ( data: TData ) => Metadata;
+	type: 'root' | 'template';
+}
 
 const defaultRootSeoPlugins = [
 	{
