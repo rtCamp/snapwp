@@ -57,6 +57,8 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 -   [Overloading WordPress Behavior](docs/overloading-wp-behavior.md)
 -   [NextJS Middleware](docs/middleware.md)
 -   [Template Rendering System](docs/template-rendering.md)
+-   [Handling HTTP Status Codes](docs/http-status-codes.md)
+-   [Resolving CORS Issues](docs/cors.md)
 
 ## Development & Contributing
 

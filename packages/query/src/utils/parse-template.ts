@@ -29,6 +29,7 @@ export function parseQueryResult(
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
 	bodyClasses: string[] | undefined;
+	is404: boolean;
 } {
 	if ( queryData.errors?.length ) {
 		queryData.errors?.forEach( ( error ) => {
@@ -51,6 +52,7 @@ export function parseQueryResult(
 	}
 
 	const templateByUri = queryData.data?.templateByUri;
+	const is404 = templateByUri?.is404 ?? false;
 
 	return {
 		stylesheets: parseEnqueuedStylesheets( wordpressUrl, templateByUri ),
@@ -58,6 +60,7 @@ export function parseQueryResult(
 		scripts: parseEnqueuedScripts( templateByUri, wordpressUrl ),
 		scriptModules: parseScriptModules( templateByUri, wordpressUrl ),
 		bodyClasses: parseBodyClasses( templateByUri ),
+		is404,
 	};
 }
 
