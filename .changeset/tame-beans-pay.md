@@ -2,4 +2,4 @@
 "@snapwp/query": patch
 ---
 
-fix: Add is404 flag for 404ed routes
+dev: Expose `QueryEngine.getTemplateData().is404` for custom HTTP status code handling.
