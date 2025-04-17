@@ -1,9 +1,9 @@
 import sanitizeHtml from 'sanitize-html';
-import { getNodeDescription } from '../utils';
+import { getDescriptionFromNode } from '../utils';
 import type { Metadata } from 'next';
 
 export interface Node {
-    id: string;
+	id: string;
 	title?: string | undefined | null;
 	name?: string | undefined | null;
 	description?: string | undefined | null;
@@ -14,7 +14,7 @@ export interface Node {
 /**
  * Parses out open graph metadata.
  *
- * @param {OpenGraphMetadataFragFragment} data data
+ * @param {Node} node - Node from which OG metadata should be derived.
  * @return Parsed Open Graph metadata for the given route.
  */
 export const parseNode = < T extends Node >(
@@ -22,7 +22,7 @@ export const parseNode = < T extends Node >(
 ): Metadata => {
 	const title = node?.title || node?.name || undefined;
 
-	const description = getNodeDescription( node );
+	const description = getDescriptionFromNode( node );
 
 	return {
 		openGraph: {

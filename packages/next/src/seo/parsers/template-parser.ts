@@ -1,5 +1,5 @@
 import sanitizeHtml from 'sanitize-html';
-import { getNodeDescription } from '../utils';
+import { getDescriptionFromNode } from '../utils';
 import type { Metadata } from 'next';
 
 export interface Node {
@@ -36,7 +36,7 @@ export const parseNode = < T extends Node >(
 	}
 
 	const title = node?.title || node?.name || undefined;
-	const description = getNodeDescription( node );
+	const description = getDescriptionFromNode( node );
 
 	const authors = [];
 
