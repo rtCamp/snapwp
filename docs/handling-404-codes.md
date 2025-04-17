@@ -7,14 +7,14 @@ SnapWP's `QueryEngine.getTemplateData()` returns an `is404` boolean to detect 40
 In your catch-all route (`app/[[...path]]/page.tsx`), call:
 
 ```ts
-const { is404 } = await QueryEngine.getTemplateData(pathname);
+const { is404 } = await QueryEngine.getTemplateData( pathname );
 ```
 
 If is404 is true, call notFound() from next/navigation:
 
 ```ts
-if (is404) {
-  notFound();
+if ( is404 ) {
+	notFound();
 }
 ```
 
@@ -40,4 +40,4 @@ export default async function Page({ params }: { params: { path?: string[] } }) 
     </TemplateRenderer>
   );
 }
-````
+```
