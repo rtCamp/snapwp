@@ -1,6 +1,5 @@
 query GetCurrentTemplate($uri: String!) {
 	templateByUri(uri: $uri) {
-		is404
 		bodyClasses
 		enqueuedStylesheets(first: 1000) {
 			nodes {
@@ -127,5 +126,6 @@ query GetCurrentTemplate($uri: String!) {
 				...CoreVideoFrag
 			}
 		}
+		is404
 	}
 }
