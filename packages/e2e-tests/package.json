@@ -1,7 +1,7 @@
 {
 	"name": "@snapwp/e2e-tests",
 	"private": true,
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"license": "AGPL-3.0",
 	"description": "E2E Tests for SnapWP",
 	"author": "rtCamp",
@@ -22,6 +22,6 @@
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
 		"typescript": "*",
-		"@playwright/test": "^1.50.0"
+		"@playwright/test": "*"
 	}
 }
