@@ -23,10 +23,27 @@ export interface GeneralSettings {
 		| undefined;
 }
 
+export interface IconsMetaData {
+	faviconIcons: FormattedIconData[];
+	appleIcons: FormattedIconData[] | undefined;
+	msApplicationTileIcon: IconData | undefined;
+}
+
+export interface IconData {
+	sourceUrl: string;
+	height: string;
+	width: string;
+}
+
+export interface FormattedIconData {
+	url: string;
+	sizes: string;
+}
+
 /**
  * Parses icon metadata from general settings.
  *
- * @param {GeneralSettings} data object to be validated and parsed
+ * @param {GeneralSettings} generalSettings object to be validated and parsed
  * @return Parsed Icon metadata
  */
 export const parseGeneralSettings = < T extends GeneralSettings >(
@@ -39,11 +56,11 @@ export const parseGeneralSettings = < T extends GeneralSettings >(
 	};
 
 	if ( ! generalSettings ) {
-		return reshape( fallbackIcons );
+		return prepareMetadata( fallbackIcons );
 	}
 
 	if ( ! generalSettings.siteIcon ) {
-		return reshape( fallbackIcons );
+		return prepareMetadata( fallbackIcons );
 	}
 
 	// Creating fallback icons if siteIcon is present but mediaDetails is not.
@@ -60,7 +77,7 @@ export const parseGeneralSettings = < T extends GeneralSettings >(
 	}
 
 	if ( ! generalSettings.siteIcon.mediaDetails?.sizes ) {
-		return reshape( fallbackIcons );
+		return prepareMetadata( fallbackIcons );
 	}
 
 	const sizes = generalSettings.siteIcon.mediaDetails.sizes;
@@ -72,7 +89,7 @@ export const parseGeneralSettings = < T extends GeneralSettings >(
 
 	// Return fallback icons if no valid icons are found.
 	if ( ! validIcons.length ) {
-		return reshape( fallbackIcons );
+		return prepareMetadata( fallbackIcons );
 	}
 
 	// Filter icons by sizes.
@@ -93,7 +110,7 @@ export const parseGeneralSettings = < T extends GeneralSettings >(
 		? formatIcons( filteredAppleIcons )
 		: [];
 
-	return reshape( {
+	return prepareMetadata( {
 		faviconIcons: formattedFaviconIcons,
 		appleIcons: formattedAppleIcons,
 		msApplicationTileIcon: findIconBySize( validIcons, '270x270' ),
@@ -105,7 +122,7 @@ export const parseGeneralSettings = < T extends GeneralSettings >(
  * @param {IconsMetaData} data Meta data in the internal format
  * @return Meta data consumable by next
  */
-const reshape = ( data: IconsMetaData ): Metadata => {
+const prepareMetadata = ( data: IconsMetaData ): Metadata => {
 	return {
 		icons: {
 			icon: data.faviconIcons,
@@ -159,20 +176,3 @@ const formatIcons = ( icons: IconData[] ): FormattedIconData[] =>
 		url: sourceUrl,
 		sizes: `${ width }x${ height }`,
 	} ) );
-
-export interface IconsMetaData {
-	faviconIcons: FormattedIconData[];
-	appleIcons: FormattedIconData[] | undefined;
-	msApplicationTileIcon: IconData | undefined;
-}
-
-export interface IconData {
-	sourceUrl: string;
-	height: string;
-	width: string;
-}
-
-export interface FormattedIconData {
-	url: string;
-	sizes: string;
-}
