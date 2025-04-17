@@ -15,25 +15,25 @@ import { EditorBlocksRenderer } from '@snapwp/blocks';
 import { QueryEngine } from '@snapwp/query';
 
 export default async function Page( {
-  params,
+	params,
 }: {
-  params: { path?: string[] };
+	params: { path?: string[] };
 } ) {
-  const { path } = await params;
-  const pathname = path?.join( '/' ) || '/';
+	const { path } = await params;
+	const pathname = path?.join( '/' ) || '/';
 
-  const { is404 } = await QueryEngine.getTemplateData( pathname );
+	const { is404 } = await QueryEngine.getTemplateData( pathname );
 
-  if ( is404 ) {
-    notFound();
-  }
+	if ( is404 ) {
+		notFound();
+	}
 
-  return (
-    <TemplateRenderer>
-      { ( editorBlocks ) => (
-        <EditorBlocksRenderer editorBlocks={ editorBlocks } />
-      ) }
-    </TemplateRenderer>
-  );
+	return (
+		<TemplateRenderer>
+			{ ( editorBlocks ) => (
+				<EditorBlocksRenderer editorBlocks={ editorBlocks } />
+			) }
+		</TemplateRenderer>
+	);
 }
 ```
