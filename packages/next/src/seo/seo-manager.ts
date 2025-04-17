@@ -21,36 +21,36 @@ import type { Metadata } from 'next';
 export type MetadataParser< T > = ( data: T ) => Metadata;
 
 export interface MetadataPlugin< TFrag, TData > {
-	fragmentDoc: TFrag;
-	parser: ( data: TData ) => Metadata;
+	fragment: TFrag;
+	parseMetadata: ( data: TData ) => Metadata;
 	type: 'root' | 'template';
 }
 
 const defaultRootSeoPlugins = [
 	{
-		fragmentDoc: IconMetadataFragFragmentDoc,
-		parser: iconParser,
+		fragment: IconMetadataFragFragmentDoc,
+		parseMetadata: iconParser,
 	},
 	{
-		fragmentDoc: SiteMetadataFragFragmentDoc,
-		parser: siteParser,
+		fragment: SiteMetadataFragFragmentDoc,
+		parseMetadata: siteParser,
 	},
 ];
 
 const defaultTemplateSeoPlugins = [
 	{
-		fragmentDoc: OpenGraphMetadataFragFragmentDoc,
-		parser: opengraphParser,
+		fragment: OpenGraphMetadataFragFragmentDoc,
+		parseMetadata: opengraphParser,
 	},
 
 	{
-		fragmentDoc: TwitterMetadataFragFragmentDoc,
-		parser: twitterParser,
+		fragment: TwitterMetadataFragFragmentDoc,
+		parseMetadata: twitterParser,
 	},
 
 	{
-		fragmentDoc: RouteMetadataFragFragmentDoc,
-		parser: templateParser,
+		fragment: RouteMetadataFragFragmentDoc,
+		parseMetadata: templateParser,
 	},
 ];
 
@@ -59,6 +59,7 @@ const defaultTemplateSeoPlugins = [
  */
 export class Seo {
 	static isInitialized: boolean = false;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- allow any plugin to be registered.
 	static plugins: MetadataPlugin< any, any >[] = [];
 
 	/**
@@ -73,6 +74,7 @@ export class Seo {
 	 * Loads a plugin to generate route level meta data.
 	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
 	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- allow any plugin to be registered.
 	public static registerPlugin( plugin: MetadataPlugin< any, any > ): void {
 		Seo.plugins.push( plugin );
 	}
@@ -97,7 +99,7 @@ export class Seo {
 	public static async getSiteMetadata(): Promise< Metadata > {
 		const rootQueryFrags = Seo.plugins
 			.filter( ( { type } ) => type === 'root' )
-			.map( ( { fragmentDoc } ) => fragmentDoc );
+			.map( ( { fragment } ) => fragment );
 
 		const rootQuery = generateRootQuery( rootQueryFrags );
 
@@ -109,7 +111,7 @@ export class Seo {
 
 		const parsers = Seo.plugins
 			.filter( ( { type } ) => type === 'root' )
-			.map( ( { parser } ) => parser );
+			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
 			parser( data.generalSettings )
@@ -134,7 +136,7 @@ export class Seo {
 
 		const renderedTemplateFrags = Seo.plugins
 			.filter( ( { type } ) => type === 'template' )
-			.map( ( { fragmentDoc } ) => fragmentDoc );
+			.map( ( { fragment } ) => fragment );
 
 		const templateQuery = generateTemplateQuery( renderedTemplateFrags );
 
@@ -149,7 +151,7 @@ export class Seo {
 
 		const parsers = Seo.plugins
 			.filter( ( { type } ) => type === 'template' )
-			.map( ( { parser } ) => parser );
+			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
 			parser( data.templateByUri.connectedNode )
