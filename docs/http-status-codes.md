@@ -8,23 +8,31 @@ Although Vercel insists [this doesn't affect SEO](https://nextjs.org/docs/app/bu
 
 SnapWP's `QueryEngine.getTemplateData()` returns an `is404` boolean to detect routes that resolve to your Block Theme's 404 page. Here's how to use it with Next.js:
 
-```ts
+```tsx
 import { notFound } from 'next/navigation';
 import { TemplateRenderer } from '@snapwp/next';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 import { QueryEngine } from '@snapwp/query';
 
-export default async function Page({ params }: { params: { path?: string[] } }) {
-  const pathname = params.path?.join('/') || '/';
-  const { is404 } = await QueryEngine.getTemplateData(pathname);
+export default async function Page( {
+  params,
+}: {
+  params: { path?: string[] };
+} ) {
+  const { path } = await params;
+  const pathname = path?.join( '/' ) || '/';
 
-  if (is404) {
+  const { is404 } = await QueryEngine.getTemplateData( pathname );
+
+  if ( is404 ) {
     notFound();
-  };
+  }
 
   return (
     <TemplateRenderer>
-      {({ editorBlocks }) => <EditorBlocksRenderer editorBlocks={editorBlocks} />}
+      { ( editorBlocks ) => (
+        <EditorBlocksRenderer editorBlocks={ editorBlocks } />
+      ) }
     </TemplateRenderer>
   );
 }
