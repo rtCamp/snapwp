@@ -1,11 +1,11 @@
 import { gql } from '@apollo/client';
-import { type TypedDocumentNode } from '@graphql-typed-document-node/core';
 import {
 	Kind,
 	print,
 	type DocumentNode,
 	type FragmentDefinitionNode,
 } from 'graphql';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 
 /**
  *
