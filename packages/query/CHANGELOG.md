@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+### Patch Changes
+
+-   [#151](https://github.com/rtCamp/snapwp/pull/151) [`693252c`](https://github.com/rtCamp/snapwp/commit/693252c8bbaaedcc46d8f5958ef49b0c952cd408) Thanks [@Swanand01](https://github.com/Swanand01)! - dev: Expose `QueryEngine.getTemplateData().is404` for custom HTTP status code handling.
+
 ## 0.3.1
 
 ### Patch Changes
