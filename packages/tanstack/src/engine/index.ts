@@ -19,26 +19,8 @@ import type { DocumentNode } from 'graphql';
 export class TanStackQueryClientEngine
 	implements BaseQueryClientEngine< QueryClient, QueryClientConfig >
 {
-	private static instance?: TanStackQueryClientEngine;
 	private client?: QueryClient;
 	private readonly clientOptions: QueryClientConfig;
-
-	/**
-	 * Singleton instance of the TanStackQueryClientEngine.
-	 * @param { QueryClientConfig } options Optional TanStackClientOptions to configure the client instance.
-	 *
-	 * @return The singleton instance of the TanStackQueryClientEngine.
-	 */
-	static getInstance(
-		options?: QueryClientConfig
-	): TanStackQueryClientEngine {
-		if ( ! TanStackQueryClientEngine.instance ) {
-			TanStackQueryClientEngine.instance = new TanStackQueryClientEngine(
-				options
-			);
-		}
-		return TanStackQueryClientEngine.instance;
-	}
 
 	/**
 	 * Creates a new instance of TanStackQueryClientEngine.

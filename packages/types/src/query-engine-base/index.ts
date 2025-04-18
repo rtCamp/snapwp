@@ -55,11 +55,7 @@ export interface BaseQueryClientEngine<
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return A promise resolving with the queried data.
 	 */
-	fetchQuery< TData >( args: {
-		key: string[];
-		query: DocumentNode | TypedDocumentNode< TData >;
-		options?: unknown; // Intentionally kept unknown for implementer-defined types.
-	} ): Promise< TData >;
+	fetchQuery< TData >( args: fetchQueryArgs< TData > ): Promise< TData >;
 
 	/**
 	 * React hook for client-side GraphQL queries.
@@ -71,14 +67,18 @@ export interface BaseQueryClientEngine<
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return The queried data.
 	 */
-	useQuery< TData >( args: {
-		key: string[];
-		query: DocumentNode | TypedDocumentNode< TData >;
-		options?: unknown; // Intentionally kept unknown for implementer-defined types.
-	} ): TData;
+	useQuery< TData >( args: useQueryArgs< TData > ): TData;
 
 	/**
 	 * React component that provides the query client context.
 	 */
 	QueryProvider: ComponentType< PropsWithChildren< { client: TClient } > >;
 }
+
+export type fetchQueryArgs< TData > = {
+	key: string[];
+	query: DocumentNode | TypedDocumentNode< TData >;
+	options?: unknown; // Intentionally kept unknown for implementer-defined types.
+};
+
+export type useQueryArgs< TData > = fetchQueryArgs< TData >;

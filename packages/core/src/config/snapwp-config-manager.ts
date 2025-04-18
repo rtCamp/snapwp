@@ -37,7 +37,7 @@ export interface SnapWPEnv {
 	wpSiteUrl: string;
 }
 
-export interface SnapWPConfig {
+export interface SnapWPConfig< TClient = unknown, TClientOptions = unknown > {
 	/**
 	 * Block definitions for the editor.
 	 */
@@ -50,7 +50,12 @@ export interface SnapWPConfig {
 	 * Query Engine
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the type of the query engine, so we use `any`. unknown will cause type error.
-	queryEngine: BaseQueryClientEngine< any >;
+	query: QueryEngine< TClient, TClientOptions >;
+}
+
+interface QueryEngine< TClient = unknown, TClientOptions = unknown > {
+	engine: new () => BaseQueryClientEngine< TClient, TClientOptions >;
+	options?: TClientOptions;
 }
 
 /**
@@ -125,7 +130,7 @@ class SnapWPConfigManager {
 			type: 'object',
 			required: false,
 		},
-		queryEngine: {
+		query: {
 			type: 'object',
 			required: true,
 		},

@@ -19,46 +19,25 @@ import { getGraphqlUrl } from '@snapwp/core/config';
 import { ApolloQueryProvider } from './query-provider';
 import type { BaseQueryClientEngine } from '@snapwp/types';
 
+export type clientType = ApolloClient< NormalizedCacheObject >;
+export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
+
 /**
  * An adapter for Apollo Client that implements the BaseQueryClientEngine interface.
  * This adapter provides methods for obtaining an Apollo Client instance, executing queries,
  * and using queries as hooks.
  */
 export class ApolloQueryClientEngine
-	implements
-		BaseQueryClientEngine<
-			ApolloClient< NormalizedCacheObject >,
-			ApolloClientOptions< NormalizedCacheObject >
-		>
+	implements BaseQueryClientEngine< clientType, clientOptionsType >
 {
-	private static instance?: ApolloQueryClientEngine;
 	private client?: ApolloClient< NormalizedCacheObject >;
 	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
-
-	/**
-	 * Singleton instance of the ApolloQueryClientEngine.
-	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
-	 *
-	 * @return The singleton instance of the ApolloQueryClientEngine.
-	 */
-	static getInstance(
-		options?: ApolloClientOptions< NormalizedCacheObject >
-	): ApolloQueryClientEngine {
-		if ( ! ApolloQueryClientEngine.instance ) {
-			ApolloQueryClientEngine.instance = new ApolloQueryClientEngine(
-				options
-			);
-		}
-		return ApolloQueryClientEngine.instance;
-	}
 
 	/**
 	 * Creates a new instance of ApolloQueryClientEngine.
 	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 */
-	private constructor(
-		options?: ApolloClientOptions< NormalizedCacheObject >
-	) {
+	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
 		options =
 			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
 
