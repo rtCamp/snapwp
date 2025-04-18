@@ -8,6 +8,7 @@ on:
         paths:
             - .github/workflows/pull_request_examples.yml
             - examples/**
+            - packages/**
     push:
         branches:
             - main
@@ -15,13 +16,14 @@ on:
         paths:
             - .github/workflows/pull_request_examples.yml
             - examples/**
+            - packages/**
     # TODO: Remove and replace with real matrix.
     workflow_dispatch:
         inputs:
             NODE_VERSIONS:
                 description: 'Node versions to test against. Need a JSON array of versions.'
                 required: true
-                default: '[20]'
+                default: '[20, 22]'
                 type: string
 
 permissions:
@@ -29,14 +31,15 @@ permissions:
     pull-requests: read
 
 env:
-    #  NODE_VERSIONS: '[18, 20, 22]'
-    NODE_VERSIONS: '[20]'
+    NODE_VERSIONS: '[20, 22]'
     PATHS: |
         nextjs/starter:
           - .github/workflows/pull_request_examples.yml
           - examples/nextjs/starter/**
+          - packages/**
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
     SNAPWP_HELPER_REF: 'develop' # TODO: Get from PR description.
+    TEST_APP_DIR: '${{ runner.temp }}/snapwp-test-app' # Use runner.temp to create app outside the main workspace
 
 jobs:
     path-filter:
@@ -50,7 +53,7 @@ jobs:
               with:
                   filters: ${{ env.PATHS }}
         outputs:
-            #TODO: the example shouldn't be hardcoded
+            # TODO: the example shouldn't be hardcoded
             changes: ${{ github.event_name == 'workflow_dispatch' && '["nextjs/starter"]' || steps.filter.outputs.changes }}
 
     generate_schema:
@@ -92,25 +95,46 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp <<< '.'
+                  npm i
 
             - name: Run ESLint
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run --if-present lint
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}
 
     typecheck:
         name: TS Typecheck
@@ -143,31 +167,50 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  snapwp --proxy <<< '.'
+                  npm i
 
             - name: Run Codegen
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run codegen
 
             - name: Run TypeScript type check
               # TODO: Why are we catching the error?
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run --if-present typecheck
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}
 
     test-build:
         name: Test Build (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -242,26 +285,45 @@ jobs:
                   sleep 3
                   curl -IL http://localhost  # Verify that the server is running; will fail and exit workflow if not
 
-            # TODO: figure out overriding installed dependency for local one for testing
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  snapwp --proxy <<< '.'
+                  npm i
 
             - name: Build assets
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run --if-present build
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}
 
     unit:
         name: Unit Tests (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -295,26 +357,45 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-              # TODO: figure out overriding installed dependency for local one for testing
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  snapwp --proxy <<< '.'
+                  npm i
 
             - name: Run unit tests
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run --if-present test
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}
 
     security:
         name: Dependencies Audit
@@ -347,26 +428,45 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  snapwp --proxy <<< '.'
+                  npm i
 
             - name: Run npm audit
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm audit --audit-level=high
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}
 
     prettier:
         name: Check Formatting
@@ -399,23 +499,42 @@ jobs:
               run: |
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
-            # TODO: figure out overriding installed dependency for local one for testing
-            - name: Build Local packages
+            - name: Build local packages
               run: |
                   cd '${{ github.workspace }}'
                   npm ci --workspaces --include-workspace-root
+                  npm run --if-present local-registry:start
                   npm run --if-present build
+                  npm link snapwp
 
-            - name: Install dependencies
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
-              run: npm install
+                  # Ensure Verdaccio has the right permissions for CI
+                  touch .verdaccio/conf/htpasswd
+                  sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
+                  mkdir -p .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/storage/
+                  sudo chmod 777 .verdaccio/
 
-            - name: Copy .env.example to .env
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+                  npm run --if-present publish:local
+
+                  # Create test app directory outside of workspace
+                  mkdir -p ${{ env.TEST_APP_DIR }}
+
+            - name: Scaffold ${{ matrix.example }} App
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: |
-                  cp .env.example .env
+                  cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+                  snapwp --proxy <<< '.'
+                  npm i
 
             - name: Run Prettier
-              working-directory: ${{ github.workspace }}/examples/${{ matrix.example }}
+              working-directory: ${{ env.TEST_APP_DIR }}
               run: npm run --if-present format-check
+
+            - name: Clean up
+              if: always()
+              continue-on-error: true
+              run: |
+                  cd '${{ github.workspace }}'
+                  npm run --if-present local-registry:stop
+                  rm -rf ${{ env.TEST_APP_DIR }}

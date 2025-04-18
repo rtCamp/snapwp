@@ -195,14 +195,6 @@ jobs:
                   coverageLocations: |
                       ./coverage/lcov.info:lcov
 
-            # - name: Upload coverage to Codecov
-            #   uses: codecov/codecov-action@v5
-            #   with:
-            #       token: ${{ secrets.CODECOV_TOKEN }}
-            #       files: ./coverage/*.json
-            #       flags: unittests
-            #       name: codecov-umbrella
-
     # Reenable when we have playwright tests
     # playwright:
     #     name: E2E Tests (Node v${{ matrix.node-version }})
