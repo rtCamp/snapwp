@@ -1,0 +1,23 @@
+fragment TwitterMetadataFrag on RenderedTemplate {
+	connectedNode {
+		id
+		uri
+
+		... on NodeWithTitle {
+			title
+		}
+
+		... on NodeWithFeaturedImage {
+			featuredImage {
+				node {
+					id
+					sourceUrl
+					mediaDetails {
+						width
+						height
+					}
+				}
+			}
+		}
+	}
+}

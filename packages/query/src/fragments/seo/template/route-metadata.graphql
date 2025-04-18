@@ -1,0 +1,29 @@
+fragment RouteMetadataFrag on RenderedTemplate {
+	connectedNode {
+		id
+		... on NodeWithTitle {
+			title
+		}
+		... on NodeWithAuthor {
+			author {
+				node {
+					name
+				}
+			}
+		}
+		... on NodeWithExcerpt {
+			excerpt
+		}
+		... on NodeWithContentEditor {
+			content
+		}
+		... on TermNode {
+			name
+			description
+		}
+		... on User {
+			name
+			description
+		}
+	}
+}
