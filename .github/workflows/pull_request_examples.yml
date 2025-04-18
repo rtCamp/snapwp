@@ -39,7 +39,6 @@ env:
           - packages/**
     GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
     SNAPWP_HELPER_REF: 'develop' # TODO: Get from PR description.
-    TEST_APP_DIR: '${{ runner.temp }}/snapwp-test-app' # Use runner.temp to create app outside the main workspace
 
 jobs:
     path-filter:
@@ -113,10 +112,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -125,7 +124,7 @@ jobs:
                   npm i
 
             - name: Run ESLint
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run --if-present lint
 
             - name: Clean up
@@ -134,7 +133,7 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
 
     typecheck:
         name: TS Typecheck
@@ -185,10 +184,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -196,12 +195,12 @@ jobs:
                   npm i
 
             - name: Run Codegen
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run codegen
 
             - name: Run TypeScript type check
               # TODO: Why are we catching the error?
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run --if-present typecheck
 
             - name: Clean up
@@ -210,7 +209,7 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
 
     test-build:
         name: Test Build (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -303,10 +302,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -314,7 +313,7 @@ jobs:
                   npm i
 
             - name: Build assets
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run --if-present build
 
             - name: Clean up
@@ -323,7 +322,7 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
 
     unit:
         name: Unit Tests (Node v${{ matrix.node-version }} | ${{ matrix.example }})
@@ -375,10 +374,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -386,7 +385,7 @@ jobs:
                   npm i
 
             - name: Run unit tests
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run --if-present test
 
             - name: Clean up
@@ -395,7 +394,7 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
 
     security:
         name: Dependencies Audit
@@ -446,10 +445,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -457,7 +456,7 @@ jobs:
                   npm i
 
             - name: Run npm audit
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm audit --audit-level=high
 
             - name: Clean up
@@ -466,7 +465,7 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
 
     prettier:
         name: Check Formatting
@@ -517,10 +516,10 @@ jobs:
                   npm run --if-present publish:local
 
                   # Create test app directory outside of workspace
-                  mkdir -p ${{ env.TEST_APP_DIR }}
+                  mkdir -p ${{ runner.temp }}/snapwp-test-app
 
             - name: Scaffold ${{ matrix.example }} App
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
@@ -528,7 +527,7 @@ jobs:
                   npm i
 
             - name: Run Prettier
-              working-directory: ${{ env.TEST_APP_DIR }}
+              working-directory: ${{ runner.temp }}/snapwp-test-app
               run: npm run --if-present format-check
 
             - name: Clean up
@@ -537,4 +536,4 @@ jobs:
               run: |
                   cd '${{ github.workspace }}'
                   npm run --if-present local-registry:stop
-                  rm -rf ${{ env.TEST_APP_DIR }}
+                  rm -rf ${{ runner.temp }}/snapwp-test-app
