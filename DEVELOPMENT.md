@@ -104,13 +104,14 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     ```
 
 ### Setup CLI
+
 After the packages are build, run the following command to link the scaffolding CLI.
 
 ```bash
 npm link snapwp
 ```
 
-Linking is also useful for testing the CLI while developing. 
+Linking is also useful for testing the CLI while developing.
 
 If packages have been published to verdaccio. A scaffold can be created to use that as npm registry for scaffold from the following command.
 
@@ -123,7 +124,6 @@ For more options in the CLI look use `--help` flag
 ```bash
 snapwp --help
 ```
-
 
 ## Code Contributions (Pull Requests)
 
