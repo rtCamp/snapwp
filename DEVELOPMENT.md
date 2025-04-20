@@ -65,7 +65,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Setup.
 
-#### Building SnapWP libraries
+#### Building SnapWP Packages
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -99,11 +99,13 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm run dev
     ```
 
-5. At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+5. At this point the packages should be ready to use in any of the projects in the `examples/` directory.
 
 #### Linking the CLI command
 
-1. Follow steps 1-4 in [Setup Core Libraries](#building-snapwp-libraries)
+All packages apart from `cli` are meant to be used in a NextJS app. Using `cli` while development requires some extra steps.
+
+1. Follow steps 1-4 in [Builiding SnapWP Packages](#building-snapwp-packages)
 
 2. Link the the cli package. Linking allows you to use the `snapwp` command to scaffold an app anywhere.
 
