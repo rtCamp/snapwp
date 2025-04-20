@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import type { Twitter } from 'next/dist/lib/metadata/types/twitter-types';
 
 export interface Node {
@@ -29,7 +30,9 @@ export interface Node {
  * @param {Node} node - The data to parse for Twitter information.
  * @return Parsed Twitter metadata for the given route.
  */
-export const parseNode = < T extends Node >( node: T | null | undefined ) => {
+export const parseNode = < T extends Node >(
+	node: T | null | undefined
+): Metadata => {
 	if ( ! node ) {
 		return {};
 	}

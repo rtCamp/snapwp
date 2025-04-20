@@ -9,7 +9,7 @@ export interface GeneralSettings {
 /**
  * Parses general settings into site metadata
  *
- * @param {SiteMetadataFragFragment} data - The data to parse.
+ * @param {GeneralSettings} generalSettings - The data to parse.
  * @return The parsed root metadata.
  */
 export const parseGeneralSettings = < T extends GeneralSettings >(
