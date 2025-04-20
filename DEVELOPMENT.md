@@ -63,7 +63,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 -   [Node.js](https://nodejs.org/) v20+
 -   [Docker](https://www.docker.com/)
 
-### Setup Build
+### Setup Core Libraries.
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -83,33 +83,56 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm install
     ```
 
-4. Build the packages locally.
+4. Build the packages.
 
     ```bash
     npm run build
     ```
 
-    At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+    OR
 
-5. (Optional) Start the packages in watch mode.
+    Build in watch mode.
 
     ```bash
     npm run dev
     ```
 
-    Alternatively, you can publish the packages locally using Verdaccio:
+5. At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
 
+### Setup CLI
+
+1. Follow steps 1-4 in [Setup Core Libraries](#setup-core-libraries)
+
+2. Link the the cli package. Linking allows you to use the `snapwp` command to scaffold an app anywhere.
+
+    ```bash
+    npm link snapwp
+    ```
+
+3. A new next js starter app now can be scaffolded anywhere in your file system.
+
+    ```bash
+    snapwp
+    ```
+
+NOTE: The linked command will used published packages. To use local builds for core-libraries see [Setup Proxy Sever](#setup-proxy-server). After that you can run
+
+````bash
+
+
+### Setup Proxy Server
+
+1. The following command takes care in
     ```bash
     npm run publish:local
     ```
 
-### Setup CLI
 
 After the packages are build, run the following command to link the scaffolding CLI.
 
 ```bash
 npm link snapwp
-```
+````
 
 Linking is also useful for testing the CLI while developing.
 
