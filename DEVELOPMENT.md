@@ -63,7 +63,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 -   [Node.js](https://nodejs.org/) v20+
 -   [Docker](https://www.docker.com/)
 
-### Setup
+### Setup Build
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -102,6 +102,28 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     ```bash
     npm run publish:local
     ```
+
+### Setup CLI
+After the packages are build, run the following command to link the scaffolding CLI.
+
+```bash
+npm link snapwp
+```
+
+Linking is also useful for testing the CLI while developing. 
+
+If packages have been published to verdaccio. A scaffold can be created to use that as npm registry for scaffold from the following command.
+
+```bash
+snapwp --proxy
+```
+
+For more options in the CLI look use `--help` flag
+
+```bash
+snapwp --help
+```
+
 
 ## Code Contributions (Pull Requests)
 
