@@ -23,7 +23,7 @@ export type MetadataParser< T > = ( data: T ) => Metadata;
 export interface MetadataPlugin< TFrag, TData > {
 	fragment: TFrag;
 	parseMetadata: ( data: TData ) => Metadata;
-	type: 'root' | 'template';
+	location: 'layout' | 'page';
 }
 
 const defaultRootSeoPlugins = [
@@ -84,11 +84,11 @@ export class Seo {
 	 */
 	private static registerDefaultPlugins(): void {
 		defaultRootSeoPlugins.forEach( ( plugin ) => {
-			Seo.registerPlugin( { ...plugin, type: 'root' } );
+			Seo.registerPlugin( { ...plugin, location: 'root' } );
 		} );
 
 		defaultTemplateSeoPlugins.forEach( ( plugin ) => {
-			Seo.registerPlugin( { ...plugin, type: 'template' } );
+			Seo.registerPlugin( { ...plugin, location: 'template' } );
 		} );
 	}
 
@@ -98,7 +98,7 @@ export class Seo {
 	 */
 	public static async getSiteMetadata(): Promise< Metadata > {
 		const rootQueryFrags = Seo.plugins
-			.filter( ( { type } ) => type === 'root' )
+			.filter( ( { location } ) => location === 'root' )
 			.map( ( { fragment } ) => fragment );
 
 		const rootQuery = generateRootQuery( rootQueryFrags );
@@ -110,7 +110,7 @@ export class Seo {
 		} );
 
 		const parsers = Seo.plugins
-			.filter( ( { type } ) => type === 'root' )
+			.filter( ( { location } ) => location === 'root' )
 			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
@@ -135,7 +135,7 @@ export class Seo {
 		path = path ? '/' + path : '/';
 
 		const renderedTemplateFrags = Seo.plugins
-			.filter( ( { type } ) => type === 'template' )
+			.filter( ( { location } ) => location === 'template' )
 			.map( ( { fragment } ) => fragment );
 
 		const templateQuery = generateTemplateQuery( renderedTemplateFrags );
@@ -150,7 +150,7 @@ export class Seo {
 		} );
 
 		const parsers = Seo.plugins
-			.filter( ( { type } ) => type === 'template' )
+			.filter( ( { location } ) => location === 'template' )
 			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
