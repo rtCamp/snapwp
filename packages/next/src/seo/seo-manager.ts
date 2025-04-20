@@ -84,11 +84,11 @@ export class Seo {
 	 */
 	private static registerDefaultPlugins(): void {
 		defaultRootSeoPlugins.forEach( ( plugin ) => {
-			Seo.registerPlugin( { ...plugin, location: 'root' } );
+			Seo.registerPlugin( { ...plugin, location: 'layout' } );
 		} );
 
 		defaultTemplateSeoPlugins.forEach( ( plugin ) => {
-			Seo.registerPlugin( { ...plugin, location: 'template' } );
+			Seo.registerPlugin( { ...plugin, location: 'page' } );
 		} );
 	}
 
@@ -96,9 +96,9 @@ export class Seo {
 	 * Uses all loaded plugin to get site level meta data.
 	 * @return metadata
 	 */
-	public static async getSiteMetadata(): Promise< Metadata > {
+	public static async getLayoutMetadata(): Promise< Metadata > {
 		const rootQueryFrags = Seo.plugins
-			.filter( ( { location } ) => location === 'root' )
+			.filter( ( { location } ) => location === 'layout' )
 			.map( ( { fragment } ) => fragment );
 
 		const rootQuery = generateRootQuery( rootQueryFrags );
@@ -110,7 +110,7 @@ export class Seo {
 		} );
 
 		const parsers = Seo.plugins
-			.filter( ( { location } ) => location === 'root' )
+			.filter( ( { location } ) => location === 'layout' )
 			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
@@ -129,13 +129,13 @@ export class Seo {
 	 * @param {string} path sub route string
 	 * @return metadata
 	 */
-	public static async getTemplateMetadata(
+	public static async getPageMetadata(
 		path?: string | null
 	): Promise< Metadata > {
 		path = path ? '/' + path : '/';
 
 		const renderedTemplateFrags = Seo.plugins
-			.filter( ( { location } ) => location === 'template' )
+			.filter( ( { location } ) => location === 'page' )
 			.map( ( { fragment } ) => fragment );
 
 		const templateQuery = generateTemplateQuery( renderedTemplateFrags );
@@ -150,7 +150,7 @@ export class Seo {
 		} );
 
 		const parsers = Seo.plugins
-			.filter( ( { location } ) => location === 'template' )
+			.filter( ( { location } ) => location === 'page' )
 			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>

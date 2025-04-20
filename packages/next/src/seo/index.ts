@@ -5,5 +5,5 @@ if ( ! Seo.isInitialized ) {
 }
 
 // Rexports for simpler interface
-export const getSiteMetadata = Seo.getSiteMetadata;
-export const getTemplateMetadata = Seo.getTemplateMetadata;
+export const getLayoutMetadata = Seo.getLayoutMetadata;
+export const getPageMetadata = Seo.getPageMetadata;
