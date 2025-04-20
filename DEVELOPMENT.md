@@ -63,7 +63,9 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 -   [Node.js](https://nodejs.org/) v20+
 -   [Docker](https://www.docker.com/)
 
-### Setup Core Libraries.
+### Setup.
+
+#### Building SnapWP libraries
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -99,9 +101,9 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 5. At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
 
-### Setup CLI
+#### Linking the CLI command
 
-1. Follow steps 1-4 in [Setup Core Libraries](#setup-core-libraries)
+1. Follow steps 1-4 in [Setup Core Libraries](#building-snapwp-libraries)
 
 2. Link the the cli package. Linking allows you to use the `snapwp` command to scaffold an app anywhere.
 
@@ -109,44 +111,23 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm link snapwp
     ```
 
-3. A new next js starter app now can be scaffolded anywhere in your file system.
+3. A new NextJS starter app now can be scaffolded anywhere in your file system.
 
     ```bash
     snapwp
     ```
 
-NOTE: The linked command will used published packages. To use local builds for core-libraries see [Setup Proxy Sever](#setup-proxy-server). After that you can run
+4. (Optional) The linked command will used published packages. To use local builds for core-libraries see [Publish to local registry](#publish-to-local-registry). After that you can run
+    ```bash
+    snapwp --proxy
+    ```
 
-````bash
+#### Publish to local registry
 
-
-### Setup Proxy Server
-
-1. The following command takes care in
+1. The following commands starts a verdaccio proxy server on docker and then builds and publishes the package.
     ```bash
     npm run publish:local
     ```
-
-
-After the packages are build, run the following command to link the scaffolding CLI.
-
-```bash
-npm link snapwp
-````
-
-Linking is also useful for testing the CLI while developing.
-
-If packages have been published to verdaccio. A scaffold can be created to use that as npm registry for scaffold from the following command.
-
-```bash
-snapwp --proxy
-```
-
-For more options in the CLI look use `--help` flag
-
-```bash
-snapwp --help
-```
 
 ## Code Contributions (Pull Requests)
 
