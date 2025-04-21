@@ -3,7 +3,7 @@ import {
 	ApolloQueryClientEngine,
 	type clientType,
 	type clientOptionsType,
-} from '@snapwp/apollo';
+} from '@snapwp/plugin-apollo-client';
 
 const config: SnapWPConfig< clientType, clientOptionsType > = {
 	query: {

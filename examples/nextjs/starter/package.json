@@ -24,7 +24,7 @@
 		"@snapwp/core": "file:../../../packages/core",
 		"@snapwp/next": "file:../../../packages/next",
 		"@snapwp/query": "file:../../../packages/query",
-		"@snapwp/apollo": "file:../../../packages/apollo",
+		"@snapwp/plugin-apollo-client": "file:../../../packages/apollo",
 		"graphql": "^16.10.0",
 		"next": "^15.2.3",
 		"react": "^19.0.0",

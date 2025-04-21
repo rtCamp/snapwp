@@ -1,8 +1,8 @@
 {
-	"name": "@snapwp/apollo",
+	"name": "@snapwp/plugin-tanstack-query",
 	"version": "0.1.0",
 	"license": "AGPL-3.0",
-	"description": "Apollo Client integration for SnapWP.",
+	"description": "TanStack Client integration for SnapWP.",
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
@@ -30,7 +30,11 @@
 	},
 	"dependencies": {
 		"@snapwp/core": "*",
-		"@apollo/client": "^3.13.4"
+		"graphql-request": "^7.1.2"
+	},
+	"peerDependencies": {
+		"@tanstack/react-query": "^5.69.0",
+		"graphql": "^16.9.0"
 	},
 	"devDependencies": {
 		"resolve-tspaths": "*",
