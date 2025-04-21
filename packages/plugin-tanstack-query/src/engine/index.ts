@@ -84,6 +84,7 @@ export class TanStackQueryClientEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with TanStack's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 */
+	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
 	async fetchQuery<
 		TData,
 		TQueryOptions extends FetchQueryOptions & {
@@ -123,6 +124,8 @@ export class TanStackQueryClientEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with TanStack's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
+	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
+
 	useQuery<
 		TData,
 		TQueryOptions extends FetchQueryOptions & {

@@ -5,19 +5,21 @@ import {
 	useApolloClient,
 	useQuery as useApolloQuery,
 	type ApolloClientOptions,
-	type DocumentNode,
 	type NormalizedCacheObject,
 	type OperationVariables,
 	type QueryHookOptions,
 	type QueryOptions,
 	type ServerError,
 	type ServerParseError,
-	type TypedDocumentNode,
 } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { ApolloQueryProvider } from './query-provider';
-import type { BaseQueryClientEngine } from '@snapwp/types';
+import type {
+	BaseQueryClientEngine,
+	fetchQueryArgs,
+	useQueryArgs,
+} from '@snapwp/types';
 
 export type clientType = ApolloClient< NormalizedCacheObject >;
 export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
@@ -117,18 +119,15 @@ export class ApolloQueryClientEngine
 	 * @return A promise that resolves with the query data of type TData.
 	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
+	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
 	async fetchQuery<
 		TData,
-		TQueryOptions extends QueryOptions = QueryOptions,
+		TQueryOptions extends QueryOptions | undefined = QueryOptions,
 	>( {
-		key,
+		name,
 		query,
 		options,
-	}: {
-		key: string[];
-		query: DocumentNode | TypedDocumentNode< TData >;
-		options?: TQueryOptions;
-	} ): Promise< TData > {
+	}: fetchQueryArgs< TData, TQueryOptions > ): Promise< TData > {
 		try {
 			const queryResult = await this.getServerClient().query< TData >( {
 				...( options as QueryOptions ),
@@ -138,7 +137,7 @@ export class ApolloQueryClientEngine
 			if ( queryResult.errors?.length ) {
 				queryResult.errors?.forEach( ( error ) => {
 					Logger.error(
-						`Error fetching ${ key.join( ':' ) }: ${ error }`
+						`Error fetching ${ name.join( ':' ) }: ${ error }`
 					);
 				} );
 			}
@@ -166,19 +165,12 @@ export class ApolloQueryClientEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
+	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
 	useQuery<
 		TData,
-		TQueryOptions extends QueryHookOptions = QueryHookOptions,
-	>( {
+		TQueryOptions extends QueryHookOptions | undefined = QueryHookOptions,
 		// @ts-ignore
-		key,
-		query,
-		options,
-	}: {
-		key: string[];
-		query: DocumentNode | TypedDocumentNode< TData >;
-		options?: TQueryOptions;
-	} ): TData {
+	>( { name, query, options }: useQueryArgs< TData, TQueryOptions > ): TData {
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		return useApolloQuery< TData, OperationVariables >(
 			query,

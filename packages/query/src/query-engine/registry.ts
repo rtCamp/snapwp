@@ -100,8 +100,8 @@ export const getServerClient = < TClient, TClientOptions >(
  *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
  * @return A promise resolving with the queried data.
  */
-export const fetchQuery = < TData >(
-	args: fetchQueryArgs< TData >
+export const fetchQuery = < TData, TQueryOptions >(
+	args: fetchQueryArgs< TData, TQueryOptions >
 ): Promise< TData > => {
 	const engine = Registry.getEngine();
 	return engine.fetchQuery( args );
@@ -117,7 +117,9 @@ export const fetchQuery = < TData >(
  *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
  * @return The queried data.
  */
-export const useQuery = < TData >( args: useQueryArgs< TData > ): TData => {
+export const useQuery = < TData, TQueryOptions >(
+	args: useQueryArgs< TData, TQueryOptions >
+): TData => {
 	const engine = Registry.getEngine();
 	return engine.useQuery( args );
 };
