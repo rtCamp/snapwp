@@ -5,8 +5,8 @@
 		{ "path": "packages/core" },
 		{ "path": "packages/query" },
 		{ "path": "packages/codegen-config" },
-		{ "path": "packages/tanstack" },
-		{ "path": "packages/apollo" }
+		{ "path": "packages/plugin-apollo-client" },
+		{ "path": "packages/plugin-tanstack-query" }
 	],
 	"files": []
 }

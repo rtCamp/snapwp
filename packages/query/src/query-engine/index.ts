@@ -28,7 +28,7 @@ export class QueryEngine {
 	 */
 	static getGlobalStyles = async (): Promise< GlobalHeadProps > => {
 		const data = await fetchQuery( {
-			key: [ 'globalStyles' ],
+			name: [ 'globalStyles' ],
 			query: GetGlobalStylesDocument,
 			options: {},
 		} );
@@ -59,7 +59,7 @@ export class QueryEngine {
 		| undefined
 	> => {
 		const data = await fetchQuery( {
-			key: [ 'generalSettings' ],
+			name: [ 'generalSettings' ],
 			query: GetGeneralSettingsDocument,
 		} );
 
@@ -83,7 +83,7 @@ export class QueryEngine {
 		const variables = { uri };
 
 		const data = await fetchQuery( {
-			key: [ 'templateData', uri ],
+			name: [ 'templateData', uri ],
 			query: GetCurrentTemplateDocument,
 			options: {
 				variables,

@@ -76,7 +76,7 @@ export interface BaseQueryClientEngine<
 }
 
 export type fetchQueryArgs< TData > = {
-	key: string[];
+	name: string[];
 	query: DocumentNode | TypedDocumentNode< TData >;
 	options?: unknown; // Intentionally kept unknown for implementer-defined types.
 };
