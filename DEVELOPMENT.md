@@ -117,7 +117,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm run dev
     ```
 
-At this point the packages should be ready to use in the repository, such as linting/typechecking, IDE support, and use withinand of the projects in the [`./examples`](./examples) directory.
+At this point the packages should be ready to use in the repository, such as linting/typechecking, IDE support, and the projects in the [`./examples`](./examples) directory.
 
 5. (Optional) Link the `snapwp` command.
 
