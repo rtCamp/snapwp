@@ -2,6 +2,26 @@
 
 Code contributions, bug reports, and feature requests are welcome! The following sections provide guidelines for contributing to this project, as well as information about development processes and testing.
 
+## Table of Contents
+
+-   [Directory Structure](#directory-structure)
+-   [Local setup](#local-setup)
+    -   [Prerequisites](#prerequisites)
+    -   [Building SnapWP Packages](#building-snapwp-packages)
+-   [Code Contributions (Pull Requests)](#code-contributions-pull-requests)
+    -   [Workflow](#workflow)
+    -   [Code Quality / Code Standards](#code-quality--code-standards)
+        -   [ESLint](#eslint)
+    -   [Testing](#testing)
+        -   [Testing with Jest](#testing-with-jest)
+        -   [Testing with Playwright](#testing-with-playwright)
+    -   [Type checking](#type-checking)
+    -   [Testing packages locally](#testing-packages-locally)
+        -   [Package linking](#package-linking)
+        -   [Verdaccio proxy registry](#verdaccio-proxy-registry)
+    -   [Changesets](#changesets)
+    -   [Releasing](#releasing)
+
 ## Directory Structure
 
 The monorepo is organized as follows:
@@ -54,7 +74,7 @@ The monorepo is organized as follows:
 
 </details>
 
-## Setting up locally
+## Local setup
 
 To set up locally, clone the repository and navigate to the `frontend` subdirectory.
 
@@ -63,9 +83,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 -   [Node.js](https://nodejs.org/) v20+
 -   [Docker](https://www.docker.com/)
 
-### Setup.
-
-#### Building SnapWP Packages
+### Building SnapWP Packages
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -93,42 +111,40 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
     OR
 
-    Build in watch mode.
+    Build in watch mode:
 
     ```bash
     npm run dev
     ```
 
-5. At this point the packages should be ready to use in any of the projects in the `examples/` directory.
+At this point the packages should be ready to use in the repository, such as linting/typechecking, IDE support, and use withinand of the projects in the [`./examples`](./examples) directory.
 
-#### Linking the CLI command
+5. (Optional) Link the `snapwp` command.
 
-All packages apart from `cli` are meant to be used in a NextJS app. Using `cli` while development requires some extra steps.
-
-1. Follow steps 1-4 in [Builiding SnapWP Packages](#building-snapwp-packages)
-
-2. Link the the cli package. Linking allows you to use the `snapwp` command to scaffold an app anywhere.
+    To test the local versions of [`./packages/cli`], you can link it to your global NPM packages:
 
     ```bash
     npm link snapwp
     ```
 
-3. A new NextJS starter app now can be scaffolded anywhere in your file system.
+    For more information see [@todo]
 
-    ```bash
-    snapwp
-    ```
+6. (Optional) Publish to local Verdaccio registry.
 
-4. (Optional) The linked command will used published packages. To use local builds for core-libraries see [Publish to local registry](#publish-to-local-registry). After that you can run
-    ```bash
-    snapwp --proxy
-    ```
+    The following command starts a Verdaccio proxy server on docker and then builds and publishes the packages to the local Verdaccio registry.
 
-#### Publish to local registry
-
-1. The following commands starts a verdaccio proxy server on docker and then builds and publishes the package.
     ```bash
     npm run publish:local
+    ```
+
+    For more information see [@todo]
+
+7. (Optional) Scaffold a new project using the local CLI & packages.
+
+    After the `snapwp` command is linked (Step 5) and the packages are published to the local Verdaccio registry (Step 6), you can scaffold a new project using the local CLI and packages with the following command.
+
+    ```bash
+    snapwp --proxy
     ```
 
 ## Code Contributions (Pull Requests)
@@ -187,7 +203,7 @@ npm run test:unit:updatesnapshot
 
 Note: Update snapshots when a test fails due to intentional changes in the code.
 
-#### Testing with Playwright.
+#### Testing with Playwright
 
 This project uses [Playwright](https://playwright.dev/) to run e2e tests.
 
@@ -211,24 +227,20 @@ npm run typecheck
 
 You can test these packages locally by linking them, or by using a local npm registry such as Verdaccio.
 
-#### Using linking (recommended for local development)
+#### Package linking
 
 1. Follow steps 1–3 in [Setup](#setup).
 2. Run `npm link -w snapwp` to link the package into your global dependencies.
 3. Verify the CLI by running `snapwp`.
 4. Remove the global link with `npm r snapwp -g`.
 
-#### Using Verdaccio (recommended for pre-release testing)
+#### Verdaccio proxy registry
 
 1. Follow steps 1–4 in [Setup](#setup).
 2. Use `npm_config_registry=http://localhost:4873 npx snapwp` to run the local package.
 3. Clear the npx cache if needed:
     - Find your cache location using `npm config get cache`.
     - Remove the `_npx` directory in that cache folder.
-
-#### Using the packages in `/examples/`
-
-@todo
 
 ### Changesets
 
