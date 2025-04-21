@@ -127,7 +127,7 @@ At this point the packages should be ready to use in the repository, such as lin
     npm link snapwp
     ```
 
-    For more information see [@todo]
+    For more information see CLI's [Readme](./packages/cli/README.md) file.
 
 6. (Optional) Publish to local Verdaccio registry.
 
@@ -232,12 +232,13 @@ You can test these packages locally by linking them, or by using a local npm reg
 1. Follow steps 1–3 in [Setup](#setup).
 2. Run `npm link -w snapwp` to link the package into your global dependencies.
 3. Verify the CLI by running `snapwp`.
-4. Remove the global link with `npm r snapwp -g`.
+4. (Optional) Run `snapwp --proxy` to use proxied packages in the linked cli.
+5. Remove the global link with `npm r snapwp -g`.
 
 #### Verdaccio proxy registry
 
 1. Follow steps 1–4 in [Setup](#setup).
-2. Use `npm_config_registry=http://localhost:4873 npx snapwp` to run the local package.
+2. Use `npm_config_registry=http://localhost:4873 npx snapwp --proxy` to run the local package.
 3. Clear the npx cache if needed:
     - Find your cache location using `npm config get cache`.
     - Remove the `_npx` directory in that cache folder.
