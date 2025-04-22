@@ -1,6 +1,7 @@
 import { headers } from 'next/headers';
 import Script from 'next/script';
 import { QueryEngine } from '@snapwp/query';
+import { LightboxOverlay } from '@/components/lightbox-overlay';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 
@@ -53,6 +54,7 @@ export async function TemplateRenderer( {
 				</main>
 			</TemplateScripts>
 			{ /* Hot Fix for adding classes to the body outside the root layout */ }
+			<LightboxOverlay />
 
 			<Script
 				strategy="beforeInteractive"
