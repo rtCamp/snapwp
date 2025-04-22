@@ -132,9 +132,7 @@ export class ApolloClientEngine
 
 			if ( queryResult.errors?.length ) {
 				queryResult.errors?.forEach( ( error ) => {
-					Logger.error(
-						`Error fetching ${ name.join( ':' ) }: ${ error }`
-					);
+					Logger.error( `Error fetching ${ name }: ${ error }` );
 				} );
 			}
 

@@ -80,7 +80,7 @@ export type fetchQueryArgs<
 	TData,
 	TQueryOptions extends unknown | undefined,
 > = {
-	name: string[];
+	name: string;
 	query: DocumentNode | TypedDocumentNode< TData >;
 	options?: TQueryOptions; // Intentionally kept unknown for implementer-defined types.
 };

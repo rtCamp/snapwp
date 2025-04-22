@@ -11,6 +11,8 @@ import { getGraphqlUrl } from '@snapwp/core/config';
 import { QueryProvider } from './query-provider';
 import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
 
+export type clientType = QueryClient;
+export type clientOptionsType = QueryClientConfig;
 /**
  * TanStack Query Client Adapter that implements the QueryEngine interface.
  * This adapter allows you to work with TanStack Query in a generic way.
@@ -97,9 +99,31 @@ export class TanStackQueryEngine
 		options,
 	}: fetchQueryArgs< TData, TQueryOptions > ): Promise< TData > {
 		const graphqlUrl = getGraphqlUrl();
+		const key = [ name ];
+
+		if ( options?.variables ) {
+			// If options include variables, we need to create a unique key.
+			Object.values( options.variables ).forEach( ( value ) => {
+				if ( Array.isArray( value ) ) {
+					key.push( value.join( ':' ) );
+				} else if ( typeof value === 'number' ) {
+					// Convert number to string
+					key.push( value.toString() );
+				} else if ( typeof value === 'bigint' ) {
+					// Convert BigInt to string
+					key.push( value.toString() );
+				} else if ( typeof value === 'string' ) {
+					key.push( value );
+				} else {
+					// Handle other types as needed
+					key.push( JSON.stringify( value ) );
+				}
+			} );
+		}
+
 		// Here we assume that options may include variables.
 		return this.getServerClient().fetchQuery( {
-			queryKey: name,
+			queryKey: key,
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
@@ -130,10 +154,32 @@ export class TanStackQueryEngine
 		},
 	>( { name, query, options }: useQueryArgs< TData, TQueryOptions > ): TData {
 		const graphqlUrl = getGraphqlUrl();
+		const key = [ name ];
+
+		if ( options?.variables ) {
+			// If options include variables, we need to create a unique key.
+			Object.values( options.variables ).forEach( ( value ) => {
+				if ( Array.isArray( value ) ) {
+					key.push( value.join( ':' ) );
+				} else if ( typeof value === 'number' ) {
+					// Convert number to string
+					key.push( value.toString() );
+				} else if ( typeof value === 'bigint' ) {
+					// Convert BigInt to string
+					key.push( value.toString() );
+				} else if ( typeof value === 'string' ) {
+					key.push( value );
+				} else {
+					// Handle other types as needed
+					key.push( JSON.stringify( value ) );
+				}
+			} );
+		}
+
 		// Use TanStack's useQuery hook and extract the data property.
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		const result = useQuery< TData, unknown >( {
-			queryKey: name,
+			queryKey: key,
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
