@@ -2,6 +2,26 @@
 
 Code contributions, bug reports, and feature requests are welcome! The following sections provide guidelines for contributing to this project, as well as information about development processes and testing.
 
+## Table of Contents
+
+-   [Directory Structure](#directory-structure)
+-   [Local setup](#local-setup)
+    -   [Prerequisites](#prerequisites)
+    -   [Building SnapWP Packages](#building-snapwp-packages)
+-   [Code Contributions (Pull Requests)](#code-contributions-pull-requests)
+    -   [Workflow](#workflow)
+    -   [Code Quality / Code Standards](#code-quality--code-standards)
+        -   [ESLint](#eslint)
+    -   [Testing](#testing)
+        -   [Testing with Jest](#testing-with-jest)
+        -   [Testing with Playwright](#testing-with-playwright)
+    -   [Type checking](#type-checking)
+    -   [Testing packages locally](#testing-packages-locally)
+        -   [Package linking](#package-linking)
+        -   [Verdaccio proxy registry](#verdaccio-proxy-registry)
+    -   [Changesets](#changesets)
+    -   [Releasing](#releasing)
+
 ## Directory Structure
 
 The monorepo is organized as follows:
@@ -54,7 +74,7 @@ The monorepo is organized as follows:
 
 </details>
 
-## Setting up locally
+## Local setup
 
 To set up locally, clone the repository and navigate to the `frontend` subdirectory.
 
@@ -63,7 +83,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 -   [Node.js](https://nodejs.org/) v20+
 -   [Docker](https://www.docker.com/)
 
-### Setup
+### Building SnapWP Packages
 
 1. Copy the example environment file to `.env` and update the [values as needed](./docs/config-api.md#env-variables)
 
@@ -83,24 +103,52 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
     npm install
     ```
 
-4. Build the packages locally.
+4. Build the packages.
 
     ```bash
     npm run build
     ```
 
-    At this point the libraries should be ready to use in any of the projects in the `examples/` directory.
+    OR
 
-5. (Optional) Start the packages in watch mode.
+    Build in watch mode:
 
     ```bash
     npm run dev
     ```
 
-    Alternatively, you can publish the packages locally using Verdaccio:
+At this point the packages should be ready to use in the repository, such as linting/typechecking, IDE support, and the projects in the [`./examples`](./examples) directory.
+
+5. (Optional) Link the `snapwp` command.
+
+    To test the local versions of [`./packages/cli`], you can link it to your global NPM packages:
+
+    ```bash
+    npm link snapwp
+    ```
+
+    Unlink it by
+
+    ```bash
+    npm r snapwp -g
+    ```
+
+    For more information see CLI's [Readme](./packages/cli/README.md) file.
+
+6. (Optional) Publish to local Verdaccio registry.
+
+    The following command starts a Verdaccio proxy server on docker and then builds and publishes the packages to the local Verdaccio registry.
 
     ```bash
     npm run publish:local
+    ```
+
+7. (Optional) Scaffold a new project using the local CLI & packages.
+
+    After the `snapwp` command is linked (Step 5) and the packages are published to the local Verdaccio registry (Step 6), you can scaffold a new project using the local CLI and packages with the following command.
+
+    ```bash
+    snapwp --proxy
     ```
 
 ## Code Contributions (Pull Requests)
@@ -159,7 +207,7 @@ npm run test:unit:updatesnapshot
 
 Note: Update snapshots when a test fails due to intentional changes in the code.
 
-#### Testing with Playwright.
+#### Testing with Playwright
 
 This project uses [Playwright](https://playwright.dev/) to run e2e tests.
 
@@ -178,29 +226,6 @@ You can run type check for all packages:
 ```bash
 npm run typecheck
 ```
-
-### Testing packages locally
-
-You can test these packages locally by linking them, or by using a local npm registry such as Verdaccio.
-
-#### Using linking (recommended for local development)
-
-1. Follow steps 1–3 in [Setup](#setup).
-2. Run `npm link -w snapwp` to link the package into your global dependencies.
-3. Verify the CLI by running `snapwp`.
-4. Remove the global link with `npm r snapwp -g`.
-
-#### Using Verdaccio (recommended for pre-release testing)
-
-1. Follow steps 1–4 in [Setup](#setup).
-2. Use `npm_config_registry=http://localhost:4873 npx snapwp` to run the local package.
-3. Clear the npx cache if needed:
-    - Find your cache location using `npm config get cache`.
-    - Remove the `_npx` directory in that cache folder.
-
-#### Using the packages in `/examples/`
-
-@todo
 
 ### Changesets
 
