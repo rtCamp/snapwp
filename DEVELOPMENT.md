@@ -143,8 +143,6 @@ At this point the packages should be ready to use in the repository, such as lin
     npm run publish:local
     ```
 
-    For more information see [@todo]
-
 7. (Optional) Scaffold a new project using the local CLI & packages.
 
     After the `snapwp` command is linked (Step 5) and the packages are published to the local Verdaccio registry (Step 6), you can scaffold a new project using the local CLI and packages with the following command.
