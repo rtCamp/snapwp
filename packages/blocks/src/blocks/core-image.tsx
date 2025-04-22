@@ -13,6 +13,7 @@ import type {
 	CoreImageMediaDetails,
 	CoreImageProps,
 	FigureProps,
+	LightBoxProp,
 } from '@snapwp/types';
 import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
@@ -248,17 +249,13 @@ const getImageProps = (
  *
  * @return Whether the lightbox is enabled.
  */
-//@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
-	// if ( ! lightbox ) {
-	// 	return false;
-	// }
-	// const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
-	//
-	// return lightboxObj.enabled;
+	if ( ! lightbox ) {
+		return false;
+	}
+	const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
 
-	// Disabling lightbox support for now.
-	return false;
+	return lightboxObj.enabled;
 };
 
 /**
