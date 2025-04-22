@@ -16,7 +16,7 @@ import type { JSX, PropsWithChildren } from 'react';
  *
  * @return The rendered ApolloProvider component.
  */
-export const ApolloQueryProvider: ( {
+export const QueryProvider: ( {
 	client,
 	children,
 }: PropsWithChildren< {

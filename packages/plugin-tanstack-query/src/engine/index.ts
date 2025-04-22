@@ -8,22 +8,21 @@ import {
 } from '@tanstack/react-query';
 import { request } from 'graphql-request';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { TanStackQueryProvider } from './query-provider';
-import type { BaseQueryClientEngine } from '@snapwp/types';
-import type { DocumentNode } from 'graphql';
+import { QueryProvider } from './query-provider';
+import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
 
 /**
- * TanStack Query Client Adapter that implements the BaseQueryClientEngine interface.
+ * TanStack Query Client Adapter that implements the QueryEngine interface.
  * This adapter allows you to work with TanStack Query in a generic way.
  */
-export class TanStackQueryClientEngine
-	implements BaseQueryClientEngine< QueryClient, QueryClientConfig >
+export class TanStackQueryEngine
+	implements QueryEngine< QueryClient, QueryClientConfig >
 {
 	private client?: QueryClient;
 	private readonly clientOptions: QueryClientConfig;
 
 	/**
-	 * Creates a new instance of TanStackQueryClientEngine.
+	 * Creates a new instance of TanStackQueryEngine.
 	 * @param { QueryClientConfig } options - Optional QueryClient instance. If not provided, a new QueryClient is created.
 	 */
 	constructor( options?: QueryClientConfig ) {
@@ -79,7 +78,7 @@ export class TanStackQueryClientEngine
 	/**
 	 * Executes a GraphQL query using the TanStack Client instance and writes the result to the cache.
 	 * @param { Object } props An object containing:
-	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
+	 * @param { string[] } props.name - An array of strings that uniquely identifies the query in the cache.
 	 * @param { DocumentNode } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
 	 * @param { TQueryOptions } props.options - Optional query options compatible with TanStack's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
@@ -93,18 +92,14 @@ export class TanStackQueryClientEngine
 			variables?: Record< string, unknown >;
 		},
 	>( {
-		key,
+		name,
 		query,
 		options,
-	}: {
-		key: string[];
-		query: DocumentNode;
-		options?: TQueryOptions;
-	} ): Promise< TData > {
+	}: fetchQueryArgs< TData, TQueryOptions > ): Promise< TData > {
 		const graphqlUrl = getGraphqlUrl();
 		// Here we assume that options may include variables.
 		return this.getServerClient().fetchQuery( {
-			queryKey: key,
+			queryKey: name,
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
@@ -133,20 +128,12 @@ export class TanStackQueryClientEngine
 		} = FetchQueryOptions & {
 			variables?: Record< string, unknown >;
 		},
-	>( {
-		key,
-		query,
-		options,
-	}: {
-		key: string[];
-		query: DocumentNode;
-		options?: TQueryOptions;
-	} ): TData {
+	>( { name, query, options }: useQueryArgs< TData, TQueryOptions > ): TData {
 		const graphqlUrl = getGraphqlUrl();
 		// Use TanStack's useQuery hook and extract the data property.
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		const result = useQuery< TData, unknown >( {
-			queryKey: key,
+			queryKey: name,
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
@@ -159,5 +146,5 @@ export class TanStackQueryClientEngine
 		return result.data as TData;
 	}
 
-	QueryProvider = TanStackQueryProvider;
+	QueryProvider = QueryProvider;
 }

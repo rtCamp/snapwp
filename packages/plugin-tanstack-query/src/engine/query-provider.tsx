@@ -11,7 +11,7 @@ import type { JSX, PropsWithChildren } from 'react';
  *
  * @return The rendered TanStackProvider component.
  */
-export const TanStackQueryProvider: ( {
+export const QueryProvider: ( {
 	client,
 	children,
 }: PropsWithChildren< {

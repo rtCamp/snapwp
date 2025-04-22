@@ -1,9 +1,5 @@
 import { getConfig } from '@snapwp/core/config';
-import type {
-	BaseQueryClientEngine,
-	fetchQueryArgs,
-	useQueryArgs,
-} from '@snapwp/types';
+import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
 
 /**
  * Registry class to manage the registration of query engines.
@@ -12,7 +8,7 @@ class Registry {
 	/**
 	 * Holds the registered query engines.
 	 */
-	private static engine?: BaseQueryClientEngine;
+	private static engine?: QueryEngine;
 
 	/**
 	 * Registers a query engine.
@@ -30,7 +26,7 @@ class Registry {
 	 *
 	 * @return The registered query engine.
 	 */
-	public static getEngine< TClient, TClientOptions >(): BaseQueryClientEngine<
+	public static getEngine< TClient, TClientOptions >(): QueryEngine<
 		TClient,
 		TClientOptions
 	> {
@@ -38,7 +34,7 @@ class Registry {
 			this.register();
 		}
 
-		return < BaseQueryClientEngine< TClient, TClientOptions > >this.engine;
+		return < QueryEngine< TClient, TClientOptions > >this.engine;
 	}
 }
 

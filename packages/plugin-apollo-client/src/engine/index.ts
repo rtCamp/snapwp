@@ -14,29 +14,25 @@ import {
 } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { ApolloQueryProvider } from './query-provider';
-import type {
-	BaseQueryClientEngine,
-	fetchQueryArgs,
-	useQueryArgs,
-} from '@snapwp/types';
+import { QueryProvider } from './query-provider';
+import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
 
 export type clientType = ApolloClient< NormalizedCacheObject >;
 export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
 
 /**
- * An adapter for Apollo Client that implements the BaseQueryClientEngine interface.
+ * An adapter for Apollo Client that implements the QueryEngine interface.
  * This adapter provides methods for obtaining an Apollo Client instance, executing queries,
  * and using queries as hooks.
  */
-export class ApolloQueryClientEngine
-	implements BaseQueryClientEngine< clientType, clientOptionsType >
+export class ApolloClientEngine
+	implements QueryEngine< clientType, clientOptionsType >
 {
 	private client?: ApolloClient< NormalizedCacheObject >;
 	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
 
 	/**
-	 * Creates a new instance of ApolloQueryClientEngine.
+	 * Creates a new instance of ApolloClientEngine.
 	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 */
 	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
@@ -177,7 +173,7 @@ export class ApolloQueryClientEngine
 			options as QueryHookOptions< TData, OperationVariables >
 		).data as TData;
 	}
-	QueryProvider = ApolloQueryProvider;
+	QueryProvider = QueryProvider;
 }
 
 /**

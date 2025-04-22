@@ -3,7 +3,7 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BaseQueryClientEngine, BlockDefinitions } from '@snapwp/types';
+import type { BlockDefinitions, QueryEngine } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -37,7 +37,10 @@ export interface SnapWPEnv {
 	wpSiteUrl: string;
 }
 
-export interface SnapWPConfig< TClient = unknown, TClientOptions = unknown > {
+export interface SnapWPConfig<
+	TClient extends unknown = unknown,
+	TClientOptions extends unknown = unknown,
+> {
 	/**
 	 * Block definitions for the editor.
 	 */
@@ -49,12 +52,13 @@ export interface SnapWPConfig< TClient = unknown, TClientOptions = unknown > {
 	/**
 	 * Query Engine
 	 */
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- We don't know the type of the query engine, so we use `any`. unknown will cause type error.
-	query: QueryEngine< TClient, TClientOptions >;
+	query: QueryEngineConfig< TClient, TClientOptions >;
 }
 
-interface QueryEngine< TClient = unknown, TClientOptions = unknown > {
-	engine: new () => BaseQueryClientEngine< TClient, TClientOptions >;
+interface QueryEngineConfig< TClient = unknown, TClientOptions = unknown > {
+	engine: new (
+		options?: TClientOptions
+	) => QueryEngine< TClient, TClientOptions >;
 	options?: TClientOptions;
 }
 
