@@ -127,7 +127,8 @@ At this point the packages should be ready to use in the repository, such as lin
     npm link snapwp
     ```
 
-    Unlink it by 
+    Unlink it by
+
     ```bash
     npm r snapwp -g
     ```
