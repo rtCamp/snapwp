@@ -79,6 +79,7 @@ export class QueryEngine {
 		scripts: EnqueuedScriptProps[] | undefined;
 		scriptModules: ScriptModuleProps[] | undefined;
 		bodyClasses: string[] | undefined;
+		is404: boolean;
 	} > => {
 		const variables = { uri };
 

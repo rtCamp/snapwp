@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/core",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"license": "AGPL-3.0",
 	"description": "Shared utility methods and React components used by our other packages.",
 	"author": "rtCamp",
@@ -52,6 +52,6 @@
 		"tsc-watch": "*",
 		"typescript": "*",
 		"@snapwp/types": "*",
-		"html-react-parser": "^5.1.12"
+		"html-react-parser": "^5.2.3"
 	}
 }

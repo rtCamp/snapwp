@@ -126,5 +126,6 @@ query GetCurrentTemplate($uri: String!) {
 				...CoreVideoFrag
 			}
 		}
+		is404
 	}
 }

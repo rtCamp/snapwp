@@ -27,6 +27,7 @@ export function parseQueryResult(
 	scripts: EnqueuedScriptProps[] | undefined;
 	scriptModules: ScriptModuleProps[] | undefined;
 	bodyClasses: string[] | undefined;
+	is404: boolean;
 } {
 	// If there is no data or templateByUri in the query data and there are errors, throw an error.
 	if ( ! queryData || ! queryData.templateByUri ) {
@@ -36,6 +37,7 @@ export function parseQueryResult(
 	}
 
 	const templateByUri = queryData.templateByUri;
+	const is404 = templateByUri?.is404 ?? false;
 
 	return {
 		stylesheets: parseEnqueuedStylesheets( wordpressUrl, templateByUri ),
@@ -43,6 +45,7 @@ export function parseQueryResult(
 		scripts: parseEnqueuedScripts( templateByUri, wordpressUrl ),
 		scriptModules: parseScriptModules( templateByUri, wordpressUrl ),
 		bodyClasses: parseBodyClasses( templateByUri ),
+		is404,
 	};
 }
 

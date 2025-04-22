@@ -47,7 +47,7 @@ echo "Deleting previous published packages"
 rm -r ./.verdaccio/storage/*
 
 echo "Publishing workspaces to private registry"
-npm publish --workspaces --registry $registry_url 
+npm publish --workspaces --registry $registry_url --access public  # access public is needed for initial publish (ci)
 
 echo "Logging out"
 npm logout --registry $registry_url
