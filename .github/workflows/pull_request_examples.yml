@@ -100,7 +100,6 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
 
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
@@ -120,7 +119,7 @@ jobs:
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
                   npm i '${{ github.workspace }}/packages/cli' --no-save
-                  npx snapwp <<< '.'
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Run ESLint
@@ -172,7 +171,6 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
 
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
@@ -191,7 +189,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  snapwp --proxy <<< '.'
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Run Codegen
@@ -290,7 +289,6 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
 
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
@@ -309,7 +307,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  snapwp --proxy <<< '.'
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Build assets
@@ -362,7 +361,6 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
 
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
@@ -381,7 +379,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  snapwp --proxy <<< '.'
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Run unit tests
@@ -433,8 +432,7 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
-
+                
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
@@ -452,7 +450,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  snapwp --proxy <<< '.'
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Run npm audit
@@ -504,7 +503,6 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                  npm link snapwp
 
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
@@ -523,7 +521,8 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  snapwp --proxy <<< '.'
+                  npm i '${{ github.workspace }}/packages/cli' --no-save
+                  npx snapwp --proxy <<< '.'
                   npm i
 
             - name: Run Prettier
