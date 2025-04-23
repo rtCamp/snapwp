@@ -56,9 +56,7 @@ interface QueryEngineConfig< TClient, TClientOptions > {
 	engine: new (
 		options?: TClientOptions
 	) => QueryEngine< TClient, TClientOptions >;
-	options?: Parameters<
-		QueryEngine< TClient, TClientOptions >[ 'init' ]
-	>[ 0 ];
+	options?: TClientOptions;
 }
 
 /**
