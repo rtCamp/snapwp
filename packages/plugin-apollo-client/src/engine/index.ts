@@ -7,7 +7,6 @@ import {
 	type ApolloClientOptions,
 	type NormalizedCacheObject,
 	type OperationVariables,
-	type QueryHookOptions,
 	type QueryOptions,
 	type ServerError,
 	type ServerParseError,
@@ -15,43 +14,31 @@ import {
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { QueryProvider } from './query-provider';
-import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import type { QueryEngine } from '@snapwp/types';
 
 export type clientType = ApolloClient< NormalizedCacheObject >;
 export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
+
+type ApolloQueryArgs< TData, TQueryVars extends Record< string, unknown > > = {
+	name: string;
+	query: TypedDocumentNode< TData, TQueryVars >;
+	options?: QueryOptions< TQueryVars, TData >;
+};
 
 /**
  * An adapter for Apollo Client that implements the QueryEngine interface.
  * This adapter provides methods for obtaining an Apollo Client instance, executing queries,
  * and using queries as hooks.
  */
-export class ApolloClientEngine
-	implements QueryEngine< clientType, clientOptionsType >
-{
-	private client?: ApolloClient< NormalizedCacheObject >;
-	private readonly clientOptions: ApolloClientOptions< NormalizedCacheObject >;
+export class ApolloClientEngine implements QueryEngine< clientType > {
+	private readonly client: ApolloClient< NormalizedCacheObject >;
 
 	/**
 	 * Creates a new instance of ApolloClientEngine.
 	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to configure the client instance.
 	 */
 	constructor( options?: ApolloClientOptions< NormalizedCacheObject > ) {
-		options =
-			options || ( {} as ApolloClientOptions< NormalizedCacheObject > );
-
-		this.clientOptions = options;
-	}
-
-	/**
-	 * Initializes a new ApolloClient instance with default options and merges them with provided options.
-	 *
-	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional ApolloClientOptions to merge with the default configuration.
-	 *
-	 * @return A new instance of ApolloClient with the merged configuration.
-	 */
-	init(
-		options?: ApolloClientOptions< NormalizedCacheObject >
-	): ApolloClient< NormalizedCacheObject > {
 		const defaultOptions: ApolloClientOptions< NormalizedCacheObject > = {
 			cache: new InMemoryCache(),
 			uri: getGraphqlUrl(),
@@ -63,29 +50,14 @@ export class ApolloClientEngine
 			> ) || {} ),
 		};
 
-		return new ApolloClient( mergedOptions );
+		this.client = new ApolloClient( mergedOptions );
 	}
 
 	/**
 	 * Returns a new ApolloClient instance using merged default and provided options.
-	 * @param { ApolloClientOptions< NormalizedCacheObject > } options Optional client options to merge with the default configuration.
 	 * @return A new instance of ApolloClient with the merged configuration.
 	 */
-	getClient(
-		options?: ApolloClientOptions< NormalizedCacheObject >
-	): ApolloClient< NormalizedCacheObject > {
-		return this.init( options );
-	}
-
-	/**
-	 * Returns the ApolloClient instance used on the server.
-	 *
-	 * @return The ApolloClient instance created during initialization.
-	 */
-	getServerClient(): ApolloClient< NormalizedCacheObject > {
-		if ( ! this.client ) {
-			this.client = this.init( this.clientOptions );
-		}
+	getClient(): ApolloClient< NormalizedCacheObject > {
 		return this.client;
 	}
 
@@ -97,13 +69,18 @@ export class ApolloClientEngine
 	 */
 	useClient(
 		client: ApolloClient< NormalizedCacheObject > | undefined
-	): ApolloClient< NormalizedCacheObject > | undefined {
-		return client
-			? // eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
-			  ( useApolloClient(
-					client as ApolloClient< object >
-			  ) as ApolloClient< NormalizedCacheObject > )
-			: undefined;
+	): ApolloClient< NormalizedCacheObject > {
+		if ( client ) {
+			// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.  if (client){
+			return useApolloClient(
+				client
+			) as ApolloClient< NormalizedCacheObject >;
+		}
+
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.  if (client){
+		return useApolloClient(
+			this.client
+		) as ApolloClient< NormalizedCacheObject >;
 	}
 
 	/**
@@ -117,15 +94,15 @@ export class ApolloClientEngine
 	 */
 	async fetchQuery<
 		TData,
-		TQueryOptions extends QueryOptions | undefined = QueryOptions,
+		TQueryOptions extends Record< string, unknown >,
 	>( {
 		name,
 		query,
 		options,
-	}: fetchQueryArgs< TData, TQueryOptions > ): Promise< TData > {
+	}: ApolloQueryArgs< TData, TQueryOptions > ): Promise< TData > {
 		try {
-			const queryResult = await this.getServerClient().query< TData >( {
-				...( options as QueryOptions ),
+			const queryResult = await this.getClient().query< TData >( {
+				...options,
 				query,
 			} );
 
@@ -158,16 +135,13 @@ export class ApolloClientEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
-	useQuery<
-		TData,
-		TQueryOptions extends QueryHookOptions | undefined = QueryHookOptions,
-		// @ts-ignore
-	>( { name, query, options }: useQueryArgs< TData, TQueryOptions > ): TData {
+	useQuery< TData, TQueryOptions extends Record< string, unknown > >( {
+		query,
+		options,
+	}: ApolloQueryArgs< TData, TQueryOptions > ): TData {
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
-		return useApolloQuery< TData, OperationVariables >(
-			query,
-			options as QueryHookOptions< TData, OperationVariables >
-		).data as TData;
+		return useApolloQuery< TData, OperationVariables >( query, options )
+			.data as TData;
 	}
 	QueryProvider = QueryProvider;
 }

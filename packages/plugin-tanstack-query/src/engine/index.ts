@@ -9,48 +9,36 @@ import {
 import { request } from 'graphql-request';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { QueryProvider } from './query-provider';
-import type { fetchQueryArgs, QueryEngine, useQueryArgs } from '@snapwp/types';
+import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
+import type { QueryEngine, QueryOptions } from '@snapwp/types';
 
 export type clientType = QueryClient;
 export type clientOptionsType = QueryClientConfig;
+
+type TanStackQueryArgs<
+	TData,
+	TQueryVars extends Record< string, unknown >,
+> = {
+	name: string;
+	query: TypedDocumentNode< TData, TQueryVars >;
+	options?: Omit<
+		FetchQueryOptions< TData > & QueryOptions< TQueryVars >,
+		'queryKey'
+	>;
+};
 /**
  * TanStack Query Client Adapter that implements the QueryEngine interface.
  * This adapter allows you to work with TanStack Query in a generic way.
  */
-export class TanStackQueryEngine
-	implements QueryEngine< QueryClient, QueryClientConfig >
-{
-	private client?: QueryClient;
-	private readonly clientOptions: QueryClientConfig;
+export class TanStackQueryEngine implements QueryEngine< QueryClient > {
+	private readonly client: QueryClient;
 
 	/**
-	 * Creates a new instance of TanStackQueryEngine.
-	 * @param { QueryClientConfig } options - Optional QueryClient instance. If not provided, a new QueryClient is created.
+	 *
+	 * @param { QueryClientConfig } options - Client options.
 	 */
 	constructor( options?: QueryClientConfig ) {
-		options = options || ( {} as QueryClientConfig );
-
-		this.clientOptions = options;
-	}
-
-	/**
-	 * Initializes a new TanStackClient instance with default options and merges them with provided options.
-	 *
-	 * @param { QueryClientConfig } options Optional TanStackClientOptions to merge with the default configuration.
-	 *
-	 * @return A new instance of TanStackClient with the merged configuration.
-	 */
-	init( options?: QueryClientConfig ): QueryClient {
-		return new QueryClient( options );
-	}
-
-	/**
-	 * Returns the TanStack QueryClient instance.
-	 * @param { QueryClientConfig } options - Generic client options (not used in this implementation).
-	 * @return The QueryClient instance.
-	 */
-	getClient( options?: QueryClientConfig ): QueryClient {
-		return this.init( options );
+		this.client = new QueryClient( options );
 	}
 
 	/**
@@ -58,11 +46,7 @@ export class TanStackQueryEngine
 	 *
 	 * @return The QueryClient instance.
 	 */
-	getServerClient(): QueryClient {
-		if ( ! this.client ) {
-			this.client = this.init( this.clientOptions );
-		}
-
+	getClient(): QueryClient {
 		return this.client;
 	}
 
@@ -85,44 +69,16 @@ export class TanStackQueryEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with TanStack's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 */
-	async fetchQuery<
-		TData,
-		TQueryOptions extends FetchQueryOptions & {
-			variables?: Record< string, unknown >;
-		} = FetchQueryOptions & {
-			variables?: Record< string, unknown >;
-		},
-	>( {
+	async fetchQuery< TData, TQueryVars extends Record< string, unknown > >( {
 		name,
 		query,
 		options,
-	}: fetchQueryArgs< TData, TQueryOptions > ): Promise< TData > {
+	}: TanStackQueryArgs< TData, TQueryVars > ): Promise< TData > {
 		const graphqlUrl = getGraphqlUrl();
-		const key = [ name ];
-
-		if ( options?.variables ) {
-			// If options include variables, we need to create a unique key.
-			Object.values( options.variables ).forEach( ( value ) => {
-				if ( Array.isArray( value ) ) {
-					key.push( value.join( ':' ) );
-				} else if ( typeof value === 'number' ) {
-					// Convert number to string
-					key.push( value.toString() );
-				} else if ( typeof value === 'bigint' ) {
-					// Convert BigInt to string
-					key.push( value.toString() );
-				} else if ( typeof value === 'string' ) {
-					key.push( value );
-				} else {
-					// Handle other types as needed
-					key.push( JSON.stringify( value ) );
-				}
-			} );
-		}
 
 		// Here we assume that options may include variables.
-		return this.getServerClient().fetchQuery( {
-			queryKey: key,
+		return this.getClient().fetchQuery( {
+			queryKey: parseKeyArray( name, options?.variables ),
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
@@ -142,41 +98,17 @@ export class TanStackQueryEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with TanStack's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
-	useQuery<
-		TData,
-		TQueryOptions extends FetchQueryOptions & {
-			variables?: Record< string, unknown >;
-		} = FetchQueryOptions & {
-			variables?: Record< string, unknown >;
-		},
-	>( { name, query, options }: useQueryArgs< TData, TQueryOptions > ): TData {
+	useQuery< TData, TQueryVars extends Record< string, unknown > >( {
+		name,
+		query,
+		options,
+	}: TanStackQueryArgs< TData, TQueryVars > ): TData {
 		const graphqlUrl = getGraphqlUrl();
-		const key = [ name ];
-
-		if ( options?.variables ) {
-			// If options include variables, we need to create a unique key.
-			Object.values( options.variables ).forEach( ( value ) => {
-				if ( Array.isArray( value ) ) {
-					key.push( value.join( ':' ) );
-				} else if ( typeof value === 'number' ) {
-					// Convert number to string
-					key.push( value.toString() );
-				} else if ( typeof value === 'bigint' ) {
-					// Convert BigInt to string
-					key.push( value.toString() );
-				} else if ( typeof value === 'string' ) {
-					key.push( value );
-				} else {
-					// Handle other types as needed
-					key.push( JSON.stringify( value ) );
-				}
-			} );
-		}
 
 		// Use TanStack's useQuery hook and extract the data property.
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		const result = useQuery< TData, unknown >( {
-			queryKey: key,
+			queryKey: parseKeyArray( name, options?.variables ),
 			/**
 			 * The query function that will be called to fetch the data.
 			 *
@@ -184,10 +116,46 @@ export class TanStackQueryEngine
 			 */
 			queryFn: () =>
 				request< TData >( graphqlUrl, query, options?.variables ),
-			...( options as object ),
+			...options,
 		} as UseQueryOptions< TData, unknown > );
 		return result.data as TData;
 	}
 
 	QueryProvider = QueryProvider;
+}
+
+/**
+ *
+ * @param {string} name Query name.
+ * @param {Record< string, unknown >} variables Query Variables
+ *
+ * @return key array for tanstack
+ */
+function parseKeyArray(
+	name: string,
+	variables?: Record< string, unknown >
+): string[] {
+	const key = [ name ];
+
+	if ( variables ) {
+		// If options include variables, we need to create a unique key.
+		Object.values( variables ).forEach( ( value ) => {
+			if ( Array.isArray( value ) ) {
+				key.push( value.join( ':' ) );
+			} else if ( typeof value === 'number' ) {
+				// Convert number to string
+				key.push( value.toString() );
+			} else if ( typeof value === 'bigint' ) {
+				// Convert BigInt to string
+				key.push( value.toString() );
+			} else if ( typeof value === 'string' ) {
+				key.push( value );
+			} else {
+				// Handle other types as needed
+				key.push( JSON.stringify( value ) );
+			}
+		} );
+	}
+
+	return key;
 }

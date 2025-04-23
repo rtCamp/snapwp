@@ -1,5 +1,4 @@
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import type { DocumentNode } from 'graphql/language';
 import type { ComponentType, PropsWithChildren } from 'react';
 
 /**
@@ -9,30 +8,13 @@ import type { ComponentType, PropsWithChildren } from 'react';
  * @template TClient - The type of the GraphQL client instance.
  * @template TClientOptions - The type of options used to initialize the client.
  */
-export interface QueryEngine< TClient = unknown, TClientOptions = unknown > {
-	/**
-	 * Initialize a new query client instance.
-	 *
-	 * @param options - Optional configuration for the client.
-	 * @return The initialized query client.
-	 */
-	init( options?: TClientOptions ): TClient;
-
-	/**
-	 * Retrieve the query client (can be singleton or factory).
-	 *
-	 * @param options - Optional configuration for the client.
-	 * @return The query client instance.
-	 */
-	getClient( options?: TClientOptions ): TClient;
-
+export interface QueryEngine< TClient > {
 	/**
 	 * Retrieve a query client suitable for server-side usage.
 	 *
-	 * @param options - Optional configuration for the client.
 	 * @return The server-side query client instance.
 	 */
-	getServerClient( options?: TClientOptions ): TClient;
+	getClient(): TClient;
 
 	/**
 	 * Set or retrieve the client instance on the client side.
@@ -40,31 +22,33 @@ export interface QueryEngine< TClient = unknown, TClientOptions = unknown > {
 	 * @param client - The query client instance or undefined.
 	 * @return The query client instance or undefined.
 	 */
-	useClient( client: TClient | undefined ): TClient | undefined;
+	useClient( client: TClient | undefined ): TClient;
 
 	/**
 	 * Perform a server-safe data fetch using the GraphQL client.
 	 *
-	 * @typeParam TData - The shape of the response data.
 	 * @param { Object } args - Object containing:
 	 *   - key: Unique cache key for the query.
 	 *   - query: The GraphQL document (typed or untyped).
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return A promise resolving with the queried data.
 	 */
-	fetchQuery< TData >( args: fetchQueryArgs< TData > ): Promise< TData >;
+	fetchQuery< TData, TQueryVars extends Record< string, unknown > >(
+		args: QueryArgs< TData, TQueryVars >
+	): Promise< TData >;
 
 	/**
 	 * React hook for client-side GraphQL queries.
 	 *
-	 * @typeParam TData - The shape of the response data.
 	 * @param { Object } args - Object containing:
 	 *   - key: Unique cache key for the query.
 	 *   - query: The GraphQL document (typed or untyped).
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return The queried data.
 	 */
-	useQuery< TData >( args: useQueryArgs< TData > ): TData;
+	useQuery< TData, TQueryVars extends Record< string, unknown > >(
+		args: QueryArgs< TData, TQueryVars >
+	): TData;
 
 	/**
 	 * React component that provides the query client context.
@@ -72,13 +56,15 @@ export interface QueryEngine< TClient = unknown, TClientOptions = unknown > {
 	QueryProvider: ComponentType< PropsWithChildren< { client: TClient } > >;
 }
 
-export type fetchQueryArgs< TData, TQueryOptions = unknown > = {
-	name: string;
-	query: DocumentNode | TypedDocumentNode< TData >;
-	options?: TQueryOptions; // Intentionally kept unknown for implementer-defined types.
-};
+export interface QueryOptions< TQueryVars extends Record< string, unknown > > {
+	variables?: TQueryVars;
+}
 
-export type useQueryArgs< TData, TQueryOptions = unknown > = fetchQueryArgs<
+export interface QueryArgs<
 	TData,
-	TQueryOptions
->;
+	TQueryVars extends Record< string, unknown >,
+> {
+	name: string;
+	query: TypedDocumentNode< TData, TQueryVars >;
+	options?: QueryOptions< TQueryVars >;
+}

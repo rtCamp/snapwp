@@ -30,7 +30,6 @@ export class QueryEngine {
 		const data = await fetchQuery( {
 			name: 'GlobalStyles',
 			query: GetGlobalStylesDocument,
-			options: {},
 		} );
 
 		return parseGlobalStyles( data );
