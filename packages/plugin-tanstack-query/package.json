@@ -2,7 +2,7 @@
 	"name": "@snapwp/plugin-tanstack-query",
 	"version": "0.1.0",
 	"license": "AGPL-3.0",
-	"description": "TanStack Client integration for SnapWP.",
+	"description": "TanStack Query integration for SnapWP.",
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {

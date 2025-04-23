@@ -7,8 +7,6 @@ import {
 
 const config: SnapWPConfig< clientType, clientOptionsType > = {
 	query: {
-		// TODO: Find a way to fix this type error
-		// @ts-expect-error TS2419: Class 'ApolloClientEngine' is not generic as the base interface so typescript is throwing an error.
 		engine: ApolloClientEngine,
 	},
 };

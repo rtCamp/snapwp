@@ -115,7 +115,6 @@ export class ApolloClientEngine
 	 * @return A promise that resolves with the query data of type TData.
 	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
-	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
 	async fetchQuery<
 		TData,
 		TQueryOptions extends QueryOptions | undefined = QueryOptions,
@@ -159,7 +158,6 @@ export class ApolloClientEngine
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
-	// @ts-expect-error TS2416: stricter generics than interface — safe in this context
 	useQuery<
 		TData,
 		TQueryOptions extends QueryHookOptions | undefined = QueryHookOptions,

@@ -37,10 +37,7 @@ export interface SnapWPEnv {
 	wpSiteUrl: string;
 }
 
-export interface SnapWPConfig<
-	TClient extends unknown = unknown,
-	TClientOptions extends unknown = unknown,
-> {
+export interface SnapWPConfig< TClient = unknown, TClientOptions = unknown > {
 	/**
 	 * Block definitions for the editor.
 	 */
@@ -55,11 +52,13 @@ export interface SnapWPConfig<
 	query: QueryEngineConfig< TClient, TClientOptions >;
 }
 
-interface QueryEngineConfig< TClient = unknown, TClientOptions = unknown > {
+interface QueryEngineConfig< TClient, TClientOptions > {
 	engine: new (
 		options?: TClientOptions
 	) => QueryEngine< TClient, TClientOptions >;
-	options?: TClientOptions;
+	options?: Parameters<
+		QueryEngine< TClient, TClientOptions >[ 'init' ]
+	>[ 0 ];
 }
 
 /**
