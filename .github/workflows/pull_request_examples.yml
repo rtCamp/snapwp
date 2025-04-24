@@ -118,7 +118,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
-                  # Had to resort to a local install because npm link didn't want to work properly. Refer #165
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
@@ -190,6 +192,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
@@ -308,6 +313,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
@@ -380,6 +388,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
@@ -433,7 +444,7 @@ jobs:
                   npm ci --workspaces --include-workspace-root
                   npm run --if-present local-registry:start
                   npm run --if-present build
-                
+
                   # Ensure Verdaccio has the right permissions for CI
                   touch .verdaccio/conf/htpasswd
                   sudo chmod 666 .verdaccio/conf/htpasswd  # Required so verdaccio container can add our user
@@ -451,6 +462,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
@@ -522,6 +536,9 @@ jobs:
               run: |
                   cp '${{ github.workspace }}/examples/${{ matrix.example }}/.env.example' .env
                   sed -i 's|NEXT_PUBLIC_WP_HOME_URL=.*|NEXT_PUBLIC_WP_HOME_URL=http://localhost|' .env
+
+                  # We use a local install because npm link is flaky in CI.
+                  # @see https://github.com/rtCamp/snapwp/pull/
                   npm i '${{ github.workspace }}/packages/cli' --no-save
                   npx snapwp --proxy <<< '.'
                   npm i
