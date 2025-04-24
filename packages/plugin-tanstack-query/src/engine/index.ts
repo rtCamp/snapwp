@@ -42,7 +42,7 @@ export class TanStackQueryEngine implements QueryEngine< QueryClient > {
 	}
 
 	/**
-	 * Returns the TanStack QueryClient instance for server-side usage.
+	 * Returns the TanStack QueryClient instance.
 	 *
 	 * @return The QueryClient instance.
 	 */

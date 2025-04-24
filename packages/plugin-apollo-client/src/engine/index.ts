@@ -54,8 +54,9 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 	}
 
 	/**
-	 * Returns a new ApolloClient instance using merged default and provided options.
-	 * @return A new instance of ApolloClient with the merged configuration.
+	 * Returns ApolloClient instance.
+	 *
+	 * @return A instance of ApolloClient.
 	 */
 	getClient(): ApolloClient< NormalizedCacheObject > {
 		return this.client;
@@ -70,16 +71,9 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 	useClient(
 		client: ApolloClient< NormalizedCacheObject > | undefined
 	): ApolloClient< NormalizedCacheObject > {
-		if ( client ) {
-			// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.  if (client){
-			return useApolloClient(
-				client
-			) as ApolloClient< NormalizedCacheObject >;
-		}
-
-		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.  if (client){
+		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		return useApolloClient(
-			this.client
+			client || this.client
 		) as ApolloClient< NormalizedCacheObject >;
 	}
 
