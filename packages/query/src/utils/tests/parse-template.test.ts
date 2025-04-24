@@ -1,4 +1,4 @@
-import { Logger, TemplateParseError } from '@snapwp/core';
+import { TemplateParseError } from '@snapwp/core';
 
 import { type GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 
@@ -94,46 +94,41 @@ describe( 'parseQueryResult', () => {
 	} );
 
 	it( 'should return is404 true if `templateByUri.is404` is true', () => {
-		const queryData: ApolloQueryResult< GetCurrentTemplateQuery > = {
-			data: {
-				templateByUri: {
-					bodyClasses: [ 'class1', 'class2' ],
-					enqueuedScripts: {
-						nodes: [
-							{
-								id: '122',
-								src: '/script.js',
-								handle: 'test-script',
-							},
-							{
-								id: '123',
-								src: 'https://cdn.com/script.js',
-								handle: 'cdn-script',
-							},
-						],
-					},
-					enqueuedStylesheets: {
-						nodes: [
-							{
-								src: '/style.css',
-								handle: 'test-style',
-								before: [ 'before-content' ],
-								after: [ 'after-content' ],
-							},
-						],
-					},
-					editorBlocks: [
+		const queryData: GetCurrentTemplateQuery = {
+			templateByUri: {
+				bodyClasses: [ 'class1', 'class2' ],
+				enqueuedScripts: {
+					nodes: [
 						{
-							type: 'core/paragraph',
-							renderedHtml: '<p>Text</p>',
+							id: '122',
+							src: '/script.js',
+							handle: 'test-script',
+						},
+						{
+							id: '123',
+							src: 'https://cdn.com/script.js',
+							handle: 'cdn-script',
 						},
 					],
-					is404: true,
 				},
+				enqueuedStylesheets: {
+					nodes: [
+						{
+							src: '/style.css',
+							handle: 'test-style',
+							before: [ 'before-content' ],
+							after: [ 'after-content' ],
+						},
+					],
+				},
+				editorBlocks: [
+					{
+						type: 'core/paragraph',
+						renderedHtml: '<p>Text</p>',
+					},
+				],
+				is404: true,
 			},
-			errors: [],
-			loading: false,
-			networkStatus: 7,
 		};
 
 		const result = parseQueryResult( queryData, wordpressUrl, uri );

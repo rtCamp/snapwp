@@ -1,4 +1,5 @@
 import { getConfig } from '@snapwp/core/config';
+import { QueryProvider } from '@/query-engine/query-provider';
 import type { QueryArgs, QueryEngine } from '@snapwp/types';
 
 /**
@@ -104,6 +105,4 @@ export const useQuery = <
 	return engine.useQuery( args );
 };
 
-export const QueryProvider = Registry.getEngine().QueryProvider;
-
-export { Registry };
+export { QueryProvider, Registry };
