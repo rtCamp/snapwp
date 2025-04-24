@@ -28,13 +28,11 @@
 		"lint": "eslint . --config ../../.eslintrc.json",
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
-	"dependencies": {
-		"@snapwp/core": "*",
-		"graphql-request": "^7.1.2"
-	},
 	"peerDependencies": {
 		"@tanstack/react-query": "^5.69.0",
-		"graphql": "^16.9.0"
+		"graphql": "^16.9.0",
+		"@snapwp/core": "*",
+		"graphql-request": "^7.1.2"
 	},
 	"devDependencies": {
 		"resolve-tspaths": "*",

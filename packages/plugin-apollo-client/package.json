@@ -29,9 +29,7 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
 	"peerDependencies": {
-		"@apollo/client": "^3.13.4"
-	},
-	"dependencies": {
+		"@apollo/client": "^3.13.4",
 		"@snapwp/core": "*"
 	},
 	"devDependencies": {
