@@ -4,9 +4,13 @@ import type { ReactNode } from 'react';
  * Renders the lightbox overlay for displaying an enlarged image with interactions.
  *
  * @return The lightbox overlay.
+ * @see https://github.com/WordPress/gutenberg/blob/accde16096464ac832fbe8e249a3b61535800800/packages/block-library/src/image/index.php#L253
  */
 export function LightboxOverlay(): ReactNode {
 	const closeButtonLabel = 'Close';
+	// These are the css variables for the button color and background color. Ideally, these should be fetched from the site's theme.json.
+	// Since we don't have a way to do this, we'll use the default variables.
+	// @todo Implement fetching css variables from theme.json
 	const closeButtonColor = 'var(--wp--preset--color--contrast)';
 	const backgroundColor = 'var(--wp--preset--color--base)';
 
