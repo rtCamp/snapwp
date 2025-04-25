@@ -1,10 +1,14 @@
+import type { ReactNode } from 'react';
+
 /**
+ * Renders the lightbox overlay for displaying an enlarged image with interactions.
  *
+ * @return The lightbox overlay.
  */
-export function LightboxOverlay() {
+export function LightboxOverlay(): ReactNode {
 	const closeButtonLabel = 'Close';
-	const closeButtonColor = '#000';
-	const backgroundColor = '#fff';
+	const closeButtonColor = 'var(--wp--preset--color--contrast)';
+	const backgroundColor = 'var(--wp--preset--color--base)';
 
 	return (
 		<div
@@ -50,6 +54,7 @@ export function LightboxOverlay() {
 					data-wp-bind--style="state.figureStyles"
 				>
 					<img
+						alt=""
 						data-wp-bind--alt="state.currentImage.alt"
 						data-wp-bind--class="state.currentImage.imgClassNames"
 						data-wp-bind--style="state.imgStyles"
@@ -63,6 +68,7 @@ export function LightboxOverlay() {
 					data-wp-bind--style="state.figureStyles"
 				>
 					<img
+						alt=""
 						data-wp-bind--alt="state.currentImage.alt"
 						data-wp-bind--class="state.currentImage.imgClassNames"
 						data-wp-bind--style="state.imgStyles"
