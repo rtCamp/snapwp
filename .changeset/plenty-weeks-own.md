@@ -7,4 +7,4 @@
 "@snapwp/plugin-apollo-client": patch
 ---
 
-feat: apollo client and tanstack query extension plugin
+feat: removed apollo client module from query package added extension plugins for the apollo client and tanstack query.
