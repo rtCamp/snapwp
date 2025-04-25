@@ -17,7 +17,7 @@ export async function updatePackageVersions(
 
 	// @todo: This should be the latest version number of the packages.
 	const updatedPackageJsonData = packageJsonData.replaceAll(
-		/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config)/g,
+		/file:..\/..\/..\/packages\/(blocks|query|core|next|codegen-config|eslint-config|prettier-config|plugin-apollo-client)/g,
 		'*'
 	);
 
