@@ -1,9 +1,10 @@
 # @snapwp/plugin-apollo-client
 
-**Apollo Client Extension for SnapWP**  
-This package is a wrapper around the Apollo Client library, designed to provide seamless integration with the SnapWP framework.
+**Apollo Client adapter for [SnapWP](../../README.md)**.
 
-SnapWP's query system and configuration API are built to support any GraphQL client that extends its `BaseQueryEngine` interface. This extension makes it easy to use Apollo Client as the underlying engine for data fetching within the SnapWP ecosystem.
+This package is a wrapper around the [`@apollo/client` library](https://github.com/apollographql/apollo-client), providing seamless integration with the SnapWP framework.
+
+SnapWP's query system and configuration API are built to support any GraphQL client that extends its `QueryEngine` interface. This extension makes it easy to use Apollo Client as the underlying engine for data fetching within the SnapWP ecosystem.
 
 > [!WARNING]
 > 🐉 There be dragons!

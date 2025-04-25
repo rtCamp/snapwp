@@ -1,9 +1,10 @@
 # @snapwp/plugin-tanstack-query
 
-**TanStack Query Extension for SnapWP**  
-This package is a wrapper around the TanStack Query library, providing seamless integration with the SnapWP framework.
+**TanStack Query adapter for [SnapWP](../../README.md)**.
 
-SnapWP’s query system and configuration API are designed to support any GraphQL client that implements its `BaseQueryEngine` interface. This extension allows you to easily use TanStack Query as the underlying engine for data fetching within the SnapWP ecosystem.
+This package is a wrapper around the [TanStack Query](https://github.com/TanStack/query) library, providing seamless integration with the SnapWP framework.
+
+SnapWP’s query system and configuration API are designed to support any GraphQL client that implements its `QueryEngine` interface. This extension allows you to easily use TanStack Query as the underlying engine for data fetching within the SnapWP ecosystem.
 
 > [!WARNING]
 > 🐉 There be dragons!
