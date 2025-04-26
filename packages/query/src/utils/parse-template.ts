@@ -1,26 +1,24 @@
 import {
-	Logger,
 	TemplateParseError,
 	type EnqueuedScriptProps,
 	type ScriptModuleProps,
 	type StyleSheetProps,
 } from '@snapwp/core';
 
-import type { ApolloQueryResult } from '@apollo/client';
 import type { GetCurrentTemplateQuery } from '@graphqlTypes/graphql';
 import type { BlockData } from '@snapwp/types';
 
 /**
  * Parses template query data into props for rendering a template.
  *
- * @param {ApolloQueryResult<GetCurrentTemplateQuery>} queryData    The data fetched from the template query.
- * @param {string}                                     wordpressUrl The base URL of the WordPress site.
- * @param {string}                                     uri          The URI of the template.
+ * @param {GetCurrentTemplateQuery} queryData    The data fetched from the template query.
+ * @param {string}                  wordpressUrl The base URL of the WordPress site.
+ * @param {string}                  uri          The URI of the template.
  *
  * @return An object containing parsed template data.
  */
 export function parseQueryResult(
-	queryData: ApolloQueryResult< GetCurrentTemplateQuery >,
+	queryData: GetCurrentTemplateQuery,
 	wordpressUrl: string,
 	uri: string
 ): {
@@ -31,27 +29,14 @@ export function parseQueryResult(
 	bodyClasses: string[] | undefined;
 	is404: boolean;
 } {
-	if ( queryData.errors?.length ) {
-		queryData.errors?.forEach( ( error ) => {
-			Logger.error(
-				`Error fetching template data: ${ error?.message }.`,
-				'(Please refer to our FAQs for steps to debug and fix)', // @TODO: update FAQs with URL.
-				error
-			);
-		} );
-	}
-
 	// If there is no data or templateByUri in the query data and there are errors, throw an error.
-	if (
-		( ! queryData.data || ! queryData.data.templateByUri ) &&
-		queryData.errors?.length
-	) {
+	if ( ! queryData || ! queryData.templateByUri ) {
 		throw new TemplateParseError(
 			`Error fetching template data for uri: ${ uri }`
 		);
 	}
 
-	const templateByUri = queryData.data?.templateByUri;
+	const templateByUri = queryData.templateByUri;
 	const is404 = templateByUri?.is404 ?? false;
 
 	return {
