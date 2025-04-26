@@ -8,3 +8,4 @@ export { Fonts } from './components/font';
 export { Image } from './components/image';
 export { Link } from './components/link';
 export { Script } from './components/script';
+export * from './sitemap';

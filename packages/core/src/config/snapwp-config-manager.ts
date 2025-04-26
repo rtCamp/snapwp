@@ -3,7 +3,7 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions } from '@snapwp/types';
+import type { BlockDefinitions, SitemapConfig } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -46,6 +46,12 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Sitemap configuration.
+	 */
+	sitemap?: {
+		config?: SitemapConfig;
+	};
 }
 
 /**
@@ -59,6 +65,8 @@ type ConfigSchema< T > = {
 	};
 };
 
+const INDEX_SITEMAP_URI = '/wp-sitemap.xml';
+
 /**
  * Default configuration.
  */
@@ -69,6 +77,11 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
+	sitemap: {
+		config: {
+			indexSitemapUri: INDEX_SITEMAP_URI,
+		},
+	},
 };
 
 /**
@@ -117,6 +130,10 @@ class SnapWPConfigManager {
 			required: false,
 		},
 		parserOptions: {
+			type: 'object',
+			required: false,
+		},
+		sitemap: {
 			type: 'object',
 			required: false,
 		},

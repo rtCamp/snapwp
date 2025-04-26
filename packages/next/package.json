@@ -49,7 +49,8 @@
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
-		"modify-source-webpack-plugin": "^4.1.0"
+		"modify-source-webpack-plugin": "^4.1.0",
+		"fast-xml-parser": "^5.2.1"
 	},
 	"devDependencies": {
 		"@types/react-dom": "*",
