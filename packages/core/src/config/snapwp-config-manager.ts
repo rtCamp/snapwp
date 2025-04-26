@@ -3,7 +3,11 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions, QueryEngine, SitemapConfig } from '@snapwp/types';
+import type {
+	BlockDefinitions,
+	QueryEngine,
+	SitemapConfig,
+} from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
