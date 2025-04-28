@@ -86,8 +86,13 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     ```typescript
     // snapwp.config.ts
     import type { SnapWPConfig } from '@snapwp/core/config';
+    import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 
-    const config: SnapWPConfig = {};
+    const config: SnapWPConfig = {
+    	query: {
+    		engine: ApolloClientEngine,
+    	},
+    };
 
     export default config;
     ```
