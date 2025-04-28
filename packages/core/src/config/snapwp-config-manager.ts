@@ -3,7 +3,7 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions } from '@snapwp/types';
+import type { BlockDefinitions, QueryEngine } from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -46,6 +46,16 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Query Engine
+	 */
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required to allow any client
+	query: QueryEngineConfig< any, any >;
+}
+
+interface QueryEngineConfig< TClient, TClientOptions > {
+	engine: new ( options?: TClientOptions ) => QueryEngine< TClient >;
+	options?: TClientOptions;
 }
 
 /**
@@ -119,6 +129,10 @@ class SnapWPConfigManager {
 		parserOptions: {
 			type: 'object',
 			required: false,
+		},
+		query: {
+			type: 'object',
+			required: true,
 		},
 	};
 

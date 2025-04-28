@@ -1,8 +1,8 @@
 {
-	"name": "@snapwp/query",
-	"version": "0.3.1",
+	"name": "@snapwp/plugin-apollo-client",
+	"version": "0.1.0",
 	"license": "AGPL-3.0",
-	"description": "Internal package for SnapWP",
+	"description": "Apollo Client integration for SnapWP.",
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
@@ -25,30 +25,17 @@
 		"postforce-build": "npm run resolve-paths",
 		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
 		"resolve-paths": "resolve-tspaths",
-		"codegen": "graphql-codegen --config codegen.ts",
-		"codegen:watch": "graphql-codegen --config codegen.ts --watch",
 		"lint": "eslint . --config ../../.eslintrc.json",
-		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
-		"typecheck": "tsc --noEmit"
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
 	},
-	"dependencies": {
-		"@graphql-typed-document-node/core": "^3.2.0",
+	"peerDependencies": {
+		"@apollo/client": "^3.13.4",
 		"@snapwp/core": "*"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^5.0.5",
-		"@parcel/watcher": "^2.5.1",
-		"@snapwp/codegen-config": "*",
-		"@snapwp/types": "*",
-		"dotenv": "^16.5.0",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
-	},
-	"peerDependencies": {
-		"@apollo/client": "^3.11.4",
-		"graphql": "^16.9.0",
-		"react": "^19.0.0",
-		"@types/react": "*"
+		"typescript": "*",
+		"@snapwp/types": "*"
 	}
 }
