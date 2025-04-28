@@ -1,9 +1,10 @@
+import { hasKey, Logger } from '@snapwp/core';
 import {
+	fetchQuery,
 	generateRootQuery,
 	generateTemplateQuery,
 	IconMetadataFragFragmentDoc,
 	OpenGraphMetadataFragFragmentDoc,
-	QueryEngine,
 	RouteMetadataFragFragmentDoc,
 	SiteMetadataFragFragmentDoc,
 	TwitterMetadataFragFragmentDoc,
@@ -103,16 +104,21 @@ export class Seo {
 
 		const rootQuery = generateRootQuery( rootQueryFrags );
 
-		const { data } = await QueryEngine.apolloClient.query( {
+		const data = await fetchQuery( {
+			name: 'layout-metadata-query',
 			query: rootQuery,
-			fetchPolicy: 'no-cache', // @todo figure out a caching strategy, instead of always fetching from network
-			errorPolicy: 'all',
 		} );
+
+		if ( ! hasKey( data, 'generalSettings' ) ) {
+			Logger.error(
+				'Error fetching layout metadata. General Settings is missing in response'
+			);
+			return {};
+		}
 
 		const parsers = Seo.plugins
 			.filter( ( { location } ) => location === 'layout' )
 			.map( ( { parseMetadata } ) => parseMetadata );
-
 		const metadataArray = parsers.map( ( parser ) =>
 			parser( data.generalSettings )
 		);
@@ -140,21 +146,37 @@ export class Seo {
 
 		const templateQuery = generateTemplateQuery( renderedTemplateFrags );
 
-		const { data } = await QueryEngine.apolloClient.query( {
+		const data = await fetchQuery( {
+			name: 'page-metadata-query',
 			query: templateQuery,
-			fetchPolicy: 'no-cache', // @todo figure out a caching strategy, instead of always fetching from network
-			errorPolicy: 'all',
-			variables: {
-				uri: path,
+			options: {
+				variables: {
+					uri: path,
+				},
 			},
 		} );
 
+		if ( ! hasKey( data, 'templateByUri' ) ) {
+			Logger.error(
+				'Error fetching page metadata. RenderedTemplate missing in response'
+			);
+			return {};
+		}
+
+		const template = data.templateByUri;
+
+		if ( ! hasKey( template, 'connectedNode' ) ) {
+			Logger.error(
+				'Error fetching page metadata. ConnectedNode missing in response'
+			);
+			return {};
+		}
 		const parsers = Seo.plugins
 			.filter( ( { location } ) => location === 'page' )
 			.map( ( { parseMetadata } ) => parseMetadata );
 
 		const metadataArray = parsers.map( ( parser ) =>
-			parser( data.templateByUri.connectedNode )
+			parser( template.connectedNode )
 		);
 
 		return metadataArray.reduce(
