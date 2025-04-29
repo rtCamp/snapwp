@@ -1,12 +1,10 @@
 import type { MetadataRoute } from 'next';
 import {
-	generateSitemaps as generateWPSitemaps,
+	getSitemapPaths as generateSitemaps,
 	generateSubSitemaps,
 } from '@snapwp/next';
 
-export async function generateSitemaps() {
-	return await generateWPSitemaps();
-}
+export { generateSitemaps };
 
 export default async function sitemap( {
 	id,

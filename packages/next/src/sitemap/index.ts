@@ -12,7 +12,7 @@ import type { X2jOptions } from 'fast-xml-parser';
  *
  * @return {Promise<{ id: string }[]>} - An array of objects containing the sitemap IDs.
  */
-export const generateSitemaps = async (
+export const getSitemapPaths = async (
 	customXMLParserConfig?: X2jOptions
 ): Promise< Array< { id: string } > > => {
 	const wpSitemaps = await fetchIndexSitemap( customXMLParserConfig );
@@ -24,6 +24,13 @@ export const generateSitemaps = async (
 
 		if ( ! data ) {
 			return;
+		}
+
+		data.url = removeLeadingSlash( data.url );
+
+		// If url ends with .xml, remove it
+		if ( data.url.endsWith( '.xml' ) ) {
+			data.url = data.url.slice( 0, -4 );
 		}
 
 		sitemapsToGenerate.push( { id: removeLeadingSlash( data.url ) } );
@@ -75,7 +82,12 @@ export const generateSubSitemaps = async (
 	id: string,
 	customXMLParserConfig?: X2jOptions
 ): Promise< SitemapData[] > => {
-	const wpSitemaps = await fetchSubSitemap( id, customXMLParserConfig );
+	const { wpHomeUrl } = getConfig();
+	const wpSubSitemapUrl = `${ wpHomeUrl }/${ id }.xml`;
+	const wpSitemaps = await fetchSubSitemap(
+		wpSubSitemapUrl,
+		customXMLParserConfig
+	);
 
 	const sitemaps: SitemapData[] = [];
 
@@ -110,10 +122,6 @@ export const generateSubSitemaps = async (
 
 		sitemaps.push( data );
 	} );
-
-	if ( ! sitemaps ) {
-		return [];
-	}
 
 	return sitemaps;
 };

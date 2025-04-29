@@ -9,19 +9,6 @@ const XMLParserConfig: Partial< X2jOptions > = {
 	unpairedTags: [ 'xml', 'xml-stylesheet' ],
 	processEntities: true,
 	htmlEntities: true,
-	/**
-	 * FXP can't determine if a single tag should be parsed as an array or
-	 * an object, so we need to specify we always want "sitemap" tags to be an
-	 * array.
-	 *
-	 * @param {string} tagName The name of the tag to check.
-	 * @see https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/docs/v4/2.XMLparseOptions.md#isarray
-	 *
-	 * @return {boolean} True if the tag should be parsed as an array, false otherwise.
-	 */
-	isArray: ( tagName: string ): boolean => {
-		return tagName === 'sitemap';
-	},
 };
 
 /**
@@ -42,9 +29,9 @@ export const fetchIndexSitemap = async (
 
 	const wpSitemapIndexPath = `${ wpHomeUrl }/${ sitemapConfig.config.indexSitemapUri }`;
 
-	const res = await fetch( wpSitemapIndexPath );
+	const response = await fetch( wpSitemapIndexPath );
 
-	if ( ! res.ok ) {
+	if ( ! response.ok ) {
 		Logger.error(
 			`Failed to fetch sitemap index from WordPress at ${ wpSitemapIndexPath }`
 		);
@@ -52,7 +39,7 @@ export const fetchIndexSitemap = async (
 		return [];
 	}
 
-	const xmlRes = await res.text();
+	const xmlResponse = await response.text();
 
 	/**
 	 * Create a parser to convert our XML data into a JS object
@@ -62,10 +49,23 @@ export const fetchIndexSitemap = async (
 	const parser = new XMLParser( {
 		...XMLParserConfig,
 		...customXMLParserConfig,
+		/**
+		 * FXP can't determine if a single tag should be parsed as an array or
+		 * an object, so we need to specify we always want "sitemap" tags to be an
+		 * array.
+		 *
+		 * @param {string} tagName The name of the tag to check.
+		 * @see https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/docs/v4/2.XMLparseOptions.md#isarray
+		 *
+		 * @return {boolean} True if the tag should be parsed as an array, false otherwise.
+		 */
+		isArray: ( tagName: string ): boolean => {
+			return tagName === 'sitemap';
+		},
 	} );
 
 	// JS object representation of the XML sitemap index
-	const parsedSitemapIndex = parser.parse( xmlRes );
+	const parsedSitemapIndex = parser.parse( xmlResponse );
 	const wpSitemaps = parsedSitemapIndex?.sitemapindex
 		?.sitemap as SitemapDataFromXML[];
 
@@ -82,42 +82,51 @@ export const fetchIndexSitemap = async (
 /**
  * Fetches a sub-sitemap from WordPress and parses it into an array of SitemapData.
  *
- * @param {string} id - The ID of the sub-sitemap to fetch.
+ * @param {string} wpSubSitemapUrl - The url to the sub-sitemap.
  * @param {X2jOptions}customXMLParserConfig - Custom XML parser configuration.
  *
  * @return {Promise<SitemapDataFromXML[]>} - An array of SitemapData objects.
  */
 export const fetchSubSitemap = async (
-	id: string,
+	wpSubSitemapUrl: string,
 	customXMLParserConfig?: X2jOptions
 ): Promise< SitemapDataFromXML[] > => {
-	const { wpHomeUrl } = getConfig();
+	const response = await fetch( wpSubSitemapUrl );
 
-	const wpSubSitemapPath = `${ wpHomeUrl }/${ id }.xml`;
-
-	const res = await fetch( wpSubSitemapPath );
-
-	if ( ! res.ok ) {
+	if ( ! response.ok ) {
 		Logger.error(
-			`Failed to fetch sitemap from WordPress at ${ wpSubSitemapPath }`
+			`Failed to fetch sitemap from WordPress at ${ wpSubSitemapUrl }`
 		);
 
 		return [];
 	}
 
-	const xmlRes = await res.text();
+	const xmlResponse = await response.text();
 
 	const parser = new XMLParser( {
 		...XMLParserConfig,
 		...customXMLParserConfig,
+		/**
+		 * FXP can't determine if a single tag should be parsed as an array or
+		 * an object, so we need to specify we always want "sitemap" tags to be an
+		 * array.
+		 *
+		 * @param {string} tagName The name of the tag to check.
+		 * @see https://github.com/NaturalIntelligence/fast-xml-parser/blob/master/docs/v4/2.XMLparseOptions.md#isarray
+		 *
+		 * @return {boolean} True if the tag should be parsed as an array, false otherwise.
+		 */
+		isArray: ( tagName: string ): boolean => {
+			return tagName === 'url';
+		},
 	} );
 
-	const parsedSitemapIndex = parser.parse( xmlRes );
+	const parsedSitemapIndex = parser.parse( xmlResponse );
 	const wpSitemaps = parsedSitemapIndex?.urlset?.url as SitemapDataFromXML[];
 
 	if ( ! wpSitemaps ) {
 		Logger.error(
-			`No sitemaps found in the sitemap index at ${ wpSubSitemapPath }`
+			`No sitemaps found in the sitemap index at ${ wpSubSitemapUrl }`
 		);
 		return [];
 	}
