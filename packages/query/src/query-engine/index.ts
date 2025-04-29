@@ -7,13 +7,11 @@ import {
 import { getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
-	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
 } from '@graphqlTypes/graphql';
 
 import { fetchQuery } from '@/query-engine/registry';
-import { parseGeneralSettings } from '@/utils/parse-general-settings';
 import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
 import { parseQueryResult as parseTemplate } from '@/utils/parse-template';
 
@@ -34,36 +32,6 @@ export class QueryEngine {
 		} );
 
 		return parseGlobalStyles( data );
-	};
-
-	/**
-	 * Fetches the general settings, like favicon icon.
-	 *
-	 * @return General settings data.
-	 */
-	static getGeneralSettings = async (): Promise<
-		| {
-				generalSettings: {
-					siteIcon: {
-						mediaItemUrl: string | undefined;
-						mediaDetails: {
-							sizes: {
-								sourceUrl: string;
-								height: string;
-								width: string;
-							}[];
-						};
-					};
-				};
-		  }
-		| undefined
-	> => {
-		const data = await fetchQuery( {
-			name: 'GetGeneralSettings',
-			query: GetGeneralSettingsDocument,
-		} );
-
-		return parseGeneralSettings( data );
 	};
 
 	/**
