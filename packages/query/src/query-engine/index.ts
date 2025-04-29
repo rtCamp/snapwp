@@ -9,6 +9,7 @@ import {
 	GetCurrentTemplateDocument,
 	GetGeneralSettingsDocument,
 	GetGlobalStylesDocument,
+	GetPagesToRenderStaticallyDocument,
 } from '@graphqlTypes/graphql';
 
 import { fetchQuery } from '@/query-engine/registry';
@@ -93,5 +94,27 @@ export class QueryEngine {
 		const { wpHomeUrl } = getConfig();
 
 		return parseTemplate( data, wpHomeUrl, uri );
+	};
+
+	/**
+	 * Fetches pages to be rendered statically.
+	 *
+	 * @return The pages to be rendered statically.
+	 */
+	static getPagesToRenderStatically = async (): Promise<
+		{ uri?: string | null }[]
+	> => {
+		const data = await fetchQuery( {
+			name: 'GetPagesToRenderStatically',
+			query: GetPagesToRenderStaticallyDocument,
+		} );
+
+		const nodes = data?.pages?.nodes;
+
+		if ( ! nodes ) {
+			return [];
+		}
+
+		return nodes;
 	};
 }

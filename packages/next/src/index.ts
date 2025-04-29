@@ -1,4 +1,3 @@
-export { currentPath } from './middleware/current-path';
 export { proxies } from './middleware/proxies';
 export * from './middleware/utils';
 export * from './template-renderer';
