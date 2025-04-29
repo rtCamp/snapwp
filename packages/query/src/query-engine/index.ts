@@ -101,20 +101,42 @@ export class QueryEngine {
 	 *
 	 * @return The pages to be rendered statically.
 	 */
-	static getPagesToRenderStatically = async (): Promise<
-		{ uri?: string | null }[]
-	> => {
+	static getPaths = async (): Promise< Paths > => {
 		const data = await fetchQuery( {
 			name: 'GetPagesToRenderStatically',
 			query: GetPagesToRenderStaticallyDocument,
 		} );
 
-		const nodes = data?.pages?.nodes;
+		const paths: Paths = {};
 
-		if ( ! nodes ) {
-			return [];
+		const pagesNodes = data?.pages?.nodes;
+
+		if ( pagesNodes ) {
+			paths.pages = pagesNodes;
 		}
 
-		return nodes;
+		const postsNodes = data?.posts?.nodes;
+
+		if ( postsNodes ) {
+			paths.posts = postsNodes;
+		}
+
+		const termsNodes = data?.terms?.nodes;
+
+		if ( termsNodes ) {
+			paths.terms = termsNodes;
+		}
+
+		return paths;
 	};
+}
+
+interface Paths {
+	pages?: PathsUri[];
+	posts?: PathsUri[];
+	terms?: PathsUri[];
+}
+
+interface PathsUri {
+	uri?: string | null;
 }

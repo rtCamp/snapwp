@@ -1,6 +1,5 @@
-import { TemplateRenderer } from '@snapwp/next';
+import { TemplateRenderer, getPathsToRenderStatically } from '@snapwp/next';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
-import { QueryEngine } from '@snapwp/query';
 
 export default async function Page( {
 	params,
@@ -19,18 +18,5 @@ export default async function Page( {
 }
 
 export const generateStaticParams = async () => {
-	const pages = await QueryEngine.getPagesToRenderStatically();
-
-	const paths: Array< { path: string[] } > = [];
-
-	if ( pages ) {
-		for ( const page of pages ) {
-			if ( page.uri ) {
-				const path = page.uri.split( '/' ).filter( Boolean );
-				paths.push( { path } );
-			}
-		}
-	}
-
-	return paths;
+	return getPathsToRenderStatically();
 };
