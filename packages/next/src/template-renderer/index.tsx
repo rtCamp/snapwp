@@ -10,7 +10,7 @@ export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
 	children: ( editorBlocks: BlockData[] ) => ReactNode;
 	params: Promise< {
-		path: string[];
+		slug: string[];
 	} >;
 };
 
@@ -77,14 +77,15 @@ export async function TemplateRenderer( {
  * @param {Object} params The params for the component.
  * @param {string[]} params.path The path segments to join.
  *
+ * @param params.slug
  * @return {string} The generated path name.
  */
-const generatePathName = ( params: { path: string[] } ): string => {
-	if ( ! params.path ) {
+const generatePathName = ( params: { slug: string[] } ): string => {
+	if ( ! params.slug ) {
 		return '/';
 	}
 
-	const path = params.path.join( '/' );
+	const path = params.slug.join( '/' );
 
 	if ( path.length > 0 ) {
 		return `/${ path }`;

@@ -6,17 +6,17 @@ import { QueryEngine } from '@snapwp/query';
  * @return The paths to render statically.
  */
 export const getPathsToRenderStatically = async (): Promise<
-	Array< { path: string[] } >
+	Array< { slug: string[] } >
 > => {
 	const pathsToRender = await QueryEngine.getPaths();
 
-	const paths: Array< { path: string[] } > = [];
+	const paths: Array< { slug: string[] } > = [];
 
 	if ( pathsToRender.pages ) {
 		for ( const page of pathsToRender.pages ) {
 			if ( page.uri ) {
-				const path = page.uri.split( '/' ).filter( Boolean );
-				paths.push( { path } );
+				const slug = page.uri.split( '/' ).filter( Boolean );
+				paths.push( { slug } );
 			}
 		}
 	}
@@ -24,8 +24,8 @@ export const getPathsToRenderStatically = async (): Promise<
 	if ( pathsToRender.posts ) {
 		for ( const post of pathsToRender.posts ) {
 			if ( post.uri ) {
-				const path = post.uri.split( '/' ).filter( Boolean );
-				paths.push( { path } );
+				const slug = post.uri.split( '/' ).filter( Boolean );
+				paths.push( { slug } );
 			}
 		}
 	}
@@ -33,8 +33,8 @@ export const getPathsToRenderStatically = async (): Promise<
 	if ( pathsToRender.terms ) {
 		for ( const term of pathsToRender.terms ) {
 			if ( term.uri ) {
-				const path = term.uri.split( '/' ).filter( Boolean );
-				paths.push( { path } );
+				const slug = term.uri.split( '/' ).filter( Boolean );
+				paths.push( { slug } );
 			}
 		}
 	}

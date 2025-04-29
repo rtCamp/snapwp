@@ -1,4 +1,4 @@
-import { TemplateRenderer } from '@snapwp/next';
+import { TemplateRenderer, getPathsToRenderStatically } from '@snapwp/next';
 import { getPageMetadata } from '@snapwp/next/seo';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 import type { Metadata } from 'next';
@@ -19,12 +19,16 @@ export async function generateMetadata( {
 	return metadata;
 }
 
-export default function Page() {
+export default function Page( { params }: Props ) {
 	return (
-		<TemplateRenderer>
+		<TemplateRenderer params={ params }>
 			{ ( editorBlocks ) => {
 				return <EditorBlocksRenderer editorBlocks={ editorBlocks } />;
 			} }
 		</TemplateRenderer>
 	);
 }
+
+export const generateStaticParams = async () => {
+	return getPathsToRenderStatically();
+};
