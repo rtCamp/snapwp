@@ -27,6 +27,11 @@
 			"import": "./dist/components/default-error.js",
 			"require": "./dist/components/default-error.js",
 			"types": "./dist/types/components/default-error.d.ts"
+		},
+		"./seo": {
+			"import": "./dist/seo/index.js",
+			"require": "./dist/seo/index.js",
+			"types": "./dist/types/seo/index.js"
 		}
 	},
 	"scripts": {
@@ -41,22 +46,25 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"peerDependencies": {
+		"@snapwp/core": "*",
+		"@snapwp/query": "*",
 		"next": "^15",
 		"react": "^19.0.0",
-		"react-dom": "^19.0.0",
-		"@snapwp/core": "*",
-		"@snapwp/query": "*"
+		"react-dom": "^19.0.0"
 	},
 	"dependencies": {
 		"html-react-parser": "^5.1.12",
 		"modify-source-webpack-plugin": "^4.1.0",
+		"sanitize-html": "^2.15.0",
+		"zod": "^3.24.2",
 		"fast-xml-parser": "^5.2.1"
 	},
 	"devDependencies": {
+		"@snapwp/types": "*",
 		"@types/react-dom": "*",
-		"typescript": "*",
+		"@types/sanitize-html": "^2.15.0",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"@snapwp/types": "*"
+		"typescript": "*"
 	}
 }
