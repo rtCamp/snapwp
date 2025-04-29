@@ -4,4 +4,14 @@ query GetPagesToRenderStatically {
 			uri
 		}
 	}
+	posts(first: 100) {
+		nodes {
+			uri
+		}
+	}
+	terms(first: 100) {
+		nodes {
+			uri
+		}
+	}
 }
