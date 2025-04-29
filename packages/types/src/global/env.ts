@@ -11,7 +11,7 @@ declare global {
 			NEXT_PUBLIC_WP_HOME_URL?: string;
 			NEXT_PUBLIC_WP_SITE_URL?: string;
 			NEXT_PUBLIC_WP_UPLOADS_DIRECTORY?: string;
-			NODE_ENV?: 'development' | 'production' | 'test';
+			readonly NODE_ENV: 'development' | 'production' | 'test';
 		}
 	}
 }
