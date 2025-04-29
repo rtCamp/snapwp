@@ -75,9 +75,8 @@ export async function TemplateRenderer( {
  * Generates the path name for the template renderer.
  *
  * @param {Object} params The params for the component.
- * @param {string[]} params.path The path segments to join.
+ * @param {string[]} params.slug The slug segments to join.
  *
- * @param params.slug
  * @return {string} The generated path name.
  */
 const generatePathName = ( params: { slug: string[] } ): string => {
