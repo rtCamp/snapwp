@@ -3,4 +3,4 @@
 "@snapwp/core": patch
 ---
 
-fix: logger test cases
+tests: Fix logger test cases
