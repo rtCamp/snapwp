@@ -5,20 +5,27 @@
 import { Logger } from '../index';
 
 describe( 'Logger', () => {
+	const originalEnv = process.env;
+
 	beforeEach( () => {
 		jest.spyOn( console, 'debug' ).mockImplementation( jest.fn() );
 		jest.spyOn( console, 'info' ).mockImplementation( jest.fn() );
 		jest.spyOn( console, 'warn' ).mockImplementation( jest.fn() );
 		jest.spyOn( console, 'error' ).mockImplementation( jest.fn() );
 		jest.spyOn( console, 'log' ).mockImplementation( jest.fn() );
+		process.env = { ...originalEnv };
 	} );
 
 	afterEach( () => {
 		jest.restoreAllMocks();
+		process.env = originalEnv;
 	} );
 
 	it( 'should log a debug message', () => {
-		process.env.NODE_ENV = 'development';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'development',
+			writable: true,
+		} );
 		Logger.debug( 'Debug message' );
 		expect( console.debug ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -27,7 +34,10 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an info message', () => {
-		process.env.NODE_ENV = 'development';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'development',
+			writable: true,
+		} );
 		Logger.info( 'Info message' );
 		expect( console.info ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -36,7 +46,10 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a warning message', () => {
-		process.env.NODE_ENV = 'development';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'development',
+			writable: true,
+		} );
 		Logger.warn( 'Warning message' );
 		expect( console.warn ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -45,7 +58,10 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log an error message', () => {
-		process.env.NODE_ENV = 'development';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'development',
+			writable: true,
+		} );
 		Logger.error( 'Error message' );
 		expect( console.error ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -54,7 +70,10 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should log a general message', () => {
-		process.env.NODE_ENV = 'development';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'development',
+			writable: true,
+		} );
 		Logger.log( 'General message' );
 		expect( console.log ).toHaveBeenCalledWith(
 			'SnapWP:',
@@ -63,7 +82,10 @@ describe( 'Logger', () => {
 	} );
 
 	it( 'should not log in production mode', () => {
-		process.env.NODE_ENV = 'production';
+		Object.defineProperty( process.env, 'NODE_ENV', {
+			value: 'production',
+			writable: true,
+		} );
 		Logger.debug( 'Debug message' );
 		Logger.info( 'Info message' );
 		Logger.warn( 'Warning message' );
@@ -74,7 +96,6 @@ describe( 'Logger', () => {
 		expect( console.warn ).not.toHaveBeenCalled();
 		expect( console.error ).not.toHaveBeenCalled();
 		expect( console.log ).not.toHaveBeenCalled();
-		process.env.NODE_ENV = 'test';
 	} );
 
 	it( 'should not log in test mode', () => {
