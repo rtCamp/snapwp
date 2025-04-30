@@ -32,3 +32,6 @@ export default function Page( { params }: Props ) {
 export const generateStaticParams = async () => {
 	return getPathsToRenderStatically();
 };
+
+// This is the revalidation time in seconds.
+export const revalidate = 300; // 5 minutes
