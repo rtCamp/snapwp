@@ -242,7 +242,7 @@ Then you can simply plug it into SnapWP:
 
 ```typescript
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { GraphQLRequestEngine } from './your-engines/GraphQLRequestEngine';
+import { GraphQLRequestEngine } from './GraphQLRequestEngine';
 
 const config: SnapWPConfig = {
 	query: {

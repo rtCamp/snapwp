@@ -14,34 +14,30 @@ SnapWP's query system and configuration API are built to support any GraphQL cli
 
 To integrate plugin-apollo-client within the SnapWP framework:
 
-```bash
-npm install plugin-apollo-client
-```
+1. **Add the package to your project's dependencies:**
 
-## Using `plugin-apollo-client` in `snapwp.config.ts`
+    ```bash
+    npm install plugin-apollo-client --save
+    ```
 
-To use `plugin-apollo-client` with SnapWP, we will configure the query engine by adding the `ApolloClientEngine` as the engine to be used for GraphQL operations.
+2. **Update your snapwp.config.ts file to use the ApolloClientEngine as the GraphQL query engine:**
 
-```ts
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
+    To use `plugin-apollo-client` with SnapWP, we will configure the query engine by adding the `ApolloClientEngine` as the engine to be used for GraphQL operations.
 
-const config: SnapWPConfig = {
-	query: {
-		engine: ApolloClientEngine,
-	},
-};
+    ```diff
+    import type { SnapWPConfig } from '@snapwp/core/config';
+    + import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 
-export default config;
-```
+    const config: SnapWPConfig = {
+    +	query: {
+    +		engine: ApolloClientEngine,
+    +	},
+    };
 
-#### Breakdown of the Setup
+    export default config;
+    ```
 
-1. **Import `ApolloClientEngine`**: Import `ApolloClientEngine` from `plugin-apollo-client`.
-
-2. **Configure `query.engine`**: In the SnapWP config, set `query.engine` to `ApolloClientEngine`. This integrates TanStack Query into the SnapWP framework.
-
-3. **Export the Config**: Export the configuration as default to be used by the SnapWP application.
+    This setup tells SnapWP to use Apollo Client as its data fetching engine by leveraging the ApolloClientEngine adapter.
 
 ## Contributing
 

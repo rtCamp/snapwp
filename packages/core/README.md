@@ -51,32 +51,6 @@ import { getConfig } from '@snapwp/core/config';
 const config = getConfig();
 ```
 
-#### Changing Query Engine from Apollo Client (default) to TanStack Query
-
-To change your query engine from Apollo Client to TanStack (React Query), you just need to update the engine in your `snapwp.config.ts` file after installation of required Query Engine _(here, TanStack Query)_.
-
-**Here’s how you can define and use a query engine:**
-
-Example `(snapwp.config.ts)`:
-
-```diff
-import type { SnapWPConfig } from '@snapwp/core/config';
-- import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
-+ import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
-
-
-const config: SnapWPConfig = {
-	query: {
-- 		engine: ApolloClientEngine, // Switching from Apollo Client.
-+ 		engine: TanStackQueryEngine, // Switching to TanStack Query.
-	},
-};
-
-export default config;
-```
-
-In this example, we're configuring to switch usage to `TanStackQueryEngine`. If you want to create a custom query engine, refer to the [Creating a Custom Query Engine guide](../../docs/query-engine.md#creating-a-custom-query-engine).
-
 ## Contributing
 
 This package is part of [SnapWP's monorepo](https://github.com/rtCamp/snapwp) and is actively maintained by [rtCamp](https://rtcamp.com/). Packages are published to [npm](https://www.npmjs.com/) from the `packages` directory, and can be used standalone in the headless WordPress ecosystem or as part of SnapWP's framework.
