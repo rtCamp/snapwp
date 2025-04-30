@@ -11,7 +11,7 @@ declare global {
 			WP_HOME_URL?: string;
 			WP_SITE_URL?: string;
 			WP_UPLOADS_DIRECTORY?: string;
-			NODE_ENV?: 'development' | 'production' | 'test';
+			readonly NODE_ENV?: 'development' | 'production' | 'test';
 		}
 	}
 }

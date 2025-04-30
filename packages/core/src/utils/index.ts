@@ -26,3 +26,5 @@ export {
 	isWPHomeUrl,
 	isWPSiteUrl,
 } from './url/validators';
+
+export { hasKey } from './type-guards';
