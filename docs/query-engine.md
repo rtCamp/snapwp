@@ -13,7 +13,7 @@ This allows **maximum flexibility** to choose or change the underlying GraphQL c
 ## How it works
 
 -   The `query` expects a **Query Engine class**.
--   The Query Engine handles how queries, mutations, and client context are managed.
+-   The Query Engine handles how queries, and client context are managed.
 -   It must implement the `QueryEngine` interface provided by `@snapwp/types`.
 
 You can configure the Query Engine inside your `snapwp.config.ts` file.
@@ -251,6 +251,95 @@ const config: SnapWPConfig = {
 };
 
 export default config;
+```
+
+### Using the Query Engine
+
+The `@snapwp/query` package provides a way to interact with the GraphQL query engine. You don’t need to worry about what engine is in use behind the scenes—just use the provided utility functions directly.
+
+-   `fetchQuery<TData, TVars>()`: Perform a server-safe data fetch using the GraphQL client.
+
+-   `getClient<T>()`: Returns a server client instance for the query engine.
+
+-   `useClient<T>(client)`: Returns a client instance for the query engine.
+
+-   `useQuery<TData, TVars>()`: React hook for client-side GraphQL queries.
+
+-   `QueryProvider<T>()`: Provider component to wrap app with query context.
+
+**Example Usage:**
+
+```ts
+import {
+	fetchQuery,
+	useQuery,
+	getClient,
+	useClient,
+	QueryProvider,
+} from '@snapwp/query';
+```
+
+##### Example: Fetching Data on the Server
+
+```ts
+import { fetchQuery } from '@snapwp/query';
+import { GetCurrentTemplateDocument } from '@graphqlTypes/graphql';
+
+const data = await fetchQuery( {
+	name: 'GetCurrentTemplate',
+	query: GetCurrentTemplateDocument,
+	options: {
+		variables: { uri: '/' },
+	},
+} );
+```
+
+##### Example: Server-Side Client Access
+
+```ts
+import { getClient } from '@snapwp/query';
+
+export default async function handler( req, res ) {
+	const client = getClient(); // Example: Apollo Client instance
+}
+```
+
+##### Example: Use `useClient` inside React
+
+```tsx
+'use client';
+
+import { useClient } from '@snapwp/query';
+
+// Inside a React component
+useClient( /* The client instance to be used */ );
+```
+
+##### Example: Using in a React Component
+
+```tsx
+import { useQuery } from '@snapwp/query';
+import { GetGlobalStylesDocument } from '@graphqlTypes/graphql';
+
+const MyComponent = () => {
+	const data = useQuery( {
+		name: 'GlobalStyles',
+		query: GetGlobalStylesDocument,
+	} );
+};
+```
+
+##### Example: Wrap Your App in a Query Context
+
+```ts
+'use client';
+
+import { QueryProvider } from '@snapwp/query';
+
+// Inside a layout or root component
+<QueryProvider client={ /* your GraphQL client instance */ }>
+  {/* children components go here */}
+</QueryProvider>
 ```
 
 ---
