@@ -9,10 +9,9 @@ global.__envConfig = {
 	restUrlPrefix: '/env-wp-json',
 };
 
-process.env.NEXT_PUBLIC_FRONTEND_URL = global.__envConfig.frontendUrl;
-process.env.NEXT_PUBLIC_WP_HOME_URL = global.__envConfig.wpHomeUrl;
-process.env.NEXT_PUBLIC_WP_SITE_URL = global.__envConfig.wpSiteUrl;
-process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT = global.__envConfig.graphqlEndpoint;
-process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY =
-	global.__envConfig.uploadsDirectory;
-process.env.NEXT_PUBLIC_REST_URL_PREFIX = global.__envConfig.restUrlPrefix;
+process.env.FRONTEND_URL = global.__envConfig.frontendUrl;
+process.env.WP_HOME_URL = global.__envConfig.wpHomeUrl;
+process.env.WP_SITE_URL = global.__envConfig.wpSiteUrl;
+process.env.GRAPHQL_ENDPOINT = global.__envConfig.graphqlEndpoint;
+process.env.WP_UPLOADS_DIRECTORY = global.__envConfig.uploadsDirectory;
+process.env.REST_URL_PREFIX = global.__envConfig.restUrlPrefix;

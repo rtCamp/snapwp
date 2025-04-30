@@ -9,8 +9,8 @@ dotenv.config( { path: '../../.env' } );
 // This is necessary because we don't have access to the config manager.
 const graphqlUrl = generateGraphqlUrl(
 	// If there's no explicit SITE_URL, it's the same as the HOME_URL.
-	process.env.NEXT_PUBLIC_WP_SITE_URL || process.env.NEXT_PUBLIC_WP_HOME_URL,
-	process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT
+	process.env.WP_SITE_URL || process.env.WP_HOME_URL,
+	process.env.GRAPHQL_ENDPOINT
 );
 
 const config: CodegenConfig = {
