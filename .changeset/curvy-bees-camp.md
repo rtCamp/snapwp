@@ -3,4 +3,4 @@
 "@snapwp/query": patch
 ---
 
-fix: add no-cache for apollo client to allow dynamic query generation
+fix: restore `no-cache` policy when using `plugin-apollo-client`
