@@ -15,5 +15,5 @@ export default async function sitemap( {
 }
 
 // @todo: This will be replaced with on-demand revalidation using revalidateTag or revalidatePath once webhooks are implemented.
-// Revalidate the sitemap every 10 minutes
-export const revalidate = 60 * 10; // 10 minutes
+// Keeping revalidation to 0 to render it dynamically always.
+export const revalidate = 0;
