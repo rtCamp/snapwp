@@ -98,6 +98,8 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 			const queryResult = await this.getClient().query< TData >( {
 				...options,
 				query,
+				// @todo: Fix the caching issue tracked by: https://github.com/rtCamp/headless/issues/461
+				fetchPolicy: 'no-cache',
 			} );
 
 			if ( queryResult.errors?.length ) {
