@@ -5,4 +5,4 @@
 "snapwp": patch
 ---
 
-docs : update documentation for Query engine overloading.
+docs: Backfill and add docs on using and extending the Query Engine API.

@@ -2,9 +2,7 @@
 
 **Apollo Client adapter for [SnapWP](../../README.md)**.
 
-This package is a wrapper around the [`@apollo/client` library](https://github.com/apollographql/apollo-client), providing seamless integration with the SnapWP framework.
-
-SnapWP's query system and configuration API are built to support any GraphQL client that extends its `QueryEngine` interface. This extension makes it easy to use Apollo Client as the underlying engine for data fetching within the SnapWP ecosystem.
+This package is a wrapper around the [`@apollo/client` library](https://github.com/apollographql/apollo-client), allowing you to use Apollo Client as the underlying engine for data fetching within the SnapWP ecosystem.
 
 > [!WARNING]
 > 🐉 There be dragons!
@@ -12,32 +10,33 @@ SnapWP's query system and configuration API are built to support any GraphQL cli
 
 ## Installation
 
-To integrate plugin-apollo-client within the SnapWP framework:
-
-1. **Add the package to your project's dependencies:**
+1. Add the package to your SnapWP project's dependencies:
 
     ```bash
-    npm install plugin-apollo-client --save
+    npm install @snapwp/plugin-apollo-client --save
     ```
 
-2. **Update your snapwp.config.ts file to use the ApolloClientEngine as the GraphQL query engine:**
+    If you wish to use Apollo Client directly, you should also install the core Apollo Client package:
 
-    To use `plugin-apollo-client` with SnapWP, we will configure the query engine by adding the `ApolloClientEngine` as the engine to be used for GraphQL operations.
+    ```bash
+    npm install @snapwp/plugin-apollo-client @apollo/client --save
+    ```
+
+2. Update your [snapwp.config.ts file](../../docs/config-api.md) to use the `ApolloClientEngine`:
 
     ```diff
     import type { SnapWPConfig } from '@snapwp/core/config';
     + import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 
     const config: SnapWPConfig = {
-    +	query: {
-    +		engine: ApolloClientEngine,
-    +	},
+      // The rest of your SnapWP config...
+      query: {
+    +    engine: ApolloClientEngine,
+      },
     };
 
     export default config;
     ```
-
-    This setup tells SnapWP to use Apollo Client as its data fetching engine by leveraging the ApolloClientEngine adapter.
 
 ## Contributing
 

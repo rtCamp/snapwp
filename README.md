@@ -36,8 +36,8 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 -   [@snapwp/next](packages/next): Next.js integration layer for SnapWP.
 -   [@snapwp/blocks](packages/blocks): WordPress Block rendering and management system.
 -   [@snapwp/query](packages/query): Centralized WPGraphQL query management.
--   [@snapwp/plugin-apollo-client](packages/plugin-apollo-client): Query Engine plugin using Apollo Client for GraphQL operations.
--   [@snapwp/plugin-tanstack-query](packages/plugin-tanstack-query): Query Engine plugin using TanStack Query (React Query) for GraphQL operations.
+-   [@snapwp/plugin-apollo-client](packages/plugin-apollo-client): Integration with Apollo Client.
+-   [@snapwp/plugin-tanstack-query](packages/plugin-tanstack-query): Integration with TanStack Query (React Query).
 
 #### Developer Tooling
 

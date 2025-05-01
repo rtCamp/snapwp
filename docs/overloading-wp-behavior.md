@@ -97,14 +97,10 @@ export const customParserOptions: HTMLReactParserOptions = {
 // snapwp.config.ts
 
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 import { customParserOptions } from './src/MyCustomReactParser';
 
 const config: SnapWPConfig = {
-	query: {
-		engine: ApolloClientEngine,
-	},
-	/* passing custom options to overload default react-parser options  */
+	// other SnapWP configuration options.
 	parserOptions: customParserOptions,
 };
 
@@ -162,13 +158,10 @@ To apply your block override globally, update your SnapWP configuration:
 ```ts
 // snapwp.config.ts
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 import MyCustomParagraph from './src/app/core-paragraph';
 
 const config: SnapWPConfig = {
-	query: {
-		engine: ApolloClientEngine,
-	},
+	// other SnapWP configuration options.
 	blockDefinitions: {
 		CoreParagraph: MyCustomParagraph,
 	},

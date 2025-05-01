@@ -2,9 +2,7 @@
 
 **TanStack Query adapter for [SnapWP](../../README.md)**.
 
-This package is a wrapper around the [TanStack Query](https://github.com/TanStack/query) library, providing seamless integration with the SnapWP framework.
-
-SnapWP’s query system and configuration API are designed to support any GraphQL client that implements its `QueryEngine` interface. This extension allows you to easily use TanStack Query as the underlying engine for data fetching within the SnapWP ecosystem.
+This package is a wrapper around the [TanStack Query](https://github.com/TanStack/query) library, allowing you to use TanStack Query as the underlying [Query Engine](../../docs/query-engine.md) for data fetching within the SnapWP ecosystem.
 
 > [!WARNING]
 > 🐉 There be dragons!
@@ -12,44 +10,33 @@ SnapWP’s query system and configuration API are designed to support any GraphQ
 
 ## Installation
 
-To integrate plugin-tanstack-query within the SnapWP framework:
-
-1. **Add the package to your project's dependencies:**
+1. Add the package to your SnapWP project's dependencies:
 
     ```bash
-    npm install plugin-tanstack-query --save
+    npm install @snapwp/plugin-tanstack-query --save
     ```
 
-2. **Update your snapwp.config.ts file to use the TanStackQueryEngine instead of the default ApolloClientEngine:**
+    If you wish to use TanStack Query directly, you should also install the core TanStack Query package:
 
-    ## Using `plugin-tanstack-query` in `snapwp.config.ts`
+    ```bash
+    npm install @snapwp/plugin-tanstack-query @tanstack/react-query --save
+    ```
 
-    To use `plugin-tanstack-query` with SnapWP, we will configure the query engine by replacing the `ApolloClientEngine` _(default)_ with `TanStackQueryEngine`.
+2. Update your [snapwp.config.ts file](../../docs/config-api.md) to use the `TanStackQueryEngine`:
 
     ```diff
     import type { SnapWPConfig } from '@snapwp/core/config';
-    - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
     + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query';
 
     const config: SnapWPConfig = {
-    	query: {
-    -		engine: ApolloClientEngine,
-    +		engine: TanStackQueryEngine,
-    	},
+      // The rest of your SnapWP config...
+      query: {
+    +    engine: TanStackQueryEngine,
+      },
     };
 
     export default config;
     ```
-
-This setup tells SnapWP to use TanStack Query as its data fetching engine via the TanStackQueryEngine adapter.
-
-#### Breakdown of the Setup
-
-1. **Import `TanStackQueryEngine`**: Instead of ApolloClientEngine _(default)_, import `TanStackQueryEngine` from `plugin-tanstack-query`.
-
-2. **Configure `query.engine`**: In the SnapWP config, set `query.engine` to `TanStackQueryEngine`. This integrates TanStack Query into the SnapWP framework.
-
-3. **Export the Config**: Export the configuration as default to be used by the SnapWP application.
 
 ## Contributing
 

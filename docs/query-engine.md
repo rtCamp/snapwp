@@ -1,9 +1,8 @@
 # Query Engine
 
-## What it does
+Instead of locking you down to a specific GraphQL query libray, SnapWP uses a composable **Query Engine** to manage GraphQL queries and client context. It allows you to use your favorite GraphQL client library while providing a consistent API for fetching data.
 
-SnapWP allows users to decouple the GraphQL client from the core query logic.
-Instead of being locked to a specific client like Apollo, users can now:
+Users can:
 
 -   Use a **prebuilt Query Engine** (Apollo/TanStack/etc.)
 -   **Build and plug-in** their own custom Query Engine following a simple contract.
@@ -12,53 +11,41 @@ This allows **maximum flexibility** to choose or change the underlying GraphQL c
 
 ## How it works
 
--   The `query` expects a **Query Engine class**.
--   The Query Engine handles how queries, and client context are managed.
--   It must implement the `QueryEngine` interface provided by `@snapwp/types`.
+-   Inside your [snapwp.config.ts](./config-api.md#snapwpconfigts-file), you import and assign your Query Engine class to the `query.engine` property.
+-   The Query Engine handles how queries, and client context are managed. It must implement the `QueryEngine` interface provided by `@snapwp/types`.
+-   Throughout your app, you can use the `@snapwp/query` package to interact with the Query Engine. This package provides utility functions and hooks for fetching data, managing client context, and using the Query Provider.
 
-You can configure the Query Engine inside your `snapwp.config.ts` file.
-
-Example (`snapwp.config.ts`):
+### Example (`snapwp.config.ts`)
 
 ```typescript
 import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
+import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query';
 
 const config: SnapWPConfig = {
 	query: {
-		engine: ApolloClientEngine,
+		engine: TanStackQueryEngine,
 	},
 };
 
 export default config;
 ```
 
-In the above example, `ApolloClientEngine` is the selected query engine.
+In the above example, `TanStackQueryEngine` is the selected query engine.
 
 ## Available Query Engines
 
+SnapWP provides official Query Engines for popular GraphQL clients. You can use these engines out of the box without needing to implement your own.
+
+-   [Apollo Client - `@snapwp/plugin-apollo-client`](../packages/plugin-apollo-client/README.md)
+-   [TanStack Query - `@snapwp/plugin-tanstack-query`](../packages/plugin-tanstack-query/README.md)
+
 -   `Apollo Client Engine` from `@snapwp/plugin-apollo-client` _([README](../packages/plugin-apollo-client/README.md))_
 -   `TanStack Client Engine` from `@snapwp/plugin-tanstack-query` _([README](../packages/plugin-tanstack-client/README.md))_
+-   (Open a PR to submit your own engine!)
 
-## Config API
+## Configuration
 
-You set the query engine by specifying the **engine class** inside `snapwp.config.ts`.
-
-**Config Structure:**
-
-```typescript
-{
-	query: {
-		engine: YourQueryEngineClass,
-	},
-}
-```
-
-The `engine` should be a class that **implements** the `QueryEngine` interface.
-
-The query configuration not only expects a Query Engine class but can also accept options that are passed during the engine's instantiation.
-
-### Config Structure
+You set the Query Engine by specifying it inside `snapwp.config.ts`.
 
 In your `snapwp.config.ts`, you can pass both the engine and options like this:
 
@@ -101,29 +88,13 @@ export default config;
 
 If you want to use a **different GraphQL client**, you can create your own Query Engine.
 
-Your class **must implement** the following interface:
+Your class **must implement** the [`QueryEngine` Interface](..packages/types/src/query-engine/index.ts) from `@snapwp/types`. This interface defines the contract for your Query Engine.
 
-```typescript
-interface QueryEngine< TClient > {
-	getClient(): TClient;
-
-	useClient( client: TClient | undefined ): TClient;
-
-	fetchQuery< TData, TQueryVars >(
-		args: QueryArgs< TData, TQueryVars >
-	): Promise< TData >;
-
-	useQuery< TData, TQueryVars >(
-		args: QueryArgs< TData, TQueryVars >
-	): TData;
-
-	QueryProvider: ComponentType< PropsWithChildren< { client: TClient } > >;
-}
-```
+````
 
 #### Method Descriptions:
 
--   **`getClient()`**  
+-   **`getClient()`**
     This method should return an instance of the GraphQL client that is suitable for server-side usage. It will be used to interact with the GraphQL API on the server.
 
     ```typescript
@@ -132,7 +103,7 @@ interface QueryEngine< TClient > {
 
     **Example use case:** This method ensures that the GraphQL client is available for making requests.
 
--   **`useClient(client: TClient | undefined): TClient`**  
+-   **`useClient(client: TClient | undefined): TClient`**
     This method is responsible for setting or retrieving the client instance on the client-side (React). If `client` is provided, the method will store it; if `client` is `undefined`, the method should return the current client instance.
 
     ```typescript
@@ -141,7 +112,7 @@ interface QueryEngine< TClient > {
 
     **Example use case:** On the client-side, this function helps manage the client instance, allowing you to switch or refresh the client if necessary.
 
--   **`fetchQuery<TData, TQueryVars>(args: QueryArgs<TData, TQueryVars>): Promise<TData>`**  
+-   **`fetchQuery<TData, TQueryVars>(args: QueryArgs<TData, TQueryVars>): Promise<TData>`**
     This method performs a server-safe data fetch using the GraphQL client. It takes the query arguments (`key`, `query`, and `options`) and returns a promise that resolves with the queried data.
 
     ```typescript
@@ -150,7 +121,7 @@ interface QueryEngine< TClient > {
 
     **Example use case:** You would use this to send GraphQL requests on the server side and return the results.
 
--   **`useQuery<TData, TQueryVars>(args: QueryArgs<TData, TQueryVars>): TData`**  
+-   **`useQuery<TData, TQueryVars>(args: QueryArgs<TData, TQueryVars>): TData`**
     This method is a React hook that is used for client-side GraphQL queries. It should return the queried data, leveraging the client-side instance for making the request.
 
     ```typescript
@@ -159,7 +130,7 @@ interface QueryEngine< TClient > {
 
     **Example use case:** On the client-side, you can use this method in your React components to fetch GraphQL data with the provided query and options.
 
--   **`QueryProvider: ComponentType<PropsWithChildren<{ client: TClient }>>`**  
+-   **`QueryProvider: ComponentType<PropsWithChildren<{ client: TClient }>>`**
     This is a React component that provides the GraphQL client to the context, allowing any component in the tree to access and use the client. This provider ensures that your GraphQL client is available throughout the React component tree.
 
     ```typescript
@@ -212,7 +183,7 @@ class GraphQLRequestEngine implements QueryEngine< GraphQLClient > {
 
 	QueryProvider = QueryProvider;
 }
-```
+````
 
 ### Example : Custom QueryProvider.
 
@@ -236,7 +207,7 @@ export const QueryProvider: ( {
 }
 ```
 
-Then you can simply plug it into SnapWP:
+Then you can plug it into SnapWP:
 
 (`snapwp.config.ts`)
 
