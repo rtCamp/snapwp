@@ -88,7 +88,7 @@ To change your query engine from Apollo Client to TanStack (React Query), you ju
 1. **Add the `@snapwp/plugin-tanstack-query` package to your project's dependencies:**
 
     ```bash
-    npm install plugin-tanstack-query --save
+    npm install @snapwp/plugin-tanstack-query --save
     ```
 
 2. **Update your snapwp.config.ts file to use the TanStackQueryEngine instead of the default ApolloClientEngine:**
