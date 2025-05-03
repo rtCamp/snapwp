@@ -27,4 +27,5 @@ export * from './core-spacer';
 export * from './core-template-part';
 export * from './core-verse';
 export * from './core-video';
+export * from './core-synced-pattern';
 export * from './default';

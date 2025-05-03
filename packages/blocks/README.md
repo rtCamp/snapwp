@@ -76,6 +76,7 @@ These components provide developer-friendly APIs for rendering core WordPress bl
 | core-quote         | CoreQuote        |
 | core-separator     | CoreSeparator    |
 | core-spacer        | CoreSpacer       |
+| core-synced-pattern| CoreSyncedPattern|
 | core-template-part | CoreTemplatePart |
 | core-verse         | CoreVerse        |
 | core-video         | CoreVideo        |
