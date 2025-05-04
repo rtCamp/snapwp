@@ -1,0 +1,41 @@
+{
+	"name": "@snapwp/plugin-apollo-client",
+	"version": "0.1.0",
+	"license": "AGPL-3.0",
+	"description": "Apollo Client integration for SnapWP.",
+	"author": "rtCamp",
+	"type": "module",
+	"engines": {
+		"node": ">=20.0.0",
+		"npm": ">=10.0.0",
+		"yarn": "please-use-npm"
+	},
+	"files": [
+		"dist"
+	],
+	"exports": {
+		"import": "./dist/index.js",
+		"require": "./dist/index.js",
+		"types": "./dist/types/index.d.ts"
+	},
+	"scripts": {
+		"build": "tsc --build",
+		"postbuild": "npm run resolve-paths",
+		"force-build": "tsc --build --force",
+		"postforce-build": "npm run resolve-paths",
+		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
+		"resolve-paths": "resolve-tspaths",
+		"lint": "eslint . --config ../../.eslintrc.json",
+		"lint:fix": "eslint . --config ../../.eslintrc.json --fix"
+	},
+	"peerDependencies": {
+		"@apollo/client": "^3.13.4",
+		"@snapwp/core": "*"
+	},
+	"devDependencies": {
+		"resolve-tspaths": "*",
+		"tsc-watch": "*",
+		"typescript": "*",
+		"@snapwp/types": "*"
+	}
+}

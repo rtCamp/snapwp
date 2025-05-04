@@ -1,43 +1,29 @@
-import {
-	GlobalStylesParseError,
-	Logger,
-	type GlobalHeadProps,
-} from '@snapwp/core';
+import { GlobalStylesParseError, type GlobalHeadProps } from '@snapwp/core';
 
-import type { ApolloQueryResult } from '@apollo/client';
 import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
 
 /**
  * Parses template query data into props for rendering a template.
  *
- * @param {ApolloQueryResult<GetGlobalStylesQuery>} queryData The data fetched from the template query.
+ * @param {GetGlobalStylesQuery} queryData The data fetched from the template query.
  *
  * @throws Throws an error if the query data is missing or invalid.
  *
  * @return An object containing parsed template data.
  */
 export function parseQueryResult(
-	queryData: ApolloQueryResult< GetGlobalStylesQuery >
+	queryData: GetGlobalStylesQuery
 ): GlobalHeadProps {
-	if ( queryData.errors?.length ) {
-		queryData.errors?.forEach( ( error ) => {
-			Logger.error(
-				`Error fetching global styles: ${ error?.message }`,
-				error
-			);
-		} );
-	}
-
 	// Check if globalStyles is null.
-	if ( queryData.data.globalStyles === null ) {
+	if ( queryData.globalStyles === null ) {
 		throw new GlobalStylesParseError( `Error fetching global styles.` );
 	}
 
-	if ( ! queryData.data && queryData.errors?.length ) {
+	if ( ! queryData ) {
 		throw new GlobalStylesParseError( `Error fetching global styles.` );
 	}
 
-	const globalStyles = queryData.data?.globalStyles;
+	const globalStyles = queryData.globalStyles;
 
 	return {
 		customCss: globalStyles?.customCss || null,

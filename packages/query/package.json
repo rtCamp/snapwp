@@ -32,21 +32,23 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
+		"@graphql-typed-document-node/core": "^3.2.0",
 		"@snapwp/core": "*"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^5.0.5",
 		"@parcel/watcher": "^2.5.1",
 		"@snapwp/codegen-config": "*",
+		"@snapwp/types": "*",
 		"dotenv": "^16.5.0",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*",
-		"@snapwp/types": "*"
+		"typescript": "*"
 	},
 	"peerDependencies": {
-		"react": "^19.0.0",
 		"@apollo/client": "^3.11.4",
-		"graphql": "^16.9.0"
+		"graphql": "^16.9.0",
+		"react": "^19.0.0",
+		"@types/react": "*"
 	}
 }
