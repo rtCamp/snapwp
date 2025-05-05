@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import Script from 'next/script';
 import { QueryEngine } from '@snapwp/query';
-import { LightboxOverlay } from '@/components/lightbox-overlay';
+import { LightboxOverlay } from './lightbox-overlay';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 
@@ -54,6 +54,8 @@ export async function TemplateRenderer( {
 				</main>
 			</TemplateScripts>
 			{ /* Hot Fix for adding classes to the body outside the root layout */ }
+
+			{ /* @todo: Check if we can patch this with either the portal or the @wordpress/hooks implementation. */ }
 			<LightboxOverlay />
 
 			<Script
