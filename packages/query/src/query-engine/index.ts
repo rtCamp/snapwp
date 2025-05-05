@@ -10,6 +10,7 @@ import {
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
 	type GetPagesToRenderStaticallyQuery,
+	type InputMaybe,
 } from '@graphqlTypes/graphql';
 
 import { fetchQuery } from '@/query-engine/registry';
@@ -84,21 +85,22 @@ export class QueryEngine {
 		let hasMoreTerms = true;
 		let hasMoreUsers = true;
 
+		const variables: VariablesType = {
+			first,
+			hasMoreContentNodes,
+			hasMoreTerms,
+			hasMoreUsers,
+			contentNodeCursor,
+			termCursor,
+			userCursor,
+		};
+
 		do {
 			const data: GetPagesToRenderStaticallyQuery = await fetchQuery( {
 				name: 'GetPagesToRenderStatically',
 				query: GetPagesToRenderStaticallyDocument,
 				options: {
-					// @ts-ignore
-					variables: {
-						first,
-						hasMoreContentNodes,
-						hasMoreTerms,
-						hasMoreUsers,
-						contentNodeCursor,
-						termCursor,
-						userCursor,
-					},
+					variables,
 				},
 			} );
 
@@ -151,4 +153,14 @@ export type Paths = {
 	terms?: PathInfo[];
 	users?: PathInfo[];
 	[ key: string ]: PathInfo[] | undefined;
+};
+
+type VariablesType = {
+	first?: InputMaybe< number >;
+	hasMoreContentNodes?: InputMaybe< boolean >;
+	hasMoreTerms?: InputMaybe< boolean >;
+	hasMoreUsers?: InputMaybe< boolean >;
+	contentNodeCursor?: InputMaybe< string >;
+	termCursor?: InputMaybe< string >;
+	userCursor?: InputMaybe< string >;
 };
