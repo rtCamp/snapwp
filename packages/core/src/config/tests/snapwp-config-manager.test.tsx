@@ -92,7 +92,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if frontendUrl is missing', () => {
-		process.env.FRONTEND_URL = '';
+		process.env.NEXT_PUBLIC_FRONTEND_URL = '';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -101,7 +101,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if frontendUrl is not a string', () => {
-		process.env.FRONTEND_URL = 123 as unknown as string;
+		process.env.NEXT_PUBLIC_FRONTEND_URL = 123 as unknown as string;
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -110,7 +110,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should throw an error if frontendUrl is not a valid URL', () => {
-		process.env.FRONTEND_URL = 'invalid-url';
+		process.env.NEXT_PUBLIC_FRONTEND_URL = 'invalid-url';
 		// @ts-ignore Allow setting global variable for testing
 		global.__snapWPConfig = {};
 		expect( () => getConfig() ).toThrow(
@@ -169,7 +169,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should handle missing environment variables correctly', () => {
-		delete process.env.FRONTEND_URL;
+		delete process.env.NEXT_PUBLIC_FRONTEND_URL;
 		delete process.env.WP_HOME_URL;
 		delete process.env.GRAPHQL_ENDPOINT;
 		delete process.env.WP_UPLOADS_DIRECTORY;
@@ -210,7 +210,7 @@ describe( 'SnapWPConfigManager functions', () => {
 	} );
 
 	it( 'should correctly normalize URLs by removing trailing slashes', () => {
-		process.env.FRONTEND_URL = 'https://localhost:3000/';
+		process.env.NEXT_PUBLIC_FRONTEND_URL = 'https://localhost:3000/';
 		process.env.WP_HOME_URL = 'https://wordpress.example.com/';
 
 		const config = getConfig();

@@ -12,7 +12,6 @@ declare global {
 			NEXT_PUBLIC_WP_SITE_URL?: string;
 			NEXT_PUBLIC_WP_UPLOADS_DIRECTORY?: string;
 			CORS_PROXY_PREFIX?: string;
-			FRONTEND_URL?: string;
 			GRAPHQL_ENDPOINT?: string;
 			REST_URL_PREFIX?: string;
 			WP_HOME_URL?: string;

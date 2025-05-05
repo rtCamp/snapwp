@@ -12,7 +12,7 @@ export interface SnapWPEnv {
 	 */
 	corsProxyPrefix?: string | undefined;
 	/**
-	 * The URL of the Next.js site. Defaults to `process.env.FRONTEND_URL`.
+	 * The URL of the Next.js site. Defaults to `process.env.NEXT_PUBLIC_FRONTEND_URL`.
 	 */
 	frontendUrl: string;
 	/**
@@ -94,8 +94,7 @@ const envConfig = (): Partial< SnapWPEnv > => ( {
 	corsProxyPrefix:
 		process.env.CORS_PROXY_PREFIX ||
 		process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
-	frontendUrl:
-		process.env.FRONTEND_URL || process.env.NEXT_PUBLIC_FRONTEND_URL,
+	frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
 	graphqlEndpoint:
 		process.env.GRAPHQL_ENDPOINT ||
 		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
