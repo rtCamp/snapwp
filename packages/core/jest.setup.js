@@ -10,7 +10,7 @@ global.__envConfig = {
 };
 
 process.env.NEXT_PUBLIC_FRONTEND_URL = global.__envConfig.frontendUrl;
-process.env.WP_HOME_URL = global.__envConfig.wpHomeUrl;
+process.env.NEXT_PUBLIC_WP_HOME_URL = global.__envConfig.wpHomeUrl;
 process.env.WP_SITE_URL = global.__envConfig.wpSiteUrl;
 process.env.GRAPHQL_ENDPOINT = global.__envConfig.graphqlEndpoint;
 process.env.WP_UPLOADS_DIRECTORY = global.__envConfig.uploadsDirectory;

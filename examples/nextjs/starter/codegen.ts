@@ -11,7 +11,6 @@ const graphqlFiles = globSync( GRAPHQL_GLOB );
 const homeUrl =
 	process.env.WP_SITE_URL ||
 	process.env.NEXT_PUBLIC_WP_SITE_URL ||
-	process.env.WP_HOME_URL ||
 	process.env.NEXT_PUBLIC_WP_HOME_URL;
 
 const graphqlEndpoint =

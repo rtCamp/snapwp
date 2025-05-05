@@ -12,7 +12,7 @@ export function generateGraphqlUrl(
 	homeUrl?: string,
 	graphqlEndpoint?: string
 ): string {
-	// Adding extra check because there is high chances of process.env.WP_HOME_URL and process.env.GRAPHQL_ENDPOINT being undefined
+	// Adding extra check because there is high chances of process.env.NEXT_PUBLIC_WP_HOME_URL and process.env.GRAPHQL_ENDPOINT being undefined
 	if ( ! homeUrl ) {
 		Logger.error( 'wpHomeUrl is not set' );
 		return '';

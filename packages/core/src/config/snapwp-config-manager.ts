@@ -28,7 +28,7 @@ export interface SnapWPEnv {
 	 */
 	uploadsDirectory: string;
 	/**
-	 * The home URL of the WordPress site. Defaults to `process.env.WP_HOME_URL`.
+	 * The home URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_HOME_URL`.
 	 */
 	wpHomeUrl: string;
 	/**
@@ -98,14 +98,13 @@ const envConfig = (): Partial< SnapWPEnv > => ( {
 	graphqlEndpoint:
 		process.env.GRAPHQL_ENDPOINT ||
 		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
-	wpHomeUrl: process.env.WP_HOME_URL || process.env.NEXT_PUBLIC_WP_HOME_URL,
+	wpHomeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
 	restUrlPrefix:
 		process.env.REST_URL_PREFIX || process.env.NEXT_PUBLIC_REST_URL_PREFIX,
 	// If `wpSiteUrl` is not provided, use `wpHomeUrl`.
 	wpSiteUrl:
 		process.env.WP_SITE_URL ||
 		process.env.NEXT_PUBLIC_WP_SITE_URL ||
-		process.env.WP_HOME_URL ||
 		process.env.NEXT_PUBLIC_WP_HOME_URL,
 	uploadsDirectory:
 		process.env.WP_UPLOADS_DIRECTORY ||
