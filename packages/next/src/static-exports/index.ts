@@ -8,7 +8,8 @@ import { QueryEngine, type Paths } from '@snapwp/query';
 export const getPathsToRenderStatically = async (): Promise<
 	Array< { slug: string[] } >
 > => {
-	const pathsToRender: Paths = await QueryEngine.getPaths();
+	const pathsToRender: Paths =
+		await QueryEngine.getPathsToStaticallyGenerate();
 
 	const paths: Array< { slug: string[] } > = [];
 	Object.keys( pathsToRender ).forEach( ( key ) => {

@@ -71,7 +71,7 @@ export class QueryEngine {
 	 *
 	 * @return The pages to be rendered statically.
 	 */
-	static getPaths = async (): Promise< Paths > => {
+	static getPathsToStaticallyGenerate = async (): Promise< Paths > => {
 		const first = 100;
 		const contentNodes: Paths[ 'contentNodes' ] = [];
 		const terms: Paths[ 'terms' ] = [];
