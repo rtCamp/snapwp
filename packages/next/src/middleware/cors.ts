@@ -14,7 +14,7 @@ import type { MiddlewareFactory } from './utils';
  * as the first path element will be proxied to WP server.
  *
  * eg: http://localhost:3000/proxy/assets/api.js will get resouce at https://examplewp/assets/api.js
- * assuming env vars FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
+ * assuming env vars NEXT_PUBLIC_FRONTEND_URL had its value set to http://localhost:3000 and NEXT_PUBLIC_WP_HOME_URL to https://examplewp.com
  *
  * @param {NextMiddleware} next Next middleware.
  *
