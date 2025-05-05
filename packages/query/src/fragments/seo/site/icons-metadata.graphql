@@ -1,4 +1,4 @@
-query GetGeneralSettings {
+fragment IconMetadataFrag on RootQuery {
 	generalSettings {
 		siteIcon {
 			id
