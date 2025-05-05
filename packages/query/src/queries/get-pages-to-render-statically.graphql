@@ -1,17 +1,38 @@
-query GetPagesToRenderStatically {
-	pages(first: 100) {
+query GetPagesToRenderStatically(
+ 	$first: Int = 100,
+ 	$hasMoreContentNodes: Boolean = false, $contentNodeCursor: String = null,
+	$hasMoreTerms: Boolean = false, $termCursor: String = null,
+	$hasMoreUsers: Boolean = false, $userCursor: String = null
+) {
+	contentNodes(first: $first, after: $contentNodeCursor) @include(if: $hasMoreContentNodes) {
+		pageInfo {
+			hasNextPage
+			endCursor
+		}
 		nodes {
 			uri
+			id
 		}
 	}
-	posts(first: 100) {
-		nodes {
-			uri
-		}
+
+	terms(first: $first, after: $termCursor) @include(if: $hasMoreTerms) {
+		pageInfo {
+        	hasNextPage
+        	endCursor
+        }
+        nodes {
+        	uri
+        	id
+        }
 	}
-	terms(first: 100) {
-		nodes {
-			uri
+	users(first: $first, after: $userCursor) @include(if: $hasMoreUsers) {
+		pageInfo {
+        	hasNextPage
+        	endCursor
+        }
+        nodes {
+        	uri
+        	id
 		}
 	}
 }

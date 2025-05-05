@@ -9,6 +9,7 @@ import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
+	type GetPagesToRenderStaticallyQuery,
 } from '@graphqlTypes/graphql';
 
 import { fetchQuery } from '@/query-engine/registry';
@@ -70,41 +71,84 @@ export class QueryEngine {
 	 * @return The pages to be rendered statically.
 	 */
 	static getPaths = async (): Promise< Paths > => {
-		const data = await fetchQuery( {
-			name: 'GetPagesToRenderStatically',
-			query: GetPagesToRenderStaticallyDocument,
-		} );
+		const first = 100;
+		const contentNodes: Paths[ 'contentNodes' ] = [];
+		const terms: Paths[ 'terms' ] = [];
+		const users: Paths[ 'users' ] = [];
 
-		const paths: Paths = {};
+		let contentNodeCursor: string | null | undefined = null;
+		let termCursor: string | null | undefined = null;
+		let userCursor: string | null | undefined = null;
 
-		const pagesNodes = data?.pages?.nodes;
+		let hasMoreContentNodes = true;
+		let hasMoreTerms = true;
+		let hasMoreUsers = true;
 
-		if ( pagesNodes ) {
-			paths.pages = pagesNodes;
-		}
+		do {
+			const data: GetPagesToRenderStaticallyQuery = await fetchQuery( {
+				name: 'GetPagesToRenderStatically',
+				query: GetPagesToRenderStaticallyDocument,
+				options: {
+					// @ts-ignore
+					variables: {
+						first,
+						hasMoreContentNodes,
+						hasMoreTerms,
+						hasMoreUsers,
+						contentNodeCursor,
+						termCursor,
+						userCursor,
+					},
+				},
+			} );
 
-		const postsNodes = data?.posts?.nodes;
+			if ( ! data ) {
+				throw new Error(
+					'Error fetching pages to render statically. No data returned.'
+				);
+			}
 
-		if ( postsNodes ) {
-			paths.posts = postsNodes;
-		}
+			if ( data.contentNodes ) {
+				contentNodes.push( ...data.contentNodes.nodes );
+				hasMoreContentNodes = data.contentNodes.pageInfo.hasNextPage;
+				contentNodeCursor = data.contentNodes.pageInfo.endCursor;
+			} else {
+				hasMoreContentNodes = false;
+			}
 
-		const termsNodes = data?.terms?.nodes;
+			if ( data.terms ) {
+				terms.push( ...data.terms.nodes );
+				hasMoreTerms = data.terms.pageInfo.hasNextPage;
+				termCursor = data.terms.pageInfo.endCursor;
+			} else {
+				hasMoreTerms = false;
+			}
 
-		if ( termsNodes ) {
-			paths.terms = termsNodes;
-		}
+			if ( data.users ) {
+				users.push( ...data.users.nodes );
+				hasMoreUsers = data.users.pageInfo.hasNextPage;
+				userCursor = data.users.pageInfo.endCursor;
+			} else {
+				hasMoreUsers = false;
+			}
+		} while ( hasMoreContentNodes || hasMoreTerms || hasMoreUsers );
 
-		return paths;
+		return {
+			contentNodes,
+			terms,
+			users,
+		};
 	};
 }
 
-interface Paths {
-	pages?: PathsUri[];
-	posts?: PathsUri[];
-	terms?: PathsUri[];
-}
-
-interface PathsUri {
+type PathInfo = {
 	uri?: string | null;
-}
+	id: string;
+};
+
+export type Paths = {
+	contentNodes?: PathInfo[];
+	terms?: PathInfo[];
+	users?: PathInfo[];
+	[ key: string ]: PathInfo[] | undefined;
+};

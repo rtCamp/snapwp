@@ -33,5 +33,5 @@ export const generateStaticParams = async () => {
 	return getPathsToRenderStatically();
 };
 
-// This is the revalidation time in seconds.
+// Update this to change the revalidation time (in seconds).
 export const revalidate = 300; // 5 minutes
