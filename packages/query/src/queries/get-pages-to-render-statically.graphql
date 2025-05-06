@@ -1,6 +1,6 @@
 query GetPagesToRenderStatically(
- 	$first: Int = 100,
- 	$hasMoreContentNodes: Boolean = false, $contentNodeCursor: String = null,
+	$first: Int = 100,
+	$hasMoreContentNodes: Boolean = false, $contentNodeCursor: String = null,
 	$hasMoreTerms: Boolean = false, $termCursor: String = null,
 	$hasMoreUsers: Boolean = false, $userCursor: String = null
 ) {
@@ -17,22 +17,22 @@ query GetPagesToRenderStatically(
 
 	terms(first: $first, after: $termCursor) @include(if: $hasMoreTerms) {
 		pageInfo {
-        	hasNextPage
-        	endCursor
-        }
-        nodes {
-        	uri
-        	id
-        }
+			hasNextPage
+			endCursor
+		}
+		nodes {
+			uri
+			id
+		}
 	}
 	users(first: $first, after: $userCursor) @include(if: $hasMoreUsers) {
 		pageInfo {
-        	hasNextPage
-        	endCursor
-        }
-        nodes {
-        	uri
-        	id
+			hasNextPage
+			endCursor
+		}
+		nodes {
+			uri
+			id
 		}
 	}
 }

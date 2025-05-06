@@ -1,22 +1,22 @@
-import {
-	type EnqueuedScriptProps,
-	type GlobalHeadProps,
-	type ScriptModuleProps,
-	type StyleSheetProps,
-} from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import {
 	GetCurrentTemplateDocument,
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
-	type GetPagesToRenderStaticallyQuery,
-	type InputMaybe,
 } from '@graphqlTypes/graphql';
-
 import { fetchQuery } from '@/query-engine/registry';
 import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
 import { parseQueryResult as parseTemplate } from '@/utils/parse-template';
-
+import type {
+	GetPagesToRenderStaticallyQuery,
+	InputMaybe,
+} from '@graphqlTypes/graphql';
+import type {
+	EnqueuedScriptProps,
+	GlobalHeadProps,
+	ScriptModuleProps,
+	StyleSheetProps,
+} from '@snapwp/core';
 import type { BlockData } from '@snapwp/types';
 
 /**
