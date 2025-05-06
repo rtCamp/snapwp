@@ -49,38 +49,38 @@ const blockDefinitions = {
 
 These components provide developer-friendly APIs for rendering core WordPress blocks. If a WordPress block does not have a corresponding component, it will fallback to the `Default` block component, which uses `html-react-parser` under the hood.
 
-| Type               | Component        |
-| ------------------ | ---------------- |
-| core-audio         | CoreAudio        |
-| core-button        | CoreButton       |
-| core-buttons       | CoreButtons      |
-| core-code          | CoreCode         |
-| core-column        | CoreColumn       |
-| core-columns       | CoreColumns      |
-| core-cover         | CoreCover        |
-| core-details       | CoreDetails      |
-| core-file          | CoreFile         |
-| core-freeform      | CoreFreeform     |
-| core-gallery       | CoreGallery      |
-| core-group         | CoreGroup        |
-| core-heading       | CoreHeading      |
-| core-html          | CoreHtml         |
-| core-image         | CoreImage        |
-| core-list          | CoreList         |
-| core-list-item     | CoreListItem     |
-| core-media-text    | CoreMediaText    |
-| core-paragraph     | CoreParagraph    |
-| core-post-content  | CorePostContent  |
-| core-preformatted  | CorePreformatted |
-| core-pullquote     | CorePullquote    |
-| core-quote         | CoreQuote        |
-| core-separator     | CoreSeparator    |
-| core-spacer        | CoreSpacer       |
-| core-synced-pattern| CoreSyncedPattern|
-| core-template-part | CoreTemplatePart |
-| core-verse         | CoreVerse        |
-| core-video         | CoreVideo        |
-| default            | Default          |
+| Type                | Component         |
+| ------------------- | ----------------- |
+| core-audio          | CoreAudio         |
+| core-button         | CoreButton        |
+| core-buttons        | CoreButtons       |
+| core-code           | CoreCode          |
+| core-column         | CoreColumn        |
+| core-columns        | CoreColumns       |
+| core-cover          | CoreCover         |
+| core-details        | CoreDetails       |
+| core-file           | CoreFile          |
+| core-freeform       | CoreFreeform      |
+| core-gallery        | CoreGallery       |
+| core-group          | CoreGroup         |
+| core-heading        | CoreHeading       |
+| core-html           | CoreHtml          |
+| core-image          | CoreImage         |
+| core-list           | CoreList          |
+| core-list-item      | CoreListItem      |
+| core-media-text     | CoreMediaText     |
+| core-paragraph      | CoreParagraph     |
+| core-post-content   | CorePostContent   |
+| core-preformatted   | CorePreformatted  |
+| core-pullquote      | CorePullquote     |
+| core-quote          | CoreQuote         |
+| core-separator      | CoreSeparator     |
+| core-spacer         | CoreSpacer        |
+| core-synced-pattern | CoreSyncedPattern |
+| core-template-part  | CoreTemplatePart  |
+| core-verse          | CoreVerse         |
+| core-video          | CoreVideo         |
+| default             | Default           |
 
 ## Known Limitations
 

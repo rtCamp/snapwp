@@ -322,23 +322,23 @@ Create a new React component to modify the rendering of a specific Synced Patter
 import React from 'react';
 import { BlockData, cn, getClassNamesFromString } from '@snapwp/core';
 
-export default function MyCustomSyncedPattern({
+export default function MyCustomSyncedPattern( {
 	renderedHtml,
 	attributes,
 	children,
-}: BlockData) {
+}: BlockData ) {
 	const safeAttributes = attributes || {}; // Ensure attributes are not undefined.
 	const { style } = safeAttributes;
 
 	const classNamesFromString = renderedHtml
-		? getClassNamesFromString(renderedHtml)
+		? getClassNamesFromString( renderedHtml )
 		: '';
-	const classNames = cn(classNamesFromString);
+	const classNames = cn( classNamesFromString );
 
 	return (
-		<div className={classNames} style={style}>
-			{/* Your custom rendering logic here */}
-			{children}
+		<div className={ classNames } style={ style }>
+			{ /* Your custom rendering logic here */ }
+			{ children }
 		</div>
 	);
 }
@@ -356,11 +356,11 @@ Add your custom component to the `blockDefinitions` in your `snapwp.config.ts`:
 import { defineConfig } from '@snapwp/config';
 import MyCustomSyncedPattern from './components/MyCustomSyncedPattern';
 
-export default defineConfig({
+export default defineConfig( {
 	blockDefinitions: {
 		CoreSyncedPattern: MyCustomSyncedPattern,
 	},
-});
+} );
 ```
 
 #### Per-Route Registration
@@ -378,12 +378,12 @@ const pageBlockDefinitions = {
 export default function Page() {
 	return (
 		<TemplateRenderer>
-			{(editorBlocks) => (
+			{ ( editorBlocks ) => (
 				<EditorBlocksRenderer
-					editorBlocks={editorBlocks}
-					blockDefinitions={pageBlockDefinitions}
+					editorBlocks={ editorBlocks }
+					blockDefinitions={ pageBlockDefinitions }
 				/>
-			)}
+			) }
 		</TemplateRenderer>
 	);
 }

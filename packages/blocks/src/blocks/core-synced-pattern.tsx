@@ -15,28 +15,28 @@ import type { ReactNode } from 'react';
  *
  * @return The rendered block.
  */
-export const CoreSyncedPattern: CoreSyncedPatternType = ({
+export const CoreSyncedPattern: CoreSyncedPatternType = ( {
 	attributes,
 	children,
 	renderedHtml,
-}: CoreSyncedPatternProps): ReactNode => {
+}: CoreSyncedPatternProps ): ReactNode => {
 	const { style } = attributes || {};
-	const styleObject = getStylesFromAttributes({ style });
+	const styleObject = getStylesFromAttributes( { style } );
 
 	/**
 	 * @todo replace with cssClassName once it's supported.
 	 */
 	const classNamesFromString = renderedHtml
-		? getClassNamesFromString(renderedHtml)
+		? getClassNamesFromString( renderedHtml )
 		: '';
-	const classNames = cn(classNamesFromString);
+	const classNames = cn( classNamesFromString );
 
 	return (
 		<div
-			className={classNames}
-			{...(styleObject && { style: styleObject })}
+			className={ classNames }
+			{ ...( styleObject && { style: styleObject } ) }
 		>
-			{children}
+			{ children }
 		</div>
 	);
-}; 
+};
