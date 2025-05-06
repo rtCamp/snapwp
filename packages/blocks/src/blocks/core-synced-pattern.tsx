@@ -1,4 +1,8 @@
-import { cn, getClassNamesFromString } from '@snapwp/core';
+import {
+	cn,
+	getClassNamesFromString,
+	getStylesFromAttributes,
+} from '@snapwp/core';
 import type {
 	CoreSyncedPattern as CoreSyncedPatternType,
 	CoreSyncedPatternProps,

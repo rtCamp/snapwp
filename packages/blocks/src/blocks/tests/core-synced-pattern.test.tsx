@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render } from '@testing-library/react';
 
 import { CoreSyncedPattern } from '../core-synced-pattern';
 
@@ -42,6 +42,7 @@ describe( 'CoreSyncedPattern Component', () => {
 
 	it( 'handles empty attributes gracefully', () => {
 		const { container } = render(
+			//@ts-ignore to test undefined props
 			<CoreSyncedPattern attributes={ undefined }>
 				<div>Test Child</div>
 			</CoreSyncedPattern>
@@ -52,7 +53,8 @@ describe( 'CoreSyncedPattern Component', () => {
 
 	it( 'handles empty renderedHtml gracefully', () => {
 		const { container } = render(
-			<CoreSyncedPattern renderedHtml={ undefined }>
+			// @ts-ignore to test undefined props
+			<CoreSyncedPattern renderedHtml="">
 				<div>Test Child</div>
 			</CoreSyncedPattern>
 		);
