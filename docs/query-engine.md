@@ -213,6 +213,8 @@ class GraphQLRequestEngine implements QueryEngine< GraphQLClient > {
 	}: QueryArgs< TData, TQueryVars > ): TData {
 		// Implement your client-side fetching here.
 	}
+
+	QueryProvider = ClientQueryProvider;
 }
 ```
 
