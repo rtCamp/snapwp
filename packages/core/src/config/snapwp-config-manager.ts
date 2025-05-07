@@ -92,23 +92,23 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
 	corsProxyPrefix:
-		process.env.CORS_PROXY_PREFIX ||
-		process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
+		process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX ||
+		process.env.CORS_PROXY_PREFIX,
 	frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
 	graphqlEndpoint:
-		process.env.GRAPHQL_ENDPOINT ||
-		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+		process.env.GRAPHQL_ENDPOINT,
 	wpHomeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
 	restUrlPrefix:
-		process.env.REST_URL_PREFIX || process.env.NEXT_PUBLIC_REST_URL_PREFIX,
+		process.env.NEXT_PUBLIC_REST_URL_PREFIX || process.env.REST_URL_PREFIX,
 	// If `wpSiteUrl` is not provided, use `wpHomeUrl`.
 	wpSiteUrl:
-		process.env.WP_SITE_URL ||
 		process.env.NEXT_PUBLIC_WP_SITE_URL ||
+		process.env.WP_SITE_URL ||
 		process.env.NEXT_PUBLIC_WP_HOME_URL,
 	uploadsDirectory:
-		process.env.WP_UPLOADS_DIRECTORY ||
-		process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY,
+		process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY ||
+		process.env.WP_UPLOADS_DIRECTORY,
 	/* eslint-enable n/no-process-env -- Rule restored. */
 } );
 

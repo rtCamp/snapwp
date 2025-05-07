@@ -8,12 +8,12 @@ dotenv.config( { path: '../../.env' } );
 
 // If there's no explicit SITE_URL, it's the same as the HOME_URL.
 const homeUrl =
-	process.env.WP_SITE_URL ||
 	process.env.NEXT_PUBLIC_WP_SITE_URL ||
+	process.env.WP_SITE_URL ||
 	process.env.NEXT_PUBLIC_WP_HOME_URL;
 
 const graphqlEndpoint =
-	process.env.GRAPHQL_ENDPOINT || process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT;
+	process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT || process.env.GRAPHQL_ENDPOINT;
 
 // This is necessary because we don't have access to the config manager.
 const graphqlUrl = generateGraphqlUrl( homeUrl, graphqlEndpoint );
