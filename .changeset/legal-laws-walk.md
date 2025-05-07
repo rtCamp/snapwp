@@ -3,4 +3,4 @@
 "@snapwp/next": patch
 ---
 
-fix: Images not opening in lightbox
+fix: Shim support for Image Block lightboxes
