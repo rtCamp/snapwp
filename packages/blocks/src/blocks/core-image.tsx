@@ -254,9 +254,13 @@ const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
 	if ( ! lightbox ) {
 		return false;
 	}
-	const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
-
-	return lightboxObj.enabled;
+	try {
+		const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
+		return !! lightboxObj?.enabled;
+	} catch ( error ) {
+		// If JSON parsing fails, lightbox can't be enabled
+		return false;
+	}
 };
 
 /**
