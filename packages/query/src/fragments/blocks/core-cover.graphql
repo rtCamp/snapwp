@@ -21,6 +21,7 @@ fragment CoreCoverFrag on CoreCover {
 	}
 	connectedMediaItem {
 		node {
+			id
 			databaseId
 			mediaItemUrl
 			sizes
