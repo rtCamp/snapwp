@@ -36,6 +36,36 @@ type PathInfo = {
 };
 
 /**
+ * Merges additional data into the resolved data object.
+ *
+ * @param {Object} resolvedData - The existing resolved data.
+ * @param {Object} additionalData - The new data to merge.
+ *
+ * @return {void}
+ */
+function mergeResolvedData(
+	resolvedData: Record< string, PathInfo[] >,
+	additionalData: Record< string, PathInfo[] >
+): void {
+	Object.entries( additionalData ).forEach( ( [ key, paths ] ) => {
+		if ( ! resolvedData[ key ] ) {
+			resolvedData[ key ] = [];
+		}
+		resolvedData[ key ] = [ ...resolvedData[ key ]!, ...paths ];
+	} );
+}
+
+/**
+ * Capitalizes the first letter of a string.
+ *
+ * @param {string} str - The string to capitalize.
+ * @return The capitalized string.
+ */
+function capitalize( str: string ): string {
+	return str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+}
+
+/**
  * Singleton class to handle GraphQL queries using Apollo.
  */
 export class QueryEngine {
@@ -163,34 +193,4 @@ export class QueryEngine {
 
 		return resolvedData;
 	};
-}
-
-/**
- * Merges additional data into the resolved data object.
- *
- * @param {Object} resolvedData - The existing resolved data.
- * @param {Object} additionalData - The new data to merge.
- *
- * @return {void}
- */
-function mergeResolvedData(
-	resolvedData: Record< string, PathInfo[] >,
-	additionalData: Record< string, PathInfo[] >
-): void {
-	Object.entries( additionalData ).forEach( ( [ key, paths ] ) => {
-		if ( ! resolvedData[ key ] ) {
-			resolvedData[ key ] = [];
-		}
-		resolvedData[ key ] = [ ...resolvedData[ key ]!, ...paths ];
-	} );
-}
-
-/**
- * Capitalizes the first letter of a string.
- *
- * @param {string} str - The string to capitalize.
- * @return The capitalized string.
- */
-function capitalize( str: string ): string {
-	return str.charAt( 0 ).toUpperCase() + str.slice( 1 );
 }

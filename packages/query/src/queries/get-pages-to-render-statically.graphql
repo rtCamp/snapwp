@@ -1,10 +1,14 @@
 query GetPagesToRenderStatically(
-	$first: Int = 100,
-	$hasMoreContentNodes: Boolean = true, $contentNodesCursor: String = null,
-	$hasMoreTerms: Boolean = true, $termsCursor: String = null,
-	$hasMoreUsers: Boolean = true, $usersCursor: String = null
+	$first: Int = 100
+	$hasMoreContentNodes: Boolean = true
+	$contentNodesCursor: String = null
+	$hasMoreTerms: Boolean = true
+	$termsCursor: String = null
+	$hasMoreUsers: Boolean = true
+	$usersCursor: String = null
 ) {
-	contentNodes(first: $first, after: $contentNodesCursor) @include(if: $hasMoreContentNodes) {
+	contentNodes(first: $first, after: $contentNodesCursor)
+		@include(if: $hasMoreContentNodes) {
 		pageInfo {
 			hasNextPage
 			endCursor
