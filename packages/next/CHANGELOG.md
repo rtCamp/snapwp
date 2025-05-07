@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.0.0
+
+### Minor Changes
+
+-   [#123](https://github.com/rtCamp/snapwp/pull/123) [`0ff49b6`](https://github.com/rtCamp/snapwp/commit/0ff49b60a919b005a04754d7a982973a84e902be) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Add SEO support for core WordPress metadata.
+
+### Patch Changes
+
+-   [#164](https://github.com/rtCamp/snapwp/pull/164) [`8a68620`](https://github.com/rtCamp/snapwp/commit/8a68620c8aab91d33c1af809c2d9031edde4fef7) Thanks [@Swanand01](https://github.com/Swanand01)! - fix: Shim support for Image Block lightboxes
+
+-   Updated dependencies [[`0ff49b6`](https://github.com/rtCamp/snapwp/commit/0ff49b60a919b005a04754d7a982973a84e902be), [`cf1b672`](https://github.com/rtCamp/snapwp/commit/cf1b6728876601313697a9cc6a107d19c680db20), [`4ef89bd`](https://github.com/rtCamp/snapwp/commit/4ef89bdee915831dcd9fb0d40aaa2aec71dea7a0), [`1580854`](https://github.com/rtCamp/snapwp/commit/1580854334ef3e98d2501f418572f9dac139721a), [`9576cf4`](https://github.com/rtCamp/snapwp/commit/9576cf4ad0032a3f8ee9be4831d642baffe2bfbe), [`87f8f56`](https://github.com/rtCamp/snapwp/commit/87f8f5600039e7f72f0146f3dc1f0c77ead946bd), [`693252c`](https://github.com/rtCamp/snapwp/commit/693252c8bbaaedcc46d8f5958ef49b0c952cd408)]:
+    -   @snapwp/query@0.4.0
+    -   @snapwp/core@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes

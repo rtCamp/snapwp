@@ -1,5 +1,11 @@
 # @snapwp/eslint-config
 
+## 0.2.1
+
+### Patch Changes
+
+-   [#175](https://github.com/rtCamp/snapwp/pull/175) [`1faffd4`](https://github.com/rtCamp/snapwp/commit/1faffd4458711a3a587e311347a13216476d4839) Thanks [@justlevine](https://github.com/justlevine)! - fix: add TSDoc `@typeParam` to `jsdoc/check-tag-names` allowlist.
+
 ## 0.2.0
 
 ### Minor Changes
