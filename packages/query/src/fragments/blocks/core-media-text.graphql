@@ -18,6 +18,8 @@ fragment CoreMediaTextFrag on CoreMediaText {
 	}
 	connectedMediaItem {
 		node {
+			id
+			databaseId
 			sizes
 		}
 	}
