@@ -5,6 +5,8 @@ import {
 	GetPagesToRenderStaticallyDocument,
 	type GetPagesToRenderStaticallyQuery,
 	type InputMaybe,
+	type StaticRouteNodeDataFragment,
+	type StaticRoutePageInfoFragment,
 } from '@graphqlTypes/graphql';
 import { fetchQuery } from '@/query-engine/registry';
 import { parseQueryResult as parseGlobalStyles } from '@/utils/parse-global-styles';
@@ -24,46 +26,12 @@ type VariableTypes = {
 		K,
 		string
 	> }Cursor` ]: InputMaybe< string >;
-} & {
-	[ K in keyof GetPagesToRenderStaticallyQuery as `hasMore${ Capitalize<
-		Extract< K, string >
-	> }` ]: InputMaybe< boolean >;
 };
 
 type PathInfo = {
-	uri?: string | null | undefined;
+	uri: string;
 	id: string;
 };
-
-/**
- * Merges additional data into the resolved data object.
- *
- * @param {Object} resolvedData - The existing resolved data.
- * @param {Object} additionalData - The new data to merge.
- *
- * @return {void}
- */
-function mergeResolvedData(
-	resolvedData: Record< string, PathInfo[] >,
-	additionalData: Record< string, PathInfo[] >
-): void {
-	Object.entries( additionalData ).forEach( ( [ key, paths ] ) => {
-		if ( ! resolvedData[ key ] ) {
-			resolvedData[ key ] = [];
-		}
-		resolvedData[ key ] = [ ...resolvedData[ key ]!, ...paths ];
-	} );
-}
-
-/**
- * Capitalizes the first letter of a string.
- *
- * @param {string} str - The string to capitalize.
- * @return The capitalized string.
- */
-function capitalize( str: string ): string {
-	return str.charAt( 0 ).toUpperCase() + str.slice( 1 );
-}
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -113,20 +81,17 @@ export class QueryEngine {
 	};
 
 	/**
-	 * Fetches pages to be rendered statically.
+	 * Fetches paths to be rendered statically.
 	 *
 	 * @param {Object} variables - The variables for the query.
-	 * @return The pages to be rendered statically.
+	 * @return The path data to be rendered statically.
 	 */
-	static getPathsToStaticallyGenerate = async (
+	static getStaticPaths = async (
 		variables: VariableTypes = {
 			first: 100,
 			contentNodesCursor: null,
-			hasMoreContentNodes: true,
 			termsCursor: null,
-			hasMoreTerms: true,
 			usersCursor: null,
-			hasMoreUsers: true,
 		}
 	): Promise< Record< string, PathInfo[] > > => {
 		const data = await fetchQuery( {
@@ -135,6 +100,9 @@ export class QueryEngine {
 			options: {
 				variables: {
 					...variables,
+					hasMoreContentNodes: !! variables.contentNodesCursor,
+					hasMoreTerms: !! variables.termsCursor,
+					hasMoreUsers: !! variables.usersCursor,
 				},
 			},
 		} );
@@ -145,13 +113,11 @@ export class QueryEngine {
 			);
 		}
 
-		const resolvedData: Record< string, PathInfo[] > = {};
+		let resolvedData: Record< string, PathInfo[] > = {};
 
 		let shouldFetchMore = false;
 
-		const newVariables = {
-			...variables,
-		};
+		const newVariables: Record< string, string > = {};
 
 		Object.entries( data ).forEach( ( [ key, section ] ) => {
 			if ( ! section ) {
@@ -159,36 +125,36 @@ export class QueryEngine {
 			}
 
 			const { nodes, pageInfo } = section as {
-				nodes: PathInfo[];
-				pageInfo: { hasNextPage: boolean; endCursor: string | null };
+				nodes: StaticRouteNodeDataFragment[];
+				pageInfo: StaticRoutePageInfoFragment;
 			};
 
-			resolvedData[ key ] = nodes.map( ( { uri, id } ) => ( {
-				uri,
-				id,
-			} ) );
+			resolvedData[ key ] = nodes
+				.filter( ( { uri } ) => !! uri )
+				.map( ( { uri, id } ) => ( {
+					uri,
+					id,
+				} ) ) as PathInfo[];
 
-			if ( pageInfo.hasNextPage ) {
+			const cursorKey = `${ key }Cursor` as keyof VariableTypes;
+
+			if ( pageInfo.hasNextPage && pageInfo.endCursor ) {
 				shouldFetchMore = true;
-				( newVariables[
-					`hasMore${ capitalize( key ) }` as keyof VariableTypes
-				] as boolean ) = true;
-
-				( newVariables[ `${ key }Cursor` as keyof VariableTypes ] as
-					| string
-					| null
-					| undefined ) = pageInfo.endCursor;
-			} else {
-				( newVariables[
-					`hasMore${ capitalize( key ) }` as keyof VariableTypes
-				] as boolean ) = false;
+				newVariables[ cursorKey ] = pageInfo.endCursor;
 			}
 		} );
 
+		// Recursively fetch more data if there are more pages to fetch.
 		if ( shouldFetchMore ) {
-			const additionalData =
-				await QueryEngine.getPathsToStaticallyGenerate( newVariables );
-			mergeResolvedData( resolvedData, additionalData );
+			const additionalData = await QueryEngine.getStaticPaths( {
+				first: 100,
+				...newVariables,
+			} satisfies VariableTypes );
+
+			resolvedData = {
+				...resolvedData,
+				...additionalData,
+			};
 		}
 
 		return resolvedData;
