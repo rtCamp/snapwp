@@ -53,11 +53,11 @@ export async function TemplateRenderer( {
 					</div>
 				</main>
 			</TemplateScripts>
-			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 
 			{ /* @todo: Check if we can patch this with either the portal or the @wordpress/hooks implementation. */ }
 			<LightboxOverlay />
 
+			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 			<Script
 				strategy="beforeInteractive"
 				dangerouslySetInnerHTML={ {

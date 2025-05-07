@@ -243,12 +243,13 @@ const getImageProps = (
 };
 
 /**
- * Is Lightbox enabled for the image.
+ * Is Lightbox enabled for the image. If enabled the <LightboxOverlay> component will be added in the template renderer.
  *
  * @param {string} lightbox The lightbox attribute.
  *
  * @return Whether the lightbox is enabled.
  */
+// @todo to colocate the lightbox overlay here and portal it where needed
 const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
 	if ( ! lightbox ) {
 		return false;
