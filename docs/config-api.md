@@ -39,12 +39,19 @@ SnapWP allows you to define configurations in a `snapwp.config.ts` (or `.mjs` or
 Example `snapwp.config.ts`:
 
 ```ts
-``tsx
 // snapwp.config.ts
 
 import type { SnapWPConfig } from '@snapwp/core/config';
+import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Example engine import
 
 const config: SnapWPConfig = {
+	query: {
+		engine: ApolloClientEngine, // Specify the query engine to use (required)
+		options: {
+			// Additional options specific to the engine's client, as necessary.
+		},
+	},
+
 	/* your custom configuration */
 };
 
@@ -53,12 +60,80 @@ export default config;
 
 Here are the available configuration options:
 
-| Property           | Type                     | Default Value                                                   | Description                                                                                                                                     |
-| ------------------ | ------------------------ | --------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `parserOptions`    | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx) | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
-| `blockDefinitions` | `BlockDefinitions`       | [blocks](../packages/blocks/src/blocks/index.ts)                | Block definitions for the editor.<br />[Learn more](./overloading-wp-behavior.md#overloading-blocks)                                            |
+| Property           | Type                     | Default Value                                                              | Description                                                                                                                                     |
+| ------------------ | ------------------------ | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `blockDefinitions` | `BlockDefinitions`       | [blocks](../packages/blocks/src/blocks/index.ts)                           | Block definitions for the editor.<br />[Learn more](./overloading-wp-behavior.md#overloading-blocks)                                            |
+| `parserOptions`    | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx)            | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
+| `query`            | `QueryEngine`            | [ApolloClientEngine](../packages/plugin-apollo-client/src/engine/index.ts) | Configuration for the GraphQL query engine.<br />See below for more details on how to customize it.[Learn more](./query-engine.md)              |
 
 Config values are available via their respective keys in the `getConfig()` function.
+
+### `query` Configuration
+
+The `query` configuration is used to specify which Query Engine to use for making GraphQL requests. You can either use a default engine (such as Apollo Client) or create and configure a custom one.
+
+#### Options:
+
+| Property  | Type           | Default Value                                                              | Description                                                                                                                                                          |
+| --------- | -------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `engine`  | `QueryEngine`  | [ApolloClientEngine](../packages/plugin-apollo-client/src/engine/index.ts) | The GraphQL client engine to use for executing queries. You can use one of the available engines or create your own.[Learn more](./query-engine.md#config-structure) |
+| `options` | `QueryOptions` | undefined                                                                  | Any client-specific options that may be required when initializing the engine (e.g., custom configurations). [Learn more](./query-engine.md#config-structure)        |
+
+#### Changing Query Engine from Apollo Client (default) to TanStack Query
+
+To change your query engine from Apollo Client to TanStack (React Query), you just need to update the engine in your `snapwp.config.ts` file after installation of required Query Engine _(here, TanStack Query)_.
+
+**Here’s how you can define and use a query engine:**
+
+1. **Add the `@snapwp/plugin-tanstack-query` package to your project's dependencies:**
+
+    ```bash
+    npm install @snapwp/plugin-tanstack-query --save
+    ```
+
+2. **Update your snapwp.config.ts file to use the TanStackQueryEngine instead of the default ApolloClientEngine:**
+
+    Example `(snapwp.config.ts)`:
+
+    ```diff
+    import type { SnapWPConfig } from '@snapwp/core/config';
+    - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
+    + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
+
+
+    const config: SnapWPConfig = {
+    	query: {
+    - 		engine: ApolloClientEngine, // Switching from Apollo Client.
+    + 		engine: TanStackQueryEngine, // Switching to TanStack Query.
+    	},
+    };
+
+    export default config;
+    ```
+
+In this example, we're configuring to switch usage to `TanStackQueryEngine`. If you want to create a custom query engine, refer to the [Creating a Custom Query Engine guide](./query-engine.md#creating-a-custom-query-engine).
+
+#### Example for a Custom Query Engine Configuration
+
+To configure a custom GraphQL client, follow this pattern in the snapwp.config.ts:
+
+```ts
+import type { SnapWPConfig } from '@snapwp/core/config';
+import { CustomQueryEngine } from '@snapwp/plugin-my-custom-engine'; // Import your custom engine.
+
+const config: SnapWPConfig = {
+	query: {
+		engine: CustomQueryEngine, // Set your custom query engine
+		options: {
+			// Optional: Provide custom options for your query engine, such as authentication, headers, etc.
+		},
+	},
+};
+
+export default config;
+```
+
+This configuration allows you to replace the default engine with your custom engine. For more information about creating a custom query engine, see [Creating a Custom Query Engine](./query-engine.md#creating-a-custom-query-engine).
 
 ## Integration with `next.config.ts`
 
