@@ -12,5 +12,12 @@ module.exports = {
 	],
 	rules: {
 		'n/no-process-env': [ 'error' ],
+		// Add support for tsdoc `@typeParam` to JSdoc.
+		'jsdoc/check-tag-names': [
+			'warn',
+			{
+				definedTags: [ 'typeParam' ],
+			},
+		],
 	},
 };
