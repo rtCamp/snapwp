@@ -7,7 +7,6 @@ import {
 	type ApolloClientOptions,
 	type NormalizedCacheObject,
 	type OperationVariables,
-	type QueryOptions,
 	type ServerError,
 	type ServerParseError,
 } from '@apollo/client';
@@ -15,7 +14,7 @@ import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
 import { QueryProvider as ApolloQueryProvider } from './query-provider';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
-import type { QueryEngine } from '@snapwp/types';
+import type { QueryEngine, QueryOptions } from '@snapwp/types';
 
 export type clientType = ApolloClient< NormalizedCacheObject >;
 export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
@@ -23,7 +22,7 @@ export type clientOptionsType = ApolloClientOptions< NormalizedCacheObject >;
 type ApolloQueryArgs< TData, TQueryVars extends Record< string, unknown > > = {
 	name: string;
 	query: TypedDocumentNode< TData, TQueryVars >;
-	options?: QueryOptions< TQueryVars, TData >;
+	options?: QueryOptions< TQueryVars >;
 };
 
 /**
@@ -79,24 +78,21 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 
 	/**
 	 * Executes a GraphQL query using the Apollo Client instance and writes the result to the cache.
-	 * @param { Object } props An object containing:
-	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryOptions.
+	 * @param { Object } props - Object containing:
+	 * @param { string } props.name - A string that uniquely identifies the query in the cache.
+	 * @param { import('@apollo/client').DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { QueryOptions<TQueryVars> } props.options - Optional query options compatible with Apollo's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
-	async fetchQuery<
-		TData,
-		TQueryOptions extends Record< string, unknown >,
-	>( {
+	async fetchQuery< TData, TQueryVars extends Record< string, unknown > >( {
 		name,
 		query,
 		options,
-	}: ApolloQueryArgs< TData, TQueryOptions > ): Promise< TData > {
+	}: ApolloQueryArgs< TData, TQueryVars > ): Promise< TData > {
 		try {
 			const queryResult = await this.getClient().query< TData >( {
-				...options,
+				...( options || {} ),
 				query,
 				// @todo: make this customizable. See https://github.com/rtCamp/headless/issues/461
 				fetchPolicy: 'no-cache',
@@ -126,15 +122,15 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 	/**
 	 * Executes a GraphQL query as a React hook using Apollo's useQuery.
 	 * @param { Object } props An object containing:
-	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
-	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
+	 * @param { string } props.name - A string that uniquely identifies the query in the cache.
+	 * @param { import('@apollo/client').DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { QueryOptions<TQueryVars> } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
-	useQuery< TData, TQueryOptions extends Record< string, unknown > >( {
+	useQuery< TData, TQueryVars extends Record< string, unknown > >( {
 		query,
 		options,
-	}: ApolloQueryArgs< TData, TQueryOptions > ): TData {
+	}: ApolloQueryArgs< TData, TQueryVars > ): TData {
 		// eslint-disable-next-line react-hooks/rules-of-hooks -- This is a hook, so we need to use it in a React component.
 		return useApolloQuery< TData, OperationVariables >( query, options )
 			.data as TData;

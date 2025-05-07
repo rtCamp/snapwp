@@ -14,7 +14,7 @@ export interface QueryEngine< TClient > {
 	 *
 	 * @return The server-side query client instance.
 	 */
-	getClient(): TClient;
+	getClient: () => TClient;
 
 	/**
 	 * Set or retrieve the client instance on the client side.
@@ -22,7 +22,7 @@ export interface QueryEngine< TClient > {
 	 * @param client - The query client instance or undefined.
 	 * @return The query client instance or undefined.
 	 */
-	useClient( client: TClient | undefined ): TClient;
+	useClient: ( client: TClient | undefined ) => TClient;
 
 	/**
 	 * Perform a server-safe data fetch using the GraphQL client.
@@ -33,9 +33,9 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return A promise resolving with the queried data.
 	 */
-	fetchQuery< TData, TQueryVars extends Record< string, unknown > >(
+	fetchQuery: < TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
-	): Promise< TData >;
+	) => Promise< TData >;
 
 	/**
 	 * React hook for client-side GraphQL queries.
@@ -46,9 +46,9 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return The queried data.
 	 */
-	useQuery< TData, TQueryVars extends Record< string, unknown > >(
+	useQuery: < TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
-	): TData;
+	) => TData;
 
 	/**
 	 * React component that provides the query client context.
