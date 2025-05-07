@@ -13,7 +13,7 @@ import {
 } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { QueryProvider } from './query-provider';
+import { QueryProvider as ApolloQueryProvider } from './query-provider';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import type { QueryEngine } from '@snapwp/types';
 
@@ -139,6 +139,8 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 		return useApolloQuery< TData, OperationVariables >( query, options )
 			.data as TData;
 	}
+
+	QueryProvider = ApolloQueryProvider;
 }
 
 /**

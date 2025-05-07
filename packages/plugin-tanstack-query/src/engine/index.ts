@@ -8,7 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { request } from 'graphql-request';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { QueryProvider } from './query-provider';
+import { QueryProvider as TanstackQueryProvider } from './query-provider';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import type { QueryEngine, QueryOptions } from '@snapwp/types';
 
@@ -120,6 +120,8 @@ export class TanStackQueryEngine implements QueryEngine< QueryClient > {
 		} as UseQueryOptions< TData, unknown > );
 		return result.data as TData;
 	}
+
+	QueryProvider = TanstackQueryProvider;
 }
 
 /**
