@@ -139,7 +139,6 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 		return useApolloQuery< TData, OperationVariables >( query, options )
 			.data as TData;
 	}
-	QueryProvider = QueryProvider;
 }
 
 /**

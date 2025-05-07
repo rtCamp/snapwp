@@ -120,8 +120,6 @@ export class TanStackQueryEngine implements QueryEngine< QueryClient > {
 		} as UseQueryOptions< TData, unknown > );
 		return result.data as TData;
 	}
-
-	QueryProvider = QueryProvider;
 }
 
 /**
