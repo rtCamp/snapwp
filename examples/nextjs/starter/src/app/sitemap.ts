@@ -6,6 +6,13 @@ import {
 
 export { generateSitemaps };
 
+/**
+ * Generate a sitemap for a specific path.
+ *
+ * @param {string} id - The ID of the sitemap to generate.
+ *
+ * @return {Promise<MetadataRoute.Sitemap>} - The generated sitemap.
+ */
 export default async function sitemap( {
 	id,
 }: {

@@ -10,17 +10,15 @@ import type { SitemapData } from '@snapwp/types';
  * @return {boolean} - True if the path should be ignored, false otherwise
  */
 export const shouldIgnoreSitemapPath = ( loc: string ): boolean => {
-	const { sitemap: sitemapConfig } = getConfig();
-	if ( ! sitemapConfig?.config?.ignorePatterns ) {
+	const { sitemapConfig } = getConfig();
+	if ( ! sitemapConfig?.ignorePatterns ) {
 		return false;
 	}
 
-	const ignorePattern = sitemapConfig.config.ignorePatterns.find(
-		( pattern ) => {
-			const regex = new RegExp( pattern );
-			return regex.test( loc );
-		}
-	);
+	const ignorePattern = sitemapConfig.ignorePatterns.find( ( pattern ) => {
+		const regex = new RegExp( pattern );
+		return regex.test( loc );
+	} );
 
 	return !! ignorePattern;
 };

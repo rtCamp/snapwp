@@ -36,10 +36,8 @@ describe( 'SnapWPConfigManager functions', () => {
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
-		sitemap: {
-			config: {
-				indexSitemapUri: '/wp-sitemap.xml',
-			},
+		sitemapConfig: {
+			indexSitemapUri: '/wp-sitemap.xml',
 		},
 	};
 

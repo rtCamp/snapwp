@@ -1,7 +1,7 @@
 import { XMLParser, type X2jOptions } from 'fast-xml-parser';
 import { Logger } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import { type SitemapDataFromXML } from '@/sitemap/utils';
+import type { SitemapDataFromXML } from '@/sitemap/utils';
 
 const XMLParserConfig: Partial< X2jOptions > = {
 	ignoreAttributes: false,
@@ -21,13 +21,13 @@ const XMLParserConfig: Partial< X2jOptions > = {
 export const fetchIndexSitemap = async (
 	customXMLParserConfig?: X2jOptions
 ): Promise< SitemapDataFromXML[] > => {
-	const { wpHomeUrl, sitemap: sitemapConfig } = getConfig();
+	const { wpHomeUrl, sitemapConfig } = getConfig();
 
-	if ( ! sitemapConfig?.config?.indexSitemapUri ) {
+	if ( ! sitemapConfig?.indexSitemapUri ) {
 		return [];
 	}
 
-	const wpSitemapIndexPath = `${ wpHomeUrl }/${ sitemapConfig.config.indexSitemapUri }`;
+	const wpSitemapIndexPath = `${ wpHomeUrl }/${ sitemapConfig.indexSitemapUri }`;
 
 	const response = await fetch( wpSitemapIndexPath );
 

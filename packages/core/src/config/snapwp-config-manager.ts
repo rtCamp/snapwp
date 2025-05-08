@@ -53,9 +53,7 @@ export interface SnapWPConfig {
 	/**
 	 * Sitemap configuration.
 	 */
-	sitemap?: {
-		config?: SitemapConfig;
-	};
+	sitemapConfig?: SitemapConfig;
 	/**
 	 * Query Engine
 	 */
@@ -79,8 +77,6 @@ type ConfigSchema< T > = {
 	};
 };
 
-const INDEX_SITEMAP_URI = '/wp-sitemap.xml';
-
 /**
  * Default configuration.
  */
@@ -91,10 +87,8 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
-	sitemap: {
-		config: {
-			indexSitemapUri: INDEX_SITEMAP_URI,
-		},
+	sitemapConfig: {
+		indexSitemapUri: '/wp-sitemap.xml',
 	},
 };
 
@@ -147,7 +141,7 @@ class SnapWPConfigManager {
 			type: 'object',
 			required: false,
 		},
-		sitemap: {
+		sitemapConfig: {
 			type: 'object',
 			required: false,
 		},

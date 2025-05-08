@@ -91,12 +91,12 @@ export const generateSubSitemaps = async (
 
 	const sitemaps: SitemapData[] = [];
 
-	const { frontendUrl, sitemap: sitemapConfig } = getConfig();
+	const { frontendUrl, sitemapConfig } = getConfig();
 
 	let customPaths: SitemapData[] = [];
 
-	if ( sitemapConfig?.config?.customPaths ) {
-		customPaths = sitemapConfig?.config?.customPaths[ id ] || [];
+	if ( sitemapConfig?.customPaths ) {
+		customPaths = sitemapConfig.customPaths[ id ] || [];
 	}
 
 	customPaths.forEach( ( customPath: SitemapData ) => {
