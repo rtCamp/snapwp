@@ -8,7 +8,7 @@ import { getSitemapPaths, generateSubSitemaps } from '@snapwp/next';
  *
  * @return {Promise<Array<{ id: string }>>} - An array of Sitemap IDs.
  */
-export const generateSitemap = async () => {
+export const generateSitemap = async (): Promise< Array< { id: string } > > => {
 	return await getSitemapPaths();
 };
 

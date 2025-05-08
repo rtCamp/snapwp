@@ -1,6 +1,7 @@
 import { toFrontendUri } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import type { SitemapData, SitemapDataFromXML } from '@snapwp/types';
+import type { SitemapDataFromXML } from '@/sitemap/types';
+import type { SitemapData } from '@snapwp/types';
 
 /**
  * Check if the given sitemap path should be ignored based on the ignore patterns

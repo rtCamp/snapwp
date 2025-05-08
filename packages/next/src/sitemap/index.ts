@@ -2,7 +2,8 @@ import { removeLeadingSlash } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { fetchIndexSitemap, fetchSubSitemap } from '@/sitemap/services';
 import { parseSitemap } from '@/sitemap/utils';
-import type { SitemapData, SitemapDataFromXML } from '@snapwp/types';
+import type { SitemapDataFromXML } from '@/sitemap/types';
+import type { SitemapData } from '@snapwp/types';
 import type { X2jOptions } from 'fast-xml-parser';
 
 /**

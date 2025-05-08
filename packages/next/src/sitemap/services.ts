@@ -1,7 +1,7 @@
 import { XMLParser, type X2jOptions } from 'fast-xml-parser';
 import { Logger } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import type { SitemapDataFromXML } from '@snapwp/types';
+import type { SitemapDataFromXML } from '@/sitemap/types';
 
 const XMLParserConfig: Partial< X2jOptions > = {
 	ignoreAttributes: false,
