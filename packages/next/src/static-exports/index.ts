@@ -11,17 +11,10 @@ export const getPathsToRenderStatically = async (): Promise<
 	const pathsToRender = await QueryEngine.getStaticPaths();
 
 	const paths: Array< { uri: string[] } > = [];
-	Object.keys( pathsToRender ).forEach( ( key ) => {
-		if ( ! pathsToRender[ key ] ) {
-			return;
-		}
 
-		pathsToRender[ key ]?.forEach( ( path ) => {
-			if ( path.uri ) {
-				const slugs = path.uri.split( '/' ).filter( Boolean );
-				paths.push( { uri: slugs } );
-			}
-		} );
+	pathsToRender.forEach( ( pathToRender ) => {
+		const slugs = pathToRender.split( '/' ).filter( Boolean );
+		paths.push( { uri: slugs } );
 	} );
 
 	return paths;

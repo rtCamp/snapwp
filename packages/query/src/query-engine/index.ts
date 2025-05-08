@@ -4,7 +4,7 @@ import {
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
 	type GetPagesToRenderStaticallyQuery,
-	type InputMaybe,
+	type GetPagesToRenderStaticallyQueryVariables,
 	type StaticRouteNodeDataFragment,
 	type StaticRoutePageInfoFragment,
 } from '@graphqlTypes/graphql';
@@ -18,20 +18,6 @@ import type {
 	StyleSheetProps,
 } from '@snapwp/core';
 import type { BlockData } from '@snapwp/types';
-
-type VariableTypes = {
-	first: number;
-} & {
-	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
-		K,
-		string
-	> }Cursor` ]: InputMaybe< string >;
-};
-
-type PathInfo = {
-	uri: string;
-	id: string;
-};
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -83,26 +69,18 @@ export class QueryEngine {
 	/**
 	 * Fetches paths to be rendered statically.
 	 *
-	 * @param {Object} variables - The variables for the query.
+	 * @param {GetPagesToRenderStaticallyQueryVariables} variables - The variables for the query.
 	 * @return The path data to be rendered statically.
 	 */
 	static getStaticPaths = async (
-		variables: VariableTypes = {
-			first: 100,
-			contentNodesCursor: null,
-			termsCursor: null,
-			usersCursor: null,
-		}
-	): Promise< Record< string, PathInfo[] > > => {
+		variables: GetPagesToRenderStaticallyQueryVariables = {}
+	): Promise< string[] > => {
 		const data = await fetchQuery( {
 			name: 'GetPagesToRenderStatically',
 			query: GetPagesToRenderStaticallyDocument,
 			options: {
 				variables: {
 					...variables,
-					hasMoreContentNodes: !! variables.contentNodesCursor,
-					hasMoreTerms: !! variables.termsCursor,
-					hasMoreUsers: !! variables.usersCursor,
 				},
 			},
 		} );
@@ -113,34 +91,44 @@ export class QueryEngine {
 			);
 		}
 
-		let resolvedData: Record< string, PathInfo[] > = {};
-
+		const resolvedData: string[] = [];
 		let shouldFetchMore = false;
-
-		const newVariables: Record< string, string > = {};
+		const newVariables = {
+			...variables,
+		};
 
 		Object.entries( data ).forEach( ( [ key, section ] ) => {
 			if ( ! section ) {
 				return;
 			}
 
+			// Here we know for sure that the key which is string is a key of GetPagesToRenderStaticallyQuery so it's safe to cast it.
+			const resolvedKey = key as keyof GetPagesToRenderStaticallyQuery;
+
 			const { nodes, pageInfo } = section as {
 				nodes: StaticRouteNodeDataFragment[];
 				pageInfo: StaticRoutePageInfoFragment;
 			};
 
-			resolvedData[ key ] = nodes
-				.filter( ( { uri } ) => !! uri )
-				.map( ( { uri, id } ) => ( {
-					uri,
-					id,
-				} ) ) as PathInfo[];
+			resolvedData.push(
+				...nodes
+					.filter( ( { uri } ) => !! uri )
+					.map( ( { uri } ) => uri! )
+			);
 
-			const cursorKey = `${ key }Cursor` as keyof VariableTypes;
+			const cursorKey =
+				`${ resolvedKey }Cursor` satisfies keyof GetPagesToRenderStaticallyQueryVariables;
+			const hasMoreKey = `hasMore${ capitalize(
+				resolvedKey
+			) }` satisfies keyof GetPagesToRenderStaticallyQueryVariables;
 
 			if ( pageInfo.hasNextPage && pageInfo.endCursor ) {
 				shouldFetchMore = true;
 				newVariables[ cursorKey ] = pageInfo.endCursor;
+				newVariables[ hasMoreKey ] = true;
+			} else {
+				newVariables[ cursorKey ] = null;
+				newVariables[ hasMoreKey ] = false;
 			}
 		} );
 
@@ -149,14 +137,23 @@ export class QueryEngine {
 			const additionalData = await QueryEngine.getStaticPaths( {
 				first: 100,
 				...newVariables,
-			} satisfies VariableTypes );
+			} );
 
-			resolvedData = {
-				...resolvedData,
-				...additionalData,
-			};
+			resolvedData.push( ...additionalData );
 		}
 
 		return resolvedData;
 	};
+}
+
+/**
+ * Capitalizes the first letter of a string.
+ *
+ * @param {T} key - The string to capitalize.
+ *
+ * @return {Capitalize< T >} - The capitalized string.
+ */
+function capitalize< T extends string >( key: T ): Capitalize< T > {
+	return ( key.charAt( 0 ).toUpperCase() +
+		key.slice( 1 ) ) as Capitalize< T >;
 }
