@@ -8,7 +8,12 @@ import { QueryEngine } from '@snapwp/query';
 export const getPathsToRenderStatically = async (): Promise<
 	Array< { uri: string[] } >
 > => {
-	const pathsToRender = await QueryEngine.getStaticPaths();
+	const pathsToRender = await QueryEngine.getStaticPaths( {
+		first: 100,
+		contentNodesHasMore: true,
+		termsHasMore: true,
+		usersHasMore: true,
+	} );
 
 	const paths: Array< { uri: string[] } > = [];
 

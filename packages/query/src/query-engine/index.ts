@@ -4,7 +4,7 @@ import {
 	GetGlobalStylesDocument,
 	GetPagesToRenderStaticallyDocument,
 	type GetPagesToRenderStaticallyQuery,
-	type GetPagesToRenderStaticallyQueryVariables,
+	type InputMaybe,
 	type StaticRouteNodeDataFragment,
 	type StaticRoutePageInfoFragment,
 } from '@graphqlTypes/graphql';
@@ -18,6 +18,20 @@ import type {
 	StyleSheetProps,
 } from '@snapwp/core';
 import type { BlockData } from '@snapwp/types';
+
+export type VariableType = {
+	first?: number;
+} & {
+	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+		K,
+		string
+	> }Cursor` ]: InputMaybe< string >;
+} & {
+	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+		K,
+		string
+	> }HasMore` ]: InputMaybe< boolean >;
+};
 
 /**
  * Singleton class to handle GraphQL queries using Apollo.
@@ -69,11 +83,11 @@ export class QueryEngine {
 	/**
 	 * Fetches paths to be rendered statically.
 	 *
-	 * @param {GetPagesToRenderStaticallyQueryVariables} variables - The variables for the query.
+	 * @param {VariableType} variables - The variables for the query.
 	 * @return The path data to be rendered statically.
 	 */
 	static getStaticPaths = async (
-		variables: GetPagesToRenderStaticallyQueryVariables = {}
+		variables: VariableType
 	): Promise< string[] > => {
 		const data = await fetchQuery( {
 			name: 'GetPagesToRenderStatically',
@@ -93,9 +107,7 @@ export class QueryEngine {
 
 		const resolvedData: string[] = [];
 		let shouldFetchMore = false;
-		const newVariables = {
-			...variables,
-		};
+		const newVariables: VariableType = {};
 
 		Object.entries( data ).forEach( ( [ key, section ] ) => {
 			if ( ! section ) {
@@ -117,18 +129,14 @@ export class QueryEngine {
 			);
 
 			const cursorKey =
-				`${ resolvedKey }Cursor` satisfies keyof GetPagesToRenderStaticallyQueryVariables;
-			const hasMoreKey = `hasMore${ capitalize(
-				resolvedKey
-			) }` satisfies keyof GetPagesToRenderStaticallyQueryVariables;
+				`${ resolvedKey }Cursor` satisfies keyof VariableType;
+			const hasMoreKey =
+				`${ resolvedKey }HasMore` satisfies keyof VariableType;
 
 			if ( pageInfo.hasNextPage && pageInfo.endCursor ) {
 				shouldFetchMore = true;
 				newVariables[ cursorKey ] = pageInfo.endCursor;
 				newVariables[ hasMoreKey ] = true;
-			} else {
-				newVariables[ cursorKey ] = null;
-				newVariables[ hasMoreKey ] = false;
 			}
 		} );
 
@@ -144,16 +152,4 @@ export class QueryEngine {
 
 		return resolvedData;
 	};
-}
-
-/**
- * Capitalizes the first letter of a string.
- *
- * @param {T} key - The string to capitalize.
- *
- * @return {Capitalize< T >} - The capitalized string.
- */
-function capitalize< T extends string >( key: T ): Capitalize< T > {
-	return ( key.charAt( 0 ).toUpperCase() +
-		key.slice( 1 ) ) as Capitalize< T >;
 }

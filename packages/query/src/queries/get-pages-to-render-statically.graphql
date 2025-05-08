@@ -18,21 +18,21 @@ fragment StaticRoutes on Connection {
 
 query GetPagesToRenderStatically(
 	$first: Int = 100
-	$hasMoreContentNodes: Boolean = true
+	$contentNodesHasMore: Boolean = false
 	$contentNodesCursor: String = null
-	$hasMoreTerms: Boolean = true
+	$termsHasMore: Boolean = false
 	$termsCursor: String = null
-	$hasMoreUsers: Boolean = true
+	$usersHasMore: Boolean = false
 	$usersCursor: String = null
 ) {
 	contentNodes(first: $first, after: $contentNodesCursor)
-		@include(if: $hasMoreContentNodes) {
+		@include(if: $contentNodesHasMore) {
 		...StaticRoutes
 	}
-	terms(first: $first, after: $termsCursor) @include(if: $hasMoreTerms) {
+	terms(first: $first, after: $termsCursor) @include(if: $termsHasMore) {
 		...StaticRoutes
 	}
-	users(first: $first, after: $usersCursor) @include(if: $hasMoreUsers) {
+	users(first: $first, after: $usersCursor) @include(if: $usersHasMore) {
 		...StaticRoutes
 	}
 }
