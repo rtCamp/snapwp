@@ -1,5 +1,6 @@
 import Script from 'next/script';
 import { QueryEngine } from '@snapwp/query';
+import { TemplateFooter } from './template-footer';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 
@@ -55,8 +56,10 @@ export async function TemplateRenderer( {
 					</div>
 				</main>
 			</TemplateScripts>
-			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 
+			<TemplateFooter />
+
+			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 			<Script
 				strategy="beforeInteractive"
 				dangerouslySetInnerHTML={ {
