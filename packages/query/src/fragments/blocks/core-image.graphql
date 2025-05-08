@@ -1,6 +1,7 @@
 fragment CoreImageFrag on CoreImage {
 	connectedMediaItem {
 		node {
+			id
 			databaseId
 			sizes
 		}
