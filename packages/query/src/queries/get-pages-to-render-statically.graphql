@@ -18,11 +18,11 @@ fragment StaticRoutes on Connection {
 
 query GetPagesToRenderStatically(
 	$first: Int = 100
-	$contentNodesHasMore: Boolean = false
+	$contentNodesHasMore: Boolean = true
 	$contentNodesCursor: String = null
-	$termsHasMore: Boolean = false
+	$termsHasMore: Boolean = true
 	$termsCursor: String = null
-	$usersHasMore: Boolean = false
+	$usersHasMore: Boolean = true
 	$usersCursor: String = null
 ) {
 	contentNodes(first: $first, after: $contentNodesCursor)

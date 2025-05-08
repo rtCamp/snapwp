@@ -87,7 +87,7 @@ export class QueryEngine {
 	 * @return The path data to be rendered statically.
 	 */
 	static getStaticPaths = async (
-		variables: VariableType
+		variables: VariableType = {}
 	): Promise< string[] > => {
 		const data = await fetchQuery( {
 			name: 'GetPagesToRenderStatically',
@@ -122,12 +122,14 @@ export class QueryEngine {
 				pageInfo: StaticRoutePageInfoFragment;
 			};
 
+			// Store the data.
 			resolvedData.push(
 				...nodes
 					.filter( ( { uri } ) => !! uri )
 					.map( ( { uri } ) => uri! )
 			);
 
+			// Set the pagination variables for the next fetch.
 			const cursorKey =
 				`${ resolvedKey }Cursor` satisfies keyof VariableType;
 			const hasMoreKey =
@@ -136,8 +138,8 @@ export class QueryEngine {
 			if ( pageInfo.hasNextPage && pageInfo.endCursor ) {
 				shouldFetchMore = true;
 				newVariables[ cursorKey ] = pageInfo.endCursor;
-				newVariables[ hasMoreKey ] = true;
 			}
+			newVariables[ hasMoreKey ] = !! newVariables?.[ cursorKey ];
 		} );
 
 		// Recursively fetch more data if there are more pages to fetch.
@@ -146,7 +148,6 @@ export class QueryEngine {
 				first: 100,
 				...newVariables,
 			} );
-
 			resolvedData.push( ...additionalData );
 		}
 
