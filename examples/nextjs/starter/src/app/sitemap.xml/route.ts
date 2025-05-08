@@ -4,7 +4,7 @@ import { generateIndexSitemap } from '@snapwp/next';
 /**
  * Generate a sitemap index for all sitemaps.
  *
- * @return {Promise<NextResponse>} - The generated sitemap index.
+ * @return The generated sitemap index.
  */
 export async function GET(): Promise< NextResponse > {
 	const sitemaps = await generateIndexSitemap();
