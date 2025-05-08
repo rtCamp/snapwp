@@ -9,6 +9,8 @@ export { generateSitemaps };
 /**
  * Generate a sitemap for a specific path.
  *
+ * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
+ *
  * @param {string} id - The ID of the sitemap to generate.
  *
  * @return {Promise<MetadataRoute.Sitemap>} - The generated sitemap.
