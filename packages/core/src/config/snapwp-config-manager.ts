@@ -3,7 +3,11 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions, QueryEngine } from '@snapwp/types';
+import type {
+	BlockDefinitions,
+	QueryEngine,
+	SitemapConfig,
+} from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -47,6 +51,10 @@ export interface SnapWPConfig {
 	 */
 	parserOptions?: HTMLReactParserOptions;
 	/**
+	 * Sitemap configuration.
+	 */
+	sitemap?: SitemapConfig;
+	/**
 	 * Query Engine
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required to allow any client
@@ -79,6 +87,9 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
+	sitemap: {
+		indexUri: '/wp-sitemap.xml',
+	},
 };
 
 /**
@@ -127,6 +138,10 @@ class SnapWPConfigManager {
 			required: false,
 		},
 		parserOptions: {
+			type: 'object',
+			required: false,
+		},
+		sitemap: {
 			type: 'object',
 			required: false,
 		},
