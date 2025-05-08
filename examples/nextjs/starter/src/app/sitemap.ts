@@ -1,10 +1,16 @@
 import type { MetadataRoute } from 'next';
-import {
-	getSitemapPaths as generateSitemaps,
-	generateSubSitemaps,
-} from '@snapwp/next';
+import { getSitemapPaths, generateSubSitemaps } from '@snapwp/next';
 
-export { generateSitemaps };
+/**
+ * Returns Sitemap IDs to be dynamically generated.
+ *
+ * https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap#generating-multiple-sitemaps
+ *
+ * @return {Promise<Array<{ id: string }>>} - An array of Sitemap IDs.
+ */
+export const generateSitemap = async () => {
+	return await getSitemapPaths();
+};
 
 /**
  * Generate a sitemap for a specific path.
