@@ -44,7 +44,7 @@ export const fetchIndexSitemap = async (
 	/**
 	 * Create a parser to convert our XML data into a JS object
 	 *
-	 * @link https://github.com/NaturalIntelligence/fast-xml-parser/blob/HEAD/docs/v4/6.HTMLParsing.md
+	 * @see https://github.com/NaturalIntelligence/fast-xml-parser/blob/HEAD/docs/v4/6.HTMLParsing.md
 	 */
 	const parser = new XMLParser( {
 		...XMLParserConfig,
