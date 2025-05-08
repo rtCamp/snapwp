@@ -8,7 +8,9 @@ import { getSitemapPaths, generateSubSitemaps } from '@snapwp/next';
  *
  * @return An array of Sitemap IDs.
  */
-export const generateSitemap = async (): Promise< Array< { id: string } > > => {
+export const generateSitemaps = async (): Promise<
+	Array< { id: string } >
+> => {
 	return await getSitemapPaths();
 };
 
@@ -17,7 +19,8 @@ export const generateSitemap = async (): Promise< Array< { id: string } > > => {
  *
  * @see https://nextjs.org/docs/app/api-reference/file-conventions/metadata/sitemap
  *
- * @param id - The ID of the sitemap to generate.
+ * @param root0 - The object containing the sitemap ID.
+ * @param root0.id - The ID of the sitemap to generate.
  *
  * @return The generated sitemap.
  */
