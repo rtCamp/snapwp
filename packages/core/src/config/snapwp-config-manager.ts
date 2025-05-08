@@ -53,7 +53,7 @@ export interface SnapWPConfig {
 	/**
 	 * Sitemap configuration.
 	 */
-	sitemapConfig?: SitemapConfig;
+	sitemap?: SitemapConfig;
 	/**
 	 * Query Engine
 	 */
@@ -87,8 +87,8 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
-	sitemapConfig: {
-		indexSitemapUri: '/wp-sitemap.xml',
+	sitemap: {
+		indexUri: '/wp-sitemap.xml',
 	},
 };
 
@@ -141,7 +141,7 @@ class SnapWPConfigManager {
 			type: 'object',
 			required: false,
 		},
-		sitemapConfig: {
+		sitemap: {
 			type: 'object',
 			required: false,
 		},

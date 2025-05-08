@@ -1,8 +1,8 @@
 import { removeLeadingSlash } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { fetchIndexSitemap, fetchSubSitemap } from '@/sitemap/services';
-import { parseSitemap, type SitemapDataFromXML } from '@/sitemap/utils';
-import type { SitemapData } from '@snapwp/types';
+import { parseSitemap } from '@/sitemap/utils';
+import type { SitemapData, SitemapDataFromXML } from '@snapwp/types';
 import type { X2jOptions } from 'fast-xml-parser';
 
 /**
@@ -91,7 +91,7 @@ export const generateSubSitemaps = async (
 
 	const sitemaps: SitemapData[] = [];
 
-	const { frontendUrl, sitemapConfig } = getConfig();
+	const { frontendUrl, sitemap: sitemapConfig } = getConfig();
 
 	let customPaths: SitemapData[] = [];
 

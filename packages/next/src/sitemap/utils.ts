@@ -1,6 +1,6 @@
 import { toFrontendUri } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
-import type { SitemapData } from '@snapwp/types';
+import type { SitemapData, SitemapDataFromXML } from '@snapwp/types';
 
 /**
  * Check if the given sitemap path should be ignored based on the ignore patterns
@@ -10,7 +10,7 @@ import type { SitemapData } from '@snapwp/types';
  * @return {boolean} - True if the path should be ignored, false otherwise
  */
 export const shouldIgnoreSitemapPath = ( loc: string ): boolean => {
-	const { sitemapConfig } = getConfig();
+	const { sitemap: sitemapConfig } = getConfig();
 	if ( ! sitemapConfig?.ignorePatterns ) {
 		return false;
 	}
@@ -61,19 +61,4 @@ export const parseSitemap = ( {
 	}
 
 	return sitemapData;
-};
-
-export type SitemapDataFromXML = {
-	loc?: string;
-	lastmod?: string | Date | undefined;
-	changeFrequency?:
-		| 'always'
-		| 'hourly'
-		| 'daily'
-		| 'weekly'
-		| 'monthly'
-		| 'yearly'
-		| 'never'
-		| undefined;
-	priority?: number | undefined;
 };
