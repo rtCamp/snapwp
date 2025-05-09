@@ -2,4 +2,4 @@
 "@snapwp/query": patch
 ---
 
-tests: backfill test for `parseGeneralSettings` utils function.
+tests: backfill test for `generateRootQuery` and `generateTemplateQuery` utils function.
