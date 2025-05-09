@@ -76,7 +76,7 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 1. Install the required packages in your Next.js project:
 
     ```bash
-    npm install --save @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query
+    npm install --save @snapwp/blocks @snapwp/core @snapwp/next @snapwp/query @snapwp/plugin-apollo-client
     ```
 
 2. Create an `.env` file in the project root. The contents for the .env file can be copied from `Dashboard > WPGraphQL > Settings > SnapWP Helper` from your [WordPress backend](#backend-setup).
@@ -86,8 +86,13 @@ To create a new headless WordPress app using SnapWP, follow these steps:
     ```typescript
     // snapwp.config.ts
     import type { SnapWPConfig } from '@snapwp/core/config';
+    import { ApolloClientEngine } from '@snapwp/plugin-apollo-client';
 
-    const config: SnapWPConfig = {};
+    const config: SnapWPConfig = {
+    	query: {
+    		engine: ApolloClientEngine,
+    	},
+    };
 
     export default config;
     ```
