@@ -1,0 +1,38 @@
+fragment StaticRoutePageInfo on PageInfo {
+	endCursor
+	hasNextPage
+}
+fragment StaticRouteNodeData on UniformResourceIdentifiable {
+	uri
+	id
+}
+
+fragment StaticRoutes on Connection {
+	pageInfo {
+		...StaticRoutePageInfo
+	}
+	nodes {
+		...StaticRouteNodeData
+	}
+}
+
+query GetPagesToRenderStatically(
+	$first: Int = 100
+	$contentNodesHasMore: Boolean = true
+	$contentNodesCursor: String = null
+	$termsHasMore: Boolean = true
+	$termsCursor: String = null
+	$usersHasMore: Boolean = true
+	$usersCursor: String = null
+) {
+	contentNodes(first: $first, after: $contentNodesCursor)
+		@include(if: $contentNodesHasMore) {
+		...StaticRoutes
+	}
+	terms(first: $first, after: $termsCursor) @include(if: $termsHasMore) {
+		...StaticRoutes
+	}
+	users(first: $first, after: $usersCursor) @include(if: $usersHasMore) {
+		...StaticRoutes
+	}
+}
