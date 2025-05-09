@@ -33,9 +33,10 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return A promise resolving with the queried data.
 	 */
-	fetchQuery: < TData, TQueryVars extends Record< string, unknown > >(
+	// eslint-disable-next-line @typescript-eslint/method-signature-style -- @todo fix this and the downstream types.
+	fetchQuery< TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
-	) => Promise< TData >;
+	): Promise< TData >;
 
 	/**
 	 * React hook for client-side GraphQL queries.
@@ -46,9 +47,10 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return The queried data.
 	 */
-	useQuery: < TData, TQueryVars extends Record< string, unknown > >(
+	// eslint-disable-next-line @typescript-eslint/method-signature-style -- @todo fix this and the downstream types.
+	useQuery< TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
-	) => TData;
+	): TData;
 
 	/**
 	 * React component that provides the query client context.
