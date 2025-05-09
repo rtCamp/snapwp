@@ -30,7 +30,11 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"html-entities": "^2.5.2",
+		"html-entities": "^2.5.2"
+	},
+	"peerDependencies": {
+		"@snapwp/core": "^0.3.1",
+		"@snapwp/next": "^0.3.1",
 		"next": "^15"
 	},
 	"devDependencies": {
@@ -43,9 +47,5 @@
 		"tsc-watch": "*",
 		"typescript": "*",
 		"@snapwp/types": "*"
-	},
-	"peerDependencies": {
-		"@snapwp/core": "*",
-		"@snapwp/next": "*"
 	}
 }

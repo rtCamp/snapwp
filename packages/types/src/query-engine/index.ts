@@ -14,7 +14,7 @@ export interface QueryEngine< TClient > {
 	 *
 	 * @return The server-side query client instance.
 	 */
-	getClient(): TClient;
+	getClient: () => TClient;
 
 	/**
 	 * Set or retrieve the client instance on the client side.
@@ -22,7 +22,7 @@ export interface QueryEngine< TClient > {
 	 * @param client - The query client instance or undefined.
 	 * @return The query client instance or undefined.
 	 */
-	useClient( client: TClient | undefined ): TClient;
+	useClient: ( client: TClient | undefined ) => TClient;
 
 	/**
 	 * Perform a server-safe data fetch using the GraphQL client.
@@ -33,6 +33,7 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return A promise resolving with the queried data.
 	 */
+	// eslint-disable-next-line @typescript-eslint/method-signature-style -- @todo fix this and the downstream types.
 	fetchQuery< TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
 	): Promise< TData >;
@@ -46,6 +47,7 @@ export interface QueryEngine< TClient > {
 	 *   - options: Client-specific query options (kept unknown to allow flexibility; implementers can define stricter types).
 	 * @return The queried data.
 	 */
+	// eslint-disable-next-line @typescript-eslint/method-signature-style -- @todo fix this and the downstream types.
 	useQuery< TData, TQueryVars extends Record< string, unknown > >(
 		args: QueryArgs< TData, TQueryVars >
 	): TData;
