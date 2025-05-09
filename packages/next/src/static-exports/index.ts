@@ -5,7 +5,7 @@ import { QueryEngine } from '@snapwp/query';
  *
  * @return The paths to render statically.
  */
-export const getPathsToRenderStatically = async (): Promise<
+export const getWPStaticPaths = async (): Promise<
 	Array< { uri: string[] } >
 > => {
 	const pathsToRender = await QueryEngine.getStaticPaths();

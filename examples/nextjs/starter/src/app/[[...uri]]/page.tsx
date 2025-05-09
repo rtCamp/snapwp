@@ -1,4 +1,4 @@
-import { getPathsToRenderStatically, TemplateRenderer } from '@snapwp/next';
+import { getWPStaticPaths, TemplateRenderer } from '@snapwp/next';
 import { getPageMetadata } from '@snapwp/next/seo';
 import { EditorBlocksRenderer } from '@snapwp/blocks';
 import type { Metadata } from 'next';
@@ -28,7 +28,7 @@ export async function generateMetadata( {
 }
 
 export const generateStaticParams = async () => {
-	return getPathsToRenderStatically();
+	return getWPStaticPaths();
 };
 
 // Update this to change the revalidation time (in seconds).
