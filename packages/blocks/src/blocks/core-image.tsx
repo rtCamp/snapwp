@@ -13,6 +13,7 @@ import type {
 	CoreImageMediaDetails,
 	CoreImageProps,
 	FigureProps,
+	LightBoxProp,
 } from '@snapwp/types';
 import type { ComponentProps, CSSProperties, ReactNode } from 'react';
 
@@ -242,23 +243,24 @@ const getImageProps = (
 };
 
 /**
- * Is Lightbox enabled for the image.
+ * Is Lightbox enabled for the image. If enabled the <LightboxOverlay> component will be added in the template renderer.
  *
  * @param {string} lightbox The lightbox attribute.
+ * @todo colocate the lightbox overlay here and portal it where needed
  *
  * @return Whether the lightbox is enabled.
  */
-//@ts-ignore -- Stubbed until lightbox support is fixed.
 const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
-	// if ( ! lightbox ) {
-	// 	return false;
-	// }
-	// const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
-	//
-	// return lightboxObj.enabled;
-
-	// Disabling lightbox support for now.
-	return false;
+	if ( ! lightbox ) {
+		return false;
+	}
+	try {
+		const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
+		return !! lightboxObj?.enabled;
+	} catch ( error ) {
+		// If JSON parsing fails, lightbox can't be enabled
+		return false;
+	}
 };
 
 /**
