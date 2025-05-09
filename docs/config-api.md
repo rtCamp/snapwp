@@ -32,8 +32,9 @@ Additionally, if you are running a local development environment without a valid
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
 
-> [!NOTE]
-> You can prefix environment variables with `NEXT_PUBLIC_` to expose them to the browser. Only variables with this prefix will be included in the client-side bundle. You may also need to update the `codegen.ts` file in the Next.js app.
+### Visibility & Access
+
+You can prefix environment variables with `NEXT_PUBLIC_` to expose them to the browser. Only variables with this prefix will be included in the client-side bundle. You may also need to update the `codegen.ts` file in the Next.js app.
 
 ## `snapwp.config.ts` File
 
