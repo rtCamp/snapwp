@@ -32,7 +32,7 @@ export interface SnapWPEnv {
 	 */
 	wpHomeUrl: string;
 	/**
-	 * The site URL of the WordPress site. Defaults to `process.env.WP_SITE_URL`.
+	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_SITE_URL` || `process.env.WP_SITE_URL`.
 	 */
 	wpSiteUrl: string;
 }
