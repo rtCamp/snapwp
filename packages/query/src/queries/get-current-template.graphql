@@ -1,32 +1,35 @@
 query GetCurrentTemplate($uri: String!) {
 	templateByUri(uri: $uri) {
+		id
 		bodyClasses
 		enqueuedStylesheets(first: 1000) {
 			nodes {
-				src
-				handle
-				before
+				id
 				after
+				before
+				handle
+				src
 			}
 		}
 		enqueuedScripts {
 			nodes {
+				id
 				after
 				before
 				extraData
-				handle
-				id
 				groupLocation
-				src
+				handle
 				loadingStrategy: strategy
+				src
 				version
 			}
 		}
 		enqueuedScriptModules {
 			nodes {
+				id
+				extraData
 				handle
 				src
-				extraData
 				dependencies {
 					importType
 					connectedScriptModule {
