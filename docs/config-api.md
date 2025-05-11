@@ -2,8 +2,8 @@
 
 To ensure consistency and enable composability across the SnapWP framework, we use a shared configuration API that unifies two source:
 
--   The environment variables in the `.env` file.
--   The `snapwp.config.ts` config.
+- The environment variables in the `.env` file.
+- The `snapwp.config.ts` config.
 
 Configurations are used to power behavior behind the scenes, but can also be used directly in your application code with the `getConfig` function.
 
@@ -41,18 +41,18 @@ Example `snapwp.config.ts`:
 ```ts
 // snapwp.config.ts
 
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Example engine import
+import type { SnapWPConfig } from "@snapwp/core/config";
+import { ApolloClientEngine } from "@snapwp/plugin-apollo-client"; // Example engine import
 
 const config: SnapWPConfig = {
-	query: {
-		engine: ApolloClientEngine, // Specify the query engine to use (required)
-		options: {
-			// Additional options specific to the engine's client, as necessary.
-		},
-	},
+  query: {
+    engine: ApolloClientEngine, // Specify the query engine to use (required)
+    options: {
+      // Additional options specific to the engine's client, as necessary.
+    },
+  },
 
-	/* your custom configuration */
+  /* your custom configuration */
 };
 
 export default config;
@@ -65,6 +65,7 @@ Here are the available configuration options:
 | `blockDefinitions` | `BlockDefinitions`       | [blocks](../packages/blocks/src/blocks/index.ts)                           | Block definitions for the editor.<br />[Learn more](./overloading-wp-behavior.md#overloading-blocks)                                            |
 | `parserOptions`    | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx)            | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
 | `query`            | `QueryEngine`            | [ApolloClientEngine](../packages/plugin-apollo-client/src/engine/index.ts) | Configuration for the GraphQL query engine.<br />See below for more details on how to customize it.[Learn more](./query-engine.md)              |
+| `sitemap`          | `SitemapConfig`          | [defaultSitemapConfig](../packages/plugin-sitemap/src/config.ts)           | Configuration for the sitemap plugin.<br />[Learn more](./sitemap.md)                                                                           |
 
 Config values are available via their respective keys in the `getConfig()` function.
 
@@ -87,29 +88,29 @@ To change your query engine from Apollo Client to TanStack (React Query), you ju
 
 1. **Add the `@snapwp/plugin-tanstack-query` package to your project's dependencies:**
 
-    ```bash
-    npm install @snapwp/plugin-tanstack-query --save
-    ```
+   ```bash
+   npm install @snapwp/plugin-tanstack-query --save
+   ```
 
 2. **Update your snapwp.config.ts file to use the TanStackQueryEngine instead of the default ApolloClientEngine:**
 
-    Example `(snapwp.config.ts)`:
+   Example `(snapwp.config.ts)`:
 
-    ```diff
-    import type { SnapWPConfig } from '@snapwp/core/config';
-    - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
-    + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
+   ```diff
+   import type { SnapWPConfig } from '@snapwp/core/config';
+   - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
+   + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
 
 
-    const config: SnapWPConfig = {
-    	query: {
-    - 		engine: ApolloClientEngine, // Switching from Apollo Client.
-    + 		engine: TanStackQueryEngine, // Switching to TanStack Query.
-    	},
-    };
+   const config: SnapWPConfig = {
+   	query: {
+   - 		engine: ApolloClientEngine, // Switching from Apollo Client.
+   + 		engine: TanStackQueryEngine, // Switching to TanStack Query.
+   	},
+   };
 
-    export default config;
-    ```
+   export default config;
+   ```
 
 In this example, we're configuring to switch usage to `TanStackQueryEngine`. If you want to create a custom query engine, refer to the [Creating a Custom Query Engine guide](./query-engine.md#creating-a-custom-query-engine).
 
@@ -118,16 +119,16 @@ In this example, we're configuring to switch usage to `TanStackQueryEngine`. If 
 To configure a custom GraphQL client, follow this pattern in the snapwp.config.ts:
 
 ```ts
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { CustomQueryEngine } from '@snapwp/plugin-my-custom-engine'; // Import your custom engine.
+import type { SnapWPConfig } from "@snapwp/core/config";
+import { CustomQueryEngine } from "@snapwp/plugin-my-custom-engine"; // Import your custom engine.
 
 const config: SnapWPConfig = {
-	query: {
-		engine: CustomQueryEngine, // Set your custom query engine
-		options: {
-			// Optional: Provide custom options for your query engine, such as authentication, headers, etc.
-		},
-	},
+  query: {
+    engine: CustomQueryEngine, // Set your custom query engine
+    options: {
+      // Optional: Provide custom options for your query engine, such as authentication, headers, etc.
+    },
+  },
 };
 
 export default config;
@@ -135,16 +136,26 @@ export default config;
 
 This configuration allows you to replace the default engine with your custom engine. For more information about creating a custom query engine, see [Creating a Custom Query Engine](./query-engine.md#creating-a-custom-query-engine).
 
+### `sitemap` Configuration
+
+Sitemap configuration allows to customize the sitemap. The following are the available options:
+
+| **Property**     | **Type**                                | **Default Value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| ---------------- | --------------------------------------- | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `indexUri`       | `string`                                | `/wp-sitemap.xml` | The URI of the WordPress index sitemap.                                                                                                                                                                                                                                                                                                                                                                                                            |
+| `ignorePatterns` | `string[]`                              | `undefined`       | An array of regex patterns used to exclude specific URLs from the sitemap. **Important:** These patterns are matched against the WordPress URLs of each post or page — not your frontend (e.g., Next.js) URLs. For example, if your WordPress site is hosted at `https://example.com` and a post URL is `https://example.com/blog/my-post`, a pattern like `/\/blog\//` or `/my-post$/` will work, while `/localhost:3000/blog/my-post/` will not. |
+| `customPaths`    | `Record<string, MetadataRoute.Sitemap>` | `undefined`       | An object where each key is the name of a sub-sitemap (e.g., `wp-sitemap-posts-page-1`) and the value is a `MetadataRoute.Sitemap` object. **Important:** If the WordPress sub-sitemap URL is something like `http://snapwp-helper.local/wp-sitemap-posts-page-1.xml`, the key should be `wp-sitemap-posts-page-1`.                                                                                                                                |
+
 ## Integration with `next.config.ts`
 
 SnapWP extends the Next.js configuration using the `withSnapWP` function to configure certain settings automatically based on your Config API, such as using the WordPress URL for [`images.remotePatterns`](https://nextjs.org/docs/app/api-reference/components/image#remotepatterns).
 
 ```ts
-import withSnapWP from '@snapwp/next/withSnapWP';
+import withSnapWP from "@snapwp/next/withSnapWP";
 
-export default await withSnapWP( {
-	// Your Next.js configuration
-} );
+export default await withSnapWP({
+  // Your Next.js configuration
+});
 ```
 
 This function automatically loads configurations from `.env` and `snapwp.config.js|mjs|ts`, making them available for your Next.js application.
@@ -154,7 +165,7 @@ This function automatically loads configurations from `.env` and `snapwp.config.
 You can access the configuration values in your application code using the `getConfig` function from `@snapwp/config`.
 
 ```ts
-import { getConfig } from '@snapwp/core/config';
+import { getConfig } from "@snapwp/core/config";
 
 // Or any other valid configuration property.
 const { frontendUrl, wpHomeUrl, parserOptions } = getConfig();
