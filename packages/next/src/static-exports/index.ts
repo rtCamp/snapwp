@@ -1,21 +1,99 @@
-import { QueryEngine } from '@snapwp/query';
+import { fetchQuery, GetPagesToRenderStaticallyDocument } from '@snapwp/query';
+import type {
+	GetPagesToRenderStaticallyQuery,
+	InputMaybe,
+	StaticRouteNodeDataFragment,
+	StaticRoutePageInfoFragment,
+} from '@snapwp/query';
+
+export type VariableType = {
+	first?: number;
+} & {
+	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+		K,
+		string
+	> }Cursor` ]: InputMaybe< string >;
+} & {
+	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+		K,
+		string
+	> }HasMore` ]: InputMaybe< boolean >;
+};
 
 /**
- * Get the paths to render statically.
+ * Fetches paths to be rendered statically.
  *
- * @return The paths to render statically.
+ * @param {VariableType} variables - The variables for the query.
+ * @return The path data to be rendered statically.
  */
-export const getWPStaticPaths = async (): Promise<
-	Array< { uri: string[] } >
-> => {
-	const pathsToRender = await QueryEngine.getStaticPaths();
-
-	const paths: Array< { uri: string[] } > = [];
-
-	pathsToRender.forEach( ( pathToRender ) => {
-		const slugs = pathToRender.split( '/' ).filter( Boolean );
-		paths.push( { uri: slugs } );
+export const getWPStaticPaths = async (
+	variables: VariableType = {}
+): Promise< Array< { uri: string[] } > > => {
+	const data = await fetchQuery( {
+		name: 'GetPagesToRenderStatically',
+		query: GetPagesToRenderStaticallyDocument,
+		options: {
+			variables: {
+				...variables,
+			},
+		},
 	} );
 
-	return paths;
+	if ( ! data ) {
+		throw new Error(
+			'Error fetching pages to render statically. No data returned.'
+		);
+	}
+
+	const resolvedData: Array< { uri: string[] } > = [];
+	let shouldFetchMore = false;
+	const newVariables: VariableType = {};
+
+	Object.entries( data ).forEach( ( [ key, section ] ) => {
+		if ( ! section ) {
+			return;
+		}
+
+		// Here we know for sure that the key which is string is a key of GetPagesToRenderStaticallyQuery so it's safe to cast it.
+		const resolvedKey = key as keyof GetPagesToRenderStaticallyQuery;
+
+		const { nodes, pageInfo } = section as {
+			nodes: StaticRouteNodeDataFragment[];
+			pageInfo: StaticRoutePageInfoFragment;
+		};
+
+		// Store the data.
+		resolvedData.push(
+			...nodes
+				.filter( ( { uri } ) => !! uri )
+				.map( ( { uri } ) => {
+					return {
+						uri: uri!.split( '/' ).filter( Boolean ),
+					};
+				} )
+		);
+
+		// Set the pagination variables for the next fetch.
+		const cursorKey = `${ resolvedKey }Cursor` satisfies keyof VariableType;
+		const hasMoreKey =
+			`${ resolvedKey }HasMore` satisfies keyof VariableType;
+
+		if ( pageInfo.hasNextPage && pageInfo.endCursor ) {
+			shouldFetchMore = true;
+			newVariables[ cursorKey ] = pageInfo.endCursor;
+		}
+		newVariables[ hasMoreKey ] = !! newVariables?.[ cursorKey ];
+	} );
+
+	// Recursively fetch more data if there are more pages to fetch.
+	if ( shouldFetchMore ) {
+		const additionalData = await getWPStaticPaths( {
+			first: 100,
+			...newVariables,
+		} );
+
+		resolvedData.push( ...additionalData );
+	}
+
+	return resolvedData;
 };
