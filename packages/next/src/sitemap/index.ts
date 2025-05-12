@@ -1,4 +1,4 @@
-import { removeLeadingSlash } from '@snapwp/core';
+import { Logger, removeLeadingSlash } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { fetchIndexSitemap, fetchSubSitemap } from '@/sitemap/services';
 import { parseSitemap } from '@/sitemap/utils';
@@ -16,28 +16,33 @@ import type { X2jOptions } from 'fast-xml-parser';
 export const getSitemapPaths = async (
 	customXMLParserConfig?: X2jOptions
 ): Promise< Array< { id: string } > > => {
-	const wpSitemaps = await fetchIndexSitemap( customXMLParserConfig );
+	try {
+		const wpSitemaps = await fetchIndexSitemap( customXMLParserConfig );
 
-	const sitemapsToGenerate: Array< { id: string } > = [];
+		const sitemapsToGenerate: Array< { id: string } > = [];
 
-	wpSitemaps.forEach( ( wpSitemap: SitemapDataFromXML ) => {
-		const data = parseSitemap( wpSitemap );
+		wpSitemaps.forEach( ( wpSitemap: SitemapDataFromXML ) => {
+			const data = parseSitemap( wpSitemap );
 
-		if ( ! data ) {
-			return;
-		}
+			if ( ! data ) {
+				return;
+			}
 
-		data.url = removeLeadingSlash( data.url );
+			data.url = removeLeadingSlash( data.url );
 
-		// If url ends with .xml, remove it
-		if ( data.url.endsWith( '.xml' ) ) {
-			data.url = data.url.slice( 0, -4 );
-		}
+			// If url ends with .xml, remove it
+			if ( data.url.endsWith( '.xml' ) ) {
+				data.url = data.url.slice( 0, -4 );
+			}
 
-		sitemapsToGenerate.push( { id: removeLeadingSlash( data.url ) } );
-	} );
+			sitemapsToGenerate.push( { id: removeLeadingSlash( data.url ) } );
+		} );
 
-	return sitemapsToGenerate;
+		return sitemapsToGenerate;
+	} catch ( error ) {
+		Logger.error( `Error in getSitemapPaths: ${ error }` );
+		return [];
+	}
 };
 
 /**
