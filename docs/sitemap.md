@@ -36,7 +36,6 @@ export async function GET(): Promise< NextResponse > {
 > [!Note]
 > The function `generateIndexSitemap()` returns an array of sitemap objects. You can map over them to build the final XML structure.
 
-
 ## Sub-sitemaps
 
 SnapWP supports automatic generation of sub-sitemaps (for posts, pages, custom post types, etc.) using the `app/sitemap.ts` file.
