@@ -1,8 +1,9 @@
 # SEO Metadata
 
-SnapWP export 2 main functions `getPageMetadata` and `getLayoutMetadata` to add meta tags for SEO.
-`getLayoutMetadata` - Gets SEO data for the site.
-`getPageMetadata` - Gets SEO data related to the template. Adds update icon
+SnapWP exports two main functions to add meta tags for SEO:
+
+-   `getLayoutMetadata`: Gets SEO data for the site.
+-   `getPageMetadata`: Gets SEO data related to the template. Adds update icon
 
 ## Registering a new plugin
 
@@ -16,10 +17,10 @@ import type { PropsWithChildren } from 'react';
 
 // Register a plugin before calling function `getLayoutMetadata`
 Seo.registerPlugin(
-    {
+	{
 		fragment: PluginFragmentDoc,
 		parseMetadata: parserFunction,
-        location:'page'
+		location:'page'
 	}
 );
 
@@ -48,8 +49,9 @@ export async function generateMetadata(): Promise< Metadata > {
 
 An plugin requires 3 things to be registered.
 
-**Fragment** to define the data needed from the WP server.
-**Parser** to parse the fragment data to be consumable by NextJS.
-**Location** has value of either `page` or `layout`. This defines if the parsed meta data should be added to the returned value of `getPageMetadata` or `getLayoutMetadata`.
+-   **Fragment** to define the data needed from the WP server.
+-   **Parser** to parse the fragment data to be consumable by NextJS.
+-   **Location** has value of either `page` or `layout`. This defines if the parsed meta data should be added to the returned value of `getPageMetadata` or `getLayoutMetadata`.
 
-Note: if a plugin is defined to have the location `page` the fragment should be on `RootQuery` and for `layout` it should be a fragment of `RenderedTemplate`.
+> [!Note]
+> If a plugin is defined to have the location `page` the fragment should be on `RootQuery` and for `layout` it should be a fragment of `RenderedTemplate`.
