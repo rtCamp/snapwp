@@ -1,6 +1,6 @@
 # Sitemap
 
-SnapWP automatically generates a sitemap for your site using WordPress as the source of truth. The sitemap is built using data fetched directly from your WordPress backend and updates automatically whenever your content changes—no redeploys needed.
+By default, SnapWP uses WordPress's built-in sitemap as the source of truth for generating sitemaps. The sitemap is built using data fetched directly from your WordPress backend and updates automatically.
 
 ## Index Sitemap
 
@@ -33,9 +33,9 @@ export async function GET(): Promise< NextResponse > {
 }
 ```
 
+> [!Note]
 > The function `generateIndexSitemap()` returns an array of sitemap objects. You can map over them to build the final XML structure.
 
----
 
 ## Sub-sitemaps
 
