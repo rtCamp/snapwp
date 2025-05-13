@@ -17,19 +17,19 @@ If you'd like to change the path (e.g., to `/sitemap_index.xml`), follow these s
 ```ts
 // route.ts
 
-import { NextResponse } from "next/server";
-import { generateIndexSitemap } from "@snapwp/next";
+import { NextResponse } from 'next/server';
+import { generateIndexSitemap } from '@snapwp/next';
 
-export async function GET(): Promise<NextResponse> {
-  const sitemaps = await generateIndexSitemap();
+export async function GET(): Promise< NextResponse > {
+	const sitemaps = await generateIndexSitemap();
 
-  const xml = buildXmlFromSitemaps(sitemaps); // Build <sitemapindex> XML from list
+	const xml = buildXmlFromSitemaps( sitemaps ); // Build <sitemapindex> XML from list
 
-  return new NextResponse(xml, {
-    headers: {
-      "Content-Type": "application/xml",
-    },
-  });
+	return new NextResponse( xml, {
+		headers: {
+			'Content-Type': 'application/xml',
+		},
+	} );
 }
 ```
 
@@ -46,17 +46,17 @@ SnapWP supports automatic generation of sub-sitemaps (for posts, pages, custom p
 ```ts
 // app/sitemap.ts
 
-import type { MetadataRoute } from "next";
-import { getSitemapPaths, generateSubSitemaps } from "@snapwp/next";
+import type { MetadataRoute } from 'next';
+import { getSitemapPaths, generateSubSitemaps } from '@snapwp/next';
 
 // This function returns an array of sitemap IDs from WordPress
 export const generateSitemaps = async () => {
-  return await getSitemapPaths();
+	return await getSitemapPaths();
 };
 
 // This function generates the XML for each sitemap based on the ID
-export default async function sitemap({ id }: { id: string }) {
-  return await generateSubSitemaps(id);
+export default async function sitemap( { id }: { id: string } ) {
+	return await generateSubSitemaps( id );
 }
 
 // Always render fresh sitemap content
@@ -65,6 +65,6 @@ export const revalidate = 0;
 
 ### What Each Function Does
 
-- **`getSitemapPaths()`** → Fetches all available sitemap IDs (e.g., `wp-sitemap-posts-post-1`, `wp-sitemap-pages-page-1`) from the WordPress sitemap index.
-- **`generateSubSitemaps(id)`** → Generates the XML content for the specified sitemap ID by fetching the sub-sitemap and mapping the URLs.
-- **`revalidate = 0`** → Disables static caching to ensure the sitemap is always generated fresh on every request.
+-   **`getSitemapPaths()`** → Fetches all available sitemap IDs (e.g., `wp-sitemap-posts-post-1`, `wp-sitemap-pages-page-1`) from the WordPress sitemap index.
+-   **`generateSubSitemaps(id)`** → Generates the XML content for the specified sitemap ID by fetching the sub-sitemap and mapping the URLs.
+-   **`revalidate = 0`** → Disables static caching to ensure the sitemap is always generated fresh on every request.
