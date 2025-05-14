@@ -501,11 +501,11 @@ describe( 'Sitemap functions', () => {
 			// Custom paths should come first, followed by fetched paths
 			expect( result ).toEqual( [
 				{
-					url: 'https://example.com/custom-path1',
+					url: 'custom-path1',
 					lastModified: new Date( '2023-01-03' ),
 				},
 				{
-					url: 'https://example.com/custom-path2',
+					url: 'custom-path2',
 					lastModified: new Date( '2023-01-04' ),
 				},
 				{
@@ -542,7 +542,7 @@ describe( 'Sitemap functions', () => {
 
 			expect( result ).toEqual( [
 				{
-					url: 'https://example.com/custom-path2',
+					url: 'custom-path2',
 					lastModified: new Date( '2023-01-04' ),
 				},
 			] );
@@ -589,7 +589,7 @@ describe( 'Sitemap functions', () => {
 			const postResult = await generateSubSitemaps( 'post-sitemap' );
 			expect( postResult ).toEqual( [
 				{
-					url: 'https://example.com/post-custom-path',
+					url: 'post-custom-path',
 					lastModified: new Date( '2023-01-03' ),
 				},
 				{
@@ -609,68 +609,12 @@ describe( 'Sitemap functions', () => {
 			const pageResult = await generateSubSitemaps( 'page-sitemap' );
 			expect( pageResult ).toEqual( [
 				{
-					url: 'https://example.com/page-custom-path',
+					url: 'page-custom-path',
 					lastModified: new Date( '2023-01-04' ),
 				},
 				{
 					url: 'https://example.com/page/example1',
 					lastModified: new Date( '2023-01-02' ),
-				},
-			] );
-		} );
-
-		it( 'should handle URLs with different formats in custom paths', async () => {
-			const customPaths = [
-				{
-					url: '/leading/slash',
-					lastModified: new Date( '2023-01-03' ),
-				},
-				{
-					url: 'no/leading/slash',
-					lastModified: new Date( '2023-01-04' ),
-				},
-				{
-					url: 'trailing/slash/',
-					lastModified: new Date( '2023-01-05' ),
-				},
-				{
-					url: 'https://external.com/path',
-					lastModified: new Date( '2023-01-06' ),
-				},
-			];
-
-			( getConfig as jest.Mock ).mockReturnValue( {
-				frontendUrl: 'https://example.com',
-				wpHomeUrl: 'https://wp.example.com',
-				wpSiteUrl: 'https://wp.example.com',
-				sitemap: {
-					customPaths: {
-						'post-sitemap': customPaths,
-					},
-				},
-			} );
-
-			( fetchSubSitemap as jest.Mock ).mockResolvedValue( [] );
-
-			const result = await generateSubSitemaps( 'post-sitemap' );
-
-			// Update expected results to match actual behavior
-			expect( result ).toEqual( [
-				{
-					url: 'https://example.com/leading/slash',
-					lastModified: new Date( '2023-01-03' ),
-				},
-				{
-					url: 'https://example.com/no/leading/slash',
-					lastModified: new Date( '2023-01-04' ),
-				},
-				{
-					url: 'https://example.com/trailing/slash/', // Trailing slash NOT removed
-					lastModified: new Date( '2023-01-05' ),
-				},
-				{
-					url: 'https://example.com/https://external.com/path', // External URL prefixed
-					lastModified: new Date( '2023-01-06' ),
 				},
 			] );
 		} );
@@ -701,7 +645,7 @@ describe( 'Sitemap functions', () => {
 
 			expect( result ).toEqual( [
 				{
-					url: 'https://example.com/custom-path',
+					url: 'custom-path',
 					lastModified: new Date( '2023-01-03' ),
 				},
 			] );

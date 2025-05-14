@@ -1,8 +1,6 @@
-import { XMLParser } from 'fast-xml-parser';
 import { Logger } from '@snapwp/core';
 import { getConfig } from '@snapwp/core/config';
 import { fetchIndexSitemap, fetchSubSitemap } from '../services';
-import type { SitemapDataFromXML } from '../types';
 
 // Mock dependencies
 jest.mock( '@snapwp/core/config', () => ( {
