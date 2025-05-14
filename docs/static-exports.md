@@ -12,10 +12,10 @@ You can use the `getWPStaticPaths` function from the `@snapwp/next` package to f
 
 ```tsx
 // app/[[...uri]]/page.tsx
-import { getWPStaticPaths } from "@snapwp/next";
+import { getWPStaticPaths } from '@snapwp/next';
 
 export const generateStaticParams = async () => {
-  return getWPStaticPaths();
+	return getWPStaticPaths();
 };
 ```
 
@@ -23,10 +23,10 @@ If your WordPress site contains a large number of posts, pages, custom post type
 
 ```tsx
 // app/[[...uri]]/page.tsx
-import { getWPStaticPaths } from "@snapwp/next";
+import { getWPStaticPaths } from '@snapwp/next';
 
 export const generateStaticParams = async () => {
-  return getWPStaticPaths({ first: 20 });
+	return getWPStaticPaths( { first: 20 } );
 };
 ```
 
@@ -37,16 +37,16 @@ To better manage server load during static generation, you can configure the fol
 ```js
 // next.config.js
 const nextConfig = {
-  experimental: {
-    // Number of pages processed per worker
-    staticGenerationMaxConcurrency: 2,
-    // Minimum pages before spawning a new worker
-    staticGenerationMinPagesPerWorker: 25,
-    // Number of retry attempts for failed page generation
-    staticGenerationRetryCount: 1,
-    // Number of CPU cores (workers) to use
-    cpus: 2,
-  },
+	experimental: {
+		// Number of pages processed per worker
+		staticGenerationMaxConcurrency: 2,
+		// Minimum pages before spawning a new worker
+		staticGenerationMinPagesPerWorker: 25,
+		// Number of retry attempts for failed page generation
+		staticGenerationRetryCount: 1,
+		// Number of CPU cores (workers) to use
+		cpus: 2,
+	},
 };
 
 export default nextConfig;
