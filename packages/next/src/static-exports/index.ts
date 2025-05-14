@@ -7,7 +7,7 @@ import type {
 } from '@snapwp/query';
 
 export type VariableType = {
-	first?: number;
+	first?: InputMaybe< number >;
 } & {
 	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
 		K,
@@ -29,11 +29,13 @@ export type VariableType = {
 export const getWPStaticPaths = async (
 	variables: VariableType = {}
 ): Promise< Array< { uri: string[] } > > => {
+	const { first } = variables;
 	const data = await fetchQuery( {
 		name: 'GetPagesToRenderStatically',
 		query: GetPagesToRenderStaticallyDocument,
 		options: {
 			variables: {
+				first: first || 100,
 				...variables,
 			},
 		},
@@ -88,7 +90,7 @@ export const getWPStaticPaths = async (
 	// Recursively fetch more data if there are more pages to fetch.
 	if ( shouldFetchMore ) {
 		const additionalData = await getWPStaticPaths( {
-			first: 100,
+			first: first || 100,
 			...newVariables,
 		} );
 
