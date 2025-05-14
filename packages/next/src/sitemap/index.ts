@@ -110,10 +110,6 @@ export const generateSubSitemaps = async (
 			return;
 		}
 
-		customPath.url = `${ frontendUrl }/${ removeLeadingSlash(
-			customPath.url
-		) }`;
-
 		sitemaps.push( customPath );
 	} );
 

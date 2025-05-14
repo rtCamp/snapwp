@@ -152,6 +152,26 @@ class SnapWPConfigManager {
 		sitemap: {
 			type: 'object',
 			required: false,
+			/**
+			 * Validate the sitemap configuration.
+			 *
+			 * @param {SitemapConfig} value The sitemap configuration to validate.
+			 *
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate( value ) {
+				if ( value && typeof value !== 'object' ) {
+					throw new Error( '`sitemap` should be an object.' );
+				}
+
+				if (
+					value &&
+					value.indexUri &&
+					typeof value.indexUri !== 'string'
+				) {
+					throw new Error( '`sitemap.indexUri` should be a string.' );
+				}
+			},
 		},
 		query: {
 			type: 'object',
@@ -281,6 +301,11 @@ class SnapWPConfigManager {
 					cfg[ key ] = ( value.endsWith( '/' )
 						? value.slice( 0, -1 )
 						: value ) as unknown as T[ keyof T ];
+				} else if ( key === 'sitemap' ) {
+					cfg[ key ] = {
+						...defaultConfig.sitemap,
+						...( cfg[ key ] as SitemapConfig ),
+					} as unknown as T[ keyof T ];
 				}
 			}
 		);
