@@ -2,8 +2,8 @@
 
 To ensure consistency and enable composability across the SnapWP framework, we use a shared configuration API that unifies two source:
 
--   The environment variables in the `.env` file.
--   The `snapwp.config.ts` config.
+- The environment variables in the `.env` file.
+- The `snapwp.config.ts` config.
 
 Configurations are used to power behavior behind the scenes, but can also be used directly in your application code with the `getConfig` function.
 
@@ -45,18 +45,18 @@ Example `snapwp.config.ts`:
 ```ts
 // snapwp.config.ts
 
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Example engine import
+import type { SnapWPConfig } from "@snapwp/core/config";
+import { ApolloClientEngine } from "@snapwp/plugin-apollo-client"; // Example engine import
 
 const config: SnapWPConfig = {
-	query: {
-		engine: ApolloClientEngine, // Specify the query engine to use (required)
-		options: {
-			// Additional options specific to the engine's client, as necessary.
-		},
-	},
+  query: {
+    engine: ApolloClientEngine, // Specify the query engine to use (required)
+    options: {
+      // Additional options specific to the engine's client, as necessary.
+    },
+  },
 
-	/* your custom configuration */
+  /* your custom configuration */
 };
 
 export default config;
@@ -92,29 +92,29 @@ To change your query engine from Apollo Client to TanStack (React Query), you ju
 
 1. **Add the `@snapwp/plugin-tanstack-query` package to your project's dependencies:**
 
-    ```bash
-    npm install @snapwp/plugin-tanstack-query --save
-    ```
+   ```bash
+   npm install @snapwp/plugin-tanstack-query --save
+   ```
 
 2. **Update your snapwp.config.ts file to use the TanStackQueryEngine instead of the default ApolloClientEngine:**
 
-    Example `(snapwp.config.ts)`:
+   Example `(snapwp.config.ts)`:
 
-    ```diff
-    import type { SnapWPConfig } from '@snapwp/core/config';
-    - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
-    + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
+   ```diff
+   import type { SnapWPConfig } from '@snapwp/core/config';
+   - import { ApolloClientEngine } from '@snapwp/plugin-apollo-client'; // Default.
+   + import { TanStackQueryEngine } from '@snapwp/plugin-tanstack-query'; // Changed to TanStack.
 
 
-    const config: SnapWPConfig = {
-    	query: {
-    - 		engine: ApolloClientEngine, // Switching from Apollo Client.
-    + 		engine: TanStackQueryEngine, // Switching to TanStack Query.
-    	},
-    };
+   const config: SnapWPConfig = {
+   	query: {
+   - 		engine: ApolloClientEngine, // Switching from Apollo Client.
+   + 		engine: TanStackQueryEngine, // Switching to TanStack Query.
+   	},
+   };
 
-    export default config;
-    ```
+   export default config;
+   ```
 
 In this example, we're configuring to switch usage to `TanStackQueryEngine`. If you want to create a custom query engine, refer to the [Creating a Custom Query Engine guide](./query-engine.md#creating-a-custom-query-engine).
 
@@ -123,16 +123,16 @@ In this example, we're configuring to switch usage to `TanStackQueryEngine`. If 
 To configure a custom GraphQL client, follow this pattern in the snapwp.config.ts:
 
 ```ts
-import type { SnapWPConfig } from '@snapwp/core/config';
-import { CustomQueryEngine } from '@snapwp/plugin-my-custom-engine'; // Import your custom engine.
+import type { SnapWPConfig } from "@snapwp/core/config";
+import { CustomQueryEngine } from "@snapwp/plugin-my-custom-engine"; // Import your custom engine.
 
 const config: SnapWPConfig = {
-	query: {
-		engine: CustomQueryEngine, // Set your custom query engine
-		options: {
-			// Optional: Provide custom options for your query engine, such as authentication, headers, etc.
-		},
-	},
+  query: {
+    engine: CustomQueryEngine, // Set your custom query engine
+    options: {
+      // Optional: Provide custom options for your query engine, such as authentication, headers, etc.
+    },
+  },
 };
 
 export default config;
@@ -144,22 +144,22 @@ This configuration allows you to replace the default engine with your custom eng
 
 Sitemap behavior is controllable vis the `sitemap` configuration object. The following are the available options:
 
-| **Property**     | **Type**                        | **Default Value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
-| ---------------- | ------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `indexUri`       | `string`                        | `/wp-sitemap.xml` | The URI of the WordPress index sitemap.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| `ignorePatterns` | `string[]`                      | `undefined`       | An array of regex patterns used to exclude specific URLs from the sitemap.<br /><br />**Important:** These patterns are matched against the WordPress URLs of each post or page — not your frontend (e.g., Next.js) URLs. For example, if your WordPress site is hosted at `https://example.com` and a post URL is `https://example.com/blog/my-post`, a pattern like `/\/blog\//` or `/my-post$/` will work, while `/localhost:3000/blog/my-post/` will not.                                                                                               |
-| `customPaths`    | `Record<string, SitemapData[]>` | `undefined`       | Arrays of SitemapData, keyed to their sub-sitemap names. This allows you to add custom or overload WordPress-generated sub-sitemaps.<br /> <br />The keys should match the sub-sitemap names as defined in the WordPress sitemap index. For example, if the WordPress sub-sitemap URL you are overriding is `http://mysite.local/wp-sitemap-posts-page-1.xml`, the key should be `wp-sitemap-posts-page-1`.<br /> <br />The `SitemapData` is a subset of [NextJS's MetadataRoute.SiteMap](@todo). The `images` and `videos` properties are _not_ supported. |
+| **Property**     | **Type**                        | **Default Value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------- | ------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `indexUri`       | `string`                        | `/wp-sitemap.xml` | The URI of the WordPress index sitemap.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ignorePatterns` | `string[]`                      | `undefined`       | An array of regex patterns used to exclude specific URLs from the sitemap.<br /><br />**Important:** These patterns are matched against the WordPress URLs of each post or page — not your frontend (e.g., Next.js) URLs. For example, if your WordPress site is hosted at `https://example.com` and a post URL is `https://example.com/blog/my-post`, a pattern like `/\/blog\//` or `/my-post$/` will work, while `/localhost:3000/blog/my-post/` will not.                                                                                                                                                                                                                                         |
+| `customPaths`    | `Record<string, SitemapData[]>` | `undefined`       | Arrays of SitemapData, keyed to their sub-sitemap names. This allows you to add custom or overload WordPress-generated sub-sitemaps.<br /> <br />The keys should match the sub-sitemap names as defined in the WordPress sitemap index. For example, if the WordPress sub-sitemap URL you are overriding is `http://mysite.local/wp-sitemap-posts-page-1.xml`, the key should be `wp-sitemap-posts-page-1`.<br /> <br />The `SitemapData` is a subset of [NextJS's MetadataRoute.SiteMap](https://github.com/vercel/next.js/blob/47eda30f1ab5ff8fc97802643125b4ce19cac14e/packages/next/src/lib/metadata/types/metadata-interface.ts#L687). The `images` and `videos` properties are _not_ supported. |
 
 ## Integration with `next.config.ts`
 
 SnapWP extends the Next.js configuration using the `withSnapWP` function to configure certain settings automatically based on your Config API, such as using the WordPress URL for [`images.remotePatterns`](https://nextjs.org/docs/app/api-reference/components/image#remotepatterns).
 
 ```ts
-import withSnapWP from '@snapwp/next/withSnapWP';
+import withSnapWP from "@snapwp/next/withSnapWP";
 
-export default await withSnapWP( {
-	// Your Next.js configuration
-} );
+export default await withSnapWP({
+  // Your Next.js configuration
+});
 ```
 
 This function automatically loads configurations from `.env` and `snapwp.config.js|mjs|ts`, making them available for your Next.js application.
@@ -169,7 +169,7 @@ This function automatically loads configurations from `.env` and `snapwp.config.
 You can access the configuration values in your application code using the `getConfig` function from `@snapwp/config`.
 
 ```ts
-import { getConfig } from '@snapwp/core/config';
+import { getConfig } from "@snapwp/core/config";
 
 // Or any other valid configuration property.
 const { frontendUrl, wpHomeUrl, parserOptions } = getConfig();
