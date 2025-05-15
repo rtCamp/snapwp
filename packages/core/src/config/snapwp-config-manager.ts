@@ -289,7 +289,10 @@ class SnapWPConfigManager {
 			( key: keyof T ) => {
 				if ( cfg[ key ] === undefined ) {
 					delete cfg[ key ];
-				} else if (
+					return;
+				}
+
+				if (
 					// @todo this should probably be moved into the schema as a sanitize callback.
 					( key === 'wpHomeUrl' ||
 						key === 'frontendUrl' ||
@@ -301,7 +304,11 @@ class SnapWPConfigManager {
 					cfg[ key ] = ( value.endsWith( '/' )
 						? value.slice( 0, -1 )
 						: value ) as unknown as T[ keyof T ];
-				} else if ( key === 'sitemap' ) {
+
+					return;
+				}
+
+				if ( key === 'sitemap' ) {
 					cfg[ key ] = {
 						...defaultConfig.sitemap,
 						...( cfg[ key ] as SitemapConfig ),
