@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/blocks",
-	"version": "1.0.0",
+	"version": "0.3.0",
 	"license": "AGPL-3.0",
 	"description": "Library for handling Gutenberg blocks.",
 	"author": "rtCamp",
@@ -34,7 +34,7 @@
 	},
 	"peerDependencies": {
 		"@snapwp/core": "^0.4.0",
-		"@snapwp/next": "^1.0.0",
+		"@snapwp/next": "^0.4.0",
 		"next": "^15"
 	},
 	"devDependencies": {

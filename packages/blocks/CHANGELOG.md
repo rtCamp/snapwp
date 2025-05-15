@@ -1,6 +1,6 @@
 # @snapwp/blocks
 
-## 1.0.0
+## 0.3.0
 
 ### Patch Changes
 
@@ -12,7 +12,7 @@
 
 -   Updated dependencies [[`0ff49b6`](https://github.com/rtCamp/snapwp/commit/0ff49b60a919b005a04754d7a982973a84e902be), [`1e96a8b`](https://github.com/rtCamp/snapwp/commit/1e96a8bc9450fef814d7452f7495f85e84a8a454), [`4ef89bd`](https://github.com/rtCamp/snapwp/commit/4ef89bdee915831dcd9fb0d40aaa2aec71dea7a0), [`9576cf4`](https://github.com/rtCamp/snapwp/commit/9576cf4ad0032a3f8ee9be4831d642baffe2bfbe), [`8a68620`](https://github.com/rtCamp/snapwp/commit/8a68620c8aab91d33c1af809c2d9031edde4fef7), [`87f8f56`](https://github.com/rtCamp/snapwp/commit/87f8f5600039e7f72f0146f3dc1f0c77ead946bd), [`f09a820`](https://github.com/rtCamp/snapwp/commit/f09a820bec4cd972ae9e897aa13cf25ae6c54e27)]:
     -   @snapwp/core@0.4.0
-    -   @snapwp/next@1.0.0
+    -   @snapwp/next@0.4.0
 
 ## 0.2.1
 
