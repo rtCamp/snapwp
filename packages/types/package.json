@@ -39,6 +39,7 @@
 		"@types/react": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"next": "^15"
 	}
 }

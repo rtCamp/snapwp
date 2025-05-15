@@ -16,7 +16,7 @@ declare global {
 			REST_URL_PREFIX?: string;
 			WP_SITE_URL?: string;
 			WP_UPLOADS_DIRECTORY?: string;
-			readonly NODE_ENV?: 'development' | 'production' | 'test';
+			readonly NODE_ENV: 'development' | 'production' | 'test';
 		}
 	}
 }

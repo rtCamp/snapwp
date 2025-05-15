@@ -3,6 +3,7 @@ import {
 	getConfig,
 	getGraphqlUrl,
 	setConfig,
+	type SnapWPConfig,
 	type SnapWPEnv,
 } from '@/config/snapwp-config-manager';
 import { Logger } from '@/logger';
@@ -29,12 +30,15 @@ describe( 'SnapWPConfigManager functions', () => {
 		restUrlPrefix: '/env-wp-json',
 	};
 
-	const defaultConfig: Partial< SnapWPEnv > = {
+	const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 		corsProxyPrefix:
 			process.env.NODE_ENV === 'development' ? '/proxy' : undefined,
 		graphqlEndpoint: 'index.php?graphql',
 		uploadsDirectory: '/wp-content/uploads',
 		restUrlPrefix: '/wp-json',
+		sitemap: {
+			indexUri: '/wp-sitemap.xml',
+		},
 	};
 
 	beforeEach( () => {

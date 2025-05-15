@@ -3,7 +3,11 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions, QueryEngine } from '@snapwp/types';
+import type {
+	BlockDefinitions,
+	QueryEngine,
+	SitemapConfig,
+} from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -47,6 +51,10 @@ export interface SnapWPConfig {
 	 */
 	parserOptions?: HTMLReactParserOptions;
 	/**
+	 * Sitemap configuration.
+	 */
+	sitemap?: SitemapConfig;
+	/**
 	 * Query Engine
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- Any is required to allow any client
@@ -79,6 +87,9 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
+	sitemap: {
+		indexUri: '/wp-sitemap.xml',
+	},
 };
 
 /**
@@ -137,6 +148,30 @@ class SnapWPConfigManager {
 		parserOptions: {
 			type: 'object',
 			required: false,
+		},
+		sitemap: {
+			type: 'object',
+			required: false,
+			/**
+			 * Validate the sitemap configuration.
+			 *
+			 * @param {SitemapConfig} value The sitemap configuration to validate.
+			 *
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate( value ) {
+				if ( value && typeof value !== 'object' ) {
+					throw new Error( '`sitemap` should be an object.' );
+				}
+
+				if (
+					value &&
+					value.indexUri &&
+					typeof value.indexUri !== 'string'
+				) {
+					throw new Error( '`sitemap.indexUri` should be a string.' );
+				}
+			},
 		},
 		query: {
 			type: 'object',
@@ -254,7 +289,10 @@ class SnapWPConfigManager {
 			( key: keyof T ) => {
 				if ( cfg[ key ] === undefined ) {
 					delete cfg[ key ];
-				} else if (
+					return;
+				}
+
+				if (
 					// @todo this should probably be moved into the schema as a sanitize callback.
 					( key === 'wpHomeUrl' ||
 						key === 'frontendUrl' ||
@@ -266,6 +304,15 @@ class SnapWPConfigManager {
 					cfg[ key ] = ( value.endsWith( '/' )
 						? value.slice( 0, -1 )
 						: value ) as unknown as T[ keyof T ];
+
+					return;
+				}
+
+				if ( key === 'sitemap' ) {
+					cfg[ key ] = {
+						...defaultConfig.sitemap,
+						...( cfg[ key ] as SitemapConfig ),
+					} as unknown as T[ keyof T ];
 				}
 			}
 		);

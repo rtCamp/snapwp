@@ -7,6 +7,8 @@ import type { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
  * This middleware adds a custom header 'x-current-path' to the response,
  * which contains the current pathname of the request.
  *
+ * @todo This middleware is not used in the current implementation. It may be deprecated in the future.
+ *
  * @param {NextMiddleware} next Next middleware.
  *
  * @return The response object with modified headers
