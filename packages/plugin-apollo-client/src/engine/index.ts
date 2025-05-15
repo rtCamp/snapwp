@@ -13,7 +13,7 @@ import {
 } from '@apollo/client';
 import { Logger } from '@snapwp/core';
 import { getGraphqlUrl } from '@snapwp/core/config';
-import { QueryProvider } from './query-provider';
+import { QueryProvider as ApolloQueryProvider } from './query-provider';
 import type { TypedDocumentNode } from '@graphql-typed-document-node/core';
 import type { QueryEngine } from '@snapwp/types';
 
@@ -79,9 +79,9 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 
 	/**
 	 * Executes a GraphQL query using the Apollo Client instance and writes the result to the cache.
-	 * @param { Object } props An object containing:
-	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { Object } props - Object containing:
+	 * @param { string } props.name - A string that uniquely identifies the query in the cache.
+	 * @param { import('@apollo/client').DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
 	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
@@ -126,8 +126,8 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 	/**
 	 * Executes a GraphQL query as a React hook using Apollo's useQuery.
 	 * @param { Object } props An object containing:
-	 * @param { string[] } props.key - An array of strings that uniquely identifies the query in the cache.
-	 * @param { DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
+	 * @param { string } props.name - A string that uniquely identifies the query in the cache.
+	 * @param { import('@apollo/client').DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryHookOptions.
 	 * @return The query result data of type TData.
 	 */
@@ -139,7 +139,8 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 		return useApolloQuery< TData, OperationVariables >( query, options )
 			.data as TData;
 	}
-	QueryProvider = QueryProvider;
+
+	QueryProvider = ApolloQueryProvider;
 }
 
 /**

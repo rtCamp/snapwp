@@ -100,7 +100,7 @@ import type { SnapWPConfig } from '@snapwp/core/config';
 import { customParserOptions } from './src/MyCustomReactParser';
 
 const config: SnapWPConfig = {
-	/* passing custom options to overload default react-parser options  */
+	// other SnapWP configuration options.
 	parserOptions: customParserOptions,
 };
 
@@ -161,6 +161,7 @@ import type { SnapWPConfig } from '@snapwp/core/config';
 import MyCustomParagraph from './src/app/core-paragraph';
 
 const config: SnapWPConfig = {
+	// other SnapWP configuration options.
 	blockDefinitions: {
 		CoreParagraph: MyCustomParagraph,
 	},

@@ -1,6 +1,6 @@
-import { headers } from 'next/headers';
 import Script from 'next/script';
 import { QueryEngine } from '@snapwp/query';
+import { TemplateFooter } from './template-footer';
 import { TemplateHead } from './template-head';
 import { TemplateScripts } from './template-scripts';
 
@@ -10,6 +10,9 @@ import type { ReactNode } from 'react';
 export type TemplateRendererProps = {
 	getTemplateData?: ( typeof QueryEngine )[ 'getTemplateData' ];
 	children: ( editorBlocks: BlockData[] ) => ReactNode;
+	params: Promise< {
+		uri: string[];
+	} >;
 };
 
 /**
@@ -19,15 +22,16 @@ export type TemplateRendererProps = {
  * @param {Object}                                   props                 The props for the component.
  * @param {TemplateRendererProps['getTemplateData']} props.getTemplateData A async callback to get template styles and content.
  * @param {TemplateRendererProps['children']}        props.children        The block content to render.
+ * @param {TemplateRendererProps['params']}          props.params          The params for the component.
  *
  * @return A complete HTML document structure.
  */
 export async function TemplateRenderer( {
 	getTemplateData = QueryEngine.getTemplateData,
 	children,
+	params,
 }: TemplateRendererProps ): Promise< ReactNode > {
-	const headerList = await headers(); // headers() returns a Promise from NextJS 19.
-	const pathname = headerList.get( 'x-current-path' );
+	const pathname = generatePathName( await params );
 
 	const { editorBlocks, bodyClasses, stylesheets, scripts, scriptModules } =
 		await getTemplateData( pathname || '/' );
@@ -52,8 +56,10 @@ export async function TemplateRenderer( {
 					</div>
 				</main>
 			</TemplateScripts>
-			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 
+			<TemplateFooter />
+
+			{ /* Hot Fix for adding classes to the body outside the root layout */ }
 			<Script
 				strategy="beforeInteractive"
 				dangerouslySetInnerHTML={ {
@@ -67,3 +73,25 @@ export async function TemplateRenderer( {
 		</>
 	);
 }
+
+/**
+ * Generates the path name for the template renderer.
+ *
+ * @param {Object} params The params for the component.
+ * @param {string[]} params.uri The slug segments to join.
+ *
+ * @return {string} The generated path name.
+ */
+const generatePathName = ( params: { uri: string[] } ): string => {
+	if ( ! params.uri ) {
+		return '/';
+	}
+
+	const path = params.uri.join( '/' );
+
+	if ( path.length > 0 ) {
+		return `/${ path }`;
+	}
+
+	return '/';
+};

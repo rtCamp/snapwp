@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/core",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"license": "AGPL-3.0",
 	"description": "Shared utility methods and React components used by our other packages.",
 	"author": "rtCamp",
@@ -41,7 +41,9 @@
 	},
 	"dependencies": {
 		"@wordpress/style-engine": "^2.6.0",
-		"clsx": "^2.1.1",
+		"clsx": "^2.1.1"
+	},
+	"peerDependencies": {
 		"react": "^19.0.0"
 	},
 	"devDependencies": {

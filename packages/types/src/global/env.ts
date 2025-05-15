@@ -11,7 +11,12 @@ declare global {
 			NEXT_PUBLIC_WP_HOME_URL?: string;
 			NEXT_PUBLIC_WP_SITE_URL?: string;
 			NEXT_PUBLIC_WP_UPLOADS_DIRECTORY?: string;
-			readonly NODE_ENV?: 'development' | 'production' | 'test';
+			CORS_PROXY_PREFIX?: string;
+			GRAPHQL_ENDPOINT?: string;
+			REST_URL_PREFIX?: string;
+			WP_SITE_URL?: string;
+			WP_UPLOADS_DIRECTORY?: string;
+			readonly NODE_ENV: 'development' | 'production' | 'test';
 		}
 	}
 }

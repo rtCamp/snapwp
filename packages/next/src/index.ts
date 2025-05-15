@@ -1,4 +1,3 @@
-export { currentPath } from './middleware/current-path';
 export { proxies } from './middleware/proxies';
 export * from './middleware/utils';
 export * from './template-renderer';
@@ -8,3 +7,9 @@ export { Fonts } from './components/font';
 export { Image } from './components/image';
 export { Link } from './components/link';
 export { Script } from './components/script';
+export { getWPStaticPaths } from './static-exports';
+export {
+	generateIndexSitemap,
+	generateSubSitemaps,
+	getSitemapPaths,
+} from './sitemap';

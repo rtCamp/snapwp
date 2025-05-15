@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/types",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"license": "AGPL-3.0",
 	"description": "Shared types used by our other packages.",
 	"author": "rtCamp",
@@ -31,15 +31,15 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
 		"typecheck": "tsc --noEmit"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "*",
 		"@types/react": "*",
-		"next": "^15",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"next": "^15"
 	}
 }
