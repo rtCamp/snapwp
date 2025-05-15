@@ -52,17 +52,18 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 ## Usage
 
 -   [Getting Started](docs/getting-started.md)
-
-### References
-
 -   [Config API & Environment Variables](docs/config-api.md)
--   [Overloading WordPress Behavior](docs/overloading-wp-behavior.md)
--   [NextJS Middleware](docs/middleware.md)
--   [Template Rendering System](docs/template-rendering.md)
--   [Handling HTTP Status Codes](docs/http-status-codes.md)
 -   [Resolving CORS Issues](docs/cors.md)
--   [Handling Sitemap Generation](docs/sitemap.md)
+
+### How-to
+
+-   [Overloading WordPress Behavior](docs/overloading-wp-behavior.md)
+-   [Template Rendering System](docs/template-rendering.md)
 -   [Using the Query Engine](docs/query-engine.md)
+-   [Handling HTTP Status Codes](docs/http-status-codes.md)
+-   [Handling Sitemap Generation](docs/sitemap.md)
+-   [NextJS Middleware](docs/middleware.md)
+-   [Static Exports](docs/static-exports.md)
 
 ## Development & Contributing
 
