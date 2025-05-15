@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/plugin-apollo-client",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"license": "AGPL-3.0",
 	"description": "Apollo Client integration for SnapWP.",
 	"author": "rtCamp",
@@ -30,7 +30,7 @@
 	},
 	"peerDependencies": {
 		"@apollo/client": "^3.13.4",
-		"@snapwp/core": "^0.3.1"
+		"@snapwp/core": "^0.4.0"
 	},
 	"devDependencies": {
 		"resolve-tspaths": "*",

@@ -1,5 +1,30 @@
 # Changelog
 
+## 1.0.0
+
+### Minor Changes
+
+-   [#123](https://github.com/rtCamp/snapwp/pull/123) [`0ff49b6`](https://github.com/rtCamp/snapwp/commit/0ff49b60a919b005a04754d7a982973a84e902be) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Add SEO support for core WordPress metadata.
+
+-   [#144](https://github.com/rtCamp/snapwp/pull/144) [`87f8f56`](https://github.com/rtCamp/snapwp/commit/87f8f5600039e7f72f0146f3dc1f0c77ead946bd) Thanks [@SH4LIN](https://github.com/SH4LIN)! - feat!: Refactor the Query Engine for composability and release `@snapwp/plugin-apollo-client` and `@snapwp/plugin-tanstack-query` adapters.
+
+### Patch Changes
+
+-   [#170](https://github.com/rtCamp/snapwp/pull/170) [`cf1b672`](https://github.com/rtCamp/snapwp/commit/cf1b6728876601313697a9cc6a107d19c680db20) Thanks [@SH4LIN](https://github.com/SH4LIN)! - fix: restore `no-cache` policy when using `plugin-apollo-client`
+
+-   [#171](https://github.com/rtCamp/snapwp/pull/171) [`1e96a8b`](https://github.com/rtCamp/snapwp/commit/1e96a8bc9450fef814d7452f7495f85e84a8a454) Thanks [@Swanand01](https://github.com/Swanand01)! - feat: Add support for both NEXT*PUBLIC* prefixed and non-prefixed ENV variables
+
+-   [#174](https://github.com/rtCamp/snapwp/pull/174) [`1580854`](https://github.com/rtCamp/snapwp/commit/1580854334ef3e98d2501f418572f9dac139721a) Thanks [@justlevine](https://github.com/justlevine)! - dev: Include GraphQL `id` fields on all GraphQL nodes
+
+-   [#163](https://github.com/rtCamp/snapwp/pull/163) [`95d3615`](https://github.com/rtCamp/snapwp/commit/95d36152bc627b044105d701dc7bdbad8ea063cc) Thanks [@Ta5r](https://github.com/Ta5r)! - tests: backfill test for `generateRootQuery` and `generateTemplateQuery` utils function.
+
+-   [#176](https://github.com/rtCamp/snapwp/pull/176) [`f09a820`](https://github.com/rtCamp/snapwp/commit/f09a820bec4cd972ae9e897aa13cf25ae6c54e27) Thanks [@justlevine](https://github.com/justlevine)! - chore: fix and update NPM dependencies
+
+-   [#151](https://github.com/rtCamp/snapwp/pull/151) [`693252c`](https://github.com/rtCamp/snapwp/commit/693252c8bbaaedcc46d8f5958ef49b0c952cd408) Thanks [@Swanand01](https://github.com/Swanand01)! - dev: Expose `QueryEngine.getTemplateData().is404` for custom HTTP status code handling.
+
+-   Updated dependencies [[`0ff49b6`](https://github.com/rtCamp/snapwp/commit/0ff49b60a919b005a04754d7a982973a84e902be), [`1e96a8b`](https://github.com/rtCamp/snapwp/commit/1e96a8bc9450fef814d7452f7495f85e84a8a454), [`4ef89bd`](https://github.com/rtCamp/snapwp/commit/4ef89bdee915831dcd9fb0d40aaa2aec71dea7a0), [`9576cf4`](https://github.com/rtCamp/snapwp/commit/9576cf4ad0032a3f8ee9be4831d642baffe2bfbe), [`87f8f56`](https://github.com/rtCamp/snapwp/commit/87f8f5600039e7f72f0146f3dc1f0c77ead946bd), [`f09a820`](https://github.com/rtCamp/snapwp/commit/f09a820bec4cd972ae9e897aa13cf25ae6c54e27)]:
+    -   @snapwp/core@0.4.0
+
 ## 0.3.1
 
 ### Patch Changes
