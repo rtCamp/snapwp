@@ -3,7 +3,11 @@
 import { Logger } from '@/logger';
 import { generateGraphqlUrl, isValidUrl } from '@/utils';
 
-import type { BlockDefinitions, QueryEngine } from '@snapwp/types';
+import type {
+	BlockDefinitions,
+	QueryEngine,
+	SitemapConfig,
+} from '@snapwp/types';
 import type { HTMLReactParserOptions } from 'html-react-parser';
 
 export interface SnapWPEnv {
@@ -32,7 +36,7 @@ export interface SnapWPEnv {
 	 */
 	wpHomeUrl: string;
 	/**
-	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_SITE_URL`.
+	 * The site URL of the WordPress site. Defaults to `process.env.NEXT_PUBLIC_WP_SITE_URL` || `process.env.WP_SITE_URL`.
 	 */
 	wpSiteUrl: string;
 }
@@ -46,6 +50,10 @@ export interface SnapWPConfig {
 	 * html-react-parser overload options
 	 */
 	parserOptions?: HTMLReactParserOptions;
+	/**
+	 * Sitemap configuration.
+	 */
+	sitemap?: SitemapConfig;
 	/**
 	 * Query Engine
 	 */
@@ -79,6 +87,9 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 	graphqlEndpoint: 'index.php?graphql',
 	restUrlPrefix: '/wp-json',
 	uploadsDirectory: '/wp-content/uploads',
+	sitemap: {
+		indexUri: '/wp-sitemap.xml',
+	},
 };
 
 /**
@@ -91,16 +102,24 @@ const defaultConfig: Partial< SnapWPEnv & SnapWPConfig > = {
 // @ts-ignore - ignore check for nextUrl,homeUrl to run missing environment variable test.
 const envConfig = (): Partial< SnapWPEnv > => ( {
 	/* eslint-disable n/no-process-env -- These are the env variables we want to manage. */
-	corsProxyPrefix: process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX,
+	corsProxyPrefix:
+		process.env.NEXT_PUBLIC_CORS_PROXY_PREFIX ||
+		process.env.CORS_PROXY_PREFIX,
 	frontendUrl: process.env.NEXT_PUBLIC_FRONTEND_URL,
-	graphqlEndpoint: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT,
+	graphqlEndpoint:
+		process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT ||
+		process.env.GRAPHQL_ENDPOINT,
 	wpHomeUrl: process.env.NEXT_PUBLIC_WP_HOME_URL,
-	restUrlPrefix: process.env.NEXT_PUBLIC_REST_URL_PREFIX,
+	restUrlPrefix:
+		process.env.NEXT_PUBLIC_REST_URL_PREFIX || process.env.REST_URL_PREFIX,
 	// If `wpSiteUrl` is not provided, use `wpHomeUrl`.
 	wpSiteUrl:
 		process.env.NEXT_PUBLIC_WP_SITE_URL ||
+		process.env.WP_SITE_URL ||
 		process.env.NEXT_PUBLIC_WP_HOME_URL,
-	uploadsDirectory: process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY,
+	uploadsDirectory:
+		process.env.NEXT_PUBLIC_WP_UPLOADS_DIRECTORY ||
+		process.env.WP_UPLOADS_DIRECTORY,
 	/* eslint-enable n/no-process-env -- Rule restored. */
 } );
 
@@ -129,6 +148,30 @@ class SnapWPConfigManager {
 		parserOptions: {
 			type: 'object',
 			required: false,
+		},
+		sitemap: {
+			type: 'object',
+			required: false,
+			/**
+			 * Validate the sitemap configuration.
+			 *
+			 * @param {SitemapConfig} value The sitemap configuration to validate.
+			 *
+			 * @throws {Error} If the value is invalid.
+			 */
+			validate( value ) {
+				if ( value && typeof value !== 'object' ) {
+					throw new Error( '`sitemap` should be an object.' );
+				}
+
+				if (
+					value &&
+					value.indexUri &&
+					typeof value.indexUri !== 'string'
+				) {
+					throw new Error( '`sitemap.indexUri` should be a string.' );
+				}
+			},
 		},
 		query: {
 			type: 'object',
@@ -246,7 +289,10 @@ class SnapWPConfigManager {
 			( key: keyof T ) => {
 				if ( cfg[ key ] === undefined ) {
 					delete cfg[ key ];
-				} else if (
+					return;
+				}
+
+				if (
 					// @todo this should probably be moved into the schema as a sanitize callback.
 					( key === 'wpHomeUrl' ||
 						key === 'frontendUrl' ||
@@ -258,6 +304,15 @@ class SnapWPConfigManager {
 					cfg[ key ] = ( value.endsWith( '/' )
 						? value.slice( 0, -1 )
 						: value ) as unknown as T[ keyof T ];
+
+					return;
+				}
+
+				if ( key === 'sitemap' ) {
+					cfg[ key ] = {
+						...defaultConfig.sitemap,
+						...( cfg[ key ] as SitemapConfig ),
+					} as unknown as T[ keyof T ];
 				}
 			}
 		);

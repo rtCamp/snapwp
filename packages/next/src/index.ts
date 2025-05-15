@@ -8,3 +8,8 @@ export { Image } from './components/image';
 export { Link } from './components/link';
 export { Script } from './components/script';
 export { getWPStaticPaths } from './static-exports';
+export {
+	generateIndexSitemap,
+	generateSubSitemaps,
+	getSitemapPaths,
+} from './sitemap';

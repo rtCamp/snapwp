@@ -15,22 +15,26 @@ SnapWP uses the following `.env` variables to configure your Next.js app.
 > We recommend copying the `.env` variables from the SnapWP Helper plugin settings screen and pasting them into your `.env` file, then modifying them as needed.
 > See the [Getting Started](getting-started.md#backend-setup) guide for more information.
 
-| Variable                           | Required | Default Value         | Description                                                                                                                                                                                      | Available via `getConfig() |
-| ---------------------------------- | -------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
-| `NEXT_PUBLIC_FRONTEND_URL`         | Yes      |                       | The URL of the Next.js (headless) frontend. <br />E.g. `http://localhost:3000`                                                                                                                   | `frontendUrl`              |
-| `NEXT_PUBLIC_WP_HOME_URL`          | Yes      |                       | The traditional WordPress _frontend_ domain URL. <br />E.g `https://mywpsite.local`                                                                                                              | `wpHomeUrl`                |
-| `NEXT_PUBLIC_WP_SITE_URL`          | No       |                       | The _backend_ "WordPress Address" domain URL where your WordPress core files reside.<br />Only necessary if different than `NEXT_PUBLIC_WP_HOME_URL`<br />E.g. `https://api.mywpsite.local/wp` . | `wpSiteUrl`                |
-| `NEXT_PUBLIC_GRAPHQL_ENDPOINT`     | No       | `index.php?graphql`   | The relative path to the WordPress GraphQL endpoint.                                                                                                                                             | `graphqlEndpoint`          |
-| `NEXT_PUBLIC_REST_URL_PREFIX`      | No       | `/wp-json`            | The WordPress REST API URL prefix.                                                                                                                                                               | `restUrlPrefix`            |
-| `NEXT_PUBLIC_WP_UPLOADS_DIRECTORY` | No       | `/wp-content/uploads` | The relative path to the WordPress uploads directory.                                                                                                                                            | `uploadsDirectory`         |
-| `NEXT_PUBLIC_CORS_PROXY_PREFIX`    | No       |                       | The prefix for the CORS proxy. If unset, no proxy will be used.                                                                                                                                  | `corsProxyPrefix`          |
-| `INTROSPECTION_TOKEN`              | Yes      |                       | Token used for authenticating GraphQL introspection queries with GraphQL Codegen.                                                                                                                | N/A                        |
+| Variable                   | Required | Default Value         | Description                                                                                                                                                                                      | Available via `getConfig() |
+| -------------------------- | -------- | --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------------------------- |
+| `NEXT_PUBLIC_FRONTEND_URL` | Yes      |                       | The URL of the Next.js (headless) frontend. <br />E.g. `http://localhost:3000`                                                                                                                   | `frontendUrl`              |
+| `NEXT_PUBLIC_WP_HOME_URL`  | Yes      |                       | The traditional WordPress _frontend_ domain URL. <br />E.g `https://mywpsite.local`                                                                                                              | `wpHomeUrl`                |
+| `WP_SITE_URL`              | No       |                       | The _backend_ "WordPress Address" domain URL where your WordPress core files reside.<br />Only necessary if different than `NEXT_PUBLIC_WP_HOME_URL`<br />E.g. `https://api.mywpsite.local/wp` . | `wpSiteUrl`                |
+| `GRAPHQL_ENDPOINT`         | No       | `index.php?graphql`   | The relative path to the WordPress GraphQL endpoint.                                                                                                                                             | `graphqlEndpoint`          |
+| `REST_URL_PREFIX`          | No       | `/wp-json`            | The WordPress REST API URL prefix.                                                                                                                                                               | `restUrlPrefix`            |
+| `WP_UPLOADS_DIRECTORY`     | No       | `/wp-content/uploads` | The relative path to the WordPress uploads directory.                                                                                                                                            | `uploadsDirectory`         |
+| `CORS_PROXY_PREFIX`        | No       |                       | The prefix for the CORS proxy. If unset, no proxy will be used.                                                                                                                                  | `corsProxyPrefix`          |
+| `INTROSPECTION_TOKEN`      | Yes      |                       | Token used for authenticating GraphQL introspection queries with GraphQL Codegen.                                                                                                                | N/A                        |
 
 Additionally, if you are running a local development environment without a valid SSL certificate, you can set the following environment variable:
 
 ```bash
 NODE_TLS_REJECT_UNAUTHORIZED=0
 ```
+
+### Visibility & Access
+
+You can prefix environment variables with `NEXT_PUBLIC_` to expose them to the browser. Only variables with this prefix will be included in the client-side bundle. You may also need to update the `codegen.ts` file in the Next.js app.
 
 ## `snapwp.config.ts` File
 
@@ -65,6 +69,7 @@ Here are the available configuration options:
 | `blockDefinitions` | `BlockDefinitions`       | [blocks](../packages/blocks/src/blocks/index.ts)                           | Block definitions for the editor.<br />[Learn more](./overloading-wp-behavior.md#overloading-blocks)                                            |
 | `parserOptions`    | `HTMLReactParserOptions` | [defaultOptions](../packages/next/src/react-parser/options.tsx)            | The default options for the `html-react-parser` library.<br />[Learn more](./overloading-wp-behavior.md#2-pass-customparseroptions-to-overload) |
 | `query`            | `QueryEngine`            | [ApolloClientEngine](../packages/plugin-apollo-client/src/engine/index.ts) | Configuration for the GraphQL query engine.<br />See below for more details on how to customize it.[Learn more](./query-engine.md)              |
+| `sitemap`          | `SitemapConfig`          | undefined                                                                  | Configuration for the sitemap plugin.<br />[Learn more](./sitemap.md)                                                                           |
 
 Config values are available via their respective keys in the `getConfig()` function.
 
@@ -134,6 +139,16 @@ export default config;
 ```
 
 This configuration allows you to replace the default engine with your custom engine. For more information about creating a custom query engine, see [Creating a Custom Query Engine](./query-engine.md#creating-a-custom-query-engine).
+
+### `sitemap` Configuration
+
+Sitemap behavior is controllable vis the `sitemap` configuration object. The following are the available options:
+
+| **Property**     | **Type**                        | **Default Value** | **Description**                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ---------------- | ------------------------------- | ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `indexUri`       | `string`                        | `/wp-sitemap.xml` | The URI of the WordPress index sitemap.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `ignorePatterns` | `string[]`                      | `undefined`       | An array of regex patterns used to exclude specific URLs from the sitemap.<br /><br />**Important:** These patterns are matched against the WordPress URLs of each post or page — not your frontend (e.g., Next.js) URLs. For example, if your WordPress site is hosted at `https://example.com` and a post URL is `https://example.com/blog/my-post`, a pattern like `/\/blog\//` or `/my-post$/` will work, while `/localhost:3000/blog/my-post/` will not.                                                                                                                                                                                                                                         |
+| `customPaths`    | `Record<string, SitemapData[]>` | `undefined`       | Arrays of SitemapData, keyed to their sub-sitemap names. This allows you to add custom or overload WordPress-generated sub-sitemaps.<br /> <br />The keys should match the sub-sitemap names as defined in the WordPress sitemap index. For example, if the WordPress sub-sitemap URL you are overriding is `http://mysite.local/wp-sitemap-posts-page-1.xml`, the key should be `wp-sitemap-posts-page-1`.<br /> <br />The `SitemapData` is a subset of [NextJS's MetadataRoute.SiteMap](https://github.com/vercel/next.js/blob/47eda30f1ab5ff8fc97802643125b4ce19cac14e/packages/next/src/lib/metadata/types/metadata-interface.ts#L687). The `images` and `videos` properties are _not_ supported. |
 
 ## Integration with `next.config.ts`
 

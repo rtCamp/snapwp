@@ -31,15 +31,15 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.json --fix",
 		"typecheck": "tsc --noEmit"
 	},
-	"dependencies": {
+	"peerDependencies": {
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "*",
 		"@types/react": "*",
-		"next": "^15",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "*",
+		"next": "^15"
 	}
 }
