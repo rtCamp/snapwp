@@ -1,6 +1,6 @@
 {
 	"name": "@snapwp/query",
-	"version": "0.3.1",
+	"version": "0.4.0",
 	"license": "AGPL-3.0",
 	"description": "Internal package for SnapWP",
 	"author": "rtCamp",
@@ -38,7 +38,7 @@
 		"@apollo/client": "^3.11.4",
 		"graphql": "^16.9.0",
 		"react": "^19.0.0",
-		"@snapwp/core": "^0.3.1"
+		"@snapwp/core": "^0.4.0"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^5.0.5",

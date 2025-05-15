@@ -34,7 +34,7 @@
 	"peerDependencies": {
 		"@tanstack/react-query": "^5.69.0",
 		"graphql": "^16.9.0",
-		"@snapwp/core": "^0.3.1"
+		"@snapwp/core": "^0.4.0"
 	},
 	"devDependencies": {
 		"resolve-tspaths": "*",
