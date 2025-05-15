@@ -1,7 +1,6 @@
 import { NextResponse, type NextMiddleware } from 'next/server';
 import { getConfig } from '@snapwp/core/config';
 import { corsProxyMiddleware } from './cors';
-import { currentPath as cm } from './current-path';
 import { proxies } from './proxies';
 
 export type MiddlewareFactory = (
@@ -52,7 +51,7 @@ export function stackMiddlewares(
 ): Array< MiddlewareFactory > {
 	const { corsProxyPrefix } = getConfig();
 
-	const defaultMiddlewares = [ cm, proxies ];
+	const defaultMiddlewares = [ proxies ];
 
 	if ( corsProxyPrefix ) {
 		defaultMiddlewares.push( corsProxyMiddleware );

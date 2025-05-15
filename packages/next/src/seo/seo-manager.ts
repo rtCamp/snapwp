@@ -132,13 +132,13 @@ export class Seo {
 	/**
 	 * Uses all loaded plugin to get route level meta data.
 	 * @todo add params and searchParams
-	 * @param {string} path sub route string
+	 * @param {string} uri sub route string
 	 * @return metadata
 	 */
 	public static async getPageMetadata(
-		path?: string | null
+		uri?: string | null
 	): Promise< Metadata > {
-		path = path ? '/' + path : '/';
+		uri = uri ? '/' + uri : '/';
 
 		const renderedTemplateFrags = Seo.plugins
 			.filter( ( { location } ) => location === 'page' )
@@ -151,7 +151,7 @@ export class Seo {
 			query: templateQuery,
 			options: {
 				variables: {
-					uri: path,
+					uri,
 				},
 			},
 		} );
