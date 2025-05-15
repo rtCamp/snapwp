@@ -41,7 +41,9 @@
 	},
 	"dependencies": {
 		"@wordpress/style-engine": "^2.6.0",
-		"clsx": "^2.1.1",
+		"clsx": "^2.1.1"
+	},
+	"peerDependencies": {
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
