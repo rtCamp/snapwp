@@ -61,6 +61,8 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 -   [Template Rendering System](docs/template-rendering.md)
 -   [Handling HTTP Status Codes](docs/http-status-codes.md)
 -   [Resolving CORS Issues](docs/cors.md)
+-   [Handling Sitemap Generation](docs/sitemap.md)
+-   [Using the Query Engine](docs/query-engine.md)
 
 ## Development & Contributing
 
