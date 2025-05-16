@@ -69,9 +69,9 @@ jobs:
                       if [ "$tag_exists_on_github" == "true" ]; then
                         echo "Tag $package@$version already exists on GitHub. Skipping creating a new tag."
                       else
-                        echo "Creating tag $package@$version on GitHub"
-                        git tag "$package@$version"
-                        git push origin "$package@$version"
+                        echo "Creating release $package@$version on GitHub"
+                        bash '${{ github.workspace }}/.github/scripts/release_content.sh' "${{ github.workspace }}/$location/CHANGELOG.md" "$version"
+                        gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
                       fi
                       continue
                     else
