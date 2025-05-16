@@ -65,7 +65,7 @@ jobs:
                     private="$(npm query ".workspace#$package" | jq -r '.[0].private')"
                     if [ "$private" == "true" ]; then
                       echo "Skipping publishing private package $package"
-                      tag_exists_on_github=$(gh api -X GET "/repos/rtcamp/snapwp/releases/tags/$package@$version" &> /dev/null && echo true || echo false)
+                      tag_exists_on_github=$(gh api -X GET "/repos/${{ github.repository }}/releases/tags/$package@$version" &> /dev/null && echo true || echo false)
                       if [ "$tag_exists_on_github" == "true" ]; then
                         echo "Tag $package@$version already exists on GitHub. Skipping creating a new tag."
                       else
