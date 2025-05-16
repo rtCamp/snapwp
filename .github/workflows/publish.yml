@@ -62,10 +62,24 @@ jobs:
                     echo "Publishing $package"
                     location="$(npm query ".workspace#$package" | jq -r '.[0].location')"
                     version="$(npm query ".workspace#$package" | jq -r '.[0].version')"
-                    npm publish --access public --workspace "$location" "$package"
-                    # Make a GitHub Release
-                    bash '${{ github.workspace }}/.github/scripts/release_content.sh' "${{ github.workspace }}/$location/CHANGELOG.md" "$version"
-                    gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
+                    private="$(npm query ".workspace#$package" | jq -r '.[0].private')"
+                    if [ "$private" == "true" ]; then
+                      echo "Skipping publishing private package $package"
+                      tag_exists_on_github=$(gh api -X GET "/repos/rtcamp/snapwp/releases/tags/$package@$version" &> /dev/null && echo true || echo false)
+                      if [ "$tag_exists_on_github" == "true" ]; then
+                        echo "Tag $package@$version already exists on GitHub. Skipping creating a new tag."
+                      else
+                        echo "Creating tag $package@$version on GitHub"
+                        git tag "$package@$version"
+                        git push origin "$package@$version"
+                      fi
+                      continue
+                    else
+                      npm publish --access public --workspace "$location" "$package"
+                      # Make a GitHub Release
+                      bash '${{ github.workspace }}/.github/scripts/release_content.sh' "${{ github.workspace }}/$location/CHANGELOG.md" "$version"
+                      gh release create "$package@$version" --title "$package@$version" --notes-file /tmp/changelog.md
+                    fi
                   done
 
                   git fetch origin main
