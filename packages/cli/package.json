@@ -26,9 +26,11 @@
 		"ora": "^8.2.0"
 	},
 	"devDependencies": {
+		"@types/fs-extra": "^11.0.4",
+		"@types/jest": "^29.5.14",
 		"@types/node": "*",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*"
+		"typescript": "^5.8.3"
 	}
 }

@@ -68,7 +68,6 @@
 		"test:e2e": "playwright test -c config/playwright.config.js",
 		"test:e2e:headed": "npm run test:e2e -- --headed",
 		"test:unit": "jest --config=config/jest.config.js --passWithNoTests",
-		"pretest:unit": "npm run clean-ts-build && npm run build",
 		"test:unit:updatesnapshot": "npm run test:unit -- --updateSnapshot",
 		"test:unit:coverage": "npm run test:unit:coverage-collect && open coverage/lcov-report/index.html",
 		"test:unit:coverage-collect": "npm run test:unit -- --collectCoverage",
