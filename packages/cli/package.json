@@ -19,8 +19,7 @@
 		"dev": "tsc-watch -b --onSuccess \"npm run resolve-paths\"",
 		"resolve-paths": "resolve-tspaths",
 		"lint": "eslint . --config ../../.eslintrc.cjs",
-		"lint:fix": "eslint . --config ../../.eslintrc.cjs --fix",
-		"test": "jest"
+		"lint:fix": "eslint . --config ../../.eslintrc.cjs --fix"
 	},
 	"dependencies": {
 		"commander": "^13.1.0",
@@ -30,9 +29,7 @@
 		"@types/fs-extra": "^11.0.4",
 		"@types/jest": "^29.5.14",
 		"@types/node": "*",
-		"jest": "^29.7.0",
 		"resolve-tspaths": "*",
-		"ts-jest": "^29.3.4",
 		"tsc-watch": "*",
 		"typescript": "^5.8.3"
 	}

@@ -3,6 +3,7 @@ import blocksConfig from '../packages/blocks/tsconfig.json' with { type: 'json' 
 import coreConfig from '../packages/core/tsconfig.json' with { type: 'json' };
 import queryConfig from '../packages/query/tsconfig.json' with { type: 'json' };
 import nextConfig from '../packages/next/tsconfig.json' with { type: 'json' };
+import cliConfig from '../packages/cli/tsconfig.json' with { type: 'json' };
 
 const snapWPModuleNameMapper = {
 	'^@snapwp/([^/]+)/(.*)$': '<rootDir>/packages/$1/dist/$2',
@@ -148,6 +149,34 @@ const config = {
 				'<rootDir>/packages/blocks/src/**/*.{ts,tsx}',
 			],
 			coveragePathIgnorePatterns: [ '<rootDir>/packages/blocks/dist/' ],
+		},
+		{
+			displayName: '@snapwp/cli tests',
+			rootDir: './',
+			testMatch: [ '<rootDir>/packages/cli/src/**/*.test.ts' ],
+			testPathIgnorePatterns: [ '<rootDir>/packages/cli/dist' ],
+			setupFiles: [ '<rootDir>/packages/cli/jest.setup.js' ],
+			moduleNameMapper: {
+				...pathsToModuleNameMapper( cliConfig.compilerOptions.paths, {
+					prefix: '<rootDir>/packages/cli/',
+				} ),
+				...snapWPModuleNameMapper,
+			},
+			transform: {
+				'^.+\\.tsx?$': [
+					'ts-jest',
+					{
+						useESM: true,
+						isolatedModules: true,
+						tsconfig: '<rootDir>/packages/cli/tsconfig.json',
+					},
+				],
+			},
+			collectCoverageFrom: [
+				'<rootDir>/packages/cli/src/**/*.ts',
+			],
+			coveragePathIgnorePatterns: [ '<rootDir>/packages/cli/dist/' ],
+			testEnvironment: 'node',
 		},
 	],
 };
