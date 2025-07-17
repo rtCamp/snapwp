@@ -77,6 +77,29 @@ For development guidelines, please refer to our [Development Guide](./DEVELOPMEN
 
 This project is licensed under the AGPL-3.0 License - see the [LICENSE](LICENSE) file for details.
 
+...
+
+License  
+This project is licensed under the AGPL-3.0 License - see the LICENSE file for details.
+
+---
+
+### 🖼️ fetchPriority for Optimized Image Loading
+
+SnapWP’s `<Image>` component supports the `fetchPriority` attribute, which helps control the priority of image loading in browsers.
+
+This is useful for optimizing performance — especially for **above-the-fold images** like hero banners.
+
+```jsx
+<Image
+  src="/hero-banner.jpg"
+  alt="Hero Banner"
+  fetchPriority="high" // Values: "high", "low", or "auto"
+  width={800}
+  height={400}
+/>
+
+
 ## BTW, We're Hiring!
 
 <a href="https://rtcamp.com/"><img src="https://rtcamp.com/wp-content/uploads/sites/2/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions"></a>
