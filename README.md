@@ -104,27 +104,18 @@ Package	Description <br>
 @snapwp/blocks	WordPress block rendering<br>
 @snapwp/query	GraphQL query manager<br>
 
-🧩 **Development & Contributing**<br>
-SnapWP is under active development and maintained by rtCamp.<br>
+## Development & Contributing
 
-Contributions are welcome and encouraged! 💪<br>
-You can:<br>
-Add new modules<br>
-Improve documentation<br>
-Optimize existing components<br>
-Fix bugs or issues<br>
+[SnapWP](https://github.com/rtCamp/snapwp) is under active development and maintained by [rtCamp](https://rtcamp.com/).
 
-To learn more about contributing, please read the Contributing Guide<br>
-For development standards, check the Development Guide<br>
+Contributions are _welcome_ and **encouraged!** To learn more about contributing to SnapWP, please read the [Contributing Guide](/.github/CONTRIBUTING.md).
 
-💬 **Community & Support**<br>
-If you have questions, ideas, or issues:<br>
-Check out the Issues section.<br>
-Start a discussion or suggest improvements.<br>
-Follow rtCamp on GitHub for updates.<br>
+For development guidelines, please refer to our [Development Guide](./DEVELOPMENT.md).
 
-🧾 **License**<br>
-This project is licensed under the AGPL-3.0 License — see the LICENSE file for details.<br>
+## License
 
-💼 BTW, We're Hiring!<br>
-<a href="https://rtcamp.com/"> <img src="https://rtcamp.com/wp-content/uploads/sites/2/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions"> </a>
+This project is licensed under the AGPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+
+## BTW, We're Hiring!
+
+<a href="https://rtcamp.com/"><img src="https://rtcamp.com/wp-content/uploads/sites/2/2019/04/github-banner@2x.png" alt="Join us at rtCamp, we specialize in providing high performance enterprise WordPress solutions"></a>
