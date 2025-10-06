@@ -84,7 +84,7 @@ Follow these steps to run SnapWP locally for development or experimentation:
    git clone https://github.com/<your-username>/snapwp.git
    cd snapwp
 3. **Start the development server**
-npm run dev
+```npm run dev```
 
 This runs the local environment (usually on http://localhost:3000).
 
@@ -93,7 +93,9 @@ This runs the local environment (usually on http://localhost:3000).
 Install and activate the WPGraphQL plugin
 
 Add this line to your .env.local file:
+```
 NEXT_PUBLIC_WP_API_URL=https://your-site.com/graphql
+```
 
 4. **Explore available packages**
 Package	Description
