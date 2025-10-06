@@ -98,11 +98,11 @@ NEXT_PUBLIC_WP_API_URL=https://your-site.com/graphql
 ```
 
 4. **Explore available packages**
-Package	Description
-@snapwp/core	Core utilities
-@snapwp/next	Next.js integration
-@snapwp/blocks	WordPress block rendering
-@snapwp/query	GraphQL query manager
+Package	Description <br>
+@snapwp/core	Core utilities<br>
+@snapwp/next	Next.js integration<br>
+@snapwp/blocks	WordPress block rendering<br>
+@snapwp/query	GraphQL query manager<br>
 
 🧩 **Development & Contributing**
 SnapWP is under active development and maintained by rtCamp.
