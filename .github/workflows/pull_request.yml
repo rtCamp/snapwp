@@ -187,14 +187,6 @@ jobs:
                   flag-name: Unit
                   format: lcov
 
-            - name: Push coverage to CodeClimate
-              uses: paambaati/codeclimate-action@f429536ee076d758a24705203199548125a28ca7 # v9.0.0
-              env:
-                  CC_TEST_REPORTER_ID: 1e98816019b2a03c321a5d6462109528f7c33ced127f8c6e720ddff213a5006c
-              with:
-                  coverageLocations: |
-                      ./coverage/lcov.info:lcov
-
     # Reenable when we have playwright tests
     # playwright:
     #     name: E2E Tests (Node v${{ matrix.node-version }})
