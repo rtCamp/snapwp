@@ -1,7 +1,8 @@
 'use snapWPConfig';
 
 import { Logger } from '@/logger';
-import { generateGraphqlUrl, isValidUrl } from '@/utils';
+import { generateGraphqlUrl } from '@/utils/generate-graphql-url';
+import { isValidUrl } from '@/utils/url/validators';
 
 import type {
 	BlockDefinitions,
