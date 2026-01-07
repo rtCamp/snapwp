@@ -257,6 +257,7 @@ const isLightboxEnabled = ( lightbox?: string | null ): boolean => {
 	try {
 		const lightboxObj = JSON.parse( lightbox ) as LightBoxProp;
 		return !! lightboxObj?.enabled;
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We don't need the error variable.
 	} catch ( error ) {
 		// If JSON parsing fails, lightbox can't be enabled
 		return false;

@@ -89,6 +89,8 @@ export const isValidUrl = ( str: string ): boolean => {
 	try {
 		const url = new URL( str );
 		return !! url;
+
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We don't need the error variable.
 	} catch ( e ) {
 		return false;
 	}

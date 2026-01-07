@@ -30,7 +30,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"html-entities": "^2.5.2"
+		"html-entities": "^2.6.0"
 	},
 	"peerDependencies": {
 		"@snapwp/core": "^0.4.0",

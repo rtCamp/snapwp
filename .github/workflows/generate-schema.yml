@@ -77,7 +77,7 @@ jobs:
                   npm run install-test-env
                   cd $WORDPRESS_ROOT_DIR
 
-            - name: Generarte Static Schema from ref `${{ inputs.ref }}`
+            - name: Generate Static Schema from ref `${{ inputs.ref }}`
               run: |
                   cd '${{ github.workspace }}'
                   cp .env.dist .env; set -a; source .env; set +a

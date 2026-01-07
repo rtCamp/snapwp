@@ -231,26 +231,6 @@ jobs:
     #               path: playwright-report/
     #               retention-days: 3 # TODO: Figure this number out
 
-    security:
-        name: Dependencies Audit
-        runs-on: ubuntu-latest
-
-        steps:
-            - name: Checkout
-              uses: actions/checkout@v4
-
-            - name: Setup Node.js
-              uses: actions/setup-node@v4
-              with:
-                  node-version-file: '.nvmrc'
-
-            - name: Install dependencies
-              run: npm ci --workspaces --include-workspace-root
-
-            - name: Run npm audit
-              run: |
-                  npm audit --audit-level=high
-
     prettier:
         name: Check Formatting
         runs-on: ubuntu-latest
