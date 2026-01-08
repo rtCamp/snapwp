@@ -22,8 +22,8 @@
 		"lint:fix": "eslint . --config ../../.eslintrc.cjs --fix"
 	},
 	"dependencies": {
-		"commander": "^13.1.0",
-		"ora": "^8.2.0"
+		"commander": "^14.0.2",
+		"ora": "^9.0.0"
 	},
 	"devDependencies": {
 		"@types/node": "*",

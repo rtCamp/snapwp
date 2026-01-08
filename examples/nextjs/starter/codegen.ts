@@ -1,3 +1,5 @@
+/* eslint-disable n/no-process-env */
+
 import type { CodegenConfig } from '@graphql-codegen/cli';
 import { sync as globSync } from 'glob';
 import baseConfig from '@snapwp/codegen-config';

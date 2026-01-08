@@ -66,6 +66,8 @@ const DEFAULT_PROJECT_PATH = './snapwp-app';
 		if ( ! options[ 'skipInstall' ] ) {
 			try {
 				await runNpmInstall( projectDirPath );
+
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We don't need the error variable.
 			} catch ( error ) {
 				// Set flag to inform user they need to run npm install manually
 				needsManualInstall = true;

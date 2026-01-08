@@ -36,6 +36,8 @@ export function parseExternalRemotePatterns( str?: string | undefined ): ( {
 					pathname:
 						url.pathname + ( url.pathname === '/' ? '**' : '/**' ),
 				};
+
+				// eslint-disable-next-line @typescript-eslint/no-unused-vars -- We don't need the error variable.
 			} catch ( e ) {
 				return null;
 			}
