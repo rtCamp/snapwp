@@ -36,7 +36,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Get generated schema
-              uses: actions/download-artifact@v4
+              uses: actions/download-artifact@v7
               with:
                   name: schema
                   path: /tmp/schema
