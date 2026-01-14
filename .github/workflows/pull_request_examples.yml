@@ -274,7 +274,7 @@ jobs:
                   cp /tmp/schema/schema.graphql ${{ github.workspace }}/schema.graphql
 
             - name: Install Composer deps for SnapWP Helper
-              uses: ramsey/composer-install@57532f8be5bda426838819c5ee9afb8af389d51a # 3.0.0
+              uses: ramsey/composer-install@3cf229dc2919194e9e36783941438d17239e8520 # 3.1.1
               with:
                   working-directory: '${{ github.workspace }}/snapwp-helper'
                   composer-options: '--no-progress'
