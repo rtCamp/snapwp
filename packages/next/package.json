@@ -53,10 +53,10 @@
 		"react-dom": "^19.0.0"
 	},
 	"dependencies": {
-		"html-react-parser": "^5.2.11",
+		"html-react-parser": "^5.2.17",
 		"modify-source-webpack-plugin": "^4.1.0",
 		"sanitize-html": "^2.17.0",
-		"fast-xml-parser": "^5.3.4"
+		"fast-xml-parser": "^5.3.5"
 	},
 	"devDependencies": {
 		"@snapwp/types": "*",

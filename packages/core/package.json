@@ -40,7 +40,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@wordpress/style-engine": "^2.37.0",
+		"@wordpress/style-engine": "^2.39.0",
 		"clsx": "^2.1.1"
 	},
 	"peerDependencies": {
@@ -54,6 +54,6 @@
 		"tsc-watch": "*",
 		"typescript": "*",
 		"@snapwp/types": "*",
-		"html-react-parser": "^5.2.11"
+		"html-react-parser": "^5.2.17"
 	}
 }
