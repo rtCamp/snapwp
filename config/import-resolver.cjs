@@ -57,7 +57,7 @@ exports.resolve = function ( source, file, config ) {
  * @param {string} alias     Alias to search.
  * @param {string} aliasPath Alias path.
  * @param {string} file      File-path in which alias is used.
- * @param {Function} resolve   Path resolver.
+ * @param {(sourcePath: string) => { found: boolean; path?: string }} resolve   Path resolver.
  *
  * @return Resolved path on success | False if alias is not found in import string.
  */

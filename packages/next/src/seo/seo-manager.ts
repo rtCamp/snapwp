@@ -73,7 +73,7 @@ export class Seo {
 
 	/**
 	 * Loads a plugin to generate route level meta data.
-	 * @param {RootMetadataGeneratorPlugin< any >} plugin Plugin object
+	 * @param {MetadataPlugin<unknown, unknown>} plugin Plugin object
 	 */
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any -- allow any plugin to be registered.
 	public static registerPlugin( plugin: MetadataPlugin< any, any > ): void {
