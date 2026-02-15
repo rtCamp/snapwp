@@ -32,7 +32,7 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 
 ### Prerequisites
 
--   **Node.js**: v20+ (with `npm` and `npx` installed).
+-   **Node.js**: v22+ (with `npm` and `npx` installed).
 -   **A WordPress backend** configured with SnapWP Helper (see [previous section](#backend-setup)).
 
 ### Installation Steps

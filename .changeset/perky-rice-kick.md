@@ -13,4 +13,4 @@
 "snapwp": minor
 ---
 
-chore!: Bump minimum node to 20, Typescript to 5, and other minor dependencies
+chore!: Bump minimum node to 22, Typescript to 5, and other minor dependencies
