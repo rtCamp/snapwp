@@ -19,7 +19,7 @@ SnapWP treats headless WordPress as a progressive enhancement, providing a "turn
 
 ## Prerequisites
 
--   **Node.js**: v20+ (with `npm` and `npx` installed).
+-   **Node.js**: v22+ (with `npm` and `npx` installed).
 -   **A WordPress backend** [configured with SnapWP Helper](https://github.com/rtCamp/snapwp/blob/develop/docs/getting-started.md#backend-setup).
 
 ## Commands

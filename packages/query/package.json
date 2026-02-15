@@ -6,7 +6,7 @@
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
-		"node": ">=20.0.0",
+		"node": ">=22.0.0",
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
@@ -41,7 +41,7 @@
 		"@snapwp/core": "^0.4.0"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^5.0.7",
+		"@graphql-codegen/cli": "^6.1.1",
 		"@parcel/watcher": "^2.5.4",
 		"@snapwp/codegen-config": "*",
 		"@snapwp/types": "*",

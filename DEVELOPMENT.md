@@ -80,7 +80,7 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/) v20+
+-   [Node.js](https://nodejs.org/) v22+
 -   [Docker](https://www.docker.com/)
 
 ### Building SnapWP Packages

@@ -21,7 +21,7 @@ on:
             NODE_VERSIONS:
                 description: 'Node versions to test against. Need a JSON array of versions.'
                 required: true
-                default: '[20]'
+                default: '[22]'
                 type: string
 
 permissions:
@@ -112,7 +112,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: ${{ fromJSON('[20]') }}
+                node-version: ${{ fromJSON('[22]') }}
             fail-fast: true
         env:
             GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
@@ -148,7 +148,7 @@ jobs:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                node-version: ${{ fromJSON('[20]') }}
+                node-version: ${{ fromJSON('[22]') }}
             fail-fast: true
         env:
             GRAPHQL_SCHEMA_FILE: '${{ github.workspace }}/schema.graphql'
@@ -193,7 +193,7 @@ jobs:
     #     runs-on: ubuntu-latest
     #     strategy:
     #         matrix:
-    #             node-version: ${{ fromJSON('[20]') }}
+    #             node-version: ${{ fromJSON('[22]') }}
     #         fail-fast: true
 
     #     steps:
