@@ -84,7 +84,7 @@ export class ApolloClientEngine implements QueryEngine< clientType > {
 	 * @param { import('@apollo/client').DocumentNode | TypedDocumentNode< TData > } props.query - A GraphQL DocumentNode or TypedDocumentNode representing the query.
 	 * @param { TQueryOptions } props.options - Optional query options compatible with Apollo's QueryOptions.
 	 * @return A promise that resolves with the query data of type TData.
-	 * @throws An error if the query fails, with enhanced error logging for ApolloErrors.
+	 * @throws {Error} An error if the query fails, with enhanced error logging for ApolloErrors.
 	 */
 	async fetchQuery<
 		TData,

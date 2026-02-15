@@ -7,7 +7,7 @@ import type { GetGlobalStylesQuery } from '@graphqlTypes/graphql';
  *
  * @param {GetGlobalStylesQuery} queryData The data fetched from the template query.
  *
- * @throws Throws an error if the query data is missing or invalid.
+ * @throws {GlobalStylesParseError} Throws an error if the query data is missing or invalid.
  *
  * @return An object containing parsed template data.
  */

@@ -10,7 +10,7 @@
 	"main": "./index.js",
 	"exports": "./index.js",
 	"dependencies": {
-		"@wordpress/prettier-config": "^4.37.0"
+		"@wordpress/prettier-config": "^4.39.0"
 	},
 	"peerDependencies": {
 		"prettier": "npm:wp-prettier@^3.0.3"
