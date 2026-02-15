@@ -8,7 +8,7 @@
 	"dependencies": {
 		"@wordpress/eslint-plugin": "^22.22.0",
 		"eslint-import-resolver-typescript": "^4.3.4",
-		"eslint-plugin-jsdoc": "^50.8.0",
+		"eslint-plugin-jsdoc": "^62.5.5",
 		"eslint-plugin-n": "^17.23.1"
 	},
 	"peerDependencies": {
