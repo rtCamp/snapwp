@@ -68,7 +68,7 @@ export const getClient = < TClient >(): TClient => {
 /**
  * Perform a server-safe data fetch using the GraphQL client.
  *
- * @typeParam TData - The shape of the response data.
+ * @template TData - The shape of the response data.
  * @param { Object } args - Object containing:
  *   - key: Unique cache key for the query.
  *   - query: The GraphQL document (typed or untyped).
@@ -88,7 +88,7 @@ export const fetchQuery = <
 /**
  * React hook for client-side GraphQL queries.
  *
- * @typeParam TData - The shape of the response data.
+ * @template TData - The shape of the response data.
  * @param { Object } args - Object containing:
  *   - key: Unique cache key for the query.
  *   - query: The GraphQL document (typed or untyped).

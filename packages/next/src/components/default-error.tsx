@@ -10,7 +10,7 @@ import type { ReactNode } from 'react';
  *
  * @param {Object}   props       The props.
  * @param {Error}    props.error The error.
- * @param {Function} props.reset The reset function.
+ * @param {() => void} props.reset The reset function.
  *
  * @return The default error component.
  */

@@ -4,7 +4,7 @@ import path from 'path';
 /**
  * Clones the SnapWP Helper plugin, installs dependencies, and builds it.
  *
- * @throws If any command fails, an error is logged and rethrown.
+ * @throws {Error} If any command fails, an error is logged and rethrown.
  */
 export function setupSnapWPHelper(): void {
 	const pluginPath = path.join( process.cwd(), 'snapwp-helper' );

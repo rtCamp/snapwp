@@ -6,7 +6,7 @@
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
-		"node": ">=20.0.0",
+		"node": ">=22.0.0",
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
@@ -40,7 +40,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@wordpress/style-engine": "^2.6.0",
+		"@wordpress/style-engine": "^2.39.0",
 		"clsx": "^2.1.1"
 	},
 	"peerDependencies": {
@@ -54,6 +54,6 @@
 		"tsc-watch": "*",
 		"typescript": "*",
 		"@snapwp/types": "*",
-		"html-react-parser": "^5.2.3"
+		"html-react-parser": "^5.2.17"
 	}
 }

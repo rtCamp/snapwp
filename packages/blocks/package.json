@@ -6,7 +6,7 @@
 	"author": "rtCamp",
 	"type": "module",
 	"engines": {
-		"node": ">=20.0.0",
+		"node": ">=22.0.0",
 		"npm": ">=10.0.0",
 		"yarn": "please-use-npm"
 	},
@@ -30,7 +30,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"html-entities": "^2.5.2"
+		"html-entities": "^2.6.0"
 	},
 	"peerDependencies": {
 		"@snapwp/core": "^0.4.0",
