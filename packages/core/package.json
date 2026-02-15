@@ -54,6 +54,6 @@
 		"tsc-watch": "*",
 		"typescript": "*",
 		"@snapwp/types": "*",
-		"html-react-parser": "^5.2.11"
+		"html-react-parser": "^5.2.17"
 	}
 }
