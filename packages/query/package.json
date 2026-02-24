@@ -46,7 +46,7 @@
 		"@snapwp/codegen-config": "*",
 		"@snapwp/types": "*",
 		"@types/react": "*",
-		"dotenv": "^17.2.4",
+		"dotenv": "^17.3.1",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
 		"typescript": "*"
