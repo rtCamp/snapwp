@@ -15,7 +15,7 @@ export function getClassNamesFromString( html: string ): string[] {
 
 	const classNames = classAttribute
 		.replace( 'class="', '' )
-		.replace( '"', '' )
+		.slice( 0, -1 )
 		.split( ' ' )
 		.filter( Boolean ); // Filter out empty strings
 
