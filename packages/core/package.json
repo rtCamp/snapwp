@@ -40,7 +40,7 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@wordpress/style-engine": "^2.39.0",
+		"@wordpress/style-engine": "^2.40.0",
 		"clsx": "^2.1.1"
 	},
 	"peerDependencies": {
