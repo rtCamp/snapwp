@@ -41,7 +41,7 @@
 		"@snapwp/core": "^0.4.0"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^6.1.1",
+		"@graphql-codegen/cli": "^6.1.2",
 		"@parcel/watcher": "^2.5.6",
 		"@snapwp/codegen-config": "*",
 		"@snapwp/types": "*",

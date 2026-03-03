@@ -85,7 +85,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
@@ -159,7 +159,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
@@ -264,7 +264,7 @@ jobs:
                   tools: composer, wp-cli
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
@@ -355,7 +355,7 @@ jobs:
                   node-version: ${{ matrix.node-version }}
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
@@ -429,7 +429,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
@@ -503,7 +503,7 @@ jobs:
                   node-version-file: '.nvmrc'
 
             - name: Get generated schema
-              uses: actions/download-artifact@v7
+              uses: actions/download-artifact@v8
               with:
                   name: schema
                   path: /tmp/schema
