@@ -1,25 +1,52 @@
 version: 2
 
 updates:
-    # NPM: 1x weekly for minor/patch, 1x monthly for major.
+    # 1. Root package.json and package-lock.json
     - package-ecosystem: 'npm'
-      directories:
-          - '/'
-          - 'examples/*'
-          - 'packages/*'
+      directory: '/'
       schedule:
           interval: 'weekly'
-      cooldown:
-          semver-major-days: 30
-          semver-minor-days: 7
-          semver-patch-days: 7
       groups:
-          npm-dev-minor-patch:
+          root-devDependencies:
               dependency-type: 'development'
               update-types: [minor, patch]
-          npm-prod-minor-patch:
+      # For root 'dependencies', user wants "Only deps that are compatible with our packages etc."
+      # This usually means minor and patch are fine for internal/well-known deps.
+      # Major should be ignored for production dependencies to be safe.
+      ignore:
+          - dependency-name: '*'
+            dependency-type: 'production'
+            update-types: [version-update:semver-major]
+
+    # 2. Packages: Only patches for dependencies/peerDependencies, all for devDependencies
+    - package-ecosystem: 'npm'
+      directory: 'packages/*'
+      schedule:
+          interval: 'weekly'
+      groups:
+          packages-production-patches:
               dependency-type: 'production'
+              update-types: [patch]
+          packages-devDependencies-minor-patch:
+              dependency-type: 'development'
               update-types: [minor, patch]
+      # major should NOT be grouped for devDependencies (so no group for them).
+      # production dependencies and peerDependencies (which are 'production' in npm ecosystem for Dependabot)
+      # should ignore anything above patch.
+      ignore:
+          - dependency-name: '*'
+            dependency-type: 'production'
+            update-types:
+                - version-update:semver-major
+                - version-update:semver-minor
+
+    # 3. Examples: All dependencies bumped
+    - package-ecosystem: 'npm'
+      directories:
+          - 'examples/nextjs/starter'
+      schedule:
+          interval: 'weekly'
+      # All updates allowed, no grouping required to keep it fresh.
 
     # GitHub Actions: 1x weekly.
     - package-ecosystem: 'github-actions'
