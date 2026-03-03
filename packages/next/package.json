@@ -55,7 +55,7 @@
 	"dependencies": {
 		"html-react-parser": "^5.2.17",
 		"modify-source-webpack-plugin": "^4.1.0",
-		"sanitize-html": "^2.17.0",
+		"sanitize-html": "^2.17.1",
 		"fast-xml-parser": "^5.3.8"
 	},
 	"devDependencies": {
