@@ -1,27 +1,81 @@
 version: 2
 
 updates:
-    # NPM: 1x weekly for minor/patch, 1x monthly for major.
+    # --- ROOT CONFIGURATION ---
+    # Development dependencies in the root: All updates allowed, grouped for efficiency.
     - package-ecosystem: 'npm'
-      directories:
-          - '/'
-          - 'examples/*'
-          - 'packages/*'
+      directory: '/'
+      name: 'root-devDependencies'
+      allow:
+          - dependency-type: 'development'
+      exclude-paths:
+          - 'packages/**'
+          - 'examples/**'
       schedule:
           interval: 'weekly'
-      cooldown:
-          semver-major-days: 30
-          semver-minor-days: 7
-          semver-patch-days: 7
       groups:
-          npm-dev-minor-patch:
-              dependency-type: 'development'
-              update-types: [minor, patch]
-          npm-prod-minor-patch:
-              dependency-type: 'production'
+          devDependencies:
               update-types: [minor, patch]
 
-    # GitHub Actions: 1x weekly.
+    # Production dependencies in the root: Patches and Minors allowed (conservative major).
+    - package-ecosystem: 'npm'
+      directory: '/'
+      name: 'root-dependencies'
+      allow:
+          - dependency-type: 'production'
+      exclude-paths:
+          - 'packages/**'
+          - 'examples/**'
+      schedule:
+          interval: 'weekly'
+      ignore:
+          - dependency-name: '*'
+            update-types: [version-update:semver-major]
+
+    # --- PACKAGES CONFIGURATION ---
+    # Library packages: All updates for devDependencies.
+    - package-ecosystem: 'npm'
+      directories:
+          - 'packages/*'
+      name: 'packages-devDependencies'
+      allow:
+          - dependency-type: 'development'
+      schedule:
+          interval: 'weekly'
+      groups:
+          # Use 2026 cross-directory grouping to reduce PR noise across the monorepo
+          packages-dev:
+              group-by: 'dependency-name'
+              update-types: [minor, patch]
+
+    # Library packages: ONLY patches for production/peerDependencies to protect downstream.
+    - package-ecosystem: 'npm'
+      directories:
+          - 'packages/*'
+      name: 'packages-production'
+      allow:
+          - dependency-type: 'production'
+      schedule:
+          interval: 'weekly'
+      ignore:
+          - dependency-name: '*'
+            update-types: [version-update:semver-major, version-update:semver-minor]
+      groups:
+          packages-prod-patches:
+              group-by: 'dependency-name'
+              update-types: [patch]
+
+    # --- EXAMPLES CONFIGURATION ---
+    # Application examples: All updates allowed to keep them fresh.
+    - package-ecosystem: 'npm'
+      directories:
+          - 'examples/*/*'
+      name: 'examples'
+      schedule:
+          interval: 'weekly'
+      # No restrictions or groupings for examples
+
+    # --- GITHUB ACTIONS ---
     - package-ecosystem: 'github-actions'
       directory: '/'
       schedule:
