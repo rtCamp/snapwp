@@ -9,6 +9,7 @@ updates:
           - 'packages/*'
       schedule:
           interval: 'weekly'
+      versioning-strategy: 'widen'
       cooldown:
           semver-major-days: 30
           semver-minor-days: 7
