@@ -40,20 +40,20 @@
 		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
-		"@wordpress/style-engine": "^2.39.0",
+		"@wordpress/style-engine": "^2.42.0",
 		"clsx": "^2.1.1"
 	},
 	"peerDependencies": {
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
+		"@snapwp/types": "*",
 		"@types/jest": "*",
 		"@types/node": "*",
 		"@types/react": "*",
+		"html-react-parser": "^5.2.17",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*",
-		"@snapwp/types": "*",
-		"html-react-parser": "^5.2.17"
+		"typescript": "*"
 	}
 }
