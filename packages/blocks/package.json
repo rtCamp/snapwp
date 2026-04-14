@@ -35,9 +35,10 @@
 	"peerDependencies": {
 		"@snapwp/core": "^0.4.0",
 		"@snapwp/next": "^0.4.0",
-		"next": "^15"
+		"next": "^15.5.15"
 	},
 	"devDependencies": {
+		"@snapwp/types": "*",
 		"@testing-library/jest-dom": "*",
 		"@testing-library/react": "*",
 		"@types/jest": "*",
@@ -45,7 +46,6 @@
 		"isomorphic-fetch": "^3.0.0",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
-		"typescript": "*",
-		"@snapwp/types": "*"
+		"typescript": "*"
 	}
 }
