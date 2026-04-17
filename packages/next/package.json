@@ -54,7 +54,7 @@
 	},
 	"dependencies": {
 		"fast-xml-parser": "^5.5.10",
-		"html-react-parser": "^5.2.17",
+		"html-react-parser": "^6.0.1",
 		"modify-source-webpack-plugin": "^4.1.0",
 		"sanitize-html": "^2.17.3"
 	},
