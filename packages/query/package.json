@@ -41,12 +41,12 @@
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^6.2.1",
+		"@graphql-codegen/cli": "^6.3.0",
 		"@parcel/watcher": "^2.5.6",
 		"@snapwp/codegen-config": "*",
 		"@snapwp/types": "*",
 		"@types/react": "*",
-		"dotenv": "^17.4.1",
+		"dotenv": "^17.4.2",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
 		"typescript": "*"
