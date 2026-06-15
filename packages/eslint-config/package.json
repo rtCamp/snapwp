@@ -6,7 +6,7 @@
 	"main": "./index.js",
 	"exports": "./index.js",
 	"dependencies": {
-		"@wordpress/eslint-plugin": "^24.5.0",
+		"@wordpress/eslint-plugin": "^25.4.0",
 		"eslint-import-resolver-typescript": "^4.3.4",
 		"eslint-plugin-jsdoc": "^62.9.0",
 		"eslint-plugin-n": "^17.23.2"
