@@ -37,7 +37,7 @@
 	"devDependencies": {
 		"@types/node": "*",
 		"@types/react": "*",
-		"next": "^15.5.19",
+		"next": "^15.5.20",
 		"resolve-tspaths": "*",
 		"tsc-watch": "*",
 		"typescript": "*"
