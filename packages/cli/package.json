@@ -23,7 +23,7 @@
 	},
 	"dependencies": {
 		"commander": "^14.0.3",
-		"ora": "^9.4.0"
+		"ora": "^9.4.1"
 	},
 	"devDependencies": {
 		"@types/node": "*",
