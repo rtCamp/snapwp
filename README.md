@@ -7,8 +7,12 @@ A better way to build headless WordPress applications.
 -   [Overview](#what-is-snapwp)
 -   [What's Included?](#whats-included)
 -   [Usage](#usage)
--   [Development & Contributing](#local-development--contributing-guidelines)
+-   [Local Setup Guide](#local-setup-guide)
+-   [Development & Contributing](#development--contributing)
+-   [Community & Support](#community--support)
 -   [License](#license)
+
+---
 
 ## What is SnapWP?
 
@@ -23,6 +27,8 @@ SnapWP treats headless WordPress as a progressive enhancement, providing a "turn
 > [!WARNING]
 > 🐉 There be dragons!
 > This project is in **active development** and considered _experimental_. Some features may be incomplete, unstable, or subject to change.
+
+---
 
 ## What's Included?
 
@@ -43,11 +49,13 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 
 -   [@snapwp/codegen-config](packages/codegen-config): Reusable configuration for [GraphQL Codegen](https://the-guild.dev/graphql/codegen).
 -   [@snapwp/eslint-config](packages/eslint-config): Reusable ESLint configuration.
--   [@snapwp/prettier-config](packages/jest-preset): Reusable Prettier configuration.
+-   [@snapwp/prettier-config](packages/prettier-config): Reusable Prettier configuration.
 
 ### WordPress Plugins (🔌 External)
 
 -   [SnapWP Helper](https://github.com/rtCamp/snapwp-helper): A WordPress plugin that provides the additional functionality to WordPress and [WPGraphQL](https://www.wpgraphql.com/) needed for SnapWP's frontend libraries.
+
+---
 
 ## Usage
 
@@ -64,6 +72,37 @@ SnapWP provides several plugins, packages, and libraries that can be used indivi
 -   [Handling Sitemap Generation](docs/sitemap.md)
 -   [NextJS Middleware](docs/middleware.md)
 -   [Static Exports](docs/static-exports.md)
+
+---
+
+## 🧑‍💻 Local Setup Guide
+
+Follow these steps to run SnapWP locally for development or experimentation:
+
+1. **Fork and clone the repository**
+   ```
+   git clone https://github.com/<your-username>/snapwp.git
+   cd snapwp
+3. **Start the development server**
+```npm run dev```
+
+This runs the local environment (usually on http://localhost:3000).
+
+3. **Connect to a WordPress backend**
+
+Install and activate the WPGraphQL plugin
+
+Add this line to your .env.local file:
+```
+NEXT_PUBLIC_WP_API_URL=https://your-site.com/graphql
+```
+
+4. **Explore available packages**
+Package	Description <br>
+@snapwp/core	Core utilities<br>
+@snapwp/next	Next.js integration<br>
+@snapwp/blocks	WordPress block rendering<br>
+@snapwp/query	GraphQL query manager<br>
 
 ## Development & Contributing
 
