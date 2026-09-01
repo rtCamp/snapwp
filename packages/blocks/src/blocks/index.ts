@@ -24,6 +24,7 @@ import { CorePullquote } from './core-pullquote';
 import { CoreQuote } from './core-quote';
 import { CoreSeparator } from './core-separator';
 import { CoreSpacer } from './core-spacer';
+import { CoreSyncedPattern } from './core-synced-pattern';
 import { CoreTemplatePart } from './core-template-part';
 import { CoreVerse } from './core-verse';
 import { CoreVideo } from './core-video';
@@ -58,6 +59,7 @@ export const blocks: BlockDefinitions = {
 	CoreQuote,
 	CoreSeparator,
 	CoreSpacer,
+	CoreSyncedPattern,
 	CoreTemplatePart,
 	CoreVerse,
 	CoreVideo,
