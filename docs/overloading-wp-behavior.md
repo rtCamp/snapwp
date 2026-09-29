@@ -307,3 +307,92 @@ export default function Page() {
 
 -   **Local Styles**: Use CSS Modules (as shown with `styles.module.css`) or any other CSS-in-JS solution for component-specific styling.
 -   **Global and Theme Styles**: Classes like `wp-block-heading`, `has-text-align-center`, and `has-x-large-font-size` (likely from your WordPress `theme.json` and/or global CSS) are automatically available.
+
+## Overloading Synced Patterns
+
+SnapWP allows you to customize **Synced Patterns** by mapping them to custom React components. This is useful for modifying the structure, design, or behavior of reusable block patterns while keeping WordPress as the content source.
+
+> [!TIP]
+> Synced Patterns are reusable block patterns in WordPress that stay in sync across all instances. When you edit a synced pattern, all instances of that pattern are updated.
+
+### 1. Creating a Custom Component
+
+Create a new React component to modify the rendering of a specific Synced Pattern:
+
+```tsx
+import React from 'react';
+import { BlockData, cn, getClassNamesFromString } from '@snapwp/core';
+
+export default function MyCustomSyncedPattern( {
+	renderedHtml,
+	attributes,
+	children,
+}: BlockData ) {
+	const safeAttributes = attributes || {}; // Ensure attributes are not undefined.
+	const { style } = safeAttributes;
+
+	const classNamesFromString = renderedHtml
+		? getClassNamesFromString( renderedHtml )
+		: '';
+	const classNames = cn( classNamesFromString );
+
+	return (
+		<div className={ classNames } style={ style }>
+			{ /* Your custom rendering logic here */ }
+			{ children }
+		</div>
+	);
+}
+```
+
+### 2. Registering the Custom Component
+
+You can register your custom component either globally or per-route:
+
+#### Global Registration
+
+Add your custom component to the `blockDefinitions` in your `snapwp.config.ts`:
+
+```ts
+import { defineConfig } from '@snapwp/config';
+import MyCustomSyncedPattern from './components/MyCustomSyncedPattern';
+
+export default defineConfig( {
+	blockDefinitions: {
+		CoreSyncedPattern: MyCustomSyncedPattern,
+	},
+} );
+```
+
+#### Per-Route Registration
+
+Override the component for specific routes:
+
+```tsx
+import { EditorBlocksRenderer } from '@snapwp/blocks';
+import MyCustomSyncedPattern from './components/MyCustomSyncedPattern';
+
+const pageBlockDefinitions = {
+	CoreSyncedPattern: MyCustomSyncedPattern,
+};
+
+export default function Page() {
+	return (
+		<TemplateRenderer>
+			{ ( editorBlocks ) => (
+				<EditorBlocksRenderer
+					editorBlocks={ editorBlocks }
+					blockDefinitions={ pageBlockDefinitions }
+				/>
+			) }
+		</TemplateRenderer>
+	);
+}
+```
+
+This allows you to apply the override only on specific routes while using the default block rendering elsewhere.
+
+Now, whenever a `core/synced-pattern` block is encountered, your `MyCustomSyncedPattern` component will be used to render it. Any other blocks will use the default rendering unless you provide a custom component in `blockDefinitions`.
+
+> [!TIP]
+> If a block is overridden both globally (`snapwp.config.ts`) and per-route (`EditorBlocksRenderer` prop), the per-route override takes precedence.
