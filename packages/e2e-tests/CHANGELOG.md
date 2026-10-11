@@ -1,5 +1,11 @@
 # @snapwp/e2e-tests
 
+## 0.2.0
+
+### Minor Changes
+
+-   [#229](https://github.com/rtCamp/snapwp/pull/229) [`d454858`](https://github.com/rtCamp/snapwp/commit/d454858e3914ab90823c6be560335e2c9a5c9e3b) Thanks [@justlevine](https://github.com/justlevine)! - chore!: Bump minimum node to 22, Typescript to 5, and other minor dependencies
+
 ## 0.1.1
 
 ### Patch Changes
