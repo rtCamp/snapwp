@@ -28,7 +28,7 @@
 		"typescript": "*"
 	},
 	"peerDependencies": {
-		"@graphql-codegen/cli": "^6.3.1",
+		"@graphql-codegen/cli": "^7.4.6",
 		"@parcel/watcher": "^2.6.0",
 		"graphql": "^16.9.0"
 	}
