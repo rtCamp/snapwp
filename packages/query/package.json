@@ -41,7 +41,7 @@
 		"react": "^19.0.0"
 	},
 	"devDependencies": {
-		"@graphql-codegen/cli": "^6.3.1",
+		"@graphql-codegen/cli": "^7.4.6",
 		"@parcel/watcher": "^2.6.0",
 		"@snapwp/codegen-config": "*",
 		"@snapwp/types": "*",
