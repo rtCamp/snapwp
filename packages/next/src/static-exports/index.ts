@@ -9,15 +9,19 @@ import type {
 export type VariableType = {
 	first?: InputMaybe< number >;
 } & {
-	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
-		K,
-		string
-	> }Cursor` ]: InputMaybe< string >;
+	[
+		K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+			K,
+			string
+		> }Cursor`
+	]: InputMaybe< string >;
 } & {
-	[ K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
-		K,
-		string
-	> }HasMore` ]: InputMaybe< boolean >;
+	[
+		K in keyof GetPagesToRenderStaticallyQuery as `${ Extract<
+			K,
+			string
+		> }HasMore`
+	]: InputMaybe< boolean >;
 };
 
 /**

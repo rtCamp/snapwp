@@ -22,14 +22,14 @@ The Parse component converts raw HTML strings into React components, replacing s
 
 #### Key Features:
 
--   Replaces `<a>` tags with the custom [Link](#link-component) component for better navigation handling.
--   Replaces `<img>` tags with the [Image](#image-component) component, ensuring optimized image loading and attribute handling.
--   Extracts and applies styles using `getStyleObjectFromString`.
--   Determines image dimensions using `getImageSizeFromAttributes`.
+- Replaces `<a>` tags with the custom [Link](#link-component) component for better navigation handling.
+- Replaces `<img>` tags with the [Image](#image-component) component, ensuring optimized image loading and attribute handling.
+- Extracts and applies styles using `getStyleObjectFromString`.
+- Determines image dimensions using `getImageSizeFromAttributes`.
 
 #### Props:
 
--   `html`: A string containing HTML to be parsed and rendered as React elements.
+- `html`: A string containing HTML to be parsed and rendered as React elements.
 
 This component ensures safe and optimized rendering of dynamic HTML content.
 
@@ -54,16 +54,16 @@ The Image component wraps [Next.js' `Image`](https://nextjs.org/docs/api-referen
 
 #### Props:
 
--   `alt`: Alternative text for accessibility.
--   `className`: CSS class for styling.
--   `fill`: If true, the image fills the container.
--   `fetchPriority`: Controls browser image loading priority (high, low, auto).
--   `height`: Image height (optional, auto-calculated if not provided).
--   `image` : Media item containing the image details.
--   `priority`: Loads the image with higher priority.
--   `sizes`: Defines responsive image sizes for optimization.
--   `src`: Image URL.
--   `width`: Image width (optional, auto-calculated if not provided).
+- `alt`: Alternative text for accessibility.
+- `className`: CSS class for styling.
+- `fill`: If true, the image fills the container.
+- `fetchPriority`: Controls browser image loading priority (high, low, auto).
+- `height`: Image height (optional, auto-calculated if not provided).
+- `image` : Media item containing the image details.
+- `priority`: Loads the image with higher priority.
+- `sizes`: Defines responsive image sizes for optimization.
+- `src`: Image URL.
+- `width`: Image width (optional, auto-calculated if not provided).
 
 If the image source is external or missing proper dimensions, the component gracefully falls back to using a standard `<img>` tag.
 
@@ -90,10 +90,10 @@ The Link component wraps [Next.js' `Link`](https://nextjs.org/docs/api-reference
 
 #### Props:
 
--   `children`: The link text or elements.
--   `className`: CSS class for styling.
--   `href`: The destination URL.
--   `style`: Inline styles for customization.
+- `children`: The link text or elements.
+- `className`: CSS class for styling.
+- `href`: The destination URL.
+- `style`: Inline styles for customization.
 
 If the link is external, the component renders a standard `<a>` tag. Otherwise, it leverages Next.js' `<Link>` for optimized client-side navigation.
 
@@ -116,13 +116,13 @@ The Script component is a flexible wrapper around Next.js' `<Script>`, allowing 
 
 #### Props:
 
--   `after`: The inline code to be run after the asset is loaded..
--   `before`: The inline code to be run before the asset is loaded..
--   `extraData`: Extra information needed for the script
--   `handle`: A unique identifier for the script.
--   `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
--   `groupLocation`: Defines where the script should be loaded (header or footer).
--   `src`: The source of the asset.
+- `after`: The inline code to be run after the asset is loaded..
+- `before`: The inline code to be run before the asset is loaded..
+- `extraData`: Extra information needed for the script
+- `handle`: A unique identifier for the script.
+- `loadingStrategy`: Determines how the script is loaded (ASYNC, DEFER).
+- `groupLocation`: Defines where the script should be loaded (header or footer).
+- `src`: The source of the asset.
 
 This component ensures better script management, allowing inline execution before or after the main script while supporting external script sources.
 
@@ -150,10 +150,10 @@ The ScriptModule component loads a [WordPress-registered script module](https://
 
 #### Props:
 
--   `extraData`: Extra information needed for the script.
--   `handle`: A unique identifier for the script.
--   `dependencies`: Dependencies required by the script module .
--   `src`: The source URL for the script module.
+- `extraData`: Extra information needed for the script.
+- `handle`: A unique identifier for the script.
+- `dependencies`: Dependencies required by the script module .
+- `src`: The source URL for the script module.
 
 This component ensures that all dependencies are loaded asynchronously and before the main script loads.
 
@@ -188,7 +188,7 @@ The Fonts component is used to correctly parse and output the [WordPress-generat
 
 #### Props:
 
--   `renderedFontFaces`: font face data as a string.
+- `renderedFontFaces`: font face data as a string.
 
 renderedFontFaces receives the list of @font-face CSS to load fonts (with URLs to font files)..
 

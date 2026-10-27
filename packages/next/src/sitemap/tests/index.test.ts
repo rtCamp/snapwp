@@ -198,7 +198,7 @@ describe( 'Sitemap functions', () => {
 					? {
 							url: match[ 1 ],
 							lastModified: new Date( sitemap.lastmod ),
-					  }
+						}
 					: undefined;
 			} );
 

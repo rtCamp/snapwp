@@ -47,9 +47,9 @@ For a real-world example, see the [configuration file in SnapWP's NextJS Starter
 
 ## Development
 
--   `npm run build`: Build the package.
--   `npm run dev`: Watch for changes and rebuild.
--   `npm run clean`: Clean build artifacts.
+- `npm run build`: Build the package.
+- `npm run dev`: Watch for changes and rebuild.
+- `npm run clean`: Clean build artifacts.
 
 ## Contributing
 

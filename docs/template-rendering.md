@@ -16,9 +16,9 @@ The typical flow is as follows:
 
 The following components are used internally by `TemplateRenderer` and `RootLayout` and are documented here for completeness in case a more advanced user needs to customize them:
 
--   `TemplateHead`: Manages template-specific stylesheets.
--   `TemplateScripts`: Manages template-specific scripts.
--   `GlobalHead`: Manages global styles and fonts.
+- `TemplateHead`: Manages template-specific stylesheets.
+- `TemplateScripts`: Manages template-specific scripts.
+- `GlobalHead`: Manages global styles and fonts.
 
 ## Components
 
@@ -38,8 +38,8 @@ export default function Layout( { children }: { children: React.ReactNode } ) {
 
 #### Props
 
--   `getGlobalStyles`: (Optional) A function that fetches global styles. Defaults to [`QueryEngine.getGlobalStyles`](https://github.com/rtCamp/snapwp/blob/82877410582419b939300d4afc659ace166dd2a0/packages/query/src/query-engine/index.ts#L57-L69). Should return an object containing `customCss`, `globalStylesheet`, and `renderedFontFaces`.
--   `children`: (Required) The content to be rendered within the layout. This is where the `TemplateRenderer` is placed.
+- `getGlobalStyles`: (Optional) A function that fetches global styles. Defaults to [`QueryEngine.getGlobalStyles`](https://github.com/rtCamp/snapwp/blob/82877410582419b939300d4afc659ace166dd2a0/packages/query/src/query-engine/index.ts#L57-L69). Should return an object containing `customCss`, `globalStylesheet`, and `renderedFontFaces`.
+- `children`: (Required) The content to be rendered within the layout. This is where the `TemplateRenderer` is placed.
 
 ### `TemplateRenderer`
 
@@ -71,8 +71,8 @@ export default function Page() {
 
 #### Props
 
--   `getTemplateData`: (Optional) A function that fetches the template data. Defaults to [`QueryEngine.getTemplateData`](https://github.com/rtCamp/snapwp/blob/82877410582419b939300d4afc659ace166dd2a0/packages/query/src/query-engine/index.ts#L76-L90). This function should accept a pathname (string) and return a Promise that resolves to an object containing `editorBlocks`, `bodyClasses`, `stylesheets`, `scripts`, and `scriptModules`.
--   `children`: (Required) A render function that receives an array of `BlockData` and returns the JSX to render the block content. This is where you would typically use the `EditorBlocksRenderer`.
+- `getTemplateData`: (Optional) A function that fetches the template data. Defaults to [`QueryEngine.getTemplateData`](https://github.com/rtCamp/snapwp/blob/82877410582419b939300d4afc659ace166dd2a0/packages/query/src/query-engine/index.ts#L76-L90). This function should accept a pathname (string) and return a Promise that resolves to an object containing `editorBlocks`, `bodyClasses`, `stylesheets`, `scripts`, and `scriptModules`.
+- `children`: (Required) A render function that receives an array of `BlockData` and returns the JSX to render the block content. This is where you would typically use the `EditorBlocksRenderer`.
 
 ### `EditorBlocksRenderer`
 
@@ -105,5 +105,5 @@ export default function Page() {
 
 #### Props
 
--   `editorBlocks`: (Optional) An array of block data objects.
--   `blockDefinitions`: (Optional) An object mapping block names to React components.
+- `editorBlocks`: (Optional) An array of block data objects.
+- `blockDefinitions`: (Optional) An object mapping block names to React components.

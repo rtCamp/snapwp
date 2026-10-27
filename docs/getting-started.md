@@ -6,9 +6,9 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 
 ### Prerequisites
 
--   **PHP**: v7.4+
--   **WordPress**: v6.7+
--   A **[Block Theme](https://wordpress.org/documentation/article/block-themes/)**
+- **PHP**: v7.4+
+- **WordPress**: v6.7+
+- A **[Block Theme](https://wordpress.org/documentation/article/block-themes/)**
 
 ### Installation Steps
 
@@ -32,8 +32,8 @@ This guide will walk you through setting up a headless WordPress app using SnapW
 
 ### Prerequisites
 
--   **Node.js**: v22+ (with `npm` and `npx` installed).
--   **A WordPress backend** configured with SnapWP Helper (see [previous section](#backend-setup)).
+- **Node.js**: v22+ (with `npm` and `npx` installed).
+- **A WordPress backend** configured with SnapWP Helper (see [previous section](#backend-setup)).
 
 ### Installation Steps
 
@@ -52,15 +52,14 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
         1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` into the file created.
 
-         <a href="./images/snapwp-helper-env.png">
-           <figure>
-             <!--@todo: link to snapwp-helper repo for image-->
-             <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;" />
-             <br />
-             <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
-           </figure>
-         </a>
-
+          <a href="./images/snapwp-helper-env.png">
+            <figure>
+              <!--@todo: link to snapwp-helper repo for image-->
+              <img src="./images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;" />
+              <br />
+              <figcaption> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</figcaption>
+            </figure>
+          </a>
         2. Adjust any [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 
@@ -170,13 +169,13 @@ This section contains a list of curated resources for developers working with he
 
 ### WPGraphQL
 
--   **Docs**: [https://www.wpgraphql.com/docs/introduction](https://www.wpgraphql.com/docs/introduction)
--   **Official Discord Community**: [https://wpgraphql.com/discord/](https://wpgraphql.com/community/)
+- **Docs**: [https://www.wpgraphql.com/docs/introduction](https://www.wpgraphql.com/docs/introduction)
+- **Official Discord Community**: [https://wpgraphql.com/discord/](https://wpgraphql.com/community/)
 
 ### Next.js
 
--   **Docs**: [https://nextjs.org/docs](https://nextjs.org/docs)
+- **Docs**: [https://nextjs.org/docs](https://nextjs.org/docs)
 
 ### TypeScript
 
--   **Docs**: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/)
+- **Docs**: [https://www.typescriptlang.org/docs/](https://www.typescriptlang.org/docs/)

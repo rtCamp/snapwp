@@ -148,8 +148,8 @@ export default MyCustomParagraph;
 
 SnapWP provides two ways to map your block in your SnapWP configuration:
 
--   Global Override via `snapwp.config.ts`
--   Per-Route Override by passing a prop to `EditorBlocksRenderer`
+- Global Override via `snapwp.config.ts`
+- Per-Route Override by passing a prop to `EditorBlocksRenderer`
 
 **Global Override (snapwp.config.ts)**
 
@@ -220,8 +220,8 @@ SnapWP allows you to customize **Template Parts**, such as headers, footers, etc
 > Template Parts are reusable block structures in WordPress [Block Themes](https://wordpress.org/documentation/article/block-themes/).
 > Common examples include:
 >
-> -   The **Header** ( slug `"header"`)
-> -   The **Footer** ( slug `"footer"`)
+> - The **Header** ( slug `"header"`)
+> - The **Footer** ( slug `"footer"`)
 
 ### 1. Identifying the Template Part
 
@@ -305,5 +305,5 @@ export default function Page() {
 
 ### Styling
 
--   **Local Styles**: Use CSS Modules (as shown with `styles.module.css`) or any other CSS-in-JS solution for component-specific styling.
--   **Global and Theme Styles**: Classes like `wp-block-heading`, `has-text-align-center`, and `has-x-large-font-size` (likely from your WordPress `theme.json` and/or global CSS) are automatically available.
+- **Local Styles**: Use CSS Modules (as shown with `styles.module.css`) or any other CSS-in-JS solution for component-specific styling.
+- **Global and Theme Styles**: Classes like `wp-block-heading`, `has-text-align-center`, and `has-x-large-font-size` (likely from your WordPress `theme.json` and/or global CSS) are automatically available.

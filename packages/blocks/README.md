@@ -14,10 +14,10 @@ npm install @snapwp/blocks
 
 ## Features
 
--   **Additive DX**: Just include or extend the Block Components you need, and fallback to default rendering for the rest.
--   **Custom Block Definitions**: Override components on a block-level, or even entire patterns, template parts, and templates.
--   **Fallback Rendering**: Uses `html-react-parser` to let you transform your WordPress data on even an HTML element level.
--   **Comprehensive Support**: Includes an ever-growing list of strongly-typed Block Components that can be used to recreate or enhance the block HTML markup.
+- **Additive DX**: Just include or extend the Block Components you need, and fallback to default rendering for the rest.
+- **Custom Block Definitions**: Override components on a block-level, or even entire patterns, template parts, and templates.
+- **Fallback Rendering**: Uses `html-react-parser` to let you transform your WordPress data on even an HTML element level.
+- **Comprehensive Support**: Includes an ever-growing list of strongly-typed Block Components that can be used to recreate or enhance the block HTML markup.
 
 When combined with a headless WordPress framework like SnapWP, this library offers parity with many modern WordPress features out of the box.
 
@@ -85,9 +85,9 @@ These components provide developer-friendly APIs for rendering core WordPress bl
 
 Work is ongoing for full feature parity with Gutenberg, in particular around Block Supports and certain aspects of the Interactivity API. The following functionality is coming soon:
 
--   Duotone Filters
--   Image Lightboxes
--   @todo
+- Duotone Filters
+- Image Lightboxes
+- @todo
 
 ## Contributing
 

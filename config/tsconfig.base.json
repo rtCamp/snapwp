@@ -45,6 +45,9 @@
 		"incremental": true,
 
 		// Completeness
-		"skipLibCheck": true
+		"skipLibCheck": true,
+
+		// 7.0
+		"ignoreDeprecations": "6.0"
 	}
 }
