@@ -460,5 +460,5 @@ export const _private =
 	process.env.NODE_ENV === 'test'
 		? {
 				SnapWPConfigManager,
-		  }
+			}
 		: {};

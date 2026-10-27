@@ -237,9 +237,7 @@ describe( 'SnapWPConfigManager functions', () => {
 
 		const config = getConfig();
 		expect( config.blockDefinitions ).toEqual( mockBlockDefinitions );
-		expect( config.blockDefinitions?.[ 'myBlock' ] ).toBe(
-			MockBlockComponent
-		);
+		expect( config.blockDefinitions?.myBlock ).toBe( MockBlockComponent );
 	} );
 
 	it( 'should throw an error if blockDefinitions is not an object', () => {

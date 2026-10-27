@@ -4,23 +4,23 @@ Code contributions, bug reports, and feature requests are welcome! The following
 
 ## Table of Contents
 
--   [Directory Structure](#directory-structure)
--   [Local setup](#local-setup)
-    -   [Prerequisites](#prerequisites)
-    -   [Building SnapWP Packages](#building-snapwp-packages)
--   [Code Contributions (Pull Requests)](#code-contributions-pull-requests)
-    -   [Workflow](#workflow)
-    -   [Code Quality / Code Standards](#code-quality--code-standards)
-        -   [ESLint](#eslint)
-    -   [Testing](#testing)
-        -   [Testing with Jest](#testing-with-jest)
-        -   [Testing with Playwright](#testing-with-playwright)
-    -   [Type checking](#type-checking)
-    -   [Testing packages locally](#testing-packages-locally)
-        -   [Package linking](#package-linking)
-        -   [Verdaccio proxy registry](#verdaccio-proxy-registry)
-    -   [Changesets](#changesets)
-    -   [Releasing](#releasing)
+- [Directory Structure](#directory-structure)
+- [Local setup](#local-setup)
+    - [Prerequisites](#prerequisites)
+    - [Building SnapWP Packages](#building-snapwp-packages)
+- [Code Contributions (Pull Requests)](#code-contributions-pull-requests)
+    - [Workflow](#workflow)
+    - [Code Quality / Code Standards](#code-quality--code-standards)
+        - [ESLint](#eslint)
+    - [Testing](#testing)
+        - [Testing with Jest](#testing-with-jest)
+        - [Testing with Playwright](#testing-with-playwright)
+    - [Type checking](#type-checking)
+    - [Testing packages locally](#testing-packages-locally)
+        - [Package linking](#package-linking)
+        - [Verdaccio proxy registry](#verdaccio-proxy-registry)
+    - [Changesets](#changesets)
+    - [Releasing](#releasing)
 
 ## Directory Structure
 
@@ -80,8 +80,8 @@ To set up locally, clone the repository and navigate to the `frontend` subdirect
 
 ### Prerequisites
 
--   [Node.js](https://nodejs.org/) v22+
--   [Docker](https://www.docker.com/)
+- [Node.js](https://nodejs.org/) v22+
+- [Docker](https://www.docker.com/)
 
 ### Building SnapWP Packages
 

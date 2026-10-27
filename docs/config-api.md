@@ -2,8 +2,8 @@
 
 To ensure consistency and enable composability across the SnapWP framework, we use a shared configuration API that unifies two source:
 
--   The environment variables in the `.env` file.
--   The `snapwp.config.ts` config.
+- The environment variables in the `.env` file.
+- The `snapwp.config.ts` config.
 
 Configurations are used to power behavior behind the scenes, but can also be used directly in your application code with the `getConfig` function.
 

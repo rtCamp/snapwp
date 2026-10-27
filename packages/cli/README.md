@@ -6,9 +6,9 @@ A better way to build headless WordPress applications.
 
 [SnapWP](https://snapwp.io) is a composable framework of JavaScript libraries for building headless WordPress applications.
 
--   🎨 It uses WordPress's [Block Themes](https://wordpress.org/documentation/article/block-themes/) as the default source of truth for both design and content on the frontend.
+- 🎨 It uses WordPress's [Block Themes](https://wordpress.org/documentation/article/block-themes/) as the default source of truth for both design and content on the frontend.
 
--   🛠️ It provides an additive and adaptable DX layer / API / tooling that lets developers granularly override just the parts of their app they care about.
+- 🛠️ It provides an additive and adaptable DX layer / API / tooling that lets developers granularly override just the parts of their app they care about.
 
 SnapWP treats headless WordPress as a progressive enhancement, providing a "turn-key" experience for parity with traditional WordPress sites, so you can focus on building the unique and custom features that make your project stand out.
 
@@ -19,8 +19,8 @@ SnapWP treats headless WordPress as a progressive enhancement, providing a "turn
 
 ## Prerequisites
 
--   **Node.js**: v22+ (with `npm` and `npx` installed).
--   **A WordPress backend** [configured with SnapWP Helper](https://github.com/rtCamp/snapwp/blob/develop/docs/getting-started.md#backend-setup).
+- **Node.js**: v22+ (with `npm` and `npx` installed).
+- **A WordPress backend** [configured with SnapWP Helper](https://github.com/rtCamp/snapwp/blob/develop/docs/getting-started.md#backend-setup).
 
 ## Commands
 
@@ -45,12 +45,11 @@ To create a new headless WordPress app using SnapWP, follow these steps:
 
         1. Paste the .env contents from `Dashboard > WPGraphQL > Settings > SnapWP Helper` into the file created.
 
-         <a href="https://github.com/rtCamp/snapwp/blob/develop/docs/images/snapwp-helper-env.png">
-           <!--@todo: link to snapwp-helper repo for image-->
-           <img src="https://raw.githubusercontent.com/rtCamp/snapwp/refs/heads/develop/docs/images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
-           <p> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</p>
-         </a>
-
+          <a href="https://github.com/rtCamp/snapwp/blob/develop/docs/images/snapwp-helper-env.png">
+            <!--@todo: link to snapwp-helper repo for image-->
+            <img src="https://raw.githubusercontent.com/rtCamp/snapwp/refs/heads/develop/docs/images/snapwp-helper-env.png" alt="Example environment variables from SnapWP Helper plugin screen." style="width: 300px;">
+            <p> Example environment variables from SnapWP Helper plugin screen. (Click for full screen)</p>
+          </a>
         2. Adjust any [environment variables as needed](./config-api.md#environment-variables).
         3. Save the file and close the editor.
 

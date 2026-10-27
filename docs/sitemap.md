@@ -64,6 +64,6 @@ export const revalidate = 0;
 
 ### What Each Function Does
 
--   **`getSitemapPaths()`** → Fetches all available sitemap IDs (e.g., `wp-sitemap-posts-post-1`, `wp-sitemap-pages-page-1`) from the WordPress sitemap index.
--   **`generateSubSitemaps(id)`** → Generates the XML content for the specified sitemap ID by fetching the sub-sitemap and mapping the URLs.
--   **`revalidate = 0`** → Disables static caching to ensure the sitemap is always generated fresh on every request.
+- **`getSitemapPaths()`** → Fetches all available sitemap IDs (e.g., `wp-sitemap-posts-post-1`, `wp-sitemap-pages-page-1`) from the WordPress sitemap index.
+- **`generateSubSitemaps(id)`** → Generates the XML content for the specified sitemap ID by fetching the sub-sitemap and mapping the URLs.
+- **`revalidate = 0`** → Disables static caching to ensure the sitemap is always generated fresh on every request.

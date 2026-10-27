@@ -31,9 +31,9 @@ Adds a custom header 'x-current-path' to the response, which is used to query th
 
 Configures custom proxies to the headless WordPress backend for the following routes:
 
--   `wp-content/uploads/*`
--   `wp-json/*`
--   `wp-admin/admin-ajax.php`
+- `wp-content/uploads/*`
+- `wp-json/*`
+- `wp-admin/admin-ajax.php`
 
 ## Adding custom middleware
 

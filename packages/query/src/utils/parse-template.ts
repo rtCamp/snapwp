@@ -92,7 +92,7 @@ function parseEnqueuedScripts(
 				// Ensure the src is an absolute URL.
 				src: script?.src?.startsWith( '/' )
 					? wordpressUrl + script.src
-					: script.src ?? null,
+					: ( script.src ?? null ),
 				handle: script.handle ? script.handle : null,
 			};
 		}
@@ -164,7 +164,7 @@ function parseScriptModules(
 			handle: script?.handle ?? null,
 			src: script?.src?.startsWith( '/' )
 				? `${ wordpressUrl }${ script.src }`
-				: script?.src ?? null,
+				: ( script?.src ?? null ),
 			extraData: script?.extraData || null,
 			dependencies:
 				script?.dependencies
@@ -183,7 +183,7 @@ function parseScriptModules(
 							)
 								? `${ wordpressUrl }${
 										dep.connectedScriptModule!.src
-								  }`
+									}`
 								: dep.connectedScriptModule!.src!,
 						},
 					} ) ) ?? null,

@@ -4,16 +4,16 @@ SnapWP uses a composable **Query Engine** to manage GraphQL queries and client c
 
 Instead of locking you down to a specific GraphQL query library, the Query Engine provides a common interface that can be implemented by different GraphQL clients. This gives you:
 
--   **Flexibility** to choose your preferred GraphQL client
--   **Consistency** in how you interact with GraphQL data
--   **Interchangeability** to switch implementations without modifying app logic
+- **Flexibility** to choose your preferred GraphQL client
+- **Consistency** in how you interact with GraphQL data
+- **Interchangeability** to switch implementations without modifying app logic
 
 ## Available Query Engines
 
 SnapWP provides official Query Engines for popular GraphQL clients:
 
--   **Apollo Client**: [`@snapwp/plugin-apollo-client`](../packages/plugin-apollo-client/README.md)
--   **TanStack Query**: [`@snapwp/plugin-tanstack-query`](../packages/plugin-tanstack-query/README.md)
+- **Apollo Client**: [`@snapwp/plugin-apollo-client`](../packages/plugin-apollo-client/README.md)
+- **TanStack Query**: [`@snapwp/plugin-tanstack-query`](../packages/plugin-tanstack-query/README.md)
 
 > [!NOTE]
 > Want to contribute your own? Open a PR with your implementation!
@@ -43,15 +43,15 @@ export default config;
 
 Once configured, you can use the Query Engine through the `@snapwp/query` package, which provides these main APIs:
 
--   `fetchQuery<TData, TVars>()`: Perform a server-safe data fetch using the GraphQL client.
+- `fetchQuery<TData, TVars>()`: Perform a server-safe data fetch using the GraphQL client.
 
--   `getClient<T>()`: Returns a server client instance for the query engine.
+- `getClient<T>()`: Returns a server client instance for the query engine.
 
--   `useClient<T>(client)`: Returns a client instance for the query engine.
+- `useClient<T>(client)`: Returns a client instance for the query engine.
 
--   `useQuery<TData, TVars>()`: React hook for client-side GraphQL queries.
+- `useQuery<TData, TVars>()`: React hook for client-side GraphQL queries.
 
--   `QueryProvider<T>()`: Provider component to wrap app with query context.
+- `QueryProvider<T>()`: Provider component to wrap app with query context.
 
 ```ts
 import {
